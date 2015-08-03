@@ -1,0 +1,20 @@
+{
+    "compress": false,
+    "base64": {
+        "limit": 10000,
+        "types": {
+            "gif":  "image/gif",
+            "png":  "image/png",
+            "jpg":  "image/jpeg",
+            "jpeg": "image/jpeg",
+            "svg":  "image/svg+xml",
+            "woff2": "font/woff2"
+        }
+    },
+    "errors": {
+        "resources": "alert",
+        "imports": "ignore",
+        "processors": "error"
+    },
+    "path": "./"
+}

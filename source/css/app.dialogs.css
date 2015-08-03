@@ -1,0 +1,172 @@
+
+.md-modal {
+    position: relative;
+    top: 50%;
+    /*left: 50%;*/
+    width: 50%;
+    max-width: 39.375em;
+    min-width: 18.750em;
+    height: auto;
+    z-index: 2000;
+    margin: 1.875em auto;
+    /*will-change: visibility;*/
+    /*visibility: hidden;*/
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateX(-0%) translateY(-50%);
+    -moz-transform: translateX(-0%) translateY(-50%);
+    -ms-transform: translateX(-0%) translateY(-50%);
+    transform: translateX(-0%) translateY(-50%);
+}
+
+    /*.md-modal.md-show {*/
+        /*visibility: visible;*/
+    /*}*/
+
+.md-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    will-change: visibility, opacity;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    opacity: 0;
+    background: RGBA(0,0,0,0.4);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    -webkit-transition: opacity 0.3s linear;
+    -moz-transition: opacity 0.3s linear;
+    transition: opacity 0.3s linear;
+}
+
+    .md-overlay.md-show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+
+.md-modal .md-title{
+    background-color: #e74c3c;
+    border-radius: 0.188em 0.188em 0 0;
+    padding: 0.4em;
+    text-align: center;
+}
+    .md-modal .md-title.icon{
+        padding-left: 4.375em;
+        background-image: url("../../img/favicons/apple-touch-icon-57x57.png");
+        background-repeat: no-repeat no-repeat;
+        background-position: 0.938em 0.813em;
+    }
+.md-modal .md-title h3 {
+    margin: 0;
+    font-size: 2.4em;
+    font-weight: 300;
+    background: rgba(0,0,0,0.1);
+    opacity: 0.8;
+}
+
+.md-modal .md-content {
+    color: #fff;
+    background: #e74c3c;
+    position: relative;
+    border-radius: 0.188em;
+    margin: 0 auto;
+}
+
+.md-modal .md-content > p {
+    margin: 0;
+    padding: 0.625em 0;
+}
+
+.md-modal .md-content > ul {
+    margin: 0;
+    padding: 0 0 1.875em 1.250em;
+}
+
+.md-modal .md-content > ul li {
+    padding: 0.313em 0;
+}
+
+.md-modal .md-content button {
+    display: block;
+    margin: 0 auto;
+    font-size: 0.8em;
+
+    border: none;
+    padding: 0.6em 1.2em;
+    background: #c0392b;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0.125em;
+}
+    .md-modal .md-content button:hover {
+        background: #A5281B;
+    }
+
+
+
+/**
+    Dialog Effects
+**/
+
+/* Slide from the bottom */
+.md-modal.md-effect-slidebottom .md-title,
+.md-modal.md-effect-slidebottom .md-content {
+    -webkit-transform: translateY(40%);
+    -moz-transform: translateY(40%);
+    -ms-transform: translateY(40%);
+    transform: translateY(40%);
+    opacity: 0;
+    will-change: opacity, transform, -ms-transform, -moz-transform, -webkit-transform;
+
+    -webkit-transition: opacity 0.3s linear;
+    -moz-transition: opacity 0.3s linear;
+    transition: opacity 0.3s linear;
+}
+
+.md-overlay.md-show .md-modal.md-effect-slidebottom .md-title,
+.md-overlay.md-show .md-modal.md-effect-slidebottom .md-content {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+/* 3D flip horizontal */
+.md-modal.md-effect-3dflip {
+    -webkit-perspective: 81.250em;
+    -moz-perspective: 81.250em;
+    perspective: 81.250em;
+}
+
+.md-modal.md-effect-3dflip .md-title,
+.md-modal.md-effect-3dflip .md-content {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateY(-70deg);
+    -moz-transform: rotateY(-70deg);
+    -ms-transform: rotateY(-70deg);
+    transform: rotateY(-70deg);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.md-overlay.md-show .md-modal.md-effect-3dflip .md-title,
+.md-overlay.md-show .md-modal.md-effect-3dflip .md-content {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    opacity: 1;
+}
