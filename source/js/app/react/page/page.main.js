@@ -67,16 +67,46 @@ var PageMain = Object.assign({}, {}, {
 
             <div className = "page-main">
                 <div className = "page-content">
-                    <div className = "blockAll">
-                        <div className = "blockHeader">
-                            <div className = "content">
-                                <div className = "">
-                                    <div className = "">
+                    <div className = "ps-all">
+                        <div className = "ps-header">
+                            <div className = "ps-image">
+                                <div className = "cn-image">
+                                    <img src=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className = "ps-counters">
+                            <div className = "ps-stars">
+                                <div className = "ps-star">
+                                    <div className = "cn-star">
+                                        <img src=""/>
+                                    </div>
+                                </div>
+                                <div className = "ps-counter">
+                                    <div className = "cn-counter">
+                                        999999
+                                    </div>
+                                </div>
+                            </div>
+                            <div className = "ps-cash">
+                                <div className = "ps-dollar">
+                                    <div className = "cn-dollar">
+                                        <img src=""/>
+                                    </div>
+                                </div>
+                                <div className = "ps-counter">
+                                    <div className = "cn-counter">
+                                        999999
+                                    </div>
+                                </div>
+                                <div className = "ps-plus">
+                                    <div className = "cn-plus">
+                                        <img src=""/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className = "blockSubheader">
+                        <div className = "ps-main">
                             <div className = "">
                                 <div className = "">
                                     <div className = "">
@@ -84,15 +114,7 @@ var PageMain = Object.assign({}, {}, {
                                 </div>
                             </div>
                         </div>
-                        <div className = "blockMain">
-                            <div className = "">
-                                <div className = "">
-                                    <div className = "">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className = "blockFooter">
+                        <div className = "ps-footer">
                             <div className = "">
                                 <div className = "">
                                     <div className = "">

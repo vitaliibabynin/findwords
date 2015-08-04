@@ -6,28 +6,69 @@
         margin-top: 0rem;
     }
 
-.blockAll {
-    margin-left: auto;
-    margin-right: auto;
+.ps-all {
     width:26.5rem;
     height:40.063rem;
-    background-color:blue;
+    background-color:#2574a9;
     position: relative;
 }
-    .blockHeader {
+    .ps-all .ps-header {
         height:9rem;
+        position:relative;
     }
 
-    .blockSubheader {
-        height:3.063rem;
-        background-color: green;
+    .ps-all .ps-counters {
+        height: 3.063rem;
+        background-color: #2ecc71;
+        position: relative;
+        text-align: center;
+        padding: auto;
     }
 
-    .blockMain {
+        .ps-all .ps-counters .ps-stars {
+            display:inline-block;
+            padding:0.5rem;
+            background-color:red;
+            position:relative;
+            vertical-align: middle;
+            line-height: normal;
+            margin-right: 5rem;
+        }
+
+            .ps-all .ps-counters .ps-stars .ps-star {
+
+            }
+
+            .ps-all .ps-counters .ps-stars .ps-counter {
+
+            }
+
+        .ps-all .ps-counters .ps-cash {
+            display:inline-block;
+            padding:0.5rem;
+            background-color:red;
+            position:relative;
+            vertical-align: middle;
+            line-height: normal;
+        }
+
+            .ps-all .ps-counters .ps-cash .ps-dollar {
+
+            }
+
+            .ps-all .ps-counters .ps-stars .ps-counter {
+
+            }
+
+            .ps-all .ps-counters .ps-stars .ps-plus {
+
+            }
+
+    .ps-all .ps-main {
         height:23rem;
         background-color:cyan;
     }
 
-    .blockFooter {
+    .ps-all .ps-footer {
 
     }
