@@ -44,18 +44,21 @@ var PageMain = Object.assign({}, {}, {
 
     renderExample: function() {
         return (
+
             <div className="page-main">
 
                 <div className="page-content">
+
                     <h1 className={classNames({hide: !this.state.showHeader})}>Page Main</h1>
 
                     <FbButton onClick={this.onFBButtonClick}>{i18n._('button.fb')}</FbButton>
 
                     <Button onClick={this.onButtonClick}>перейти на PageGameMain</Button>
+
                 </div>
 
-
             </div>
+
         );
     },
 
