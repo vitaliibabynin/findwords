@@ -42,8 +42,7 @@ var PageMain = Object.assign({}, {}, {
         router.navigate("game", "main");
     },
 
-    render: function() {
-
+    renderExample: function() {
         return (
             <div className="page-main">
 
@@ -58,6 +57,14 @@ var PageMain = Object.assign({}, {}, {
 
             </div>
         );
+    },
+
+    renderDisplay: function() {
+
+    },
+
+    render: function() {
+        return this.renderExample();
     }
 });
 
