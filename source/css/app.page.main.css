@@ -6,3 +6,28 @@
         margin-top: 0rem;
     }
 
+.blockAll {
+    margin-left: auto;
+    margin-right: auto;
+    width:26.5rem;
+    height:40.063rem;
+    background-color:blue;
+    position: relative;
+}
+    .blockHeader {
+        height:9rem;
+    }
+
+    .blockSubheader {
+        height:3.063rem;
+        background-color: green;
+    }
+
+    .blockMain {
+        height:23rem;
+        background-color:cyan;
+    }
+
+    .blockFooter {
+
+    }

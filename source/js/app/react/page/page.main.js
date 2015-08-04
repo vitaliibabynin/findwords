@@ -63,11 +63,53 @@ var PageMain = Object.assign({}, {}, {
     },
 
     renderDisplay: function() {
+        return (
 
+            <div className = "page-main">
+                <div className = "page-content">
+                    <div className = "blockAll">
+                        <div className = "blockHeader">
+                            <div className = "content">
+                                <div className = "">
+                                    <div className = "">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className = "blockSubheader">
+                            <div className = "">
+                                <div className = "">
+                                    <div className = "">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className = "blockMain">
+                            <div className = "">
+                                <div className = "">
+                                    <div className = "">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className = "blockFooter">
+                            <div className = "">
+                                <div className = "">
+                                    <div className = "">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        );
     },
 
     render: function() {
-        return this.renderExample();
+        //return this.renderExample();
+        return this.renderDisplay();
     }
 });
 
