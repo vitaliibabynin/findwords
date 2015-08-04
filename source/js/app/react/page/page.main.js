@@ -8,7 +8,7 @@ var classNames = require('classnames');
 
 var FbButton = require('./../component/app.button').FbButton;
 var Button = require('./../component/app.button').Button;
-
+var Counter = require('./../component/app.counter').Counter;
 
 var PageMain = Object.assign({}, {}, {
     mixins: [PureRenderMixin, GameMixin],
@@ -84,7 +84,7 @@ var PageMain = Object.assign({}, {}, {
                                 </div>
                                 <div className = "ps-counter">
                                     <div className = "cn-counter">
-                                        999999
+                                        <counter value={50}/>
                                     </div>
                                 </div>
                             </div>
