@@ -52,13 +52,11 @@ var CounterClass = Object.assign({}, {}, {
 
     },
 
-    renderDisplay: function() {
+    render: function () {
 
         var counterClasses = classNames(
             this.state.className
         );
-
-        this.setValue(100);
 
         var finalValue = this.getValue();
 
@@ -67,11 +65,6 @@ var CounterClass = Object.assign({}, {}, {
             <Counter className={counterClasses}>{finalValue}</Counter>
 
         );
-    },
-
-    render: function () {
-
-        return this.renderDisplay();
 
     }
 });
