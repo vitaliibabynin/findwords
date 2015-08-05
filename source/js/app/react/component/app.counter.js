@@ -12,46 +12,70 @@ var classNames = require('classnames');
 module.exports = {};
 
 var CounterClass = Object.assign({}, {}, {
+
     displayName: 'Counter',
     mixins: [GameMixin],
 
     propTypes: {
+
         value: React.PropTypes.Number
+
     },
 
     getInitialState: function () {
+
         var state = {
+
             className: 'counter',
-            value: 100
+            value: this.props.value || 0
+
         };
+
         return state;
     },
 
     checkIfNumber: function (number) {
+
         if (isNaN(number)) {
+
             return false;
+
         } else {
+
             return true;
+
         }
+
     },
 
-    setValue: function (number) {
-        if (this.checkIfNumber(number)) {
-            this.setState({value: number});
+    setValue: function (newValue) {
+
+        if (!this.checkIfNumber(newValue)) {
+            throw 'counter.value must be a number';
         }
+
+        this.setState({value: newValue});
+
     },
 
     getValue: function () {
+
         return this.state.value;
+
     },
 
-    render: function() {
+    render: function () {
+
         var counterClasses = classNames(
             this.state.className
         );
 
         return (
+
+            this.setValue (100),
+
             <counter className={counterClasses}>{this.getValue()}</counter>
+
         );
     }
 });

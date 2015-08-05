@@ -6,66 +6,17 @@
         margin-top: 0rem;
     }
 
-.page-content {
-    width: 26.5rem;
-    height: 40.063rem;
-}
-    .page-content .header {
+    .page-main .page-content .header {
         height: 9rem;
         background-color: #2574a9;
     }
 
-    .page-content .counters {
-        height: 3.063rem;
-        background-color: #2ecc71;
-        text-align: center;
-    }
-
-        .page-content .counters .stars {
-            display:inline-block;
-            height: 3.063rem;
-            padding: 1rem;
-            background-color: red;
-            vertical-align: bottom;
-            line-height: 100%;
-            margin-right: 5rem;
-        }
-
-            .page-content .counters .stars .star {
-
-            }
-
-            .page-content .counters .stars .counter {
-
-            }
-
-        .page-content .counters .cash {
-            display: inline-block;
-            height: 3.063rem;
-            padding: 1rem;
-            background-color: red;
-            vertical-align: bottom;
-            line-height: 100%;
-        }
-
-            .page-content .counters .cash .dollar {
-
-            }
-
-            .page-content .counters .stars .counter {
-
-            }
-
-            .page-content .counters .stars .plus {
-
-            }
-
-    .page-content .main {
+    .page-main .page-content .main {
         height: 23rem;
         background-color: cyan;
     }
 
-    .page-content .footer {
+    .page-main .page-content .footer {
         background-color: #2574a9;
         height: 5rem;
     }
