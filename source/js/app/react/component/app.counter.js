@@ -7,21 +7,16 @@
 
 var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
-var Radium = require('radium');
 var classNames = require('classnames');
 
 module.exports = {};
 
-var CounterClass = Object.assign({}, {}, Radium.wrap({
+var CounterClass = Object.assign({}, {}, {
     displayName: 'Counter',
     mixins: [GameMixin],
 
     propTypes: {
-        value: function(props, propName) {
-            if (typeof props[propName] !== "number"){
-                return new Error('The count property must be a number');
-            }
-        }
+        value: React.PropTypes.Number
     },
 
     getInitialState: function () {
@@ -34,33 +29,32 @@ var CounterClass = Object.assign({}, {}, Radium.wrap({
 
     checkIfNumber: function (number) {
         if (isNaN(number)) {
-            return console.log("CounterClass.value must be a number");
+            return false;
         } else {
-            return number;
+            return true;
         }
     },
 
     setValue: function (number) {
         if (this.checkIfNumber(number)) {
-            this.value = number;
+            this.setState({value: number});
         }
     },
 
     getValue: function () {
-        return this.value;
+        return this.state.value;
     },
 
     render: function() {
         var counterClasses = classNames(
-            this.state.className,
-            this.props.className
+            this.state.className
         );
 
         return (
-            <counter className={counterClasses}>{this.value}</counter>
+            <counter className={counterClasses}>{this.getValue()}</counter>
         );
     }
-}));
+});
 
 module.exports.Counter = React.createClass(CounterClass);
 module.exports.Counter.Class = CounterClass;

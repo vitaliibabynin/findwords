@@ -67,58 +67,44 @@ var PageMain = Object.assign({}, {}, {
 
             <div className = "page-main">
                 <div className = "page-content">
-                    <div className = "ps-all">
-                        <div className = "ps-header">
-                            <div className = "ps-image">
-                                <div className = "cn-image">
+                    <div className = "header">
+                        <div className = "image">
+                                <img src=""/>
+                        </div>
+                    </div>
+                    <div className = "counters">
+                        <div className = "stars">
+                            <div className = "star">
                                     <img src=""/>
-                                </div>
+                            </div>
+                            <div className = "counter">
+                                    <counter></counter>
                             </div>
                         </div>
-                        <div className = "ps-counters">
-                            <div className = "ps-stars">
-                                <div className = "ps-star">
-                                    <div className = "cn-star">
-                                        <img src=""/>
-                                    </div>
-                                </div>
-                                <div className = "ps-counter">
-                                    <div className = "cn-counter">
-                                        <counter value={50}/>
-                                    </div>
-                                </div>
+                        <div className = "cash">
+                            <div className = "dollar">
+                                    <img src=""/>
                             </div>
-                            <div className = "ps-cash">
-                                <div className = "ps-dollar">
-                                    <div className = "cn-dollar">
-                                        <img src=""/>
-                                    </div>
-                                </div>
-                                <div className = "ps-counter">
-                                    <div className = "cn-counter">
-                                        999999
-                                    </div>
-                                </div>
-                                <div className = "ps-plus">
-                                    <div className = "cn-plus">
-                                        <img src=""/>
-                                    </div>
-                                </div>
+                            <div className = "counter">
+                                    999999
+                            </div>
+                            <div className = "plus">
+                                    <img src=""/>
                             </div>
                         </div>
-                        <div className = "ps-main">
+                    </div>
+                    <div className = "main">
+                        <div className = "">
                             <div className = "">
                                 <div className = "">
-                                    <div className = "">
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className = "ps-footer">
+                    </div>
+                    <div className = "footer">
+                        <div className = "">
                             <div className = "">
                                 <div className = "">
-                                    <div className = "">
-                                    </div>
                                 </div>
                             </div>
                         </div>
