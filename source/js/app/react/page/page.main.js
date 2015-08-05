@@ -95,30 +95,30 @@ var PageMain = Object.assign({}, {}, {
                     </div>
                     <div className = "main">
                         <div className = "swiper">
-                            //swiper-element
+                             /*swiper-element*/
                         </div>
                         <div className = "navigation">
                             <div className = "settings">
-                                //settings-element
+                                /*settings-element*/
                             </div>
                             <div className = "rating">
-                                //link to ratings
+                                /*link to ratings*/
                             </div>
                             <div className = "facebook">
-                                //facebook-element
+                                /*facebook-element*/
                             </div>
                             <div className = "shop">
-                                //link to shop
+                                /*link to shop*/
                             </div>
                         </div>
                     </div>
                     <div className = "footer">
                         <div className = "advertisement-switch">
                             <div className = "advertisement">
-                                //babelfish-element
+                                /*babelfish-element*/
                             </div>
                             <div className = "switch">
-                                //switch-element
+                                /*switch-element*/
                             </div>
                         </div>
                     </div>
