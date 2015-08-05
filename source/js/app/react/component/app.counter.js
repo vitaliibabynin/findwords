@@ -18,7 +18,7 @@ var CounterClass = Object.assign({}, {}, {
 
     propTypes: {
 
-        count: React.PropTypes.Number
+        value: React.PropTypes.Number
 
     },
 
@@ -27,46 +27,52 @@ var CounterClass = Object.assign({}, {}, {
         var state = {
 
             className: 'counter',
-            count: this.props.count || 0
+            value: this.props.value || 0
 
         };
 
         return state;
     },
 
-    setCount: function (newCount) {
+    setValue: function (newValue) {
 
-        if (typeof(newCount) !== "number") {
+        if (typeof(newValue) !== "number") {
 
-            throw 'counter.count must be a number';
+            throw 'counter.value must be a number';
 
         }
 
-        this.setState({count: newCount});
+        this.setState({value: newValue});
 
     },
 
-    getCount: function () {
+    getValue: function () {
 
-        return this.state.count;
+        return this.state.value;
 
     },
 
-    render: function () {
+    renderDisplay: function() {
 
         var counterClasses = classNames(
             this.state.className
         );
 
-        this.setCount(100);
+        this.setValue(100);
 
-        var finalCount = this.getCount();
+        var finalValue = this.getValue();
 
         return (
 
-            <counter className={counterClasses}>{finalCount}</counter>
+            <Counter className={counterClasses}>{finalValue}</Counter>
 
         );
+    },
+
+    render: function () {
+
+        return this.renderDisplay();
+
     }
 });
 

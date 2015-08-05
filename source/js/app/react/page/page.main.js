@@ -77,9 +77,7 @@ var PageMain = Object.assign({}, {}, {
                             <div className = "star">
                                     <img src=""/>
                             </div>
-                            <div className = "counter">
-                                    <counter></counter>
-                            </div>
+                            <Counter></Counter>
                         </div>
                         <div className = "cash">
                             <div className = "dollar">
