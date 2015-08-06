@@ -9,17 +9,12 @@
     .page-main .page-content .header {
         height: 6.875rem;
         background-color: #2574a9;
-        position: relative;
     }
 
-        .page-main .page-content .header .image {
-            position: absolute;
-            top: 50%;
-            left: 45%;
-            transform: translate(-55%, -50%);
+        .page-main .page-content .header Head head.head {
+            margin: 2rem auto;
             min-width: 14.813rem;
             min-height: 4.313rem;
-            background-image: url("../img/head/head_img@.png");
             background-repeat: no-repeat;
         }
 

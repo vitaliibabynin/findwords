@@ -9,7 +9,8 @@ var classNames = require('classnames');
 var FbButton = require('./../component/app.button').FbButton;
 var Button = require('./../component/app.button').Button;
 
-var Counter = require('./../component/app.counter').Counter;
+var Head = require('./../component/app.head').Head;
+
 var StarCounter = require('./../component/app.counter').StarCounter;
 var CashCounter = require('./../component/app.counter').CashCounter;
 
@@ -72,8 +73,7 @@ var PageMain = Object.assign({}, {}, {
             <div className="page-main">
                 <div className="page-content">
                     <div className="header">
-                        <div className="image">
-                        </div>
+                        <Head />
                     </div>
                     <div className="counters">
                         <div className="stars">

@@ -58,37 +58,44 @@ html.cordova.ios #app-content .page-layout .page{
     .page-content .counters .stars {
         display:inline-block;
         height: 2.375rem;
+        width: 7rem;
         background-color: red;
         margin-right: 3rem;
         vertical-align: top;
-        position:relative;
     }
 
         .page-content .counters .stars .star {
-            position: absolute;
+            display: inline-block;
+            background-color: yellow;
         }
 
         .page-content .counters .stars .counter{
-            position: absolute;
+            display: inline-block;
             width: 3.750rem;
             height: 1.125rem;
+            background-color: pink;
+
         }
 
     .page-content .counters .cash {
         display: inline-block;
         height: 2.375em;
+        width: 7rem;
         background-color: red;
         vertical-align: top;
     }
 
         .page-content .counters .cash .dollar {
-
+            display: inline-block;
+            background-color: yellow;
         }
 
         .page-content .counters .cash .counter{
-
+            display: inline-block;
+            background-color: grey;
         }
 
         .page-content .counters .cash .plus {
-
+            display: inline-block;
+            background-color: brown;
         }

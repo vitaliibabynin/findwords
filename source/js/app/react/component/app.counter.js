@@ -18,7 +18,7 @@ var CounterClass = Object.assign({}, {}, {
 
     propTypes: {
 
-        value: React.PropTypes.Number
+        value: React.PropTypes.number
 
     },
 
@@ -71,7 +71,8 @@ var CounterClass = Object.assign({}, {}, {
     render: function () {
 
         var counterClasses = classNames(
-            this.state.className
+            this.state.className,
+            this.props.className
         );
 
         var finalValue = this.getStateValue();
