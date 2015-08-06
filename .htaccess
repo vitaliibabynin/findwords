@@ -1,52 +1,7 @@
-DirectoryIndex index.php index.html index.phtml index.php3 index.php4 index.cgi index.pl
-Options All -Indexes
+
 ErrorDocument 403 "Access Forbidden"
 
 AddType text/cache-manifest .manifest
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType text/cache-manifest "access plus 0 seconds"
-
-    <FilesMatch "\.manifest$">
-        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
-        Header set Pragma "no-cache"
-        Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
-    </FilesMatch>
-</IfModule>
-
-
-<IfModule mod_mime.c>
-    AddType application/x-javascript .js
-    AddType text/css .css
-</IfModule>
-
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/css application/x-javascript text/x-component text/html text/richtext image/svg+xml text/plain text/xsd text/xsl text/xml image/x-icon application/javascript
-    <IfModule mod_setenvif.c>
-        BrowserMatch ^Mozilla/4 gzip-only-text/html
-        BrowserMatch ^Mozilla/4\.0[678] no-gzip
-        BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-    </IfModule>
-    <IfModule mod_headers.c>
-        Header append Vary User-Agent env=!dont-vary
-    </IfModule>
-</IfModule>
-
-
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-</IfModule>
-
-
-<FilesMatch "\.svn/.*">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-#SetEnv runtime_environment "production"
-
-php_value upload_max_filesize    10M
-php_value post_max_size          50M
 
 
 RewriteEngine On
