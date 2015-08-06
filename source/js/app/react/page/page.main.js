@@ -8,13 +8,17 @@ var classNames = require('classnames');
 
 var FbButton = require('./../component/app.button').FbButton;
 var Button = require('./../component/app.button').Button;
+
 var Counter = require('./../component/app.counter').Counter;
+var StarCounter = require('./../component/app.counter').StarCounter;
+var CashCounter = require('./../component/app.counter').CashCounter;
+
 
 var PageMain = Object.assign({}, {}, {
     mixins: [PureRenderMixin, GameMixin],
     displayName: 'PageMain',
 
-    getInitialState: function(){
+    getInitialState: function () {
         var state = {
             showHeader: false
         };
@@ -22,27 +26,27 @@ var PageMain = Object.assign({}, {}, {
         return state;
     },
 
-    componentDidMount: function() {
+    componentDidMount: function () {
 
     },
 
-    componentDidUpdate: function(prevProps, prevState) {
+    componentDidUpdate: function (prevProps, prevState) {
 
     },
 
-    componentWillUnmount: function() {
+    componentWillUnmount: function () {
 
     },
 
-    onFBButtonClick: function(buttonProps){
+    onFBButtonClick: function (buttonProps) {
         this.setState({showHeader: !this.state.showHeader});
     },
 
-    onButtonClick: function(buttonProps){
+    onButtonClick: function (buttonProps) {
         router.navigate("game", "main");
     },
 
-    renderExample: function() {
+    renderExample: function () {
         return (
 
             <div className="page-main">
@@ -62,60 +66,58 @@ var PageMain = Object.assign({}, {}, {
         );
     },
 
-    renderDisplay: function() {
+    renderDisplay: function () {
         return (
 
-            <div className = "page-main">
-                <div className = "page-content">
-                    <div className = "header">
-                        <div className = "image">
+            <div className="page-main">
+                <div className="page-content">
+                    <div className="header">
+                        <div className="image">
+                            <img src=""/>
+                        </div>
+                    </div>
+                    <div className="counters">
+                        <div className="stars">
+                            <div className="star">
                                 <img src=""/>
+                            </div>
+                            <StarCounter />
                         </div>
-                    </div>
-                    <div className = "counters">
-                        <div className = "stars">
-                            <div className = "star">
-                                    <img src=""/>
+                        <div className="cash">
+                            <div className="dollar">
+                                <img src=""/>
                             </div>
-                            <Counter />
-                        </div>
-                        <div className = "cash">
-                            <div className = "dollar">
-                                    <img src=""/>
-                            </div>
-                            <div className = "counter">
-                                    999999
-                            </div>
-                            <div className = "plus">
-                                    <img src=""/>
+                            <CashCounter />
+                            <div className="plus">
+                                <img src=""/>
                             </div>
                         </div>
                     </div>
-                    <div className = "main">
-                        <div className = "swiper">
-                             /*swiper-element*/
+                    <div className="main">
+                        <div className="swiper">
+                            /*swiper-element*/
                         </div>
-                        <div className = "navigation">
-                            <div className = "settings">
+                        <div className="navigation">
+                            <div className="settings">
                                 /*settings-element*/
                             </div>
-                            <div className = "rating">
+                            <div className="rating">
                                 /*link to ratings*/
                             </div>
-                            <div className = "facebook">
+                            <div className="facebook">
                                 /*facebook-element*/
                             </div>
-                            <div className = "shop">
+                            <div className="shop">
                                 /*link to shop*/
                             </div>
                         </div>
                     </div>
-                    <div className = "footer">
-                        <div className = "advertisement-switch">
-                            <div className = "advertisement">
+                    <div className="footer">
+                        <div className="advertisement-switch">
+                            <div className="advertisement">
                                 /*babelfish-element*/
                             </div>
-                            <div className = "switch">
+                            <div className="switch">
                                 /*switch-element*/
                             </div>
                         </div>
@@ -126,7 +128,7 @@ var PageMain = Object.assign({}, {}, {
         );
     },
 
-    render: function() {
+    render: function () {
         //return this.renderExample();
         return this.renderDisplay();
     }

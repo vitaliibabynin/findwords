@@ -34,7 +34,23 @@ var CounterClass = Object.assign({}, {}, {
         return state;
     },
 
-    setValue: function (newValue) {
+    getPropValue: function () {
+        return this.props.value;
+    },
+
+    setPropValue: function () {
+
+        if (typeof(newValue) !== "number") {
+
+            throw 'counter.value must be a number';
+
+        }
+
+        this.setValueForProperty({value: newValue});
+
+    },
+
+    setStateValue: function (newValue) {
 
         if (typeof(newValue) !== "number") {
 
@@ -46,7 +62,7 @@ var CounterClass = Object.assign({}, {}, {
 
     },
 
-    getValue: function () {
+    getStateValue: function () {
 
         return this.state.value;
 
@@ -58,11 +74,11 @@ var CounterClass = Object.assign({}, {}, {
             this.state.className
         );
 
-        var finalValue = this.getValue();
+        var finalValue = this.getStateValue();
 
         return (
 
-            <Counter className={counterClasses}>{finalValue}</Counter>
+            <counter className={counterClasses}>{finalValue}</counter>
 
         );
 
@@ -71,3 +87,51 @@ var CounterClass = Object.assign({}, {}, {
 
 module.exports.Counter = React.createClass(CounterClass);
 module.exports.Counter.Class = CounterClass;
+
+
+var StarCounterClass = Object.assign({}, CounterClass, {
+    displayName: 'StarCounter',
+
+    getInitialState: function () {
+
+        var state = CounterClass.getInitialState.call(this);
+        state.className += 'star';
+
+        return state;
+
+    },
+
+    render: function () {
+
+        return CounterClass.render.call(this);
+
+    }
+
+});
+
+module.exports.StarCounter = React.createClass(StarCounterClass);
+module.exports.StarCounter.Class = StarCounterClass;
+
+
+var CashCounterClass = Object.assign({}, CounterClass, {
+    displayName: 'CashCounter',
+
+    getInitialState: function () {
+
+        var state = CounterClass.getInitialState.call(this);
+        state.className += 'cash';
+
+        return state;
+
+    },
+
+    render: function () {
+
+        return CounterClass.render.call(this);
+
+    }
+
+});
+
+module.exports.CashCounter = React.createClass(CashCounterClass);
+module.exports.CashCounter.Class = CashCounterClass;
