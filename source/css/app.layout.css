@@ -52,6 +52,7 @@ html.cordova.ios #app-content .page-layout .page{
     height: 2.375rem;
     background-color: #2ecc71;
     text-align: center;
+    font-size: 1.2546875125469998rem;
 }
 
     .page-content .counters .stars {
@@ -60,14 +61,17 @@ html.cordova.ios #app-content .page-layout .page{
         background-color: red;
         margin-right: 3rem;
         vertical-align: top;
+        position:relative;
     }
 
         .page-content .counters .stars .star {
-
+            position: absolute;
         }
 
         .page-content .counters .stars .counter{
-
+            position: absolute;
+            width: 3.750rem;
+            height: 1.125rem;
         }
 
     .page-content .counters .cash {

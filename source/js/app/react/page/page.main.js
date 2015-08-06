@@ -73,7 +73,6 @@ var PageMain = Object.assign({}, {}, {
                 <div className="page-content">
                     <div className="header">
                         <div className="image">
-                            <img src=""/>
                         </div>
                     </div>
                     <div className="counters">
