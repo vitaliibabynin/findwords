@@ -9,7 +9,7 @@ var classNames = require('classnames');
 var FbButton = require('./../component/app.button').FbButton;
 var Button = require('./../component/app.button').Button;
 
-var Head = require('./../component/app.head').Head;
+//var Head = require('./../component/app.head').Head;
 
 var StarCounter = require('./../component/app.counter').StarCounter;
 var CashCounter = require('./../component/app.counter').CashCounter;
@@ -68,12 +68,21 @@ var PageMain = Object.assign({}, {}, {
     },
 
     renderDisplay: function () {
+
+        var lang = router.getLanguage();
+        var imgName = "head/head_img_" + lang;
+        var url = "url(" + this.getImagePath(imgName) + ")";
+
+        var style = {
+            backgroundImage: url
+        };
+
         return (
 
             <div className="page-main">
                 <div className="page-content">
-                    <div className="header">
-                        <Head />
+                    <div className="head"
+                        style={style}>
                     </div>
                     <div className="counters">
                         <div className="stars">
@@ -87,6 +96,7 @@ var PageMain = Object.assign({}, {}, {
                                 <img src=""/>
                             </div>
                             <CashCounter />
+
                             <div className="plus">
                                 <img src=""/>
                             </div>

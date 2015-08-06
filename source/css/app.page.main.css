@@ -6,17 +6,13 @@
         margin-top: 0rem;
     }
 
-    .page-main .page-content .header {
+    .page-main .page-content .head {
         height: 6.875rem;
         background-color: #2574a9;
-    }
-
-        .page-main .page-content .header Head head.head {
-            margin: 2rem auto;
-            min-width: 14.813rem;
-            min-height: 4.313rem;
-            background-repeat: no-repeat;
-        }
+        background-repeat: no-repeat;
+        background-size: 65% 65%;
+        background-position: 40% 50%;
+}
 
     .page-main .page-content .main {
         height: 17.625rem;
