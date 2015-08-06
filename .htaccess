@@ -56,10 +56,8 @@ RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^build/.*$ - [NC,L]
-RewriteRule ^index.html$ - [NC,L]
 
-
-RewriteRule ^(.*)$ index.html [R=301]
+RewriteRule ^(.*)$ index.html [QSA,L]
 
 
 
