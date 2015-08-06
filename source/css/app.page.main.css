@@ -7,16 +7,16 @@
     }
 
     .page-main .page-content .header {
-        height: 9rem;
+        height: 6.875rem;
         background-color: #2574a9;
     }
 
     .page-main .page-content .main {
-        height: 23rem;
+        height: 17.625rem;
         background-color: cyan;
     }
 
     .page-main .page-content .footer {
         background-color: #2574a9;
-        height: 5rem;
+        height: 3.125rem;
     }
