@@ -5,6 +5,7 @@ AddType text/cache-manifest .manifest
 
 
 
+
 RewriteEngine On
 RewriteBase /
 RewriteRule ^(.*/)?\.svn/ - [F,L]
