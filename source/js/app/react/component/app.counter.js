@@ -1,7 +1,3 @@
-/**
- * Created by Vitaliy Babynin on 04.08.2015.
- */
-
 /** @jsx React.DOM */
 "use strict";
 
@@ -11,9 +7,49 @@ var classNames = require('classnames');
 
 module.exports = {};
 
-var CounterClass = Object.assign({}, {}, {
+var StarImgClass = Object.assign({}, {}, {
 
-    displayName: 'Counter',
+    mixins: [GameMixin],
+
+    getInitialState: function () {
+
+        var state = {
+            className: 'starImg',
+            style: {}
+        };
+
+        this.updateStyle(state.style);
+
+        return state;
+    },
+
+    updateStyle: function (style) {
+
+        var imgLoc = this.getBackgoundImageLocation();
+        style.backgroundImage = "url('" + this.getImagePath(imgLoc) + "')";
+
+    },
+
+    getBackgoundImageLocation: function () {
+        return "star/star";
+    },
+
+    render: function () {
+
+        return (
+
+            <div className={this.state.className} style={this.state.style}></div>
+
+        );
+    }
+
+});
+
+module.exports.StarImg = React.createClass(StarImgClass);
+module.exports.StarImg.Class = StarImgClass;
+
+var StarCounterClass = Object.assign({}, {}, {
+
     mixins: [GameMixin],
 
     propTypes: {
@@ -25,29 +61,11 @@ var CounterClass = Object.assign({}, {}, {
     getInitialState: function () {
 
         var state = {
-
-            className: 'counter',
+            className: 'starCounter',
             value: this.props.value || 0
-
         };
 
         return state;
-    },
-
-    getPropValue: function () {
-        return this.props.value;
-    },
-
-    setPropValue: function () {
-
-        if (typeof(newValue) !== "number") {
-
-            throw 'counter.value must be a number';
-
-        }
-
-        this.setValueForProperty({value: newValue});
-
     },
 
     setStateValue: function (newValue) {
@@ -70,41 +88,7 @@ var CounterClass = Object.assign({}, {}, {
 
     render: function () {
 
-        var counterClasses = classNames(
-            this.state.className,
-            this.props.className
-        );
-
-        var finalValue = this.getStateValue();
-
-        return (
-
-            <counter className={counterClasses}>{finalValue}</counter>
-
-        );
-
-    }
-});
-
-module.exports.Counter = React.createClass(CounterClass);
-module.exports.Counter.Class = CounterClass;
-
-
-var StarCounterClass = Object.assign({}, CounterClass, {
-    displayName: 'StarCounter',
-
-    getInitialState: function () {
-
-        var state = CounterClass.getInitialState.call(this);
-        state.className += 'star';
-
-        return state;
-
-    },
-
-    render: function () {
-
-        return CounterClass.render.call(this);
+        <div className={this.state.className}>{this.getStateValue()}</div>
 
     }
 
@@ -113,14 +97,16 @@ var StarCounterClass = Object.assign({}, CounterClass, {
 module.exports.StarCounter = React.createClass(StarCounterClass);
 module.exports.StarCounter.Class = StarCounterClass;
 
+var StarsClass = Object.assign({}, {}, {
 
-var CashCounterClass = Object.assign({}, CounterClass, {
-    displayName: 'CashCounter',
+    mixins: [GameMixin],
 
     getInitialState: function () {
 
-        var state = CounterClass.getInitialState.call(this);
-        state.className += 'cash';
+        var state = {
+            className: 'stars'
+
+        };
 
         return state;
 
@@ -128,11 +114,17 @@ var CashCounterClass = Object.assign({}, CounterClass, {
 
     render: function () {
 
-        return CounterClass.render.call(this);
+        return (
 
+            <div className={this.state.className}>
+                <StarImg />
+                <StarCounter />
+            </div>
+
+        );
     }
 
 });
 
-module.exports.CashCounter = React.createClass(CashCounterClass);
-module.exports.CashCounter.Class = CashCounterClass;
+module.exports.Stars = React.createClass(StarsClass);
+module.exports.Stars.Class = StarsClass;

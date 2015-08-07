@@ -10,13 +10,13 @@
         height: 6.875rem;
         background-color: #2574a9;
         background-repeat: no-repeat;
-        background-size: 65% 65%;
-        background-position: 40% 50%;
+        background-size: 14.813rem 4.313rem;
+        background-position: center center;
 }
 
     .page-main .page-content .main {
         height: 17.625rem;
-        background-color: cyan;
+        background-color: #81cfe0;
     }
 
     .page-main .page-content .footer {

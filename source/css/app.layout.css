@@ -55,47 +55,55 @@ html.cordova.ios #app-content .page-layout .page{
     font-size: 1.2546875125469998rem;
 }
 
-    .page-content .counters .stars {
-        display:inline-block;
-        height: 2.375rem;
-        width: 7rem;
-        background-color: red;
-        margin-right: 3rem;
-        vertical-align: top;
+    .page-content .counters .starImg {
+        height: 1.375rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        /*background-size: 14.813rem 4.313rem;*/
+        background-position: center center;
     }
 
-        .page-content .counters .stars .star {
-            display: inline-block;
-            background-color: yellow;
-        }
+    /*.page-content .counters .counterstars {*/
+        /*display:inline-block;*/
+        /*height: 2.375rem;*/
+        /*width: 7rem;*/
+        /*background-color: red;*/
+        /*margin-right: 3rem;*/
+        /*vertical-align: top;*/
+    /*}*/
 
-        .page-content .counters .stars .counter{
-            display: inline-block;
-            width: 3.750rem;
-            height: 1.125rem;
-            background-color: pink;
+        /*.page-content .counters .stars .star {*/
+            /*display: inline-block;*/
+            /*background-color: yellow;*/
+        /*}*/
 
-        }
+        /*.page-content .counters .stars .counter{*/
+            /*display: inline-block;*/
+            /*width: 3.750rem;*/
+            /*height: 1.125rem;*/
+            /*background-color: pink;*/
 
-    .page-content .counters .cash {
-        display: inline-block;
-        height: 2.375em;
-        width: 7rem;
-        background-color: red;
-        vertical-align: top;
-    }
+        /*}*/
 
-        .page-content .counters .cash .dollar {
-            display: inline-block;
-            background-color: yellow;
-        }
+    /*.page-content .counters .cash {*/
+        /*display: inline-block;*/
+        /*height: 2.375em;*/
+        /*width: 7rem;*/
+        /*background-color: red;*/
+        /*vertical-align: top;*/
+    /*}*/
 
-        .page-content .counters .cash .counter{
-            display: inline-block;
-            background-color: grey;
-        }
+        /*.page-content .counters .cash .dollar {*/
+            /*display: inline-block;*/
+            /*background-color: yellow;*/
+        /*}*/
 
-        .page-content .counters .cash .plus {
-            display: inline-block;
-            background-color: brown;
-        }
+        /*.page-content .counters .cash .counter{*/
+            /*display: inline-block;*/
+            /*background-color: grey;*/
+        /*}*/
+
+        /*.page-content .counters .cash .plus {*/
+            /*display: inline-block;*/
+            /*background-color: brown;*/
+        /*}*/
