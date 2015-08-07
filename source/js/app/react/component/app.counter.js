@@ -7,124 +7,72 @@ var classNames = require('classnames');
 
 module.exports = {};
 
-var StarImgClass = Object.assign({}, {}, {
+
+var CounterClass = Object.assign({}, {}, {
 
     mixins: [GameMixin],
 
     getInitialState: function () {
 
         var state = {
-            className: 'starImg',
-            style: {}
-        };
-
-        this.updateStyle(state.style);
-
-        return state;
-    },
-
-    updateStyle: function (style) {
-
-        var imgLoc = this.getBackgoundImageLocation();
-        style.backgroundImage = "url('" + this.getImagePath(imgLoc) + "')";
-
-    },
-
-    getBackgoundImageLocation: function () {
-        return "star/star";
-    },
-
-    render: function () {
-
-        return (
-
-            <div className={this.state.className} style={this.state.style}></div>
-
-        );
-    }
-
-});
-
-module.exports.StarImg = React.createClass(StarImgClass);
-module.exports.StarImg.Class = StarImgClass;
-
-var StarCounterClass = Object.assign({}, {}, {
-
-    mixins: [GameMixin],
-
-    propTypes: {
-
-        value: React.PropTypes.number
-
-    },
-
-    getInitialState: function () {
-
-        var state = {
-            className: 'starCounter',
+            imgName: false,
             value: this.props.value || 0
         };
 
         return state;
+
     },
 
-    setStateValue: function (newValue) {
-
+    setValue: function (newValue) {
         if (typeof(newValue) !== "number") {
-
             throw 'counter.value must be a number';
-
         }
 
         this.setState({value: newValue});
-
     },
 
-    getStateValue: function () {
-
+    getValue: function () {
         return this.state.value;
-
     },
 
     render: function () {
-
-        <div className={this.state.className}>{this.getStateValue()}</div>
-
-    }
-
-});
-
-module.exports.StarCounter = React.createClass(StarCounterClass);
-module.exports.StarCounter.Class = StarCounterClass;
-
-var StarsClass = Object.assign({}, {}, {
-
-    mixins: [GameMixin],
-
-    getInitialState: function () {
-
-        var state = {
-            className: 'stars'
-
-        };
-
-        return state;
-
-    },
-
-    render: function () {
+        var style = {};
+        var className = classNames('counter', this.props.className);
+        if(this.state.imgName){
+            style.backgroundImage = "url('" + this.getImagePath(this.state.imgName) + "')";
+            className += ' icon';
+        }
 
         return (
-
-            <div className={this.state.className}>
-                <StarImg />
-                <StarCounter />
+            <div className={className} style={style}>
+                <div className="text">{this.getValue()}</div>
             </div>
-
         );
     }
-
 });
 
-module.exports.Stars = React.createClass(StarsClass);
-module.exports.Stars.Class = StarsClass;
+module.exports.Counter = React.createClass(CounterClass);
+module.exports.Counter.Class = CounterClass;
+
+
+var ScoreCounterClass = Object.assign({}, CounterClass, {
+    getInitialState: function () {
+        var state = CounterClass.getInitialState.apply(this);
+        state.imgName = 'counter/star'
+
+        return state;
+    }
+});
+module.exports.ScoreCounter = React.createClass(ScoreCounterClass);
+module.exports.ScoreCounter.Class = ScoreCounterClass;
+
+var CoinsCounterClass = Object.assign({}, CounterClass, {
+    getInitialState: function () {
+        var state = CounterClass.getInitialState.apply(this);
+        state.imgName = 'counter/coins'
+
+        return state;
+    }
+});
+module.exports.CoinsCounter = React.createClass(CoinsCounterClass);
+module.exports.CoinsCounter.Class = CoinsCounterClass;

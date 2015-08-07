@@ -49,19 +49,32 @@ html.cordova.ios #app-content .page-layout .page{
 }
 
 .page-content .counters {
-    height: 2.375rem;
     background-color: #2ecc71;
     text-align: center;
     font-size: 1.2546875125469998rem;
+    padding: 0.2rem;
 }
 
-    .page-content .counters .starImg {
-        height: 1.375rem;
-        background-size: contain;
-        background-repeat: no-repeat;
-        /*background-size: 14.813rem 4.313rem;*/
-        background-position: center center;
+    .page-content .counters .counter{
+        width: 5rem;
+        height: 2.0rem;
+        display: inline-block;
+        margin-left: 1rem;
     }
+        .page-content .counters .counter:first-of-type{
+            margin-left: 0rem;
+        }
+        .page-content .counters .counter.icon{
+            background-size: auto 1.375rem;
+            background-repeat: no-repeat no-repeat;
+            /*background-size: 14.813rem 4.313rem;*/
+            background-position: left center;
+        }
+        .page-content .counters .counter .text{
+            text-align: left;
+            margin-left: 1.8rem;
+            line-height: 2.25rem;
+        }
 
     /*.page-content .counters .counterstars {*/
         /*display:inline-block;*/

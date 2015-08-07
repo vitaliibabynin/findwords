@@ -9,7 +9,8 @@ var classNames = require('classnames');
 var FbButton = require('./../component/app.button').FbButton;
 var Button = require('./../component/app.button').Button;
 
-var Stars = require('./../component/app.counter').Stars;
+var ScoreCounter = require('./../component/app.counter').ScoreCounter;
+var CoinsCounter = require('./../component/app.counter').CoinsCounter;
 
 
 var PageMain = Object.assign({}, {}, {
@@ -79,7 +80,8 @@ var PageMain = Object.assign({}, {}, {
                         style={headStyle}>
                     </div>
                     <div className="counters">
-                            <Stars />
+                        <ScoreCounter value={10} />
+                        <CoinsCounter value={98} />
                     </div>
                     <div className="main">
                         <div className="swiper">
