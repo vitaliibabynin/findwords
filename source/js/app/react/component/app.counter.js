@@ -12,6 +12,12 @@ var CounterClass = Object.assign({}, {}, {
 
     mixins: [GameMixin],
 
+    propTypes: {
+
+        value: React.PropTypes.number
+
+    },
+
     getInitialState: function () {
 
         var state = {
@@ -21,18 +27,6 @@ var CounterClass = Object.assign({}, {}, {
 
         return state;
 
-    },
-
-    setValue: function (newValue) {
-        if (typeof(newValue) !== "number") {
-            throw 'counter.value must be a number';
-        }
-
-        this.setState({value: newValue});
-    },
-
-    getValue: function () {
-        return this.state.value;
     },
 
     render: function () {
