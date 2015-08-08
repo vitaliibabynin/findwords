@@ -46,7 +46,7 @@ var CounterClass = Object.assign({}, {}, {
         return (
             <div className={className} style={style}>
                 <div className="text">
-                    <span>{this.getValue()}</span>
+                    {this.getValue()}
                 </div>
             </div>
         );
