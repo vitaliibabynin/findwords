@@ -4,6 +4,7 @@
 var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
+var IconButton = require('./app.button').IconButton;
 
 module.exports = {};
 
@@ -14,7 +15,9 @@ var CounterClass = Object.assign({}, {}, {
 
     propTypes: {
 
-        value: React.PropTypes.number
+        value: React.PropTypes.number,
+        iconImg: React.PropTypes.string,
+        hideIcon: React.PropTypes.oneOf(["show", "hide"])
 
     },
 
@@ -22,11 +25,22 @@ var CounterClass = Object.assign({}, {}, {
 
         var state = {
             imgName: false,
-            value: this.props.value || 0
+            value: this.props.value || 0,
+            iconImg: this.props.iconImg || "plus",
+            hideIcon: this.props.hideIcon || "hide"
         };
 
         return state;
 
+    },
+
+    showIcon: function() {
+        if(this.state.hideIcon === "show"){
+            console.log(this.state.iconImg);
+            return (
+                <IconButton icon={this.state.iconImg}></IconButton>
+            );
+        }
     },
 
     render: function () {
@@ -37,24 +51,32 @@ var CounterClass = Object.assign({}, {}, {
             className += ' icon';
         }
 
+        var styleText = {};
+        if (this.state.hideIcon === "hide") {
+            styleText.paddingRight = "0.4rem";
+        }
+
         return (
             <div className={className} style={style}>
-                <div className="text">
-                    {this.getValue()}
+                <div className="text" style={styleText}>
+                    {this.state.value}
                 </div>
+                {this.showIcon()}
             </div>
         );
     }
 });
-
 module.exports.Counter = React.createClass(CounterClass);
 module.exports.Counter.Class = CounterClass;
 
 
 var ScoreCounterClass = Object.assign({}, CounterClass, {
+
+    //hideIcon: "hide",
+
     getInitialState: function () {
         var state = CounterClass.getInitialState.apply(this);
-        state.imgName = 'counter/star'
+        state.imgName = 'counter/star';
 
         return state;
     }
@@ -63,9 +85,12 @@ module.exports.ScoreCounter = React.createClass(ScoreCounterClass);
 module.exports.ScoreCounter.Class = ScoreCounterClass;
 
 var CoinsCounterClass = Object.assign({}, CounterClass, {
+
+    //hideIcon: "show",
+
     getInitialState: function () {
         var state = CounterClass.getInitialState.apply(this);
-        state.imgName = 'counter/coins'
+        state.imgName = 'counter/coins';
 
         return state;
     }

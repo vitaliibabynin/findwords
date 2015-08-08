@@ -80,8 +80,8 @@ var PageMain = Object.assign({}, {}, {
                         style={headStyle}>
                     </div>
                     <div className="counters">
-                        <ScoreCounter value={1} />
-                        <CoinsCounter value={1} />
+                        <ScoreCounter value={9999} hideIcon={"hide"}/>
+                        <CoinsCounter value={15} hideIcon={"show"}/>
                     </div>
                     <div className="main">
                         <div className="swiper">

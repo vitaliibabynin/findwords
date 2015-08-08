@@ -114,10 +114,7 @@ html.android{
 }
 
 .btn{
-    border: none;
     background-color: #6E4C59;
-    border-radius: 0.313rem;
-    border-bottom: 0.1875rem solid #583D47;
     height: 3.125rem;
     width: 100%;
     line-height: 3.125rem;
@@ -136,31 +133,24 @@ html.android{
     html.desktop .btn:hover,
     .btn.hover{
         opacity: 0.8;
-        border-bottom-width: 0.0625rem;
     }
 .btn.female{
     background-color: #D34646;
-    border-color: #A83838;
 }
 .btn.male{
     background-color: #459393;
-    border-color: #377676;
 }
 .btn.light{
     background-color: #AA9699;
-    border-color: #88787A;
 }
 .btn.orange{
     background-color: #D28647;
-    border-color: #A96B39;
 }
 .btn.green{
     background-color: #39A939;
-    border-color: #2E882D;
 }
 .btn.white{
     background-color: #ffffff;
-    border-color: #BDAF96;
 }
 
 .btn.icon{
@@ -170,15 +160,12 @@ html.android{
 }
 .btn.fb{
     background-color: #3C5A96;
-    border-color: #304878;
 }
 .btn.vk{
     background-color: #54769a;
-    border-color: #435e7b;
 }
 .btn.ok{
     background-color: #fa8423;
-    border-color: #c86a1c;
 }
 
 

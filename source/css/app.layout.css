@@ -59,6 +59,7 @@ html.cordova.ios #app-content .page-layout .page{
         height: 2.175rem;
         display: inline-block;
         margin-left: 2rem;
+        position:relative;
     }
         .page-content .counters .counter:first-of-type{
             margin-left: 0rem;
@@ -69,6 +70,7 @@ html.cordova.ios #app-content .page-layout .page{
             background-position: left center;
         }
         .page-content .counters .counter .text{
+            display: inline-block;
             min-width: 2rem;
             height: 1.575rem;
             background-color: rgba(85,85,85,0.5);
@@ -80,9 +82,35 @@ html.cordova.ios #app-content .page-layout .page{
             margin-top: 0.3rem;
             margin-bottom: 0.3rem;
             padding-left: 0.4rem;
-            padding-right: 0.4rem;
+            /*padding-right: 0.4rem;*/
+            padding-right: 1rem;
         }
 
         .page-content .counters .counter:last-of-type .text{
             margin-left: 1.32rem;
+        }
+
+        .page-content .counters .counter .btn.icon {
+            background-color: transparent;
+            height: 1.4rem;
+            width: 1.4rem;
+            line-height: initial;
+            display: inline-block;
+            color: #ffffff;
+            text-align: center;
+            vertical-align: initial;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0;
+            margin-left: -0.5rem;
+            margin-right: 0;
+            cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-bottom:0;
+            margin-top: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
         }

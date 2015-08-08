@@ -80,7 +80,7 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
         );
 
         return (
-            <button className={buttonClasses} style={this.state.style} onClick={this.onClick} dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} >{this.props.children}</button>
+            <div className={buttonClasses} style={this.state.style} onClick={this.onClick} dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} >{this.props.children}</div>
         );
     }
 }));
