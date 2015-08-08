@@ -1,15 +1,24 @@
-
 @font-face {
     font-family: 'AzoftSans';
-    src: url('../fonts/AzoftSans.eot?#iefix') format('embedded-opentype'),  url('../fonts/AzoftSans.woff') format('woff'), url('../fonts/AzoftSans.ttf')  format('truetype'), url('../fonts/AzoftSans.svg#AzoftSans') format('svg');
+    src: url('../fonts/AzoftSans.eot?#iefix') format('embedded-opentype'), url('../fonts/AzoftSans.woff') format('woff'), url('../fonts/AzoftSans.ttf') format('truetype'), url('../fonts/AzoftSans.svg#AzoftSans') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
-
 @font-face {
     font-family: 'Roboto-Light';
-    src: url('../fonts/Roboto-Light.eot?#iefix') format('embedded-opentype'),  url('../fonts/Roboto-Light.woff') format('woff'), url('../fonts/Roboto-Light.ttf')  format('truetype'), url('../fonts/Roboto-Light.svg#Roboto-Light') format('svg');
+    src: url('../fonts/Roboto-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Light.woff') format('woff'), url('../fonts/Roboto-Light.ttf') format('truetype'), url('../fonts/Roboto-Light.svg#Roboto-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyriadPro-Regular';
+    src: url('../fonts/MyriadPro-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/MyriadPro-Regular.otf') format('opentype'),
+    url('../fonts/MyriadPro-Regular.woff') format('woff'),
+    url('../fonts/MyriadPro-Regular.ttf') format('truetype'),
+    url('../fonts/MyriadPro-Regular.svg#MyriadPro-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }

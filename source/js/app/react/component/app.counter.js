@@ -38,14 +38,16 @@ var CounterClass = Object.assign({}, {}, {
     render: function () {
         var style = {};
         var className = classNames('counter', this.props.className);
-        if(this.state.imgName){
+        if (this.state.imgName) {
             style.backgroundImage = "url('" + this.getImagePath(this.state.imgName) + "')";
             className += ' icon';
         }
 
         return (
             <div className={className} style={style}>
-                <div className="text">{this.getValue()}</div>
+                <div className="text">
+                    <span>{this.getValue()}</span>
+                </div>
             </div>
         );
     }
