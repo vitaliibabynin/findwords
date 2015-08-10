@@ -36,7 +36,6 @@ var CounterClass = Object.assign({}, {}, {
 
     showIcon: function() {
         if(this.state.isDisplayPlusButton){
-            console.log(this.state.iconImg);
             return (
                 <IconButton icon={this.state.iconImg}></IconButton>
             );
@@ -52,8 +51,8 @@ var CounterClass = Object.assign({}, {}, {
         }
 
         var styleText = {};
-        if (!this.state.isDisplayPlusButton) {
-            styleText.paddingRight = "0.4rem";
+        if (this.state.isDisplayPlusButton) {
+            styleText.paddingRight = "1rem";
         }
 
         return (

@@ -33,7 +33,7 @@
     margin: 0;
 }
 #app-content .page-layout .page .page-content{
-    margin-bottom: 2rem;
+    /*margin-bottom: 2rem;*/
 }
 
 html.cordova.ios #app-content .page-layout,
@@ -42,7 +42,7 @@ html.cordova.ios #app-content .page-layout .page{
 }
 
 .page-content{
-    padding: 0 0.625rem;
+    /*padding: 0 0.625rem;*/
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -73,6 +73,8 @@ html.cordova.ios #app-content .page-layout .page{
             display: inline-block;
             min-width: 2rem;
             height: 1.575rem;
+            line-height: 1.575rem;
+            vertical-align: middle;
             background-color: rgba(85,85,85,0.5);
             border-radius: 0.4rem;;
             text-align: center;
@@ -82,8 +84,7 @@ html.cordova.ios #app-content .page-layout .page{
             margin-top: 0.3rem;
             margin-bottom: 0.3rem;
             padding-left: 0.4rem;
-            /*padding-right: 0.4rem;*/
-            padding-right: 1rem;
+            padding-right: 0.4rem;
         }
 
         .page-content .counters .counter:last-of-type .text{
@@ -98,7 +99,7 @@ html.cordova.ios #app-content .page-layout .page{
             display: inline-block;
             color: #ffffff;
             text-align: center;
-            vertical-align: initial;
+            vertical-align: middle;
             text-decoration: none;
             font-size: 1rem;
             padding: 0;
@@ -110,7 +111,7 @@ html.cordova.ios #app-content .page-layout .page{
             background-position: center;
             margin-bottom:0;
             margin-top: 0;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            /*position: absolute;*/
+            /*top: 50%;*/
+            /*transform: translateY(-50%);*/
         }

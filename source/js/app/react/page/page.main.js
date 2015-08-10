@@ -12,6 +12,8 @@ var Button = require('./../component/app.button').Button;
 var ScoreCounter = require('./../component/app.counter').ScoreCounter;
 var CoinsCounter = require('./../component/app.counter').CoinsCounter;
 
+var Switch = require('./../component/app.switch').Switch;
+
 
 var PageMain = Object.assign({}, {}, {
     mixins: [PureRenderMixin, GameMixin],
@@ -80,8 +82,8 @@ var PageMain = Object.assign({}, {}, {
                         style={headStyle}>
                     </div>
                     <div className="counters">
-                        <ScoreCounter value={9999} />
-                        <CoinsCounter value={15} />
+                        <ScoreCounter value={15} />
+                        <CoinsCounter value={9999} />
                     </div>
                     <div className="main">
                         <div className="swiper">
@@ -108,7 +110,7 @@ var PageMain = Object.assign({}, {}, {
                                 /*babelfish-element*/
                             </div>
                             <div className="switch">
-                                /*switch-element*/
+                                <Switch />
                             </div>
                         </div>
                     </div>
