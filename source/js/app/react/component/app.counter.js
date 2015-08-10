@@ -72,11 +72,10 @@ module.exports.Counter.Class = CounterClass;
 
 var ScoreCounterClass = Object.assign({}, CounterClass, {
 
-    //hideIcon: "hide",
-
     getInitialState: function () {
         var state = CounterClass.getInitialState.apply(this);
         state.imgName = 'counter/star';
+        state.hideIcon = this.props.hideIcon || "hide";
 
         return state;
     }
@@ -86,11 +85,10 @@ module.exports.ScoreCounter.Class = ScoreCounterClass;
 
 var CoinsCounterClass = Object.assign({}, CounterClass, {
 
-    //hideIcon: "show",
-
     getInitialState: function () {
         var state = CounterClass.getInitialState.apply(this);
         state.imgName = 'counter/coins';
+        state.hideIcon = this.props.hideIcon || "show";
 
         return state;
     }
