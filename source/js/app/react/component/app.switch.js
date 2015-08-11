@@ -37,7 +37,7 @@ var SwitchButtonClass = Object.assign({}, {}, {
         id: React.PropTypes.string,
         name: React.PropTypes.string,
         title: React.PropTypes.string,
-        label: React.PropTypes.string,
+        label: React.PropTypes.func,
         label_right: React.PropTypes.string,
         labelRight: React.PropTypes.string,
         defaultChecked: React.PropTypes.string,
@@ -53,14 +53,15 @@ var SwitchButtonClass = Object.assign({}, {}, {
      * @returns {{id: string, name: string, title: string, label: string, label_right: string, defaultChecked: string, theme: string, checked: null, onChange: *}}
      */
     getDefaultProps: function () {
+
         return {
             id: '',
             name: 'switch-button',
             title: '',
-            label: '',
+            label: i18n._('switch.ad'),
             label_right: '',
             labelRight: '',
-            defaultChecked: '',
+            defaultChecked: 'on',
             theme: 'rsbc-switch-button-flat-round',
             checked: null,
             onChange: this.handleChange

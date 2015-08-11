@@ -105,14 +105,7 @@ var PageMain = Object.assign({}, {}, {
                         </div>
                     </div>
                     <div className="footer">
-                        <div className="advertisement-switch">
-                            <div className="advertisement">
-                                {i18n._('switch.ad')}
-                            </div>
-                            <div className="switch">
-                                <Switch />
-                            </div>
-                        </div>
+                        <Switch />
                     </div>
                 </div>
             </div>
