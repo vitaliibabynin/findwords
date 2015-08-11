@@ -39,7 +39,7 @@ window.CONST = {
             'loadingscreen.errorloading.message': 'An error has occurred loading this game. Please check your internet connection and try again.',
             'loadingscreen.errorloading.button.reload': 'Try again',
             'button.fb': 'button FBButton',
-            'switch.ad':'Ads',
+            'switch.ad':'Adverts',
             t: ''
         }
     },

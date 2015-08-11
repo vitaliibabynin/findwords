@@ -68,20 +68,22 @@
             .page-main .page-content .footer .rsbc-switch-button label {
                 color: #FFFFFF;
                 font-size: 2.083rem;
-                cursor: pointer
+                cursor: pointer;
+                line-height: 3.6rem;
+                vertical-align: middle;
             }
 
             .page-main .page-content .footer .rsbc-switch-button input[type="checkbox"] {
                 position: absolute;
-                    margin-left: -937.406rem;
+                margin-left: -937.406rem;
                 visibility: hidden
             }
 
             .page-main .page-content .footer .rsbc-switch-button > label:first-child {
                 display: inline-block;
-                min-width: 6rem;
+                /*min-width: 6rem;*/
                 text-align: right;
-                margin: 0 0.563rem 0 1.125rem
+                margin: 0 0.563rem 0 0
             }
 
             .page-main .page-content .footer .rsbc-switch-button label + label {
@@ -106,6 +108,7 @@
                 padding: 0.188rem;
                 width: 4.500rem;
                 height: 2.250rem;
+                line-height: 3.125rem;
                 vertical-align: middle;
                 background-color: #eee;
                 -webkit-border-radius: 5.625rem;

@@ -37,7 +37,7 @@ var SwitchButtonClass = Object.assign({}, {}, {
         id: React.PropTypes.string,
         name: React.PropTypes.string,
         title: React.PropTypes.string,
-        label: React.PropTypes.func,
+        label: React.PropTypes.string,
         label_right: React.PropTypes.string,
         labelRight: React.PropTypes.string,
         defaultChecked: React.PropTypes.string,
@@ -58,7 +58,7 @@ var SwitchButtonClass = Object.assign({}, {}, {
             id: '',
             name: 'switch-button',
             title: '',
-            label: i18n._('switch.ad'),
+            label: 'ads',
             label_right: '',
             labelRight: '',
             defaultChecked: 'on',
@@ -87,7 +87,7 @@ var SwitchButtonClass = Object.assign({}, {}, {
 
         if (this.props.label != '') {
             label = (
-                React.createElement("label", {htmlFor: id}, this.props.label)
+                React.createElement("label", {htmlFor: id}, i18n._('switch.ad'))
             );
         }
 
