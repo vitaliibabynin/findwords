@@ -31,6 +31,7 @@ window.CONST = {
             'loadingscreen.errorloading.message': 'Произошла ошибка во время загрузки приложения. Пожалуйста, проверьте подключение к интернету и повторите загрузку',
             'loadingscreen.errorloading.button.reload': 'Повторить загрузку',
             'button.fb': 'кнопка FBButton',
+            'switch.ad':'Реклама',
             t: ''
         },
         en: {
@@ -38,6 +39,7 @@ window.CONST = {
             'loadingscreen.errorloading.message': 'An error has occurred loading this game. Please check your internet connection and try again.',
             'loadingscreen.errorloading.button.reload': 'Try again',
             'button.fb': 'button FBButton',
+            'switch.ad':'Ads',
             t: ''
         }
     },

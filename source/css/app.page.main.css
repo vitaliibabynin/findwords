@@ -33,14 +33,130 @@
     }
 
     .page-main .page-content .footer .advertisement-switch {
-
+        text-align: center;
     }
 
         .page-main .page-content .footer .advertisement-switch .advertisement {
-
+            font-size: 2.083rem;
+            display: inline-block;
+            color: #FFFFFF;
+            line-height: 3.125rem;
+            vertical-align: middle;
+            margin-right: 1rem;
         }
 
         .page-main .page-content .footer .advertisement-switch .switch {
-
+            display: inline-block;
+            line-height: 3.125rem;
+            vertical-align: top;
         }
 
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button {
+                position: relative;
+                line-height: 100%;
+                display: inline-block;
+                vertical-align: middle;
+                margin: 0;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button label {
+                cursor: pointer
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button input[type="checkbox"] {
+                position: absolute;
+                margin-left: -9999px;
+                visibility: hidden
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button > label:first-child {
+                display: inline-block;
+                min-width: 140px;
+                text-align: right;
+                margin: 0 6px 0 12px
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button label + label {
+                margin-left: 6px
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button input[type="checkbox"] + label {
+                display: inline-block;
+                position: relative;
+                margin: 0;
+                outline: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
+                padding: 2px;
+                width: 48px;
+                height: 24px;
+                vertical-align: middle;
+                background-color: #eee;
+                -webkit-border-radius: 60px;
+                -moz-border-radius: 60px;
+                border-radius: 60px;
+                -webkit-transition: background .4s;
+                -moz-transition: background .4s;
+                -o-transition: background .4s;
+                transition: background .4s
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
+                background-color: #6f6f6f
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+                display: inline-block;
+                position: absolute;
+                content: ""
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
+                top: 2px;
+                left: 2px;
+                bottom: 2px;
+                right: 2px;
+                background-color: #fff;
+                -webkit-border-radius: 60px;
+                -moz-border-radius: 60px;
+                border-radius: 60px;
+                -webkit-transition: background .4s;
+                -moz-transition: background .4s;
+                -o-transition: background .4s;
+                transition: background .4s
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+                top: 4px;
+                left: 4px;
+                bottom: 4px;
+                width: 16px;
+                background-color: #d5d5d5;
+                -webkit-border-radius: 52px;
+                -moz-border-radius: 52px;
+                border-radius: 52px;
+                -webkit-transition: margin .4s, background .4s;
+                -moz-transition: margin .4s, background .4s;
+                -o-transition: margin .4s, background .4s;
+                transition: margin .4s, background .4s
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
+                background-color: #579fcb
+            }
+
+            .page-main .page-content .footer .advertisement-switch .switch .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
+                margin-left: 24px;
+                background-color: #3887b7
+            }

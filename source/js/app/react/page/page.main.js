@@ -107,7 +107,7 @@ var PageMain = Object.assign({}, {}, {
                     <div className="footer">
                         <div className="advertisement-switch">
                             <div className="advertisement">
-                                /*babelfish-element*/
+                                {i18n._('switch.ad')}
                             </div>
                             <div className="switch">
                                 <Switch />
