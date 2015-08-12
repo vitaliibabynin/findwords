@@ -94,6 +94,7 @@ gulp.task('js:build:initial', function () {
         });
 
         b.bundle()
+            .on("error", function (err) { console.log("Error: " + err.message); this.emit('end'); })
             .pipe(plumber())
             .pipe(source(path.src.jsInitial))
             .pipe(buffer())
@@ -113,6 +114,7 @@ gulp.task('js:build:initial', function () {
         });
 
         b.bundle()
+            .on("error", function (err) { console.log("Error: " + err.message); this.emit('end'); })
             .pipe(plumber())
             .pipe(source(path.src.jsInitial))
             .pipe(buffer())
@@ -137,6 +139,7 @@ gulp.task('js:build:app', function () {
         });
 
         b.bundle()
+            .on("error", function (err) { console.log("Error: " + err.message); this.emit('end'); })
             .pipe(plumber())
             .pipe(source(path.src.jsApp))
             .pipe(buffer())
@@ -156,6 +159,7 @@ gulp.task('js:build:app', function () {
         });
 
         b.bundle()
+            .on("error", function (err) { console.log("Error: " + err.message); this.emit('end'); })
             .pipe(plumber())
             .pipe(source(path.src.jsApp))
             .pipe(buffer())

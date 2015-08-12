@@ -12,7 +12,7 @@ var Button = require('./../component/app.button').Button;
 var ScoreCounter = require('./../component/app.counter').ScoreCounter;
 var CoinsCounter = require('./../component/app.counter').CoinsCounter;
 
-var Swiper = require('./../../../app/libs/swiper');
+var Swiper = require('./../../../app/libs/swiper.jquery');
 var Switch = require('./../component/app.switch').Switch;
 
 
@@ -29,7 +29,8 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        var mySwiper = new Swiper ('.swiper-container', {
+        console.log(Swiper);
+        var mySwiper = new Swiper (this.refs.swiperConatiner.getDOMNode(), {
 
             direction: 'horizontal',
             loop: true,
@@ -103,20 +104,20 @@ var PageMain = Object.assign({}, {}, {
                         <CoinsCounter value={9999} />
                     </div>
                     <div className="main">
-                        <div class="swiper-container">
+                        <div ref="swiperConatiner" className="swiper-container">
 
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">Slide 1</div>
-                                <div class="swiper-slide">Slide 2</div>
-                                <div class="swiper-slide">Slide 3</div>
+                            <div className="swiper-wrapper">
+                                <div className="swiper-slide">Slide 1</div>
+                                <div className="swiper-slide">Slide 2</div>
+                                <div className="swiper-slide">Slide 3</div>
                             </div>
 
-                            <div class="swiper-pagination"></div>
+                            <div className="swiper-pagination"></div>
 
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
+                            <div className="swiper-button-prev"></div>
+                            <div className="swiper-button-next"></div>
 
-                            <div class="swiper-scrollbar"></div>
+                            <div className="swiper-scrollbar"></div>
 
                         </div>
                         <div className="navigation">
