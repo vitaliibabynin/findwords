@@ -31,7 +31,7 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        console.log(Swiper);
+
         if(null == this.swiper){
             this.swiper = new Swiper (this.refs.swiperConatiner.getDOMNode(), {
 
