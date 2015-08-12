@@ -1,0 +1,114 @@
+.page-main .page-content .footer .rsbc-switch-button {
+    position: relative;
+    line-height: 3.125rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.page-main .page-content .footer .rsbc-switch-button label {
+    color: #FFFFFF;
+    font-size: 2.083rem;
+    cursor: pointer;
+    line-height: 3.6rem;
+    vertical-align: middle;
+}
+
+.page-main .page-content .footer .rsbc-switch-button input[type="checkbox"] {
+    position: absolute;
+    margin-left: -937.406rem;
+    visibility: hidden
+}
+
+.page-main .page-content .footer .rsbc-switch-button > label:first-child {
+    display: inline-block;
+    /*min-width: 6rem;*/
+    text-align: right;
+    margin: 0 0.563rem 0 0
+}
+
+.page-main .page-content .footer .rsbc-switch-button label + label {
+    margin-left: 0.563rem
+}
+
+.page-main .page-content .footer .rsbc-switch-button input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
+    padding: 0.188rem;
+    width: 4.500rem;
+    height: 2.250rem;
+    line-height: 3.125rem;
+    vertical-align: middle;
+    background-color: #eee;
+    -webkit-border-radius: 5.625rem;
+    -moz-border-radius: 5.625rem;
+    border-radius: 5.625rem;
+    -webkit-transition: background .4s;
+    -moz-transition: background .4s;
+    -o-transition: background .4s;
+    transition: background .4s
+}
+
+.page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
+    background-color: #6f6f6f
+}
+
+.page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+    display: inline-block;
+    position: absolute;
+    content: ""
+}
+
+.page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
+    top: 0.188rem;
+    left: 0.188rem;
+    bottom: 0.188rem;
+    right: 0.188rem;
+    background-color: #fff;
+    -webkit-border-radius: 5.625rem;
+    -moz-border-radius: 5.625rem;
+    border-radius: 5.625rem;
+    -webkit-transition: background .4s;
+    -moz-transition: background .4s;
+    -o-transition: background .4s;
+    transition: background .4s
+}
+
+.page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+    top: 0.375rem;
+    left: 0.375rem;
+    bottom: 0.375rem;
+    width: 1.500rem;
+    background-color: #d5d5d5;
+    -webkit-border-radius: 4.875rem;
+    -moz-border-radius: 4.875rem;
+    border-radius: 4.875rem;
+    -webkit-transition: margin .4s, background .4s;
+    -moz-transition: margin .4s, background .4s;
+    -o-transition: margin .4s, background .4s;
+    transition: margin .4s, background .4s
+}
+
+.page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
+    background-color: #579fcb
+}
+
+.page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
+    margin-left: 2.250rem;
+    background-color: #3887b7
+}

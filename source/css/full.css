@@ -7,6 +7,9 @@
 @import "app.layout.css";
 @import "app.page.main.css";
 
+@import "app.swiper.css";
+@import "app.adswitch.css";
+
 @import "mediaquery.app.layout.css";
 
 
