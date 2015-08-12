@@ -20,6 +20,8 @@ var PageMain = Object.assign({}, {}, {
     mixins: [PureRenderMixin, GameMixin],
     displayName: 'PageMain',
 
+    swiper: null,
+
     getInitialState: function () {
         var state = {
             showHeader: false
@@ -30,23 +32,23 @@ var PageMain = Object.assign({}, {}, {
 
     componentDidMount: function () {
         console.log(Swiper);
-        var mySwiper = new Swiper (this.refs.swiperConatiner.getDOMNode(), {
+        if(null == this.swiper){
+            this.swiper = new Swiper (this.refs.swiperConatiner.getDOMNode(), {
 
-            direction: 'horizontal',
-            loop: true,
+                direction: 'horizontal',
+                loop: true,
+
+                pagination: '.swiper-pagination',
+
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+
+                scrollbar: '.swiper-scrollbar'
+
+            });
+        }
 
 
-            pagination: '.swiper-pagination',
-
-
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-
-
-            scrollbar: '.swiper-scrollbar'
-        });
-
-        return mySwiper;
     },
 
     componentDidUpdate: function (prevProps, prevState) {
@@ -63,26 +65,6 @@ var PageMain = Object.assign({}, {}, {
 
     onButtonClick: function (buttonProps) {
         router.navigate("game", "main");
-    },
-
-    renderExample: function () {
-        return (
-
-            <div className="page-main">
-
-                <div className="page-content">
-
-                    <h1 className={classNames({hide: !this.state.showHeader})}>Page Main</h1>
-
-                    <FbButton onClick={this.onFBButtonClick}>{i18n._('button.fb')}</FbButton>
-
-                    <Button onClick={this.onButtonClick}>перейти на PageGameMain</Button>
-
-                </div>
-
-            </div>
-
-        );
     },
 
     renderDisplay: function () {
@@ -145,7 +127,6 @@ var PageMain = Object.assign({}, {}, {
     },
 
     render: function () {
-        //return this.renderExample();
         return this.renderDisplay();
     }
 });
