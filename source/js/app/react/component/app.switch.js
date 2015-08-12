@@ -58,10 +58,10 @@ var SwitchButtonClass = Object.assign({}, {}, {
             id: '',
             name: 'switch-button',
             title: '',
-            label: 'ads',
+            label: 'Ads',
             label_right: '',
             labelRight: '',
-            defaultChecked: 'on',
+            defaultChecked: 'checked',
             theme: 'rsbc-switch-button-flat-round',
             checked: null,
             onChange: this.handleChange
@@ -81,13 +81,15 @@ var SwitchButtonClass = Object.assign({}, {}, {
     render: function () {
         var id, label, labelRight;
 
+        var text = i18n._('switch.ad');
+
         if (this.props.id == '' && this.props.name != '') {
             id = this.props.name;
         }
 
         if (this.props.label != '') {
             label = (
-                React.createElement("label", {htmlFor: id}, i18n._('switch.ad'))
+                React.createElement("label", {htmlFor: id}, text)
             );
         }
 
@@ -113,7 +115,7 @@ var SwitchButtonClass = Object.assign({}, {}, {
                     name: this.props.name,
                     type: "checkbox",
                     value: "1"
-                }),
+                    }),
                 React.createElement("label", {htmlFor: id}),
                 labelRight
             )
