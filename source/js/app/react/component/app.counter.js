@@ -52,7 +52,7 @@ var CounterClass = Object.assign({}, {}, {
 
         var styleText = {};
         if (this.state.isDisplayPlusButton) {
-            styleText.paddingRight = "1rem";
+            styleText.paddingRight = "0.750rem";
         }
 
         return (

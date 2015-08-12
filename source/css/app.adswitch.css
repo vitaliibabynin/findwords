@@ -16,8 +16,8 @@
     font-size: 1.875rem;
     cursor: pointer;
     height: 1.875rem;
-    line-height: 1.875rem;
-    vertical-align: bottom;
+    line-height: 2.250rem;
+    vertical-align: middle;
 }
 
 .page-main .page-content .footer .rsbc-switch-button input[type="checkbox"] {
