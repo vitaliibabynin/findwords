@@ -1,9 +1,10 @@
 .page-main .page-content .footer .rsbc-switch-button {
     position: relative;
-    height: 1.875rem;
-    line-height: 1.875rem;
-    display: inline-block;
-    vertical-align: middle;
+    /*height: 1.875rem;*/
+    /*line-height: 1.875rem;*/
+    display: block;
+    margin: 0;
+    /*vertical-align: middle;*/
     margin: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
