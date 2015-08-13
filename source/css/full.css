@@ -4,15 +4,13 @@
 
 @import "fonts.css";
 
+@import "react-switch-button.css";
+@import "swiper.css";
+
 @import "app.layout.css";
 @import "app.page.main.css";
 
-@import "app.swiper.css";
-@import "app.adswitch.css";
-/*@import "app.switch.css";*/
-
 @import "mediaquery.app.layout.css";
-
 
 @import "font-awesome.css";
 

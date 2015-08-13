@@ -1,0 +1,109 @@
+.rsbc-switch-button {
+    position: relative;
+    line-height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.rsbc-switch-button label {
+    cursor: pointer
+}
+
+.rsbc-switch-button input[type="checkbox"] {
+    position: absolute;
+    margin-left: -624.938rem;
+    visibility: hidden
+}
+
+.rsbc-switch-button > label:first-child {
+    display: inline-block;
+    min-width: 8.750rem;
+    text-align: right;
+    margin: 0 0.375rem 0 0.750rem
+}
+
+.rsbc-switch-button label + label {
+    margin-left: 0.375rem
+}
+
+.rsbc-switch-button input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
+    padding: 0.125rem;
+    width: 3.000rem;
+    height: 1.500rem;
+    vertical-align: middle;
+    background-color: #eee;
+    -webkit-border-radius: 3.750rem;
+    -moz-border-radius: 3.750rem;
+    border-radius: 3.750rem;
+    -webkit-transition: background .4s;
+    -moz-transition: background .4s;
+    -o-transition: background .4s;
+    transition: background .4s
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
+    background-color: #6f6f6f
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+    display: inline-block;
+    position: absolute;
+    content: ""
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
+    top: 0.125rem;
+    left: 0.125rem;
+    bottom: 0.125rem;
+    right: 0.125rem;
+    background-color: #fff;
+    -webkit-border-radius: 3.750rem;
+    -moz-border-radius: 3.750rem;
+    border-radius: 3.750rem;
+    -webkit-transition: background .4s;
+    -moz-transition: background .4s;
+    -o-transition: background .4s;
+    transition: background .4s
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+    top: 0.250rem;
+    left: 0.250rem;
+    bottom: 0.250rem;
+    width: 1.000rem;
+    background-color: #d5d5d5;
+    -webkit-border-radius: 3.250rem;
+    -moz-border-radius: 3.250rem;
+    border-radius: 3.250rem;
+    -webkit-transition: margin .4s, background .4s;
+    -moz-transition: margin .4s, background .4s;
+    -o-transition: margin .4s, background .4s;
+    transition: margin .4s, background .4s
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
+    background-color: #579fcb
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
+    margin-left: 1.500rem;
+    background-color: #3887b7
+}
