@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     clean = require('gulp-clean'),
     source = require('vinyl-source-stream'),
-    runSequence = require('gulp-run-sequence')
+    runSequence = require('gulp-run-sequence'),
+    scss = require('gulp-scss')
     ;
 
 
@@ -29,7 +30,7 @@ var path = {
         jsInitial: 'source/js/initialcheck/initialcheck.app.js',
         jsApp: 'source/js/app/init.app.js',
         cssInitial: 'source/css/init.css',
-        cssApp: 'source/css/full.css'
+        cssApp: 'source/css/full.scss'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
         jsInitial: 'source/js/initialcheck/**/*.js',
@@ -187,13 +188,20 @@ gulp.task('js:build', [
     , 'js:copy:lib'
 ]);
 
+gulp.task("scss", function () {
+    gulp.src(
+        "home/scss/**/*.scss"
+    ).pipe(scss(
+            {"bundleExec": true}
+        )).pipe(gulp.dest("home/static/css"));
+});
 
 gulp.task('css:build:all', function () {
     if(process.env.NODE_ENV == "production"){
         //for prod
         gulp.src(path.src.cssInitial)
             .pipe(plumber())
-            //.pipe(sass()) //Скомпилируем
+            //.pipe(scss()) //Скомпилируем
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(out('./'+path.build.css+'bundle.init.css'))
@@ -211,7 +219,7 @@ gulp.task('css:build:all', function () {
 
         gulp.src(path.src.cssApp)
             .pipe(plumber())
-            //.pipe(sass()) //Скомпилируем
+            //.pipe(scss()) //Скомпилируем
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(out('./'+path.build.css+'bundle.app.css'))
@@ -231,7 +239,7 @@ gulp.task('css:build:all', function () {
         gulp.src(path.src.cssInitial)
             .pipe(plumber())
             .pipe(sourcemaps.init()) //Инициализируем sourcemap
-            //.pipe(sass()) //Скомпилируем
+            //.pipe(scss()) //Скомпилируем
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(sourcemaps.write())
@@ -242,7 +250,7 @@ gulp.task('css:build:all', function () {
         gulp.src(path.src.cssApp)
             .pipe(plumber())
             .pipe(sourcemaps.init()) //Инициализируем sourcemap
-            //.pipe(sass()) //Скомпилируем
+            .pipe(scss({"bundleExec": true})) //Скомпилируем
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(sourcemaps.write())
