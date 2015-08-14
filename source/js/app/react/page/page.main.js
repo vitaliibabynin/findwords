@@ -12,7 +12,7 @@ var Button = require('./../component/app.button').Button;
 var ScoreCounter = require('./../component/app.counter').ScoreCounter;
 var CoinsCounter = require('./../component/app.counter').CoinsCounter;
 
-var Swiper = require('./../../../app/libs/swiper.jquery');
+var Swiper = require('./../component/app.swiper').Swiper;
 var Switch = require('./../component/app.switch').Switch;
 
 
@@ -31,23 +31,6 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-
-        if(null == this.swiper){
-            this.swiper = new Swiper (this.refs.swiperConatiner.getDOMNode(), {
-
-                direction: 'horizontal',
-                loop: true,
-
-                pagination: '.swiper-pagination',
-
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-
-                scrollbar: '.swiper-scrollbar'
-
-            });
-        }
-
 
     },
 
@@ -86,36 +69,7 @@ var PageMain = Object.assign({}, {}, {
                         <CoinsCounter value={9999} />
                     </div>
                     <div className="main">
-                        <div ref="swiperConatiner" className="swiper-container">
-
-                            <div className="swiper-wrapper">
-                                <div className="swiper-slide">Slide 1</div>
-                                <div className="swiper-slide">Slide 2</div>
-                                <div className="swiper-slide">Slide 3</div>
-                            </div>
-
-                            <div className="swiper-pagination"></div>
-
-                            <div className="swiper-button-prev"></div>
-                            <div className="swiper-button-next"></div>
-
-                            <div className="swiper-scrollbar"></div>
-
-                        </div>
-                        <div className="navigation">
-                            <div className="settings">
-                                /*settings-element*/
-                            </div>
-                            <div className="rating">
-                                /*link to ratings*/
-                            </div>
-                            <div className="facebook">
-                                /*facebook-element*/
-                            </div>
-                            <div className="shop">
-                                /*link to shop*/
-                            </div>
-                        </div>
+                        <Swiper />
                     </div>
                     <div className="footer">
                         <Switch />

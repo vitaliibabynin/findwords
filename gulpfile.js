@@ -36,7 +36,7 @@ var path = {
         jsInitial: 'source/js/initialcheck/**/*.js',
         jsApp: 'source/js/app/**/*.js',
         jsLib: 'source/jslib/**/*.js',
-        css: 'source/scss/**/*.css',
+        css: 'source/scss/**/*.scss',
         cssLib: 'source/csslib/**/*.css',
         img: 'source/img/**/*.*',
         fonts: 'source/fonts/**/*.*'

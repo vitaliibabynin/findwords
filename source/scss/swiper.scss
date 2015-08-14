@@ -54,11 +54,11 @@
 }
 .swiper-container-android .swiper-slide,
 .swiper-wrapper {
-    -webkit-transform: translate3d(0px, 0, 0);
-    -moz-transform: translate3d(0px, 0, 0);
-    -o-transform: translate(0px, 0px);
-    -ms-transform: translate3d(0px, 0, 0);
-    transform: translate3d(0px, 0, 0);
+    -webkit-transform: translate3d(0rem, 0, 0);
+    -moz-transform: translate3d(0rem, 0, 0);
+    -o-transform: translate(0rem, 0rem);
+    -ms-transform: translate3d(0rem, 0, 0);
+    transform: translate3d(0rem, 0, 0);
 }
 .swiper-container-multirow > .swiper-wrapper {
     -webkit-box-lines: multiple;
@@ -209,11 +209,11 @@ button.swiper-pagination-bullet {
 .swiper-container-vertical > .swiper-pagination {
     right: 0.625rem;
     top: 50%;
-    -webkit-transform: translate3d(0px, -50%, 0);
-    -moz-transform: translate3d(0px, -50%, 0);
-    -o-transform: translate(0px, -50%);
-    -ms-transform: translate3d(0px, -50%, 0);
-    transform: translate3d(0px, -50%, 0);
+    -webkit-transform: translate3d(0rem, -50%, 0);
+    -moz-transform: translate3d(0rem, -50%, 0);
+    -o-transform: translate(0rem, -50%);
+    -ms-transform: translate3d(0rem, -50%, 0);
+    transform: translate3d(0rem, -50%, 0);
 }
 .swiper-container-vertical > .swiper-pagination .swiper-pagination-bullet {
     margin: 0.313rem 0;
@@ -363,7 +363,7 @@ button.swiper-pagination-bullet {
 .swiper-container-cube .swiper-cube-shadow {
     position: absolute;
     left: 0;
-    bottom: 0px;
+    bottom: 0rem;
     width: 100%;
     height: 100%;
     background: #000;
