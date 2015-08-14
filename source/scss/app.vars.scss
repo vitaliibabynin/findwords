@@ -1,2 +1,32 @@
+//COLORS
 
+//mainPage
+$mainPage-bg-color: #81cfe0;
+
+//mainPage-Header
+$header-bg-color: #2574a9;
+
+//mainPage-Counters
 $counters-bg-color: #2ecc71;
+$countersPanel-bg-color: rgba(85,85,85,0.5);
+$countersNumbers-color: #ffffff;
+$scoreCounterPanel-bg-color: $countersPanel-bg-color;
+$scoreCounterNumbers-color: $countersNumbers-color;
+$coinsCounterPanel-bg-color: $countersPanel-bg-color;
+$coinsCounterNumbers-color: $countersNumbers-color;
+
+//mainPage-Menu
+$slide1-bg-color: #d64541;
+$slide2-bg-color: #0000ff;
+$slide3-bg-color: #ff0000;
+$slide4-bg-color: #00ff00;
+$slide5-bg-color: #0000ff;
+$swiper-pagination-bullet: #ffffff;
+$swiper-pagination-bullet-active: #ff9d00;
+
+//mainPage-Footer
+$footer-bg-color: #2574a9;
+$footerLabel-color: #ffffff;
+$footerSwitchOn-bg-color: #26c281;
+$footerSwitchBorderOn-bg-color: $footerSwitchOn-bg-color;
+$footerSwitchCircleOn-bg-color: $footerSwitchOn-bg-color;

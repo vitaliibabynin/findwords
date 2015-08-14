@@ -1,7 +1,7 @@
 .page-main{
     position: relative;
     height: 100%;
-    background-color: #81cfe0;
+    background-color: $mainPage-bg-color;
     width: 100%;
 }
 
@@ -13,14 +13,14 @@
 
     .page-main .page-content .head {
         height: 6.875rem;
-        background-color: #2574a9;
+        background-color: $header-bg-color;
         background-repeat: no-repeat;
         background-size: 14.813rem 4.313rem;
         background-position: center center;
         width: 100%;
-}
+    }
 
-    .page-main .page-content .main {
+    .page-main .page-content .menu {
         font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
         font-size: 0.875rem;
         color: #000;
@@ -53,40 +53,63 @@
             align-items: center;
         }
         .swiper-slide:first-child {
-            background-color: #d64541;
+            background-color: $slide1-bg-color;
+        }
+        .swiper-slide:nth-child(2) {
+            background-color: $slide2-bg-color;
+        }
+        .swiper-slide:nth-child(3) {
+            background-color: $slide3-bg-color;
+        }
+        .swiper-slide:nth-child(4) {
+            background-color: $slide4-bg-color;
+        }
+        .swiper-slide:nth-child(5) {
+            background-color: $slide5-bg-color;
         }
         .swiper-slide:nth-child(2n) {
-            background-color: #0000ff;
             width: 40%;
         }
         .swiper-slide:nth-child(3n) {
             width: 20%;
         }
-
+        .swiper-pagination-bullet {
+            $spaceBetween: 0.313rem / 2;
+            margin-left: $spaceBetween;
+            margin-right: $spaceBetween;
+            opacity: 1;
+            line-height: 100%;
+            vertical-align: middle;
+            background-color: $swiper-pagination-bullet;
+        }
+        .swiper-pagination-bullet-active {
+            $side: 0.500rem * 1.25;
+            width: $side;
+            height: $side;
+            background-color: $swiper-pagination-bullet-active;
+        }
     }
 
     .page-main .page-content .footer {
-        background-color: #2574a9;
+        background-color: $footer-bg-color;
         /*height: 3.125rem;*/
-        padding: 0.3rem 0;
         position: absolute;
         bottom: 0;
         width: 100%;
         text-align: center;
         font-size: 2.083rem;
         padding: 0.3rem 0;
-    }
 
-        .page-main .page-content .footer .rsbc-switch-button {
+        .rsbc-switch-button {
             /*height: 1.875rem;*/
             /*line-height: 1.875rem;*/
             display: block;
             /*vertical-align: middle;*/
         }
 
-        .page-main .page-content .footer .rsbc-switch-button label {
+        .rsbc-switch-button label {
             padding: 0;
-            color: #FFFFFF;
+            color: $footerLabel-color;
             font-size: 1.875rem;
             cursor: pointer;
             /*height: 1.875rem;*/
@@ -94,24 +117,24 @@
             /*vertical-align: middle;*/
         }
 
-        .page-main .page-content .footer .rsbc-switch-button input[type="checkbox"] {
+        .rsbc-switch-button input[type="checkbox"] {
             margin-left: -781.172rem;
         }
 
-        .page-main .page-content .footer .rsbc-switch-button > label:first-child {
+        .rsbc-switch-button > label:first-child {
             min-width: 0;
             margin: 0 0.75rem 0 0
         }
 
-        .page-main .page-content .footer .rsbc-switch-button label + label {
+        .rsbc-switch-button label + label {
             /*margin-left: 0.469rem*/
         }
 
-        .page-main .page-content .footer .rsbc-switch-button input[type="checkbox"] + label {
+        .rsbc-switch-button input[type="checkbox"] + label {
 
         }
 
-        .page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
             padding: 0.156rem;
             width: 3.750rem;
             height: 1.875rem;
@@ -122,15 +145,15 @@
             border-radius: 4.688rem;
         }
 
-        .page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
+        .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
             /*background-color: #6f6f6f*/
         }
 
-        .page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
 
         }
 
-        .page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
             top: 0.156rem;
             left: 0.156rem;
             bottom: 0.156rem;
@@ -141,7 +164,7 @@
             border-radius: 4.688rem;
         }
 
-        .page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
             top: 0.313rem;
             left: 0.313rem;
             bottom: 0.313rem;
@@ -152,13 +175,13 @@
             border-radius: 4.063rem;
         }
 
-        .page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
-            /*background-color: #579fcb*/
-            background-color: #26c281;
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
+            background-color: $footerSwitchBorderOn-bg-color;
         }
 
-        .page-main .page-content .footer .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
             margin-left: 1.875rem;
-            /*background-color: #3887b7;*/
-            background-color: #26c281;
+            background-color: $footerSwitchCircleOn-bg-color;
         }
+
+    }
