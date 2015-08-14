@@ -14,7 +14,7 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     source = require('vinyl-source-stream'),
     runSequence = require('gulp-run-sequence'),
-    scss = require('gulp-scss')
+    sass = require('gulp-sass')
     ;
 
 
@@ -29,14 +29,14 @@ var path = {
     src: { //Пути откуда брать исходники
         jsInitial: 'source/js/initialcheck/initialcheck.app.js',
         jsApp: 'source/js/app/init.app.js',
-        cssInitial: 'source/css/init.css',
-        cssApp: 'source/css/full.scss'
+        cssInitial: 'source/scss/init.scss',
+        cssApp: 'source/scss/full.scss'
     },
     watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
         jsInitial: 'source/js/initialcheck/**/*.js',
         jsApp: 'source/js/app/**/*.js',
         jsLib: 'source/jslib/**/*.js',
-        css: 'source/css/**/*.css',
+        css: 'source/scss/**/*.css',
         cssLib: 'source/csslib/**/*.css',
         img: 'source/img/**/*.*',
         fonts: 'source/fonts/**/*.*'
@@ -188,20 +188,13 @@ gulp.task('js:build', [
     , 'js:copy:lib'
 ]);
 
-gulp.task("scss", function () {
-    gulp.src(
-        "home/scss/**/*.scss"
-    ).pipe(scss(
-            {"bundleExec": true}
-        )).pipe(gulp.dest("home/static/css"));
-});
 
 gulp.task('css:build:all', function () {
     if(process.env.NODE_ENV == "production"){
         //for prod
         gulp.src(path.src.cssInitial)
             .pipe(plumber())
-            //.pipe(scss()) //Скомпилируем
+            .pipe(sass())
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(out('./'+path.build.css+'bundle.init.css'))
@@ -219,7 +212,7 @@ gulp.task('css:build:all', function () {
 
         gulp.src(path.src.cssApp)
             .pipe(plumber())
-            //.pipe(scss()) //Скомпилируем
+            .pipe(sass())
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(out('./'+path.build.css+'bundle.app.css'))
@@ -238,24 +231,30 @@ gulp.task('css:build:all', function () {
         //for dev
         gulp.src(path.src.cssInitial)
             .pipe(plumber())
+            .pipe(sass())
             .pipe(sourcemaps.init()) //Инициализируем sourcemap
-            //.pipe(scss()) //Скомпилируем
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(sourcemaps.write())
             .pipe(out('./'+path.build.css+'bundle.init.css'))
             //.pipe(reload({stream: true}))
+            .on('finish', function() {
+                console.log('DEV Finished '+path.src.cssInitial);
+            })
         ;
 
         gulp.src(path.src.cssApp)
             .pipe(plumber())
             .pipe(sourcemaps.init()) //Инициализируем sourcemap
-            .pipe(scss({"bundleExec": true})) //Скомпилируем
+            .pipe(sass())
             .pipe(prefixer()) //Добавим вендорные префиксы
             .pipe(cssmin()) //Сожмем
             .pipe(sourcemaps.write())
             .pipe(out('./'+path.build.css+'bundle.app.css'))
             //.pipe(reload({stream: true}))
+            .on('finish', function() {
+                console.log('DEV Finished '+path.src.cssApp);
+            })
         ;
     }
 });

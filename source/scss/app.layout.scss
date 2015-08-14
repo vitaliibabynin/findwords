@@ -49,7 +49,7 @@ html.cordova.ios #app-content .page-layout .page{
 }
 
 .page-content .counters {
-    background-color: #2ecc71;
+    background-color: $counters-bg-color;
     text-align: center;
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
