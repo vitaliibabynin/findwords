@@ -92,42 +92,45 @@
 
     .page-main .page-content .footer {
         background-color: $footer-bg-color;
-        /*height: 3.125rem;*/
+        height: 3.125rem;
         position: absolute;
         bottom: 0;
         width: 100%;
         text-align: center;
         font-size: 2.083rem;
-        padding: 0.3rem 0;
+        padding: 0.300rem 0;
+        //padding: auto 0;
 
         .rsbc-switch-button {
-            /*height: 1.875rem;*/
-            /*line-height: 1.875rem;*/
+            //height: 1.500rem*$footerSwitch-size;
+            //line-height: 1.500rem*$footerSwitch-size;
+            //line-height: 100%;
             display: block;
-            /*vertical-align: middle;*/
+            //vertical-align: middle;
         }
 
         .rsbc-switch-button label {
             padding: 0;
             color: $footerLabel-color;
-            font-size: 1.875rem;
+            font-size: 1.500rem*$footerLabelFont-size;
             cursor: pointer;
-            /*height: 1.875rem;*/
-            /*line-height: 2.250rem;*/
-            /*vertical-align: middle;*/
+            //height: 1.500rem*$footerLabelFont-size;
+            //line-height: 1.500rem*$footerLabelFont-size;
+            //line-height: 120%;
+            vertical-align: middle;
         }
 
         .rsbc-switch-button input[type="checkbox"] {
-            margin-left: -781.172rem;
+            margin-left: -624.938rem*$footerSwitch-size;
         }
 
         .rsbc-switch-button > label:first-child {
             min-width: 0;
-            margin: 0 0.75rem 0 0
+            margin: 0 0.750rem 0 0
         }
 
         .rsbc-switch-button label + label {
-            /*margin-left: 0.469rem*/
+            /*margin-left: 0.375rem*$footerSwitch-size*/
         }
 
         .rsbc-switch-button input[type="checkbox"] + label {
@@ -135,14 +138,15 @@
         }
 
         .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
-            padding: 0.156rem;
-            width: 3.750rem;
-            height: 1.875rem;
-            line-height: 1.875rem;
+            padding: 0.125rem*$footerSwitch-size;
+            width: 3.000rem*$footerSwitch-size;
+            height: 1.500rem*$footerSwitch-size;
+            //line-height: 1.500rem*$footerSwitch-size;
+            //line-height: 2.1875rem;
             /*background-color: #eee;*/
-            -webkit-border-radius: 4.688rem;
-            -moz-border-radius: 4.688rem;
-            border-radius: 4.688rem;
+            -webkit-border-radius: 3.750rem*$footerSwitch-size;
+            -moz-border-radius: 3.750rem*$footerSwitch-size;
+            border-radius: 3.750rem*$footerSwitch-size;
         }
 
         .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
@@ -154,25 +158,23 @@
         }
 
         .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
-            top: 0.156rem;
-            left: 0.156rem;
-            bottom: 0.156rem;
-            right: 0.156rem;
-            /*background-color: #fff;*/
-            -webkit-border-radius: 4.688rem;
-            -moz-border-radius: 4.688rem;
-            border-radius: 4.688rem;
+            top: 0.125rem*$footerSwitch-size;
+            left: 0.125rem*$footerSwitch-size;
+            bottom: 0.125rem*$footerSwitch-size;
+            right: 0.125rem*$footerSwitch-size;
+            -webkit-border-radius: 3.750rem*$footerSwitch-size;
+            -moz-border-radius: 3.750rem*$footerSwitch-size;
+            border-radius: 3.750rem*$footerSwitch-size;
         }
 
         .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
-            top: 0.313rem;
-            left: 0.313rem;
-            bottom: 0.313rem;
-            width: 1.250rem;
-            /*background-color: #d5d5d5;*/
-            -webkit-border-radius: 4.063rem;
-            -moz-border-radius: 4.063rem;
-            border-radius: 4.063rem;
+            top: 0.250rem*$footerSwitch-size;
+            left: 0.250rem*$footerSwitch-size;
+            bottom: 0.250rem*$footerSwitch-size;
+            width: 1.000rem*$footerSwitch-size;
+            -webkit-border-radius: 3.250rem*$footerSwitch-size;
+            -moz-border-radius: 3.250rem*$footerSwitch-size;
+            border-radius: 3.250rem*$footerSwitch-size;
         }
 
         .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
@@ -180,7 +182,7 @@
         }
 
         .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
-            margin-left: 1.875rem;
+            margin-left: 1.500rem*$footerSwitch-size;
             background-color: $footerSwitchCircleOn-bg-color;
         }
 
