@@ -21,8 +21,10 @@ $slide2-bg-color: #0000ff;
 $slide3-bg-color: #ff0000;
 $slide4-bg-color: #00ff00;
 $slide5-bg-color: #0000ff;
+$slide-wordsComplete-panel-bg-color: rgba(85,85,85,0.5);
+$slide-wordsComplete-progress-bg-color: #ffffff;
 $swiper-pagination-bullet: #ffffff;
-$swiper-pagination-bullet-active: #ff9d00;
+$swiper-pagination-bullet-active: #e87e04;
 
 //mainPage-Footer
 $footer-bg-color: #2574a9;
@@ -33,6 +35,9 @@ $footerSwitchCircleOn-bg-color: $footerSwitchOn-bg-color;
 
 
 //SIZE
+//mainPage-Menu
+$slide-wordsComplete-progress-size: 0.7;
+
 //mainPage-Footer
 $footerSwitch-size: 1.25;
 $footerLabelFont-size: 1.25;

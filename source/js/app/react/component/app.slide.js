@@ -13,7 +13,7 @@ var SlideClass = Object.assign({}, {}, {
 
     propTypes: {
 
-        slideNumber: React.PropTypes.number,
+        slideNumber: React.PropTypes.string,
         playerName: React.PropTypes.string,
         wordsComplete: React.PropTypes.number,
         wordsTotal: React.PropTypes.number,
@@ -48,11 +48,17 @@ var SlideClass = Object.assign({}, {}, {
 
             <div className="swiper-slide">
 
-                <div>Комплект №{this.state.slideNumber} {this.state.playerName}</div>
+                <div className="slide-number">Комплект №{this.state.slideNumber}</div>
+                <div className="player-name">{this.state.playerName}</div>
+                <div className="words-complete">
 
-                <div>{this.state.wordsComplete}/{this.state.wordsTotal}</div>
+                    <div className="wc-stats">{this.state.wordsComplete}/{this.state.wordsTotal}</div>
+                    <div className="wc-panel">
+                        <div className="wc-progress">
+                        </div>
+                    </div>
 
-                <div></div>
+                </div>
 
                 <div></div>
 

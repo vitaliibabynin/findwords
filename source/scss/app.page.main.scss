@@ -35,23 +35,39 @@
         .swiper-slide {
             height: 10.938rem;
             text-align: center;
-            font-size: 1.125rem;
-            background: #fff;
-            width: 60%;
-            /* Center slide text vertically */
-            //display: -webkit-box;
-            //display: -ms-flexbox;
-            //display: -webkit-flex;
-            //display: flex;
-            //-webkit-box-pack: center;
-            //-ms-flex-pack: center;
-            //-webkit-justify-content: center;
-            //justify-content: center;
-            //-webkit-box-align: center;
-            //-ms-flex-align: center;
-            //-webkit-align-items: center;
-            //align-items: center;
+            //font-size: 1.125rem;
+            //background: #fff;
+            width: 9.375rem;
+
+            .slide-number,
+            .player-name {
+                font-size: 1.5rem;
+            }
+            .words-complete {
+                width: 100%;
+                height: 2rem;
+
+                .wc-stats {
+                    display: inline-block;
+                    font-size: 0.8rem;
+                }
+                .wc-panel {
+                    display: inline-block;
+                    width: 6.250rem;
+                    height: 0.688rem;
+                    background-color: $slide-wordsComplete-panel-bg-color;
+                    border-radius: 1rem;
+
+                    .wc-progress {
+                        width: 6.250rem * $slide-wordsComplete-progress-size;
+                        height: 0.625rem;
+                        background-color: $slide-wordsComplete-progress-bg-color;
+                        border-radius: 1rem;
+                    }
+                }
+            }
         }
+
         .swiper-slide:first-child {
             background-color: $slide1-bg-color;
         }
