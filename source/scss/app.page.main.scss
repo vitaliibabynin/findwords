@@ -60,29 +60,37 @@
                     height: 1rem;
                     //padding: auto;
 
-                    .wc-stats {
+                    .stats {
                         display: inline-block;
                         font-size: $slide-progress-font-size;
                         margin-right: 0.55rem;
                         line-height: 1rem;
                         vertical-align: middle;
                     }
-                    .wc-panel {
+                    .progress-bar {
                         display: inline-block;
+                        position: relative;
+                        height: 0.688rem;
                         width: 6.250rem;
-                        height: 0.625rem;
-                        background-color: $slide-wordsComplete-panel-bg-color;
-                        border-radius: 0.3125rem;
                         line-height: 1rem;
                         vertical-align: middle;
 
-                        .wc-progress {
+                        .panel {
+                            position: absolute;
+                            width: 6.250rem;
+                            height: 0.625rem;
+                            background-color: $slide-wordsComplete-panel-bg-color;
+                            border-radius: 0.3125rem;
+                            margin-top: 0.0315rem;
+                            margin-bottom: 0.315rem;
+
+                        }
+                        .fill {
+                            position: absolute;
                             //width: 6.250rem * $slide-wordsComplete-progress-size;
                             height: 0.688rem;
                             background-color: $slide-wordsComplete-progress-bg-color;
                             border-radius: 0.3125rem;
-                            line-height: 1rem;
-                            vertical-align: middle;
                         }
                     }
                 }

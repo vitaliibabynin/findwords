@@ -82,9 +82,11 @@ var SlideClass = Object.assign({}, {}, {
                     <div className="player-name">{this.state.playerName}</div>
 
                     <div className="words-complete">
-                        <div className="wc-stats">{this.state.wordsComplete}/{this.state.wordsTotal}</div>
-                        <div className="wc-panel">
-                            <div className="wc-progress" style={progress}>
+                        <div className="stats">{this.state.wordsComplete}/{this.state.wordsTotal}</div>
+                        <div className="progress-bar">
+                            <div className="panel">
+                            </div>
+                            <div className="fill" style={progress}>
                             </div>
                         </div>
                     </div>
