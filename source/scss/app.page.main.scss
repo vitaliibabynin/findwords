@@ -70,7 +70,7 @@
                     .progress-bar {
                         display: inline-block;
                         position: relative;
-                        height: 0.688rem;
+                        height: 0.750rem;
                         width: 6.250rem;
                         line-height: 1rem;
                         vertical-align: middle;
@@ -81,8 +81,8 @@
                             height: 0.625rem;
                             background-color: $slide-wordsComplete-panel-bg-color;
                             border-radius: 0.3125rem;
-                            margin-top: 0.0315rem;
-                            margin-bottom: 0.315rem;
+                            top: 0.0625rem;
+                            bottom: 0.625rem;
 
                         }
                         .fill {
