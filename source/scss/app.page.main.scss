@@ -32,48 +32,72 @@
             height: 12.688rem;
             margin: 1.125rem auto;
         }
+
         .swiper-slide {
             height: 10.938rem;
             text-align: center;
-            //font-size: 1.125rem;
-            //background: #fff;
-            width: 9.375rem;
+            color: $slide-text-color;
 
-            .slide-number,
-            .player-name {
-                font-size: 1.5rem;
-            }
-            .words-complete {
-                width: 100%;
-                height: 1rem;
+            .on-click {
+                height: inherit;
+                width: inherit;
 
-                .wc-stats {
-                    display: inline-block;
-                    font-size: 0.8rem;
+                .slide-number,
+                .player-name {
+                    line-height: 100%;
+                    font-size: $slide-heading-font-size;
                 }
-                .wc-panel {
-                    display: inline-block;
-                    width: 6.250rem;
-                    height: 0.688rem;
-                    background-color: $slide-wordsComplete-panel-bg-color;
-                    border-radius: 1rem;
+                .slide-number {
+                    padding-top: 1.4rem;
+                    vertical-align: bottom;
+                }
+                .player-name {
+                    vertical-align: top;
+                }
+                .words-complete {
+                    margin: 0.6rem auto;
+                    width: 100%;
+                    height: 1rem;
+                    //padding: auto;
 
-                    .wc-progress {
-                        width: 6.250rem * $slide-wordsComplete-progress-size;
+                    .wc-stats {
+                        display: inline-block;
+                        font-size: $slide-progress-font-size;
+                        margin-right: 0.55rem;
+                        line-height: 1rem;
+                        vertical-align: middle;
+                    }
+                    .wc-panel {
+                        display: inline-block;
+                        width: 6.250rem;
                         height: 0.625rem;
-                        background-color: $slide-wordsComplete-progress-bg-color;
-                        border-radius: 1rem;
+                        background-color: $slide-wordsComplete-panel-bg-color;
+                        border-radius: 0.3125rem;
+                        line-height: 1rem;
+                        vertical-align: middle;
+
+                        .wc-progress {
+                            //width: 6.250rem * $slide-wordsComplete-progress-size;
+                            height: 0.688rem;
+                            background-color: $slide-wordsComplete-progress-bg-color;
+                            border-radius: 0.3125rem;
+                            line-height: 1rem;
+                            vertical-align: middle;
+                        }
                     }
                 }
-            }
-            .play {
-                height: 2.875rem;
-                width: 2.875rem;
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
-            .score {
-                font-size: 1rem;
+                .play {
+                    margin: auto;
+                    height: 2.875rem;
+                    width: 2.875rem;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                .score {
+                    font-size: $slide-score-font-size;
+                    margin-top: 0.6rem;
+                    margin-bottom: 0.9rem;
+                }
             }
         }
 
@@ -137,7 +161,7 @@
         .rsbc-switch-button label {
             padding: 0;
             color: $footerLabel-color;
-            font-size: 1.500rem*$footerLabelFont-size;
+            font-size: $footerLabel-font-size;
             cursor: pointer;
             //height: 1.500rem*$footerLabelFont-size;
             //line-height: 1.500rem*$footerLabelFont-size;

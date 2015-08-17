@@ -32,6 +32,9 @@ window.CONST = {
             'loadingscreen.errorloading.button.reload': 'Повторить загрузку',
             'button.fb': 'кнопка FBButton',
             'switch.ad':'Реклама',
+            'slide.set':'Комплект',
+            'playerName':'Гаврюша',
+            'slide.score':'Счет',
             t: ''
         },
         en: {
@@ -40,6 +43,9 @@ window.CONST = {
             'loadingscreen.errorloading.button.reload': 'Try again',
             'button.fb': 'button FBButton',
             'switch.ad':'Adverts',
+            'slide.set':'Set',
+            'playerName':'Gavryusha',
+            'slide.score':'Score',
             t: ''
         }
     },

@@ -25,7 +25,6 @@ var SlideClass = Object.assign({}, {}, {
     getDefaultProps: function () {
 
         return {
-            playerName: "Гаврюша",
             wordsTotal: 25,
             imgPath: 'play/play'
         };
@@ -36,13 +35,20 @@ var SlideClass = Object.assign({}, {}, {
 
         return {
             slideNumber: this.props.slideNumber || 0,
-            playerName: this.props.playerName || "Player1",
+            playerName: this.props.playerName || i18n._('playerName'),
             wordsComplete: this.props.wordsComplete || 15,
             wordsTotal: this.props.wordsTotal || 25,
             slideScore: this.props.slideScore || 999999,
-            imgPath: this.props.imgPath || 'play/play'
+            imgPath: this.props.imgPath || 'play/play',
+            isSelected: false
         };
 
+    },
+
+    onClick: function() {
+        this.setState({
+            isSelected: true
+        })
     },
 
     render: function () {
@@ -55,28 +61,40 @@ var SlideClass = Object.assign({}, {}, {
             backgroundImage: "url('" + this.getImagePath(this.state.imgPath) + "')"
         };
 
+        var isSelected = this.state.isSelected;
+
+        var slideClickedStyle = {
+            backgroundColor: ''
+        };
+
+        if (isSelected) {
+            slideClickedStyle = {
+                backgroundColor: 'rgba(0,0,0,0.2)'
+            };
+        }
+
         return (
 
             <div className="swiper-slide">
+                <div className="on-click" onClick={this.onClick} style={slideClickedStyle}>
 
-                <div className="slide-number">Комплект №{this.state.slideNumber}</div>
-                <div className="player-name">{this.state.playerName}</div>
-                <div className="words-complete">
+                    <div className="slide-number">{i18n._('slide.set')} №{this.state.slideNumber}</div>
+                    <div className="player-name">{this.state.playerName}</div>
 
-                    <div className="wc-stats">{this.state.wordsComplete}/{this.state.wordsTotal}</div>
-                    <div className="wc-panel">
-                        <div className="wc-progress" style={progress}>
+                    <div className="words-complete">
+                        <div className="wc-stats">{this.state.wordsComplete}/{this.state.wordsTotal}</div>
+                        <div className="wc-panel">
+                            <div className="wc-progress" style={progress}>
+                            </div>
                         </div>
                     </div>
 
+                    <div className="play" style={playImg}></div>
+
+                    <div className="score">{i18n._('slide.score')} {this.state.slideScore}</div>
+
                 </div>
-
-                <div className="play" style={playImg}></div>
-
-                <div className="score">Счет {this.state.slideScore}</div>
-
             </div>
-
         );
     }
 });
