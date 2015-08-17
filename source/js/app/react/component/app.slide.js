@@ -17,15 +17,17 @@ var SlideClass = Object.assign({}, {}, {
         playerName: React.PropTypes.string,
         wordsComplete: React.PropTypes.number,
         wordsTotal: React.PropTypes.number,
-        slideScore: React.PropTypes.number
+        slideScore: React.PropTypes.number,
+        imgName: React.PropTypes.string
 
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function () {
 
         return {
             playerName: "Гаврюша",
-            wordsTotal: 25
+            wordsTotal: 25,
+            imgPath: 'play/play'
         };
 
     },
@@ -37,12 +39,21 @@ var SlideClass = Object.assign({}, {}, {
             playerName: this.props.playerName || "Player1",
             wordsComplete: this.props.wordsComplete || 15,
             wordsTotal: this.props.wordsTotal || 25,
-            slideScore: this.props.slideScore || 999999
+            slideScore: this.props.slideScore || 999999,
+            imgPath: this.props.imgPath || 'play/play'
         };
 
     },
 
     render: function () {
+
+        var progress = {
+            width: (this.state.wordsComplete / this.state.wordsTotal * 6.250) + "rem"
+        };
+
+        var playImg = {
+            backgroundImage: "url('" + this.getImagePath(this.state.imgPath) + "')"
+        };
 
         return (
 
@@ -54,15 +65,15 @@ var SlideClass = Object.assign({}, {}, {
 
                     <div className="wc-stats">{this.state.wordsComplete}/{this.state.wordsTotal}</div>
                     <div className="wc-panel">
-                        <div className="wc-progress">
+                        <div className="wc-progress" style={progress}>
                         </div>
                     </div>
 
                 </div>
 
-                <div></div>
+                <div className="play" style={playImg}></div>
 
-                <div>Счет {this.state.slideScore}</div>
+                <div className="score">Счет {this.state.slideScore}</div>
 
             </div>
 
