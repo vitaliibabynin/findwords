@@ -13,6 +13,7 @@ var ScoreCounter = require('./../component/app.counter').ScoreCounter;
 var CoinsCounter = require('./../component/app.counter').CoinsCounter;
 
 var Swiper = require('./../component/app.swiper').Swiper;
+var Navigation = require('./../component/app.menu').Navigation;
 var Switch = require('./../component/app.switch').Switch;
 
 
@@ -68,8 +69,9 @@ var PageMain = Object.assign({}, {}, {
                         <ScoreCounter value={15} />
                         <CoinsCounter value={9999} />
                     </div>
-                    <div className="menu">
+                    <div className="navigation">
                         <Swiper />
+                        <Navigation />
                     </div>
                     <div className="footer">
                         <Switch />

@@ -20,7 +20,7 @@
         width: 100%;
     }
 
-    .page-main .page-content .menu {
+    .page-main .page-content .navigation {
         font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
         font-size: 0.875rem;
         color: #000;
@@ -145,6 +145,10 @@
             height: $side;
             background-color: $swiper-pagination-bullet-active;
         }
+    }
+
+    .menu {
+        text-align: center;
     }
 
     .page-main .page-content .footer {
