@@ -19,16 +19,8 @@ var SlideClass = Object.assign({}, {}, {
         wordsTotal: React.PropTypes.number,
         slideScore: React.PropTypes.number,
         imgName: React.PropTypes.string,
-        isActive: React.PropTypes.bool
-    },
-
-    getDefaultProps: function () {
-
-        return {
-            wordsTotal: 25,
-            imgPath: 'play/play'
-        };
-
+        isActive: React.PropTypes.bool,
+        className: React.PropTypes.string
     },
 
     getInitialState: function () {
@@ -40,7 +32,8 @@ var SlideClass = Object.assign({}, {}, {
             wordsTotal: this.props.wordsTotal || 25,
             slideScore: this.props.slideScore || 999999,
             imgPath: this.props.imgPath || 'play/play',
-            isActive: false
+            isActive: false,
+            className: this.props.className || "swiper-slide"
         };
 
     },
@@ -73,20 +66,15 @@ var SlideClass = Object.assign({}, {}, {
             backgroundImage: "url('" + this.getImagePath(this.state.imgPath) + "')"
         };
 
-        var slideClickedStyle = {
-            backgroundColor: ''
-        };
-
-        if (this.state.isActive) {
-            slideClickedStyle = {
-                backgroundColor: 'rgba(0,0,0,0.2)'
-            };
-        }
+        var slideClasses = classNames(
+            this.state.className,
+            this.props.className,
+            {'hover': this.state.isActive || this.props.isActive}
+        );
 
         return (
 
-            <div className="swiper-slide">
-                <div className="on-click" onClick={this.onClick} style={slideClickedStyle}>
+            <div className={slideClasses} onClick={this.onClick}>
 
                     <div className="slide-number">{i18n._('slide.set')} №{this.state.slideNumber}</div>
                     <div className="player-name">{this.state.playerName}</div>
@@ -105,8 +93,8 @@ var SlideClass = Object.assign({}, {}, {
 
                     <div className="score">{i18n._('slide.score')} {this.state.slideScore}</div>
 
-                </div>
             </div>
+
         );
     }
 });

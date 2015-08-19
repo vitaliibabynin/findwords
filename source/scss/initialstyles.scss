@@ -124,14 +124,10 @@ html.android{
     vertical-align: middle;
     text-decoration: none;
     font-size: 1rem;
+    padding: 0 0.313rem;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
-}
-.btn .on-click {
-    height: inherit;
-    width: inherit;
-    padding: 0 0.313rem;
 }
     html.desktop .btn:hover,
     .btn.hover{
