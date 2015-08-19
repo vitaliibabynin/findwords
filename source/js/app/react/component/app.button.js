@@ -79,8 +79,22 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
             {'hover': this.state.isActive || this.props.isActive}
         );
 
+        var slideClickedStyle = {
+            backgroundColor: ''
+        };
+
+        if (this.state.isActive) {
+            slideClickedStyle = {
+                backgroundColor: 'rgba(0,0,0,0.2)'
+            };
+        }
+
         return (
-            <div className={buttonClasses} style={this.state.style} onClick={this.onClick} dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} >{this.props.children}</div>
+            <div className={buttonClasses} style={this.state.style} dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML} >
+                <div className="on-click" onClick={this.onClick} style={slideClickedStyle}>
+                    {this.props.children}
+                </div>
+            </div>
         );
     }
 }));

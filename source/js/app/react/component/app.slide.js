@@ -18,8 +18,8 @@ var SlideClass = Object.assign({}, {}, {
         wordsComplete: React.PropTypes.number,
         wordsTotal: React.PropTypes.number,
         slideScore: React.PropTypes.number,
-        imgName: React.PropTypes.string
-
+        imgName: React.PropTypes.string,
+        isActive: React.PropTypes.bool
     },
 
     getDefaultProps: function () {
@@ -40,15 +40,27 @@ var SlideClass = Object.assign({}, {}, {
             wordsTotal: this.props.wordsTotal || 25,
             slideScore: this.props.slideScore || 999999,
             imgPath: this.props.imgPath || 'play/play',
-            isSelected: false
+            isActive: false
         };
 
     },
 
-    onClick: function() {
-        this.setState({
-            isSelected: true
-        })
+    onClick: function(e){
+        e.preventDefault();
+
+        if(!this.state.isActive){
+            this.setState({isActive: true}, function(){
+                setTimeout(function(){
+                    if(this.isMounted()){
+                        this.setState({isActive: false});
+                    }
+                }.bind(this), 300);
+            });
+        }
+
+        if(this.props.onClick && typeof this.props.onClick == 'function'){
+            this.props.onClick(this.props);
+        }
     },
 
     render: function () {
@@ -61,13 +73,11 @@ var SlideClass = Object.assign({}, {}, {
             backgroundImage: "url('" + this.getImagePath(this.state.imgPath) + "')"
         };
 
-        var isSelected = this.state.isSelected;
-
         var slideClickedStyle = {
             backgroundColor: ''
         };
 
-        if (isSelected) {
+        if (this.state.isActive) {
             slideClickedStyle = {
                 backgroundColor: 'rgba(0,0,0,0.2)'
             };

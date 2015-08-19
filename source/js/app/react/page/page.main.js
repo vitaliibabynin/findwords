@@ -69,7 +69,7 @@ var PageMain = Object.assign({}, {}, {
                         <ScoreCounter value={15} />
                         <CoinsCounter value={9999} />
                     </div>
-                    <div className="navigation">
+                    <div className="main">
                         <Swiper />
                         <Navigation />
                     </div>
