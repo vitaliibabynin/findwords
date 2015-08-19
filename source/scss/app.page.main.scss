@@ -10,7 +10,6 @@
         height: 100%;
         width: 100%;
     }
-
     .page-main .page-content .head {
         height: 6.875rem;
         background-color: $header-bg-color;
@@ -19,7 +18,6 @@
         background-position: center center;
         width: 100%;
     }
-
     .page-main .page-content .main {
         font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
         font-size: 0.875rem;
@@ -30,104 +28,105 @@
         .swiper-container {
             width: 100%;
             height: 12.688rem;
-            margin: 1.125rem auto;
-        }
+            //margin: 1.125rem auto;
+            margin-top: 0.8rem;
+            margin-bottom: 0.2rem;
 
-        .swiper-slide {
-            height: 10.938rem;
-            text-align: center;
-            color: $slide-text-color;
+            .swiper-slide {
+                height: 10.938rem;
+                text-align: center;
+                color: $slide-text-color;
+                cursor: pointer;
 
-            &:hover,
-            &.hover {
-                opacity: 0.8;
-            }
-
-            &:first-child {
-                background-color: $slide1-bg-color;
-            }
-            &:nth-child(2) {
-                background-color: $slide2-bg-color;
-            }
-            &:nth-child(3) {
-                background-color: $slide3-bg-color;
-            }
-            &:nth-child(4) {
-                background-color: $slide4-bg-color;
-            }
-            &:nth-child(5) {
-                background-color: $slide5-bg-color;
-            }
-            &:nth-child(2n) {
-                width: 40%;
-            }
-            &:nth-child(3n) {
-                width: 20%;
-            }
-
-            .slide-number,
-            .player-name {
-                line-height: 100%;
-                font-size: $slide-heading-font-size;
-            }
-            .slide-number {
-                padding-top: 1.3rem;
-                vertical-align: bottom;
-            }
-            .player-name {
-                vertical-align: top;
-            }
-            .words-complete {
-                margin: 0.6rem auto;
-                width: 100%;
-                height: 1rem;
-                //padding: auto;
-
-                .stats {
-                    display: inline-block;
-                    font-size: $slide-progress-font-size;
-                    margin-right: 0.55rem;
-                    line-height: 1rem;
-                    vertical-align: middle;
+                &:hover,
+                &.hover {
+                    opacity: 0.8;
                 }
-                .progress-bar {
-                    display: inline-block;
-                    position: relative;
-                    height: 0.750rem;
-                    width: 6.250rem;
-                    line-height: 1rem;
-                    vertical-align: middle;
+                &:first-child {
+                    background-color: $slide1-bg-color;
+                }
+                &:nth-child(2) {
+                    background-color: $slide2-bg-color;
+                }
+                &:nth-child(3) {
+                    background-color: $slide3-bg-color;
+                }
+                &:nth-child(4) {
+                    background-color: $slide4-bg-color;
+                }
+                &:nth-child(5) {
+                    background-color: $slide5-bg-color;
+                }
+                &:nth-child(2n) {
+                    width: 40%;
+                }
+                &:nth-child(3n) {
+                    width: 20%;
+                }
+                .slide-number,
+                .player-name {
+                    line-height: 100%;
+                    font-size: $slide-heading-font-size;
+                }
+                .slide-number {
+                    padding-top: 1.3rem;
+                    vertical-align: bottom;
+                }
+                .player-name {
+                    vertical-align: top;
+                }
+                .words-complete {
+                    margin: 0.6rem auto;
+                    width: 100%;
+                    height: 1rem;
+                    //padding: auto;
 
-                    .panel {
-                        position: absolute;
+                    .stats {
+                        display: inline-block;
+                        font-size: $slide-progress-font-size;
+                        margin-right: 0.55rem;
+                        line-height: 1rem;
+                        vertical-align: middle;
+                    }
+                    .progress-bar {
+                        display: inline-block;
+                        position: relative;
+                        height: 0.750rem;
                         width: 6.250rem;
-                        height: 0.625rem;
-                        background-color: $slide-wordsComplete-panel-bg-color;
-                        border-radius: 0.3125rem;
-                        top: 0.0625rem;
-                        bottom: 0.625rem;
+                        line-height: 1rem;
+                        vertical-align: middle;
 
-                    }
-                    .fill {
-                        position: absolute;
-                        //width: 6.250rem * $slide-wordsComplete-progress-size;
-                        height: 0.688rem;
-                        background-color: $slide-wordsComplete-progress-bg-color;
-                        border-radius: 0.3125rem;
+                        .panel {
+                            position: absolute;
+                            width: 6.250rem;
+                            height: 0.625rem;
+                            background-color: $slide-wordsComplete-panel-bg-color;
+                            border-radius: 0.3125rem;
+                            top: 0.0625rem;
+                            bottom: 0.625rem;
+
+                        }
+                        .fill {
+                            position: absolute;
+                            //width: 6.250rem * $slide-wordsComplete-progress-size;
+                            height: 0.688rem;
+                            background-color: $slide-wordsComplete-progress-bg-color;
+                            border-radius: 0.3125rem;
+                        }
                     }
                 }
-            }
-            .play {
-                margin: auto;
-                height: 2.875rem;
-                width: 2.875rem;
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
-            .score {
-                font-size: $slide-score-font-size;
-                margin-top: 0.6rem;
-                margin-bottom: 1rem;
+                .play {
+                    margin: auto;
+                    height: 2.875rem;
+                    width: 2.875rem;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                .score {
+                    font-size: $slide-score-font-size;
+                    margin-top: 0.6rem;
+                    margin-bottom: 1rem;
+                }
             }
         }
 
@@ -147,7 +146,7 @@
             background-color: $swiper-pagination-bullet-active;
         }
 
-        .menu {
+        .navigation {
             text-align: center;
         }
     }
