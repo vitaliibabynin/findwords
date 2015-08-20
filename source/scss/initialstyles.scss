@@ -114,20 +114,17 @@ html.android{
 }
 
 .btn {
-    background-color: #6E4C59;
     height: 3.125rem;
     width: 3.438rem;
-    line-height: 3.125rem;
     display: inline-block;
     color: #ffffff;
     text-align: center;
-    vertical-align: middle;
     text-decoration: none;
-    font-size: 0.813rem;
-    padding: 0 0.313rem;
+    font-size: 0.6rem;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+    padding-top: 2.25rem;
 }
     html.desktop .btn:hover,
     .btn.hover{
@@ -153,9 +150,9 @@ html.android{
 }
 
 .btn.icon{
-    background-size: 1.6rem;
+    background-size: auto;
     background-repeat: no-repeat;
-    background-position: 0.5rem center;
+    background-position: center top;
 }
 .btn.fb{
     background-color: #3C5A96;

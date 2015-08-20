@@ -15,7 +15,8 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
 
     propTypes: {
 
-        buttonId: React.PropTypes.string
+        buttonId: React.PropTypes.string,
+        icon: React.PropTypes.string
 
     },
 
@@ -142,7 +143,7 @@ var FbButtonClass = Object.assign({}, IconButtonClass, {
     },
 
     getBackgoundImageName: function () {
-        return 'fb';
+        return this.props.icon;
     },
 
     render: function () {

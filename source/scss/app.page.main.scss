@@ -40,7 +40,7 @@
 
                 &:hover,
                 &.hover {
-                    opacity: 0.8;
+                    box-shadow: $hover-box-shadow;
                 }
                 &:first-child {
                     background-color: $slide1-bg-color;
@@ -148,6 +148,29 @@
 
         .navigation {
             text-align: center;
+
+            .btn {
+                background-color: $navigation-btn-bg-color;
+
+                &.icon {
+                    background-size: 1.75rem 1.75rem;
+                    background-position: center 0.25rem;
+                }
+                &:hover,
+                &.hover {
+                    box-shadow: $hover-box-shadow;
+                }
+                &.rating {
+                    background-color: $navigation-btn-rating-bg-color;
+                }
+                &.facebook-enter,
+                &.facebook-exit {
+                    background-color: $navigation-btn-facebook-bg-color;
+                }
+                &.shop {
+                    background-color: $navigation-btn-shop-bg-color;
+                }
+            }
         }
     }
 

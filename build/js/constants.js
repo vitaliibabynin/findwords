@@ -9,8 +9,8 @@ window.CONST = {
     PLATFORM_IOS: 'ios',
     PLATFORM_SITE: 'site',
 
-    BASE_URL: 'http://manvswoman.game',
-    API_URL: 'http://api.manvswoman.game',
+    BASE_URL: 'http://words.game',
+    API_URL: 'http://api.words.game',
     STATIC_IMAGE_URL: '/build/img/',
     STATIC_CSS_URL: '/build/css/',
     STATIC_JS_URL: '/build/js/',
