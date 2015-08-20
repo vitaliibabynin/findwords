@@ -35,6 +35,14 @@ window.CONST = {
             'slide.set':'Комплект',
             'playerName':'Гаврюша',
             'slide.score':'Счет',
+            'button.settings': 'Настройки',
+            'button.rating': 'Рейтинг',
+            'button.facebook.enter': 'Войти',
+            'button.facebook.exit': 'Выйти',
+            'button.shop': 'Магазин',
+            'button.languages': 'Языки',
+            'button.music': 'Музыка',
+            'button.sound': 'Звук',
             t: ''
         },
         en: {
@@ -46,6 +54,14 @@ window.CONST = {
             'slide.set':'Set',
             'playerName':'Gavryusha',
             'slide.score':'Score',
+            'button.settings': 'Settings',
+            'button.rating': 'Rating',
+            'button.facebook.enter': 'Enter',
+            'button.facebook.exit': 'Exit',
+            'button.shop': 'Shop',
+            'button.languages': 'Language',
+            'button.music': 'Music',
+            'button.sound': 'Sound',
             t: ''
         }
     },

@@ -31,14 +31,14 @@ var NavigationClass = Object.assign({}, {}, {
 
     onClick: function (buttonProps) {
 
-        if (buttonProps.className === "settings") {
+        if (buttonProps.buttonId === "settings") {
             if (this.state.buttonLayout === "menu" || this.state.buttonLayout === "languages") {
                 this.setState({buttonLayout: "settings"});
             } else {
                 this.setState({buttonLayout: "menu"});
             }
 
-        } else if (buttonProps.className === "languages") {
+        } else if (buttonProps.buttonId === "languages") {
             if (this.state.buttonLayout === "settings") {
                 this.setState({buttonLayout: "languages"});
             } else {
@@ -52,10 +52,10 @@ var NavigationClass = Object.assign({}, {}, {
 
         return (
             <div className="navigation menu-layout">
-                <IconButton className="settings" onClick={this.onClick}>Settings</IconButton>
-                <IconButton className="rankings" onClick={this.onClick}>Rankings</IconButton>
-                <FbButton className="facebook" onClick={this.onClick}>Facebook</FbButton>
-                <IconButton className="shop" onClick={this.onClick}>Shop</IconButton>
+                <IconButton buttonId="settings" className="settings" onClick={this.onClick}>{i18n._('button.settings')}</IconButton>
+                <IconButton buttonId="rankings" className="rankings" onClick={this.onClick}>{i18n._('button.rating')}</IconButton>
+                <FbButton buttonId="facebook" className="facebook" onClick={this.onClick}>{i18n._('button.facebook.enter')}</FbButton>
+                <IconButton buttonId="shop" className="shop" onClick={this.onClick}>{i18n._('button.shop')}</IconButton>
             </div>
         )
 
@@ -65,10 +65,10 @@ var NavigationClass = Object.assign({}, {}, {
 
         return (
             <div className="navigation settings-layout">
-                <IconButton className="settings" onClick={this.onClick}>Settings</IconButton>
-                <IconButton className="languages" onClick={this.onClick}>Languages</IconButton>
-                <IconButton className="music" onClick={this.onClick}>Music</IconButton>
-                <IconButton className="sound" onClick={this.onClick}>Sound</IconButton>
+                <IconButton buttonId="settings" className="settings hover" onClick={this.onClick}>{i18n._('button.settings')}</IconButton>
+                <IconButton buttonId="languages" className="languages" onClick={this.onClick}>{i18n._('button.languages')}</IconButton>
+                <IconButton buttonId="music" className="music" onClick={this.onClick}>{i18n._('button.music')}</IconButton>
+                <IconButton buttonId="sound" className="sound" onClick={this.onClick}>{i18n._('button.sound')}</IconButton>
             </div>
         )
 
@@ -78,10 +78,10 @@ var NavigationClass = Object.assign({}, {}, {
 
         return (
             <div className="navigation languages-layout">
-                <IconButton className="settings" onClick={this.onClick}>Settings</IconButton>
-                <IconButton className="languages" onClick={this.onClick}>Languages</IconButton>
-                <IconButton className="russian" onClick={this.onClick}>Russian</IconButton>
-                <IconButton className="english" onClick={this.onClick}>English</IconButton>
+                <IconButton buttonId="settings" className="settings hover" onClick={this.onClick}>{i18n._('button.settings')}</IconButton>
+                <IconButton buttonId="languages" className="languages hover" onClick={this.onClick}>{i18n._('button.languages')}</IconButton>
+                <IconButton buttonId="russian" className="russian" onClick={this.onClick}>Русский</IconButton>
+                <IconButton buttonId="english" className="english" onClick={this.onClick}>English</IconButton>
             </div>
         )
 

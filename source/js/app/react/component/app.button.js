@@ -13,6 +13,13 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
     displayName: 'Button',
     mixins: [GameMixin],
 
+    propTypes: {
+
+        buttonId: React.PropTypes.string
+
+    },
+
+
     getInitialState: function () {
 
         var state = {
