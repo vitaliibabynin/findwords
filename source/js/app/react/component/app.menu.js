@@ -24,7 +24,7 @@ var NavigationClass = Object.assign({}, {}, {
         return {
 
             buttonLayout: "menu"
-            //menu, settings, languages, musicOff, soundOff, MusicSoundOff
+            //menu, settings, facebook-online, languages, musicOff, soundOff, MusicSoundOff
 
         };
 
@@ -40,6 +40,14 @@ var NavigationClass = Object.assign({}, {}, {
             }
         }
 
+        else if (buttonProps.buttonId === "facebook") {
+            if (this.state.buttonLayout === "facebook-online") {
+                this.setState({buttonLayout: "menu"});
+            } else {
+                this.setState({buttonLayout: "facebook-online"})
+            }
+        }
+
         else if (buttonProps.buttonId === "languages") {
             if (this.state.buttonLayout === "languages") {
                 this.setState({buttonLayout: "settings"});
@@ -49,26 +57,26 @@ var NavigationClass = Object.assign({}, {}, {
         }
 
         else if (buttonProps.buttonId === "music") {
-            if (this.state.buttonLayout === "settings") {
-                this.setState({buttonLayout: "musicOff"});
+            if (this.state.buttonLayout === "musicOff") {
+                this.setState({buttonLayout: "settings"});
             } else if (this.state.buttonLayout === "musicSoundOff") {
                 this.setState({buttonLayout: "soundOff"});
             } else if (this.state.buttonLayout === "soundOff") {
                 this.setState({buttonLayout: "musicSoundOff"})
             } else {
-                this.setState({buttonLayout: "settings"})
+                this.setState({buttonLayout: "musicOff"})
             }
         }
 
         else if (buttonProps.buttonId === "sound") {
-            if (this.state.buttonLayout === "settings") {
-                this.setState({buttonLayout: "soundOff"});
+            if (this.state.buttonLayout === "soundOff") {
+                this.setState({buttonLayout: "settings"});
             } else if (this.state.buttonLayout === "musicSoundOff") {
                 this.setState({buttonLayout: "musicOff"});
             } else if (this.state.buttonLayout === "musicOff") {
                 this.setState({buttonLayout: "musicSoundOff"})
             } else {
-                this.setState({buttonLayout: "settings"})
+                this.setState({buttonLayout: "soundOff"})
             }
         }
 
@@ -90,8 +98,25 @@ var NavigationClass = Object.assign({}, {}, {
                             onClick={this.onClick}>{i18n._('button.settings')}</IconButton>
                 <IconButton buttonId="rating" className="rating" icon="leader"
                             onClick={this.onClick}>{i18n._('button.rating')}</IconButton>
-                <FbButton buttonId="facebook-enter" className="facebook-enter" icon="facebook_connect"
-                          onClick={this.onClick}>{i18n._('button.facebook.enter')}</FbButton>
+                <IconButton buttonId="facebook" className="facebook-connect" icon="facebook_connect"
+                            onClick={this.onClick}>{i18n._('button.facebook.enter')}</IconButton>
+                <IconButton buttonId="shop" className="shop" icon="shop"
+                            onClick={this.onClick}>{i18n._('button.shop')}</IconButton>
+            </div>
+        )
+
+    },
+
+    renderFacebookOnline: function () {
+
+        return (
+            <div className="navigation menu-layout">
+                <IconButton buttonId="settings" className="settings" icon="settings"
+                            onClick={this.onClick}>{i18n._('button.settings')}</IconButton>
+                <IconButton buttonId="rating" className="rating" icon="leader"
+                            onClick={this.onClick}>{i18n._('button.rating')}</IconButton>
+                <IconButton buttonId="facebook" className="facebook-online" icon="facebook_online"
+                            onClick={this.onClick}>{i18n._('button.facebook.exit')}</IconButton>
                 <IconButton buttonId="shop" className="shop" icon="shop"
                             onClick={this.onClick}>{i18n._('button.shop')}</IconButton>
             </div>
@@ -186,6 +211,9 @@ var NavigationClass = Object.assign({}, {}, {
 
         if (this.state.buttonLayout === "settings") {
             return this.renderSettings();
+
+        } else if (this.state.buttonLayout === "facebook-online") {
+            return this.renderFacebookOnline();
 
         } else if (this.state.buttonLayout === "languages") {
             return this.renderLanguages();
