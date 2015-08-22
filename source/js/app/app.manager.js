@@ -20,6 +20,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
 
     language: null,
     settings: null,
+    gameState: null,
     gameManager: null,
     ratingManager: null,
     runtimeState: {},
@@ -146,7 +147,13 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
         return this.settings;
     },
 
+    getGameState: function(){
+        if(null == this.gameState){
+            this.gameState = require('./model/app.gamestate');
+        }
 
+        return this.gameState;
+    },
 
     addOnInitListener: function(callback){
         this.on(EVENT_ONINIT, callback);
