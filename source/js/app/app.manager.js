@@ -44,7 +44,8 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                 }.bind(this))
             .then(function(){
                     return Promise.all([
-                        window.appFB.init(CONST.FB_APP_ID, this.language)
+                        this.getGameState().init()
+                        , window.appFB.init(CONST.FB_APP_ID, this.language)
                         , window.appStore.init()
                         , window.appNotificationLocal.init()
                     ]);

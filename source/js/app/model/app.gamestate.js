@@ -1,61 +1,63 @@
 
 var Object = {assign: require('react/lib/Object.assign')};
 
+var SETTINGS_GAMESTATE = 'game_state';
 
 var GameState = Object.assign({}, {}, {
 
     gameState: {
 
         settings: {
-
-            buttonLayout: "menu",
-            settings: false,
-            languages: false,
             music: true,
             sound: true
-
         }
 
     },
 
-    setButtonLayout: function(newValue){
-        this.gameState.settings.buttonLayout = newValue;
+    init: function(){
+        return new Promise(function(resolve, reject){
+            DB.getSettings().get(SETTINGS_GAMESTATE).then(function(gameState){
+                if(gameState){
+                    this.gameState = gameState;
+                }
+
+                return resolve();
+            }.bind(this));
+        }.bind(this));
     },
 
-    setSettings: function(newBoolean){
-        this.gameState.settings.settings = newBoolean;
+    saveGameState: function(){
+        DB.getSettings().set(SETTINGS_GAMESTATE, this.gameState);
     },
 
-    setLanguages: function(newBoolean){
-        this.gameState.settings.languages = newBoolean;
+    setSettingsField: function(field, newValue){
+        this.gameState.settings[field] = newValue;
+        this.saveGameState();
+    },
+
+    getSettingsField: function(field, defaultValue){
+        if(!this.gameState.settings || !this.gameState.settings.hasOwnProperty(field)){
+            return defaultValue;
+        }
+
+        return this.gameState.settings[field];
     },
 
     setMusic: function(newBoolean){
-        this.gameState.settings.music = newBoolean;
+        this.setSettingsField('music', newBoolean);
     },
 
     setSound: function(newBoolean){
-        this.gameState.settings.sound = newBoolean;
+        this.setSettingsField('sound', newBoolean);
     },
 
-    getButtonLayout: function(){
-        return this.gameState.settings.buttonLayout;
-    },
-
-    getSettings: function(){
-        return this.gameState.settings.settings;
-    },
-
-    getLanguages: function(){
-        return this.gameState.settings.languages;
-    },
 
     getMusic: function(){
-        return this.gameState.settings.music;
+        return this.getSettingsField('music', true);
     },
 
     getSound: function(){
-        return this.gameState.settings.sound;
+        return this.getSettingsField('sound', true);
     }
 
 });
