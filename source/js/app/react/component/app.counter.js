@@ -36,7 +36,7 @@ var CounterClass = Object.assign({}, {}, {
 
     componentWillReceiveProps: function (nextProps) {
 
-        if (!nextProps.hasOwnProperty(value) || nextProps.value != this.state.value) {
+        if (!nextProps.hasOwnProperty(value) || nextProps.value == this.state.value) {
             return;
         }
 
