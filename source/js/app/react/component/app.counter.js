@@ -8,7 +8,6 @@ var IconButton = require('./app.button').IconButton;
 
 module.exports = {};
 
-
 var CounterClass = Object.assign({}, {}, {
 
     mixins: [GameMixin],
@@ -35,8 +34,13 @@ var CounterClass = Object.assign({}, {}, {
 
     },
 
-    showIcon: function() {
-        if(this.state.isDisplayPlusButton){
+    setValue: function () {
+
+    },
+
+
+    showIcon: function () {
+        if (this.state.isDisplayPlusButton) {
             return (
                 <IconButton icon={this.state.iconImg}></IconButton>
             );
@@ -79,6 +83,7 @@ var ScoreCounterClass = Object.assign({}, CounterClass, {
 
         return state;
     }
+
 });
 module.exports.ScoreCounter = React.createClass(ScoreCounterClass);
 module.exports.ScoreCounter.Class = ScoreCounterClass;
@@ -92,6 +97,7 @@ var CoinsCounterClass = Object.assign({}, CounterClass, {
 
         return state;
     }
+
 });
 module.exports.CoinsCounter = React.createClass(CoinsCounterClass);
 module.exports.CoinsCounter.Class = CoinsCounterClass;
