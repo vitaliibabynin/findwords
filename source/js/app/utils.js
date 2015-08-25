@@ -143,9 +143,5 @@ module.exports = {
     round: function(val, precisions){
         precisions = Math.pow(10, precisions || 0);
         return Math.round(val * precisions) / precisions;
-    },
-
-    capitalizeFirstLetter: function(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 }
