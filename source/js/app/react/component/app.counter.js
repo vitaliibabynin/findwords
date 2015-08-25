@@ -34,16 +34,28 @@ var CounterClass = Object.assign({}, {}, {
 
     },
 
+    componentWillReceiveProps: function (nextProps) {
+
+        this.setState({
+            value: nextProps.value
+        })
+
+    },
+
     showIcon: function () {
+
         if (this.state.isDisplayPlusButton) {
             return (
                 <IconButton icon={this.state.iconImg}></IconButton>
             );
         }
+
     },
 
     render: function () {
+
         var style = {};
+
         var className = classNames('counter', this.props.className);
         if (this.state.imgPath) {
             style.backgroundImage = "url('" + this.getImagePath(this.state.imgPath) + "')";
@@ -63,6 +75,7 @@ var CounterClass = Object.assign({}, {}, {
                 {this.showIcon()}
             </div>
         );
+
     }
 });
 module.exports.Counter = React.createClass(CounterClass);
@@ -72,11 +85,13 @@ module.exports.Counter.Class = CounterClass;
 var ScoreCounterClass = Object.assign({}, CounterClass, {
 
     getInitialState: function () {
+
         var state = CounterClass.getInitialState.apply(this);
         state.imgPath = 'counter/star';
         state.isDisplayPlusButton = this.props.isDisplayPlusButton || false;
 
         return state;
+
     }
 
 });
@@ -86,11 +101,13 @@ module.exports.ScoreCounter.Class = ScoreCounterClass;
 var CoinsCounterClass = Object.assign({}, CounterClass, {
 
     getInitialState: function () {
+
         var state = CounterClass.getInitialState.apply(this);
         state.imgPath = 'counter/coins';
         state.isDisplayPlusButton = this.props.isDisplayPlusButton || true;
 
         return state;
+
     }
 
 });
