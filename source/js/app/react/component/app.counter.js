@@ -34,11 +34,6 @@ var CounterClass = Object.assign({}, {}, {
 
     },
 
-    setValue: function () {
-
-    },
-
-
     showIcon: function () {
         if (this.state.isDisplayPlusButton) {
             return (

@@ -31,24 +31,6 @@ var PageMain = Object.assign({}, {}, {
         return state;
     },
 
-    setScoreValue: function (newNumber) {
-        appManager.getGameState().setScore(newNumber);
-        this.forceUpdate();
-    },
-
-    setCoinsValue: function (newNumber) {
-        appManager.getGameState().setCoins(newNumber);
-        this.forceUpdate();
-    },
-
-    getScoreValue: function () {
-        return appManager.getGameState().getScore();
-    },
-
-    getCoinsValue: function () {
-        return appManager.getGameState().getCoins();
-    },
-
     componentDidMount: function () {
 
     },
@@ -84,8 +66,8 @@ var PageMain = Object.assign({}, {}, {
                         style={headStyle}>
                     </div>
                     <div className="counters">
-                        <ScoreCounter value={this.getScoreValue()} />
-                        <CoinsCounter value={this.getCoinsValue()} />
+                        <ScoreCounter value={appManager.getGameState().getScore()} />
+                        <CoinsCounter value={appManager.getGameState().getCoins()} />
                     </div>
                     <div className="main">
                         <Swiper />
