@@ -2,9 +2,9 @@
 var AbstractEventEmitter = require('./abstract.eventemitter');
 var Object = {assign: require('react/lib/Object.assign')};
 
-
 var AppSettings = Object.assign({}, AbstractEventEmitter, {
-    settings: null,
+
+    settings: require("./../game.data"),
 
 
     setSettings: function(data){
@@ -38,6 +38,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getShareAppLink: function(){
         return this.getSettingsValue('share_applink', false);
+    },
+
+    getRoundsBundle: function(){
+        return this.getSettingsValue('roundsBundle', []);
     }
 
 });
