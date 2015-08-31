@@ -75,7 +75,27 @@
                     }
                 }
                 &.instructions {
+                    position: relative;
 
+                    .text {
+                        padding: 0 1rem;
+                        display: table;
+                        height: 6.138rem;
+
+                        span {
+                            display: table-cell;
+                            vertical-align: middle;
+                        }
+                    }
+                    .purchase {
+                        position: absolute;
+                        width: 100%;
+                        text-align: center;
+                        line-height: 1.5rem;
+                        bottom: 0;
+                        height: 1.5rem;
+                        background-color: $slide-instructions-buy;
+                    }
 
                 }
                 &.unlocked {

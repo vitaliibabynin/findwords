@@ -9,7 +9,7 @@ var libSwiper = require('./../../../app/libs/swiper.jquery');
 module.exports = {};
 
 
-var SLIDE_LAYOUT = "locked";
+var SLIDE_LAYOUT = "instructions";
 
 
 var SlideClass = Object.assign({}, {}, {
@@ -147,6 +147,8 @@ var SlideClass = Object.assign({}, {}, {
 
                 <div className="slide-title">{title}</div>
                 <div className="player-name">{this.state.playerName}</div>
+                <div className="text"><span>{i18n._('slide.instructions')}</span></div>
+                <div className="purchase">{i18n._('slide.buy')}</div>
 
             </div>
 
