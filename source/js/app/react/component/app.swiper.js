@@ -8,26 +8,36 @@ var libSwiper = require('./../../../app/libs/swiper.jquery');
 
 module.exports = {};
 
+
+var SLIDE_LAYOUT = "locked";
+
+
 var SlideClass = Object.assign({}, {}, {
 
     mixins: [GameMixin],
 
     propTypes: {
 
-        backgroundColor: React.PropTypes.string,
         className: React.PropTypes.string,
         isActive: React.PropTypes.bool,
-        layout: React.PropTypes.string,
-        //locked, instructions, unlocked
+        layout: React.PropTypes.oneOf(["locked","instructions","unlocked"]),
         lockImgPath: React.PropTypes.string,
         playerName: React.PropTypes.string,
         playImgPath: React.PropTypes.string,
         roundsComplete: React.PropTypes.number,
-        roundsTotal: React.PropTypes.number,
+
+        slideData: React.PropTypes.shape({
+            backgroundColor: React.PropTypes.string,
+            name: React.PropTypes.shape({
+                en: React.PropTypes.string,
+                ru: React.PropTypes.string
+            }),
+            numberOfRoundsRequired: React.PropTypes.number,
+            rounds: React.PropTypes.arrayOf(React.PropTypes.object)
+        }),
+
         slideNumber: React.PropTypes.number,
-        slideScore: React.PropTypes.number,
-        titleEn: React.PropTypes.string,
-        titleRu: React.PropTypes.string
+        slideScore: React.PropTypes.number
 
     },
 
@@ -35,7 +45,7 @@ var SlideClass = Object.assign({}, {}, {
 
         return {
 
-            backgroundColor: this.props.backgroundColor || "#0000ff",
+            backgroundColor: this.props.slideData.backgroundColor || "#0000ff",
             className: this.props.className || "swiper-slide",
             isActive: this.props.isActive || false,
             layout: this.props.layout || 'locked',
@@ -43,11 +53,12 @@ var SlideClass = Object.assign({}, {}, {
             playerName: this.props.playerName || i18n._('playerName'),
             playImgPath: this.props.imgPath || 'slide/play',
             roundsComplete: this.props.roundsComplete || 1,
-            roundsTotal: this.props.roundsTotal || 1,
+            roundsTotal: this.props.slideData.rounds.length || 1,
+            slideData: this.props.slideData,
             slideNumber: this.props.slideNumber || 0,
             slideScore: this.props.slideScore || 999999,
-            titleEn: this.props.titleEn || "Set #?",
-            titleRu: this.props.titleRu || "Комплект №?"
+            titleEn: this.props.slideData.name.en || "Set #?",
+            titleRu: this.props.slideData.name.ru || "Комплект №?"
 
         };
 
@@ -246,12 +257,9 @@ var SwiperClass = Object.assign({}, {}, {
 
             return (
                 <Slide
-                    backgroundColor={slide.backgroundColor}
-                    layout="locked"
-                    roundsTotal={slide.rounds.length}
+                    layout={SLIDE_LAYOUT}
+                    slideData={slide}
                     slideNumber={slideIndex+1}
-                    titleRu={slide.name.ru}
-                    titleEn={slide.name.en}
                     />
             )
 
