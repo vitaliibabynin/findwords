@@ -40,8 +40,8 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return this.getSettingsValue('share_applink', false);
     },
 
-    getRoundsBundle: function(){
-        return this.getSettingsValue('roundsBundle', []);
+    getRoundsBundles: function(){
+        return this.getSettingsValue('roundsBundles', []);
     }
 
 });

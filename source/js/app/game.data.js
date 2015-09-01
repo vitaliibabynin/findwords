@@ -1,5 +1,5 @@
 var gameData = {
-    roundsBundle: [{
+    roundsBundles: [{
         name: {ru: "Комплект №1", en: "Set #1"},
         numberOfRoundsRequired: 2,
         backgroundColor: "#d64541",

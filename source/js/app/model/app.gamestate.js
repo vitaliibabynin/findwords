@@ -6,12 +6,20 @@ var GameState = Object.assign({}, {}, {
 
     gameState: {
 
+        coins: 0,
+        score: 0,
         settings: {
             music: true,
             sound: true
         },
-        score: 0,
-        coins: 0
+        roundsBundles: {
+            0: {
+                isLocked: false
+            },
+            1: {
+                isLocked: true
+            }
+        }
 
     },
 
@@ -31,7 +39,7 @@ var GameState = Object.assign({}, {}, {
         DB.getSettings().set(SETTINGS_GAMESTATE, this.gameState);
     },
 
-    setGameStateField: function(field, newValue) {
+    setGameStateField: function (field, newValue) {
         this.gameState[field] = newValue;
         this.saveGameState();
     },
@@ -39,6 +47,10 @@ var GameState = Object.assign({}, {}, {
     setSettingsField: function (field, newValue) {
         this.gameState.settings[field] = newValue;
         this.saveGameState();
+    },
+
+    setRoundsBundles: function (bundleIndex, field, newValue) {
+        this.gameState.roundsBundles[bundleIndex][field] = newValue;
     },
 
     getGameStateField: function (field, defaultValue) {
@@ -55,6 +67,20 @@ var GameState = Object.assign({}, {}, {
         }
 
         return this.gameState.settings[field];
+    },
+
+    getRoundsBundles: function (bundleIndex) {
+
+        if (!bundleIndex) {
+            return this.gameState.roundsBundles;
+        }
+
+        if (!this.gameState.roundsBundles.hasOwnProperty(bundleIndex)) {
+            return false;
+        }
+
+        return this.gameState.roundsBundles[bundleIndex];
+
     },
 
     setScore: function (newNumber) {
@@ -90,8 +116,4 @@ var GameState = Object.assign({}, {}, {
     }
 
 });
-
 module.exports = GameState;
-
-
-

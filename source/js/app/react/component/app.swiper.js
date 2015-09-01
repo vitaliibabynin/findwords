@@ -8,8 +8,9 @@ var libSwiper = require('./../../../app/libs/swiper.jquery');
 
 module.exports = {};
 
-
-var SLIDE_LAYOUT = "instructions";
+var SLIDE_LAYOUT_LOCKED = "locked";
+var SLIDE_LAYOUT_INSTRUCTIONS = "instructions";
+var SLIDE_LAYOUT_UNLOCKED = "unlocked";
 
 
 var SlideClass = Object.assign({}, {}, {
@@ -20,7 +21,7 @@ var SlideClass = Object.assign({}, {}, {
 
         className: React.PropTypes.string,
         isActive: React.PropTypes.bool,
-        layout: React.PropTypes.oneOf(["locked","instructions","unlocked"]),
+        isLocked: React.PropTypes.bool,
         lockImgPath: React.PropTypes.string,
         playerName: React.PropTypes.string,
         playImgPath: React.PropTypes.string,
@@ -36,6 +37,7 @@ var SlideClass = Object.assign({}, {}, {
             rounds: React.PropTypes.arrayOf(React.PropTypes.object)
         }),
 
+        slideIndex: React.PropTypes.number,
         slideNumber: React.PropTypes.number,
         slideScore: React.PropTypes.number
 
@@ -48,19 +50,36 @@ var SlideClass = Object.assign({}, {}, {
             backgroundColor: this.props.slideData.backgroundColor || "#0000ff",
             className: this.props.className || "swiper-slide",
             isActive: this.props.isActive || false,
-            layout: this.props.layout || 'locked',
+            isLocked: this.props.isLocked || true,
             lockImgPath: this.props.imgPath || 'slide/lock',
             playerName: this.props.playerName || i18n._('playerName'),
             playImgPath: this.props.imgPath || 'slide/play',
             roundsComplete: this.props.roundsComplete || 1,
             roundsTotal: this.props.slideData.rounds.length || 1,
             slideData: this.props.slideData,
-            slideNumber: this.props.slideNumber || 0,
+            slideIndex: this.props.slideIndex || 0,
+            slideNumber: this.props.slideNumber || this.props.slideIndex + 1 || 0,
             slideScore: this.props.slideScore || 999999,
             titleEn: this.props.slideData.name.en || "Set #?",
             titleRu: this.props.slideData.name.ru || "Комплект №?"
 
         };
+
+    },
+
+    getSlideData: function () {
+
+        return appManager.getGameState().getRoundsBundles(this.state.slideIndex);
+
+    },
+
+    componentWillMount: function () {
+
+        var state = {
+            isLocked: this.getSlideData(this.state.slideIndex).isLocked
+        };
+
+        this.setState(state);
 
     },
 
@@ -213,14 +232,7 @@ var SlideClass = Object.assign({}, {}, {
 
     render: function () {
 
-        switch (this.state.layout) {
-            case "locked":
-                return this.renderLocked();
-            case "instructions":
-                return this.renderInstructions();
-            case "unlocked":
-                return this.renderUnlocked();
-        }
+        return this.state.isLocked ? this.renderLocked(): this.renderUnlocked();
 
     }
 
@@ -249,19 +261,18 @@ var SwiperClass = Object.assign({}, {}, {
         }
     },
 
-    getSlideData: function () {
-        return appManager.getSettings().getRoundsBundle();
+    getSlidesData: function () {
+        return appManager.getSettings().getRoundsBundles();
     },
 
     render: function () {
 
-        var slides = this.getSlideData().map(function (slide, slideIndex, allSlides) {
+        var slides = this.getSlidesData().map(function (slide, slideIndex, allSlides) {
 
             return (
                 <Slide
-                    layout={SLIDE_LAYOUT}
                     slideData={slide}
-                    slideNumber={slideIndex+1}
+                    slideIndex={slideIndex}
                     />
             )
 
