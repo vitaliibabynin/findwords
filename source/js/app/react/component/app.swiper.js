@@ -121,16 +121,15 @@ var SlideClass = Object.assign({}, {}, {
 
     },
 
+    onClickGame: function () {
+        router.navigate("game", "main");
+    },
+
     onClick: function (e) {
 
-        //if (!this.onClickInstructions()) {
-        //
-        //    this.onClickEffect(e);
-        //
-        //}
-
-        this.onClickInstructions();
         this.onClickEffect(e);
+
+        this.state.isLocked ? this.onClickInstructions(): this.onClickGame() ;
 
     },
 
