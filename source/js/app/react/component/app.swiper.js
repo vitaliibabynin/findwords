@@ -20,6 +20,7 @@ var SlideClass = Object.assign({}, {}, {
     propTypes: {
 
         className: React.PropTypes.string,
+        instructions: React.PropTypes.bool,
         isActive: React.PropTypes.bool,
         isLocked: React.PropTypes.bool,
         lockImgPath: React.PropTypes.string,
@@ -49,6 +50,7 @@ var SlideClass = Object.assign({}, {}, {
 
             backgroundColor: this.props.slideData.backgroundColor || "#0000ff",
             className: this.props.className || "swiper-slide",
+            instructions: this.props.instructions || false,
             isActive: this.props.isActive || false,
             isLocked: this.props.isLocked || true,
             lockImgPath: this.props.imgPath || 'slide/lock',
@@ -83,7 +85,8 @@ var SlideClass = Object.assign({}, {}, {
 
     },
 
-    onClick: function (e) {
+    onClickEffect: function (e) {
+
         e.preventDefault();
 
         if (!this.state.isActive) {
@@ -99,6 +102,33 @@ var SlideClass = Object.assign({}, {}, {
         if (this.props.onClick && typeof this.props.onClick == 'function') {
             this.props.onClick(this.props);
         }
+
+    },
+
+    onClickInstructions: function () {
+
+        if (!this.state.isLocked) {
+            return false;
+        }
+
+        var state = {
+            instructions: this.state.instructions ? false: true
+        };
+
+        this.setState(state);
+
+        return true;
+
+    },
+
+    onClick: function (e) {
+
+        if (!this.onClickInstructions()) {
+
+            this.onClickEffect(e);
+
+        }
+
     },
 
     renderLocked: function () {
@@ -231,6 +261,10 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     render: function () {
+
+        if (this.state.instructions) {
+            return this.renderInstructions();
+        }
 
         return this.state.isLocked ? this.renderLocked(): this.renderUnlocked();
 
