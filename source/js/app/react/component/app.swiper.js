@@ -123,11 +123,14 @@ var SlideClass = Object.assign({}, {}, {
 
     onClick: function (e) {
 
-        if (!this.onClickInstructions()) {
+        //if (!this.onClickInstructions()) {
+        //
+        //    this.onClickEffect(e);
+        //
+        //}
 
-            this.onClickEffect(e);
-
-        }
+        this.onClickInstructions();
+        this.onClickEffect(e);
 
     },
 
