@@ -61,7 +61,10 @@ var AppClass = {
                         break;
                 }
                 break;
-
+            case "cleardb":
+                DB.getSettings().del('game_state');
+                alert("game_state cleared");
+                break;
             default:
                 this.renderPage(<PageMain parent={this} />);
                 break;
