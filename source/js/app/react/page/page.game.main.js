@@ -58,6 +58,24 @@ var PageGameMain = Object.assign({}, {}, {
                         <CoinsCounter value={appManager.getGameState().getCoins()} />
                     </div>
 
+                    <div className="timer">
+
+                    </div>
+
+                    <div className="helpers">
+                        <Helper className="open-word"></Helper>
+                        <Helper className="open-letter"></Helper>
+                        <Helper className="show-word"></Helper>
+                    </div>
+
+                    <div className="game">
+
+                    </div>
+
+                    <div className="ad">
+
+                    </div>
+
                 </div>
             </div>
         );
