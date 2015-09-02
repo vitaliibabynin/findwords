@@ -1,122 +1,130 @@
 
-
-#app-content{
+#app-content {
 
 }
-#app-content .page-layout{
-    /*height: 100vh;*/
-    //margin-left: 0rem;
 
+#app-content .page-layout {
+  /*height: 100vh;*/
+  //margin-left: 0rem;
 
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-    display: block;
-    /*overflow: auto;*/
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
+  display: block;
+  /*overflow: auto;*/
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
-#app-content .page-layout .page{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
 
-    display: block;
-    overflow: auto;
-    padding: 0;
-    margin: 0;
+#app-content .page-layout .page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: block;
+  overflow: auto;
+  padding: 0;
+  margin: 0;
 }
-#app-content .page-layout .page .page-content{
-    margin-bottom: 2rem;
+
+#app-content .page-layout .page .page-content {
+  margin-bottom: 2rem;
 }
 
 html.cordova.ios #app-content .page-layout,
-html.cordova.ios #app-content .page-layout .page{
-    padding-top: 1.25rem;
+html.cordova.ios #app-content .page-layout .page {
+  padding-top: 1.25rem;
 }
 
-.page-content{
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+.page-content {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 }
 
 .page-content .counters {
-    background-color: $counters-bg-color;
+  position: relative;
+  background-color: $counters-bg-color;
+  text-align: center;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+
+  .back-arrow {
+    position: absolute;
+    top: 0.4875rem;
+    left: 0.4875rem;
+    height: 1.4rem;
+    width: 1.4rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .counter {
+    height: 2.175rem;
+    display: inline-block;
+    margin-left: 1.75rem;
+    position: relative;
+  }
+
+  .counter.score {
+    margin-left: 0;
+  }
+
+  .counter.icon {
+    background-size: auto 1.575rem;
+    background-repeat: no-repeat no-repeat;
+    background-position: left center;
+  }
+
+  .counter .text {
+    display: inline-block;
+    min-width: 2rem;
+    height: 1.575rem;
+    line-height: 1.8rem;
+    vertical-align: middle;
+    background-color: $scoreCounterPanel-bg-color;
+    border-radius: 0.4rem;;
     text-align: center;
-    padding-top: 0.1rem;
-    padding-bottom: 0.1rem;
+    font-size: 1.25rem;
+    color: $scoreCounterNumbers-color;
+    margin-left: 1.87rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
 
-    .counter{
-        height: 2.175rem;
-        display: inline-block;
-        margin-left: 2rem;
-        position:relative;
-    }
+  .counter.coins .text {
+    margin-left: 1.32rem;
+    background-color: $coinsCounterPanel-bg-color;
+    color: $coinsCounterNumbers-color;
+  }
 
-    .counter:first-of-type{
-        margin-left: 0;
-    }
-
-    .counter.icon{
-        background-size: auto 1.575rem;
-        background-repeat: no-repeat no-repeat;
-        background-position: left center;
-    }
-
-    .counter .text{
-        display: inline-block;
-        min-width: 2rem;
-        height: 1.575rem;
-        line-height: 1.8rem;
-        vertical-align: middle;
-        background-color: $scoreCounterPanel-bg-color;
-        border-radius: 0.4rem;;
-        text-align: center;
-        font-size: 1.25rem;
-        color: $scoreCounterNumbers-color;
-        margin-left: 1.87rem;
-        margin-top: 0.3rem;
-        margin-bottom: 0.3rem;
-        padding-left: 0.4rem;
-        padding-right: 0.4rem;
-    }
-
-    .counter:last-of-type .text{
-        margin-left: 1.32rem;
-        background-color: $coinsCounterPanel-bg-color;
-        color: $coinsCounterNumbers-color;
-    }
-
-    .counter .btn.icon {
-        background-color: transparent;
-        height: 1.4rem;
-        width: 1.4rem;
-        line-height: initial;
-        display: inline-block;
-        color: #ffffff;
-        text-align: center;
-        vertical-align: middle;
-        text-decoration: none;
-        font-size: 1rem;
-        padding: 0;
-        margin-left: -0.5rem;
-        margin-right: 0;
-        cursor: pointer;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        margin-bottom:0;
-        margin-top: 0;
-        /*position: absolute;*/
-        /*top: 50%;*/
-        /*transform: translateY(-50%);*/
-    }
+  .counter .btn.icon {
+    height: 1.4rem;
+    width: 1.4rem;
+    line-height: initial;
+    display: inline-block;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0;
+    margin-left: -0.5rem;
+    margin-right: 0;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
 
 }

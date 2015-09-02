@@ -24,6 +24,7 @@ var CounterClass = Object.assign({}, {}, {
     getInitialState: function () {
 
         var state = {
+            className: "",
             imgPath: '',
             value: this.props.value || 0,
             iconImg: this.props.iconImg || "plus",
@@ -60,7 +61,7 @@ var CounterClass = Object.assign({}, {}, {
 
         var style = {};
 
-        var className = classNames('counter', this.props.className);
+        var className = classNames('counter', this.props.className, this.state.className);
         if (this.state.imgPath) {
             style.backgroundImage = "url('" + this.getImagePath(this.state.imgPath) + "')";
             className += ' icon';
@@ -92,6 +93,7 @@ var ScoreCounterClass = Object.assign({}, CounterClass, {
 
         var state = CounterClass.getInitialState.apply(this);
         state.imgPath = 'counter/star';
+        state.className = "score";
         state.isDisplayPlusButton = this.props.isDisplayPlusButton || false;
 
         return state;
@@ -108,6 +110,7 @@ var CoinsCounterClass = Object.assign({}, CounterClass, {
 
         var state = CounterClass.getInitialState.apply(this);
         state.imgPath = 'counter/coins';
+        state.className = "coins";
         state.isDisplayPlusButton = this.props.isDisplayPlusButton || true;
 
         return state;
