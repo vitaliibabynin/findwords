@@ -46,42 +46,41 @@ var SlideClass = Object.assign({}, {}, {
 
     getInitialState: function () {
 
-        return {
-
-            backgroundColor: this.props.slideData.backgroundColor || "#0000ff",
-            className: this.props.className || "swiper-slide",
-            instructions: this.props.instructions || false,
-            isActive: this.props.isActive || false,
-            isLocked: this.props.isLocked || true,
-            lockImgPath: this.props.imgPath || 'slide/lock',
-            playerName: this.props.playerName || i18n._('playerName'),
-            playImgPath: this.props.imgPath || 'slide/play',
-            roundsComplete: this.props.roundsComplete || 1,
-            roundsTotal: this.props.slideData.rounds.length || 1,
+        var state = {
+            //backgroundColor: this.props.slideData.backgroundColor || "#0000ff",
+            //className: this.props.className || "swiper-slide",
+            //instructions: this.props.instructions || false,
+            //isActive: this.props.isActive || false,
+            //isLocked: this.props.isLocked || true,
+            //lockImgPath: this.props.imgPath || 'slide/lock',
+            //playerName: this.props.playerName || i18n._('playerName'),
+            //playImgPath: this.props.imgPath || 'slide/play',
+            //roundsComplete: this.props.roundsComplete || 1,
+            //roundsTotal: this.props.slideData.rounds.length || 1,
+            //slideData: this.props.slideData,
+            //slideIndex: this.props.slideIndex || 0,
+            //slideNumber: this.props.slideNumber || this.props.slideIndex + 1 || 0,
+            //slideScore: this.props.slideScore || 999999,
+            //titleEn: this.props.slideData.name.en,
+            //titleRu: this.props.slideData.name.ru,
+            //
             slideData: this.props.slideData,
-            slideIndex: this.props.slideIndex || 0,
-            slideNumber: this.props.slideNumber || this.props.slideIndex + 1 || 0,
-            slideScore: this.props.slideScore || 999999,
-            titleEn: this.props.slideData.name.en || "Set #?",
-            titleRu: this.props.slideData.name.ru || "Комплект №?"
-
+            slideIndex: this.props.slideIndex || 0
         };
 
+        var slideData = this.getSlideData(state.slideIndex);
+        state.isLocked = !slideData || !slideData.isUnLocked ?  true : false
+
+        return state;
     },
 
-    getSlideData: function () {
+    getSlideData: function (idx) {
 
-        return appManager.getGameState().getRoundsBundles(this.state.slideIndex);
+        return appManager.getGameState().getRoundsBundles(idx);
 
     },
 
     componentWillMount: function () {
-
-        var state = {
-            isLocked: this.getSlideData(this.state.slideIndex).isLocked
-        };
-
-        this.setState(state);
 
     },
 

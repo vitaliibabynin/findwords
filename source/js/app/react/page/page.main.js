@@ -25,7 +25,7 @@ var PageMain = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            showHeader: false
+
         };
 
         return state;
@@ -43,27 +43,17 @@ var PageMain = Object.assign({}, {}, {
 
     },
 
-    onFBButtonClick: function (buttonProps) {
-        this.setState({showHeader: !this.state.showHeader});
-    },
-
-    onButtonClick: function (buttonProps) {
-        router.navigate("game", "main");
-    },
-
-    renderDisplay: function () {
-
+    render: function () {
         var headImgName = "head/head_img_" + router.getLanguage();
         var headStyle = {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };
 
         return (
-
             <div className="page-main">
                 <div className="page-content">
                     <div className="head"
-                        style={headStyle}>
+                    style={headStyle}>
                     </div>
                     <div className="counters">
                         <ScoreCounter value={appManager.getGameState().getScore()} />
@@ -80,10 +70,6 @@ var PageMain = Object.assign({}, {}, {
             </div>
 
         );
-    },
-
-    render: function () {
-        return this.renderDisplay();
     }
 });
 

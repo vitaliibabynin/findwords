@@ -21,7 +21,8 @@ var PageGameMain = Object.assign({}, {}, {
 
         var state = {
 
-            backArrowImg: "plus"
+            backArrowImg: "plus",
+            roundIdx: router.getParam('roundidx') || 0
 
         };
 

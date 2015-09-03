@@ -13,12 +13,9 @@ var CounterClass = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     propTypes: {
-
-        imgPath: React.PropTypes.string,
         value: React.PropTypes.number,
         iconImg: React.PropTypes.string,
         isDisplayPlusButton: React.PropTypes.bool
-
     },
 
     getInitialState: function () {

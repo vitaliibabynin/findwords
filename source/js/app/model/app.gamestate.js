@@ -8,16 +8,20 @@ var GameState = Object.assign({}, {}, {
 
         coins: 0,
         score: 0,
+        chips:{
+            word: 10,
+            word1: 0
+        },
         settings: {
             music: true,
             sound: true
         },
         roundsBundles: {
             0: {
-                isLocked: false
+                isUnLocked: false
             },
             1: {
-                isLocked: true
+                isUnLocked: true
             }
         }
 

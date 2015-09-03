@@ -13,14 +13,6 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
     displayName: 'Button',
     mixins: [GameMixin],
 
-    propTypes: {
-
-        buttonId: React.PropTypes.string,
-        icon: React.PropTypes.string
-
-    },
-
-
     getInitialState: function () {
 
         var state = {
@@ -101,6 +93,10 @@ module.exports.Button.Class = ButtonClass;
 
 var IconButtonClass = Object.assign({}, ButtonClass, {
     displayName: 'IconButton',
+
+    propTypes: {
+        icon: React.PropTypes.string
+    },
 
     getInitialState: function () {
         var state = ButtonClass.getInitialState.call(this);

@@ -4,7 +4,7 @@
 var classNames = require('classnames');
 
 var PageMain = require('./page/page.main');
-var PageGameMain = require('./page/page.game.main');
+var PageGame = require('./page/page.game');
 
 
 React.initializeTouchEvents(true);
@@ -53,11 +53,17 @@ var AppClass = {
 
     updatePage: function(){
         switch(router.getController()){
+            case 'shop':
+                //this.renderPage(<PageGame parent={this} />);
+                break;
             case "game":
                 switch(router.getAction()){
+                    case "victory":
+                        //this.renderPage(<PageGameResult parent={this} />);
+                        break;
                     case "main":
                     default:
-                        this.renderPage(<PageGameMain parent={this} />);
+                        this.renderPage(<PageGame parent={this} />);
                         break;
                 }
                 break;
