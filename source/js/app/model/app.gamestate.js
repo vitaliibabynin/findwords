@@ -18,10 +18,14 @@ var GameState = Object.assign({}, {}, {
         },
         roundsBundles: {
             0: {
-                isUnlocked: true
+                bundleScore: 999999,
+                isUnlocked: true,
+                roundsComplete: 1
             },
             1: {
-                isUnlocked: false
+                bundleScore: 999999,
+                isUnlocked: false,
+                roundsComplete: 2
             }
         }
 

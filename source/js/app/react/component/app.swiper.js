@@ -39,17 +39,54 @@ var SlideClass = Object.assign({}, {}, {
 
         };
 
-        var slideGameState = this.getStateSlideGameState(state.slideIndex);
-        state.isUnlocked = slideGameState && slideGameState.isUnlocked ?  true : false;
+        var slideGameState = this.getSlideGameState(state.slideIndex);
+        console.log(slideGameState);
+        state.isUnlocked = slideGameState && slideGameState.isUnlocked ? true : false;
         state.layout = state.isUnlocked ? LAYOUT_UNLOCKED : LAYOUT_LOCKED;
-
+        console.log(state.layout);
         return state;
 
     },
 
-    getStateSlideGameState: function (idx) {
+    getSlideGameState: function (idx) {
 
         return appManager.getGameState().getRoundsBundles(idx);
+
+    },
+
+    renderUnlocked: function () {
+
+        var slideGameState = this.getSlideGameState(this.state.slideIndex);
+
+        var progressBar = {
+            width: (slideGameState.roundsComplete / this.state.slideData.rounds.length * 6.250) + "rem"
+        };
+
+        var playImg = {
+            backgroundImage: "url('" + this.getImagePath('slide/play') + "')"
+        };
+
+        return (
+
+            <div>
+
+                <div className="rounds-complete">
+                    <div className="stats">{slideGameState.roundsComplete}/{this.state.slideData.rounds.length}</div>
+                    <div className="progress-bar">
+                        <div className="panel">
+                        </div>
+                        <div className="fill" style={progressBar}>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="play" style={playImg}></div>
+
+                <div className="score">{i18n._('slide.score')} {slideGameState.bundleScore}</div>
+
+            </div>
+
+        );
 
     },
 
@@ -77,6 +114,8 @@ var SlideClass = Object.assign({}, {}, {
             <div className={slideClasses} style={slideStyle} onClick={this.onClick}>
 
                 <div className="slide-title">{slideTitle}</div>
+
+                {this.renderUnlocked()}
 
             </div>
 
@@ -136,20 +175,20 @@ var SlideClassOld = Object.assign({}, {}, {
             //playImgPath: PLAY_IMG_PATH,
             //roundsComplete: 1,
             //roundsTotal: this.props.slideData.rounds.length || 1,
-            
+
             slideData: this.props.slideData || {},
             //slideIndex: this.props.slideIndex || 0,
-            
+
             //slideNumber: this.props.slideIndex + 1 || 1,
             slideScore: SLIDE_SCORE || 0
-        
+
         };
 
         //unpack slideData
         var slideData = this.getSlideData(state.slideIndex);
 
         //set isUnlocked
-        state.isUnlocked = slideData && slideData.isUnlocked ?  true : false;
+        state.isUnlocked = slideData && slideData.isUnlocked ? true : false;
 
         //set layout
         if (state.isUnlocked) {
@@ -160,8 +199,7 @@ var SlideClassOld = Object.assign({}, {}, {
             state.layout = LAYOUT_INSTRUCTIONS;
         }
 
-        
-        
+
         return state;
     },
 
@@ -213,7 +251,7 @@ var SlideClassOld = Object.assign({}, {}, {
 
         this.onClickEffect(e);
 
-        this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions() ;
+        this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions();
 
     },
 
@@ -349,14 +387,13 @@ var SlideClassOld = Object.assign({}, {}, {
             return this.renderInstructions();
         }
 
-        return this.state.isUnlocked ? this.renderUnlocked() : this.renderLocked() ;
+        return this.state.isUnlocked ? this.renderUnlocked() : this.renderLocked();
 
     },
-    
+
     renderNew: function () {
-        
-        
-        
+
+
     }
 
 });
