@@ -14,10 +14,7 @@ var CoinsCounter = require('./../component/app.counter').CoinsCounter;
 
 var Swiper = require('./../component/app.swiper').Swiper;
 var Navigation = require('./../component/app.menu').Navigation;
-var SwitchButton = require('./../libs/react-switch-button');
-
-
-var AD_SWITCH = "ad_switch";
+var AdSwitch = require('./../libs/react-switch-button');
 
 
 var PageMain = Object.assign({}, {}, {
@@ -76,8 +73,7 @@ var PageMain = Object.assign({}, {}, {
                     </div>
 
                     <div className="footer">
-                        <div className="text">{i18n._('switch.ad')}</div>
-                        <SwitchButton id={AD_SWITCH} defaultChecked="checked"/>
+                        <AdSwitch defaultChecked="checked" label={i18n._('switch.ad')}/>
                     </div>
 
                 </div>

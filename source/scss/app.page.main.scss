@@ -93,7 +93,6 @@
           cursor: pointer;
           padding: 0;
 
-
           position: absolute;
           width: 100%;
           text-align: center;
@@ -216,99 +215,97 @@
   //padding: 0.300rem 0;
   //padding: auto 0;
 
-  .text {
+
+  .rsbc-switch-button {
+    //height: 1.500rem*$footerSwitch-size;
+    //line-height: 1.500rem*$footerSwitch-size;
+    line-height: 3.125rem;
+    display: inline-block;
+    vertical-align: middle;
+    //position: relative;
+  }
+
+  .rsbc-switch-button label {
+    cursor: pointer;
     display: inline-block;
     color: $footerLabel-color;
     font-size: $footerLabel-font-size;
-    //cursor: pointer;
     //height: 1.500rem*$footerLabelFont-size;
     //line-height: 1.500rem*$footerLabelFont-size;
     line-height: 3.125rem;
     vertical-align: middle;
-    margin-right: 1rem;
-    //padding: 0;
-
-    //span {
-    //  display: block;
-    //  height: 1.5rem;
-    //  padding-top: 0.15rem;
-    //  line-height: 1.5rem;
-    //  //vertical-align: bottom;
-    //}
+    //margin-right: 1rem;
+    //padding-bottom: 1rem;
   }
 
-  //.rsbc-switch-button {
-  //  //height: 1.500rem*$footerSwitch-size;
-  //  //line-height: 1.500rem*$footerSwitch-size;
-  //  line-height: 3.125rem;
-  //  display: inline-block;
-  //  vertical-align: middle;
-  //}
-  //
-  //.rsbc-switch-button input[type="checkbox"] {
-  //  margin-left: -624.938rem*$footerSwitch-size;
-  //}
-  //
-  //.rsbc-switch-button > label:first-child {
-  //  min-width: 0;
-  //  margin: 0 0.750rem 0 0
-  //}
-  //
-  //.rsbc-switch-button label + label {
-  //  /*margin-left: 0.375rem*$footerSwitch-size*/
-  //}
-  //
-  //.rsbc-switch-button input[type="checkbox"] + label {
-  //
-  //}
-  //
-  //.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
-  //  padding: 0.125rem*$footerSwitch-size;
-  //  width: 3.000rem*$footerSwitch-size;
-  //  height: 1.500rem*$footerSwitch-size;
-  //  //line-height: 1.500rem*$footerSwitch-size;
-  //  //line-height: 2.1875rem;
-  //  /*background-color: #eee;*/
-  //  -webkit-border-radius: 3.750rem*$footerSwitch-size;
-  //  -moz-border-radius: 3.750rem*$footerSwitch-size;
-  //  border-radius: 3.750rem*$footerSwitch-size;
-  //}
-  //
-  //.rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
-  //  /*background-color: #6f6f6f*/
-  //}
-  //
-  //.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
-  //
-  //}
-  //
-  //.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
-  //  top: 0.125rem*$footerSwitch-size;
-  //  left: 0.125rem*$footerSwitch-size;
-  //  bottom: 0.125rem*$footerSwitch-size;
-  //  right: 0.125rem*$footerSwitch-size;
-  //  -webkit-border-radius: 3.750rem*$footerSwitch-size;
-  //  -moz-border-radius: 3.750rem*$footerSwitch-size;
-  //  border-radius: 3.750rem*$footerSwitch-size;
-  //}
-  //
-  //.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
-  //  top: 0.250rem*$footerSwitch-size;
-  //  left: 0.250rem*$footerSwitch-size;
-  //  bottom: 0.250rem*$footerSwitch-size;
-  //  width: 1.000rem*$footerSwitch-size;
-  //  -webkit-border-radius: 3.250rem*$footerSwitch-size;
-  //  -moz-border-radius: 3.250rem*$footerSwitch-size;
-  //  border-radius: 3.250rem*$footerSwitch-size;
-  //}
-  //
-  //.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
-  //  background-color: $footerSwitchBorderOn-bg-color;
-  //}
-  //
-  //.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
-  //  margin-left: 1.500rem*$footerSwitch-size;
-  //  background-color: $footerSwitchCircleOn-bg-color;
-  //}
+  .rsbc-switch-button input[type="checkbox"] {
+    margin-left: -624.938rem*$footerSwitch-size;
+  }
+
+  .rsbc-switch-button > label:first-child {
+    min-width: 0;
+    margin: 0 0.750rem 0 0
+  }
+
+  .rsbc-switch-button label + label {
+    /*margin-left: 0.375rem*$footerSwitch-size*/
+  }
+
+  .rsbc-switch-button input[type="checkbox"] + label {
+
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
+    padding: 0.125rem*$footerSwitch-size;
+    width: 3.000rem*$footerSwitch-size;
+    height: 1.510rem*$footerSwitch-size;
+    //line-height: 1.500rem*$footerSwitch-size;
+    //line-height: 2.1875rem;
+    /*background-color: #eee;*/
+    -webkit-border-radius: 3.750rem*$footerSwitch-size;
+    -moz-border-radius: 3.750rem*$footerSwitch-size;
+    border-radius: 3.750rem*$footerSwitch-size;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
+    //background-color: #6f6f6f;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
+    top: 0.125rem*$footerSwitch-size;
+    left: 0.125rem*$footerSwitch-size;
+    bottom: 0.125rem*$footerSwitch-size;
+    right: 0.125rem*$footerSwitch-size;
+    -webkit-border-radius: 3.750rem*$footerSwitch-size;
+    -moz-border-radius: 3.750rem*$footerSwitch-size;
+    border-radius: 3.750rem*$footerSwitch-size;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+    top: 0.250rem*$footerSwitch-size;
+    left: 0.250rem*$footerSwitch-size;
+    bottom: 0.250rem*$footerSwitch-size;
+    width: 1.000rem*$footerSwitch-size;
+    -webkit-border-radius: 3.250rem*$footerSwitch-size;
+    -moz-border-radius: 3.250rem*$footerSwitch-size;
+    border-radius: 3.250rem*$footerSwitch-size;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
+    background-color: $footerSwitchBorderOn-bg-color;
+    //position: relative;
+    //position: absolute;
+    //content: 'ON';
+    //color: #000011;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
+    margin-left: 1.500rem*$footerSwitch-size;
+    background-color: $footerSwitchCircleOn-bg-color;
+  }
 
 }

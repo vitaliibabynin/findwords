@@ -64,9 +64,9 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <div className="helpers">
-                        <Helper className="open-word"></Helper>
-                        <Helper className="open-letter"></Helper>
-                        <Helper className="show-word"></Helper>
+                        <div className="open-word"></div>
+                        <div className="open-letter"></div>
+                        <div className="show-word"></div>
                     </div>
 
                     <div className="game">
