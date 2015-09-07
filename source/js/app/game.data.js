@@ -1,6 +1,6 @@
 var gameData = {
     roundsBundles: [{
-        name: {ru: "Комплект №1", en: "Set #1"},
+        name: {ru: "Комплект №1 Гаврюша", en: "Set #1 Gavryusha"},
         numberOfRoundsRequired: 2,
         backgroundColor: "#d64541",
         rounds: [
@@ -19,7 +19,7 @@ var gameData = {
         ]
         },
         {
-        name: {ru: "Комплект №2", en: "Set #2"},
+        name: {ru: "Комплект №2 Гаврюша", en: "Set #2 Gavryusha"},
         numberOfRoundsRequired: 2,
         backgroundColor: "#0000ff",
         rounds: [

@@ -18,10 +18,10 @@ var GameState = Object.assign({}, {}, {
         },
         roundsBundles: {
             0: {
-                isUnLocked: false
+                isUnlocked: true
             },
             1: {
-                isUnLocked: true
+                isUnlocked: false
             }
         }
 

@@ -1,32 +1,20 @@
-/** @jsx React.DOM */
 "use strict";
 
+var classNames = require('classnames');
 var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
-var classNames = require('classnames');
 var libSwiper = require('./../../../app/libs/swiper.jquery');
 
 module.exports = {};
 
-var SLIDE_LAYOUT_LOCKED = "locked";
-var SLIDE_LAYOUT_INSTRUCTIONS = "instructions";
-var SLIDE_LAYOUT_UNLOCKED = "unlocked";
-
+var LAYOUT_LOCKED = 'locked';
+var LAYOUT_UNLOCKED = 'unlocked';
 
 var SlideClass = Object.assign({}, {}, {
 
     mixins: [GameMixin],
 
     propTypes: {
-
-        className: React.PropTypes.string,
-        instructions: React.PropTypes.bool,
-        isActive: React.PropTypes.bool,
-        isLocked: React.PropTypes.bool,
-        lockImgPath: React.PropTypes.string,
-        playerName: React.PropTypes.string,
-        playImgPath: React.PropTypes.string,
-        roundsComplete: React.PropTypes.number,
 
         slideData: React.PropTypes.shape({
             backgroundColor: React.PropTypes.string,
@@ -38,49 +26,148 @@ var SlideClass = Object.assign({}, {}, {
             rounds: React.PropTypes.arrayOf(React.PropTypes.object)
         }),
 
-        slideIndex: React.PropTypes.number,
-        slideNumber: React.PropTypes.number,
-        slideScore: React.PropTypes.number
+        slideIndex: React.PropTypes.number
 
     },
 
     getInitialState: function () {
 
         var state = {
-            //backgroundColor: this.props.slideData.backgroundColor || "#0000ff",
-            //className: this.props.className || "swiper-slide",
-            //instructions: this.props.instructions || false,
-            //isActive: this.props.isActive || false,
-            //isLocked: this.props.isLocked || true,
-            //lockImgPath: this.props.imgPath || 'slide/lock',
-            //playerName: this.props.playerName || i18n._('playerName'),
-            //playImgPath: this.props.imgPath || 'slide/play',
-            //roundsComplete: this.props.roundsComplete || 1,
-            //roundsTotal: this.props.slideData.rounds.length || 1,
-            //slideData: this.props.slideData,
-            //slideIndex: this.props.slideIndex || 0,
-            //slideNumber: this.props.slideNumber || this.props.slideIndex + 1 || 0,
-            //slideScore: this.props.slideScore || 999999,
-            //titleEn: this.props.slideData.name.en,
-            //titleRu: this.props.slideData.name.ru,
-            //
-            slideData: this.props.slideData,
+
+            slideData: this.props.slideData || {},
             slideIndex: this.props.slideIndex || 0
+
         };
 
-        var slideData = this.getSlideData(state.slideIndex);
-        state.isLocked = !slideData || !slideData.isUnLocked ?  true : false
+        var slideGameState = this.getStateSlideGameState(state.slideIndex);
+        state.isUnlocked = slideGameState && slideGameState.isUnlocked ?  true : false;
+        state.layout = state.isUnlocked ? LAYOUT_UNLOCKED : LAYOUT_LOCKED;
 
+        return state;
+
+    },
+
+    getStateSlideGameState: function (idx) {
+
+        return appManager.getGameState().getRoundsBundles(idx);
+
+    },
+
+    render: function () {
+
+        var slideClasses = classNames(
+            'swiper-slide',
+            this.state.layout,
+            {'hover': this.state.isActive}
+        );
+
+        var slideStyle = {
+            backgroundColor: this.state.slideData.backgroundColor
+        };
+
+        var slideTitle;
+        if (router.getLanguage() == "ru") {
+            slideTitle = this.state.slideData.name.ru;
+        } else if (router.getLanguage() == "en") {
+            slideTitle = this.state.slideData.name.en;
+        }
+
+        return (
+
+            <div className={slideClasses} style={slideStyle} onClick={this.onClick}>
+
+                <div className="slide-title">{slideTitle}</div>
+
+            </div>
+
+        )
+
+    }
+
+
+});
+var Slide = React.createClass(SlideClass);
+
+
+var CLASSNAME = "swiper-slide";
+var LAYOUT_INSTRUCTIONS = 'instructions';
+
+var LOCK_IMG_PATH = 'slide/lock';
+var PLAYER_NAME = i18n._('playerName');
+var PLAY_IMG_PATH = 'slide/play';
+var ROUNDS_COMPLETE = 1;
+var SLIDE_SCORE = 999999;
+
+var SlideClassOld = Object.assign({}, {}, {
+
+    mixins: [GameMixin],
+
+    propTypes: {
+
+        slideData: React.PropTypes.shape({
+            backgroundColor: React.PropTypes.string,
+            name: React.PropTypes.shape({
+                en: React.PropTypes.string,
+                ru: React.PropTypes.string
+            }),
+            numberOfRoundsRequired: React.PropTypes.number,
+            rounds: React.PropTypes.arrayOf(React.PropTypes.object)
+        }),
+
+        slideIndex: React.PropTypes.number
+
+    },
+
+    getInitialState: function () {
+
+        var state = {
+
+            //Оставил то что будет менятся
+
+
+            //backgroundColor: this.props.slideData.backgroundColor || "#0000ff",
+            //className: CLASSNAME || "swiper-slide",
+            instructions: false,
+            isActive: false,
+            //isUnlocked: false,
+            //layout: LAYOUT_LOCKED,
+            //lockImgPath: LOCK_IMG_PATH,
+            //playerName: PLAYER_NAME,
+            //playImgPath: PLAY_IMG_PATH,
+            //roundsComplete: 1,
+            //roundsTotal: this.props.slideData.rounds.length || 1,
+            
+            slideData: this.props.slideData || {},
+            //slideIndex: this.props.slideIndex || 0,
+            
+            //slideNumber: this.props.slideIndex + 1 || 1,
+            slideScore: SLIDE_SCORE || 0
+        
+        };
+
+        //unpack slideData
+        var slideData = this.getSlideData(state.slideIndex);
+
+        //set isUnlocked
+        state.isUnlocked = slideData && slideData.isUnlocked ?  true : false;
+
+        //set layout
+        if (state.isUnlocked) {
+            state.layout = LAYOUT_UNLOCKED;
+        } else if (!state.isUnlocked) {
+            state.layout = LAYOUT_LOCKED;
+        } else if (!state.isUnlocked && state.instructions) {
+            state.layout = LAYOUT_INSTRUCTIONS;
+        }
+
+        
+        
         return state;
     },
 
     getSlideData: function (idx) {
 
         return appManager.getGameState().getRoundsBundles(idx);
-
-    },
-
-    componentWillMount: function () {
 
     },
 
@@ -106,12 +193,8 @@ var SlideClass = Object.assign({}, {}, {
 
     onClickInstructions: function () {
 
-        if (!this.state.isLocked) {
-            return false;
-        }
-
         var state = {
-            instructions: this.state.instructions ? false: true
+            instructions: this.state.instructions ? false : true
         };
 
         this.setState(state);
@@ -121,14 +204,16 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     onClickGame: function () {
+
         router.navigate("game", "main");
+
     },
 
     onClick: function (e) {
 
         this.onClickEffect(e);
 
-        this.state.isLocked ? this.onClickInstructions(): this.onClickGame() ;
+        this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions() ;
 
     },
 
@@ -140,9 +225,8 @@ var SlideClass = Object.assign({}, {}, {
 
         var slideClasses = classNames(
             this.state.className,
-            this.props.className,
             'locked',
-            {'hover': this.state.isActive || this.props.isActive}
+            {'hover': this.state.isActive}
         );
 
         var style = {
@@ -151,9 +235,9 @@ var SlideClass = Object.assign({}, {}, {
 
         var title;
         if (router.getLanguage() == "ru") {
-            title = this.state.titleRu;
+            title = this.state.slideData.name.ru;
         } else if (router.getLanguage() == "en") {
-            title = this.state.titleEn;
+            title = this.state.slideData.name.en;
         }
 
         return (
@@ -175,20 +259,19 @@ var SlideClass = Object.assign({}, {}, {
 
         var slideClasses = classNames(
             this.state.className,
-            this.props.className,
             'instructions',
-            {'hover': this.state.isActive || this.props.isActive}
+            {'hover': this.state.isActive}
         );
 
         var style = {
-            backgroundColor: this.state.backgroundColor
+            backgroundColor: this.state.slideData.backgroundColor
         };
 
         var title;
         if (router.getLanguage() == "ru") {
-            title = this.state.titleRu;
+            title = this.state.slideData.name.ru;
         } else if (router.getLanguage() == "en") {
-            title = this.state.titleEn;
+            title = this.state.slideData.name.en;
         }
 
         return (
@@ -218,9 +301,8 @@ var SlideClass = Object.assign({}, {}, {
 
         var slideClasses = classNames(
             this.state.className,
-            this.props.className,
             'unlocked',
-            {'hover': this.state.isActive || this.props.isActive}
+            {'hover': this.state.isActive}
         );
 
         var style = {
@@ -229,9 +311,9 @@ var SlideClass = Object.assign({}, {}, {
 
         var title;
         if (router.getLanguage() == "ru") {
-            title = this.state.titleRu;
+            title = this.state.slideData.name.ru;
         } else if (router.getLanguage() == "en") {
-            title = this.state.titleEn;
+            title = this.state.slideData.name.en;
         }
 
         return (
@@ -267,17 +349,19 @@ var SlideClass = Object.assign({}, {}, {
             return this.renderInstructions();
         }
 
-        return this.state.isLocked ? this.renderLocked(): this.renderUnlocked();
+        return this.state.isUnlocked ? this.renderUnlocked() : this.renderLocked() ;
 
+    },
+    
+    renderNew: function () {
+        
+        
+        
     }
 
 });
-var Slide = React.createClass(SlideClass);
-
 
 var SwiperClass = Object.assign({}, {}, {
-
-    mixins: [GameMixin],
 
     componentDidMount: function () {
 
