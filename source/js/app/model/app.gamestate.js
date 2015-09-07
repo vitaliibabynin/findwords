@@ -79,7 +79,7 @@ var GameState = Object.assign({}, {}, {
 
     getRoundsBundles: function (bundleIndex) {
 
-        if (!bundleIndex) {
+        if (bundleIndex == 'undefined') {
             return this.gameState.roundsBundles;
         }
 
