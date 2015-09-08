@@ -1,51 +1,41 @@
-/** @jsx React.DOM */
 "use strict";
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
-var GameMixin = require('./../component/app.mixin').GameMixin;
+
+
+//var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 
-var IconButton = require('./../component/app.button').IconButton;
-var ScoreCounter = require('./../component/app.counter').ScoreCounter;
-var CoinsCounter = require('./../component/app.counter').CoinsCounter;
-
-var Button = require('./../component/app.button').Button;
+var Counters = require('./../component/app.counters').Counters;
 
 
 var PageGameMain = Object.assign({}, {}, {
-    mixins: [PureRenderMixin, GameMixin],
+
+    //mixins: [GameMixin],
     displayName: 'PageGameMain',
 
-    getInitialState: function(){
-
-        var state = {
-
-            backArrowImg: "plus",
-            roundIdx: router.getParam('roundidx') || 0
-
-        };
-
-        return state;
-    },
-
-    componentDidMount: function() {
-
-    },
-
-    componentDidUpdate: function(prevProps, prevState) {
-
-    },
-
-    componentWillUnmount: function() {
-
-    },
-
-    onButtonClick: function(buttonProps){
-
-        router.navigate("main", "index");
-
-    },
+    //getInitialState: function(){
+    //
+    //    var state = {
+    //
+    //        //roundIdx: router.getParam('roundidx') || 0
+    //
+    //    };
+    //
+    //    return state;
+    //},
+    //
+    //componentDidMount: function() {
+    //
+    //},
+    //
+    //componentDidUpdate: function(prevProps, prevState) {
+    //
+    //},
+    //
+    //componentWillUnmount: function() {
+    //
+    //},
 
     render: function() {
 
@@ -53,17 +43,13 @@ var PageGameMain = Object.assign({}, {}, {
             <div className="page-main">
                 <div className="page-content">
 
-                    <div className="counters">
-                        <IconButton className="back-arrow" icon={this.state.backArrowImg} onClick={this.onButtonClick} />
-                        <ScoreCounter value={appManager.getGameState().getScore()} />
-                        <CoinsCounter value={appManager.getGameState().getCoins()} />
-                    </div>
+                    <Counters isDisplayBackButton={true} />
 
                     <div className="timer">
 
                     </div>
 
-                    <div className="helpers">
+                    <div className="chips">
                         <div className="open-word"></div>
                         <div className="open-letter"></div>
                         <div className="show-word"></div>

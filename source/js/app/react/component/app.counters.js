@@ -1,12 +1,14 @@
-/** @jsx React.DOM */
 "use strict";
+
 
 var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 var IconButton = require('./app.button').IconButton;
 
+
 module.exports = {};
+
 
 var CounterClass = Object.assign({}, {}, {
 
@@ -80,8 +82,10 @@ var CounterClass = Object.assign({}, {}, {
 
     }
 });
-module.exports.Counter = React.createClass(CounterClass);
-module.exports.Counter.Class = CounterClass;
+//module.exports.Counter = React.createClass(CounterClass);
+//module.exports.Counter.Class = CounterClass;
+//var Slide = React.createClass(SlideClass);
+//var Counter = React.createClass(CounterClass);
 
 
 var ScoreCounterClass = Object.assign({}, CounterClass, {
@@ -98,8 +102,10 @@ var ScoreCounterClass = Object.assign({}, CounterClass, {
     }
 
 });
-module.exports.ScoreCounter = React.createClass(ScoreCounterClass);
-module.exports.ScoreCounter.Class = ScoreCounterClass;
+//module.exports.ScoreCounter = React.createClass(ScoreCounterClass);
+//module.exports.ScoreCounter.Class = ScoreCounterClass;
+var ScoreCounter = React.createClass(ScoreCounterClass);
+
 
 var CoinsCounterClass = Object.assign({}, CounterClass, {
 
@@ -115,5 +121,83 @@ var CoinsCounterClass = Object.assign({}, CounterClass, {
     }
 
 });
-module.exports.CoinsCounter = React.createClass(CoinsCounterClass);
-module.exports.CoinsCounter.Class = CoinsCounterClass;
+//module.exports.CoinsCounter = React.createClass(CoinsCounterClass);
+//module.exports.CoinsCounter.Class = CoinsCounterClass;
+var CoinsCounter = React.createClass(CoinsCounterClass);
+
+
+var BackButtonClass = Object.assign({}, {}, {
+
+    mixins: [GameMixin],
+
+    onButtonClick: function(){
+
+        router.navigate("main", "index");
+
+    },
+
+    render: function () {
+
+        var backButtonImg = 'plus';
+
+        return (
+
+            <IconButton className="back-arrow" icon={backButtonImg} onClick={this.onButtonClick} />
+
+        );
+
+    }
+
+});
+//module.exports.Counter = React.createClass(CounterClass);
+//module.exports.Counter.Class = CounterClass;
+//var Slide = React.createClass(SlideClass);
+var BackButton = React.createClass(BackButtonClass);
+
+
+var CountersClass = Object.assign({}, {}, {
+
+    propTypes: {
+
+        isDisplayBackButton: React.PropTypes.bool
+
+    },
+
+    getInitialState: function () {
+
+        var state = {
+
+            isDisplayBackButton: this.props.isDisplayBackButton || false
+
+        };
+
+        return state;
+
+    },
+
+    showBackButton: function () {
+
+        if (this.state.isDisplayBackButton) {
+            return (
+                <BackButton />
+            );
+        }
+
+    },
+
+    render: function () {
+
+        return (
+
+            <div className="counters">
+                {this.showBackButton()}
+                <ScoreCounter value={appManager.getGameState().getScore()} />
+                <CoinsCounter value={appManager.getGameState().getCoins()} />
+            </div>
+
+        );
+
+    }
+});
+module.exports.Counters = React.createClass(CountersClass);
+module.exports.Counters.Class = CountersClass;

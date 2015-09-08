@@ -1,17 +1,15 @@
 "use strict";
 
 
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
+//var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 
-var Button = require('./../component/app.button').Button;
+//var Button = require('./../component/app.button').Button;
 
-var ScoreCounter = require('./../component/app.counter').ScoreCounter;
-var CoinsCounter = require('./../component/app.counter').CoinsCounter;
-
+var Counters = require('./../component/app.counters').Counters;
 var Swiper = require('./../component/app.swiper').Swiper;
 var Navigation = require('./../component/app.menu').Navigation;
 var AdSwitch = require('./../libs/react-switch-button');
@@ -19,30 +17,34 @@ var AdSwitch = require('./../libs/react-switch-button');
 
 var PageMain = Object.assign({}, {}, {
 
-    mixins: [PureRenderMixin, GameMixin],
+    mixins: [
+        //PureRenderMixin,
+        GameMixin
+    ],
+
     displayName: 'PageMain',
 
-    swiper: null,
+    //swiper: null,
 
-    getInitialState: function () {
-
-        var state = {};
-
-        return state;
-
-    },
-
-    componentDidMount: function () {
-
-    },
-
-    componentDidUpdate: function (prevProps, prevState) {
-
-    },
-
-    componentWillUnmount: function () {
-
-    },
+    //getInitialState: function () {
+    //
+    //    var state = {};
+    //
+    //    return state;
+    //
+    //},
+    //
+    //componentDidMount: function () {
+    //
+    //},
+    //
+    //componentDidUpdate: function (prevProps, prevState) {
+    //
+    //},
+    //
+    //componentWillUnmount: function () {
+    //
+    //},
 
     render: function () {
         var headImgName = "head/head_img_" + router.getLanguage();
@@ -62,10 +64,7 @@ var PageMain = Object.assign({}, {}, {
                          style={headStyle}>
                     </div>
 
-                    <div className="counters">
-                        <ScoreCounter value={appManager.getGameState().getScore()}/>
-                        <CoinsCounter value={appManager.getGameState().getCoins()}/>
-                    </div>
+                    <Counters />
 
                     <div className="main">
                         <Swiper />
