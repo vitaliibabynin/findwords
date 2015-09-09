@@ -30,6 +30,7 @@ window.CONST = {
             'loadingscreen.message.pleasewait': 'Пожалуйста, подождите...',
             'loadingscreen.errorloading.message': 'Произошла ошибка во время загрузки приложения. Пожалуйста, проверьте подключение к интернету и повторите загрузку',
             'loadingscreen.errorloading.button.reload': 'Повторить загрузку',
+
             'language.ru': 'Русский',
             'language.en': 'English',
             'button.fb': 'кнопка FBButton',
@@ -45,12 +46,18 @@ window.CONST = {
             'button.languages': 'Языки',
             'button.music': 'Музыка',
             'button.sound': 'Звук',
+
+            'chip.open-word': 'Открыть слово',
+            'chip.open-letter': 'Открыть букву',
+            'chip.show-word': 'Показать слово',
+
             t: ''
         },
         en: {
             'loadingscreen.message.pleasewait': 'Please wait...',
             'loadingscreen.errorloading.message': 'An error has occurred loading this game. Please check your internet connection and try again.',
             'loadingscreen.errorloading.button.reload': 'Try again',
+
             'language.ru': 'Русский',
             'language.en': 'English',
             'button.fb': 'button FBButton',
@@ -66,6 +73,11 @@ window.CONST = {
             'button.languages': 'Language',
             'button.music': 'Music',
             'button.sound': 'Sound',
+
+            'chip.open-word': 'Open word',
+            'chip.open-letter': 'Open letter',
+            'chip.show-word': 'Show word',
+
             t: ''
         }
     },

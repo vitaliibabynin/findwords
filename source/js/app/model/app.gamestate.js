@@ -6,11 +6,12 @@ var GameState = Object.assign({}, {}, {
 
     gameState: {
 
-        coins: 0,
-        score: 0,
-        chips:{
-            word: 10,
-            word1: 0
+        coins: 99999,
+        score: 99999,
+        chips: {
+            openWord: 99999,
+            openLetter: 99999,
+            showWord: 99999
         },
         settings: {
             music: true,
@@ -18,12 +19,12 @@ var GameState = Object.assign({}, {}, {
         },
         roundsBundles: {
             0: {
-                bundleScore: 999999,
+                bundleScore: 99999,
                 isUnlocked: true,
                 roundsComplete: 1
             },
             1: {
-                bundleScore: 999999,
+                bundleScore: 99999,
                 isUnlocked: false,
                 roundsComplete: 2
             }
@@ -61,6 +62,11 @@ var GameState = Object.assign({}, {}, {
         this.gameState.roundsBundles[bundleIndex][field] = newValue;
     },
 
+    setChipsField: function (field, newValue) {
+        this.gameState.chips[field] = newValue;
+        this.saveGameState();
+    },
+
     getGameStateField: function (field, defaultValue) {
         if (!this.gameState || !this.gameState.hasOwnProperty(field)) {
             return defaultValue;
@@ -91,6 +97,14 @@ var GameState = Object.assign({}, {}, {
 
     },
 
+    getChipsField: function (field, defaultValue) {
+        if (!this.gameState.chips || !this.gameState.chips.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.chips[field];
+    },
+
     setScore: function (newNumber) {
         this.setGameStateField('score', newNumber)
     },
@@ -105,6 +119,15 @@ var GameState = Object.assign({}, {}, {
 
     setSound: function (newBoolean) {
         this.setSettingsField('sound', newBoolean);
+    },
+    setOpenWord: function (newNumber) {
+        this.setChipsField('openWord', newNumber);
+    },
+    setOpenLetter: function (newNumber) {
+        this.setChipsField('openLetter', newNumber);
+    },
+    setShowWord: function (newNumber) {
+        this.setChipsField('showWord', newNumber);
     },
 
     getScore: function () {
@@ -121,6 +144,15 @@ var GameState = Object.assign({}, {}, {
 
     getSound: function () {
         return this.getSettingsField('sound', true);
+    },
+    getOpenWord: function () {
+        return this.getChipsField('openWord', 0);
+    },
+    getOpenLetter: function () {
+        return this.getChipsField('openLetter', 0);
+    },
+    getShowWord: function () {
+        return this.getChipsField('showWord', 0);
     }
 
 });

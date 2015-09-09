@@ -82,10 +82,6 @@ var CounterClass = Object.assign({}, {}, {
 
     }
 });
-//module.exports.Counter = React.createClass(CounterClass);
-//module.exports.Counter.Class = CounterClass;
-//var Slide = React.createClass(SlideClass);
-//var Counter = React.createClass(CounterClass);
 
 
 var ScoreCounterClass = Object.assign({}, CounterClass, {
@@ -102,8 +98,6 @@ var ScoreCounterClass = Object.assign({}, CounterClass, {
     }
 
 });
-//module.exports.ScoreCounter = React.createClass(ScoreCounterClass);
-//module.exports.ScoreCounter.Class = ScoreCounterClass;
 var ScoreCounter = React.createClass(ScoreCounterClass);
 
 
@@ -121,8 +115,6 @@ var CoinsCounterClass = Object.assign({}, CounterClass, {
     }
 
 });
-//module.exports.CoinsCounter = React.createClass(CoinsCounterClass);
-//module.exports.CoinsCounter.Class = CoinsCounterClass;
 var CoinsCounter = React.createClass(CoinsCounterClass);
 
 
@@ -138,7 +130,7 @@ var BackButtonClass = Object.assign({}, {}, {
 
     render: function () {
 
-        var backButtonImg = 'plus';
+        var backButtonImg = 'btn_back';
 
         return (
 
@@ -149,9 +141,6 @@ var BackButtonClass = Object.assign({}, {}, {
     }
 
 });
-//module.exports.Counter = React.createClass(CounterClass);
-//module.exports.Counter.Class = CounterClass;
-//var Slide = React.createClass(SlideClass);
 var BackButton = React.createClass(BackButtonClass);
 
 

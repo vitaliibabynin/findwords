@@ -7,7 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
-
+var ChipButton = require('./../component/app.button').ChipButton;
 
 var PageGameMain = Object.assign({}, {}, {
 
@@ -40,7 +40,7 @@ var PageGameMain = Object.assign({}, {}, {
     render: function() {
 
         return (
-            <div className="page-main">
+            <div className="page-game">
                 <div className="page-content">
 
                     <Counters isDisplayBackButton={true} />
@@ -50,9 +50,9 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <div className="chips">
-                        <div className="open-word"></div>
-                        <div className="open-letter"></div>
-                        <div className="show-word"></div>
+                        <ChipButton className="open-word" value={appManager.getGameState().getOpenWord()} icon="open_word">{i18n._('chip.open-word')}</ChipButton>
+                        <ChipButton className="open-letter" value={appManager.getGameState().getOpenLetter()} icon="open_letter">{i18n._('chip.open-letter')}</ChipButton>
+                        <ChipButton className="show-word" value={appManager.getGameState().getShowWord()} icon="show_word">{i18n._('chip.show-word')}</ChipButton>
                     </div>
 
                     <div className="game">

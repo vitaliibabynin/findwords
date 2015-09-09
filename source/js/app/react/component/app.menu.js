@@ -5,7 +5,7 @@ var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 var IconButton = require('./app.button').IconButton;
-var FbButton = require('./app.button').FbButton;
+//var FbButton = require('./app.button').FbButton;
 
 module.exports = {};
 

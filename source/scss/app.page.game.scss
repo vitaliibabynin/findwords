@@ -1,12 +1,46 @@
-.page-game{
-    position: relative;
-    height: 100%;
-    background-color: $gamePage-bg-color;
-    width: 100%;
+.page-game {
+  position: relative;
+  height: 100%;
+  background-color: $gamePage-bg-color;
+  width: 100%;
 }
 
-.page-game > .page-content{
-    /*margin-top: 0rem;*/
-    height: 100%;
-    width: 100%;
+.page-game > .page-content {
+  /*margin-top: 0rem;*/
+  height: 100%;
+  width: 100%;
+
+  .chips {
+    margin: 0 auto;
+    height: 5rem;
+    width: 12rem;
+    color: white;
+
+    .btn.chip {
+      height: 5rem;
+      width: 4rem;
+      display: inline-block;
+      background-repeat: no-repeat;
+      background-position: right bottom;
+
+      .text {
+
+      }
+      .value {
+
+      }
+    }
+    .open-word {
+      background-color: $gamePage-chip-open-word-bg-color;
+      background-size: 1.3125rem 1.1875rem;
+    }
+    .open-letter {
+      background-color: $gamePage-chip-open-letter-bg-color;
+      background-size: 1.625rem 1.1875rem;
+    }
+    .show-word {
+      background-color: $gamePage-chip-show-word-bg-color;
+      background-size: 1.375rem 1.1875rem;
+    }
+  }
 }

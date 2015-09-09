@@ -1,13 +1,10 @@
 "use strict";
 
 
-//var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
-
-//var Button = require('./../component/app.button').Button;
 
 var Counters = require('./../component/app.counters').Counters;
 var Swiper = require('./../component/app.swiper').Swiper;
@@ -17,10 +14,7 @@ var AdSwitch = require('./../libs/react-switch-button');
 
 var PageMain = Object.assign({}, {}, {
 
-    mixins: [
-        //PureRenderMixin,
-        GameMixin
-    ],
+    mixins: [GameMixin],
 
     displayName: 'PageMain',
 
@@ -47,12 +41,11 @@ var PageMain = Object.assign({}, {}, {
     //},
 
     render: function () {
+
         var headImgName = "head/head_img_" + router.getLanguage();
         var headStyle = {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };
-
-        require('./../libs/react-switch-button');
 
         return (
 

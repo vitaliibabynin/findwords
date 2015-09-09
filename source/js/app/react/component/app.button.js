@@ -1,17 +1,23 @@
-/** @jsx React.DOM */
 "use strict";
+
 
 var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var Radium = require('radium');
 var classNames = require('classnames');
 
+
 module.exports = {};
 
 
 var ButtonClass = Object.assign({}, {}, Radium.wrap({
+
     displayName: 'Button',
     mixins: [GameMixin],
+
+    propTypes: {
+        className: React.PropTypes.string
+    },
 
     getInitialState: function () {
 
@@ -128,67 +134,132 @@ module.exports.IconButton = React.createClass(IconButtonClass);
 module.exports.IconButton.Class = IconButtonClass;
 
 
-var FbButtonClass = Object.assign({}, IconButtonClass, {
-    displayName: 'FbButton',
+var ChipButtonClass = Object.assign({}, ButtonClass, {
+
+    displayName: 'ChipButton',
+
+    propTypes: {
+
+        icon: React.PropTypes.string,
+        value: React.PropTypes.number
+
+    },
 
     getInitialState: function () {
-        var state = IconButtonClass.getInitialState.call(this);
-        state.className += ' fb';
+
+        var state = ButtonClass.getInitialState.call(this);
+        state.className += ' chip';
+        state.value = this.props.value || 0;
 
         return state;
+
+    },
+
+    componentDidUpdate: function (prevProps, prevState) {
+
+        if (prevProps.icon == this.props.icon || prevProps.value == this.props.value) {
+            return;
+        }
+
+        this.updateStyle(this.state.style);
+        this.setState({
+            style: this.state.style
+        });
+
     },
 
     getBackgoundImageName: function () {
+
         return this.props.icon;
+
     },
 
     render: function () {
-        return ButtonClass.render.call(this);
+
+        var buttonClasses = classNames(
+            this.state.className,
+            this.props.className,
+            {'hover': this.state.isActive || this.props.isActive}
+        );
+
+        return (
+
+            <div className={buttonClasses} style={this.state.style} onClick={this.onClick}
+                 dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
+                <div className="text">{this.props.children}</div>
+                <div className="value">{this.state.value}</div>
+            </div>
+
+        );
+
     }
+
 });
-module.exports.FbButton = React.createClass(FbButtonClass);
-module.exports.FbButton.Class = FbButtonClass;
+module.exports.ChipButton = React.createClass(ChipButtonClass);
+module.exports.ChipButton.Class = ChipButtonClass;
 
 
-var VkButtonClass = Object.assign({}, IconButtonClass, {
-    displayName: 'VkButton',
+//var FbButtonClass = Object.assign({}, IconButtonClass, {
+//    displayName: 'FbButton',
+//
+//    getInitialState: function () {
+//        var state = IconButtonClass.getInitialState.call(this);
+//        state.className += ' fb';
+//
+//        return state;
+//    },
+//
+//    getBackgoundImageName: function () {
+//        return this.props.icon;
+//    },
+//
+//    render: function () {
+//        return ButtonClass.render.call(this);
+//    }
+//});
+//module.exports.FbButton = React.createClass(FbButtonClass);
+//module.exports.FbButton.Class = FbButtonClass;
 
-    getInitialState: function () {
-        var state = IconButtonClass.getInitialState.call(this);
-        state.className += ' vk';
 
-        return state;
-    },
+//var VkButtonClass = Object.assign({}, IconButtonClass, {
+//    displayName: 'VkButton',
+//
+//    getInitialState: function () {
+//        var state = IconButtonClass.getInitialState.call(this);
+//        state.className += ' vk';
+//
+//        return state;
+//    },
+//
+//    getBackgoundImageName: function () {
+//        return 'vk';
+//    },
+//
+//    render: function () {
+//        return ButtonClass.render.call(this);
+//    }
+//});
+//module.exports.VkButton = React.createClass(VkButtonClass);
+//module.exports.VkButton.Class = VkButtonClass;
 
-    getBackgoundImageName: function () {
-        return 'vk';
-    },
 
-    render: function () {
-        return ButtonClass.render.call(this);
-    }
-});
-module.exports.VkButton = React.createClass(VkButtonClass);
-module.exports.VkButton.Class = VkButtonClass;
-
-
-var OkButtonClass = Object.assign({}, IconButtonClass, {
-    displayName: 'OkButton',
-
-    getInitialState: function () {
-        var state = IconButtonClass.getInitialState.call(this);
-        state.className += ' ok';
-
-        return state;
-    },
-
-    getBackgoundImageName: function () {
-        return 'ok';
-    },
-
-    render: function () {
-        return ButtonClass.render.call(this);
-    }
-});
-module.exports.OkButton = React.createClass(OkButtonClass);
-module.exports.OkButton.Class = OkButtonClass;
+//var OkButtonClass = Object.assign({}, IconButtonClass, {
+//    displayName: 'OkButton',
+//
+//    getInitialState: function () {
+//        var state = IconButtonClass.getInitialState.call(this);
+//        state.className += ' ok';
+//
+//        return state;
+//    },
+//
+//    getBackgoundImageName: function () {
+//        return 'ok';
+//    },
+//
+//    render: function () {
+//        return ButtonClass.render.call(this);
+//    }
+//});
+//module.exports.OkButton = React.createClass(OkButtonClass);
+//module.exports.OkButton.Class = OkButtonClass;
