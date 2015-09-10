@@ -13,6 +13,9 @@
   .timer {
     height: 1.625rem;
     background-color: $gamePage-timer-bg-color;
+    background-position: 2% 0.2rem, 33% 0.2rem, 63% 0.2rem, top 0.2rem right 2%;
+    background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem, 0.875rem 1rem;
+    background-repeat: no-repeat;
 
     .time-line {
       display: inline-block;

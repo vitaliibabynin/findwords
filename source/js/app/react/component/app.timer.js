@@ -9,22 +9,31 @@ var classNames = require('classnames');
 module.exports = {};
 
 
-var TimeLineClass = Object.assign({}, {}, {
+var TimerClass = Object.assign({}, {}, {
 
-    PropTypes: {
+    mixins: [GameMixin],
 
+    propTypes: {
+
+        isCountDownOn: React.PropTypes.bool,
         secondsRemaining: React.PropTypes.number
 
     },
 
     getInitialState: function () {
 
-        return {
+        var state = {
 
             isCountDownOn: false,
-            secondsRemaining: 0
+            secondsRemaining: this.props.secondsRemaining || 0
 
         };
+
+        if (this.props.isCountDownOn && this.props.secondsRemaining) {
+            state.isCountDownOn = true;
+        }
+
+        return state;
 
     },
 
@@ -40,14 +49,9 @@ var TimeLineClass = Object.assign({}, {}, {
 
     componentDidMount: function () {
 
-        if (this.props.secondsRemaining == 'undefined') {
+        if (!this.state.isCountDownOn) {
             return;
         }
-
-        this.setState({
-            isCountDownOn: true,
-            secondsRemaining: this.props.secondsRemaining
-        });
 
         this.interval = setInterval(this.tick, 1000);
 
@@ -61,6 +65,25 @@ var TimeLineClass = Object.assign({}, {}, {
 
     render: function () {
 
+        var starOneThird = this.getImagePath('timer/star_on');
+        var starTwoThirds = this.getImagePath('timer/star_on');
+        var starBase = this.getImagePath('timer/star_on');
+        var timerImg = this.getImagePath('timer/timer');
+
+        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 66.6) {
+            starTwoThirds = this.getImagePath('timer/star_off');
+        }
+
+        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 33.3) {
+            starOneThird = this.getImagePath('timer/star_off');
+        }
+
+        var timerImages = {
+
+            backgroundImage: "url('" + starBase + "'), url('" + starOneThird + "'), url('" + starTwoThirds + "'), url('" + timerImg + "')"
+
+        };
+
         var timeLine = {
             width: (
                 this.state.isCountDownOn ?
@@ -70,54 +93,19 @@ var TimeLineClass = Object.assign({}, {}, {
 
         return (
 
-            <div className="time-line">
-                <div className="panel"></div>
-                <div className="fill" style={timeLine}></div>
-            </div>
+            <div className="timer" style={timerImages}>
 
-        );
-    }
+                <div className="time-line">
 
-});
-var TimeLine = React.createClass(TimeLineClass);
+                    <div className="panel"></div>
 
+                    <div className="fill" style={timeLine}></div>
 
-var TimerClass = Object.assign({}, {}, {
-
-    mixins: [GameMixin],
-
-    propTypes: {
-
-        timeAvailable: React.PropTypes.number,
-        isCountDownOn: React.PropTypes.bool
-
-    },
-
-    getInitialState: function () {
-
-        var state = {
-
-            timeAvailable: this.props.timeAvailable || 0,
-            isCountDownOn: this.props.isCountDownOn || false
-
-        };
-
-        return state;
-
-    },
-
-    render: function () {
-
-        return (
-
-            <div className="timer">
-
-                <TimeLine secondsRemaining={this.state.isCountDownOn ? this.state.timeAvailable : 'undefined'}/>
+                </div>
 
             </div>
 
         );
-
     }
 
 });
