@@ -121,6 +121,7 @@ html.android {
 }
 
 .btn {
+  cursor: pointer;
   //height: 3.125rem;
   //width: 3.438rem;
   //display: inline-block;
@@ -130,7 +131,6 @@ html.android {
   //font-size: 0.6rem;
   //margin-left: auto;
   //margin-right: auto;
-  //cursor: pointer;
   //padding-top: 2.175rem;
 }
 
@@ -168,25 +168,11 @@ html.desktop .btn:hover,
   font-size: 0.6rem;
   margin-left: auto;
   margin-right: auto;
-  cursor: pointer;
   padding-top: 2.175rem;
   background-size: auto;
   background-repeat: no-repeat;
   background-position: center top;
 }
-
-.btn.chip {
-
-}
-//.btn.fb{
-//    background-color: #3C5A96;
-//}
-//.btn.vk{
-//    background-color: #54769a;
-//}
-//.btn.ok{
-//    background-color: #fa8423;
-//}
 
 /** Loading Screen **/
 .pg-loading-screen .pg-loading-html {
@@ -236,15 +222,14 @@ html.desktop .btn:hover,
   }
 }
 
-/*
-@media screen and (min-width: 640px) and (max-width: 767px) and (orientation: portrait){
-    html{
-        font-size: 23px;
-    }
-}
-@media screen and (min-width: 480px) and (max-width: 639px) and (orientation: portrait){
-    html{
-        font-size: 20px;
-    }
-}
-*/
+
+//@media screen and (min-width: 640px) and (max-width: 767px) and (orientation: portrait){
+//    html{
+//        font-size: 23px;
+//    }
+//}
+//@media screen and (min-width: 480px) and (max-width: 639px) and (orientation: portrait){
+//    html{
+//        font-size: 20px;
+//    }
+//}

@@ -61,7 +61,7 @@ window.CONST = {
             'language.ru': 'Русский',
             'language.en': 'English',
             'button.fb': 'button FBButton',
-            'switch.ad':'Adverts',
+            'switch.ad':'Advertising',
             'slide.score':'Score',
             'slide.instructions':'This set will unlock, once you complete all previous sets',
             'slide.buy':'Unlock for 0,99$',
