@@ -12,22 +12,37 @@
 
   .chips {
     margin: 0 auto;
-    height: 5rem;
-    width: 12rem;
+    width: 16.875rem;
     color: #ffffff;
 
     .btn.chip {
-      height: 5rem;
-      width: 4rem;
+      position: relative;
+      height: 3.125rem;
+      width: 5.625rem;
       display: inline-block;
       background-repeat: no-repeat;
-      background-position: right bottom;
+      background-position: right 0.4rem bottom 0.25rem;
+      text-align: center;
+      line-height: 0.75rem;
+      font-size: 0.75rem;
 
       .text {
+        display: table;
+        height: 2rem;
+        width: inherit;
+        padding-left: 1rem;
+        padding-right: 1rem;
 
+        span {
+          display: table-cell;
+          vertical-align: middle;
+        }
       }
       .value {
-
+        width: 1.75rem;
+        position: absolute;
+        bottom: 0.4rem;
+        left: 0.6rem;
       }
     }
     .open-word {

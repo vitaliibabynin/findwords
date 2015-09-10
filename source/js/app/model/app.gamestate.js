@@ -9,8 +9,8 @@ var GameState = Object.assign({}, {}, {
         coins: 99999,
         score: 99999,
         chips: {
-            openWord: 99999,
-            openLetter: 99999,
+            openWord: 999,
+            openLetter: 9,
             showWord: 99999
         },
         settings: {
