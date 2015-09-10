@@ -110,17 +110,16 @@ var SlideClass = Object.assign({}, {}, {
 
     onClick: function (e) {
 
+
+
         if (e.id == BUY_SET_BUTTON_ID) {
-
             this.onClickBuySet();
-
-        } else {
-
-            this.onClickEffect(e);
-
-            this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions();
-
+            return;
         }
+
+        this.onClickEffect(e);
+
+        this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions();
 
     },
 

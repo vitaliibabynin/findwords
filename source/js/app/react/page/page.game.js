@@ -7,6 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
+var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
 
 var PageGameMain = Object.assign({}, {}, {
@@ -45,9 +46,7 @@ var PageGameMain = Object.assign({}, {}, {
 
                     <Counters isDisplayBackButton={true} />
 
-                    <div className="timer">
-
-                    </div>
+                    <Timer timeAvailable={60} isCountDownOn={true} />
 
                     <div className="chips">
                         <ChipButton className="open-word" value={appManager.getGameState().getOpenWord()} icon="open_word">
