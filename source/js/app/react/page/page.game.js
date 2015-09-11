@@ -4,11 +4,13 @@
 //var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
-var classNames = require('classnames');
+//var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
+var Board = require('./../component/app.board').Board;
+
 
 var PageGameMain = Object.assign({}, {}, {
 
@@ -60,9 +62,7 @@ var PageGameMain = Object.assign({}, {}, {
                         </ChipButton>
                     </div>
 
-                    <div className="game">
-
-                    </div>
+                    <Board />
 
                     <div className="ad">
 

@@ -100,4 +100,22 @@
       background-size: 1.375rem 1.1875rem;
     }
   }
+
+  .board {
+    border-collapse: collapse;
+    border: 0.0625rem solid black;
+    margin: auto;
+    background-color: white;
+    height: 17.5rem;
+    width: 17.5rem;
+    table-layout: fixed;
+
+    td {
+      text-align: center;
+      vertical-align: middle;
+      text-transform: uppercase;
+      overflow: hidden;
+      border: 0.0625rem solid black;
+    }
+  }
 }
