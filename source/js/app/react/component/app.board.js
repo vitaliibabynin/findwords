@@ -11,17 +11,15 @@ module.exports = {};
 var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
-        className: React.PropTypes.string,
-        backgroundColor: React.PropTypes.string,
-        letter: React.PropTypes.string
+        //key = [row, column]
+        key: React.PropTypes.arrayOf(React.PropTypes.number),
+        backgroundColor: React.PropTypes.string
     },
 
     getInitialState: function () {
 
         var state = {
-            className: this.props.className || "c?",
-            backgroundColor: this.props.backgroundColor || '#ffffff',
-            letter: this.props.letter || ""
+            backgroundColor: this.props.backgroundColor || "#ffffff"
         };
 
         return state;
@@ -35,7 +33,7 @@ var LetterClass = Object.assign({}, {}, {
         };
 
         return (
-            <td className={this.state.className} style={letterStyle}>{this.state.letter}</td>
+            <td style={letterStyle}>{this.props.children}</td>
         );
 
     }
@@ -46,107 +44,91 @@ var Letter = React.createClass(LetterClass);
 
 var BoardClass = Object.assign({}, {}, {
 
+    propTypes: {
+        letters: React.PropTypes.array,
+        backgroundColors: React.PropTypes.array
+    },
+
+    getInitialState: function () {
+        var state = {
+            letters: this.props.letters || [
+                ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
+                ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
+                ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
+                ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
+                ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
+                ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
+                ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
+                ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
+            ],
+            backgroundColors: this.props.backgroundColors || [
+                ['#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'brown'],
+                ['#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'brown'],
+                ['#e8e8e8', '#e8e8e8', '#e8e8e8', 'purple', 'purple', 'purple', 'purple', 'brown'],
+                ['green', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'purple', 'brown'],
+                ['green', 'green', 'red', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'purple', 'brown'],
+                ['orange', 'green', 'red', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'brown'],
+                ['orange', 'red', 'red', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'cyan', 'cyan'],
+                ['orange', 'orange', 'orange', 'orange', 'orange', 'cyan', 'cyan', 'cyan']
+            ]
+        };
+
+        return state;
+    },
+
+    getBackgroundColor: function (rid, cid) {
+
+        var backgroundColor = "#ffffff";
+
+        this.state.backgroundColors.map(function (br, brid) {
+            if (brid == rid) {
+                br.map(function (bc, bcid) {
+                    if (bcid == cid) {
+                        backgroundColor = bc;
+                    }
+                })
+            }
+        });
+
+        return backgroundColor;
+
+    },
+
     render: function () {
 
         return (
 
             <table className="board">
 
-                <tr className="r0">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="B"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
-                <tr className="r1">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
-                <tr className="r2">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
-                <tr className="r3">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
-                <tr className="r4">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
-                <tr className="r5">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
-                <tr className="r6">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
-                <tr className="r7">
-                    <Letter className="c0" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c1" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c2" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c3" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c4" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c5" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c6" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c7" backgroundColor="#ff00ff" letter="a"/>
-                    <Letter className="c8" backgroundColor="#ff00ff" letter="a"/>
-                </tr>
+                {this.state.letters.map(function (row, rid) {
+
+                    return (
+
+                        <tr>
+
+                            {row.map(function (cell, cid) {
+
+                                return (
+
+                                    <Letter key={[rid, cid]} backgroundColor={this.getBackgroundColor(rid, cid)}>
+                                        {cell}
+                                    </Letter>
+
+                                );
+
+                            }.bind(this))}
+
+                        </tr>
+
+                    );
+
+                }.bind(this))}
 
             </table>
 
         );
 
     }
-
 
 });
 module.exports.Board = React.createClass(BoardClass);

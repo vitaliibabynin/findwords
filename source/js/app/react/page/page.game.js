@@ -10,7 +10,7 @@ var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
 var Board = require('./../component/app.board').Board;
-
+//var GroceryList = require('./../component/app.sandbox').GroceryList;
 
 var PageGameMain = Object.assign({}, {}, {
 
