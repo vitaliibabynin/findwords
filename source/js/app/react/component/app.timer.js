@@ -93,7 +93,7 @@ var TimerClass = Object.assign({}, {}, {
 
         return (
 
-            <div className="timer" style={timerImages}>
+            <div className="timer">
 
                 <div className="time-line">
 
@@ -102,6 +102,8 @@ var TimerClass = Object.assign({}, {}, {
                     <div className="fill" style={timeLine}></div>
 
                 </div>
+
+                <div className="timer-images" style={timerImages}></div>
 
             </div>
 
