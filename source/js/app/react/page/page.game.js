@@ -10,7 +10,9 @@ var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
 var Board = require('./../component/app.board').Board;
-//var GroceryList = require('./../component/app.sandbox').GroceryList;
+var Parent = require('./../component/app.sandbox').Parent;
+var Child = require('./../component/app.sandbox').Child;
+
 
 var PageGameMain = Object.assign({}, {}, {
 
@@ -40,29 +42,34 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
 
-    render: function() {
+    render: function () {
 
         return (
             <div className="page-game">
                 <div className="page-content">
 
-                    <Counters isDisplayBackButton={true} />
+                    <Counters isDisplayBackButton={true}/>
 
-                    <Timer secondsRemaining={60} isCountDownOn={true} />
+                    <Timer secondsRemaining={60} isCountDownOn={false}/>
 
                     <div className="chips">
-                        <ChipButton className="open-word" value={appManager.getGameState().getOpenWord()} icon="open_word">
+                        <ChipButton className="open-word" value={appManager.getGameState().getOpenWord()}
+                                    icon="open_word">
                             <span>{i18n._('chip.open-word')}</span>
                         </ChipButton>
-                        <ChipButton className="open-letter" value={appManager.getGameState().getOpenLetter()} icon="open_letter">
+                        <ChipButton className="open-letter" value={appManager.getGameState().getOpenLetter()}
+                                    icon="open_letter">
                             <span>{i18n._('chip.open-letter')}</span>
                         </ChipButton>
-                        <ChipButton className="show-word" value={appManager.getGameState().getShowWord()} icon="show_word">
+                        <ChipButton className="show-word" value={appManager.getGameState().getShowWord()}
+                                    icon="show_word">
                             <span>{i18n._('chip.show-word')}</span>
                         </ChipButton>
                     </div>
 
                     <Board />
+
+                    <Parent />
 
                     <div className="ad">
 

@@ -2,7 +2,7 @@
 
 
 var Object = {assign: require('react/lib/Object.assign')};
-//var classNames = require('classnames');
+var classNames = require('classnames');
 
 
 module.exports = {};
@@ -11,29 +11,62 @@ module.exports = {};
 var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
-        //key = [row, column]
-        key: React.PropTypes.arrayOf(React.PropTypes.number),
-        backgroundColor: React.PropTypes.string
+        row: React.PropTypes.number,
+        column: React.PropTypes.number,
+        className: React.PropTypes.string,
+        addSelectedLetter: React.PropTypes.func
     },
 
     getInitialState: function () {
 
         var state = {
-            backgroundColor: this.props.backgroundColor || "#ffffff"
+            row: this.props.row || 0,
+            column: this.props.column || 0,
+            isSelected: false
         };
 
         return state;
 
     },
 
+    addSelectedLetter: function () {
+        if (typeof this.props.addSelectedLetter === 'function') {
+            this.props.addSelectedLetter(this.state.row, this.state.column);
+        }
+    },
+
+    removeSelectedLetter: function () {
+        if (typeof this.props.removeSelectedLetter === 'function') {
+            this.props.removeSelectedLetter(this.state.row, this.state.column);
+        }
+    },
+
+    onClick: function () {
+
+        switch (this.state.isSelected) {
+            case true:
+                this.setState({isSelected: false});
+                this.removeSelectedLetter();
+                break;
+            case false:
+                this.setState({isSelected: true});
+                this.addSelectedLetter();
+                break;
+            default:
+                return false;
+        }
+
+    },
+
     render: function () {
 
-        var letterStyle = {
-            backgroundColor: this.state.backgroundColor
-        };
+        var letterClasses = classNames(
+            this.props.className,
+            {'selected': this.state.isSelected}
+        );
 
         return (
-            <td style={letterStyle}>{this.props.children}</td>
+            <td className={letterClasses} onClick={this.onClick}>{this.props.children}</td>
         );
 
     }
@@ -45,12 +78,13 @@ var Letter = React.createClass(LetterClass);
 var BoardClass = Object.assign({}, {}, {
 
     propTypes: {
-        letters: React.PropTypes.array,
-        backgroundColors: React.PropTypes.array
+        letters: React.PropTypes.array
     },
 
     getInitialState: function () {
+
         var state = {
+
             letters: this.props.letters || [
                 ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
                 ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
@@ -61,40 +95,87 @@ var BoardClass = Object.assign({}, {}, {
                 ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
                 ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
             ],
-            backgroundColors: this.props.backgroundColors || [
-                ['#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'brown'],
-                ['#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'brown'],
-                ['#e8e8e8', '#e8e8e8', '#e8e8e8', 'purple', 'purple', 'purple', 'purple', 'brown'],
-                ['green', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'purple', 'brown'],
-                ['green', 'green', 'red', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'purple', 'brown'],
-                ['orange', 'green', 'red', '#e8e8e8', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'brown'],
-                ['orange', 'red', 'red', '#e8e8e8', '#e8e8e8', '#e8e8e8', 'cyan', 'cyan'],
-                ['orange', 'orange', 'orange', 'orange', 'orange', 'cyan', 'cyan', 'cyan']
-            ]
+            selectedLetters: []
+
         };
 
         return state;
     },
 
-    getBackgroundColor: function (rid, cid) {
+    addSelectedLetter: function (row, column) {
 
-        var backgroundColor = "#ffffff";
+        if (row == 'undefined' || column == 'undefined') {
+            return false;
+        }
 
-        this.state.backgroundColors.map(function (br, brid) {
-            if (brid == rid) {
-                br.map(function (bc, bcid) {
-                    if (bcid == cid) {
-                        backgroundColor = bc;
-                    }
-                })
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters.push([row, column]);
+        this.setState({selectedLetters: updatedLetters})
+
+    },
+
+    removeSelectedLetter: function (row, column) {
+
+        if (row == 'undefined' || column == 'undefined') {
+            return false;
+        }
+
+        var index;
+        this.state.selectedLetters.map(function (rowColumn, rcIndex) {
+            if (rowColumn[0] == row && rowColumn[1] == column) {
+                index = rcIndex;
             }
         });
+
+        console.log(index);
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters.splice(index, 1);
+        this.setState({selectedLetters: updatedLetters})
+
+    },
+
+    //getBackgroundColor: function (rid, cid) {
+    //
+    //    var backgroundColor = "#ffffff";
+    //
+    //    this.state.backgroundColors.map(function (br, brid) {
+    //        if (brid == rid) {
+    //            br.map(function (bc, bcid) {
+    //                if (bcid == cid) {
+    //                    backgroundColor = bc;
+    //                }
+    //            })
+    //        }
+    //    });
+    //
+    //    return backgroundColor;
+    //
+    //},
+
+    letterClassName: function (rid, cid) {
+
+
+        var backgroundColor = classNames(
+            "connector-left"
+        );
+
+        //this.state.backgroundColors.map(function (br, brid) {
+        //    if (brid == rid) {
+        //        br.map(function (bc, bcid) {
+        //            if (bcid == cid) {
+        //                backgroundColor = bc;
+        //            }
+        //        })
+        //    }
+        //});
 
         return backgroundColor;
 
     },
 
     render: function () {
+
+        console.log(this.state.selectedLetters);
 
         return (
 
@@ -104,13 +185,16 @@ var BoardClass = Object.assign({}, {}, {
 
                     return (
 
-                        <tr>
+                        <tr key={rid}>
 
                             {row.map(function (cell, cid) {
 
                                 return (
 
-                                    <Letter key={[rid, cid]} backgroundColor={this.getBackgroundColor(rid, cid)}>
+                                    <Letter key={rid + '_' + cid} row={rid} column={cid}
+                                            addSelectedLetter={this.addSelectedLetter}
+                                            removeSelectedLetter={this.removeSelectedLetter}
+                                            className={this.letterClassName()}>
                                         {cell}
                                     </Letter>
 

@@ -116,6 +116,32 @@
       text-transform: uppercase;
       overflow: hidden;
       border: 0.0625rem solid black;
+      background-color: $gamePage-board-td-bg-color-default;
+
+      &.selected {
+        color: $gamePage-board-td-selected-color;
+      }
+      &connector-left {
+        
+      }
+      &.green {
+        background-color: $gamePage-board-td-bg-color-green;
+      }
+      &.blue {
+        background-color: $gamePage-board-td-bg-color-blue;
+      }
+      &.orange {
+        background-color: $gamePage-board-td-bg-colo-orange;
+      }
+      &.violet {
+        background-color: $gamePage-board-td-bg-color-violet;
+      }
+      &.pink {
+        background-color: $gamePage-board-td-bg-color-pink;
+      }
+      &.red {
+        background-color: $gamePage-board-td-bg-color-red;
+      }
     }
   }
 }
