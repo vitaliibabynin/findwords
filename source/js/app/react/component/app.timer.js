@@ -25,7 +25,13 @@ var TimerClass = Object.assign({}, {}, {
         var state = {
 
             isCountDownOn: false,
-            secondsRemaining: this.props.secondsRemaining || 0
+            secondsRemaining: this.props.secondsRemaining || 0,
+            starOneThirdOn: this.getImagePath('timer/star_on'),
+            starTwoThirdsOn: this.getImagePath('timer/star_on'),
+            starBase: this.getImagePath('timer/star_on'),
+            timerImg: this.getImagePath('timer/timer'),
+            starOneThirdOff: this.getImagePath('timer/star_off'),
+            starTwoThirdsOff: this.getImagePath('timer/star_off')
 
         };
 
@@ -65,17 +71,17 @@ var TimerClass = Object.assign({}, {}, {
 
     render: function () {
 
-        var starOneThird = this.getImagePath('timer/star_on');
-        var starTwoThirds = this.getImagePath('timer/star_on');
-        var starBase = this.getImagePath('timer/star_on');
-        var timerImg = this.getImagePath('timer/timer');
+        var starOneThird = this.state.starOneThirdOn;
+        var starTwoThirds = this.state.starTwoThirdsOn;
+        var starBase = this.state.starBase;
+        var timerImg = this.state.timerImg;
 
         if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 66.6) {
-            starTwoThirds = this.getImagePath('timer/star_off');
+            starTwoThirds = this.state.starTwoThirdsOff;
         }
 
         if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 33.3) {
-            starOneThird = this.getImagePath('timer/star_off');
+            starOneThird = this.state.starOneThirdOff;
         }
 
         var timerImages = {

@@ -87,12 +87,7 @@ var SlideClass = Object.assign({}, {}, {
 
     onClickInstructions: function () {
 
-        var layout;
-        if (this.state.layout == LAYOUT_INSTRUCTIONS) {
-            layout = LAYOUT_LOCKED;
-        } else if (this.state.layout == LAYOUT_LOCKED) {
-            layout = LAYOUT_INSTRUCTIONS;
-        }
+        var layout = this.state.layout == LAYOUT_INSTRUCTIONS ? LAYOUT_LOCKED : LAYOUT_INSTRUCTIONS;
 
         var state = {
             layout: layout
@@ -225,6 +220,8 @@ var SlideClass = Object.assign({}, {}, {
             case LAYOUT_INSTRUCTIONS:
                 renderLayout = this.renderInstructions();
                 break;
+            default:
+                renderLayout = this.renderLocked();
         }
 
         return (
