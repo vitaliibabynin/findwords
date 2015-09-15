@@ -8,67 +8,73 @@ var classNames = require('classnames');
 module.exports = {};
 
 
+var LINK_TOP = "link-top";
+var LINK_RIGHT = "link-right";
+var LINK_BOTTOM = "link-bottom";
+var LINK_LEFT = "link-left";
+
+
 var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
-        row: React.PropTypes.number,
-        column: React.PropTypes.number,
-        className: React.PropTypes.string,
-        addSelectedLetter: React.PropTypes.func
+        x: React.PropTypes.number,
+        y: React.PropTypes.number
     },
 
     getInitialState: function () {
-
         var state = {
-            row: this.props.row || 0,
-            column: this.props.column || 0,
-            isSelected: false
+            x: this.props.x || 0,
+            y: this.props.y || 0,
+            isActive: false,
+            isLocked: false,
+            link: ''
         };
-
         return state;
-
-    },
-
-    addSelectedLetter: function () {
-        if (typeof this.props.addSelectedLetter === 'function') {
-            this.props.addSelectedLetter(this.state.row, this.state.column);
-        }
-    },
-
-    removeSelectedLetter: function () {
-        if (typeof this.props.removeSelectedLetter === 'function') {
-            this.props.removeSelectedLetter(this.state.row, this.state.column);
-        }
     },
 
     onClick: function () {
 
-        switch (this.state.isSelected) {
-            case true:
-                this.setState({isSelected: false});
-                this.removeSelectedLetter();
-                break;
-            case false:
-                this.setState({isSelected: true});
-                this.addSelectedLetter();
-                break;
-            default:
-                return false;
+        //check if locked
+        if (this.state.isLocked) {
+            return false;
         }
+
+        //if active
+        if (this.state.isActive) {
+            //check if link ? remove link : continue
+            //make inactive
+            this.setState({isActive: false});
+        }
+
+        //if not active
+        if (!this.state.isActive) {
+
+            //check if first letter ? make active, add to selected letters, return true : continue
+            //check if this letter is allowed to be clicked ? continue : return false
+            //check if a word has been completed ? lock, change appearance, clear selected letters : continue
+            //add link
+            this.setState({link: LINK_LEFT});
+            //add color
+            //make active
+
+            return true;
+        }
+
+        //if active
+        //remove link
+        //remove color
+        //make inactive
+        this.setState({isActive: false});
 
     },
 
     render: function () {
-
-        var letterClasses = classNames(
-            this.props.className,
-            {'selected': this.state.isSelected}
-        );
-
         return (
-            <td className={letterClasses} onClick={this.onClick}>{this.props.children}</td>
+            <td onClick={this.onClick}>
+                {this.props.children}
+                <div className={this.state.link}></div>
+            </td>
         );
-
     }
 
 });
@@ -77,124 +83,86 @@ var Letter = React.createClass(LetterClass);
 
 var BoardClass = Object.assign({}, {}, {
 
-    propTypes: {
-        letters: React.PropTypes.array
-    },
-
     getInitialState: function () {
-
         var state = {
-
-            letters: this.props.letters || [
-                ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
-                ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
-                ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
-                ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
-                ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
-                ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
-                ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
-                ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
-            ],
-            selectedLetters: []
-
+            board: {
+                rows: 3,
+                cols: 3,
+                words: [
+                    {
+                        letters: [
+                            {x: 0, y: 0, letter: "a"},
+                            {x: 1, y: 0, letter: "a"},
+                            {x: 2, y: 0, letter: "a"},
+                            {x: 2, y: 1, letter: "a"},
+                            {x: 2, y: 2, letter: "a"}
+                        ]
+                    },
+                    {
+                        letters: [
+                            {x: 0, y: 1, letter: "b"},
+                            {x: 1, y: 1, letter: "b"},
+                            {x: 1, y: 2, letter: "b"},
+                            {x: 0, y: 2, letter: "b"}
+                        ]
+                    }
+                ]
+            }
         };
-
         return state;
     },
 
-    addSelectedLetter: function (row, column) {
+    boardConverter: function () {
 
-        if (row == 'undefined' || column == 'undefined') {
-            return false;
+        var arr = new Array(this.state.board.rows);
+
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = new Array(this.state.board.cols);
         }
 
-        var updatedLetters = this.state.selectedLetters.slice();
-        updatedLetters.push([row, column]);
-        this.setState({selectedLetters: updatedLetters})
+        this.state.board.words.map(function (word) {
 
-    },
+            word.letters.map(function (letter) {
 
-    removeSelectedLetter: function (row, column) {
+                arr[letter.x][letter.y] = letter.letter;
 
-        if (row == 'undefined' || column == 'undefined') {
-            return false;
-        }
+            })
 
-        var index;
-        this.state.selectedLetters.map(function (rowColumn, rcIndex) {
-            if (rowColumn[0] == row && rowColumn[1] == column) {
-                index = rcIndex;
-            }
         });
 
-        console.log(index);
-        var updatedLetters = this.state.selectedLetters.slice();
-        updatedLetters.splice(index, 1);
-        this.setState({selectedLetters: updatedLetters})
-
-    },
-
-    //getBackgroundColor: function (rid, cid) {
-    //
-    //    var backgroundColor = "#ffffff";
-    //
-    //    this.state.backgroundColors.map(function (br, brid) {
-    //        if (brid == rid) {
-    //            br.map(function (bc, bcid) {
-    //                if (bcid == cid) {
-    //                    backgroundColor = bc;
-    //                }
-    //            })
-    //        }
-    //    });
-    //
-    //    return backgroundColor;
-    //
-    //},
-
-    letterClassName: function (rid, cid) {
-
-
-        var backgroundColor = classNames(
-            "connector-left"
-        );
-
-        //this.state.backgroundColors.map(function (br, brid) {
-        //    if (brid == rid) {
-        //        br.map(function (bc, bcid) {
-        //            if (bcid == cid) {
-        //                backgroundColor = bc;
-        //            }
-        //        })
-        //    }
-        //});
-
-        return backgroundColor;
+        return arr;
 
     },
 
     render: function () {
 
-        console.log(this.state.selectedLetters);
+        var initialBoard = this.boardConverter();
+        //var initialBoard = [
+        //    ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
+        //    ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
+        //    ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
+        //    ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
+        //    ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
+        //    ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
+        //    ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
+        //    ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
+        //];
 
         return (
 
             <table className="board">
 
-                {this.state.letters.map(function (row, rid) {
+                {initialBoard.map(function (row, rowId) {
 
                     return (
 
-                        <tr key={rid}>
+                        <tr key={rowId}>
 
-                            {row.map(function (cell, cid) {
+                            {row.map(function (cell, cellId) {
 
                                 return (
 
-                                    <Letter key={rid + '_' + cid} row={rid} column={cid}
-                                            addSelectedLetter={this.addSelectedLetter}
-                                            removeSelectedLetter={this.removeSelectedLetter}
-                                            className={this.letterClassName()}>
+                                    <Letter key={rowId + '_' + cellId} x={rowId} y={cellId}>
                                         {cell}
                                     </Letter>
 
@@ -211,7 +179,6 @@ var BoardClass = Object.assign({}, {}, {
             </table>
 
         );
-
     }
 
 });

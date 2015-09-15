@@ -129,6 +129,7 @@ var NavigationClass = Object.assign({}, {}, {
 
             return (
                 <IconButton
+                    key={button.id}
                     id={button.id}
                     className={classes}
                     icon={button.icon}

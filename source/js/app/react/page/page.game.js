@@ -9,9 +9,8 @@ var Object = {assign: require('react/lib/Object.assign')};
 var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
-var Board = require('./../component/app.board').Board;
-var Parent = require('./../component/app.sandbox').Parent;
-var Child = require('./../component/app.sandbox').Child;
+var Board = require('./../component/app.board.js').Board;
+//var Parent = require('./../component/app.sandbox').Parent;
 
 
 var PageGameMain = Object.assign({}, {}, {
@@ -68,8 +67,6 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <Board />
-
-                    <Parent />
 
                     <div className="ad">
 

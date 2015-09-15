@@ -109,6 +109,7 @@
     height: 17.5rem;
     width: 17.5rem;
     table-layout: fixed;
+    position: relative;
 
     td {
       text-align: center;
@@ -118,11 +119,17 @@
       border: 0.0625rem solid black;
       background-color: $gamePage-board-td-bg-color-default;
 
+      .link-left {
+        position: absolute;
+        background-color: red;
+        height: 0.2rem;
+        width: 0.5rem;
+        margin-left: -0.325rem;
+        margin-top: -0.7rem;
+      }
+
       &.selected {
         color: $gamePage-board-td-selected-color;
-      }
-      &connector-left {
-        
       }
       &.green {
         background-color: $gamePage-board-td-bg-color-green;

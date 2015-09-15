@@ -106,7 +106,6 @@ var SlideClass = Object.assign({}, {}, {
     onClick: function (e) {
 
 
-
         if (e.id == BUY_SET_BUTTON_ID) {
             this.onClickBuySet();
             return;
@@ -182,7 +181,8 @@ var SlideClass = Object.assign({}, {}, {
                 <div className="text">
                     <span>{i18n._('slide.instructions')}</span>
                 </div>
-                <IconButton id={BUY_SET_BUTTON_ID} onClick={this.onClick} className="purchase">{i18n._('slide.buy')}</IconButton>
+                <IconButton id={BUY_SET_BUTTON_ID} onClick={this.onClick}
+                            className="purchase">{i18n._('slide.buy')}</IconButton>
 
             </div>
 
@@ -272,6 +272,7 @@ var SwiperClass = Object.assign({}, {}, {
 
             return (
                 <Slide
+                    key={'slide_' + slideIndex}
                     slideData={slide}
                     slideIndex={slideIndex}
                     />
