@@ -18,7 +18,12 @@ var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
         x: React.PropTypes.number,
-        y: React.PropTypes.number
+        y: React.PropTypes.number,
+        checkIfFirstSelectedLetter: React.PropTypes.func,
+        addSelectedLetter: React.PropTypes.func,
+        checkIfLetterCanBeClicked: React.PropTypes.func,
+        removeSelectedLetter: React.PropTypes.func,
+        addLink: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -34,6 +39,9 @@ var LetterClass = Object.assign({}, {}, {
 
     onClick: function () {
 
+        var x = this.state.x;
+        var y = this.state.y;
+
         //check if locked
         if (this.state.isLocked) {
             return false;
@@ -41,36 +49,57 @@ var LetterClass = Object.assign({}, {}, {
 
         //if active
         if (this.state.isActive) {
+
             //check if link ? remove link : continue
+            if (this.state.link) {
+                this.setState({link: ''})
+            }
+
+            //remove from selected letters
+            this.props.removeSelectedLetter(x, y);
+
             //make inactive
             this.setState({isActive: false});
-        }
-
-        //if not active
-        if (!this.state.isActive) {
-
-            //check if first letter ? make active, add to selected letters, return true : continue
-            //check if this letter is allowed to be clicked ? continue : return false
-            //check if a word has been completed ? lock, change appearance, clear selected letters : continue
-            //add link
-            this.setState({link: LINK_LEFT});
-            //add color
-            //make active
 
             return true;
         }
 
-        //if active
-        //remove link
-        //remove color
-        //make inactive
-        this.setState({isActive: false});
+        //if not active
+
+        //check if first letter ? add to selected letters, make active, return true : continue
+        if (this.props.checkIfFirstSelectedLetter()) {
+            this.props.addSelectedLetter(x, y);
+            this.setState({isActive: true});
+            return true;
+        }
+
+        //check if this letter is allowed to be clicked ? add to selected letters : return false
+        if (!this.props.checkIfLetterCanBeClicked(x, y)) {
+            return false;
+        }
+        this.props.addSelectedLetter(x, y);
+
+        //check if a word has been completed ? lock, change appearance, clear selected letters : continue
+
+
+        //add link
+        this.setState({link: this.props.addLink(this.state.x, this.state.y)});
+
+        //make active
+        this.setState({isActive: true});
+
+        return true;
 
     },
 
     render: function () {
+
+        var letterClassNames = classNames(
+            {'selected': this.state.isActive}
+        );
+
         return (
-            <td onClick={this.onClick}>
+            <td className={letterClassNames} onClick={this.onClick}>
                 {this.props.children}
                 <div className={this.state.link}></div>
             </td>
@@ -107,9 +136,89 @@ var BoardClass = Object.assign({}, {}, {
                         ]
                     }
                 ]
-            }
+            },
+            selectedLetters: []
         };
         return state;
+    },
+
+    addSelectedLetter: function (x, y) {
+
+        if (x == 'undefined' || y == 'undefined') {
+            return false;
+        }
+
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters.push([x, y]);
+        this.setState({selectedLetters: updatedLetters})
+
+    },
+
+    removeSelectedLetter: function (x, y) {
+
+        if (x == 'undefined' || y == 'undefined') {
+            return false;
+        }
+
+        var index;
+        this.state.selectedLetters.map(function (selectedLetter, slIndex) {
+            if (selectedLetter[0] == x && selectedLetter[1] == y) {
+                index = slIndex;
+            }
+        });
+
+        console.log(index);
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters.splice(index, 1);
+        this.setState({selectedLetters: updatedLetters})
+
+    },
+
+    checkIfFirstSelectedLetter: function () {
+        if (this.state.selectedLetters.length == 0) {
+            return true;
+        }
+    },
+
+    checkIfLetterCanBeClicked: function (x, y) {
+
+        var lastLetterClicked = this.state.selectedLetters[this.state.selectedLetters.length - 1];
+        var lastX = lastLetterClicked[0];
+        var lastY = lastLetterClicked[1];
+
+        if ((x == lastX + 1 || x == lastX - 1) && y == lastY) {
+            return true;
+        }
+
+        if ((y == lastY + 1 || y == lastY - 1) && x == lastX) {
+            return true;
+        }
+
+        return false;
+    },
+
+    addLink: function (x, y) {
+        var lastLetterClicked = this.state.selectedLetters[this.state.selectedLetters.length - 1];
+        var lastX = lastLetterClicked[0];
+        var lastY = lastLetterClicked[1];
+
+        if (x == lastX + 1) {
+            return LINK_TOP;
+        }
+
+        if (x == lastX - 1) {
+            return LINK_BOTTOM;
+        }
+
+        if (y == lastY + 1) {
+            return LINK_LEFT;
+        }
+
+        if (y == lastY - 1) {
+            return LINK_RIGHT;
+        }
+
+        return ''
     },
 
     boardConverter: function () {
@@ -135,6 +244,8 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     render: function () {
+
+        console.log(this.state.selectedLetters);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
@@ -162,7 +273,12 @@ var BoardClass = Object.assign({}, {}, {
 
                                 return (
 
-                                    <Letter key={rowId + '_' + cellId} x={rowId} y={cellId}>
+                                    <Letter key={rowId + '_' + cellId} x={rowId} y={cellId}
+                                            checkIfFirstSelectedLetter={this.checkIfFirstSelectedLetter}
+                                            addSelectedLetter={this.addSelectedLetter}
+                                            checkIfLetterCanBeClicked={this.checkIfLetterCanBeClicked}
+                                            removeSelectedLetter={this.removeSelectedLetter}
+                                            addLink={this.addLink}>
                                         {cell}
                                     </Letter>
 
