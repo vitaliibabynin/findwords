@@ -23,7 +23,8 @@ var LetterClass = Object.assign({}, {}, {
         addSelectedLetter: React.PropTypes.func,
         checkIfLetterCanBeClicked: React.PropTypes.func,
         removeSelectedLetter: React.PropTypes.func,
-        addLink: React.PropTypes.func
+        addLink: React.PropTypes.func,
+        checkIfLastSelectedLetter: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -44,11 +45,16 @@ var LetterClass = Object.assign({}, {}, {
 
         //check if locked
         if (this.state.isLocked) {
-            return false;
+            return;
         }
 
         //if active
         if (this.state.isActive) {
+
+            //check if last letter
+            if (!this.props.checkIfLastSelectedLetter(x,y)) {
+                return;
+            }
 
             //check if link ? remove link : continue
             if (this.state.link) {
@@ -61,7 +67,7 @@ var LetterClass = Object.assign({}, {}, {
             //make inactive
             this.setState({isActive: false});
 
-            return true;
+            return;
         }
 
         //if not active
@@ -70,12 +76,12 @@ var LetterClass = Object.assign({}, {}, {
         if (this.props.checkIfFirstSelectedLetter()) {
             this.props.addSelectedLetter(x, y);
             this.setState({isActive: true});
-            return true;
+            return;
         }
 
         //check if this letter is allowed to be clicked ? add to selected letters : return false
         if (!this.props.checkIfLetterCanBeClicked(x, y)) {
-            return false;
+            return;
         }
         this.props.addSelectedLetter(x, y);
 
@@ -83,12 +89,10 @@ var LetterClass = Object.assign({}, {}, {
 
 
         //add link
-        this.setState({link: this.props.addLink(this.state.x, this.state.y)});
+        this.setState({link: this.props.addLink(x, y)});
 
         //make active
         this.setState({isActive: true});
-
-        return true;
 
     },
 
@@ -176,6 +180,16 @@ var BoardClass = Object.assign({}, {}, {
 
     checkIfFirstSelectedLetter: function () {
         if (this.state.selectedLetters.length == 0) {
+            return true;
+        }
+    },
+
+    checkIfLastSelectedLetter: function (x, y) {
+        var lastLetterClicked = this.state.selectedLetters[this.state.selectedLetters.length - 1];
+        var lastX = lastLetterClicked[0];
+        var lastY = lastLetterClicked[1];
+
+        if (x == lastX && y == lastY) {
             return true;
         }
     },
@@ -278,7 +292,8 @@ var BoardClass = Object.assign({}, {}, {
                                             addSelectedLetter={this.addSelectedLetter}
                                             checkIfLetterCanBeClicked={this.checkIfLetterCanBeClicked}
                                             removeSelectedLetter={this.removeSelectedLetter}
-                                            addLink={this.addLink}>
+                                            addLink={this.addLink}
+                                            checkIfLastSelectedLetter={this.checkIfLastSelectedLetter}>
                                         {cell}
                                     </Letter>
 

@@ -119,9 +119,36 @@
       border: 0.0625rem solid black;
       background-color: $gamePage-board-td-bg-color-default;
 
+      .link-top {
+        position: absolute;
+        background-color: $gamePage-board-td-link-bg-color;
+        height: 0.5rem;
+        width: 0.2rem;
+        margin-left: 2.75rem;
+        margin-top: -3.7rem;
+      }
+
+      .link-right {
+        position: absolute;
+        background-color: $gamePage-board-td-link-bg-color;
+        height: 0.2rem;
+        width: 0.5rem;
+        margin-left: 5.5rem;
+        margin-top: -0.7rem;
+      }
+
+      .link-bottom {
+        position: absolute;
+        background-color: $gamePage-board-td-link-bg-color;
+        height: 0.5rem;
+        width: 0.2rem;
+        margin-left: 2.75rem;
+        margin-top: 2.1rem;
+      }
+
       .link-left {
         position: absolute;
-        background-color: red;
+        background-color: $gamePage-board-td-link-bg-color;
         height: 0.2rem;
         width: 0.5rem;
         margin-left: -0.325rem;
