@@ -22,9 +22,25 @@ var LetterClass = Object.assign({}, {}, {
         var state = {
             x: this.props.x || 0,
             y: this.props.y || 0,
-            isActive: false
+            addSelectedLetter: this.props.addSelectedLetter || function () {
+            },
+            removeSelectedLetter: this.props.removeSelectedLetter || function () {
+            },
+            classNameLetter: this.props.classNameLetter || ""
         };
         return state;
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+
+        this.setState({
+            addSelectedLetter: nextProps.addSelectedLetter || function () {
+            },
+            removeSelectedLetter: nextProps.removeSelectedLetter || function () {
+            },
+            classNameLetter: nextProps.classNameLetter || ""
+        });
+
     },
 
     onClick: function () {
@@ -32,24 +48,19 @@ var LetterClass = Object.assign({}, {}, {
         var x = this.state.x;
         var y = this.state.y;
 
-        if (this.state.isActive) {
-            if (this.props.removeSelectedLetter(x, y)) {
-                this.setState({isActive: false});
-            }
-        }
+        this.props.removeSelectedLetter(x, y);
 
-        if (!this.state.isActive) {
-            if (this.props.addSelectedLetter(x, y)) {
-                this.setState({isActive: true});
-            }
-        }
+        this.props.addSelectedLetter(x, y);
 
     },
 
     render: function () {
 
+        console.log("props: " + this.props.classNameLetter);
+        console.log("state: " + this.state.classNameLetter);
+
         var letterClassName = classNames(
-            this.props.classNameLetter
+            this.state.classNameLetter
         );
 
         return (
@@ -100,6 +111,8 @@ var BoardClass = Object.assign({}, {}, {
         if (x == 'undefined' || y == 'undefined') {
             return false;
         }
+
+        console.log(this.state.selectedLetters);
 
         var result = false;
         this.state.selectedLetters.map(function (selectedLetter, selectedLetterIndex) {
@@ -213,8 +226,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     render: function () {
-
-        console.log(this.state.selectedLetters);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
