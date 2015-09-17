@@ -154,10 +154,10 @@ var BoardClass = Object.assign({}, {}, {
             return false;
         }
 
-        //var updatedLetters = this.state.selectedLetters.slice();
-        //updatedLetters.splice(index, this.state.selectedLetters.length - index);
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters.splice(index, this.state.selectedLetters.length - index);
         this.setState({
-            selectedLetters: this.state.selectedLetters.splice(index, this.state.selectedLetters.length - index)
+            selectedLetters: updatedLetters
         });
 
         return true;
