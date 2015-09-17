@@ -112,12 +112,20 @@
     position: relative;
 
     td {
+      position: relative;
       text-align: center;
       vertical-align: middle;
       text-transform: uppercase;
       overflow: hidden;
       border: 0.0625rem solid black;
-      background-color: $gamePage-board-td-bg-color-default;
+      border-right: none;
+      border-left: none;
+//      background-color: $gamePage-board-td-bg-color-default;
+
+      background: linear-gradient(90deg, $gamePage-board-td-bg-color-default 99%, #000 0.125rem);
+      background-size: 100% 100%;
+      background-position: 0 0, 100% 100%;
+      background-repeat: no-repeat;
 
       .link-top {
         position: absolute;
@@ -176,6 +184,28 @@
       &.red {
         background-color: $gamePage-board-td-bg-color-red;
       }
+    }
+
+    td:after {
+      position: absolute;
+      background-color: $gamePage-board-td-link-bg-color;
+      height: 1.2rem;
+      width: 0.5rem;
+
+      top: 40%; //тут я примерно поставил, нужно по хорошему сделать с трансформацией или твои варианты:)
+      right: 0rem;
+      z-index: 1000;
+      content: "";
+    }
+    td:before {
+      position: absolute;
+      background-color: $gamePage-board-td-link-bg-color;
+      height: 1.2rem;
+      width: 0.5rem;
+      top: 40%; //тут я примерно поставил, нужно по хорошему сделать с трансформацией или твои варианты:)
+      left: 0rem;
+      z-index: 1000;
+      content: "";
     }
   }
 }

@@ -18,8 +18,6 @@ var PageMain = Object.assign({}, {}, {
 
     displayName: 'PageMain',
 
-    //swiper: null,
-
     //getInitialState: function () {
     //
     //    var state = {};
