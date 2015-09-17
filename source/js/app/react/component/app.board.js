@@ -24,7 +24,8 @@ var LetterClass = Object.assign({}, {}, {
         checkIfLetterCanBeClicked: React.PropTypes.func,
         removeSelectedLetter: React.PropTypes.func,
         addLink: React.PropTypes.func,
-        checkIfLastSelectedLetter: React.PropTypes.func
+        checkIfLastSelectedLetter: React.PropTypes.func,
+        checkForCompletedWord: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -52,7 +53,7 @@ var LetterClass = Object.assign({}, {}, {
         if (this.state.isActive) {
 
             //check if last letter
-            if (!this.props.checkIfLastSelectedLetter(x,y)) {
+            if (!this.props.checkIfLastSelectedLetter(x, y)) {
                 return;
             }
 
@@ -74,7 +75,9 @@ var LetterClass = Object.assign({}, {}, {
 
         //check if first letter ? add to selected letters, make active, return true : continue
         if (this.props.checkIfFirstSelectedLetter()) {
-            this.props.addSelectedLetter(x, y);
+            if (!this.props.addSelectedLetter(x, y)){
+                return;
+            }
             this.setState({isActive: true});
             return;
         }
@@ -83,10 +86,14 @@ var LetterClass = Object.assign({}, {}, {
         if (!this.props.checkIfLetterCanBeClicked(x, y)) {
             return;
         }
+
         this.props.addSelectedLetter(x, y);
 
         //check if a word has been completed ? lock, change appearance, clear selected letters : continue
-
+        if (this.props.checkForCompletedWord()) {
+            console.log("Word Complete");
+            return;
+        }
 
         //add link
         this.setState({link: this.props.addLink(x, y)});
@@ -153,8 +160,12 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         var updatedLetters = this.state.selectedLetters.slice();
+
         updatedLetters.push([x, y]);
-        this.setState({selectedLetters: updatedLetters})
+        console.log(updatedLetters);
+        this.setState({selectedLetters: updatedLetters});
+
+        return true;
 
     },
 
@@ -257,9 +268,59 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+    checkForCompletedWord: function () {
+
+        var words = this.state.board.words;
+        var selectedLetters = this.state.selectedLetters;
+        console.log(this.state.selectedLetters);
+
+        words.map(function (word, wordIndex) {
+            console.log(word.letters.length);
+            console.log(selectedLetters.length);
+
+            if (word.letters.length == selectedLetters.length) {
+                //var wordArr = new Array(word.letters.length);
+                var completeness = true;
+                word.letters.map(function (letter, letterIndex) {
+                    console.log("selectedLetters x: " + selectedLetters[letterIndex][0]);
+                    console.log("letter.x: " + letter.x);
+
+                    if (selectedLetters[letterIndex][0] != letter.x || selectedLetters[letterIndex][1] != letter.y) {
+                        completeness = false;
+                    }
+
+
+                    //selectedLetters.map(function(selectedLetter){
+                    //    //console.log(selectedLetter[0]);
+                    //    //console.log(letter.x);
+                    //
+                    //    if (selectedLetter[0] != letter.x || selectedLetter[1] != letter.y) {
+                    //        completeness = false;
+                    //        console.log(completeness);
+                    //    }
+
+
+                    //});
+
+                });
+
+                return completeness;
+
+            }
+
+        });
+
+        return false;
+        //word.letters = array of objects letters.x, letters.y
+
+        //var words = [[[0,1],[0,2]],[[0,1],[0,2]]]
+
+
+    },
+
     render: function () {
 
-        console.log(this.state.selectedLetters);
+        //console.log(this.state.selectedLetters);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
@@ -293,7 +354,8 @@ var BoardClass = Object.assign({}, {}, {
                                             checkIfLetterCanBeClicked={this.checkIfLetterCanBeClicked}
                                             removeSelectedLetter={this.removeSelectedLetter}
                                             addLink={this.addLink}
-                                            checkIfLastSelectedLetter={this.checkIfLastSelectedLetter}>
+                                            checkIfLastSelectedLetter={this.checkIfLastSelectedLetter}
+                                            checkForCompletedWord={this.checkForCompletedWord}>
                                         {cell}
                                     </Letter>
 
