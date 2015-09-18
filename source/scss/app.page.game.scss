@@ -104,9 +104,8 @@
 
   .board {
     border-collapse: collapse;
-    border: 0.0625rem solid $gamePage-board-border-color;
-    border-right: none;
-    border-bottom: none;
+    border-left: 0.0625rem solid $gamePage-board-border-color;
+    border-top: 0.0625rem solid $gamePage-board-border-color;
     background-color: $gamePage-board-td-bg-color-default;
     margin: auto;
     height: 17.5rem;
@@ -122,7 +121,7 @@
       overflow: hidden;
       border: none;
       background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-border-color 0.0625rem),
-      linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.83%, $gamePage-board-border-color 0.0625rem);
+      linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-border-color 0.0625rem);
       background-size: 100% 100%, 100% 100%;
       background-position: 0 0, 0 0;
       background-repeat: no-repeat;
