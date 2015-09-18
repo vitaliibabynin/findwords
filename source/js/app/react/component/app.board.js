@@ -8,6 +8,12 @@ var classNames = require('classnames');
 module.exports = {};
 
 
+var LINK_TOP = "link-top";
+var LINK_RIGHT = "link-right";
+var LINK_BOTTOM = "link-bottom";
+var LINK_LEFT = "link-left";
+
+
 var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
@@ -48,16 +54,17 @@ var LetterClass = Object.assign({}, {}, {
         var x = this.state.x;
         var y = this.state.y;
 
-        this.props.removeSelectedLetter(x, y);
+        if (this.props.removeSelectedLetter(x, y)) {
+            return;
+        }
 
-        this.props.addSelectedLetter(x, y);
+        if (!this.props.addSelectedLetter(x, y)) {
+            return;
+        }
 
     },
 
     render: function () {
-
-        console.log("props: " + this.props.classNameLetter);
-        console.log("state: " + this.state.classNameLetter);
 
         var letterClassName = classNames(
             this.state.classNameLetter
@@ -108,12 +115,6 @@ var BoardClass = Object.assign({}, {}, {
 
     checkIfLetterIsSelected: function (x, y) {
 
-        if (x == 'undefined' || y == 'undefined') {
-            return false;
-        }
-
-        console.log(this.state.selectedLetters);
-
         var result = false;
         this.state.selectedLetters.map(function (selectedLetter, selectedLetterIndex) {
             if (selectedLetter[0] == x && selectedLetter[1] == y) {
@@ -124,37 +125,7 @@ var BoardClass = Object.assign({}, {}, {
         return result;
     },
 
-    addSelectedLetter: function (x, y) {
-
-        if (x == 'undefined' || y == 'undefined') {
-            return false;
-        }
-
-        console.log(this.checkIfLetterIsSelected(x, y));
-        if (this.checkIfLetterIsSelected(x, y)) {
-            return false;
-        }
-
-        var updatedLetters = this.state.selectedLetters.slice();
-
-        updatedLetters.push([x, y]);
-        console.log(updatedLetters);
-        this.setState({selectedLetters: updatedLetters});
-
-        return true;
-
-    },
-
-    removeSelectedLetter: function (x, y) {
-
-        if (x == 'undefined' || y == 'undefined') {
-            return false;
-        }
-
-        console.log(this.checkIfLetterIsSelected(x, y));
-        if (!this.checkIfLetterIsSelected(x, y)) {
-            return false;
-        }
+    getSelectedLetterIndex: function (x, y) {
 
         var index = 'undefined';
         this.state.selectedLetters.map(function (selectedLetter, slIndex) {
@@ -167,7 +138,79 @@ var BoardClass = Object.assign({}, {}, {
             return false;
         }
 
+        return index;
+
+    },
+
+    addSelectedLetter: function (x, y) {
+
+        if (x == 'undefined' || y == 'undefined') {
+            return false;
+        }
+
+        if (this.checkIfLetterIsSelected(x, y)) {
+            return false;
+        }
+
         var updatedLetters = this.state.selectedLetters.slice();
+
+        //check if there is a previous letter
+        if (this.state.selectedLetters.length == 0) {
+            updatedLetters.push([x, y, '']);
+            this.setState({selectedLetters: updatedLetters});
+            return true;
+        }
+
+        var previousLetter = updatedLetters[this.state.selectedLetters.length - 1];
+
+        //find out which link needs to be attached
+        var lastX = previousLetter[0];
+        var lastY = previousLetter[1];
+
+        if (x == lastX + 1) {
+            updatedLetters.push([x, y, LINK_TOP]);
+            previousLetter.push(LINK_BOTTOM);
+        }
+
+        if (x == lastX - 1) {
+            updatedLetters.push([x, y, LINK_BOTTOM]);
+            previousLetter.push(LINK_TOP);
+        }
+
+        if (y == lastY + 1) {
+            updatedLetters.push([x, y, LINK_LEFT]);
+            previousLetter.push(LINK_RIGHT);
+        }
+
+        if (y == lastY - 1) {
+            updatedLetters.push([x, y, LINK_RIGHT]);
+            previousLetter.push(LINK_LEFT);
+        }
+
+        this.setState({selectedLetters: updatedLetters});
+
+        return true;
+
+    },
+
+    removeSelectedLetter: function (x, y) {
+
+        if (x == 'undefined' || y == 'undefined') {
+            return false;
+        }
+
+        if (!this.checkIfLetterIsSelected(x, y)) {
+            return false;
+        }
+
+        if (!this.getSelectedLetterIndex(x, y)) {
+            return false;
+        }
+
+        var index = this.getSelectedLetterIndex(x, y);
+
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters[index - 1][3] = '';
         updatedLetters.splice(index, this.state.selectedLetters.length - index);
         this.setState({
             selectedLetters: updatedLetters
@@ -177,30 +220,16 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    letterLink: function (x, y) {
+    selectedLetterLinks: function (x, y) {
 
-        //check if letter is selected
-        if (!this.checkIfLetterIsSelected(x, y)) {
+        if (!this.getSelectedLetterIndex(x, y)) {
             return false;
         }
 
-        //check if there is a previous letter
-        var index = 0;
+        var index = this.getSelectedLetterIndex(x, y);
 
-        this.state.selectedLetters.map(function (selectedLetter, slIndex) {
-            if (selectedLetter[0] == x && selectedLetter[1] == y) {
-                index = slIndex;
-            }
+        return [this.state.selectedLetters[index][2], this.state.selectedLetters[index][3]];
 
-        });
-
-        if (index = 0) {
-            return false;
-        }
-
-        var previousLetter = this.state.selectedLetters[index - 1];
-
-        //find out which link needs to be attached
     },
 
     boardConverter: function () {
@@ -227,6 +256,8 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
+        console.log(this.state.selectedLetters);
+
         var initialBoard = this.boardConverter();
         //var initialBoard = [
         //    ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
@@ -251,10 +282,9 @@ var BoardClass = Object.assign({}, {}, {
 
                             {row.map(function (cell, cellId) {
 
-                                console.log(this.checkIfLetterIsSelected(rowId, cellId));
-
                                 var boardClassName = classNames(
-                                    {"selected": this.checkIfLetterIsSelected(rowId, cellId)}
+                                    {"selected": this.checkIfLetterIsSelected(rowId, cellId)},
+                                    this.selectedLetterLinks(rowId, cellId)
                                 );
 
                                 return (
