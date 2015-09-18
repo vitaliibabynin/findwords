@@ -120,47 +120,57 @@
       border: 0.0625rem solid $gamePage-board-border-color;
       border-right: none;
       border-left: none;
-//      background-color: $gamePage-board-td-bg-color-default;
-
       background: linear-gradient(90deg, $gamePage-board-td-bg-color-default 98.8%, $gamePage-board-border-color 0.125rem);
       background-size: 100% 100%;
       background-position: 0 0, 100% 100%;
       background-repeat: no-repeat;
 
-      .link-top {
+      &.before-link-top:before,
+      &.after-link-top:after {
         position: absolute;
         background-color: $gamePage-board-td-link-bg-color;
-        height: 0.5rem;
-        width: 0.2rem;
-        margin-left: 2.75rem;
-        margin-top: -3.7rem;
+        height: 10%;
+        width: 5%;
+        top: 0;
+        left: 47.5%;
+        z-index: 1000;
+        content: "";
       }
 
-      .link-right {
+      &.before-link-right:before,
+      &.after-link-right:after {
         position: absolute;
         background-color: $gamePage-board-td-link-bg-color;
-        height: 0.2rem;
-        width: 0.5rem;
-        margin-left: 5.5rem;
-        margin-top: -0.7rem;
+        height: 5%;
+        width: 10%;
+        top: 47.5%;
+        right: 0;
+        z-index: 1000;
+        content: "";
       }
 
-      .link-bottom {
+      &.before-link-bottom:before,
+      &.after-link-bottom:after {
         position: absolute;
         background-color: $gamePage-board-td-link-bg-color;
-        height: 0.5rem;
-        width: 0.2rem;
-        margin-left: 2.75rem;
-        margin-top: 2.1rem;
+        height: 10%;
+        width: 5%;
+        bottom: 0;
+        left: 47.5%;
+        z-index: 1000;
+        content: "";
       }
 
-      .link-left {
+      &.before-link-left:before,
+      &.after-link-left:after {
         position: absolute;
         background-color: $gamePage-board-td-link-bg-color;
-        height: 0.2rem;
-        width: 0.5rem;
-        margin-left: -0.325rem;
-        margin-top: -0.7rem;
+        height: 5%;
+        width: 10%;
+        top: 47.5%;
+        left: 0;
+        z-index: 1000;
+        content: "";
       }
 
       &.selected {
@@ -186,26 +196,26 @@
       }
     }
 
-    td:after {
-      position: absolute;
-      background-color: $gamePage-board-td-link-bg-color;
-      height: 1.2rem;
-      width: 0.5rem;
-
-      top: 40%; //тут я примерно поставил, нужно по хорошему сделать с трансформацией или твои варианты:)
-      right: 0rem;
-      z-index: 1000;
-      content: "";
-    }
-    td:before {
-      position: absolute;
-      background-color: $gamePage-board-td-link-bg-color;
-      height: 1.2rem;
-      width: 0.5rem;
-      top: 40%; //тут я примерно поставил, нужно по хорошему сделать с трансформацией или твои варианты:)
-      left: 0rem;
-      z-index: 1000;
-      content: "";
-    }
+    //td:after {
+    //  position: absolute;
+    //  background-color: $gamePage-board-td-link-bg-color;
+    //  height: 1.2rem;
+    //  width: 0.5rem;
+    //
+    //  top: 40%; //тут я примерно поставил, нужно по хорошему сделать с трансформацией или твои варианты:)
+    //  right: 0rem;
+    //  z-index: 1000;
+    //  content: "";
+    //}
+    //td:before {
+    //  position: absolute;
+    //  background-color: $gamePage-board-td-link-bg-color;
+    //  height: 1.2rem;
+    //  width: 0.5rem;
+    //  top: 40%; //тут я примерно поставил, нужно по хорошему сделать с трансформацией или твои варианты:)
+    //  left: 0rem;
+    //  z-index: 1000;
+    //  content: "";
+    //}
   }
 }
