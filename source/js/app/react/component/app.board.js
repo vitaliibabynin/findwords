@@ -314,7 +314,7 @@ var BoardClass = Object.assign({}, {}, {
 
         console.log(result);
 
-        //console.log(this.state.selectedLetters);
+        console.log(this.state.selectedLetters);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
