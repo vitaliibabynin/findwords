@@ -58,9 +58,7 @@ var LetterClass = Object.assign({}, {}, {
             return;
         }
 
-        if (!this.props.addSelectedLetter(x, y)) {
-            return;
-        }
+        this.props.addSelectedLetter(x, y);
 
     },
 
@@ -247,11 +245,11 @@ var BoardClass = Object.assign({}, {}, {
         var after = '';
 
         if (this.state.selectedLetters[index][2] !== undefined) {
-                before = "before-" + this.state.selectedLetters[index][2];
+            before = "before-" + this.state.selectedLetters[index][2];
         }
 
         if (this.state.selectedLetters[index][3] !== undefined) {
-                after = "after-" + this.state.selectedLetters[index][3];
+            after = "after-" + this.state.selectedLetters[index][3];
         }
 
         return [before, after];
@@ -280,21 +278,55 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+    checkForCompletedWord: function () {
+
+        var words = this.state.board.words;
+        var selectedLetters = this.state.selectedLetters;
+
+        var result = false;
+
+        words.map(function (word) {
+
+            if (word.letters.length == selectedLetters.length) {
+
+                result = true;
+
+                word.letters.map(function (letter, letterIndex) {
+
+                    if (selectedLetters[letterIndex][0] != letter.x || selectedLetters[letterIndex][1] != letter.y) {
+
+                        result = false;
+                    }
+
+                });
+
+            }
+
+        });
+
+        return result;
+
+    },
+
     render: function () {
 
-        console.log(this.state.selectedLetters);
+        var result = this.checkForCompletedWord();
 
-        //var initialBoard = this.boardConverter();
-        var initialBoard = [
-            ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
-            ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
-            ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
-            ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
-            ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
-            ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
-            ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
-            ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
-        ];
+        console.log(result);
+
+        //console.log(this.state.selectedLetters);
+
+        var initialBoard = this.boardConverter();
+        //var initialBoard = [
+        //    ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
+        //    ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
+        //    ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
+        //    ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
+        //    ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
+        //    ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
+        //    ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
+        //    ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
+        //];
 
         return (
 
