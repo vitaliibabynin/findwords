@@ -329,7 +329,30 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     selectWordBackgroundColor: function () {
-        return "pink";
+
+        var backgroundColor = '';
+        var wordsComplete = this.state.completedWords.length;
+
+        var backgroundColors = [
+            "backgroundColor1",
+            "backgroundColor2",
+            "backgroundColor3",
+            "backgroundColor4",
+            "backgroundColor5",
+            "backgroundColor6",
+            "backgroundColor7",
+            "backgroundColor8",
+            "backgroundColor9",
+            "backgroundColor10"
+        ];
+
+        //  +1 because word hasn't been added to wordsComplete yet
+        for (var i = 0; i < wordsComplete + 1; i++) {
+            backgroundColor = backgroundColors[i % backgroundColors.length];
+        }
+
+        return backgroundColor;
+
     },
 
     moveSelectedLettersToCompleteWords: function () {

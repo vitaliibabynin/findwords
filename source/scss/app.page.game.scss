@@ -180,23 +180,36 @@
       &.isLocked {
         color: $gamePage-board-td-color-isLocked;
       }
-      &.green {
+
+      &.backgroundColor1 {
         background-color: $gamePage-board-td-bg-color-green;
       }
-      &.blue {
+      &.backgroundColor2 {
         background-color: $gamePage-board-td-bg-color-blue;
       }
-      &.orange {
+      &.backgroundColor3 {
+        background-color: $gamePage-board-td-bg-color-cyan;
+      }
+      &.backgroundColor4 {
         background-color: $gamePage-board-td-bg-colo-orange;
       }
-      &.violet {
+      &.backgroundColor5 {
+        background-color: $gamePage-board-td-bg-color-light-indigo;
+      }
+      &.backgroundColor6 {
         background-color: $gamePage-board-td-bg-color-violet;
       }
-      &.pink {
+      &.backgroundColor7 {
+        background-color: $gamePage-board-td-bg-color-yellow;
+      }
+      &.backgroundColor8 {
+        background-color: $gamePage-board-td-bg-color-purple;
+      }
+      &.backgroundColor9 {
         background-color: $gamePage-board-td-bg-color-pink;
       }
-      &.red {
-        background-color: $gamePage-board-td-bg-color-red;
+      &.backgroundColor10 {
+        background-color: $gamePage-board-td-bg-color-darkBlue;
       }
     }
   }
