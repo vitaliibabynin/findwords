@@ -70,9 +70,10 @@ $gamePage-chip-open-letter-bg-color: #d24d57;
 $gamePage-chip-show-word-bg-color: #9b59b6;
 
 //gamePage-Board
-$gamePage-board-border-color: #2a456e;
-$gamePage-board-td-selected-color: red;
-$gamePage-board-td-link-bg-color: red;
+$gamePage-board-color-border: #2a456e;
+$gamePage-board-td-color-selected: red;
+$gamePage-board-td-color-isLocked: #ffffff;
+$gamePage-board-td-bg-color-link: red;
 $gamePage-board-td-bg-color-default: #e8e8e8;
 $gamePage-board-td-bg-color-default-transparent: rgba(232,232,232,0);
 $gamePage-board-td-bg-color-green: green;

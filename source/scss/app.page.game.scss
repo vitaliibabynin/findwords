@@ -104,8 +104,8 @@
 
   .board {
     border-collapse: collapse;
-    border-left: 0.0625rem solid $gamePage-board-border-color;
-    border-top: 0.0625rem solid $gamePage-board-border-color;
+    border-left: 0.0625rem solid $gamePage-board-color-border;
+    border-top: 0.0625rem solid $gamePage-board-color-border;
     background-color: $gamePage-board-td-bg-color-default;
     margin: auto;
     height: 17.5rem;
@@ -120,8 +120,8 @@
       text-transform: uppercase;
       overflow: hidden;
       border: none;
-      background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-border-color 0.0625rem),
-      linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-border-color 0.0625rem);
+      background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
+      linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
       background-size: 100% 100%, 100% 100%;
       background-position: 0 0, 0 0;
       background-repeat: no-repeat;
@@ -129,7 +129,7 @@
       &.before-link-top:before,
       &.after-link-top:after {
         position: absolute;
-        background-color: $gamePage-board-td-link-bg-color;
+        background-color: $gamePage-board-td-bg-color-link;
         height: 10%;
         width: 5%;
         top: 0;
@@ -141,7 +141,7 @@
       &.before-link-right:before,
       &.after-link-right:after {
         position: absolute;
-        background-color: $gamePage-board-td-link-bg-color;
+        background-color: $gamePage-board-td-bg-color-link;
         height: 5%;
         width: 10%;
         top: 47.5%;
@@ -153,7 +153,7 @@
       &.before-link-bottom:before,
       &.after-link-bottom:after {
         position: absolute;
-        background-color: $gamePage-board-td-link-bg-color;
+        background-color: $gamePage-board-td-bg-color-link;
         height: 10%;
         width: 5%;
         bottom: 0;
@@ -165,7 +165,7 @@
       &.before-link-left:before,
       &.after-link-left:after {
         position: absolute;
-        background-color: $gamePage-board-td-link-bg-color;
+        background-color: $gamePage-board-td-bg-color-link;
         height: 5%;
         width: 10%;
         top: 47.5%;
@@ -175,7 +175,10 @@
       }
 
       &.selected {
-        color: $gamePage-board-td-selected-color;
+        color: $gamePage-board-td-color-selected;
+      }
+      &.isLocked {
+        color: $gamePage-board-td-color-isLocked;
       }
       &.green {
         background-color: $gamePage-board-td-bg-color-green;
