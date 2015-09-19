@@ -180,8 +180,6 @@ var BoardClass = Object.assign({}, {}, {
         var lastY = previousLetter[1];
 
         if (x == lastX + 1 && y == lastY) {
-            //updatedLetters.push([x, y, LINK_TOP]);
-            //previousLetter.push(LINK_BOTTOM);
             updatedLetters.push([x, y, {classNames: {linkBefore: LINK_TOP}}]);
             previousLetter[2].classNames.linkAfter = LINK_BOTTOM;
             this.setState({selectedLetters: updatedLetters});
@@ -189,8 +187,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (x == lastX - 1 && y == lastY) {
-            //updatedLetters.push([x, y, LINK_BOTTOM]);
-            //previousLetter.push(LINK_TOP);
             updatedLetters.push([x, y, {classNames: {linkBefore: LINK_BOTTOM}}]);
             previousLetter[2].classNames.linkAfter = LINK_TOP;
             this.setState({selectedLetters: updatedLetters});
@@ -198,8 +194,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (y == lastY + 1 && x == lastX) {
-            //updatedLetters.push([x, y, LINK_LEFT]);
-            //previousLetter.push(LINK_RIGHT);
             updatedLetters.push([x, y, {classNames: {linkBefore: LINK_LEFT}}]);
             previousLetter[2].classNames.linkAfter = LINK_RIGHT;
             this.setState({selectedLetters: updatedLetters});
@@ -207,8 +201,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (y == lastY - 1 && x == lastX) {
-            //updatedLetters.push([x, y, LINK_RIGHT]);
-            //previousLetter.push(LINK_LEFT);
             updatedLetters.push([x, y, {classNames: {linkBefore: LINK_RIGHT}}]);
             previousLetter[2].classNames.linkAfter = LINK_LEFT;
             this.setState({selectedLetters: updatedLetters});
@@ -231,7 +223,6 @@ var BoardClass = Object.assign({}, {}, {
         var updatedLetters = this.state.selectedLetters.slice();
 
         if (index != 0) {
-            //updatedLetters[index - 1].splice(3, 1);
             delete updatedLetters[index - 1][2].classNames.linkAfter;
         }
 
@@ -256,14 +247,6 @@ var BoardClass = Object.assign({}, {}, {
 
         var before = '';
         var after = '';
-
-        //if (this.state.selectedLetters[index][2] !== undefined) {
-        //    before = "before-" + this.state.selectedLetters[index][2];
-        //}
-        //
-        //if (this.state.selectedLetters[index][3] !== undefined) {
-        //    after = "after-" + this.state.selectedLetters[index][3];
-        //}
 
         if (this.state.selectedLetters[index][2].classNames.linkBefore !== undefined) {
             before = "before-" + this.state.selectedLetters[index][2].classNames.linkBefore;
@@ -398,10 +381,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     render: function () {
-
-        //console.log(this.state.completedWords);
-
-        //console.log(this.state.selectedLetters);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
