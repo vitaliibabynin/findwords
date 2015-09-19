@@ -111,33 +111,92 @@ var BoardClass = Object.assign({}, {}, {
         return state;
     },
 
-    checkIfLetterIsSelected: function (x, y) {
+    componentDidUpdate: function () {
+
+        if (!this.checkForCompletedWord()) {
+            return;
+        }
+
+        this.moveSelectedLettersToCompleteWords();
+
+    },
+
+    checkForCompletedWord: function () {
+
+        var words = this.state.board.words;
+        var selectedLetters = this.state.selectedLetters;
 
         var result = false;
-        this.state.selectedLetters.map(function (selectedLetter) {
-            if (selectedLetter[0] == x && selectedLetter[1] == y) {
+
+        words.map(function (word) {
+
+            if (word.letters.length == selectedLetters.length) {
+
                 result = true;
+
+                word.letters.map(function (letter, letterIndex) {
+
+                    if (selectedLetters[letterIndex][0] != letter.x || selectedLetters[letterIndex][1] != letter.y) {
+
+                        result = false;
+                    }
+
+                });
+
             }
+
         });
 
         return result;
 
     },
 
-    getSelectedLetterIndex: function (x, y) {
+    moveSelectedLettersToCompleteWords: function () {
 
-        var index = 'undefined';
-        this.state.selectedLetters.map(function (selectedLetter, slIndex) {
-            if (selectedLetter[0] == x && selectedLetter[1] == y) {
-                index = slIndex;
-            }
-        });
+        var completeWord = this.state.selectedLetters.slice();
+        var wordBackgroundColor = this.selectWordBackgroundColor();
 
-        if (index == 'undefined') {
-            return false;
+        for (var i = 0; i < completeWord.length; i++) {
+            completeWord[i][2].classNames = {
+                backgroundColor: wordBackgroundColor
+            };
+            completeWord[i].push({isLocked: true})
         }
 
-        return index;
+        var completedWords = this.state.completedWords.slice();
+        completedWords.push(completeWord);
+
+        this.setState({
+            selectedLetters: [],
+            completedWords: completedWords
+        });
+
+    },
+
+    selectWordBackgroundColor: function () {
+
+        var backgroundColor = '';
+        var wordsComplete = this.state.completedWords.length;
+
+        var backgroundColors = [
+            "backgroundColor1",
+            "backgroundColor2",
+            "backgroundColor3",
+            "backgroundColor4",
+            "backgroundColor5",
+            "backgroundColor6",
+            "backgroundColor7",
+            "backgroundColor8",
+            "backgroundColor9",
+            "backgroundColor10"
+        ];
+
+        //  +1 because word hasn't been added to wordsComplete yet
+        for (var i = 0; i < wordsComplete + 1; i++) {
+            backgroundColor = backgroundColors[i % backgroundColors.length];
+        }
+
+        return backgroundColor;
 
     },
 
@@ -158,6 +217,61 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         return true;
+
+    },
+
+    checkIfLetterIsSelected: function (x, y) {
+
+        var result = false;
+        this.state.selectedLetters.map(function (selectedLetter) {
+            if (selectedLetter[0] == x && selectedLetter[1] == y) {
+                result = true;
+            }
+        });
+
+        return result;
+
+    },
+
+    removeSelectedLetter: function (x, y) {
+
+        /// === because index 0 is treated as false
+        if (this.getSelectedLetterIndex(x, y) === false) {
+            return false;
+        }
+
+        var index = this.getSelectedLetterIndex(x, y);
+
+        var updatedLetters = this.state.selectedLetters.slice();
+
+        if (index != 0) {
+            delete updatedLetters[index - 1][2].classNames.linkAfter;
+        }
+
+        updatedLetters.splice(index, this.state.selectedLetters.length - index);
+
+        this.setState({
+            selectedLetters: updatedLetters
+        });
+
+        return true;
+
+    },
+
+    getSelectedLetterIndex: function (x, y) {
+
+        var index = 'undefined';
+        this.state.selectedLetters.map(function (selectedLetter, slIndex) {
+            if (selectedLetter[0] == x && selectedLetter[1] == y) {
+                index = slIndex;
+            }
+        });
+
+        if (index == 'undefined') {
+            return false;
+        }
+
+        return index;
 
     },
 
@@ -211,28 +325,25 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    removeSelectedLetter: function (x, y) {
+    boardConverter: function () {
 
-        /// === because index 0 is treated as false
-        if (this.getSelectedLetterIndex(x, y) === false) {
-            return false;
+        var arr = new Array(this.state.board.rows);
+
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = new Array(this.state.board.cols);
         }
 
-        var index = this.getSelectedLetterIndex(x, y);
+        this.state.board.words.map(function (word) {
 
-        var updatedLetters = this.state.selectedLetters.slice();
+            word.letters.map(function (letter) {
 
-        if (index != 0) {
-            delete updatedLetters[index - 1][2].classNames.linkAfter;
-        }
+                arr[letter.x][letter.y] = letter.letter;
 
-        updatedLetters.splice(index, this.state.selectedLetters.length - index);
+            })
 
-        this.setState({
-            selectedLetters: updatedLetters
         });
 
-        return true;
+        return arr;
 
     },
 
@@ -260,123 +371,6 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    getLetterBackgroundColor: function (x, y) {
-
-        var color = '';
-
-        this.state.completedWords.map(function (completedWord) {
-            completedWord.map(function (letterInCompletedWord) {
-                if (letterInCompletedWord[0] == x && letterInCompletedWord[1] == y) {
-                    color = letterInCompletedWord[2].classNames.backgroundColor;
-                }
-            });
-        });
-
-        return color;
-
-    },
-
-    boardConverter: function () {
-
-        var arr = new Array(this.state.board.rows);
-
-        for (var i = 0; i < arr.length; i++) {
-            arr[i] = new Array(this.state.board.cols);
-        }
-
-        this.state.board.words.map(function (word) {
-
-            word.letters.map(function (letter) {
-
-                arr[letter.x][letter.y] = letter.letter;
-
-            })
-
-        });
-
-        return arr;
-
-    },
-
-    checkForCompletedWord: function () {
-
-        var words = this.state.board.words;
-        var selectedLetters = this.state.selectedLetters;
-
-        var result = false;
-
-        words.map(function (word) {
-
-            if (word.letters.length == selectedLetters.length) {
-
-                result = true;
-
-                word.letters.map(function (letter, letterIndex) {
-
-                    if (selectedLetters[letterIndex][0] != letter.x || selectedLetters[letterIndex][1] != letter.y) {
-
-                        result = false;
-                    }
-
-                });
-
-            }
-
-        });
-
-        return result;
-
-    },
-
-    selectWordBackgroundColor: function () {
-
-        var backgroundColor = '';
-        var wordsComplete = this.state.completedWords.length;
-
-        var backgroundColors = [
-            "backgroundColor1",
-            "backgroundColor2",
-            "backgroundColor3",
-            "backgroundColor4",
-            "backgroundColor5",
-            "backgroundColor6",
-            "backgroundColor7",
-            "backgroundColor8",
-            "backgroundColor9",
-            "backgroundColor10"
-        ];
-
-        //  +1 because word hasn't been added to wordsComplete yet
-        for (var i = 0; i < wordsComplete + 1; i++) {
-            backgroundColor = backgroundColors[i % backgroundColors.length];
-        }
-
-        return backgroundColor;
-
-    },
-
-    moveSelectedLettersToCompleteWords: function () {
-
-        var completeWord = this.state.selectedLetters.slice();
-        var wordBackgroundColor = this.selectWordBackgroundColor();
-
-        for (var i = 0; i < completeWord.length; i++) {
-            completeWord[i][2].classNames = {
-                backgroundColor: wordBackgroundColor
-            };
-            completeWord[i].push({isLocked: true})
-        }
-
-        var completedWords = this.state.completedWords.slice();
-        completedWords.push(completeWord);
-
-        this.setState({
-            selectedLetters: [],
-            completedWords: completedWords
-        });
-
-    },
-
     checkIfLetterIsInCompleteWord: function (x, y) {
 
         var result = false;
@@ -393,13 +387,19 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    componentDidUpdate: function () {
+    getLetterBackgroundColor: function (x, y) {
 
-        if (!this.checkForCompletedWord()) {
-            return;
-        }
+        var color = '';
 
-        this.moveSelectedLettersToCompleteWords();
+        this.state.completedWords.map(function (completedWord) {
+            completedWord.map(function (letterInCompletedWord) {
+                if (letterInCompletedWord[0] == x && letterInCompletedWord[1] == y) {
+                    color = letterInCompletedWord[2].classNames.backgroundColor;
+                }
+            });
+        });
+
+        return color;
 
     },
 
