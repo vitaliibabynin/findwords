@@ -50,7 +50,17 @@ var LetterClass = Object.assign({}, {}, {
 
     },
 
-    onClick: function () {
+    //onClick: function () {
+    //
+    //    if (this.state.isLocked) {
+    //        return;
+    //    }
+    //
+    //    this.state.handleLetterClick(this.state.x, this.state.y);
+    //
+    //},
+
+    onTouchMove: function () {
 
         if (this.state.isLocked) {
             return;
@@ -67,7 +77,7 @@ var LetterClass = Object.assign({}, {}, {
         );
 
         return (
-            <td className={letterClassName} onClick={this.onClick}>
+            <td className={letterClassName} onTouchMove={this.onTouchMove}>
                 {this.props.children}
             </td>
         );
@@ -200,6 +210,14 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+    onTouchStart: function () {
+
+    },
+
+    onTouchEnd: function () {
+        console.log("touchEnd");
+    },
+
     handleLetterClick: function (x, y) {
 
         if (x == 'undefined' || y == 'undefined') {
@@ -212,7 +230,8 @@ var BoardClass = Object.assign({}, {}, {
 
         } else {
 
-            this.addSelectedLetter(x, y);
+            //this.addSelectedLetter(x, y);
+            this.addTouchedLetters(x, y);
 
         }
 
@@ -325,6 +344,14 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+    addTouchedLetters: function (x, y) {
+
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters.push([x, y, {classNames: {linkBefore: LINK_LEFT}}]);
+        this.setState({selectedLetters: updatedLetters});
+
+    },
+
     boardConverter: function () {
 
         var arr = new Array(this.state.board.rows);
@@ -405,21 +432,23 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        //var initialBoard = this.boardConverter();
-        var initialBoard = [
-            ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
-            ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
-            ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
-            ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
-            ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
-            ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
-            ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
-            ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
-        ];
+        console.log(this.state.selectedLetters);
+
+        var initialBoard = this.boardConverter();
+        //var initialBoard = [
+        //    ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
+        //    ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
+        //    ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
+        //    ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
+        //    ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
+        //    ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
+        //    ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
+        //    ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
+        //];
 
         return (
 
-            <table className="board">
+            <table className="board" onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
 
                 {initialBoard.map(function (row, rowId) {
 
