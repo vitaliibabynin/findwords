@@ -92,8 +92,6 @@ var Letter = React.createClass(LetterClass);
 
 var BoardClass = Object.assign({}, {}, {
 
-    wordBeingSelected: [],
-
     onTouchStart: function (e) {
 
         e.stopPropagation();
@@ -105,20 +103,21 @@ var BoardClass = Object.assign({}, {}, {
         var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
         var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
 
-        var rowsX = this.state.board.rows;
-        var colsY = this.state.board.cols;
+        var rows = this.state.board.rows;
+        var cols = this.state.board.cols;
 
         var boardWidthX = e.currentTarget.getBoundingClientRect().width;
         var boardHeightY = e.currentTarget.getBoundingClientRect().height;
 
-        var cellWidthX = boardWidthX / rowsX;
-        var cellHeightY = boardHeightY / colsY;
+        var cellWidthX = boardWidthX / cols;
+        var cellHeightY = boardHeightY / rows;
 
-        var x = Math.floor(boardX / cellWidthX);
-        var y = Math.floor(boardY / cellHeightY);
+        var y = Math.floor(boardX / cellWidthX);
+        var x = Math.floor(boardY / cellHeightY);
 
-        this.wordBeingSelected.push([x, y]);
-        console.log(this.wordBeingSelected);
+        var updatedLetters = this.state.selectedLetters.slice();
+        updatedLetters.push([x, y, {classNames: {}}]);
+        this.setState({selectedLetters: updatedLetters});
 
     },
 
@@ -147,37 +146,75 @@ var BoardClass = Object.assign({}, {}, {
             return;
         }
 
-        var x = Math.floor(boardX / cellWidthX);
-        var y = Math.floor(boardY / cellHeightY);
+        var y = Math.floor(boardX / cellWidthX);
+        var x = Math.floor(boardY / cellHeightY);
 
         if (x > rowsX - 1 || y > colsY - 1 || x < 0 || y < 0) {
             console.log("invalid x or y" + x, y);
             return;
         }
 
-        if (x == this.wordBeingSelected[this.wordBeingSelected.length - 1][0] && y == this.wordBeingSelected[this.wordBeingSelected.length - 1][1]) {
+        if (x == this.state.selectedLetters[this.state.selectedLetters.length - 1][0] && y == this.state.selectedLetters[this.state.selectedLetters.length - 1][1]) {
             return;
         }
 
         var sameLetter = false;
         var index = 0;
-        this.wordBeingSelected.map(function(letter, letterIndex){
+        this.state.selectedLetters.map(function (letter, letterIndex) {
             if (x == letter[0] && y == letter[1]) {
                 sameLetter = true;
                 index = letterIndex;
             }
         });
 
+        var updatedLetters = this.state.selectedLetters.slice();
+
+        //remove letter
         if (sameLetter) {
-            this.wordBeingSelected.splice(index + 1, this.wordBeingSelected.length - (index - 1));
+            updatedLetters.splice(index + 1, updatedLetters.length - (index - 1));
+            if (index != 0) {
+                delete updatedLetters[index][2].classNames.linkAfter;
+            }
+            this.setState({selectedLetters: updatedLetters});
             console.log("removed letters");
-            console.log(this.wordBeingSelected);
             return;
         }
 
         //add letter
-        this.wordBeingSelected.push([x, y]);
-        console.log(this.wordBeingSelected);
+        var previousLetter = updatedLetters[this.state.selectedLetters.length - 1];
+
+        //find out which link needs to be attached
+        //restrict which letters can be clicked
+        var lastX = previousLetter[0];
+        var lastY = previousLetter[1];
+
+        if (x == lastX + 1 && y == lastY) {
+            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_TOP}}]);
+            previousLetter[2].classNames.linkAfter = LINK_BOTTOM;
+            this.setState({selectedLetters: updatedLetters});
+            return;
+        }
+
+        if (x == lastX - 1 && y == lastY) {
+            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_BOTTOM}}]);
+            previousLetter[2].classNames.linkAfter = LINK_TOP;
+            this.setState({selectedLetters: updatedLetters});
+            return;
+        }
+
+        if (y == lastY + 1 && x == lastX) {
+            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_LEFT}}]);
+            previousLetter[2].classNames.linkAfter = LINK_RIGHT;
+            this.setState({selectedLetters: updatedLetters});
+            return;
+        }
+
+        if (y == lastY - 1 && x == lastX) {
+            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_RIGHT}}]);
+            previousLetter[2].classNames.linkAfter = LINK_LEFT;
+            this.setState({selectedLetters: updatedLetters});
+            return;
+        }
 
     },
 
@@ -186,37 +223,9 @@ var BoardClass = Object.assign({}, {}, {
         e.stopPropagation();
         e.preventDefault();
 
-        this.wordBeingSelected = [];
-        console.log(this.wordBeingSelected);
+        this.setState({selectedLetters: []});
 
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     getInitialState: function () {
@@ -553,8 +562,7 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        //console.log(this.state.selectedLetters);
-        //console.log(this.offset().left);
+        console.log(this.state.selectedLetters);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
