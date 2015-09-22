@@ -20,9 +20,9 @@ var LetterClass = Object.assign({}, {}, {
 
         x: React.PropTypes.number,
         y: React.PropTypes.number,
-        handleLetterClick: React.PropTypes.func,
+        //handleLetterClick: React.PropTypes.func,
         classNameLetter: React.PropTypes.string,
-        isLocked: React.PropTypes.bool
+        //isLocked: React.PropTypes.bool
 
     },
 
@@ -31,10 +31,10 @@ var LetterClass = Object.assign({}, {}, {
         var state = {
             x: this.props.x || 0,
             y: this.props.y || 0,
-            handleLetterClick: this.props.handleLetterClick || function () {
-            },
+            //handleLetterClick: this.props.handleLetterClick || function () {
+            //},
             classNameLetter: this.props.classNameLetter || "",
-            isLocked: this.props.isLocked || false
+            //isLocked: this.props.isLocked || false
         };
 
         return state;
@@ -45,7 +45,7 @@ var LetterClass = Object.assign({}, {}, {
 
         this.setState({
             classNameLetter: nextProps.classNameLetter || "",
-            isLocked: nextProps.isLocked || false
+            //isLocked: nextProps.isLocked || false
         });
 
     },
@@ -115,6 +115,10 @@ var BoardClass = Object.assign({}, {}, {
         var y = Math.floor(boardX / cellWidthX);
         var x = Math.floor(boardY / cellHeightY);
 
+        if (this.checkIfLetterIsInCompleteWord(x, y)) {
+            return;
+        }
+        
         var updatedLetters = this.state.selectedLetters.slice();
         updatedLetters.push([x, y, {classNames: {}}]);
         this.setState({selectedLetters: updatedLetters});
@@ -149,20 +153,26 @@ var BoardClass = Object.assign({}, {}, {
         var y = Math.floor(boardX / cellWidthX);
         var x = Math.floor(boardY / cellHeightY);
 
+        //check for invalid number of rows and columns
         if (x > rowsX - 1 || y > colsY - 1 || x < 0 || y < 0) {
             console.log("invalid x or y" + x, y);
             return;
         }
 
+        if (this.checkIfLetterIsInCompleteWord(x, y)) {
+            return;
+        }
+
+        //check if different letter
         if (x == this.state.selectedLetters[this.state.selectedLetters.length - 1][0] && y == this.state.selectedLetters[this.state.selectedLetters.length - 1][1]) {
             return;
         }
 
-        var sameLetter = false;
+        var letterSelected = false;
         var index = 0;
         this.state.selectedLetters.map(function (letter, letterIndex) {
             if (x == letter[0] && y == letter[1]) {
-                sameLetter = true;
+                letterSelected = true;
                 index = letterIndex;
             }
         });
@@ -170,11 +180,9 @@ var BoardClass = Object.assign({}, {}, {
         var updatedLetters = this.state.selectedLetters.slice();
 
         //remove letter
-        if (sameLetter) {
+        if (letterSelected) {
             updatedLetters.splice(index + 1, updatedLetters.length - (index - 1));
-            if (index != 0) {
-                delete updatedLetters[index][2].classNames.linkAfter;
-            }
+            delete updatedLetters[index][2].classNames.linkAfter;
             this.setState({selectedLetters: updatedLetters});
             console.log("removed letters");
             return;
@@ -223,7 +231,12 @@ var BoardClass = Object.assign({}, {}, {
         e.stopPropagation();
         e.preventDefault();
 
-        this.setState({selectedLetters: []});
+        if (!this.checkForCompletedWord()) {
+            this.setState({selectedLetters: []});
+            return;
+        }
+
+        this.moveSelectedLettersToCompleteWords();
 
     },
 
@@ -257,16 +270,6 @@ var BoardClass = Object.assign({}, {}, {
             completedWords: []
         };
         return state;
-    },
-
-    componentDidUpdate: function () {
-
-        if (!this.checkForCompletedWord()) {
-            return;
-        }
-
-        this.moveSelectedLettersToCompleteWords();
-
     },
 
     checkForCompletedWord: function () {
@@ -348,26 +351,26 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    handleLetterClick: function (x, y) {
-
-        if (x == 'undefined' || y == 'undefined') {
-            return false;
-        }
-
-        if (this.checkIfLetterIsSelected(x, y)) {
-
-            this.removeSelectedLetter(x, y);
-
-        } else {
-
-            //this.addSelectedLetter(x, y);
-            this.addTouchedLetters(x, y);
-
-        }
-
-        return true;
-
-    },
+    //handleLetterClick: function (x, y) {
+    //
+    //    if (x == 'undefined' || y == 'undefined') {
+    //        return false;
+    //    }
+    //
+    //    if (this.checkIfLetterIsSelected(x, y)) {
+    //
+    //        this.removeSelectedLetter(x, y);
+    //
+    //    } else {
+    //
+    //        //this.addSelectedLetter(x, y);
+    //        this.addTouchedLetters(x, y);
+    //
+    //    }
+    //
+    //    return true;
+    //
+    //},
 
     checkIfLetterIsSelected: function (x, y) {
 
@@ -382,30 +385,30 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    removeSelectedLetter: function (x, y) {
-
-        /// === because index 0 is treated as false
-        if (this.getSelectedLetterIndex(x, y) === false) {
-            return false;
-        }
-
-        var index = this.getSelectedLetterIndex(x, y);
-
-        var updatedLetters = this.state.selectedLetters.slice();
-
-        if (index != 0) {
-            delete updatedLetters[index - 1][2].classNames.linkAfter;
-        }
-
-        updatedLetters.splice(index, this.state.selectedLetters.length - index);
-
-        this.setState({
-            selectedLetters: updatedLetters
-        });
-
-        return true;
-
-    },
+    //removeSelectedLetter: function (x, y) {
+    //
+    //    /// === because index 0 is treated as false
+    //    if (this.getSelectedLetterIndex(x, y) === false) {
+    //        return false;
+    //    }
+    //
+    //    var index = this.getSelectedLetterIndex(x, y);
+    //
+    //    var updatedLetters = this.state.selectedLetters.slice();
+    //
+    //    if (index != 0) {
+    //        delete updatedLetters[index - 1][2].classNames.linkAfter;
+    //    }
+    //
+    //    updatedLetters.splice(index, this.state.selectedLetters.length - index);
+    //
+    //    this.setState({
+    //        selectedLetters: updatedLetters
+    //    });
+    //
+    //    return true;
+    //
+    //},
 
     getSelectedLetterIndex: function (x, y) {
 
@@ -424,63 +427,63 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    addSelectedLetter: function (x, y) {
-
-        var updatedLetters = this.state.selectedLetters.slice();
-
-        //check if there is a previous letter
-        if (this.state.selectedLetters.length == 0) {
-            updatedLetters.push([x, y, {classNames: {}}]);
-            this.setState({selectedLetters: updatedLetters});
-            return true;
-        }
-
-        var previousLetter = updatedLetters[this.state.selectedLetters.length - 1];
-
-        //find out which link needs to be attached
-        //restrict which letters can be clicked
-        var lastX = previousLetter[0];
-        var lastY = previousLetter[1];
-
-        if (x == lastX + 1 && y == lastY) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_TOP}}]);
-            previousLetter[2].classNames.linkAfter = LINK_BOTTOM;
-            this.setState({selectedLetters: updatedLetters});
-            return true;
-        }
-
-        if (x == lastX - 1 && y == lastY) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_BOTTOM}}]);
-            previousLetter[2].classNames.linkAfter = LINK_TOP;
-            this.setState({selectedLetters: updatedLetters});
-            return true;
-        }
-
-        if (y == lastY + 1 && x == lastX) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_LEFT}}]);
-            previousLetter[2].classNames.linkAfter = LINK_RIGHT;
-            this.setState({selectedLetters: updatedLetters});
-            return true;
-        }
-
-        if (y == lastY - 1 && x == lastX) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: LINK_RIGHT}}]);
-            previousLetter[2].classNames.linkAfter = LINK_LEFT;
-            this.setState({selectedLetters: updatedLetters});
-            return true;
-        }
-
-        return false;
-
-    },
-
-    addTouchedLetters: function (x, y) {
-
-        var updatedLetters = this.state.selectedLetters.slice();
-        updatedLetters.push([x, y, {classNames: {linkBefore: LINK_LEFT}}]);
-        this.setState({selectedLetters: updatedLetters});
-
-    },
+    //addSelectedLetter: function (x, y) {
+    //
+    //    var updatedLetters = this.state.selectedLetters.slice();
+    //
+    //    //check if there is a previous letter
+    //    if (this.state.selectedLetters.length == 0) {
+    //        updatedLetters.push([x, y, {classNames: {}}]);
+    //        this.setState({selectedLetters: updatedLetters});
+    //        return true;
+    //    }
+    //
+    //    var previousLetter = updatedLetters[this.state.selectedLetters.length - 1];
+    //
+    //    //find out which link needs to be attached
+    //    //restrict which letters can be clicked
+    //    var lastX = previousLetter[0];
+    //    var lastY = previousLetter[1];
+    //
+    //    if (x == lastX + 1 && y == lastY) {
+    //        updatedLetters.push([x, y, {classNames: {linkBefore: LINK_TOP}}]);
+    //        previousLetter[2].classNames.linkAfter = LINK_BOTTOM;
+    //        this.setState({selectedLetters: updatedLetters});
+    //        return true;
+    //    }
+    //
+    //    if (x == lastX - 1 && y == lastY) {
+    //        updatedLetters.push([x, y, {classNames: {linkBefore: LINK_BOTTOM}}]);
+    //        previousLetter[2].classNames.linkAfter = LINK_TOP;
+    //        this.setState({selectedLetters: updatedLetters});
+    //        return true;
+    //    }
+    //
+    //    if (y == lastY + 1 && x == lastX) {
+    //        updatedLetters.push([x, y, {classNames: {linkBefore: LINK_LEFT}}]);
+    //        previousLetter[2].classNames.linkAfter = LINK_RIGHT;
+    //        this.setState({selectedLetters: updatedLetters});
+    //        return true;
+    //    }
+    //
+    //    if (y == lastY - 1 && x == lastX) {
+    //        updatedLetters.push([x, y, {classNames: {linkBefore: LINK_RIGHT}}]);
+    //        previousLetter[2].classNames.linkAfter = LINK_LEFT;
+    //        this.setState({selectedLetters: updatedLetters});
+    //        return true;
+    //    }
+    //
+    //    return false;
+    //
+    //},
+    //
+    //addTouchedLetters: function (x, y) {
+    //
+    //    var updatedLetters = this.state.selectedLetters.slice();
+    //    updatedLetters.push([x, y, {classNames: {linkBefore: LINK_LEFT}}]);
+    //    this.setState({selectedLetters: updatedLetters});
+    //
+    //},
 
     boardConverter: function () {
 
