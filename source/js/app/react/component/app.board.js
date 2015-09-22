@@ -60,15 +60,17 @@ var LetterClass = Object.assign({}, {}, {
     //
     //},
 
-    onTouchMove: function () {
-
-        if (this.state.isLocked) {
-            return;
-        }
-
-        this.state.handleLetterClick(this.state.x, this.state.y);
-
-    },
+    //onTouchMove: function () {
+    //
+    //    console.log("touchMove");
+    //
+    //    if (this.state.isLocked) {
+    //        return;
+    //    }
+    //
+    //    this.state.handleLetterClick(this.state.x, this.state.y);
+    //
+    //},
 
     render: function () {
 
@@ -77,7 +79,7 @@ var LetterClass = Object.assign({}, {}, {
         );
 
         return (
-            <td className={letterClassName} onTouchMove={this.onTouchMove}>
+            <td className={letterClassName} onTouchMove={this.props.onTouchMove}>
                 {this.props.children}
             </td>
         );
@@ -210,12 +212,129 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    onTouchStart: function () {
+    onTouchStart: function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        //console.log(e._dispatchIDs);
+        //console.log(e._dispatchListeners);
+        //console.log(e.altKey);
+        //console.log(e.bubbles);
+        //console.log(e.cancelable);
+        //console.log(e.changedTouches);
+        //console.log(e.ctrlKey);
+        console.log(e.currentTarget);
+        //console.log(e.defaultPrevented);
+        //console.log(e.detail);
+        //console.log(e.dispatchConfig);
+        //console.log(e.dispatchMarker);
+        //console.log(e.eventPhase);
+        //console.log(e.getModifierState);
+        //console.log(e.isDefaultPrevented());
+        //console.log(e.isPropagationStopped());
+        //console.log(e.isTrusted);
+        //console.log(e.metaKey);
+        //console.log(e.nativeEvent);
+        //console.log(e.shiftKey);
+        //console.log(e.target);
+        //console.log(e.targetTouches);
+        //console.log(e.timeStamp);
+        //console.log(e.touches);
+        //console.log(e.type);
+        //console.log(e.view);
+
+        var x = e.touches[0].clientX;
+        var y = e.touches[0].clientY;
+
+        console.log(x, y);
 
     },
 
-    onTouchEnd: function () {
-        console.log("touchEnd");
+    onTouchMove: function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        //console.log(e._dispatchIDs);
+        //console.log(e._dispatchListeners);
+        //console.log(e.altKey);
+        //console.log(e.bubbles);
+        //console.log(e.cancelable);
+        //console.log(e.changedTouches);
+        //console.log(e.ctrlKey);
+        console.log(e.currentTarget);
+        //console.log(e.defaultPrevented);
+        //console.log(e.detail);
+        //console.log(e.dispatchConfig);
+        //console.log(e.dispatchMarker);
+        //console.log(e.eventPhase);
+        //console.log(e.getModifierState);
+        //console.log(e.isDefaultPrevented());
+        //console.log(e.isPropagationStopped());
+        //console.log(e.isTrusted);
+        //console.log(e.metaKey);
+        //console.log(e.nativeEvent);
+        //console.log(e.shiftKey);
+        //console.log(e.target);
+        //console.log(e.targetTouches);
+        //console.log(e.timeStamp);
+        //console.log(e.touches);
+        //console.log(e.type);
+        //console.log(e.view);
+
+        var x = e.touches[0].clientX;
+        var y = e.touches[0].clientY;
+
+        console.log(x, y);
+
+        //console.log("touchMove");
+
+        //if (this.state.isLocked) {
+        //    return;
+        //}
+
+        //this.handleLetterClick(this.state.x, this.state.y);
+
+    },
+
+    onTouchEnd: function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        //console.log(e._dispatchIDs);
+        //console.log(e._dispatchListeners);
+        //console.log(e.altKey);
+        //console.log(e.bubbles);
+        //console.log(e.cancelable);
+        //console.log(e.changedTouches);
+        //console.log(e.ctrlKey);
+        //console.log(e.currentTarget);
+        //console.log(e.defaultPrevented);
+        //console.log(e.detail);
+        //console.log(e.dispatchConfig);
+        //console.log(e.dispatchMarker);
+        //console.log(e.eventPhase);
+        //console.log(e.getModifierState);
+        //console.log(e.isDefaultPrevented());
+        //console.log(e.isPropagationStopped());
+        //console.log(e.isTrusted);
+        //console.log(e.metaKey);
+        //console.log(e.nativeEvent);
+        //console.log(e.shiftKey);
+        //console.log(e.target);
+        //console.log(e.targetTouches);
+        //console.log(e.timeStamp);
+        //console.log(e.touches);
+        //console.log(e.type);
+        //console.log(e.view);
+
+        //var x = e.touches[0].clientX;
+        //var y = e.touches[0].clientY;
+        //
+        //console.log(x, y);
+
     },
 
     handleLetterClick: function (x, y) {
@@ -432,7 +551,8 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log(this.state.selectedLetters);
+        //console.log(this.state.selectedLetters);
+        //console.log(this.offset().left);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
@@ -470,7 +590,8 @@ var BoardClass = Object.assign({}, {}, {
                                     <Letter key={rowId + '_' + cellId} x={rowId} y={cellId}
                                             classNameLetter={letterClassNames}
                                             handleLetterClick={this.handleLetterClick}
-                                            isLocked={this.checkIfLetterIsInCompleteWord(rowId, cellId)}>
+                                            isLocked={this.checkIfLetterIsInCompleteWord(rowId, cellId)}
+                                            onTouchMove={this.onTouchMove}>
                                         {cell}
                                     </Letter>
 
