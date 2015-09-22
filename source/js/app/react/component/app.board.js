@@ -79,7 +79,7 @@ var LetterClass = Object.assign({}, {}, {
         );
 
         return (
-            <td className={letterClassName} onTouchMove={this.props.onTouchMove}>
+            <td className={letterClassName}>
                 {this.props.children}
             </td>
         );
@@ -91,6 +91,133 @@ var Letter = React.createClass(LetterClass);
 
 
 var BoardClass = Object.assign({}, {}, {
+
+    wordBeingSelected: [],
+
+    onTouchStart: function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        var screenX = e.touches[0].clientX;
+        var screenY = e.touches[0].clientY;
+
+        var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
+        var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
+
+        var rowsX = this.state.board.rows;
+        var colsY = this.state.board.cols;
+
+        var boardWidthX = e.currentTarget.getBoundingClientRect().width;
+        var boardHeightY = e.currentTarget.getBoundingClientRect().height;
+
+        var cellWidthX = boardWidthX / rowsX;
+        var cellHeightY = boardHeightY / colsY;
+
+        var x = Math.floor(boardX / cellWidthX);
+        var y = Math.floor(boardY / cellHeightY);
+
+        this.wordBeingSelected.push([x, y]);
+        console.log(this.wordBeingSelected);
+
+    },
+
+    onTouchMove: function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        var screenX = e.touches[0].clientX;
+        var screenY = e.touches[0].clientY;
+
+        var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
+        var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
+
+        var rowsX = this.state.board.rows;
+        var colsY = this.state.board.cols;
+
+        var boardWidthX = e.currentTarget.getBoundingClientRect().width;
+        var boardHeightY = e.currentTarget.getBoundingClientRect().height;
+
+        var cellWidthX = boardWidthX / rowsX;
+        var cellHeightY = boardHeightY / colsY;
+
+        if (boardX > boardWidthX || boardX < 0 || boardY > boardHeightY || boardY < 0) {
+            console.log("off-limits");
+            return;
+        }
+
+        var x = Math.floor(boardX / cellWidthX);
+        var y = Math.floor(boardY / cellHeightY);
+
+        if (x > rowsX - 1 || y > colsY - 1 || x < 0 || y < 0) {
+            console.log("invalid x or y" + x, y);
+            return;
+        }
+
+        if (x == this.wordBeingSelected[this.wordBeingSelected.length - 1][0] && y == this.wordBeingSelected[this.wordBeingSelected.length - 1][1]) {
+            return;
+        }
+
+        var sameLetter = false;
+        var index = 0;
+        this.wordBeingSelected.map(function(letter, letterIndex){
+            if (x == letter[0] && y == letter[1]) {
+                sameLetter = true;
+                index = letterIndex;
+            }
+        });
+
+        if (sameLetter) {
+            this.wordBeingSelected.splice(index + 1, this.wordBeingSelected.length - (index - 1));
+            console.log("removed letters");
+            console.log(this.wordBeingSelected);
+            return;
+        }
+
+        //add letter
+        this.wordBeingSelected.push([x, y]);
+        console.log(this.wordBeingSelected);
+
+    },
+
+    onTouchEnd: function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        this.wordBeingSelected = [];
+        console.log(this.wordBeingSelected);
+
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     getInitialState: function () {
         var state = {
@@ -209,131 +336,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         return backgroundColor;
-
-    },
-
-    onTouchStart: function (e) {
-
-        e.stopPropagation();
-        e.preventDefault();
-
-        //console.log(e._dispatchIDs);
-        //console.log(e._dispatchListeners);
-        //console.log(e.altKey);
-        //console.log(e.bubbles);
-        //console.log(e.cancelable);
-        //console.log(e.changedTouches);
-        //console.log(e.ctrlKey);
-        console.log(e.currentTarget);
-        //console.log(e.defaultPrevented);
-        //console.log(e.detail);
-        //console.log(e.dispatchConfig);
-        //console.log(e.dispatchMarker);
-        //console.log(e.eventPhase);
-        //console.log(e.getModifierState);
-        //console.log(e.isDefaultPrevented());
-        //console.log(e.isPropagationStopped());
-        //console.log(e.isTrusted);
-        //console.log(e.metaKey);
-        //console.log(e.nativeEvent);
-        //console.log(e.shiftKey);
-        //console.log(e.target);
-        //console.log(e.targetTouches);
-        //console.log(e.timeStamp);
-        //console.log(e.touches);
-        //console.log(e.type);
-        //console.log(e.view);
-
-        var x = e.touches[0].clientX;
-        var y = e.touches[0].clientY;
-
-        console.log(x, y);
-
-    },
-
-    onTouchMove: function (e) {
-
-        e.stopPropagation();
-        e.preventDefault();
-
-        //console.log(e._dispatchIDs);
-        //console.log(e._dispatchListeners);
-        //console.log(e.altKey);
-        //console.log(e.bubbles);
-        //console.log(e.cancelable);
-        //console.log(e.changedTouches);
-        //console.log(e.ctrlKey);
-        console.log(e.currentTarget);
-        //console.log(e.defaultPrevented);
-        //console.log(e.detail);
-        //console.log(e.dispatchConfig);
-        //console.log(e.dispatchMarker);
-        //console.log(e.eventPhase);
-        //console.log(e.getModifierState);
-        //console.log(e.isDefaultPrevented());
-        //console.log(e.isPropagationStopped());
-        //console.log(e.isTrusted);
-        //console.log(e.metaKey);
-        //console.log(e.nativeEvent);
-        //console.log(e.shiftKey);
-        //console.log(e.target);
-        //console.log(e.targetTouches);
-        //console.log(e.timeStamp);
-        //console.log(e.touches);
-        //console.log(e.type);
-        //console.log(e.view);
-
-        var x = e.touches[0].clientX;
-        var y = e.touches[0].clientY;
-
-        console.log(x, y);
-
-        //console.log("touchMove");
-
-        //if (this.state.isLocked) {
-        //    return;
-        //}
-
-        //this.handleLetterClick(this.state.x, this.state.y);
-
-    },
-
-    onTouchEnd: function (e) {
-
-        e.stopPropagation();
-        e.preventDefault();
-
-        //console.log(e._dispatchIDs);
-        //console.log(e._dispatchListeners);
-        //console.log(e.altKey);
-        //console.log(e.bubbles);
-        //console.log(e.cancelable);
-        //console.log(e.changedTouches);
-        //console.log(e.ctrlKey);
-        //console.log(e.currentTarget);
-        //console.log(e.defaultPrevented);
-        //console.log(e.detail);
-        //console.log(e.dispatchConfig);
-        //console.log(e.dispatchMarker);
-        //console.log(e.eventPhase);
-        //console.log(e.getModifierState);
-        //console.log(e.isDefaultPrevented());
-        //console.log(e.isPropagationStopped());
-        //console.log(e.isTrusted);
-        //console.log(e.metaKey);
-        //console.log(e.nativeEvent);
-        //console.log(e.shiftKey);
-        //console.log(e.target);
-        //console.log(e.targetTouches);
-        //console.log(e.timeStamp);
-        //console.log(e.touches);
-        //console.log(e.type);
-        //console.log(e.view);
-
-        //var x = e.touches[0].clientX;
-        //var y = e.touches[0].clientY;
-        //
-        //console.log(x, y);
 
     },
 
@@ -568,7 +570,8 @@ var BoardClass = Object.assign({}, {}, {
 
         return (
 
-            <table className="board" onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
+            <table className="board" onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove}
+                   onTouchEnd={this.onTouchEnd}>
 
                 {initialBoard.map(function (row, rowId) {
 
@@ -590,8 +593,7 @@ var BoardClass = Object.assign({}, {}, {
                                     <Letter key={rowId + '_' + cellId} x={rowId} y={cellId}
                                             classNameLetter={letterClassNames}
                                             handleLetterClick={this.handleLetterClick}
-                                            isLocked={this.checkIfLetterIsInCompleteWord(rowId, cellId)}
-                                            onTouchMove={this.onTouchMove}>
+                                            isLocked={this.checkIfLetterIsInCompleteWord(rowId, cellId)}>
                                         {cell}
                                     </Letter>
 
