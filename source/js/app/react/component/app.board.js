@@ -81,7 +81,12 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         var updatedLetters = this.state.selectedLetters.slice();
-        updatedLetters.push([x, y, {classNames: {}}]);
+        updatedLetters.push([x, y, {
+            classNames: {
+                backgroundColor: this.selectWordBackgroundColor(),
+                isSelected: "selected"
+            }
+        }]);
         this.setState({selectedLetters: updatedLetters});
 
     },
@@ -162,26 +167,50 @@ var BoardClass = Object.assign({}, {}, {
         var lastY = previousLetter[1];
 
         if (x == lastX + 1 && y == lastY) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: "before-link-top"}}]);
+            updatedLetters.push([x, y, {
+                classNames: {
+                    linkBefore: "before-link-top",
+                    backgroundColor: this.selectWordBackgroundColor(),
+                    isSelected: "selected"
+                }
+            }]);
             previousLetter[2].classNames.linkAfter = "after-link-bottom";
             this.setState({selectedLetters: updatedLetters});
         }
 
         if (x == lastX - 1 && y == lastY) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: "before-link-bottom"}}]);
+            updatedLetters.push([x, y, {
+                classNames: {
+                    linkBefore: "before-link-bottom",
+                    backgroundColor: this.selectWordBackgroundColor(),
+                    isSelected: "selected"
+                }
+            }]);
             previousLetter[2].classNames.linkAfter = "after-link-top";
             this.setState({selectedLetters: updatedLetters});
         }
 
         if (y == lastY + 1 && x == lastX) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: "before-link-left"}}]);
+            updatedLetters.push([x, y, {
+                classNames: {
+                    linkBefore: "before-link-left",
+                    backgroundColor: this.selectWordBackgroundColor(),
+                    isSelected: "selected"
+                }
+            }]);
             previousLetter[2].classNames.linkAfter = "after-link-right";
             this.setState({selectedLetters: updatedLetters});
         }
 
         if (y == lastY - 1 && x == lastX) {
-            updatedLetters.push([x, y, {classNames: {linkBefore: "before-link-right"}}]);
-            previousLetter[2].classNames.linkAfter = "before-link-left";
+            updatedLetters.push([x, y, {
+                classNames: {
+                    linkBefore: "before-link-right",
+                    backgroundColor: this.selectWordBackgroundColor(),
+                    isSelected: "selected"
+                }
+            }]);
+            previousLetter[2].classNames.linkAfter = "after-link-left";
             this.setState({selectedLetters: updatedLetters});
         }
 
@@ -233,6 +262,28 @@ var BoardClass = Object.assign({}, {}, {
         return state;
     },
 
+    boardConverter: function () {
+
+        var arr = new Array(this.state.board.rows);
+
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = new Array(this.state.board.cols);
+        }
+
+        this.state.board.words.map(function (word) {
+
+            word.letters.map(function (letter) {
+
+                arr[letter.x][letter.y] = letter.letter;
+
+            })
+
+        });
+
+        return arr;
+
+    },
+
 
     checkForCompletedWord: function () {
 
@@ -271,7 +322,8 @@ var BoardClass = Object.assign({}, {}, {
 
         for (var i = 0; i < completeWord.length; i++) {
             completeWord[i][2].classNames = {
-                backgroundColor: wordBackgroundColor
+                backgroundColor: wordBackgroundColor,
+                inCompleteWord: "complete"
             };
             completeWord[i].push({isLocked: true})
         }
@@ -326,52 +378,6 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    boardConverter: function () {
-
-        var arr = new Array(this.state.board.rows);
-
-        for (var i = 0; i < arr.length; i++) {
-            arr[i] = new Array(this.state.board.cols);
-        }
-
-        this.state.board.words.map(function (word) {
-
-            word.letters.map(function (letter) {
-
-                arr[letter.x][letter.y] = letter.letter;
-
-            })
-
-        });
-
-        return arr;
-
-    },
-
-    selectedLetterLinks: function (x, y) {
-
-        /// === because index 0 is treated as false
-        if (this.getSelectedLetterIndex(x, y) === false) {
-            return false;
-        }
-
-        var index = this.getSelectedLetterIndex(x, y);
-
-        var before = '';
-        var after = '';
-
-        if (this.state.selectedLetters[index][2].classNames.linkBefore !== undefined) {
-            before = this.state.selectedLetters[index][2].classNames.linkBefore;
-        }
-
-        if (this.state.selectedLetters[index][2].classNames.linkAfter !== undefined) {
-            after = this.state.selectedLetters[index][2].classNames.linkAfter;
-        }
-
-        return [before, after];
-
-    },
-
     checkIfLetterIsInCompleteWord: function (x, y) {
 
         var result = false;
@@ -388,27 +394,49 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    getLetterBackgroundColor: function (x, y) {
 
-        var color = '';
+    selectedLetterClasses: function (x, y) {
+
+        /// === because index 0 is treated as false
+        if (this.getSelectedLetterIndex(x, y) === false) {
+            return false;
+        }
+
+        var index = this.getSelectedLetterIndex(x, y);
+
+        var classes = this.state.selectedLetters[index][2].classNames;
+
+        var letterClasses = [];
+        for (var c in classes) letterClasses.push(classes[c]);
+
+        return letterClasses;
+
+    },
+
+    completedWordsClasses: function (x, y) {
+
+        var classes = '';
 
         this.state.completedWords.map(function (completedWord) {
             completedWord.map(function (letterInCompletedWord) {
                 if (letterInCompletedWord[0] == x && letterInCompletedWord[1] == y) {
-                    color = letterInCompletedWord[2].classNames.backgroundColor;
+                    classes = letterInCompletedWord[2].classNames;
                 }
             });
         });
 
-        return color;
+        var completeWordClasses = [];
+        for (var c in classes) completeWordClasses.push(classes[c]);
+
+        return completeWordClasses;
 
     },
 
 
     render: function () {
 
-        console.log(this.state.selectedLetters);
-        console.log(this.state.completedWords);
+        //console.log(this.state.selectedLetters);
+        //console.log(this.state.completedWords);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
@@ -436,10 +464,8 @@ var BoardClass = Object.assign({}, {}, {
                             {row.map(function (cell, cellId) {
 
                                 var letterClassNames = classNames(
-                                    {"selected": this.getSelectedLetterIndex(rowId, cellId) !== false},
-                                    {"isLocked": this.checkIfLetterIsInCompleteWord(rowId, cellId)},
-                                    this.selectedLetterLinks(rowId, cellId),
-                                    this.getLetterBackgroundColor(rowId, cellId)
+                                    this.selectedLetterClasses(rowId, cellId),
+                                    this.completedWordsClasses(rowId, cellId)
                                 );
 
                                 return (

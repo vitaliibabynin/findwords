@@ -179,8 +179,8 @@
       &.selected {
         color: $gamePage-board-td-color-selected;
       }
-      &.isLocked {
-        color: $gamePage-board-td-color-isLocked;
+      &.complete {
+        color: $gamePage-board-td-color-complete;
       }
 
       &.backgroundColor1 {
