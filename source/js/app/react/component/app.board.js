@@ -76,8 +76,63 @@ var BoardClass = Object.assign({}, {}, {
         var x = Math.floor(boardY / cellHeightY);
 
         if (this.checkIfLetterIsInCompleteWord(x, y)) {
-            console.log(this.checkIfLetterIsInCompleteWord(x, y));
+
+            var currentWord = this.checkIfLetterIsInCompleteWord(x, y);
+            var completedWords = this.state.completedWords.slice();
+
+            var index = "undefined";
+            completedWords.map(function (word, wordIndex) {
+                var result;
+                if (word.length == currentWord.length) {
+                    result = true;
+                    word.map(function (letter, letterIdx) {
+                        if (letter[0] != currentWord[letterIdx][0] || letter[1] != currentWord[letterIdx][1]) {
+                            result = false;
+                        }
+                    })
+                }
+                if (result) {
+                    index = wordIndex;
+                }
+            });
+
+            for (var i = 1; i < currentWord.length; i++) {
+
+                var currentLetter = currentWord[i];
+                var previousLetter = currentWord[i - 1];
+                var previousX = previousLetter[0];
+                var previousY = previousLetter[1];
+                var currentX = currentLetter[0];
+                var currentY = currentLetter[1];
+
+                if (currentX == previousX + 1 && currentY == previousY) {
+                    currentLetter[2].classNames.linkBefore = "before-link-top";
+                    previousLetter[2].classNames.linkAfter = "after-link-bottom";
+                }
+
+                if (currentX == previousX - 1 && currentY == previousY) {
+                    currentLetter[2].classNames.linkBefore = "before-link-bottom";
+                    previousLetter[2].classNames.linkAfter = "after-link-top";
+                }
+
+                if (currentY == previousY + 1 && currentX == previousX) {
+                    currentLetter[2].classNames.linkBefore = "before-link-left";
+                    previousLetter[2].classNames.linkAfter = "after-link-right";
+                }
+
+                if (currentY == previousY - 1 && currentX == previousX) {
+                    currentLetter[2].classNames.linkBefore = "before-link-right";
+                    previousLetter[2].classNames.linkAfter = "after-link-left";
+                }
+
+            }
+
+            completedWords[index] = currentWord;
+
+            this.setState({completedWords: completedWords});
+
             return;
+
         }
 
         var updatedLetters = this.state.selectedLetters.slice();
@@ -163,10 +218,10 @@ var BoardClass = Object.assign({}, {}, {
 
         //find out which link needs to be attached
         //restrict which letters can be clicked
-        var lastX = previousLetter[0];
-        var lastY = previousLetter[1];
+        var previousX = previousLetter[0];
+        var previousY = previousLetter[1];
 
-        if (x == lastX + 1 && y == lastY) {
+        if (x == previousX + 1 && y == previousY) {
             updatedLetters.push([x, y, {
                 classNames: {
                     linkBefore: "before-link-top",
@@ -175,10 +230,9 @@ var BoardClass = Object.assign({}, {}, {
                 }
             }]);
             previousLetter[2].classNames.linkAfter = "after-link-bottom";
-            this.setState({selectedLetters: updatedLetters});
         }
 
-        if (x == lastX - 1 && y == lastY) {
+        if (x == previousX - 1 && y == previousY) {
             updatedLetters.push([x, y, {
                 classNames: {
                     linkBefore: "before-link-bottom",
@@ -187,10 +241,9 @@ var BoardClass = Object.assign({}, {}, {
                 }
             }]);
             previousLetter[2].classNames.linkAfter = "after-link-top";
-            this.setState({selectedLetters: updatedLetters});
         }
 
-        if (y == lastY + 1 && x == lastX) {
+        if (y == previousY + 1 && x == previousX) {
             updatedLetters.push([x, y, {
                 classNames: {
                     linkBefore: "before-link-left",
@@ -199,10 +252,9 @@ var BoardClass = Object.assign({}, {}, {
                 }
             }]);
             previousLetter[2].classNames.linkAfter = "after-link-right";
-            this.setState({selectedLetters: updatedLetters});
         }
 
-        if (y == lastY - 1 && x == lastX) {
+        if (y == previousY - 1 && x == previousX) {
             updatedLetters.push([x, y, {
                 classNames: {
                     linkBefore: "before-link-right",
@@ -211,8 +263,9 @@ var BoardClass = Object.assign({}, {}, {
                 }
             }]);
             previousLetter[2].classNames.linkAfter = "after-link-left";
-            this.setState({selectedLetters: updatedLetters});
         }
+
+        this.setState({selectedLetters: updatedLetters});
 
     },
 
@@ -258,6 +311,7 @@ var BoardClass = Object.assign({}, {}, {
             },
             selectedLetters: [],
             completedWords: []
+            //highlightedLetters: []
         };
         return state;
     },
@@ -290,13 +344,13 @@ var BoardClass = Object.assign({}, {}, {
         var words = this.state.board.words;
         var selectedLetters = this.state.selectedLetters;
 
-        var result = false;
+        var mainResult = false;
 
         words.map(function (word) {
 
             if (word.letters.length == selectedLetters.length) {
 
-                result = true;
+                var result = true;
 
                 word.letters.map(function (letter, letterIndex) {
 
@@ -307,11 +361,15 @@ var BoardClass = Object.assign({}, {}, {
 
                 });
 
+                if (result) {
+                    mainResult = true;
+                }
+
             }
 
         });
 
-        return result;
+        return mainResult;
 
     },
 
@@ -324,8 +382,7 @@ var BoardClass = Object.assign({}, {}, {
             completeWord[i][2].classNames = {
                 backgroundColor: wordBackgroundColor,
                 inCompleteWord: "complete"
-            };
-            completeWord[i].push({isLocked: true})
+            }
         }
 
         var completedWords = this.state.completedWords.slice();
@@ -432,11 +489,29 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+    //highlightedLettersClasses: function (x, y) {
+    //
+    //    var classes = '';
+    //
+    //    this.state.highlightedLetters.map(function (highlightedLetter) {
+    //        if (highlightedLetter[0] == x && highlightedLetter[1] == y) {
+    //            classes = highlightedLetter[2].classNames;
+    //        }
+    //    });
+    //
+    //    var highlightedLetters = [];
+    //    for (var c in classes) highlightedLetters.push(classes[c]);
+    //
+    //    return highlightedLetters;
+    //
+    //},
+
 
     render: function () {
 
         //console.log(this.state.selectedLetters);
         //console.log(this.state.completedWords);
+        //console.log(this.state.highlightedLetters);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
