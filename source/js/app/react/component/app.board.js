@@ -40,7 +40,7 @@ var LetterClass = Object.assign({}, {}, {
 
         return (
             <td className={this.state.classNameLetter}>
-                {this.props.children}
+                <div className="content">{this.props.children}</div>
             </td>
         );
 
@@ -50,6 +50,39 @@ var LetterClass = Object.assign({}, {}, {
 var Letter = React.createClass(LetterClass);
 
 var BoardClass = Object.assign({}, {}, {
+
+    getInitialState: function () {
+        var state = {
+            board: {
+                rows: 3,
+                cols: 3,
+                words: [
+                    {
+                        letters: [
+                            {x: 0, y: 0, letter: "a1"},
+                            {x: 1, y: 0, letter: "a2"},
+                            {x: 2, y: 0, letter: "a3"},
+                            {x: 2, y: 1, letter: "a4"},
+                            {x: 2, y: 2, letter: "a5"}
+                        ]
+                    },
+                    {
+                        letters: [
+                            {x: 0, y: 1, letter: "b1"},
+                            {x: 1, y: 1, letter: "b2"},
+                            {x: 1, y: 2, letter: "b3"},
+                            {x: 0, y: 2, letter: "b4"}
+                        ]
+                    }
+                ]
+            },
+            selectedLetters: [],
+            completedWords: [],
+            highlightedLetters: []
+        };
+        return state;
+    },
+
 
     onTouchStart: function (e) {
 
@@ -311,61 +344,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
 
-    getInitialState: function () {
-        var state = {
-            board: {
-                rows: 3,
-                cols: 3,
-                words: [
-                    {
-                        letters: [
-                            {x: 0, y: 0, letter: "a1"},
-                            {x: 1, y: 0, letter: "a2"},
-                            {x: 2, y: 0, letter: "a3"},
-                            {x: 2, y: 1, letter: "a4"},
-                            {x: 2, y: 2, letter: "a5"}
-                        ]
-                    },
-                    {
-                        letters: [
-                            {x: 0, y: 1, letter: "b1"},
-                            {x: 1, y: 1, letter: "b2"},
-                            {x: 1, y: 2, letter: "b3"},
-                            {x: 0, y: 2, letter: "b4"}
-                        ]
-                    }
-                ]
-            },
-            selectedLetters: [],
-            completedWords: [],
-            highlightedLetters: []
-        };
-        return state;
-    },
-
-    boardConverter: function () {
-
-        var arr = new Array(this.state.board.rows);
-
-        for (var i = 0; i < arr.length; i++) {
-            arr[i] = new Array(this.state.board.cols);
-        }
-
-        this.state.board.words.map(function (word) {
-
-            word.letters.map(function (letter) {
-
-                arr[letter.x][letter.y] = letter.letter;
-
-            })
-
-        });
-
-        return arr;
-
-    },
-
-
     checkForCompletedWord: function () {
 
         var words = this.state.board.words;
@@ -479,6 +457,28 @@ var BoardClass = Object.assign({}, {}, {
     },
 
 
+    boardConverter: function () {
+
+        var arr = new Array(this.state.board.rows);
+
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = new Array(this.state.board.cols);
+        }
+
+        this.state.board.words.map(function (word) {
+
+            word.letters.map(function (letter) {
+
+                arr[letter.x][letter.y] = letter.letter;
+
+            })
+
+        });
+
+        return arr;
+
+    },
+
     selectedLetterClasses: function (x, y) {
 
         /// === because index 0 is treated as false
@@ -540,7 +540,7 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.state.completedWords);
         //console.log(this.state.highlightedLetters);
 
-        var initialBoard = this.boardConverter();
+        //var initialBoard = this.boardConverter();
         //var initialBoard = [
         //    ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
         //    ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
@@ -551,6 +551,17 @@ var BoardClass = Object.assign({}, {}, {
         //    ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
         //    ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
         //];
+
+        var initialBoard = [
+            ['н', 'а', 'у', 'ш'],
+            ['а', 'н', 'т', 'и'],
+            ['м', 'о', 'р', 'г'],
+            ['п', 'а', 'к', 'в'],
+            ['у', 'л', 'к', 'к'],
+            ['к', 'я', 'л', 'б'],
+            ['а', 'в', 'о', 'а'],
+            ['п', 'с', 'у', 'л']
+        ];
 
         return (
 
