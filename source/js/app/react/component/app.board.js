@@ -49,7 +49,6 @@ var LetterClass = Object.assign({}, {}, {
 });
 var Letter = React.createClass(LetterClass);
 
-
 var BoardClass = Object.assign({}, {}, {
 
     onTouchStart: function (e) {
@@ -78,58 +77,71 @@ var BoardClass = Object.assign({}, {}, {
         if (this.checkIfLetterIsInCompleteWord(x, y)) {
 
             var currentWord = this.checkIfLetterIsInCompleteWord(x, y);
-            var completedWords = this.state.completedWords.slice();
+            //var completedWords = this.state.completedWords.slice();
 
-            var index = "undefined";
-            completedWords.map(function (word, wordIndex) {
-                var result;
-                if (word.length == currentWord.length) {
-                    result = true;
-                    word.map(function (letter, letterIdx) {
-                        if (letter[0] != currentWord[letterIdx][0] || letter[1] != currentWord[letterIdx][1]) {
-                            result = false;
-                        }
-                    })
-                }
-                if (result) {
-                    index = wordIndex;
-                }
-            });
+            //var index = "undefined";
+            //completedWords.map(function (word, wordIndex) {
+            //    var result;
+            //    if (word.length == currentWord.length) {
+            //        result = true;
+            //        word.map(function (letter, letterIdx) {
+            //            if (letter[0] != currentWord[letterIdx][0] || letter[1] != currentWord[letterIdx][1]) {
+            //                result = false;
+            //            }
+            //        })
+            //    }
+            //    if (result) {
+            //        index = wordIndex;
+            //    }
+            //});
 
-            for (var i = 1; i < currentWord.length; i++) {
+            //currentWord[0][2].classNames.fade = "fade";
+            //currentWord[0][2].classNames.visibility = "visible";
 
-                var currentLetter = currentWord[i];
-                var previousLetter = currentWord[i - 1];
-                var previousX = previousLetter[0];
-                var previousY = previousLetter[1];
-                var currentX = currentLetter[0];
-                var currentY = currentLetter[1];
+            for (var i = 0; i < currentWord.length; i++) {
 
-                if (currentX == previousX + 1 && currentY == previousY) {
-                    currentLetter[2].classNames.linkBefore = "before-link-top";
-                    previousLetter[2].classNames.linkAfter = "after-link-bottom";
-                }
+                currentWord[i][2].classNames.visibility = "visible";
 
-                if (currentX == previousX - 1 && currentY == previousY) {
-                    currentLetter[2].classNames.linkBefore = "before-link-bottom";
-                    previousLetter[2].classNames.linkAfter = "after-link-top";
-                }
-
-                if (currentY == previousY + 1 && currentX == previousX) {
-                    currentLetter[2].classNames.linkBefore = "before-link-left";
-                    previousLetter[2].classNames.linkAfter = "after-link-right";
-                }
-
-                if (currentY == previousY - 1 && currentX == previousX) {
-                    currentLetter[2].classNames.linkBefore = "before-link-right";
-                    previousLetter[2].classNames.linkAfter = "after-link-left";
-                }
+                //var currentLetter = currentWord[i];
+                //var previousLetter = currentWord[i - 1];
+                //var previousX = previousLetter[0];
+                //var previousY = previousLetter[1];
+                //var currentX = currentLetter[0];
+                //var currentY = currentLetter[1];
+                //
+                //if (currentX == previousX + 1 && currentY == previousY) {
+                //    currentLetter[2].classNames.linkBefore = "before-link-top";
+                //    previousLetter[2].classNames.linkAfter = "after-link-bottom";
+                //    currentLetter[2].classNames.fade = "fade";
+                //    currentLetter[2].classNames.visibility = "visible";
+                //}
+                //
+                //if (currentX == previousX - 1 && currentY == previousY) {
+                //    currentLetter[2].classNames.linkBefore = "before-link-bottom";
+                //    previousLetter[2].classNames.linkAfter2 = "after-link-top";
+                //    currentLetter[2].classNames.fade = "fade";
+                //    currentLetter[2].classNames.visibility = "visible";
+                //}
+                //
+                //if (currentY == previousY + 1 && currentX == previousX) {
+                //    currentLetter[2].classNames.linkBefore = "before-link-left";
+                //    previousLetter[2].classNames.linkAfter = "after-link-right";
+                //    currentLetter[2].classNames.fade = "fade";
+                //    currentLetter[2].classNames.visibility = "visible";
+                //}
+                //
+                //if (currentY == previousY - 1 && currentX == previousX) {
+                //    currentLetter[2].classNames.linkBefore = "before-link-right";
+                //    previousLetter[2].classNames.linkAfter = "after-link-left";
+                //    currentLetter[2].classNames.fade = "fade";
+                //    currentLetter[2].classNames.visibility = "visible";
+                //}
 
             }
 
-            completedWords[index] = currentWord;
+            //completedWords[index] = currentWord;
 
-            this.setState({completedWords: completedWords});
+            this.setState({highlightedLetters: currentWord});
 
             return;
 
@@ -274,6 +286,21 @@ var BoardClass = Object.assign({}, {}, {
         e.stopPropagation();
         e.preventDefault();
 
+        if (this.state.highlightedLetters != []) {
+
+            var highlightedLetters = this.state.highlightedLetters.slice();
+
+            var cleanHighlightedLetters = highlightedLetters;
+            cleanHighlightedLetters.map(function (letter) {
+                delete letter[2].classNames.visibility;
+            });
+
+            console.log(cleanHighlightedLetters);
+
+            this.setState({highlightedLetters: cleanHighlightedLetters});
+
+        }
+
         if (!this.checkForCompletedWord()) {
             this.setState({selectedLetters: []});
             return;
@@ -310,8 +337,8 @@ var BoardClass = Object.assign({}, {}, {
                 ]
             },
             selectedLetters: [],
-            completedWords: []
-            //highlightedLetters: []
+            completedWords: [],
+            highlightedLetters: []
         };
         return state;
     },
@@ -379,10 +406,10 @@ var BoardClass = Object.assign({}, {}, {
         var wordBackgroundColor = this.selectWordBackgroundColor();
 
         for (var i = 0; i < completeWord.length; i++) {
-            completeWord[i][2].classNames = {
-                backgroundColor: wordBackgroundColor,
-                inCompleteWord: "complete"
-            }
+            completeWord[i][2].classNames.backgroundColor = wordBackgroundColor;
+            completeWord[i][2].classNames.inCompleteWord = "complete";
+            completeWord[i][2].classNames.fade = "fade";
+            delete completeWord[i][2].classNames.isSelected;
         }
 
         var completedWords = this.state.completedWords.slice();
