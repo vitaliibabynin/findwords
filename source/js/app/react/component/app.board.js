@@ -12,16 +12,16 @@ var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
 
-        x: React.PropTypes.number,
-        y: React.PropTypes.number,
-        classNameLetter: React.PropTypes.string
+        classNameLetter: React.PropTypes.string,
+        cellSize: React.PropTypes.number
 
     },
 
     getInitialState: function () {
 
         var state = {
-            classNameLetter: this.props.classNameLetter || ""
+            classNameLetter: this.props.classNameLetter || "",
+            cellSize: this.props.cellSize || 0
         };
 
         return state;
@@ -31,16 +31,23 @@ var LetterClass = Object.assign({}, {}, {
     componentWillReceiveProps: function (nextProps) {
 
         this.setState({
-            classNameLetter: nextProps.classNameLetter || ""
+            classNameLetter: nextProps.classNameLetter || "",
+            cellSize: nextProps.cellSize || 0
         });
 
     },
 
     render: function () {
 
+        var letterStyle = {
+            height: this.state.cellSize + "px",
+            width: this.state.cellSize + "px"
+        };
+
         return (
-            <td className={this.state.classNameLetter}>
-                <div className="content">{this.props.children}</div>
+            <td className={this.state.classNameLetter}
+                style={letterStyle}>
+                {this.props.children}
             </td>
         );
 
@@ -48,6 +55,10 @@ var LetterClass = Object.assign({}, {}, {
 
 });
 var Letter = React.createClass(LetterClass);
+
+
+var BOARD_MARGIN = 40;
+
 
 var BoardClass = Object.assign({}, {}, {
 
@@ -80,6 +91,7 @@ var BoardClass = Object.assign({}, {}, {
             completedWords: [],
             highlightedLetters: []
         };
+        state.cellSize = (Utils.getWindowWidth() - BOARD_MARGIN) / state.board.cols;
         return state;
     },
 
@@ -540,7 +552,7 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.state.completedWords);
         //console.log(this.state.highlightedLetters);
 
-        //var initialBoard = this.boardConverter();
+        var initialBoard = this.boardConverter();
         //var initialBoard = [
         //    ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
         //    ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
@@ -552,21 +564,25 @@ var BoardClass = Object.assign({}, {}, {
         //    ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
         //];
 
-        var initialBoard = [
-            ['н', 'а', 'у', 'ш'],
-            ['а', 'н', 'т', 'и'],
-            ['м', 'о', 'р', 'г'],
-            ['п', 'а', 'к', 'в'],
-            ['у', 'л', 'к', 'к'],
-            ['к', 'я', 'л', 'б'],
-            ['а', 'в', 'о', 'а'],
-            ['п', 'с', 'у', 'л']
-        ];
+        //var initialBoard = [
+        //    ['н', 'а', 'у', 'ш'],
+        //    ['а', 'н', 'т', 'и'],
+        //    ['м', 'о', 'р', 'г'],
+        //    ['п', 'а', 'к', 'в'],
+        //    ['у', 'л', 'к', 'к'],
+        //    ['к', 'я', 'л', 'б'],
+        //    ['а', 'в', 'о', 'а'],
+        //    ['п', 'с', 'у', 'л']
+        //];
+
+        var boardStyle = {
+            fontSize: (this.state.cellSize / 2) + "px"
+        };
 
         return (
 
             <table className="board" onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove}
-                   onTouchEnd={this.onTouchEnd}>
+                   onTouchEnd={this.onTouchEnd} style={boardStyle}>
 
                 {initialBoard.map(function (row, rowId) {
 
@@ -583,8 +599,9 @@ var BoardClass = Object.assign({}, {}, {
 
                                 return (
 
-                                    <Letter key={rowId + '_' + cellId} x={rowId} y={cellId}
-                                            classNameLetter={letterClassNames}>
+                                    <Letter key={rowId + '_' + cellId}
+                                            classNameLetter={letterClassNames}
+                                            cellSize={this.state.cellSize}>
                                         {cell}
                                     </Letter>
 
