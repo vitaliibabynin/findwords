@@ -66,8 +66,8 @@ var BoardClass = Object.assign({}, {}, {
 
         var state = {
             board: {
-                rows: 3,
-                cols: 3,
+                rows: 8,
+                cols: 8,
                 words: [
                     {
                         letters: [
@@ -93,9 +93,10 @@ var BoardClass = Object.assign({}, {}, {
                 ]
             },
             selectedLetters: [],
+            prevSelection: [],
             completedWords: [],
-            highlightedLetters: []
-            //cellSize: (in componentDidMount)
+            highlightedLetters: [],
+            cellSize: 0
         };
 
         return state;
@@ -355,12 +356,17 @@ var BoardClass = Object.assign({}, {}, {
 
         }
 
-        if (!this.checkForCompletedWord()) {
-            this.setState({selectedLetters: []});
+        if (this.checkForCompletedWord()) {
+            this.moveSelectedLettersToCompleteWords();
             return;
         }
 
-        this.moveSelectedLettersToCompleteWords();
+        var selection = this.state.selectedLetters.slice();
+
+        this.setState({
+            selectedLetters: [],
+            prevSelection: selection
+        });
 
     },
 
@@ -560,18 +566,19 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.state.selectedLetters);
         //console.log(this.state.completedWords);
         //console.log(this.state.highlightedLetters);
+        console.log(this.state.prevSelection);
 
-        var initialBoard = this.boardConverter();
-        //var initialBoard = [
-        //    ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
-        //    ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
-        //    ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
-        //    ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
-        //    ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
-        //    ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
-        //    ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
-        //    ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
-        //];
+        //var initialBoard = this.boardConverter();
+        var initialBoard = [
+            ['н', 'а', 'у', 'ш', 'н', 'и', 'к', 'c'],
+            ['а', 'н', 'т', 'и', 'к', 'а', 'и', 'а'],
+            ['м', 'о', 'р', 'г', 'л', 'а', 'м', 'н'],
+            ['п', 'а', 'к', 'в', 'о', 'л', 'у', 'а'],
+            ['у', 'л', 'к', 'к', 'о', 'а', 'р', 'н'],
+            ['к', 'я', 'л', 'б', 'л', 'н', 'г', 'а'],
+            ['а', 'в', 'о', 'а', 'с', 'а', 'а', 'к'],
+            ['п', 'с', 'у', 'л', 'а', 'б', 'у', 'л']
+        ];
 
         //var initialBoard = [
         //    ['н', 'а', 'у', 'ш'],
