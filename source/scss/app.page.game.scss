@@ -228,11 +228,14 @@
       }
     }
 
-    tr:last-child {
-      background: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem);
+    tr {
+
+      td:last-child {
+        background: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem);
+      }
     }
 
-    &:last-child {
+    tr:last-child {
 
       td {
         background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem);
