@@ -63,6 +63,7 @@ var BOARD_MARGIN = 40;
 var BoardClass = Object.assign({}, {}, {
 
     getInitialState: function () {
+
         var state = {
             board: {
                 rows: 3,
@@ -70,19 +71,23 @@ var BoardClass = Object.assign({}, {}, {
                 words: [
                     {
                         letters: [
-                            {x: 0, y: 0, letter: "a1"},
-                            {x: 1, y: 0, letter: "a2"},
-                            {x: 2, y: 0, letter: "a3"},
-                            {x: 2, y: 1, letter: "a4"},
-                            {x: 2, y: 2, letter: "a5"}
+                            {x: 0, y: 1, letter: "р"},
+                            {x: 0, y: 0, letter: "о"},
+                            {x: 1, y: 0, letter: "м"}
                         ]
                     },
                     {
                         letters: [
-                            {x: 0, y: 1, letter: "b1"},
-                            {x: 1, y: 1, letter: "b2"},
-                            {x: 1, y: 2, letter: "b3"},
-                            {x: 0, y: 2, letter: "b4"}
+                            {x: 1, y: 1, letter: "л"},
+                            {x: 1, y: 2, letter: "ё"},
+                            {x: 0, y: 2, letter: "д"}
+                        ]
+                    },
+                    {
+                        letters: [
+                            {x: 2, y: 0, letter: "д"},
+                            {x: 2, y: 1, letter: "у"},
+                            {x: 2, y: 2, letter: "б"}
                         ]
                     }
                 ]
@@ -90,9 +95,16 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: [],
             completedWords: [],
             highlightedLetters: []
+            //cellSize: (in componentDidMount)
         };
-        state.cellSize = (Utils.getWindowWidth() - BOARD_MARGIN) / state.board.cols;
+
         return state;
+
+    },
+
+    componentDidMount: function () {
+
+        this.setState({cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.board.cols})
     },
 
 
@@ -333,14 +345,11 @@ var BoardClass = Object.assign({}, {}, {
 
         if (this.state.highlightedLetters != []) {
 
-            var highlightedLetters = this.state.highlightedLetters.slice();
+            var cleanHighlightedLetters = this.state.highlightedLetters.slice();
 
-            var cleanHighlightedLetters = highlightedLetters;
             cleanHighlightedLetters.map(function (letter) {
                 delete letter[2].classNames.visibility;
             });
-
-            console.log(cleanHighlightedLetters);
 
             this.setState({highlightedLetters: cleanHighlightedLetters});
 
