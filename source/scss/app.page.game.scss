@@ -19,7 +19,8 @@
     .time-line {
       font-size: 1rem;
       position: relative;
-      margin-left: 0.75rem;
+      //margin-left: 0.75rem;
+      margin-left: 3%;
       height: 0.1875rem;
       width: 88.125%;
 
@@ -126,6 +127,7 @@
       overflow: hidden;
       white-space: nowrap;
       border: none;
+      line-height: 100%;
       //background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
       //linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
       background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border .0625rem),
@@ -231,14 +233,16 @@
     tr {
 
       td:last-child {
-        background: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem);
+        background: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
+        linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
       }
     }
 
     tr:last-child {
 
       td {
-        background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem);
+        background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
+        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
       }
       td:last-child {
         background: none;
