@@ -240,7 +240,7 @@
 
       td:last-child {
         background-image: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
-        linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem);
+        linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
       }
     }
 
@@ -248,7 +248,7 @@
 
       td {
         background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
-        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem);
+        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
       }
       td:last-child {
         background-image: none;
