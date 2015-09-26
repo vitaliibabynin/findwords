@@ -47,7 +47,7 @@ var LetterClass = Object.assign({}, {}, {
         return (
             <td className={this.state.classNameLetter}
                 style={letterStyle}>
-                {this.props.children}
+                <span>{this.props.children}</span>
             </td>
         );
 

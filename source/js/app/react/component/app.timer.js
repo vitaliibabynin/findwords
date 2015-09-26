@@ -84,9 +84,15 @@ var TimerClass = Object.assign({}, {}, {
             starOneThird = this.state.starOneThirdOff;
         }
 
-        var timerImages = {
+        var stars = {
 
-            backgroundImage: "url('" + starBase + "'), url('" + starOneThird + "'), url('" + starTwoThirds + "'), url('" + timerImg + "')"
+            backgroundImage: "url('" + starBase + "'), url('" + starOneThird + "'), url('" + starTwoThirds + "')"
+
+        };
+
+        var clock = {
+
+            backgroundImage: "url('" + timerImg + "')"
 
         };
 
@@ -109,7 +115,9 @@ var TimerClass = Object.assign({}, {}, {
 
                 </div>
 
-                <div className="timer-images" style={timerImages}></div>
+                <div className="timer-stars" style={stars}></div>
+
+                <div className="timer-clock" style={clock}></div>
 
             </div>
 
