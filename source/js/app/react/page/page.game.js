@@ -49,7 +49,7 @@ var PageGameMain = Object.assign({}, {}, {
 
                     <Counters isDisplayBackButton={true}/>
 
-                    <Timer secondsRemaining={60} isCountDownOn={true}/>
+                    <Timer secondsRemaining={30} isCountDownOn={true}/>
 
                     <div className="chips">
                         <ChipButton className="open-word" value={appManager.getGameState().getOpenWord()}

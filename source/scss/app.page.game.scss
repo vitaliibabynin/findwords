@@ -49,7 +49,8 @@
       width: 90%;
       //background-position: 2% 0.3125rem, 33% 0.3125rem, 63% 0.3125rem, 97.25% 0.3125rem;
       //background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem, 0.875rem 1rem;
-      background-position: 0 0.3125rem, 35.33% 0.3125rem, 68.66% 0.3125rem;
+      //background-position: 0 0.3125rem, 34.2% 0.3125rem, 67.66% 0.3125rem;
+      background-position: 0 0.3125rem, 34.2% 0.3125rem, 67.66% 0.3125rem;
       background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem;
       background-repeat: no-repeat;
     }
@@ -69,13 +70,13 @@
   .chips {
     height: 3.125rem;
     margin: 0.25rem auto;
-    width: 16.875rem;
+    width: 84.375%;
     color: #ffffff;
 
     .btn.chip {
       position: relative;
       height: 3.125rem;
-      width: 5.625rem;
+      width: 33.33%;
       display: inline-block;
       background-repeat: no-repeat;
       text-align: center;
@@ -85,9 +86,10 @@
       .text {
         display: table;
         height: 2rem;
-        width: inherit;
         padding-left: 1rem;
         padding-right: 1rem;
+        margin-left: auto;
+        margin-right: auto;
 
         span {
           display: table-cell;
@@ -98,23 +100,23 @@
         width: 1.75rem;
         position: absolute;
         bottom: 0.4rem;
-        left: 0.6rem;
+        left: 10%;
       }
     }
     .open-word {
       background-color: $gamePage-chip-open-word-bg-color;
       background-size: 1.3125rem 1.1875rem;
-      background-position: 3.9125rem 1.6875rem;
+      background-position: 90% 1.6875rem;
     }
     .open-letter {
       background-color: $gamePage-chip-open-letter-bg-color;
       background-size: 1.625rem 1.1875rem;
-      background-position: 3.6rem 1.6875rem;
+      background-position: 90% 1.6875rem;
     }
     .show-word {
       background-color: $gamePage-chip-show-word-bg-color;
       background-size: 1.375rem 1.1875rem;
-      background-position: 3.85rem 1.6875rem;
+      background-position: 90% 1.6875rem;
     }
   }
 
@@ -221,10 +223,10 @@
       }
       @keyframes fontbulger {
         0% {
-          transform: scale(1.5,1.5);
+          transform: scale(1.5, 1.5);
         }
         99% {
-          transform: scale(1.5,1.5);
+          transform: scale(1.5, 1.5);
         }
         100% {
           transform: initial;
@@ -290,10 +292,15 @@
   }
 }
 
-
-
-html.csscalc{
+html.csscalc {
   .page-game > .page-content {
+
+    .timer {
+      .timer-stars {
+        background-position: 0 0.3125rem, calc(33.33% - .5rem) 0.3125rem, calc(66.66% - .5rem) 0.3125rem;
+      }
+    }
+
     .board {
       td {
         background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border .0625rem),
@@ -301,7 +308,6 @@ html.csscalc{
       }
 
       tr {
-
         td:last-child {
           background-image: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
           linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
@@ -309,7 +315,6 @@ html.csscalc{
       }
 
       tr:last-child {
-
         td {
           background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
           linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
