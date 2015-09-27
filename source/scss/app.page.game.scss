@@ -297,7 +297,7 @@ html.csscalc {
 
     .timer {
       .timer-stars {
-        background-position: 0 0.3125rem, calc(33.33% - .5rem) 0.3125rem, calc(66.66% - .5rem) 0.3125rem;
+        background-position: 0 0.3125rem, calc(33.33% + .5rem) 0.3125rem, calc(66.66% + .5rem) 0.3125rem;
       }
     }
 
