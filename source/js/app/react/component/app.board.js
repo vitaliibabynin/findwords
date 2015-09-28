@@ -12,27 +12,16 @@ var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
 
-        x: React.PropTypes.number,
-        y: React.PropTypes.number,
         classNameLetter: React.PropTypes.string,
-        cellSize: React.PropTypes.number,
-        checkIfLetterIsInCompleteWord: React.PropTypes.func,
-        selectWordBackgroundColor: React.PropTypes.func
+        cellSize: React.PropTypes.number
 
     },
 
     getInitialState: function () {
 
         var state = {
-            x: this.props.x || 0,
-            y: this.props.y || 0,
             classNameLetter: this.props.classNameLetter || "",
-            cellSize: this.props.cellSize || 0,
-            checkIfLetterIsInCompleteWord: this.props.checkIfLetterIsInCompleteWord || function () {
-            },
-            selectWordBackgroundColor: this.props.selectWordBackgroundColor || function () {
-            },
-            backgroundColor: ""
+            cellSize: this.props.cellSize || 0
         };
 
         return state;
@@ -43,55 +32,12 @@ var LetterClass = Object.assign({}, {}, {
 
         this.setState({
             classNameLetter: nextProps.classNameLetter || "",
-            cellSize: nextProps.cellSize || 0,
-            checkIfLetterIsInCompleteWord: nextProps.checkIfLetterIsInCompleteWord || function () {
-            },
-            selectWordBackgroundColor: nextProps.selectWordBackgroundColor || function () {
-            }
+            cellSize: nextProps.cellSize || 0
         });
 
     },
 
-    //onTouchStart: function () {
-    //
-    //    if (this.state.checkIfLetterIsInCompleteWord(this.state.x, this.state.y)) {
-    //        return;
-    //    }
-    //
-    //    var backgroundColor = this.state.selectWordBackgroundColor();
-    //
-    //    this.setState({backgroundColor: backgroundColor})
-    //
-    //},
-    //
-    //onTouchEnd: function () {
-    //
-    //    if (this.state.backgroundColor == "") {
-    //        return;
-    //    }
-    //
-    //    this.setState({backgroundColor: ""})
-    //
-    //},
-
-    onClick: function () {
-
-        if (this.state.checkIfLetterIsInCompleteWord(this.state.x, this.state.y)) {
-            return;
-        }
-
-        var backgroundColor = this.state.selectWordBackgroundColor();
-
-        this.setState({backgroundColor: backgroundColor})
-
-    },
-
     render: function () {
-
-        var letterClasses = classNames(
-            this.state.classNameLetter,
-            this.state.backgroundColor
-        );
 
         var letterStyle = {
             height: this.state.cellSize + "px",
@@ -99,9 +45,8 @@ var LetterClass = Object.assign({}, {}, {
         };
 
         return (
-            <td className={letterClasses}
-                style={letterStyle}
-                onClick={this.onClick}>
+            <td className={this.state.classNameLetter}
+                style={letterStyle}>
                 <span>{this.props.children}</span>
             </td>
         );
@@ -674,12 +619,8 @@ var BoardClass = Object.assign({}, {}, {
                                 return (
 
                                     <Letter key={rowId + '_' + cellId}
-                                            x={rowId}
-                                            y={cellId}
                                             classNameLetter={letterClassNames}
-                                            cellSize={this.state.cellSize}
-                                            selectWordBackgroundColor={this.selectWordBackgroundColor}
-                                            checkIfLetterIsInCompleteWord={this.checkIfLetterIsInCompleteWord}>
+                                            cellSize={this.state.cellSize}>
                                         {cell}
                                     </Letter>
 
