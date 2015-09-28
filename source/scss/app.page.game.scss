@@ -144,6 +144,17 @@
       background-position: 0 0, 0 0;
       background-repeat: no-repeat;
 
+      @-webkit-keyframes fade {
+        0% {
+          opacity: 1;
+        }
+        25% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
       @keyframes fade {
         0% {
           opacity: 1;
@@ -151,9 +162,6 @@
         25% {
           opacity: 1;
         }
-        //99% {
-        //  opacity: 0.25;
-        //}
         100% {
           opacity: 0;
         }
@@ -168,6 +176,7 @@
       &.after-link-bottom.fade:after,
       &.after-link-left.fade:after {
         opacity: 0;
+        -webkit-animation: fade 2s;
         animation: fade 2s;
       }
 
@@ -179,6 +188,7 @@
       &.after-link-right.visible:after,
       &.after-link-bottom.visible:after,
       &.after-link-left.visible:after {
+        -webkit-animation: none;
         animation: none;
       }
 
@@ -231,6 +241,17 @@
       &.selected {
         color: $gamePage-board-td-color-selected;
       }
+      @-webkit-keyframes fontbulger {
+        0% {
+          -webkit-transform: scale(1.5, 1.5);
+        }
+        99% {
+          -webkit-transform: scale(1.5, 1.5);
+        }
+        100% {
+          -webkit-transform: initial;
+        }
+      }
       @keyframes fontbulger {
         0% {
           transform: scale(1.5, 1.5);
@@ -243,6 +264,7 @@
         }
       }
       &.complete span {
+        -webkit-animation: fontbulger 0.2s;
         animation: fontbulger 0.2s;
         color: $gamePage-board-td-color-complete;
       }

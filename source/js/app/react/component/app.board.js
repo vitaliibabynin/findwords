@@ -12,16 +12,27 @@ var LetterClass = Object.assign({}, {}, {
 
     propTypes: {
 
+        x: React.PropTypes.number,
+        y: React.PropTypes.number,
         classNameLetter: React.PropTypes.string,
-        cellSize: React.PropTypes.number
+        cellSize: React.PropTypes.number,
+        checkIfLetterIsInCompleteWord: React.PropTypes.func,
+        selectWordBackgroundColor: React.PropTypes.func
 
     },
 
     getInitialState: function () {
 
         var state = {
+            x: this.props.x || 0,
+            y: this.props.y || 0,
             classNameLetter: this.props.classNameLetter || "",
-            cellSize: this.props.cellSize || 0
+            cellSize: this.props.cellSize || 0,
+            checkIfLetterIsInCompleteWord: this.props.checkIfLetterIsInCompleteWord || function () {
+            },
+            selectWordBackgroundColor: this.props.selectWordBackgroundColor || function () {
+            },
+            backgroundColor: ""
         };
 
         return state;
@@ -32,12 +43,43 @@ var LetterClass = Object.assign({}, {}, {
 
         this.setState({
             classNameLetter: nextProps.classNameLetter || "",
-            cellSize: nextProps.cellSize || 0
+            cellSize: nextProps.cellSize || 0,
+            checkIfLetterIsInCompleteWord: nextProps.checkIfLetterIsInCompleteWord || function () {
+            },
+            selectWordBackgroundColor: nextProps.selectWordBackgroundColor || function () {
+            }
         });
 
     },
 
+    onTouchStart: function () {
+
+        if (this.state.checkIfLetterIsInCompleteWord(this.state.x, this.state.y)) {
+            return;
+        }
+
+        var backgroundColor = this.state.selectWordBackgroundColor();
+
+        this.setState({backgroundColor: backgroundColor})
+
+    },
+
+    onTouchEnd: function () {
+
+        if (this.state.backgroundColor == "") {
+            return;
+        }
+
+        this.setState({backgroundColor: ""})
+
+    },
+
     render: function () {
+
+        var letterClasses = classNames(
+            this.state.classNameLetter,
+            this.state.backgroundColor
+        );
 
         var letterStyle = {
             height: this.state.cellSize + "px",
@@ -45,8 +87,10 @@ var LetterClass = Object.assign({}, {}, {
         };
 
         return (
-            <td className={this.state.classNameLetter}
-                style={letterStyle}>
+            <td className={letterClasses}
+                style={letterStyle}
+                onTouchStart={this.onTouchStart}
+                onTouchEnd={this.onTouchEnd}>
                 <span>{this.props.children}</span>
             </td>
         );
@@ -566,7 +610,7 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.state.selectedLetters);
         //console.log(this.state.completedWords);
         //console.log(this.state.highlightedLetters);
-        console.log(this.state.prevSelection);
+        //console.log(this.state.prevSelection);
 
         var initialBoard = this.boardConverter();
         //var initialBoard = [
@@ -597,8 +641,11 @@ var BoardClass = Object.assign({}, {}, {
 
         return (
 
-            <table className="board" onTouchStart={this.onTouchStart} onTouchMove={this.onTouchMove}
-                   onTouchEnd={this.onTouchEnd} style={boardStyle}>
+            <table className="board"
+                   onTouchStart={this.onTouchStart}
+                   onTouchMove={this.onTouchMove}
+                   onTouchEnd={this.onTouchEnd}
+                   style={boardStyle}>
 
                 {initialBoard.map(function (row, rowId) {
 
@@ -616,8 +663,12 @@ var BoardClass = Object.assign({}, {}, {
                                 return (
 
                                     <Letter key={rowId + '_' + cellId}
+                                            x={rowId}
+                                            y={cellId}
                                             classNameLetter={letterClassNames}
-                                            cellSize={this.state.cellSize}>
+                                            cellSize={this.state.cellSize}
+                                            selectWordBackgroundColor={this.selectWordBackgroundColor}
+                                            checkIfLetterIsInCompleteWord={this.checkIfLetterIsInCompleteWord}>
                                         {cell}
                                     </Letter>
 
