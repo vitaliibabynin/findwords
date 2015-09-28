@@ -5,32 +5,47 @@ var gameData = {
         backgroundColor: "#d64541",
         rounds: [
             {
-                word1: "word1",
-                word2: "word2",
-                word3: "word3"
-            },
-            {
-                word4: "word4",
-                word5: "word5"
-            },
-            {
-                word6: "word6"
+                rows: 3,
+                cols: 3,
+                words: [
+                    {
+                        letters: [
+                            {x: 0, y: 1, letter: "р"},
+                            {x: 0, y: 0, letter: "о"},
+                            {x: 1, y: 0, letter: "м"}
+                        ]
+                    },
+                    {
+                        letters: [
+                            {x: 1, y: 1, letter: "л"},
+                            {x: 1, y: 2, letter: "ё"},
+                            {x: 0, y: 2, letter: "д"}
+                        ]
+                    },
+                    {
+                        letters: [
+                            {x: 2, y: 0, letter: "д"},
+                            {x: 2, y: 1, letter: "у"},
+                            {x: 2, y: 2, letter: "б"}
+                        ]
+                    }
+                ]
             }
         ]
-        },
+    },
         {
-        name: {ru: "Комплект №2 Гаврюша", en: "Set #2 Gavryusha"},
-        numberOfRoundsRequired: 2,
-        backgroundColor: "#0000ff",
-        rounds: [
-            {
-                word7: "word7"
-            },
-            {
-                word8: "word8",
-                word9: "word9"
-            }
-        ]
-    }]
+            name: {ru: "Комплект №2 Гаврюша", en: "Set #2 Gavryusha"},
+            numberOfRoundsRequired: 2,
+            backgroundColor: "#0000ff",
+            rounds: [
+                {
+                    word7: "word7"
+                },
+                {
+                    word8: "word8",
+                    word9: "word9"
+                }
+            ]
+        }]
 };
 module.exports = gameData;

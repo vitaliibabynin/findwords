@@ -5,6 +5,7 @@ var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var Radium = require('radium');
 var classNames = require('classnames');
+var Board = require('./app.board').Board;
 
 
 module.exports = {};
@@ -16,7 +17,8 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
     mixins: [GameMixin],
 
     propTypes: {
-        className: React.PropTypes.string
+        className: React.PropTypes.string,
+        icon: React.PropTypes.string
     },
 
     getInitialState: function () {
@@ -98,11 +100,8 @@ module.exports.Button.Class = ButtonClass;
 
 
 var IconButtonClass = Object.assign({}, ButtonClass, {
-    displayName: 'IconButton',
 
-    propTypes: {
-        icon: React.PropTypes.string
-    },
+    displayName: 'IconButton',
 
     getInitialState: function () {
         var state = ButtonClass.getInitialState.call(this);
@@ -139,10 +138,7 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
     displayName: 'ChipButton',
 
     propTypes: {
-
-        icon: React.PropTypes.string,
         value: React.PropTypes.number
-
     },
 
     getInitialState: function () {
@@ -174,6 +170,19 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
 
     },
 
+    onChipClick: function (e) {
+
+        this.onClick(e);
+
+        if (!this.props.id) {
+            return;
+        }
+
+        //Board.handleChips(this.props.id);
+        console.log(this.refs);
+
+    },
+
     render: function () {
 
         var buttonClasses = classNames(
@@ -184,8 +193,11 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
 
         return (
 
-            <div className={buttonClasses} style={this.state.style} onClick={this.onClick}
+            <div className={buttonClasses}
+                 style={this.state.style}
+                 onClick={this.onChipClick}
                  dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
+
                 <div className="text">{this.props.children}</div>
                 <div className="value">{this.state.value}</div>
             </div>

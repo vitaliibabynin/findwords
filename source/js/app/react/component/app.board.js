@@ -59,39 +59,34 @@ var Letter = React.createClass(LetterClass);
 
 var BOARD_MARGIN = 40;
 
+var OPEN_WORD = "open_word";
+module.exports.OPEN_WORD = OPEN_WORD;
+
+var OPEN_LETTER = "open_letter";
+module.exports.OPEN_LETTER = OPEN_LETTER;
+
+var SHOW_WORD = "show_word";
+module.exports.SHOW_WORD = SHOW_WORD;
+
 
 var BoardClass = Object.assign({}, {}, {
+
+    propTypes: {
+        slideData: React.PropTypes.shape({
+            backgroundColor: React.PropTypes.string,
+            name: React.PropTypes.shape({
+                en: React.PropTypes.string,
+                ru: React.PropTypes.string
+            }),
+            numberOfRoundsRequired: React.PropTypes.number,
+            rounds: React.PropTypes.arrayOf(React.PropTypes.object)
+        })
+    },
 
     getInitialState: function () {
 
         var state = {
-            board: {
-                rows: 3,
-                cols: 3,
-                words: [
-                    {
-                        letters: [
-                            {x: 0, y: 1, letter: "р"},
-                            {x: 0, y: 0, letter: "о"},
-                            {x: 1, y: 0, letter: "м"}
-                        ]
-                    },
-                    {
-                        letters: [
-                            {x: 1, y: 1, letter: "л"},
-                            {x: 1, y: 2, letter: "ё"},
-                            {x: 0, y: 2, letter: "д"}
-                        ]
-                    },
-                    {
-                        letters: [
-                            {x: 2, y: 0, letter: "д"},
-                            {x: 2, y: 1, letter: "у"},
-                            {x: 2, y: 2, letter: "б"}
-                        ]
-                    }
-                ]
-            },
+            board: this.props.slideData.rounds[0] || {},
             selectedLetters: [],
             prevSelection: [],
             completedWords: [],
@@ -106,6 +101,7 @@ var BoardClass = Object.assign({}, {}, {
     componentDidMount: function () {
 
         this.setState({cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.board.cols})
+
     },
 
 
@@ -367,6 +363,32 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: [],
             prevSelection: selection
         });
+
+    },
+
+
+    handleChips: function (id) {
+
+        switch (id) {
+            case OPEN_WORD:
+                this.openWord();
+                break;
+            case OPEN_LETTER:
+                console.log("letter opened");
+                break;
+            case SHOW_WORD:
+                console.log("word shown");
+                break;
+            default:
+                return;
+        }
+
+    },
+
+    openWord: function () {
+
+        //var words = this.state.board.words;
+        console.log(this.refs);
 
     },
 
