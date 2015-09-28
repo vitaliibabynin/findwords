@@ -144,6 +144,21 @@
       background-position: 0 0, 0 0;
       background-repeat: no-repeat;
 
+      @keyframes fade {
+        0% {
+          opacity: 1;
+        }
+        25% {
+          opacity: 1;
+        }
+        //99% {
+        //  opacity: 0.25;
+        //}
+        100% {
+          opacity: 0;
+        }
+      }
+
       &.before-link-top.fade:before,
       &.before-link-right.fade:before,
       &.before-link-bottom.fade:before,
@@ -152,9 +167,8 @@
       &.after-link-right.fade:after,
       &.after-link-bottom.fade:after,
       &.after-link-left.fade:after {
-        transition-duration: 1.5s;
-        transition-delay: 0.5s;
         opacity: 0;
+        animation: fade 2s;
       }
 
       &.before-link-top.visible:before,
@@ -165,9 +179,7 @@
       &.after-link-right.visible:after,
       &.after-link-bottom.visible:after,
       &.after-link-left.visible:after {
-        transition-duration: 0s;
-        transition-delay: 0s;
-        opacity: 1;
+        animation: none;
       }
 
       &.before-link-top:before,
@@ -182,8 +194,6 @@
         z-index: 1000;
         content: "";
         background-color: $gamePage-board-td-bg-color-link;
-        transition-property: opacity;
-        transition-timing-function: ease-in;
       }
 
       &.before-link-top:before,
