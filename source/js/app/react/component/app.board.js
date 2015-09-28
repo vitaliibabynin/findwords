@@ -52,7 +52,29 @@ var LetterClass = Object.assign({}, {}, {
 
     },
 
-    onTouchStart: function () {
+    //onTouchStart: function () {
+    //
+    //    if (this.state.checkIfLetterIsInCompleteWord(this.state.x, this.state.y)) {
+    //        return;
+    //    }
+    //
+    //    var backgroundColor = this.state.selectWordBackgroundColor();
+    //
+    //    this.setState({backgroundColor: backgroundColor})
+    //
+    //},
+    //
+    //onTouchEnd: function () {
+    //
+    //    if (this.state.backgroundColor == "") {
+    //        return;
+    //    }
+    //
+    //    this.setState({backgroundColor: ""})
+    //
+    //},
+
+    onClick: function () {
 
         if (this.state.checkIfLetterIsInCompleteWord(this.state.x, this.state.y)) {
             return;
@@ -61,16 +83,6 @@ var LetterClass = Object.assign({}, {}, {
         var backgroundColor = this.state.selectWordBackgroundColor();
 
         this.setState({backgroundColor: backgroundColor})
-
-    },
-
-    onTouchEnd: function () {
-
-        if (this.state.backgroundColor == "") {
-            return;
-        }
-
-        this.setState({backgroundColor: ""})
 
     },
 
@@ -89,8 +101,7 @@ var LetterClass = Object.assign({}, {}, {
         return (
             <td className={letterClasses}
                 style={letterStyle}
-                onTouchStart={this.onTouchStart}
-                onTouchEnd={this.onTouchEnd}>
+                onClick={this.onClick}>
                 <span>{this.props.children}</span>
             </td>
         );
