@@ -170,19 +170,6 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
 
     },
 
-    onChipClick: function (e) {
-
-        this.onClick(e);
-
-        if (!this.props.id) {
-            return;
-        }
-
-        //Board.handleChips(this.props.id);
-        console.log(this.refs);
-
-    },
-
     render: function () {
 
         var buttonClasses = classNames(
@@ -195,7 +182,7 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
 
             <div className={buttonClasses}
                  style={this.state.style}
-                 onClick={this.onChipClick}
+                 onClick={this.onClick}
                  dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
 
                 <div className="text">{this.props.children}</div>

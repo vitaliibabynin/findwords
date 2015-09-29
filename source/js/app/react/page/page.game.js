@@ -12,9 +12,9 @@ var ChipButton = require('./../component/app.button').ChipButton;
 var Board = require('./../component/app.board.js').Board;
 
 
-var OPEN_WORD = require('./../component/app.board').OPEN_WORD;
-var OPEN_LETTER = require('./../component/app.board').OPEN_LETTER;
-var SHOW_WORD = require('./../component/app.board').SHOW_WORD;
+var OPEN_WORD = "open_word";
+var OPEN_LETTER = "open_letter";
+var SHOW_WORD = "show_word";
 
 
 var PageGameMain = Object.assign({}, {}, {
@@ -45,6 +45,24 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
 
+    onChipClick: function (e) {
+
+        switch (e.id) {
+            case OPEN_WORD:
+                this.refs.board.openWord();
+                break;
+            case OPEN_LETTER:
+                this.refs.board.openLetter();
+                break;
+            case SHOW_WORD:
+                this.refs.board.showWord();
+                break;
+            default:
+                return;
+        }
+
+    },
+
     render: function () {
 
         return (
@@ -58,6 +76,7 @@ var PageGameMain = Object.assign({}, {}, {
                     <div className="chips">
                         <ChipButton className="open-word"
                                     id={OPEN_WORD}
+                                    onClick={this.onChipClick}
                                     value={appManager.getGameState().getOpenWord()}
                                     icon="open_word">
 
@@ -65,6 +84,7 @@ var PageGameMain = Object.assign({}, {}, {
                         </ChipButton>
                         <ChipButton className="open-letter"
                                     id={OPEN_LETTER}
+                                    onClick={this.onChipClick}
                                     value={appManager.getGameState().getOpenLetter()}
                                     icon="open_letter">
 
@@ -72,6 +92,7 @@ var PageGameMain = Object.assign({}, {}, {
                         </ChipButton>
                         <ChipButton className="show-word"
                                     id={SHOW_WORD}
+                                    onClick={this.onChipClick}
                                     value={appManager.getGameState().getShowWord()}
                                     icon="show_word">
 

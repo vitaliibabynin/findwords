@@ -69,8 +69,7 @@
 
   .chips {
     height: 3.125rem;
-    margin: 0.25rem auto;
-    width: 84.375%;
+    margin: 0.25rem 1.25rem;
     color: #ffffff;
 
     .btn.chip {
@@ -144,28 +143,28 @@
       background-position: 0 0, 0 0;
       background-repeat: no-repeat;
 
-      @-webkit-keyframes fade {
-        0% {
-          opacity: 1;
-        }
-        25% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-      @keyframes fade {
-        0% {
-          opacity: 1;
-        }
-        25% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
+      //@-webkit-keyframes fade {
+      //  0% {
+      //    opacity: 1;
+      //  }
+      //  25% {
+      //    opacity: 1;
+      //  }
+      //  100% {
+      //    opacity: 0;
+      //  }
+      //}
+      //@keyframes fade {
+      //  0% {
+      //    opacity: 1;
+      //  }
+      //  25% {
+      //    opacity: 1;
+      //  }
+      //  100% {
+      //    opacity: 0;
+      //  }
+      //}
 
       &.before-link-top.fade:before,
       &.before-link-right.fade:before,
@@ -175,9 +174,14 @@
       &.after-link-right.fade:after,
       &.after-link-bottom.fade:after,
       &.after-link-left.fade:after {
+        //opacity: 0;
+        //-webkit-animation: fade 2s;
+        //animation: fade 2s;
+        -webkit-transition-duration: 1.5s;
+        -webkit-transition-delay: 0.5s;
+        transition-duration: 1.5s;
+        transition-delay: 0.5s;
         opacity: 0;
-        -webkit-animation: fade 2s;
-        animation: fade 2s;
       }
 
       &.before-link-top.visible:before,
@@ -188,8 +192,13 @@
       &.after-link-right.visible:after,
       &.after-link-bottom.visible:after,
       &.after-link-left.visible:after {
-        -webkit-animation: none;
-        animation: none;
+        //-webkit-animation: none;
+        //animation: none;
+        -webkit-transition-duration: 0s;
+        -webkit-transition-delay: 0s;
+        transition-duration: 0s;
+        transition-delay: 0s;
+        opacity: 1;
       }
 
       &.before-link-top:before,

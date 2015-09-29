@@ -59,15 +59,6 @@ var Letter = React.createClass(LetterClass);
 
 var BOARD_MARGIN = 40;
 
-var OPEN_WORD = "open_word";
-module.exports.OPEN_WORD = OPEN_WORD;
-
-var OPEN_LETTER = "open_letter";
-module.exports.OPEN_LETTER = OPEN_LETTER;
-
-var SHOW_WORD = "show_word";
-module.exports.SHOW_WORD = SHOW_WORD;
-
 
 var BoardClass = Object.assign({}, {}, {
 
@@ -367,29 +358,19 @@ var BoardClass = Object.assign({}, {}, {
     },
 
 
-    handleChips: function (id) {
+    openWord: function () {
 
-        switch (id) {
-            case OPEN_WORD:
-                this.openWord();
-                break;
-            case OPEN_LETTER:
-                console.log("letter opened");
-                break;
-            case SHOW_WORD:
-                console.log("word shown");
-                break;
-            default:
-                return;
-        }
+
+        console.log("word opened");
 
     },
 
-    openWord: function () {
+    openLetter: function () {
+        console.log("letter opened");
+    },
 
-        //var words = this.state.board.words;
-        console.log(this.refs);
-
+    showWord: function () {
+        console.log("word shown");
     },
 
 
