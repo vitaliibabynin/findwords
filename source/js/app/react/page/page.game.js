@@ -101,7 +101,8 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <Board ref="board"
-                           slideData={appManager.getSettings().getRoundsBundles()[0]}/>
+                           boardData={appManager.getSettings().getRoundsBundles()[0]}
+                        />
 
                     <div className="ad">
 
