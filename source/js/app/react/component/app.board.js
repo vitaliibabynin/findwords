@@ -145,7 +145,7 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
-        if(this.highlightCompletedWord(x, y)){
+        if (this.highlightCompletedWord(x, y)) {
             return;
         }
 
@@ -164,7 +164,7 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
-        if (!this.checkIfDifferentLetter(x, y)){
+        if (!this.checkIfDifferentLetter(x, y)) {
             return;
         }
 
@@ -172,8 +172,7 @@ var BoardClass = Object.assign({}, {}, {
             return;
         }
 
-        var index = this.getIndexIfLetterIsSelected(x, y);
-        if (index !== false) {
+        if (this.removeSelectedLettersAfter(x, y)) {
             return;
         }
 
@@ -234,7 +233,7 @@ var BoardClass = Object.assign({}, {}, {
     },
 
 
-    highlightCompletedWord: function(x, y) {
+    highlightCompletedWord: function (x, y) {
 
         var board = this.state.board;
         var wordAlreadyCompleted = false;
@@ -256,7 +255,7 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    fadeHighlightedWord: function() {
+    fadeHighlightedWord: function () {
 
         var highlightedWord = this.state.highlightedWord;
 
@@ -302,7 +301,7 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    addFirstLetterToSelectedLetters: function(x, y) {
+    addFirstLetterToSelectedLetters: function (x, y) {
 
         var board = this.state.board;
         var selectedLetters = this.state.selectedLetters;
@@ -330,6 +329,36 @@ var BoardClass = Object.assign({}, {}, {
         });
 
         return index;
+
+    },
+
+    removeSelectedLettersAfter: function (x, y) {
+
+        var lettersRemoved = false;
+
+        var index = this.getIndexIfLetterIsSelected(x, y);
+        if (index !== false) {
+
+            var board = this.state.board;
+            var selectedLetters = this.state.selectedLetters;
+
+            for (var i = index + 1; i < selectedLetters.length; i++) {
+                for (var property in board[selectedLetters[i].y][selectedLetters[i].x].classNames) {
+                    delete board[selectedLetters[i].y][selectedLetters[i].x].classNames[property];
+                }
+            }
+
+            delete board[selectedLetters[index].y][selectedLetters[index].x].classNames.linkAfter;
+
+            selectedLetters.splice(index + 1, selectedLetters.length - (index - 1));
+
+            this.setState({selectedLetters: selectedLetters});
+
+            lettersRemoved = true;
+
+        }
+
+        return lettersRemoved;
 
     },
 
