@@ -556,7 +556,7 @@ var BoardClass = Object.assign({}, {}, {
         var unopenedWord = this.getUnopenedWord();
 
         if (openedLetters.length == 0) {
-            var LetterToOpen = unopenedWord[0];
+            var letterToOpen = unopenedWord[0];
             board[letterToOpen.y][letterToOpen.x].classNames.openLetter = OPEN_LETTER;
 
             this.setState({openedLetters: [letterToOpen]});
