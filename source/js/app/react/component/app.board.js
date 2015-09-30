@@ -58,8 +58,8 @@ var Letter = React.createClass(LetterClass);
 var BOARD_MARGIN = 40;
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
-var VISIBLE = "visible";
-var FADE = "fade";
+var LINK_VISIBLE = "visible";
+var LINK_FADE = "fade";
 var BEFORE_LINK_TOP = "before-link-top";
 var BEFORE_LINK_RIGHT = "before-link-right";
 var BEFORE_LINK_BOTTOM = "before-link-bottom";
@@ -90,7 +90,8 @@ var BoardClass = Object.assign({}, {}, {
             boardData: this.props.boardData.rounds[0] || {},
             cellSize: 0,
             board: [],
-            selectedLetters: []
+            selectedLetters: [],
+            completedWords: []
         };
 
     },
@@ -201,12 +202,14 @@ var BoardClass = Object.assign({}, {}, {
         //restrict which letters can be clicked
         var prevX = previousLetter.x;
         var prevY = previousLetter.y;
+        var prevColor = previousLetter.classNames.backgroundColor;
 
         if (y == prevY + 1 && x == prevX) {
             selectedLetters.push(board[y][x]);
             board[y][x].classNames = {
                 linkBefore: BEFORE_LINK_TOP,
-                backgroundColor: this.selectWordBackgroundColor(),
+                linkVisibility: LINK_VISIBLE,
+                backgroundColor: prevColor,
                 color: COLOR_SELECTED
             };
             board[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
@@ -216,7 +219,8 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters.push(board[y][x]);
             board[y][x].classNames = {
                 linkBefore: BEFORE_LINK_BOTTOM,
-                backgroundColor: this.selectWordBackgroundColor(),
+                linkVisibility: LINK_VISIBLE,
+                backgroundColor: prevColor,
                 color: COLOR_SELECTED
             };
             board[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
@@ -226,7 +230,8 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters.push(board[y][x]);
             board[y][x].classNames = {
                 linkBefore: BEFORE_LINK_LEFT,
-                backgroundColor: this.selectWordBackgroundColor(),
+                linkVisibility: LINK_VISIBLE,
+                backgroundColor: prevColor,
                 color: COLOR_SELECTED
             };
             board[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
@@ -236,7 +241,8 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters.push(board[y][x]);
             board[y][x].classNames = {
                 linkBefore: BEFORE_LINK_RIGHT,
-                backgroundColor: this.selectWordBackgroundColor(),
+                linkVisibility: LINK_VISIBLE,
+                backgroundColor: prevColor,
                 color: COLOR_SELECTED
             };
             board[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
@@ -257,8 +263,23 @@ var BoardClass = Object.assign({}, {}, {
         var selectedLetters = this.state.selectedLetters;
 
         if (this.checkForCompletedWord()) {
-            console.log("word Complete");
+
+            selectedLetters.map(function (letter) {
+                board[letter.y][letter.x].classNames.color = COLOR_COMPLETED;
+                board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+            });
+
+            var completedWords = this.state.completedWords;
+            completedWords.push(selectedLetters);
+
+            this.setState({
+                board: board,
+                selectedLetters: [],
+                completedWords: completedWords
+            });
+
             return;
+
         }
 
         selectedLetters.map(function (letter) {
@@ -271,7 +292,6 @@ var BoardClass = Object.assign({}, {}, {
             board: board,
             selectedLetters: []
         });
-
 
     },
 
@@ -313,7 +333,9 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     selectWordBackgroundColor: function () {
-        return "backgroundColor5";
+
+        return "backgroundColor10";
+
     },
 
     checkForCompletedWord: function () {
@@ -360,8 +382,36 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+    moveSelectedLettersToCompleteWords: function () {
+
+
+
+
+
+        //var completeWord = this.state.selectedLetters.slice();
+        //var wordBackgroundColor = this.selectWordBackgroundColor();
+        //
+        //for (var i = 0; i < completeWord.length; i++) {
+        //    completeWord[i][2].classNames.backgroundColor = wordBackgroundColor;
+        //    completeWord[i][2].classNames.inCompleteWord = "complete";
+        //    completeWord[i][2].classNames.fade = "fade";
+        //    delete completeWord[i][2].classNames.isSelected;
+        //}
+        //
+        //var completedWords = this.state.completedWords.slice();
+        //completedWords.push(completeWord);
+        //
+        //this.setState({
+        //    selectedLetters: [],
+        //    completedWords: completedWords
+        //});
+
+    },
+
 
     render: function () {
+
+        console.log(this.state.completedWords);
 
         var boardArr = this.state.board;
         //console.log(boardArr);

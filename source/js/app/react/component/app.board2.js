@@ -475,6 +475,24 @@ var BoardClass = Object.assign({}, {}, {
 
         return backgroundColor;
 
+        //var backgroundColors = [
+        //    "backgroundColor1",
+        //    "backgroundColor2",
+        //    "backgroundColor3",
+        //    "backgroundColor4",
+        //    "backgroundColor5",
+        //    "backgroundColor6",
+        //    "backgroundColor7",
+        //    "backgroundColor8",
+        //    "backgroundColor9",
+        //    "backgroundColor10"
+        //];
+        //
+        //var randomNumber = Math.round(Math.random() * (backgroundColors.length - 1));
+        //var backgroundColor = backgroundColors[randomNumber];
+        //
+        //return backgroundColor;
+
     },
 
     getSelectedLetterIndex: function (x, y) {
