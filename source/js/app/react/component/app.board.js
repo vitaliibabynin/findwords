@@ -19,12 +19,10 @@ var LetterClass = Object.assign({}, {}, {
 
     getInitialState: function () {
 
-        var state = {
+        return {
             classNames: this.props.classNames || "",
             cellSize: this.props.cellSize || 0
         };
-
-        return state;
 
     },
 
@@ -58,6 +56,18 @@ var Letter = React.createClass(LetterClass);
 
 
 var BOARD_MARGIN = 40;
+var COLOR_SELECTED = "selected";
+var COLOR_COMPLETED = "completed";
+var VISIBLE = "visible";
+var FADE = "fade";
+var BEFORE_LINK_TOP = "before-link-top";
+var BEFORE_LINK_RIGHT = "before-link-right";
+var BEFORE_LINK_BOTTOM = "before-link-bottom";
+var BEFORE_LINK_LEFT = "before-link-left";
+var AFTER_LINK_TOP = "after-link-top";
+var AFTER_LINK_RIGHT = "after-link-right";
+var AFTER_LINK_BOTTOM = "after-link-bottom";
+var AFTER_LINK_LEFT = "after-link-left";
 
 
 var BoardClass = Object.assign({}, {}, {
@@ -76,14 +86,12 @@ var BoardClass = Object.assign({}, {}, {
 
     getInitialState: function () {
 
-        var state = {
+        return {
             boardData: this.props.boardData.rounds[0] || {},
             cellSize: 0,
             board: [],
             selectedLetters: []
         };
-
-        return state;
 
     },
 
@@ -108,7 +116,7 @@ var BoardClass = Object.assign({}, {}, {
 
             word.letters.map(function (letter) {
 
-                arr[letter.x][letter.y] = {
+                arr[letter.y][letter.x] = {
                     x: letter.x,
                     y: letter.y,
                     letter: letter.letter,
@@ -129,49 +137,141 @@ var BoardClass = Object.assign({}, {}, {
         this.preventDefaultOnEvent(e);
 
         var cellCoordinates = this.calcWhichCellIsTouched(e);
+        if (!cellCoordinates) {
+            return;
+        }
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
         var board = this.state.board;
+        var selectedLetters = this.state.selectedLetters;
 
-        //check if in complete word
+        //check if letter is in completed word
 
-        for (var i = 0; i < board.length; i++) {
-            for (var j = 0; j < board[i].length; j++) {
-                if (i == x && j == y) {
-                    board[i][j].classNames.backgroundColor = "backgroundColor1";
-                    board[i][j].classNames.color = "selected";
-                    this.state.selectedLetters.push([board[x][y]]);
-                }
-            }
-        }
+        selectedLetters.push(board[y][x]);
+        board[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
+        board[y][x].classNames.color = COLOR_SELECTED;
 
-        this.setState({board: board});
+        this.setState({
+            board: board,
+            selectedLetters: selectedLetters
+        });
 
     },
 
     onTouchMove: function (e) {
 
+        this.preventDefaultOnEvent(e);
+
+        var cellCoordinates = this.calcWhichCellIsTouched(e);
+        if (!cellCoordinates) {
+            return;
+        }
+        var x = cellCoordinates.x;
+        var y = cellCoordinates.y;
+
         var board = this.state.board;
         var selectedLetters = this.state.selectedLetters;
 
-        for (var i = 0; i < board.length; i++) {
-            for (var j = 0; j < board[i].length; j++) {
-                if (i == x && j == y) {
-                    for (var s = 0; s < selectedLetters.length; s++) {
-                        if (x != selectedLetters[s].x && y != selectedLetters[s].y) {
-                            board[i][j].classNames.backgroundColor = "backgroundColor1";
-                            board[i][j].classNames.color = "selected";
-                            this.state.selectedLetters.push([board[x][y]]);
-                        }
-                    }
-                }
-            }
+        //check if different letter
+        if (selectedLetters.length == 0) {
+            return;
         }
+        if (y == selectedLetters[selectedLetters.length - 1].y && x == selectedLetters[selectedLetters.length - 1].x) {
+            return;
+        }
+
+        var letterSelected = false;
+        var index = 0;
+        selectedLetters.map(function (letter, letterIndex) {
+            if (y == letter.y && x == letter.x) {
+                letterSelected = true;
+                index = letterIndex;
+            }
+        });
+
+        if (letterSelected) {
+            return;
+        }
+
+        //add letter
+        var previousLetter = selectedLetters[selectedLetters.length - 1];
+
+        //find out which link needs to be attached
+        //restrict which letters can be clicked
+        var prevX = previousLetter.x;
+        var prevY = previousLetter.y;
+
+        if (y == prevY + 1 && x == prevX) {
+            selectedLetters.push(board[y][x]);
+            board[y][x].classNames = {
+                linkBefore: BEFORE_LINK_TOP,
+                backgroundColor: this.selectWordBackgroundColor(),
+                color: COLOR_SELECTED
+            };
+            board[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+        }
+
+        if (y == prevY - 1 && x == prevX) {
+            selectedLetters.push(board[y][x]);
+            board[y][x].classNames = {
+                linkBefore: BEFORE_LINK_BOTTOM,
+                backgroundColor: this.selectWordBackgroundColor(),
+                color: COLOR_SELECTED
+            };
+            board[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+        }
+
+        if (x == prevX + 1 && y == prevY) {
+            selectedLetters.push(board[y][x]);
+            board[y][x].classNames = {
+                linkBefore: BEFORE_LINK_LEFT,
+                backgroundColor: this.selectWordBackgroundColor(),
+                color: COLOR_SELECTED
+            };
+            board[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+        }
+
+        if (x == prevX - 1 && y == prevY) {
+            selectedLetters.push(board[y][x]);
+            board[y][x].classNames = {
+                linkBefore: BEFORE_LINK_RIGHT,
+                backgroundColor: this.selectWordBackgroundColor(),
+                color: COLOR_SELECTED
+            };
+            board[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+        }
+
+        this.setState({
+            board: board,
+            selectedLetters: selectedLetters
+        });
 
     },
 
     onTouchEnd: function (e) {
+
+        this.preventDefaultOnEvent(e);
+
+        var board = this.state.board;
+        var selectedLetters = this.state.selectedLetters;
+
+        if (this.checkForCompletedWord()) {
+            console.log("word Complete");
+            return;
+        }
+
+        selectedLetters.map(function (letter) {
+            for (var property in board[letter.y][letter.x].classNames) {
+                delete board[letter.y][letter.x].classNames[property];
+            }
+        });
+
+        this.setState({
+            board: board,
+            selectedLetters: []
+        });
+
 
     },
 
@@ -200,10 +300,63 @@ var BoardClass = Object.assign({}, {}, {
         var cellWidthX = boardWidthX / cols;
         var cellHeightY = boardHeightY / rows;
 
-        var y = Math.floor(boardX / cellWidthX);
-        var x = Math.floor(boardY / cellHeightY);
+        var x = Math.floor(boardX / cellWidthX);
+        var y = Math.floor(boardY / cellHeightY);
+
+        //check for invalid number of rows and columns
+        if (y > rows - 1 || x > cols - 1 || y < 0 || x < 0) {
+            return false;
+        }
 
         return {x: x, y: y};
+
+    },
+
+    selectWordBackgroundColor: function () {
+        return "backgroundColor5";
+    },
+
+    checkForCompletedWord: function () {
+
+        var words = this.state.boardData.words;
+        var selectedLetters = this.state.selectedLetters;
+
+        var mainResult = false;
+
+        words.map(function (word) {
+
+            if (word.letters.length == selectedLetters.length) {
+
+                var result = true;
+                word.letters.map(function (letter, letterIndex) {
+
+                    if (selectedLetters[letterIndex].letter != letter.letter) {
+                        result = false;
+                    }
+
+                    var resultCell = false;
+                    selectedLetters.map(function (selectedLetter) {
+
+                        if (selectedLetter.x == letter.x && selectedLetter.y == letter.y) {
+                            resultCell = true;
+                        }
+
+                    });
+
+                    if (!resultCell) {
+                        result = false;
+                    }
+
+                });
+
+                if (result) {
+                    mainResult = true;
+                }
+
+            }
+        });
+
+        return mainResult;
 
     },
 
@@ -212,7 +365,7 @@ var BoardClass = Object.assign({}, {}, {
 
         var boardArr = this.state.board;
         //console.log(boardArr);
-        console.log(this.state.selectedLetters);
+        //console.log(this.state.selectedLetters);
 
         var boardStyle = {
             fontSize: (this.state.cellSize / 2) + "px"
@@ -234,9 +387,13 @@ var BoardClass = Object.assign({}, {}, {
 
                             {row.map(function (cell, cellId) {
 
+                                var properties = [];
+                                for (var property in cell.classNames) {
+                                    properties.push(cell.classNames[property])
+                                }
+
                                 var letterClassNames = classNames(
-                                    cell.classNames.backgroundColor,
-                                    cell.classNames.color
+                                    properties
                                 );
 
                                 return (
