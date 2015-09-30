@@ -68,6 +68,9 @@ var AFTER_LINK_TOP = "after-link-top";
 var AFTER_LINK_RIGHT = "after-link-right";
 var AFTER_LINK_BOTTOM = "after-link-bottom";
 var AFTER_LINK_LEFT = "after-link-left";
+var OPEN_LETTER_LINK_COLOR = "open-letter";
+var OPEN_LETTER_COLOR = "open-letter";
+
 
 
 var BoardClass = Object.assign({}, {}, {
@@ -92,7 +95,8 @@ var BoardClass = Object.assign({}, {}, {
             board: [],
             selectedLetters: [],
             completedWords: [],
-            highlightedWord: []
+            highlightedWord: [],
+            openedLetters: []
         };
 
     },
@@ -232,7 +236,6 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-
     highlightCompletedWord: function (x, y) {
 
         var board = this.state.board;
@@ -309,6 +312,7 @@ var BoardClass = Object.assign({}, {}, {
         selectedLetters.push(board[y][x]);
         board[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
         board[y][x].classNames.color = COLOR_SELECTED;
+        board[y][x].classNames.linkVisibility = LINK_VISIBLE;
 
         this.setState({
             board: board,
@@ -343,9 +347,11 @@ var BoardClass = Object.assign({}, {}, {
             var selectedLetters = this.state.selectedLetters;
 
             for (var i = index + 1; i < selectedLetters.length; i++) {
-                for (var property in board[selectedLetters[i].y][selectedLetters[i].x].classNames) {
-                    delete board[selectedLetters[i].y][selectedLetters[i].x].classNames[property];
-                }
+                delete board[selectedLetters[i].y][selectedLetters[i].x].classNames.linkBefore;
+                delete board[selectedLetters[i].y][selectedLetters[i].x].classNames.linkAfter;
+                delete board[selectedLetters[i].y][selectedLetters[i].x].classNames.linkVisibility;
+                delete board[selectedLetters[i].y][selectedLetters[i].x].classNames.backgroundColor;
+                delete board[selectedLetters[i].y][selectedLetters[i].x].classNames.color;
             }
 
             delete board[selectedLetters[index].y][selectedLetters[index].x].classNames.linkAfter;
@@ -524,15 +530,61 @@ var BoardClass = Object.assign({}, {}, {
         var selectedLetters = this.state.selectedLetters;
 
         selectedLetters.map(function (letter) {
-            for (var property in board[letter.y][letter.x].classNames) {
-                delete board[letter.y][letter.x].classNames[property];
-            }
+            delete board[letter.y][letter.x].classNames.linkBefore;
+            delete board[letter.y][letter.x].classNames.linkAfter;
+            delete board[letter.y][letter.x].classNames.linkVisibility;
+            delete board[letter.y][letter.x].classNames.backgroundColor;
+            delete board[letter.y][letter.x].classNames.color;
         });
 
         this.setState({
             board: board,
             selectedLetters: []
         });
+
+    },
+
+
+    openWord: function () {
+
+        var unopenedWord = this.getUnopenedWord();
+
+    },
+
+    openLetter: function () {
+
+        var unopenedWord = this.getUnopenedWord();
+
+        if (this.state.openedLetters.length == 0) {
+            var board = this.state.board;
+            var letterToOpen = unopenedWord[0].letters[0];
+            board[letterToOpen.y][letterToOpen.x].classNames.openLetterColor = OPEN_LETTER_COLOR;
+            board[letterToOpen.y][letterToOpen.x].classNames.openLetterlinkColor = OPEN_LETTER_LINK_COLOR;
+
+            this.setState({openedLetters: [[letterToOpen]]});
+            console.log(this.state.openedLetters);
+        }
+
+    },
+
+    showWord: function () {
+
+        var unopenedWord = this.getUnopenedWord();
+        //console.log(unopenedWord);
+
+    },
+
+    getUnopenedWord: function () {
+
+        var words = this.state.boardData.words;
+        var completedWords = this.state.completedWords;
+        var unopenedWord = [];
+
+        if (completedWords.length == 0) {
+            unopenedWord.push(words[0]);
+        }
+
+        return unopenedWord;
 
     },
 

@@ -143,6 +143,17 @@
       background-position: 0 0, 0 0;
       background-repeat: no-repeat;
 
+      &.before-link-top.open-letter:before,
+      &.before-link-right.open-letter:before,
+      &.before-link-bottom.open-letter:before,
+      &.before-link-left.open-letter:before,
+      &.after-link-top.open-letter:after,
+      &.after-link-right.open-letter:after,
+      &.after-link-bottom.open-letter:after,
+      &.after-link-left.open-letter:after {
+        background-color: $gamePage-board-td-bg-color-link-open-letter;
+      }
+
       //@-webkit-keyframes fade {
       //  0% {
       //    opacity: 1;
@@ -182,6 +193,7 @@
         transition-duration: 1.5s;
         transition-delay: 0.5s;
         opacity: 0;
+        background-color: $gamePage-board-td-bg-color-link;
       }
 
       &.before-link-top.visible:before,
@@ -199,6 +211,7 @@
         transition-duration: 0s;
         transition-delay: 0s;
         opacity: 1;
+        background-color: $gamePage-board-td-bg-color-link;
       }
 
       &.before-link-top:before,
@@ -212,7 +225,6 @@
         position: absolute;
         z-index: 1000;
         content: "";
-        background-color: $gamePage-board-td-bg-color-link;
       }
 
       &.before-link-top:before,
@@ -247,6 +259,9 @@
         left: 0;
       }
 
+      &.open-letter {
+        color: $gamePage-board-td-color-open-letter;
+      }
       &.selected {
         color: $gamePage-board-td-color-selected;
       }
