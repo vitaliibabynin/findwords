@@ -68,9 +68,7 @@ var AFTER_LINK_TOP = "after-link-top";
 var AFTER_LINK_RIGHT = "after-link-right";
 var AFTER_LINK_BOTTOM = "after-link-bottom";
 var AFTER_LINK_LEFT = "after-link-left";
-var OPEN_LETTER_LINK_COLOR = "open-letter";
-var OPEN_LETTER_COLOR = "open-letter";
-
+var OPEN_LETTER = "open-letter";
 
 
 var BoardClass = Object.assign({}, {}, {
@@ -553,17 +551,77 @@ var BoardClass = Object.assign({}, {}, {
 
     openLetter: function () {
 
+        var board = this.state.board;
+        var openedLetters = this.state.openedLetters;
         var unopenedWord = this.getUnopenedWord();
 
-        if (this.state.openedLetters.length == 0) {
-            var board = this.state.board;
-            var letterToOpen = unopenedWord[0].letters[0];
-            board[letterToOpen.y][letterToOpen.x].classNames.openLetterColor = OPEN_LETTER_COLOR;
-            board[letterToOpen.y][letterToOpen.x].classNames.openLetterlinkColor = OPEN_LETTER_LINK_COLOR;
+        if (openedLetters.length == 0) {
+            var LetterToOpen = unopenedWord[0];
+            board[letterToOpen.y][letterToOpen.x].classNames.openLetter = OPEN_LETTER;
 
-            this.setState({openedLetters: [[letterToOpen]]});
-            console.log(this.state.openedLetters);
+            this.setState({openedLetters: [letterToOpen]});
+            return;
         }
+
+        //var letterToOpen = unopenedWord[openedLetters.length];
+        //var previousLetter = openedLetters[openedLetters.length - 1];
+        //
+        //console.log(previousLetter);
+        //
+        ////find out which link needs to be attached
+        ////restrict which letters can be clicked
+        //var prevX = previousLetter.x;
+        //var prevY = previousLetter.y;
+        //
+        //if (y == prevY + 1 && x == prevX) {
+        //    openedLetters.push(board[y][x]);
+        //    board[y][x].classNames = {
+        //        linkBefore: BEFORE_LINK_TOP,
+        //        linkVisibility: LINK_VISIBLE,
+        //        backgroundColor: prevColor,
+        //        color: COLOR_SELECTED
+        //    };
+        //    board[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+        //}
+        //
+        //if (y == prevY - 1 && x == prevX) {
+        //    selectedLetters.push(board[y][x]);
+        //    board[y][x].classNames = {
+        //        linkBefore: BEFORE_LINK_BOTTOM,
+        //        linkVisibility: LINK_VISIBLE,
+        //        backgroundColor: prevColor,
+        //        color: COLOR_SELECTED
+        //    };
+        //    board[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+        //}
+        //
+        //if (x == prevX + 1 && y == prevY) {
+        //    selectedLetters.push(board[y][x]);
+        //    board[y][x].classNames = {
+        //        linkBefore: BEFORE_LINK_LEFT,
+        //        linkVisibility: LINK_VISIBLE,
+        //        backgroundColor: prevColor,
+        //        color: COLOR_SELECTED
+        //    };
+        //    board[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+        //}
+        //
+        //if (x == prevX - 1 && y == prevY) {
+        //    selectedLetters.push(board[y][x]);
+        //    board[y][x].classNames = {
+        //        linkBefore: BEFORE_LINK_RIGHT,
+        //        linkVisibility: LINK_VISIBLE,
+        //        backgroundColor: prevColor,
+        //        color: COLOR_SELECTED
+        //    };
+        //    board[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+        //}
+        //
+        //this.setState({
+        //    board: board,
+        //    selectedLetters: selectedLetters
+        //});
+
 
     },
 
@@ -581,7 +639,7 @@ var BoardClass = Object.assign({}, {}, {
         var unopenedWord = [];
 
         if (completedWords.length == 0) {
-            unopenedWord.push(words[0]);
+            unopenedWord.push(words[0].letters[0]);
         }
 
         return unopenedWord;
@@ -593,6 +651,7 @@ var BoardClass = Object.assign({}, {}, {
 
         //console.log(this.state.completedWords);
         //console.log(this.state.selectedLetters);
+        console.log(this.state.openedLetters);
 
         var boardArr = this.state.board;
         //console.log(boardArr);
