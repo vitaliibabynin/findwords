@@ -91,7 +91,8 @@ var BoardClass = Object.assign({}, {}, {
             cellSize: 0,
             board: [],
             selectedLetters: [],
-            completedWords: []
+            completedWords: [],
+            highlightedWord: []
         };
 
     },
@@ -144,19 +145,11 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
-        var board = this.state.board;
-        var selectedLetters = this.state.selectedLetters;
+        if(this.highlightCompletedWord(x, y)){
+            return;
+        }
 
-        //check if letter is in completed word
-
-        selectedLetters.push(board[y][x]);
-        board[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
-        board[y][x].classNames.color = COLOR_SELECTED;
-
-        this.setState({
-            board: board,
-            selectedLetters: selectedLetters
-        });
+        this.addFirstLetterToSelectedLetters(x, y);
 
     },
 
@@ -171,31 +164,180 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
+        if (!this.checkIfDifferentLetter(x, y)){
+            return;
+        }
+
+        if (this.checkIfLetterIsInCompleteWord(x, y)) {
+            return;
+        }
+
+        var index = this.getIndexIfLetterIsSelected(x, y);
+        if (index !== false) {
+            return;
+        }
+
+        this.addLetterToSelectedLetters(x, y);
+
+    },
+
+    onTouchEnd: function (e) {
+
+        this.preventDefaultOnEvent(e);
+
+        this.fadeHighlightedWord();
+
+        if (this.checkForCompletedWord()) {
+            this.moveSelectedLettersToCompleteWords();
+            return;
+        }
+
+        this.emptySelectedLetters();
+
+    },
+
+
+    preventDefaultOnEvent: function (e) {
+
+        e.stopPropagation();
+        e.preventDefault();
+
+    },
+
+    calcWhichCellIsTouched: function (e) {
+
+        var screenX = e.touches[0].clientX;
+        var screenY = e.touches[0].clientY;
+
+        var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
+        var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
+
+        var rows = this.state.boardData.rows;
+        var cols = this.state.boardData.cols;
+
+        var boardWidthX = e.currentTarget.getBoundingClientRect().width;
+        var boardHeightY = e.currentTarget.getBoundingClientRect().height;
+
+        var cellWidthX = boardWidthX / cols;
+        var cellHeightY = boardHeightY / rows;
+
+        var x = Math.floor(boardX / cellWidthX);
+        var y = Math.floor(boardY / cellHeightY);
+
+        //check for invalid number of rows and columns
+        if (y > rows - 1 || x > cols - 1 || y < 0 || x < 0) {
+            return false;
+        }
+
+        return {x: x, y: y};
+
+    },
+
+
+    highlightCompletedWord: function(x, y) {
+
+        var board = this.state.board;
+        var wordAlreadyCompleted = false;
+
+        var currentWord = this.checkIfLetterIsInCompleteWord(x, y);
+        if (currentWord !== false) {
+
+            currentWord.map(function (letter) {
+                board[letter.y][letter.x].classNames.linkVisibility = LINK_VISIBLE;
+            });
+
+            this.setState({highlightedWord: currentWord});
+
+            wordAlreadyCompleted = true;
+
+        }
+
+        return wordAlreadyCompleted;
+
+    },
+
+    fadeHighlightedWord: function() {
+
+        var highlightedWord = this.state.highlightedWord;
+
+        if (highlightedWord != []) {
+
+            var board = this.state.board;
+
+            highlightedWord.map(function (letter) {
+                board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+            });
+
+            this.setState({highlightedWord: []});
+
+        }
+
+    },
+
+    checkIfLetterIsInCompleteWord: function (x, y) {
+
+        var result = false;
+
+        this.state.completedWords.map(function (completedWord) {
+            completedWord.map(function (letterInCompletedWord, idx, word) {
+                if (letterInCompletedWord.x == x && letterInCompletedWord.y == y) {
+                    result = word;
+                }
+            });
+        });
+
+        return result;
+
+    },
+
+    checkIfDifferentLetter: function (x, y) {
+
+        var selectedLetters = this.state.selectedLetters;
+
+        if (selectedLetters.length == 0) {
+            return false;
+        }
+
+        return !(y == selectedLetters[selectedLetters.length - 1].y && x == selectedLetters[selectedLetters.length - 1].x);
+
+    },
+
+    addFirstLetterToSelectedLetters: function(x, y) {
+
         var board = this.state.board;
         var selectedLetters = this.state.selectedLetters;
 
-        //check if different letter
-        if (selectedLetters.length == 0) {
-            return;
-        }
-        if (y == selectedLetters[selectedLetters.length - 1].y && x == selectedLetters[selectedLetters.length - 1].x) {
-            return;
-        }
+        selectedLetters.push(board[y][x]);
+        board[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
+        board[y][x].classNames.color = COLOR_SELECTED;
 
-        var letterSelected = false;
-        var index = 0;
+        this.setState({
+            board: board,
+            selectedLetters: selectedLetters
+        });
+
+    },
+
+    getIndexIfLetterIsSelected: function (x, y) {
+
+        var selectedLetters = this.state.selectedLetters;
+
+        var index = false;
         selectedLetters.map(function (letter, letterIndex) {
             if (y == letter.y && x == letter.x) {
-                letterSelected = true;
                 index = letterIndex;
             }
         });
 
-        if (letterSelected) {
-            return;
-        }
+        return index;
 
-        //add letter
+    },
+
+    addLetterToSelectedLetters: function (x, y) {
+
+        var board = this.state.board;
+        var selectedLetters = this.state.selectedLetters;
+
         var previousLetter = selectedLetters[selectedLetters.length - 1];
 
         //find out which link needs to be attached
@@ -255,86 +397,30 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    onTouchEnd: function (e) {
-
-        this.preventDefaultOnEvent(e);
-
-        var board = this.state.board;
-        var selectedLetters = this.state.selectedLetters;
-
-        if (this.checkForCompletedWord()) {
-
-            selectedLetters.map(function (letter) {
-                board[letter.y][letter.x].classNames.color = COLOR_COMPLETED;
-                board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
-            });
-
-            var completedWords = this.state.completedWords;
-            completedWords.push(selectedLetters);
-
-            this.setState({
-                board: board,
-                selectedLetters: [],
-                completedWords: completedWords
-            });
-
-            return;
-
-        }
-
-        selectedLetters.map(function (letter) {
-            for (var property in board[letter.y][letter.x].classNames) {
-                delete board[letter.y][letter.x].classNames[property];
-            }
-        });
-
-        this.setState({
-            board: board,
-            selectedLetters: []
-        });
-
-    },
-
-
-    preventDefaultOnEvent: function (e) {
-
-        e.stopPropagation();
-        e.preventDefault();
-
-    },
-
-    calcWhichCellIsTouched: function (e) {
-
-        var screenX = e.touches[0].clientX;
-        var screenY = e.touches[0].clientY;
-
-        var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
-        var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
-
-        var rows = this.state.boardData.rows;
-        var cols = this.state.boardData.cols;
-
-        var boardWidthX = e.currentTarget.getBoundingClientRect().width;
-        var boardHeightY = e.currentTarget.getBoundingClientRect().height;
-
-        var cellWidthX = boardWidthX / cols;
-        var cellHeightY = boardHeightY / rows;
-
-        var x = Math.floor(boardX / cellWidthX);
-        var y = Math.floor(boardY / cellHeightY);
-
-        //check for invalid number of rows and columns
-        if (y > rows - 1 || x > cols - 1 || y < 0 || x < 0) {
-            return false;
-        }
-
-        return {x: x, y: y};
-
-    },
-
     selectWordBackgroundColor: function () {
 
-        return "backgroundColor10";
+        var backgroundColor = '';
+        var wordsComplete = this.state.completedWords.length;
+
+        var backgroundColors = [
+            "backgroundColor1",
+            "backgroundColor2",
+            "backgroundColor3",
+            "backgroundColor4",
+            "backgroundColor5",
+            "backgroundColor6",
+            "backgroundColor7",
+            "backgroundColor8",
+            "backgroundColor9",
+            "backgroundColor10"
+        ];
+
+        //  +1 because word hasn't been added to completedWords yet
+        for (var i = 0; i < wordsComplete + 1; i++) {
+            backgroundColor = backgroundColors[i % backgroundColors.length];
+        }
+
+        return backgroundColor;
 
     },
 
@@ -384,38 +470,51 @@ var BoardClass = Object.assign({}, {}, {
 
     moveSelectedLettersToCompleteWords: function () {
 
+        var board = this.state.board;
+        var selectedLetters = this.state.selectedLetters;
 
+        selectedLetters.map(function (letter) {
+            board[letter.y][letter.x].classNames.color = COLOR_COMPLETED;
+            board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+        });
 
+        var completedWords = this.state.completedWords;
+        completedWords.push(selectedLetters);
 
+        this.setState({
+            board: board,
+            selectedLetters: [],
+            completedWords: completedWords
+        });
 
-        //var completeWord = this.state.selectedLetters.slice();
-        //var wordBackgroundColor = this.selectWordBackgroundColor();
-        //
-        //for (var i = 0; i < completeWord.length; i++) {
-        //    completeWord[i][2].classNames.backgroundColor = wordBackgroundColor;
-        //    completeWord[i][2].classNames.inCompleteWord = "complete";
-        //    completeWord[i][2].classNames.fade = "fade";
-        //    delete completeWord[i][2].classNames.isSelected;
-        //}
-        //
-        //var completedWords = this.state.completedWords.slice();
-        //completedWords.push(completeWord);
-        //
-        //this.setState({
-        //    selectedLetters: [],
-        //    completedWords: completedWords
-        //});
+    },
+
+    emptySelectedLetters: function () {
+
+        var board = this.state.board;
+        var selectedLetters = this.state.selectedLetters;
+
+        selectedLetters.map(function (letter) {
+            for (var property in board[letter.y][letter.x].classNames) {
+                delete board[letter.y][letter.x].classNames[property];
+            }
+        });
+
+        this.setState({
+            board: board,
+            selectedLetters: []
+        });
 
     },
 
 
     render: function () {
 
-        console.log(this.state.completedWords);
+        //console.log(this.state.completedWords);
+        //console.log(this.state.selectedLetters);
 
         var boardArr = this.state.board;
         //console.log(boardArr);
-        //console.log(this.state.selectedLetters);
 
         var boardStyle = {
             fontSize: (this.state.cellSize / 2) + "px"
