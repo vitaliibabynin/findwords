@@ -42,15 +42,10 @@ var LetterClass = Object.assign({}, {}, {
             width: this.state.cellSize + "px"
         };
 
-        var letterStyle = {
-            height: (this.state.cellSize / 1.5) + "px",
-            width: (this.state.cellSize / 1.5) + "px"
-        };
-
         return (
             <td className={this.state.classNames}
                 style={cellStyle}>
-                <span style={letterStyle}>{this.props.children}</span>
+                <span>{this.props.children}</span>
             </td>
         );
 
