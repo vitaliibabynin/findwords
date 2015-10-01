@@ -547,6 +547,28 @@ var BoardClass = Object.assign({}, {}, {
 
         var unopenedWord = this.getUnopenedWord();
 
+        if (!unopenedWord) {
+            return false;
+        }
+
+        unopenedWord.map(function(letter, i) {
+
+            var prevLetter = unopenedWord[i-1];
+            var prevX = prevLetter.x;
+            var prevY = prevLetter.y;
+
+
+
+
+        });
+
+        var completedWords = this.state.completedWords;
+        completedWords.push(unopenedWord);
+
+        this.setState({
+            completedWords: completedWords
+        });
+
     },
 
     openLetter: function () {
@@ -554,16 +576,20 @@ var BoardClass = Object.assign({}, {}, {
         var board = this.state.board;
         var openedLetters = this.state.openedLetters;
         var unopenedWord = this.getUnopenedWord();
-
-        if (openedLetters.length == 0) {
-            var letterToOpen = unopenedWord[0];
-            board[letterToOpen.y][letterToOpen.x].classNames.openLetter = OPEN_LETTER;
-
-            this.setState({openedLetters: [letterToOpen]});
-            return;
-        }
-
         //var letterToOpen = unopenedWord[openedLetters.length];
+        //
+        //
+        //board[letterToOpen.y][letterToOpen.x].classNames.openLetter = OPEN_LETTER;
+        //
+        //openedLetters.push(letterToOpen);
+        //
+        //this.setState({openedLetters: openedLetters});
+        //
+        //
+        //console.log(openedLetters.length);
+        //console.log(unopenedWord);
+        //console.log(letterToOpen);
+
         //var previousLetter = openedLetters[openedLetters.length - 1];
         //
         //console.log(previousLetter);
@@ -636,11 +662,64 @@ var BoardClass = Object.assign({}, {}, {
 
         var words = this.state.boardData.words;
         var completedWords = this.state.completedWords;
-        var unopenedWord = [];
 
         if (completedWords.length == 0) {
-            unopenedWord.push(words[0].letters[0]);
+            return words[0].letters;
         }
+
+        if (completedWords.length == words.length) {
+            return false;
+        }
+
+        var unopenedWord = false;
+
+        words.map(function (word) {
+
+            var wordIsInCompletedWords = false;
+
+            completedWords.map(function (completedWord) {
+
+                var wordIsInCompletedWord = false;
+                if (completedWord.length == word.letters.length) {
+
+                    var result = true;
+                    word.letters.map(function (letter, letterIndex) {
+
+                        if (completedWord[letterIndex].letter != letter.letter) {
+                            result = false;
+                        }
+
+                        var resultCell = false;
+                        completedWord.map(function (compWordLetter) {
+
+                            if (compWordLetter.x == letter.x && compWordLetter.y == letter.y) {
+                                resultCell = true;
+                            }
+
+                        });
+
+                        if (!resultCell) {
+                            result = false;
+                        }
+
+                    });
+
+                    if (result) {
+                        wordIsInCompletedWord = true;
+                    }
+                }
+
+                if (wordIsInCompletedWord) {
+                    wordIsInCompletedWords = true;
+                }
+
+            });
+
+            if (!wordIsInCompletedWords) {
+                unopenedWord = word.letters;
+            }
+
+        });
 
         return unopenedWord;
 
@@ -649,9 +728,9 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        //console.log(this.state.completedWords);
+        console.log(this.state.completedWords);
         //console.log(this.state.selectedLetters);
-        console.log(this.state.openedLetters);
+        //console.log(this.state.openedLetters);
 
         var boardArr = this.state.board;
         //console.log(boardArr);
