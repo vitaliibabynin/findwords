@@ -622,7 +622,7 @@ var BoardClass = Object.assign({}, {}, {
                 this.setState({
                     board: board
                 })
-            }.bind(this), 0);
+            }.bind(this), 300);
         });
 
     },
