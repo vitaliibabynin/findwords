@@ -612,22 +612,17 @@ var BoardClass = Object.assign({}, {}, {
         completedWords.push(unopenedWord);
 
         this.setState({
-
             board: board,
             completedWords: completedWords
-
         }, function () {
-
-            console.log(board);
-
             unopenedWord.map(function (letter) {
                 board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
             });
-
-            this.setState({
-                board: board
-            });
-
+            setTimeout(function () {
+                this.setState({
+                    board: board
+                })
+            }.bind(this), 0);
         });
 
     },
