@@ -551,23 +551,72 @@ var BoardClass = Object.assign({}, {}, {
             return false;
         }
 
-        unopenedWord.map(function(letter, i) {
+        var board = this.state.board;
+        var backgroundColor = this.selectWordBackgroundColor();
 
-            var prevLetter = unopenedWord[i-1];
+        board[unopenedWord[0].y][unopenedWord[0].x].classNames.backgroundColor = backgroundColor;
+        board[unopenedWord[0].y][unopenedWord[0].x].classNames.color = COLOR_COMPLETED;
+        board[unopenedWord[0].y][unopenedWord[0].x].classNames.linkVisibility = LINK_VISIBLE;
+
+        for (var i = 1; i < unopenedWord.length; i++) {
+
+            var x = unopenedWord[i].x;
+            var y = unopenedWord[i].y;
+            var prevLetter = unopenedWord[i - 1];
             var prevX = prevLetter.x;
             var prevY = prevLetter.y;
 
+            if (y == prevY + 1 && x == prevX) {
+                board[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_TOP,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                board[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+            }
 
+            if (y == prevY - 1 && x == prevX) {
+                board[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_BOTTOM,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                board[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+            }
 
+            if (x == prevX + 1 && y == prevY) {
+                board[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_LEFT,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                board[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+            }
 
-        });
+            if (x == prevX - 1 && y == prevY) {
+                board[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_RIGHT,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                board[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+            }
+
+        }
 
         var completedWords = this.state.completedWords;
         completedWords.push(unopenedWord);
 
         this.setState({
+            board: board,
             completedWords: completedWords
         });
+
+        //this.addFadeEffect(unopenedWord);
 
     },
 
@@ -723,6 +772,19 @@ var BoardClass = Object.assign({}, {}, {
 
         return unopenedWord;
 
+    },
+
+    addFadeEffect: function (word) {
+
+        var board = this.state.board;
+
+        word.map(function (letter) {
+            board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+        });
+
+        this.setState({
+            board: board
+        });
     },
 
 
