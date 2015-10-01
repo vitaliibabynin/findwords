@@ -612,11 +612,23 @@ var BoardClass = Object.assign({}, {}, {
         completedWords.push(unopenedWord);
 
         this.setState({
+
             board: board,
             completedWords: completedWords
-        });
 
-        //this.addFadeEffect(unopenedWord);
+        }, function () {
+
+            console.log(board);
+
+            unopenedWord.map(function (letter) {
+                board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+            });
+
+            this.setState({
+                board: board
+            });
+
+        });
 
     },
 
@@ -774,23 +786,10 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    addFadeEffect: function (word) {
-
-        var board = this.state.board;
-
-        word.map(function (letter) {
-            board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
-        });
-
-        this.setState({
-            board: board
-        });
-    },
-
 
     render: function () {
 
-        console.log(this.state.completedWords);
+        //console.log(this.state.completedWords);
         //console.log(this.state.selectedLetters);
         //console.log(this.state.openedLetters);
 
