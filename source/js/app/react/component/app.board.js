@@ -554,9 +554,11 @@ var BoardClass = Object.assign({}, {}, {
         var board = this.state.board;
         var backgroundColor = this.selectWordBackgroundColor();
 
-        board[unopenedWord[0].y][unopenedWord[0].x].classNames.backgroundColor = backgroundColor;
-        board[unopenedWord[0].y][unopenedWord[0].x].classNames.color = COLOR_COMPLETED;
-        board[unopenedWord[0].y][unopenedWord[0].x].classNames.linkVisibility = LINK_VISIBLE;
+        board[unopenedWord[0].y][unopenedWord[0].x].classNames = {
+            backgroundColor: backgroundColor,
+            color: COLOR_COMPLETED,
+            linkVisibility: LINK_VISIBLE
+        };
 
         for (var i = 1; i < unopenedWord.length; i++) {
 
