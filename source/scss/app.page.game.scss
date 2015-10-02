@@ -143,14 +143,14 @@
       background-position: 0 0, 0 0;
       background-repeat: no-repeat;
 
-      &.before-link-top.open-letter:before,
-      &.before-link-right.open-letter:before,
-      &.before-link-bottom.open-letter:before,
-      &.before-link-left.open-letter:before,
-      &.after-link-top.open-letter:after,
-      &.after-link-right.open-letter:after,
-      &.after-link-bottom.open-letter:after,
-      &.after-link-left.open-letter:after {
+      &.open-letter-before-link-top:before,
+      &.open-letter-before-link-right:before,
+      &.open-letter-before-link-bottom:before,
+      &.open-letter-before-link-left:before,
+      &.open-letter-after-link-top:after,
+      &.open-letter-after-link-right:after,
+      &.open-letter-after-link-bottom:after,
+      &.open-letter-after-link-left:after {
         background-color: $gamePage-board-td-bg-color-link-open-letter;
       }
 
@@ -214,6 +214,14 @@
         background-color: $gamePage-board-td-bg-color-link;
       }
 
+      &.open-letter-before-link-top:before,
+      &.open-letter-before-link-right:before,
+      &.open-letter-before-link-bottom:before,
+      &.open-letter-before-link-left:before,
+      &.open-letter-after-link-top:after,
+      &.open-letter-after-link-right:after,
+      &.open-letter-after-link-bottom:after,
+      &.open-letter-after-link-left:after,
       &.before-link-top:before,
       &.before-link-right:before,
       &.before-link-bottom:before,
@@ -227,6 +235,8 @@
         content: "";
       }
 
+      &.open-letter-before-link-top:before,
+      &.open-letter-after-link-top:after,
       &.before-link-top:before,
       &.after-link-top:after {
         height: 10%;
@@ -235,6 +245,8 @@
         left: 47.5%;
       }
 
+      &.open-letter-before-link-right:before,
+      &.open-letter-after-link-right:after,
       &.before-link-right:before,
       &.after-link-right:after {
         height: 5%;
@@ -243,6 +255,8 @@
         right: 0;
       }
 
+      &.open-letter-before-link-bottom:before,
+      &.open-letter-after-link-bottom:after,
       &.before-link-bottom:before,
       &.after-link-bottom:after {
         height: 10%;
@@ -251,6 +265,8 @@
         left: 47.5%;
       }
 
+      &.open-letter-before-link-left:before,
+      &.open-letter-after-link-left:after,
       &.before-link-left:before,
       &.after-link-left:after {
         height: 5%;
