@@ -27,6 +27,7 @@ var BUTTON_SETTINGS_LANG_EN = "settings_lang_en";
 
 var NavigationClass = Object.assign({}, {}, {
 
+    displayName: 'Navigation',
     mixins: [GameMixin],
 
     getInitialState: function () {

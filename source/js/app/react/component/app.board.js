@@ -10,6 +10,8 @@ module.exports = {};
 
 var LetterClass = Object.assign({}, {}, {
 
+    displayName: 'Letter',
+
     propTypes: {
 
         classNames: React.PropTypes.string,
@@ -80,6 +82,8 @@ var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
 
 
 var BoardClass = Object.assign({}, {}, {
+
+    displayName: 'Board',
 
     propTypes: {
         boardData: React.PropTypes.shape({

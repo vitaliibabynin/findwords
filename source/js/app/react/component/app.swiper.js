@@ -245,6 +245,8 @@ var Slide = React.createClass(SlideClass);
 
 var SwiperClass = Object.assign({}, {}, {
 
+    displayName: 'Swiper',
+
     componentDidMount: function () {
 
         if (null == this.swiper) {

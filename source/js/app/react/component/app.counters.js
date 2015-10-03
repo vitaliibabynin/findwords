@@ -86,6 +86,8 @@ var CounterClass = Object.assign({}, {}, {
 
 var ScoreCounterClass = Object.assign({}, CounterClass, {
 
+    displayName: 'ScoreCounter',
+
     getInitialState: function () {
 
         var state = CounterClass.getInitialState.apply(this);
@@ -102,6 +104,8 @@ var ScoreCounter = React.createClass(ScoreCounterClass);
 
 
 var CoinsCounterClass = Object.assign({}, CounterClass, {
+
+    displayName: 'CoinsCounter',
 
     getInitialState: function () {
 
@@ -120,6 +124,7 @@ var CoinsCounter = React.createClass(CoinsCounterClass);
 
 var BackButtonClass = Object.assign({}, {}, {
 
+    displayName: 'BackButton',
     mixins: [GameMixin],
 
     onButtonClick: function(){
@@ -145,6 +150,8 @@ var BackButton = React.createClass(BackButtonClass);
 
 
 var CountersClass = Object.assign({}, {}, {
+
+    displayName: 'Counters',
 
     propTypes: {
 

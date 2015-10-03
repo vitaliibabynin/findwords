@@ -11,6 +11,7 @@ module.exports = {};
 
 var TimerClass = Object.assign({}, {}, {
 
+    displayName: 'Timer',
     mixins: [GameMixin],
 
     propTypes: {
