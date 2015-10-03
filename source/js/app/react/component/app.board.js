@@ -102,7 +102,8 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: [],
             completedWords: [],
             highlightedWord: [],
-            openedLetters: []
+            openedLetters: [],
+            shownWords: []
         };
 
     },
@@ -705,10 +706,35 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    showWord: function () {
+    getUnopenedUnshownWord: function () {
 
-        var unopenedWord = this.getUnopenedWord();
-        //console.log(unopenedWord);
+        var words = this.state.boardData.words;
+        var completedWords = this.state.completedWords;
+
+        if (completedWords.length == words.length) {
+            return false
+        }
+
+        var unopenedWord = false;
+
+        words.map(function (word) {
+
+            var wordIsInCompletedWords = this.checkIfWordIsInCompletedWords(word);
+            var wordIsInShownWords = this.checkIfWordIsInShownWords(word);
+
+            if (!wordIsInCompletedWords && !wordIsInShownWords) {
+                unopenedWord = word.letters;
+            }
+
+        }.bind(this));
+
+        if (unopenedWord !== false) {
+            var shownWords = this.state.shownWords;
+            shownWords.push(unopenedWord);
+            this.setState({shownWords: shownWords})
+        }
+
+        return unopenedWord
 
     },
 
@@ -729,62 +755,129 @@ var BoardClass = Object.assign({}, {}, {
 
         words.map(function (word) {
 
-            var wordIsInCompletedWords = false;
-
-            completedWords.map(function (completedWord) {
-
-                var wordIsInCompletedWord = false;
-                if (completedWord.length == word.letters.length) {
-
-                    var result = true;
-                    word.letters.map(function (letter, letterIndex) {
-
-                        if (completedWord[letterIndex].letter != letter.letter) {
-                            result = false;
-                        }
-
-                        var resultCell = false;
-                        completedWord.map(function (compWordLetter) {
-
-                            if (compWordLetter.x == letter.x && compWordLetter.y == letter.y) {
-                                resultCell = true;
-                            }
-
-                        });
-
-                        if (!resultCell) {
-                            result = false;
-                        }
-
-                    });
-
-                    if (result) {
-                        wordIsInCompletedWord = true;
-                    }
-                }
-
-                if (wordIsInCompletedWord) {
-                    wordIsInCompletedWords = true;
-                }
-
-            });
+            var wordIsInCompletedWords = this.checkIfWordIsInCompletedWords(word);
 
             if (!wordIsInCompletedWords) {
                 unopenedWord = word.letters;
             }
 
-        });
+        }.bind(this));
 
         return unopenedWord;
+
+    },
+
+    checkIfWordIsInCompletedWords: function (word) {
+
+        var completedWords = this.state.completedWords;
+
+        if (completedWords.length == 0) {
+            return false
+        }
+
+        var wordIsInCompletedWords = false;
+
+        completedWords.map(function (completedWord) {
+
+            var wordIsInCompletedWord = false;
+            if (completedWord.length == word.letters.length) {
+
+                var result = true;
+                word.letters.map(function (letter, letterIndex) {
+
+                    if (completedWord[letterIndex].letter != letter.letter) {
+                        result = false;
+                    }
+
+                    var resultCell = false;
+                    completedWord.map(function (compWordLetter) {
+
+                        if (compWordLetter.x == letter.x && compWordLetter.y == letter.y) {
+                            resultCell = true;
+                        }
+
+                    });
+
+                    if (!resultCell) {
+                        result = false;
+                    }
+
+                });
+
+                if (result) {
+                    wordIsInCompletedWord = true;
+                }
+            }
+
+            if (wordIsInCompletedWord) {
+                wordIsInCompletedWords = true;
+            }
+
+        });
+
+        return wordIsInCompletedWords;
+
+    },
+
+    checkIfWordIsInShownWords: function (word) {
+
+        var shownWords = this.state.shownWords;
+
+        if (shownWords.length == 0) {
+            return false
+        }
+
+        var wordIsInShownWords = false;
+
+        shownWords.map(function (shownWord) {
+
+            var wordIsInShownWord = false;
+            if (shownWord.length == word.letters.length) {
+
+                var result = true;
+                word.letters.map(function (letter, letterIndex) {
+
+                    if (shownWord[letterIndex].letter != letter.letter) {
+                        result = false;
+                    }
+
+                    var resultCell = false;
+                    shownWord.map(function (shownWordLetter) {
+
+                        if (shownWordLetter.x == letter.x && shownWordLetter.y == letter.y) {
+                            resultCell = true;
+                        }
+
+                    });
+
+                    if (!resultCell) {
+                        result = false;
+                    }
+
+                });
+
+                if (result) {
+                    wordIsInShownWord = true;
+                }
+            }
+
+            if (wordIsInShownWord) {
+                wordIsInShownWords = true;
+            }
+
+        });
+
+        return wordIsInShownWords;
 
     },
 
 
     render: function () {
 
-        console.log(this.state.completedWords);
+        //console.log({board: this.state.shownWords});
+        //console.log(this.state.completedWords);
         //console.log(this.state.selectedLetters);
-        console.log(this.state.openedLetters);
+        //console.log(this.state.openedLetters);
 
         var boardArr = this.state.board;
         //console.log(boardArr);

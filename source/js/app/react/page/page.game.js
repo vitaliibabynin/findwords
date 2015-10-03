@@ -22,16 +22,17 @@ var PageGameMain = Object.assign({}, {}, {
     //mixins: [GameMixin],
     displayName: 'PageGameMain',
 
-    //getInitialState: function(){
-    //
-    //    var state = {
-    //
-    //        //roundIdx: router.getParam('roundidx') || 0
-    //
-    //    };
-    //
-    //    return state;
-    //},
+    getInitialState: function () {
+
+        var state = {
+
+            //roundIdx: router.getParam('roundidx') || 0,
+            shownWords: []
+
+        };
+
+        return state;
+    },
     //
     //componentDidMount: function() {
     //
@@ -45,6 +46,41 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
 
+    addToShownWords: function () {
+
+        var wordToShow = this.refs.board.getUnopenedUnshownWord();
+
+        if (!wordToShow) {
+            return
+        }
+
+        var shownWords = this.state.shownWords;
+        shownWords.push(wordToShow);
+        this.setState({shownWords: shownWords});
+
+    },
+
+    showWords: function () {
+
+        var shownWords = this.state.shownWords;
+
+        var toDisplay = [];
+
+        for (var i = 0; i < shownWords.length; i++) {
+
+            var word = "";
+
+            for (var j = 0; j < shownWords[i].length; j++) {
+                word += shownWords[i][j].letter
+            }
+
+            toDisplay.push(<div key={i + "_" + j}>{word}</div>)
+        }
+
+        return toDisplay
+
+    },
+
     onChipClick: function (e) {
 
         switch (e.id) {
@@ -55,7 +91,7 @@ var PageGameMain = Object.assign({}, {}, {
                 this.refs.board.openLetter();
                 break;
             case SHOW_WORD:
-                this.refs.board.showWord();
+                this.addToShownWords();
                 break;
             default:
                 return;
@@ -64,6 +100,8 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     render: function () {
+
+        //console.log({pageGame: this.state.shownWords});
 
         return (
             <div className="page-game">
@@ -103,6 +141,8 @@ var PageGameMain = Object.assign({}, {}, {
                     <Board ref="board"
                            boardData={appManager.getSettings().getRoundsBundles()[0]}
                         />
+
+                    <div className="shown-words">{this.showWords()}</div>
 
                     <div className="ad">
 
