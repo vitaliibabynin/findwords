@@ -616,7 +616,8 @@ var BoardClass = Object.assign({}, {}, {
 
         this.setState({
             board: board,
-            completedWords: completedWords
+            completedWords: completedWords,
+            openedLetters: []
         }, function () {
             unopenedWord.map(function (letter) {
                 board[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
@@ -649,9 +650,6 @@ var BoardClass = Object.assign({}, {}, {
 
         if (openedLetters.length == unopenedWord.length - 1) {
             this.openWord();
-            this.setState({
-                openedLetters: []
-            })
             return;
         }
 
