@@ -108,6 +108,7 @@ var BoardClass = Object.assign({}, {}, {
             cellSize: 0,
             board: [],
             selectedLetters: [],
+            previousSelection: [],
             completedWords: [],
             highlightedWord: [],
             openedLetters: [],
@@ -229,6 +230,18 @@ var BoardClass = Object.assign({}, {}, {
             this.moveSelectedLettersToCompleteWords();
             return;
         }
+
+        if (this.checkForSameLetters()){
+            console.log("Try to complete the word differently");
+            this.emptySelectedLetters();
+            return;
+        }
+
+        if (this.selectedLettersEqualPreviousSelection()) {
+            console.log("Not a word in this round")
+        }
+
+        this.moveSelectedLettersToPreviousSelection();
 
         this.emptySelectedLetters();
 
@@ -558,6 +571,67 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: [],
             completedWords: completedWords
         });
+
+    },
+
+    checkForSameLetters: function () {
+
+        var words = this.state.boardData.words;
+        var selectedLetters = this.state.selectedLetters;
+
+        var mainResult = false;
+
+        words.map(function (word) {
+
+            if (word.letters.length == selectedLetters.length) {
+
+                var result = true;
+                word.letters.map(function (letter, letterIndex) {
+
+                    if (selectedLetters[letterIndex].letter != letter.letter) {
+                        result = false;
+                    }
+
+                });
+
+                if (result) {
+                    mainResult = true;
+                }
+
+            }
+        });
+
+        return mainResult;
+
+    },
+
+    moveSelectedLettersToPreviousSelection: function () {
+
+        var selectedLetters = this.state.selectedLetters;
+
+        this.setState({
+            previousSelection: selectedLetters
+        })
+
+    },
+
+    selectedLettersEqualPreviousSelection: function () {
+
+        var selectedLetters = this.state.selectedLetters;
+        var previousSelection = this.state.previousSelection;
+
+        if (selectedLetters.length != previousSelection.length) {
+            return false;
+        }
+
+        var result = true;
+        for (var i = 0; i < selectedLetters.length; i++) {
+            if (selectedLetters[i].letter != previousSelection[i].letter) {
+                result = false;
+            }
+        }
+
+        return result;
 
     },
 
