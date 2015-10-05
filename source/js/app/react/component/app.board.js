@@ -910,10 +910,10 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log(this.getGameStateRoundField('board'));
-        console.log(this.getGameStateRoundField('completedWords'));
-        console.log(this.getGameStateRoundField('openedLetters'));
-        console.log(this.getGameStateRoundField('shownWords'));
+        //console.log(this.getGameStateRoundField('board'));
+        //console.log(this.getGameStateRoundField('completedWords'));
+        //console.log(this.getGameStateRoundField('openedLetters'));
+        //console.log(this.getGameStateRoundField('shownWords'));
         //console.log({board: this.state.shownWords});
         //console.log(this.state.completedWords);
         //console.log(this.state.selectedLetters);

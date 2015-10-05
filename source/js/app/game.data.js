@@ -37,7 +37,9 @@ var gameData = {
                         ]
                     }
                 ]
-            }
+            },
+            {},
+            {}
         ]
     },
         {
@@ -73,6 +75,7 @@ var gameData = {
                     ]
                 }
             ]
-        }]
+        }
+    ]
 };
 module.exports = gameData;
