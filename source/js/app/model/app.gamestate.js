@@ -21,7 +21,17 @@ var GameState = Object.assign({}, {}, {
             0: {
                 bundleScore: 99999,
                 isUnlocked: true,
-                roundsComplete: 1
+                roundsComplete: 1,
+                rounds: {
+                    0: {
+                        board: [],
+                        completedWords: [],
+                        openedLetters: [],
+                        shownWords: []
+                    },
+                    1: {},
+                    2: {}
+                }
             },
             1: {
                 bundleScore: 99999,

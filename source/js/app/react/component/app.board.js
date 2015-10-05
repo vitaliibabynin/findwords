@@ -86,6 +86,8 @@ var BoardClass = Object.assign({}, {}, {
     displayName: 'Board',
 
     propTypes: {
+        roundBundleIdx: React.PropTypes.number,
+        roundIdx: React.PropTypes.number,
         boardData: React.PropTypes.shape({
             backgroundColor: React.PropTypes.string,
             name: React.PropTypes.shape({
@@ -100,6 +102,8 @@ var BoardClass = Object.assign({}, {}, {
     getInitialState: function () {
 
         return {
+            roundBundleIdx: this.props.roundBundleIdx || 0,
+            roundIdx: this.props.roundIdx || 0,
             boardData: this.props.boardData.rounds[0] || {},
             cellSize: 0,
             board: [],
@@ -145,6 +149,37 @@ var BoardClass = Object.assign({}, {}, {
         });
 
         return arr;
+
+    },
+
+    setGameState: function (Object) {
+
+    },
+
+    getGameState: function (field) {
+
+        var roundsBundle = appManager.getSettings().getRoundsBundles()[this.state.roundBundleIdx];
+        var round = roundsBundle.rounds[this.state.roundIdx];
+        var value = [];
+
+        switch(field){
+            case 'board':
+                value = round.board;
+                break;
+            case 'completedWords':
+                value = round.completedWords;
+                break;
+            case 'openedLetters':
+                value = round.openedLetters;
+                break;
+            case 'shownWords':
+                value = round.shownWords;
+                break;
+            default:
+                value = []
+        }
+
+        return value;
 
     },
 
@@ -205,6 +240,16 @@ var BoardClass = Object.assign({}, {}, {
             this.moveSelectedLettersToCompleteWords();
             return;
         }
+
+        this.emptySelectedLetters();
+
+    },
+
+    onTouchCancel: function () {
+
+        this.preventDefaultOnEvent(e);
+
+        this.fadeHighlightedWord();
 
         this.emptySelectedLetters();
 
@@ -545,6 +590,8 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: []
         });
 
+        console.log("empty");
+
     },
 
 
@@ -876,10 +923,14 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        //console.log({board: this.state.shownWords});
-        //console.log(this.state.completedWords);
-        //console.log(this.state.selectedLetters);
-        //console.log(this.state.openedLetters);
+        console.log('monkey');
+        //var result = false;
+        //result = this.getGameState('board');
+        //console.log(result);
+        console.log({board: this.state.shownWords});
+        console.log(this.state.completedWords);
+        console.log(this.state.selectedLetters);
+        console.log(this.state.openedLetters);
 
         var boardArr = this.state.board;
         //console.log(boardArr);

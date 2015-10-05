@@ -26,7 +26,9 @@ var PageGameMain = Object.assign({}, {}, {
 
         var state = {
 
+            roundBundleIdx: 0,
             //roundIdx: router.getParam('roundidx') || 0,
+            roundIdx: 0,
             shownWords: []
 
         };
@@ -101,7 +103,7 @@ var PageGameMain = Object.assign({}, {}, {
 
     render: function () {
 
-        //console.log({pageGame: this.state.shownWords});
+        console.log({pageGame: this.state.shownWords});
 
         return (
             <div className="page-game">
@@ -139,7 +141,9 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <Board ref="board"
-                           boardData={appManager.getSettings().getRoundsBundles()[0]}
+                           roundBundleIdx: {this.state.roundBundleIdx}
+                           roundIdx: {this.state.roundIdx}
+                           boardData={appManager.getSettings().getRoundsBundles()[this.state.roundBundleIdx]}
                         />
 
                     <div className="shown-words">{this.showWords()}</div>
