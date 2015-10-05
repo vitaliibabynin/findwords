@@ -86,7 +86,7 @@ var BoardClass = Object.assign({}, {}, {
     displayName: 'Board',
 
     propTypes: {
-        roundBundleIdx: React.PropTypes.number,
+        roundsBundleIdx: React.PropTypes.number,
         roundIdx: React.PropTypes.number,
         boardData: React.PropTypes.shape({
             backgroundColor: React.PropTypes.string,
@@ -102,7 +102,7 @@ var BoardClass = Object.assign({}, {}, {
     getInitialState: function () {
 
         return {
-            roundBundleIdx: this.props.roundBundleIdx || 0,
+            roundsBundleIdx: this.props.roundsBundleIdx || 0,
             roundIdx: this.props.roundIdx || 0,
             boardData: this.props.boardData.rounds[0] || {},
             cellSize: 0,
@@ -158,7 +158,7 @@ var BoardClass = Object.assign({}, {}, {
 
     getGameState: function (field) {
 
-        var roundsBundle = appManager.getSettings().getRoundsBundles()[this.state.roundBundleIdx];
+        var roundsBundle = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx];
         var round = roundsBundle.rounds[this.state.roundIdx];
         var value = [];
 
