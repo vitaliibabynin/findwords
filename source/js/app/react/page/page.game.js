@@ -103,7 +103,7 @@ var PageGameMain = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log({pageGame: this.state.shownWords});
+        //console.log({pageGame: this.state.shownWords});
 
         return (
             <div className="page-game">
@@ -141,9 +141,9 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <Board ref="board"
-                           roundBundleIdx = {this.state.roundsBundleIdx}
-                           roundIdx = {this.state.roundIdx}
-                           boardData = {appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
+                           roundBundleIdx={this.state.roundsBundleIdx}
+                           roundIdx={this.state.roundIdx}
+                           boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
                         />
 
                     <div className="shown-words">{this.showWords()}</div>

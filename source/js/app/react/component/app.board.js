@@ -152,34 +152,23 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    setGameState: function (Object) {
+    setGameStateRoundField: function (field, newValue) {
+
+        var bundleIndex = this.state.roundsBundleIdx;
+        var roundIndex = this.state.roundIdx;
+
+        return appManager.getGameState().setRound(bundleIndex, roundIndex, field, newValue);
 
     },
 
-    getGameState: function (field) {
+    getGameStateRoundField: function (field) {
 
-        var roundsBundle = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx];
-        var round = roundsBundle.rounds[this.state.roundIdx];
-        var value = [];
+        var bundleIndex = this.state.roundsBundleIdx;
+        var roundIndex = this.state.roundIdx;
 
-        switch(field){
-            case 'board':
-                value = round.board;
-                break;
-            case 'completedWords':
-                value = round.completedWords;
-                break;
-            case 'openedLetters':
-                value = round.openedLetters;
-                break;
-            case 'shownWords':
-                value = round.shownWords;
-                break;
-            default:
-                value = []
-        }
+        var round = appManager.getGameState().getRound(bundleIndex, roundIndex);
 
-        return value;
+        return round[field];
 
     },
 
@@ -590,8 +579,6 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: []
         });
 
-        console.log("empty");
-
     },
 
 
@@ -923,14 +910,14 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log('monkey');
-        //var result = false;
-        //result = this.getGameState('board');
-        //console.log(result);
-        console.log({board: this.state.shownWords});
-        console.log(this.state.completedWords);
-        console.log(this.state.selectedLetters);
-        console.log(this.state.openedLetters);
+        console.log(this.getGameStateRoundField('board'));
+        console.log(this.getGameStateRoundField('completedWords'));
+        console.log(this.getGameStateRoundField('openedLetters'));
+        console.log(this.getGameStateRoundField('shownWords'));
+        //console.log({board: this.state.shownWords});
+        //console.log(this.state.completedWords);
+        //console.log(this.state.selectedLetters);
+        //console.log(this.state.openedLetters);
 
         var boardArr = this.state.board;
         //console.log(boardArr);
