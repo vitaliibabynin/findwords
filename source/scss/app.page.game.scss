@@ -119,246 +119,268 @@
     }
   }
 
-  .board {
-    border-collapse: collapse;
-    border: 0.0625rem solid $gamePage-board-color-border;
-    background-color: $gamePage-board-td-bg-color-default;
+  .game-board {
     margin-left: 1.25rem;
     margin-right: 1.25rem;
-    //table-layout: fixed;
+    position: relative;
 
-    td {
-      cursor: pointer;
-      position: relative;
-      text-align: center;
-      vertical-align: middle;
-      text-transform: uppercase;
-      overflow: hidden;
-      white-space: nowrap;
-      border: none;
-      line-height: 100%;
-      background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border .0625rem),
-      linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
-      background-size: 100% 100%, 200% 100%;
-      background-position: 0 0, 0 0;
-      background-repeat: no-repeat;
-
-      &.open-letter-before-link-top:before,
-      &.open-letter-before-link-right:before,
-      &.open-letter-before-link-bottom:before,
-      &.open-letter-before-link-left:before,
-      &.open-letter-after-link-top:after,
-      &.open-letter-after-link-right:after,
-      &.open-letter-after-link-bottom:after,
-      &.open-letter-after-link-left:after {
-        background-color: $gamePage-board-td-bg-color-link-open-letter;
-      }
-
-      //@-webkit-keyframes fade {
-      //  0% {
-      //    opacity: 1;
-      //  }
-      //  25% {
-      //    opacity: 1;
-      //  }
-      //  100% {
-      //    opacity: 0;
-      //  }
-      //}
-      //@keyframes fade {
-      //  0% {
-      //    opacity: 1;
-      //  }
-      //  25% {
-      //    opacity: 1;
-      //  }
-      //  100% {
-      //    opacity: 0;
-      //  }
-      //}
-
-      &.before-link-top.fade:before,
-      &.before-link-right.fade:before,
-      &.before-link-bottom.fade:before,
-      &.before-link-left.fade:before,
-      &.after-link-top.fade:after,
-      &.after-link-right.fade:after,
-      &.after-link-bottom.fade:after,
-      &.after-link-left.fade:after {
-        //opacity: 0;
-        //-webkit-animation: fade 2s;
-        //animation: fade 2s;
-        -webkit-transition-duration: 1.5s;
-        -webkit-transition-delay: 0.5s;
-        transition-duration: 1.5s;
-        transition-delay: 0.5s;
-        opacity: 0;
-        background-color: $gamePage-board-td-bg-color-link;
-      }
-
-      &.before-link-top.visible:before,
-      &.before-link-right.visible:before,
-      &.before-link-bottom.visible:before,
-      &.before-link-left.visible:before,
-      &.after-link-top.visible:after,
-      &.after-link-right.visible:after,
-      &.after-link-bottom.visible:after,
-      &.after-link-left.visible:after {
-        //-webkit-animation: none;
-        //animation: none;
-        -webkit-transition-duration: 0s;
-        -webkit-transition-delay: 0s;
-        transition-duration: 0s;
-        transition-delay: 0s;
-        opacity: 1;
-        background-color: $gamePage-board-td-bg-color-link;
-      }
-
-      &.open-letter-before-link-top:before,
-      &.open-letter-before-link-right:before,
-      &.open-letter-before-link-bottom:before,
-      &.open-letter-before-link-left:before,
-      &.open-letter-after-link-top:after,
-      &.open-letter-after-link-right:after,
-      &.open-letter-after-link-bottom:after,
-      &.open-letter-after-link-left:after,
-      &.before-link-top:before,
-      &.before-link-right:before,
-      &.before-link-bottom:before,
-      &.before-link-left:before,
-      &.after-link-top:after,
-      &.after-link-right:after,
-      &.after-link-bottom:after,
-      &.after-link-left:after {
-        position: absolute;
-        z-index: 1000;
-        content: "";
-      }
-
-      &.open-letter-before-link-top:before,
-      &.open-letter-after-link-top:after,
-      &.before-link-top:before,
-      &.after-link-top:after {
-        height: 10%;
-        width: 5%;
-        top: 0;
-        left: 47.5%;
-      }
-
-      &.open-letter-before-link-right:before,
-      &.open-letter-after-link-right:after,
-      &.before-link-right:before,
-      &.after-link-right:after {
-        height: 5%;
-        width: 10%;
-        top: 47.5%;
-        right: 0;
-      }
-
-      &.open-letter-before-link-bottom:before,
-      &.open-letter-after-link-bottom:after,
-      &.before-link-bottom:before,
-      &.after-link-bottom:after {
-        height: 10%;
-        width: 5%;
-        bottom: 0;
-        left: 47.5%;
-      }
-
-      &.open-letter-before-link-left:before,
-      &.open-letter-after-link-left:after,
-      &.before-link-left:before,
-      &.after-link-left:after {
-        height: 5%;
-        width: 10%;
-        top: 47.5%;
-        left: 0;
-      }
-
-      &.open-letter {
-        color: $gamePage-board-td-color-open-letter;
-      }
-      &.selected {
-        color: $gamePage-board-td-color-selected;
-      }
-      @-webkit-keyframes fontbulger {
-        0% {
-          -webkit-transform: scale(1.5, 1.5);
-        }
-        99% {
-          -webkit-transform: scale(1.5, 1.5);
-        }
-        100% {
-          -webkit-transform: initial;
-        }
-      }
-      @keyframes fontbulger {
-        0% {
-          transform: scale(1.5, 1.5);
-        }
-        99% {
-          transform: scale(1.5, 1.5);
-        }
-        100% {
-          transform: initial;
-        }
-      }
-      &.completed span {
-        -webkit-animation: fontbulger 0.2s;
-        animation: fontbulger 0.2s;
-        color: $gamePage-board-td-color-complete;
-      }
-    }
-
-    tr {
-
-      td:last-child {
-        background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem),
-        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
-      }
-    }
-
-    tr:last-child {
+    .board {
+      border-collapse: collapse;
+      border: 0.0625rem solid $gamePage-board-color-border;
+      background-color: $gamePage-board-td-bg-color-default;
+      //table-layout: fixed;
 
       td {
-        background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
-        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
+        cursor: pointer;
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+        text-transform: uppercase;
+        overflow: hidden;
+        white-space: nowrap;
+        border: none;
+        line-height: 100%;
+        background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border .0625rem),
+        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
+        background-size: 100% 100%, 200% 100%;
+        background-position: 0 0, 0 0;
+        background-repeat: no-repeat;
+
+        &.open-letter-before-link-top:before,
+        &.open-letter-before-link-right:before,
+        &.open-letter-before-link-bottom:before,
+        &.open-letter-before-link-left:before,
+        &.open-letter-after-link-top:after,
+        &.open-letter-after-link-right:after,
+        &.open-letter-after-link-bottom:after,
+        &.open-letter-after-link-left:after {
+          background-color: $gamePage-board-td-bg-color-link-open-letter;
+        }
+
+        //@-webkit-keyframes fade {
+        //  0% {
+        //    opacity: 1;
+        //  }
+        //  25% {
+        //    opacity: 1;
+        //  }
+        //  100% {
+        //    opacity: 0;
+        //  }
+        //}
+        //@keyframes fade {
+        //  0% {
+        //    opacity: 1;
+        //  }
+        //  25% {
+        //    opacity: 1;
+        //  }
+        //  100% {
+        //    opacity: 0;
+        //  }
+        //}
+
+        &.before-link-top.fade:before,
+        &.before-link-right.fade:before,
+        &.before-link-bottom.fade:before,
+        &.before-link-left.fade:before,
+        &.after-link-top.fade:after,
+        &.after-link-right.fade:after,
+        &.after-link-bottom.fade:after,
+        &.after-link-left.fade:after {
+          //opacity: 0;
+          //-webkit-animation: fade 2s;
+          //animation: fade 2s;
+          -webkit-transition-duration: 1.5s;
+          -webkit-transition-delay: 0.5s;
+          transition-duration: 1.5s;
+          transition-delay: 0.5s;
+          opacity: 0;
+          background-color: $gamePage-board-td-bg-color-link;
+        }
+
+        &.before-link-top.visible:before,
+        &.before-link-right.visible:before,
+        &.before-link-bottom.visible:before,
+        &.before-link-left.visible:before,
+        &.after-link-top.visible:after,
+        &.after-link-right.visible:after,
+        &.after-link-bottom.visible:after,
+        &.after-link-left.visible:after {
+          //-webkit-animation: none;
+          //animation: none;
+          -webkit-transition-duration: 0s;
+          -webkit-transition-delay: 0s;
+          transition-duration: 0s;
+          transition-delay: 0s;
+          opacity: 1;
+          background-color: $gamePage-board-td-bg-color-link;
+        }
+
+        &.open-letter-before-link-top:before,
+        &.open-letter-before-link-right:before,
+        &.open-letter-before-link-bottom:before,
+        &.open-letter-before-link-left:before,
+        &.open-letter-after-link-top:after,
+        &.open-letter-after-link-right:after,
+        &.open-letter-after-link-bottom:after,
+        &.open-letter-after-link-left:after,
+        &.before-link-top:before,
+        &.before-link-right:before,
+        &.before-link-bottom:before,
+        &.before-link-left:before,
+        &.after-link-top:after,
+        &.after-link-right:after,
+        &.after-link-bottom:after,
+        &.after-link-left:after {
+          position: absolute;
+          z-index: 100;
+          content: "";
+        }
+
+        &.open-letter-before-link-top:before,
+        &.open-letter-after-link-top:after,
+        &.before-link-top:before,
+        &.after-link-top:after {
+          height: 10%;
+          width: 5%;
+          top: 0;
+          left: 47.5%;
+        }
+
+        &.open-letter-before-link-right:before,
+        &.open-letter-after-link-right:after,
+        &.before-link-right:before,
+        &.after-link-right:after {
+          height: 5%;
+          width: 10%;
+          top: 47.5%;
+          right: 0;
+        }
+
+        &.open-letter-before-link-bottom:before,
+        &.open-letter-after-link-bottom:after,
+        &.before-link-bottom:before,
+        &.after-link-bottom:after {
+          height: 10%;
+          width: 5%;
+          bottom: 0;
+          left: 47.5%;
+        }
+
+        &.open-letter-before-link-left:before,
+        &.open-letter-after-link-left:after,
+        &.before-link-left:before,
+        &.after-link-left:after {
+          height: 5%;
+          width: 10%;
+          top: 47.5%;
+          left: 0;
+        }
+
+        &.open-letter {
+          color: $gamePage-board-td-color-open-letter;
+        }
+        &.selected {
+          color: $gamePage-board-td-color-selected;
+        }
+        @-webkit-keyframes fontbulger {
+          0% {
+            -webkit-transform: scale(1.5, 1.5);
+          }
+          99% {
+            -webkit-transform: scale(1.5, 1.5);
+          }
+          100% {
+            -webkit-transform: initial;
+          }
+        }
+        @keyframes fontbulger {
+          0% {
+            transform: scale(1.5, 1.5);
+          }
+          99% {
+            transform: scale(1.5, 1.5);
+          }
+          100% {
+            transform: initial;
+          }
+        }
+        &.completed span {
+          -webkit-animation: fontbulger 0.2s;
+          animation: fontbulger 0.2s;
+          color: $gamePage-board-td-color-complete;
+        }
       }
-      td:last-child {
-        background-image: none;
+
+      tr {
+
+        td:last-child {
+          background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem),
+          linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
+        }
+      }
+
+      tr:last-child {
+
+        td {
+          background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
+          linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
+        }
+        td:last-child {
+          background-image: none;
+        }
+      }
+
+      td {
+        &.backgroundColor1 {
+          background-color: $gamePage-board-td-bg-color-1;
+        }
+        &.backgroundColor2 {
+          background-color: $gamePage-board-td-bg-color-2;
+        }
+        &.backgroundColor3 {
+          background-color: $gamePage-board-td-bg-color-3;
+        }
+        &.backgroundColor4 {
+          background-color: $gamePage-board-td-bg-colo-4;
+        }
+        &.backgroundColor5 {
+          background-color: $gamePage-board-td-bg-color-5;
+        }
+        &.backgroundColor6 {
+          background-color: $gamePage-board-td-bg-color-6;
+        }
+        &.backgroundColor7 {
+          background-color: $gamePage-board-td-bg-color-7;
+        }
+        &.backgroundColor8 {
+          background-color: $gamePage-board-td-bg-color-8;
+        }
+        &.backgroundColor9 {
+          background-color: $gamePage-board-td-bg-color-9;
+        }
+        &.backgroundColor10 {
+          background-color: $gamePage-board-td-bg-color-10;
+        }
       }
     }
 
-    td {
-      &.backgroundColor1 {
-        background-color: $gamePage-board-td-bg-color-1;
-      }
-      &.backgroundColor2 {
-        background-color: $gamePage-board-td-bg-color-2;
-      }
-      &.backgroundColor3 {
-        background-color: $gamePage-board-td-bg-color-3;
-      }
-      &.backgroundColor4 {
-        background-color: $gamePage-board-td-bg-colo-4;
-      }
-      &.backgroundColor5 {
-        background-color: $gamePage-board-td-bg-color-5;
-      }
-      &.backgroundColor6 {
-        background-color: $gamePage-board-td-bg-color-6;
-      }
-      &.backgroundColor7 {
-        background-color: $gamePage-board-td-bg-color-7;
-      }
-      &.backgroundColor8 {
-        background-color: $gamePage-board-td-bg-color-8;
-      }
-      &.backgroundColor9 {
-        background-color: $gamePage-board-td-bg-color-9;
-      }
-      &.backgroundColor10 {
-        background-color: $gamePage-board-td-bg-color-10;
+    .notice {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+
+      .inner-notice {
+        margin: 20%;
+        height: 60%;
+        width: 60%;
+        background-color: $gamePage-notice-bg-color;
+        color: $gamePage-notice-color;
+        background-repeat: no-repeat;
       }
     }
   }

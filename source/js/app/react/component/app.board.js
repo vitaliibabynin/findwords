@@ -3,6 +3,7 @@
 
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
+var GameMixin = require('./app.mixin').GameMixin;
 
 
 module.exports = {};
@@ -55,6 +56,76 @@ var LetterClass = Object.assign({}, {}, {
 
 });
 var Letter = React.createClass(LetterClass);
+
+
+var NoticeClass = Object.assign({}, {}, {
+
+    displayName: 'Notice',
+    mixins: [GameMixin],
+
+    propTypes: {
+
+        classNames: React.PropTypes.string
+
+    },
+
+    getInitialState: function () {
+
+        return {
+            classNames: this.props.classNames || "",
+            noticeSize: 0
+        };
+
+    },
+
+    componentDidMount: function () {
+
+        this.setState({
+            noticeSize: ($('.page-content').width() - BOARD_MARGIN)
+        })
+
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+
+        this.setState({
+            classNames: nextProps.classNames || ""
+        });
+
+    },
+
+    render: function () {
+
+        var noticeStyle = {
+            height: this.state.noticeSize + "px",
+            width: this.state.noticeSize + "px"
+        };
+
+        var innerNoticeImg = {
+            backgroundImage: "url('" + this.getImagePath('notice/wrong') + "')"
+        };
+
+        var innerNoticeStyle = {
+            backgroundImage: innerNoticeImg,
+            height: this.state.noticeSize * 0.6 + "px",
+            width: this.state.noticeSize *0.6 + "px",
+            marginLeft: this.state.noticeSize * 0.2 + "px",
+            marginTop: this.state.noticeSize * 0.2 + "px"
+        };
+
+        return (
+            <div className={this.state.classNames}>
+                <div className="inner-notice"
+                     style={innerNoticeImg}>
+                    <span>{this.props.children}</span>
+                </div>
+            </div>
+        );
+
+    }
+
+});
+var Notice = React.createClass(NoticeClass);
 
 
 var BOARD_MARGIN = 40;
@@ -231,7 +302,7 @@ var BoardClass = Object.assign({}, {}, {
             return;
         }
 
-        if (this.checkForSameLetters()){
+        if (this.checkForSameLetters()) {
             console.log("Try to complete the word differently");
             this.emptySelectedLetters();
             return;
@@ -1002,48 +1073,51 @@ var BoardClass = Object.assign({}, {}, {
 
         return (
 
-            <table className="board"
-                   onTouchStart={this.onTouchStart}
-                   onTouchMove={this.onTouchMove}
-                   onTouchEnd={this.onTouchEnd}
-                   style={boardStyle}>
+            <div className="game-board">
+                <table className="board"
+                       onTouchStart={this.onTouchStart}
+                       onTouchMove={this.onTouchMove}
+                       onTouchEnd={this.onTouchEnd}
+                       style={boardStyle}>
 
-                {boardArr.map(function (row, rowId) {
+                    {boardArr.map(function (row, rowId) {
 
-                    return (
+                        return (
 
-                        <tr key={rowId}>
+                            <tr key={rowId}>
 
-                            {row.map(function (cell, cellId) {
+                                {row.map(function (cell, cellId) {
 
-                                var properties = [];
-                                for (var property in cell.classNames) {
-                                    properties.push(cell.classNames[property])
-                                }
+                                    var properties = [];
+                                    for (var property in cell.classNames) {
+                                        properties.push(cell.classNames[property])
+                                    }
 
-                                var letterClassNames = classNames(
-                                    properties
-                                );
+                                    var letterClassNames = classNames(
+                                        properties
+                                    );
 
-                                return (
+                                    return (
 
-                                    <Letter key={rowId + '_' + cellId}
-                                            classNames={letterClassNames}
-                                            cellSize={this.state.cellSize}>
-                                        {cell.letter}
-                                    </Letter>
+                                        <Letter key={rowId + '_' + cellId}
+                                                classNames={letterClassNames}
+                                                cellSize={this.state.cellSize}>
+                                            {cell.letter}
+                                        </Letter>
 
-                                );
+                                    );
 
-                            }.bind(this))}
+                                }.bind(this))}
 
-                        </tr>
+                            </tr>
 
-                    );
+                        );
 
-                }.bind(this))}
+                    }.bind(this))}
 
-            </table>
+                </table>
+                <Notice classNames="notice"/>
+            </div>
 
         );
     }
