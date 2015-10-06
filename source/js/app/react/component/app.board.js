@@ -58,67 +58,97 @@ var LetterClass = Object.assign({}, {}, {
 var Letter = React.createClass(LetterClass);
 
 
+var SELECT_DIFFERENTLY = "selectDifferently";
+var NO_SUCH_WORD = "noSuchWord";
+
+
 var NoticeClass = Object.assign({}, {}, {
 
     displayName: 'Notice',
     mixins: [GameMixin],
 
     propTypes: {
-
-        classNames: React.PropTypes.string
-
+        classNames: React.PropTypes.string,
+        noticeType: React.PropTypes.string,
+        word: React.PropTypes.array
     },
 
     getInitialState: function () {
 
         return {
             classNames: this.props.classNames || "",
-            noticeSize: 0
+            noticeType: this.props.noticeType || "",
+            word: this.props.word || []
         };
-
-    },
-
-    componentDidMount: function () {
-
-        this.setState({
-            noticeSize: ($('.page-content').width() - BOARD_MARGIN)
-        })
 
     },
 
     componentWillReceiveProps: function (nextProps) {
 
         this.setState({
-            classNames: nextProps.classNames || ""
+            classNames: nextProps.classNames || "",
+            noticeType: nextProps.noticeType || "",
+            word: nextProps.word || []
         });
+
+    },
+
+    capitalizeWord: function () {
+
+        var initialWord = this.state.word;
+
+        if (initialWord.length == 0) {
+            return false;
+        }
+
+        var word = initialWord[0].letter.toUpperCase();
+        for (var i = 1; i < initialWord.length; i++) {
+            word += initialWord[i].letter.toLowerCase();
+        }
+
+        return word;
+
+    },
+
+    whichText: function () {
+
+        if (this.state.noticeType == "") {
+            return false;
+        }
+
+        if (this.capitalizeWord() === false) {
+            return false;
+        }
+
+        var textBefore;
+        var textAfter;
+
+        if (this.state.noticeType == NO_SUCH_WORD) {
+            textBefore = i18n._('notice.noSuchWord.before');
+            textAfter = i18n._('notice.noSuchWord.after');
+        }
+
+        if (this.state.noticeType == SELECT_DIFFERENTLY) {
+            textBefore = i18n._('notice.selectDifferently.before');
+            textAfter = i18n._('notice.selectDifferently.after');
+        }
+
+        return textBefore + ' "' + this.capitalizeWord() + '" ' + textAfter;
 
     },
 
     render: function () {
 
-        var noticeStyle = {
-            height: this.state.noticeSize + "px",
-            width: this.state.noticeSize + "px"
-        };
-
-        var innerNoticeImg = {
+        var noticeImg = {
             backgroundImage: "url('" + this.getImagePath('notice/wrong') + "')"
         };
 
-        var innerNoticeStyle = {
-            backgroundImage: innerNoticeImg,
-            height: this.state.noticeSize * 0.6 + "px",
-            width: this.state.noticeSize *0.6 + "px",
-            marginLeft: this.state.noticeSize * 0.2 + "px",
-            marginTop: this.state.noticeSize * 0.2 + "px"
-        };
+        var text = this.whichText() ? this.whichText() : "";
 
         return (
-            <div className={this.state.classNames}>
-                <div className="inner-notice"
-                     style={innerNoticeImg}>
-                    <span>{this.props.children}</span>
-                </div>
+            <div className={this.state.classNames}
+                 style={noticeImg}>
+                <div><span>{text}</span></div>
             </div>
         );
 
@@ -128,7 +158,7 @@ var NoticeClass = Object.assign({}, {}, {
 var Notice = React.createClass(NoticeClass);
 
 
-var BOARD_MARGIN = 40;
+var BOARD_MARGIN = 50;
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
 var LINK_VISIBLE = "visible";
@@ -183,7 +213,8 @@ var BoardClass = Object.assign({}, {}, {
             completedWords: [],
             highlightedWord: [],
             openedLetters: [],
-            shownWords: []
+            shownWords: [],
+            noticeType: "",
         };
 
     },
@@ -1116,7 +1147,9 @@ var BoardClass = Object.assign({}, {}, {
                     }.bind(this))}
 
                 </table>
-                <Notice classNames="notice"/>
+                <Notice classNames="notice"
+                        noticeType={NO_SUCH_WORD}
+                        word={this.state.selectedLetters}/>
             </div>
 
         );

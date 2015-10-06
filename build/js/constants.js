@@ -38,6 +38,7 @@ window.CONST = {
             'slide.score':'Счет',
             'slide.instructions':'Этот комплект уровней откроется, когда вы пройдете все предыдущие.',
             'slide.buy':'Купить за 0,99$',
+
             'button.settings': 'Настройки',
             'button.rating': 'Рейтинг',
             'button.facebook.enter': 'Войти',
@@ -50,6 +51,11 @@ window.CONST = {
             'chip.open-word': 'Открыть слово',
             'chip.open-letter': 'Открыть букву',
             'chip.show-word': 'Показать слово',
+
+            'notice.selectDifferently.before': 'Попробуйте собрать слово',
+            'notice.selectDifferently.after': 'по-другому',
+            'notice.noSuchWord.before': 'Слово',
+            'notice.noSuchWord.after': 'мы не загадывали',
 
             t: ''
         },
@@ -65,6 +71,7 @@ window.CONST = {
             'slide.score':'Score',
             'slide.instructions':'This set will unlock, once you complete all previous sets',
             'slide.buy':'Unlock for 0,99$',
+
             'button.settings': 'Settings',
             'button.rating': 'Rating',
             'button.facebook.enter': 'Enter',
@@ -77,6 +84,11 @@ window.CONST = {
             'chip.open-word': 'Open word',
             'chip.open-letter': 'Open letter',
             'chip.show-word': 'Show word',
+
+            'notice.selectDifferently.before': 'Try compiling the word',
+            'notice.selectDifferently.after': 'in a different way',
+            'notice.noSuchWord.before': 'The word',
+            'notice.noSuchWord.after': 'is not in the riddle',
 
             t: ''
         }

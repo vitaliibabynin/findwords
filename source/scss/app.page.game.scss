@@ -69,7 +69,7 @@
 
   .chips {
     height: 3.125rem;
-    margin: 0.25rem 1.25rem;
+    margin: 0.25rem 1.5625rem;
     color: #ffffff;
 
     .btn.chip {
@@ -85,8 +85,8 @@
       .text {
         display: table;
         height: 2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
         margin-left: auto;
         margin-right: auto;
 
@@ -120,8 +120,8 @@
   }
 
   .game-board {
-    margin-left: 1.25rem;
-    margin-right: 1.25rem;
+    margin-left: 1.5625rem;
+    margin-right: 1.5625rem;
     position: relative;
 
     .board {
@@ -368,19 +368,50 @@
 
     .notice {
       position: absolute;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 1000;
+      $gamePage-notice-size: 11rem;
+      height: $gamePage-notice-size;
+      width: $gamePage-notice-size;
+      background-color: $gamePage-notice-bg-color;
+      color: $gamePage-notice-color;
+      background-repeat: no-repeat;
+      $notice-image-width: 5.125rem;
+      background-size: $notice-image-width 5.1875rem;
+      background-position: (($gamePage-notice-size - $notice-image-width) / 2) 1rem;
 
-      .inner-notice {
-        margin: 20%;
-        height: 60%;
-        width: 60%;
-        background-color: $gamePage-notice-bg-color;
-        color: $gamePage-notice-color;
-        background-repeat: no-repeat;
+
+      //$padding-left-right: 1.5rem;
+      //padding-top: 7rem;
+      //padding-right: $padding-left-right;
+      //padding-bottom: 1rem;
+      //padding-left: $padding-left-right;
+      //font-size: 1rem;
+      //text-align: center;
+      //display: table;
+
+
+      div {
+        display: table;
+        $margin-left-right: 1rem;
+        margin-top: 5.75rem;
+        margin-right: $margin-left-right;
+        margin-left: $margin-left-right;
+        font-size: 1rem;
+        text-align: center;
+        height: 5rem;
+        width: $gamePage-notice-size - (2 * $margin-left-right);
+        table-layout: fixed;
+
+        span {
+          display: table-cell;
+          vertical-align: middle;
+          word-wrap: break-word;
+          width: $gamePage-notice-size - (2 * $margin-left-right);
+          line-height: 1rem;
+        }
       }
     }
   }
