@@ -367,6 +367,32 @@
     }
 
     .notice {
+
+      @-webkit-keyframes smooth-exit {
+        0% {
+          opacity: 1;
+        }
+        66.66% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      @keyframes smooth-exit {
+        0% {
+          opacity: 1;
+        }
+        66.66% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      -webkit-animation: smooth-exit 3s;
+      animation: smooth-exit 3s;
+
       position: absolute;
       top: 50%;
       left: 50%;
@@ -381,17 +407,6 @@
       $notice-image-width: 5.125rem;
       background-size: $notice-image-width 5.1875rem;
       background-position: (($gamePage-notice-size - $notice-image-width) / 2) 1rem;
-
-
-      //$padding-left-right: 1.5rem;
-      //padding-top: 7rem;
-      //padding-right: $padding-left-right;
-      //padding-bottom: 1rem;
-      //padding-left: $padding-left-right;
-      //font-size: 1rem;
-      //text-align: center;
-      //display: table;
-
 
       div {
         display: table;
@@ -414,6 +429,15 @@
         }
       }
     }
+  }
+
+  .lock-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 500;
   }
 
   .shown-words {

@@ -29,7 +29,8 @@ var PageGameMain = Object.assign({}, {}, {
             roundsBundleIdx: 0,
             //roundIdx: router.getParam('roundidx') || 0,
             roundIdx: 0,
-            shownWords: []
+            shownWords: [],
+            lockScreen: false
 
         };
 
@@ -83,6 +84,16 @@ var PageGameMain = Object.assign({}, {}, {
 
     },
 
+    lockScreen: function (time) {
+
+        this.setState({lockScreen: true}, function () {
+            setTimeout(function () {
+                this.setState({lockScreen: false});
+            }.bind(this), time);
+        });
+
+    },
+
     onChipClick: function (e) {
 
         switch (e.id) {
@@ -104,6 +115,10 @@ var PageGameMain = Object.assign({}, {}, {
     render: function () {
 
         //console.log({pageGame: this.state.shownWords});
+
+        var lockScreenStyle = {
+            display: this.state.lockScreen ? "block" : "none"
+        };
 
         return (
             <div className="page-game">
@@ -141,10 +156,13 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <Board ref="board"
+                           lockScreen={this.lockScreen}
                            roundBundleIdx={this.state.roundsBundleIdx}
                            roundIdx={this.state.roundIdx}
                            boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
                         />
+
+                    <div className="lock-screen" style={lockScreenStyle}></div>
 
                     <div className="shown-words">{this.showWords()}</div>
 

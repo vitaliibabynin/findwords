@@ -61,7 +61,6 @@ var Letter = React.createClass(LetterClass);
 var SELECT_DIFFERENTLY = "selectDifferently";
 var NO_SUCH_WORD = "noSuchWord";
 
-
 var NoticeClass = Object.assign({}, {}, {
 
     displayName: 'Notice',
@@ -181,7 +180,6 @@ var OPEN_LETTER_AFTER_LINK_RIGHT = "open-letter-after-link-right";
 var OPEN_LETTER_AFTER_LINK_BOTTOM = "open-letter-after-link-bottom";
 var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
 
-
 var BoardClass = Object.assign({}, {}, {
 
     displayName: 'Board',
@@ -197,7 +195,8 @@ var BoardClass = Object.assign({}, {}, {
             }),
             numberOfRoundsRequired: React.PropTypes.number,
             rounds: React.PropTypes.arrayOf(React.PropTypes.object)
-        })
+        }),
+        lockScreen: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -214,7 +213,9 @@ var BoardClass = Object.assign({}, {}, {
             highlightedWord: [],
             openedLetters: [],
             shownWords: [],
-            noticeType: "",
+            whichNotice: "",
+            lockScreen: this.props.lockScreen || function () {
+            }
         };
 
     },
@@ -334,13 +335,36 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (this.checkForSameLetters()) {
-            console.log("Try to complete the word differently");
-            this.emptySelectedLetters();
+
+            this.state.lockScreen(3500);
+            this.setState({whichNotice: SELECT_DIFFERENTLY}, function () {
+                setTimeout(function () {
+                    this.setState({whichNotice: ""});
+                    setTimeout(function () {
+                        this.emptySelectedLetters();
+                    }.bind(this), 500);
+                }.bind(this), 3000);
+            });
+
             return;
+
         }
 
         if (this.selectedLettersEqualPreviousSelection()) {
-            console.log("Not a word in this round")
+
+            this.state.lockScreen(3500);
+            this.setState({whichNotice: NO_SUCH_WORD}, function () {
+                setTimeout(function () {
+                    this.setState({whichNotice: ""});
+                    this.moveSelectedLettersToPreviousSelection();
+                    setTimeout(function () {
+                        this.emptySelectedLetters();
+                    }.bind(this), 500);
+                }.bind(this), 3000);
+            });
+
+            return;
+
         }
 
         this.moveSelectedLettersToPreviousSelection();
@@ -758,6 +782,39 @@ var BoardClass = Object.assign({}, {}, {
     },
 
 
+    showNotice: function () {
+
+        var whichNotice = this.state.whichNotice;
+        var notice;
+
+        switch (whichNotice) {
+            case NO_SUCH_WORD:
+                notice = (
+                    <Notice classNames="notice"
+                            noticeType={NO_SUCH_WORD}
+                            word={this.state.selectedLetters}
+                        />
+                );
+                break;
+            case SELECT_DIFFERENTLY:
+                notice = (
+                    <Notice classNames="notice"
+                            noticeType={SELECT_DIFFERENTLY}
+                            word={this.state.selectedLetters}
+                        />
+                );
+                break;
+            default:
+                notice = (
+                    <div></div>
+                );
+        }
+
+        return notice;
+
+    },
+
+
     openWord: function () {
 
         var unopenedWord = this.getUnopenedWord();
@@ -1092,8 +1149,9 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.getGameStateRoundField('shownWords'));
         //console.log({board: this.state.shownWords});
         //console.log(this.state.completedWords);
-        //console.log(this.state.selectedLetters);
+        console.log(this.state.selectedLetters);
         //console.log(this.state.openedLetters);
+        console.log(this.state.previousSelection);
 
         var boardArr = this.state.board;
         //console.log(boardArr);
@@ -1147,9 +1205,7 @@ var BoardClass = Object.assign({}, {}, {
                     }.bind(this))}
 
                 </table>
-                <Notice classNames="notice"
-                        noticeType={NO_SUCH_WORD}
-                        word={this.state.selectedLetters}/>
+                {this.showNotice()}
             </div>
 
         );
