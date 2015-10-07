@@ -339,13 +339,13 @@ var BoardClass = Object.assign({}, {}, {
 
         if (this.checkForSameLetters()) {
 
-            this.state.lockScreen(3500);
+            this.state.lockScreen(3100);
             this.setState({whichNotice: SELECT_DIFFERENTLY}, function () {
                 setTimeout(function () {
                     this.setState({whichNotice: ""});
                     setTimeout(function () {
                         this.emptySelectedLetters();
-                    }.bind(this), 500);
+                    }.bind(this), 100);
                 }.bind(this), 3000);
             });
 
@@ -355,14 +355,14 @@ var BoardClass = Object.assign({}, {}, {
 
         if (this.selectedLettersEqualPreviousSelection()) {
 
-            this.state.lockScreen(3500);
+            this.state.lockScreen(3100);
             this.setState({whichNotice: NO_SUCH_WORD}, function () {
                 setTimeout(function () {
                     this.setState({whichNotice: ""});
                     this.moveSelectedLettersToPreviousSelection();
                     setTimeout(function () {
                         this.emptySelectedLetters();
-                    }.bind(this), 500);
+                    }.bind(this), 100);
                 }.bind(this), 3000);
             });
 
