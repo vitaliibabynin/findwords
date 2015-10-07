@@ -746,6 +746,10 @@ var BoardClass = Object.assign({}, {}, {
         var selectedLetters = this.state.selectedLetters;
         var previousSelection = this.state.previousSelection;
 
+        if (selectedLetters.length < 2) {
+            return false;
+        }
+
         if (selectedLetters.length != previousSelection.length) {
             return false;
         }
@@ -1149,9 +1153,10 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.getGameStateRoundField('shownWords'));
         //console.log({board: this.state.shownWords});
         //console.log(this.state.completedWords);
-        console.log(this.state.selectedLetters);
+        //console.log(this.state.selectedLetters);
         //console.log(this.state.openedLetters);
-        console.log(this.state.previousSelection);
+        //console.log(this.state.previousSelection);
+        //console.log(this.state.highlightedWord);
 
         var boardArr = this.state.board;
         //console.log(boardArr);
