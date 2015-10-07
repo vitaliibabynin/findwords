@@ -753,7 +753,7 @@ var BoardClass = Object.assign({}, {}, {
             return false;
         }
 
-        if (selectedLetters.length > 50) {
+        if (selectedLetters.length > 40) {
             return false;
         }
 
