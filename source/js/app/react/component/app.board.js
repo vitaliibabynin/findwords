@@ -330,8 +330,11 @@ var BoardClass = Object.assign({}, {}, {
         this.fadeHighlightedWord();
 
         if (this.checkForCompletedWord()) {
+
             this.moveSelectedLettersToCompleteWords();
+
             return;
+
         }
 
         if (this.checkForSameLetters()) {
@@ -747,6 +750,10 @@ var BoardClass = Object.assign({}, {}, {
         var previousSelection = this.state.previousSelection;
 
         if (selectedLetters.length < 2) {
+            return false;
+        }
+
+        if (selectedLetters.length > 50) {
             return false;
         }
 
