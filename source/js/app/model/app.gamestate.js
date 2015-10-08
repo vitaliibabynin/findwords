@@ -24,10 +24,19 @@ var GameState = Object.assign({}, {}, {
                 roundsComplete: 1,
                 rounds: {
                     0: {
-                        board: [],
-                        completedWords: [],
-                        openedLetters: [],
-                        shownWords: []
+                        board: {
+                                0: {
+                                    color: '#000000',
+                                    openWord: true
+                                },
+                                2: {
+                                    color: '#000000',
+                                    openWord: false
+                                }
+                        },
+                        //completedWords: [],
+                        openedLetters: [{x:0, y:1}, {x:4, y:3}],
+                        shownWords: [0]
                     },
                     1: {},
                     2: {}
@@ -84,15 +93,35 @@ var GameState = Object.assign({}, {}, {
         this.gameState.chips[field] = newValue;
         this.saveGameState();
     },
+    getChipsField: function (field, defaultValue) {
+        if (!this.gameState.chips || !this.gameState.chips.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.chips[field];
+    },
     setOpenWord: function (newNumber) {
         this.setChipsField('openWord', newNumber);
+    },
+    getOpenWord: function () {
+        return this.getChipsField('openWord', 0);
     },
     setOpenLetter: function (newNumber) {
         this.setChipsField('openLetter', newNumber);
     },
+    getOpenLetter: function () {
+        return this.getChipsField('openLetter', 0);
+    },
     setShowWord: function (newNumber) {
         this.setChipsField('showWord', newNumber);
     },
+    getShowWord: function () {
+        return this.getChipsField('showWord', 0);
+    },
+
+
+
+
 
     setRoundsBundles: function (bundleIndex, field, newValue) {
         this.gameState.roundsBundles[bundleIndex][field] = newValue;
@@ -132,22 +161,6 @@ var GameState = Object.assign({}, {}, {
         return this.getSettingsField('sound', true);
     },
 
-    getChipsField: function (field, defaultValue) {
-        if (!this.gameState.chips || !this.gameState.chips.hasOwnProperty(field)) {
-            return defaultValue;
-        }
-
-        return this.gameState.chips[field];
-    },
-    getOpenWord: function () {
-        return this.getChipsField('openWord', 0);
-    },
-    getOpenLetter: function () {
-        return this.getChipsField('openLetter', 0);
-    },
-    getShowWord: function () {
-        return this.getChipsField('showWord', 0);
-    },
 
     getRoundsBundles: function (bundleIndex) {
 

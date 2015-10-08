@@ -19,7 +19,8 @@
     .time-line {
       font-size: 1rem;
       position: relative;
-      margin-left: 0.75rem;
+      //margin-left: 0.75rem;
+      margin-left: 3%;
       height: 0.1875rem;
       width: 88.125%;
 
@@ -41,41 +42,27 @@
       }
     }
 
-    .timer-stars {
+    .timer-images {
       top: 0;
       position: absolute;
       height: 1.625rem;
-      margin-left: 0.25rem;
-      width: 90%;
-      //background-position: 2% 0.3125rem, 33% 0.3125rem, 63% 0.3125rem, 97.25% 0.3125rem;
-      //background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem, 0.875rem 1rem;
-      //background-position: 0 0.3125rem, 34.2% 0.3125rem, 67.66% 0.3125rem;
-      background-position: 0 0.3125rem, 34.33% 0.3125rem, 67.66% 0.3125rem;
-      background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem;
-      background-repeat: no-repeat;
-    }
-
-    .timer-clock {
-      position: absolute;
-      top: 0;
-      left: 94%;
-      height: 1.625rem;
-      width: 0.875rem;
-      background-position: 0 0.3125rem;
-      background-size: 0.875rem 1rem;
+      width: 100%;
+      background-position: 2% 0.3125rem, 33% 0.3125rem, 63% 0.3125rem, 97.25% 0.3125rem;
+      background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem, 0.875rem 1rem;
       background-repeat: no-repeat;
     }
   }
 
   .chips {
     height: 3.125rem;
-    margin: 0.25rem 1.5625rem;
+    margin: 0.25rem auto;
+    width: 16.875rem;
     color: #ffffff;
 
     .btn.chip {
       position: relative;
       height: 3.125rem;
-      width: 33.33%;
+      width: 5.625rem;
       display: inline-block;
       background-repeat: no-repeat;
       text-align: center;
@@ -85,10 +72,9 @@
       .text {
         display: table;
         height: 2rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        margin-left: auto;
-        margin-right: auto;
+        width: inherit;
+        padding-left: 1rem;
+        padding-right: 1rem;
 
         span {
           display: table-cell;
@@ -99,375 +85,209 @@
         width: 1.75rem;
         position: absolute;
         bottom: 0.4rem;
-        left: 10%;
+        left: 0.6rem;
       }
     }
     .open-word {
       background-color: $gamePage-chip-open-word-bg-color;
       background-size: 1.3125rem 1.1875rem;
-      background-position: 90% 1.6875rem;
+      background-position: 3.9125rem 1.6875rem;
     }
     .open-letter {
       background-color: $gamePage-chip-open-letter-bg-color;
       background-size: 1.625rem 1.1875rem;
-      background-position: 90% 1.6875rem;
+      background-position: 3.6rem 1.6875rem;
     }
     .show-word {
       background-color: $gamePage-chip-show-word-bg-color;
       background-size: 1.375rem 1.1875rem;
-      background-position: 90% 1.6875rem;
+      background-position: 3.85rem 1.6875rem;
     }
   }
 
-  .game-board {
-    margin-left: 1.5625rem;
-    margin-right: 1.5625rem;
-    position: relative;
+  .board {
+    border-collapse: collapse;
+    //border-left: 0.0625rem solid $gamePage-board-color-border;
+    //border-top: 0.0625rem solid $gamePage-board-color-border;
+    border: 0.0625rem solid $gamePage-board-color-border;
+    background-color: $gamePage-board-td-bg-color-default;
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+    //margin: auto;
+    //height: 17.5rem;
+    //width: 17.5rem;
+    table-layout: fixed;
 
-    .board {
-      border-collapse: collapse;
-      border: 0.0625rem solid $gamePage-board-color-border;
-      background-color: $gamePage-board-td-bg-color-default;
-      //table-layout: fixed;
-
-      td {
-        cursor: pointer;
-        position: relative;
-        text-align: center;
-        vertical-align: middle;
-        text-transform: uppercase;
-        overflow: hidden;
-        white-space: nowrap;
-        border: none;
-        line-height: 100%;
-        background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border .0625rem),
-        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
-        background-size: 100% 100%, 200% 100%;
-        background-position: 0 0, 0 0;
-        background-repeat: no-repeat;
-
-        &.open-letter-before-link-top:before,
-        &.open-letter-before-link-right:before,
-        &.open-letter-before-link-bottom:before,
-        &.open-letter-before-link-left:before,
-        &.open-letter-after-link-top:after,
-        &.open-letter-after-link-right:after,
-        &.open-letter-after-link-bottom:after,
-        &.open-letter-after-link-left:after {
-          background-color: $gamePage-board-td-bg-color-link-open-letter;
-        }
-
-        //@-webkit-keyframes fade {
-        //  0% {
-        //    opacity: 1;
-        //  }
-        //  25% {
-        //    opacity: 1;
-        //  }
-        //  100% {
-        //    opacity: 0;
-        //  }
-        //}
-        //@keyframes fade {
-        //  0% {
-        //    opacity: 1;
-        //  }
-        //  25% {
-        //    opacity: 1;
-        //  }
-        //  100% {
-        //    opacity: 0;
-        //  }
-        //}
-
-        &.before-link-top.fade:before,
-        &.before-link-right.fade:before,
-        &.before-link-bottom.fade:before,
-        &.before-link-left.fade:before,
-        &.after-link-top.fade:after,
-        &.after-link-right.fade:after,
-        &.after-link-bottom.fade:after,
-        &.after-link-left.fade:after {
-          //opacity: 0;
-          //-webkit-animation: fade 2s;
-          //animation: fade 2s;
-          -webkit-transition-duration: 1.5s;
-          -webkit-transition-delay: 0.5s;
-          transition-duration: 1.5s;
-          transition-delay: 0.5s;
-          opacity: 0;
-          background-color: $gamePage-board-td-bg-color-link;
-        }
-
-        &.before-link-top.visible:before,
-        &.before-link-right.visible:before,
-        &.before-link-bottom.visible:before,
-        &.before-link-left.visible:before,
-        &.after-link-top.visible:after,
-        &.after-link-right.visible:after,
-        &.after-link-bottom.visible:after,
-        &.after-link-left.visible:after {
-          //-webkit-animation: none;
-          //animation: none;
-          -webkit-transition-duration: 0s;
-          -webkit-transition-delay: 0s;
-          transition-duration: 0s;
-          transition-delay: 0s;
-          opacity: 1;
-          background-color: $gamePage-board-td-bg-color-link;
-        }
-
-        &.open-letter-before-link-top:before,
-        &.open-letter-before-link-right:before,
-        &.open-letter-before-link-bottom:before,
-        &.open-letter-before-link-left:before,
-        &.open-letter-after-link-top:after,
-        &.open-letter-after-link-right:after,
-        &.open-letter-after-link-bottom:after,
-        &.open-letter-after-link-left:after,
-        &.before-link-top:before,
-        &.before-link-right:before,
-        &.before-link-bottom:before,
-        &.before-link-left:before,
-        &.after-link-top:after,
-        &.after-link-right:after,
-        &.after-link-bottom:after,
-        &.after-link-left:after {
-          position: absolute;
-          z-index: 100;
-          content: "";
-        }
-
-        &.open-letter-before-link-top:before,
-        &.open-letter-after-link-top:after,
-        &.before-link-top:before,
-        &.after-link-top:after {
-          height: 10%;
-          width: 5%;
-          top: 0;
-          left: 47.5%;
-        }
-
-        &.open-letter-before-link-right:before,
-        &.open-letter-after-link-right:after,
-        &.before-link-right:before,
-        &.after-link-right:after {
-          height: 5%;
-          width: 10%;
-          top: 47.5%;
-          right: 0;
-        }
-
-        &.open-letter-before-link-bottom:before,
-        &.open-letter-after-link-bottom:after,
-        &.before-link-bottom:before,
-        &.after-link-bottom:after {
-          height: 10%;
-          width: 5%;
-          bottom: 0;
-          left: 47.5%;
-        }
-
-        &.open-letter-before-link-left:before,
-        &.open-letter-after-link-left:after,
-        &.before-link-left:before,
-        &.after-link-left:after {
-          height: 5%;
-          width: 10%;
-          top: 47.5%;
-          left: 0;
-        }
-
-        &.open-letter {
-          color: $gamePage-board-td-color-open-letter;
-        }
-        &.selected {
-          color: $gamePage-board-td-color-selected;
-        }
-        @-webkit-keyframes fontbulger {
-          0% {
-            -webkit-transform: scale(1.5, 1.5);
-          }
-          99% {
-            -webkit-transform: scale(1.5, 1.5);
-          }
-          100% {
-            -webkit-transform: initial;
-          }
-        }
-        @keyframes fontbulger {
-          0% {
-            transform: scale(1.5, 1.5);
-          }
-          99% {
-            transform: scale(1.5, 1.5);
-          }
-          100% {
-            transform: initial;
-          }
-        }
-        &.completed span {
-          -webkit-animation: fontbulger 0.2s;
-          animation: fontbulger 0.2s;
-          color: $gamePage-board-td-color-complete;
-        }
-      }
-
-      tr {
-
-        td:last-child {
-          background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem),
-          linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
-        }
-      }
-
-      tr:last-child {
-
-        td {
-          background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
-          linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
-        }
-        td:last-child {
-          background-image: none;
-        }
-      }
-
-      td {
-        &.backgroundColor1 {
-          background-color: $gamePage-board-td-bg-color-1;
-        }
-        &.backgroundColor2 {
-          background-color: $gamePage-board-td-bg-color-2;
-        }
-        &.backgroundColor3 {
-          background-color: $gamePage-board-td-bg-color-3;
-        }
-        &.backgroundColor4 {
-          background-color: $gamePage-board-td-bg-colo-4;
-        }
-        &.backgroundColor5 {
-          background-color: $gamePage-board-td-bg-color-5;
-        }
-        &.backgroundColor6 {
-          background-color: $gamePage-board-td-bg-color-6;
-        }
-        &.backgroundColor7 {
-          background-color: $gamePage-board-td-bg-color-7;
-        }
-        &.backgroundColor8 {
-          background-color: $gamePage-board-td-bg-color-8;
-        }
-        &.backgroundColor9 {
-          background-color: $gamePage-board-td-bg-color-9;
-        }
-        &.backgroundColor10 {
-          background-color: $gamePage-board-td-bg-color-10;
-        }
-      }
-    }
-
-    .notice {
-
-      @-webkit-keyframes smooth-exit {
-        0% {
-          opacity: 1;
-        }
-        75% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-      @keyframes smooth-exit {
-        0% {
-          opacity: 1;
-        }
-        75% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-      -webkit-animation: smooth-exit 3s;
-      animation: smooth-exit 3s;
-
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      $gamePage-notice-size: 11rem;
-      height: $gamePage-notice-size;
-      width: $gamePage-notice-size;
-      background-color: $gamePage-notice-bg-color;
-      color: $gamePage-notice-color;
+    td {
+      cursor: pointer;
+      position: relative;
+      text-align: center;
+      vertical-align: middle;
+      text-transform: uppercase;
+      overflow: hidden;
+      white-space: nowrap;
+      border: none;
+      line-height: 100%;
+      //background: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
+      //linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
+      background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border .0625rem),
+      linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem);
+      background-size: 100% 100%, 200% 100%;
+      background-position: 0 0, 0 0;
       background-repeat: no-repeat;
-      $notice-image-width: 5.125rem;
-      background-size: $notice-image-width 5.1875rem;
-      background-position: (($gamePage-notice-size - $notice-image-width) / 2) 1rem;
 
-      div {
-        display: table;
-        $margin-left-right: 1rem;
-        margin-top: 5.75rem;
-        margin-right: $margin-left-right;
-        margin-left: $margin-left-right;
-        font-size: 1rem;
-        text-align: center;
-        height: 5rem;
-        width: $gamePage-notice-size - (2 * $margin-left-right);
-        table-layout: fixed;
+      &.before-link-top.fade:before,
+      &.before-link-right.fade:before,
+      &.before-link-bottom.fade:before,
+      &.before-link-left.fade:before,
+      &.after-link-top.fade:after,
+      &.after-link-right.fade:after,
+      &.after-link-bottom.fade:after,
+      &.after-link-left.fade:after {
+        transition-duration: 1.5s;
+        transition-delay: 0.5s;
+        opacity: 0;
+      }
 
-        span {
-          display: table-cell;
-          vertical-align: middle;
-          word-wrap: break-word;
-          width: $gamePage-notice-size - (2 * $margin-left-right);
-          line-height: 1rem;
+      &.before-link-top.visible:before,
+      &.before-link-right.visible:before,
+      &.before-link-bottom.visible:before,
+      &.before-link-left.visible:before,
+      &.after-link-top.visible:after,
+      &.after-link-right.visible:after,
+      &.after-link-bottom.visible:after,
+      &.after-link-left.visible:after {
+        transition-duration: 0s;
+        transition-delay: 0s;
+        opacity: 1;
+      }
+
+      &.before-link-top:before,
+      &.before-link-right:before,
+      &.before-link-bottom:before,
+      &.before-link-left:before,
+      &.after-link-top:after,
+      &.after-link-right:after,
+      &.after-link-bottom:after,
+      &.after-link-left:after {
+        position: absolute;
+        z-index: 1000;
+        content: "";
+        background-color: $gamePage-board-td-bg-color-link;
+        transition-property: opacity;
+        transition-timing-function: ease-in;
+      }
+
+      &.before-link-top:before,
+      &.after-link-top:after {
+        height: 10%;
+        width: 5%;
+        top: 0;
+        left: 47.5%;
+      }
+
+      &.before-link-right:before,
+      &.after-link-right:after {
+        height: 5%;
+        width: 10%;
+        top: 47.5%;
+        right: 0;
+      }
+
+      &.before-link-bottom:before,
+      &.after-link-bottom:after {
+        height: 10%;
+        width: 5%;
+        bottom: 0;
+        left: 47.5%;
+      }
+
+      &.before-link-left:before,
+      &.after-link-left:after {
+        height: 5%;
+        width: 10%;
+        top: 47.5%;
+        left: 0;
+      }
+
+      &.selected {
+        color: $gamePage-board-td-color-selected;
+      }
+      @keyframes fontbulger {
+        0% {
+          font-size: 1.5em;
         }
+        99% {
+          font-size: 1.5em;
+        }
+        100% {
+          font-size: 1em;
+        }
+      }
+      &.complete {
+        animation: fontbulger 0.2s;
+        color: $gamePage-board-td-color-complete;
+      }
+    }
+
+    tr {
+
+      td:last-child {
+        background-image: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
+        linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem);
+      }
+    }
+
+    tr:last-child {
+
+      td {
+        background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
+        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem);
+      }
+      td:last-child {
+        background-image: none;
+      }
+    }
+
+    td {
+      &.backgroundColor1 {
+        background-color: $gamePage-board-td-bg-color-1;
+      }
+      &.backgroundColor2 {
+        background-color: $gamePage-board-td-bg-color-2;
+      }
+      &.backgroundColor3 {
+        background-color: $gamePage-board-td-bg-color-3;
+      }
+      &.backgroundColor4 {
+        background-color: $gamePage-board-td-bg-colo-4;
+      }
+      &.backgroundColor5 {
+        background-color: $gamePage-board-td-bg-color-5;
+      }
+      &.backgroundColor6 {
+        background-color: $gamePage-board-td-bg-color-6;
+      }
+      &.backgroundColor7 {
+        background-color: $gamePage-board-td-bg-color-7;
+      }
+      &.backgroundColor8 {
+        background-color: $gamePage-board-td-bg-color-8;
+      }
+      &.backgroundColor9 {
+        background-color: $gamePage-board-td-bg-color-9;
+      }
+      &.backgroundColor10 {
+        background-color: $gamePage-board-td-bg-color-10;
       }
     }
   }
-
-  .lock-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 500;
-  }
-
-  .shown-words {
-    margin-left: 1.5625rem;
-    margin-right: 1.5625rem;
-    font-size: 1rem;
-    height: 3rem;
-    color: $gamePage-shownWords-word-color;
-
-    div {
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
-      height: 1.5rem;
-      display: inline-block;
-      margin-right: 2.5%;
-      text-transform: capitalize;
-    }
-  }
-
 }
 
-html.csscalc {
+
+
+html.csscalc{
   .page-game > .page-content {
-
-    .timer {
-      .timer-stars {
-        background-position: 0 0.3125rem, calc(33.33% + .5rem) 0.3125rem, calc(66.66% + .5rem) 0.3125rem;
-      }
-    }
-
     .board {
       td {
         background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border .0625rem),
@@ -475,6 +295,7 @@ html.csscalc {
       }
 
       tr {
+
         td:last-child {
           background-image: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
           linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
@@ -482,6 +303,7 @@ html.csscalc {
       }
 
       tr:last-child {
+
         td {
           background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
           linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
@@ -490,6 +312,7 @@ html.csscalc {
         td:last-child {
           background-image: none;
         }
+
       }
     }
   }
