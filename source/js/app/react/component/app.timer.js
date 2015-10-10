@@ -86,11 +86,15 @@ var TimerClass = Object.assign({}, {}, {
         }
 
         var stars = {
+
             backgroundImage: "url('" + starBase + "'), url('" + starOneThird + "'), url('" + starTwoThirds + "')"
+
         };
 
         var clock = {
+
             backgroundImage: "url('" + timerImg + "')"
+
         };
 
         var timeLine = {

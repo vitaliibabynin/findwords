@@ -94,7 +94,6 @@ var PageGameMain = Object.assign({}, {}, {
 
     },
 
-
     onChipClick: function (e) {
 
         switch (e.id) {

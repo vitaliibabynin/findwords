@@ -14,6 +14,7 @@ module.exports = {};
 var LAYOUT_INSTRUCTIONS = 'instructions';
 var LAYOUT_LOCKED = 'locked';
 var LAYOUT_UNLOCKED = 'unlocked';
+var BUY_SET_BUTTON_ID = 'buy_set';
 
 
 var SlideClass = Object.assign({}, {}, {
@@ -96,13 +97,21 @@ var SlideClass = Object.assign({}, {}, {
 
     },
 
-    onClickBuySet: function (buttonProps, e) {
-        e.stopPropagation();
-        router.navigate("game", "main", {slideIdx: this.props.slideIndex});
+    onClickBuySet: function () {
+
+        router.navigate("game", "main");
+
     },
 
-    onClick: function (buttonProps, e) {
-        this.onClickEffect(buttonProps);
+    onClick: function (e) {
+
+
+        if (e.id == BUY_SET_BUTTON_ID) {
+            this.onClickBuySet();
+            return;
+        }
+
+        this.onClickEffect(e);
 
         this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions();
 
@@ -172,7 +181,7 @@ var SlideClass = Object.assign({}, {}, {
                 <div className="text">
                     <span>{i18n._('slide.instructions')}</span>
                 </div>
-                <IconButton onClick={this.onClickBuySet}
+                <IconButton id={BUY_SET_BUTTON_ID} onClick={this.onClick}
                             className="purchase">{i18n._('slide.buy')}</IconButton>
 
             </div>

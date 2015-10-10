@@ -72,11 +72,11 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
                         this.setState({isActive: false});
                     }
                 }.bind(this), 300);
-            }.bind(this));
+            });
         }
 
         if (this.props.onClick && typeof this.props.onClick == 'function') {
-            this.props.onClick(this.props, e);
+            this.props.onClick(this.props);
         }
     },
 

@@ -201,11 +201,12 @@ var BoardClass = Object.assign({}, {}, {
 
     getInitialState: function () {
 
-        var state = {
+        return {
             roundsBundleIdx: this.props.roundsBundleIdx || 0,
             roundIdx: this.props.roundIdx || 0,
             boardData: this.props.boardData.rounds[0] || {},
             cellSize: 0,
+            board: [],
             selectedLetters: [],
             previousSelection: [],
             completedWords: [],
@@ -214,32 +215,29 @@ var BoardClass = Object.assign({}, {}, {
             shownWords: [],
             whichNotice: "",
             lockScreen: this.props.lockScreen || function () {
-
             }
         };
 
-        state.board = this.boardConverter(state.boardData);
-        return state;
     },
 
     componentDidMount: function () {
 
         this.setState({
-            //board: this.boardConverter() || {},
+            board: this.boardConverter() || {},
             cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.boardData.cols || 0
         })
 
     },
 
-    boardConverter: function (boardData) {
+    boardConverter: function () {
 
-        var arr = new Array(boardData.rows);
+        var arr = new Array(this.state.boardData.rows);
 
         for (var i = 0; i < arr.length; i++) {
-            arr[i] = new Array(boardData.cols);
+            arr[i] = new Array(this.state.boardData.cols);
         }
 
-        boardData.words.map(function (word) {
+        this.state.boardData.words.map(function (word) {
 
             word.letters.map(function (letter) {
 
@@ -247,9 +245,7 @@ var BoardClass = Object.assign({}, {}, {
                     x: letter.x,
                     y: letter.y,
                     letter: letter.letter,
-                    classNames: {
-
-                    }
+                    classNames: {}
                 };
 
             })
@@ -650,37 +646,36 @@ var BoardClass = Object.assign({}, {}, {
         var mainResult = false;
 
         words.map(function (word) {
-            if (word.letters.length != selectedLetters.length) {
-                return;
-            }
 
+            if (word.letters.length == selectedLetters.length) {
 
-            var result = true;
-            word.letters.map(function (letter, letterIndex) {
+                var result = true;
+                word.letters.map(function (letter, letterIndex) {
 
-                if (selectedLetters[letterIndex].letter != letter.letter) {
-                    result = false;
-                }
+                    if (selectedLetters[letterIndex].letter != letter.letter) {
+                        result = false;
+                    }
 
-                var resultCell = false;
-                selectedLetters.map(function (selectedLetter) {
+                    var resultCell = false;
+                    selectedLetters.map(function (selectedLetter) {
 
-                    if (selectedLetter.x == letter.x && selectedLetter.y == letter.y) {
-                        resultCell = true;
+                        if (selectedLetter.x == letter.x && selectedLetter.y == letter.y) {
+                            resultCell = true;
+                        }
+
+                    });
+
+                    if (!resultCell) {
+                        result = false;
                     }
 
                 });
 
-                if (!resultCell) {
-                    result = false;
+                if (result) {
+                    mainResult = true;
                 }
 
-            });
-
-            if (result) {
-                mainResult = true;
             }
-
         });
 
         return mainResult;
