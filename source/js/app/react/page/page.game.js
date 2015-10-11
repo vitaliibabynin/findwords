@@ -89,6 +89,10 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
 
+    displayNotice: function () {
+
+    },
+
     onChipOpenWordClick: function() {
         //this.refs.board.openWord();
     },
@@ -136,7 +140,7 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <Board ref="board"
-                           lockScreen={this.lockScreen}
+                           displayNotice={this.displayNotice}
                            roundBundleIdx={this.state.roundsBundleIdx}
                            roundIdx={this.state.roundIdx}
                            boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
