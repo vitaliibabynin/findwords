@@ -59,18 +59,18 @@ var Letter = React.createClass(LetterClass);
 
 
 var BOARD_MARGIN = 50;
-//var COLOR_SELECTED = "selected";
-//var COLOR_COMPLETED = "completed";
-//var LINK_VISIBLE = "visible";
-//var LINK_FADE = "fade";
-//var BEFORE_LINK_TOP = "before-link-top";
-//var BEFORE_LINK_RIGHT = "before-link-right";
-//var BEFORE_LINK_BOTTOM = "before-link-bottom";
-//var BEFORE_LINK_LEFT = "before-link-left";
-//var AFTER_LINK_TOP = "after-link-top";
-//var AFTER_LINK_RIGHT = "after-link-right";
-//var AFTER_LINK_BOTTOM = "after-link-bottom";
-//var AFTER_LINK_LEFT = "after-link-left";
+var COLOR_SELECTED = "selected";
+var COLOR_COMPLETED = "completed";
+var LINK_VISIBLE = "visible";
+var LINK_FADE = "fade";
+var BEFORE_LINK_TOP = "before-link-top";
+var BEFORE_LINK_RIGHT = "before-link-right";
+var BEFORE_LINK_BOTTOM = "before-link-bottom";
+var BEFORE_LINK_LEFT = "before-link-left";
+var AFTER_LINK_TOP = "after-link-top";
+var AFTER_LINK_RIGHT = "after-link-right";
+var AFTER_LINK_BOTTOM = "after-link-bottom";
+var AFTER_LINK_LEFT = "after-link-left";
 //var OPEN_LETTER_COLOR = "open-letter";
 //var OPEN_LETTER_BEFORE_LINK_TOP = "open-letter-before-link-top";
 //var OPEN_LETTER_BEFORE_LINK_RIGHT = "open-letter-before-link-right";
@@ -114,6 +114,7 @@ var BoardClass = Object.assign({}, {}, {
                     openWord: false
                 }
             },
+            selectedLetters: {letters: []},
             openedLetters: [{x: 0, y: 1}, {x: 4, y: 3}],
             shownWords: [0],
             displayNotice: this.props.displayNotice || function () {
@@ -152,28 +153,250 @@ var BoardClass = Object.assign({}, {}, {
     extractWordsToFind: function (boardData) {
         var boardDataWords = boardData.words;
         var wordsToFind = {words: []};
+
         boardDataWords.map(function (word, wordIndex) {
             wordsToFind.words[wordIndex] = {word: "", letters: word.letters};
             word.letters.map(function (letter) {
                 wordsToFind.words[wordIndex].word += letter.letter;
             });
         });
+
         return wordsToFind;
     },
 
-    onTouchStart: function () {
+    onTouchStart: function (e) {
+        this.preventDefaultOnEvent(e);
+
+        var cellCoordinates = this.calcWhichCellIsTouched(e);
+        if (!cellCoordinates) {
+            return;
+        }
+        var x = cellCoordinates.x;
+        var y = cellCoordinates.y;
+
+        this.addFirstLetterToSelectedLetters(x, y);
+    },
+
+    onTouchMove: function (e) {
+        this.preventDefaultOnEvent(e);
+
+        var cellCoordinates = this.calcWhichCellIsTouched(e);
+        if (!cellCoordinates) {
+            return;
+        }
+        var x = cellCoordinates.x;
+        var y = cellCoordinates.y;
+
+        if (!this.checkIfDifferentLetter(x, y)) {
+            return;
+        }
+
+        if (this.removeSelectedLettersAfter(x, y)) {
+            return;
+        }
+
+        this.addLetterToSelectedLetters(x, y);
+    },
+
+    onTouchEnd: function (e) {
+        this.preventDefaultOnEvent(e);
+        this.emptySelectedLetters();
+    },
+
+    preventDefaultOnEvent: function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+    },
+
+    calcWhichCellIsTouched: function (e) {
+        var screenX = e.touches[0].clientX;
+        var screenY = e.touches[0].clientY;
+
+        var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
+        var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
+
+        var rows = this.state.boardData.rows;
+        var cols = this.state.boardData.cols;
+
+        var boardWidthX = e.currentTarget.getBoundingClientRect().width;
+        var boardHeightY = e.currentTarget.getBoundingClientRect().height;
+
+        var cellWidthX = boardWidthX / cols;
+        var cellHeightY = boardHeightY / rows;
+
+        var x = Math.floor(boardX / cellWidthX);
+        var y = Math.floor(boardY / cellHeightY);
+
+        //check for invalid number of rows and columns
+        if (y > rows - 1 || x > cols - 1 || y < 0 || x < 0) {
+            return false;
+        }
+
+        return {x: x, y: y};
+    },
+
+    addFirstLetterToSelectedLetters: function (x, y) {
+
+        var boardArr = this.state.boardArr;
+        var selectedLetters = this.state.selectedLetters;
+
+        selectedLetters.letters.push(boardArr[y][x]);
+        boardArr[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
+        boardArr[y][x].classNames.color = COLOR_SELECTED;
+        boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+
+        this.setState({
+            boardArr: boardArr,
+            selectedLetters: selectedLetters
+        });
 
     },
 
-    onTouchMove: function () {
+    selectWordBackgroundColor: function () {
+        return "backgroundColor1"
+    },
+
+    checkIfDifferentLetter: function (x, y) {
+
+        var selectedLetters = this.state.selectedLetters.letters;
+
+        if (selectedLetters.length == 0) {
+            return false;
+        }
+
+        return !(y == selectedLetters[selectedLetters.length - 1].y && x == selectedLetters[selectedLetters.length - 1].x);
 
     },
 
-    onTouchEnd: function () {
+    removeSelectedLettersAfter: function (x, y) {
+
+        var lettersRemoved = false;
+
+        var index = this.getIndexIfLetterIsSelected(x, y);
+        if (index !== false) {
+
+            var boardArr = this.state.boardArr;
+            var selectedLetters = this.state.selectedLetters.letters;
+
+            for (var i = index + 1; i < selectedLetters.length; i++) {
+                delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkBefore;
+                delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkAfter;
+                delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkVisibility;
+                delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.backgroundColor;
+                delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color;
+            }
+
+            delete boardArr[selectedLetters[index].y][selectedLetters[index].x].classNames.linkAfter;
+
+            selectedLetters.splice(index + 1, selectedLetters.length - (index - 1));
+
+            this.setState({
+                selectedLetters: {letters: selectedLetters}
+            });
+
+            lettersRemoved = true;
+
+        }
+
+        return lettersRemoved;
+
+    },
+
+    getIndexIfLetterIsSelected: function (x, y) {
+
+        var selectedLetters = this.state.selectedLetters.letters;
+
+        var index = false;
+        selectedLetters.map(function (letter, letterIndex) {
+            if (y == letter.y && x == letter.x) {
+                index = letterIndex;
+            }
+        });
+
+        return index;
+
+    },
+
+    addLetterToSelectedLetters: function (x, y) {
+
+        var boardArr = this.state.boardArr;
+        var selectedLetters = this.state.selectedLetters;
+
+        var previousLetter = selectedLetters.letters[selectedLetters.letters.length - 1];
+
+        //find out which link needs to be attached
+        //restrict which letters can be clicked
+        var prevX = previousLetter.x;
+        var prevY = previousLetter.y;
+        var prevColor = previousLetter.classNames.backgroundColor;
+
+        if (y == prevY + 1 && x == prevX) {
+            selectedLetters.letters.push(boardArr[y][x]);
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+            boardArr[y][x].classNames.backgroundColor = prevColor;
+            boardArr[y][x].classNames.color = COLOR_SELECTED;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+        }
+
+        if (y == prevY - 1 && x == prevX) {
+            selectedLetters.letters.push(boardArr[y][x]);
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+            boardArr[y][x].classNames.backgroundColor = prevColor;
+            boardArr[y][x].classNames.color = COLOR_SELECTED;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+        }
+
+        if (x == prevX + 1 && y == prevY) {
+            selectedLetters.letters.push(boardArr[y][x]);
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_LEFT;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+            boardArr[y][x].classNames.backgroundColor = prevColor;
+            boardArr[y][x].classNames.color = COLOR_SELECTED;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+        }
+
+        if (x == prevX - 1 && y == prevY) {
+            selectedLetters.letters.push(boardArr[y][x]);
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_RIGHT;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+            boardArr[y][x].classNames.backgroundColor = prevColor;
+            boardArr[y][x].classNames.color = COLOR_SELECTED;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+        }
+
+        this.setState({
+            boardArr: boardArr,
+            selectedLetters: selectedLetters
+        });
+
+    },
+
+    emptySelectedLetters: function () {
+
+        var boardArr = this.state.boardArr;
+        var selectedLetters = this.state.selectedLetters;
+
+        selectedLetters.letters.map(function (letter) {
+            delete boardArr[letter.y][letter.x].classNames.linkBefore;
+            delete boardArr[letter.y][letter.x].classNames.linkAfter;
+            delete boardArr[letter.y][letter.x].classNames.linkVisibility;
+            delete boardArr[letter.y][letter.x].classNames.backgroundColor;
+            delete boardArr[letter.y][letter.x].classNames.color;
+        });
+
+        this.setState({
+            boardArr: boardArr,
+            selectedLetters: {letters: []}
+        });
 
     },
 
     render: function () {
+
+        console.log(this.state.selectedLetters);
+
         var boardArr = this.state.boardArr;
         var boardStyle = {
             fontSize: (this.state.cellSize / 2) + "px"
@@ -185,9 +408,11 @@ var BoardClass = Object.assign({}, {}, {
                        onTouchMove={this.onTouchMove}
                        onTouchEnd={this.onTouchEnd}
                        style={boardStyle}>
+
                     {boardArr.map(function (row, rowId) {
                         return (
                             <tr key={rowId}>
+
                                 {row.map(function (cell, cellId) {
                                     var properties = [];
                                     for (var property in cell.classNames) {
@@ -204,9 +429,11 @@ var BoardClass = Object.assign({}, {}, {
                                         </Letter>
                                     );
                                 }.bind(this))}
+
                             </tr>
                         );
                     }.bind(this))}
+
                 </table>
             </div>
         );
