@@ -106,15 +106,16 @@ var BoardClass = Object.assign({}, {}, {
             roundIdx: this.props.roundIdx || 0,
             board: {
                 0: {
-                    color: '#000000',
-                    openWord: false
+                    color: "backgroundColor7",
+                    openWord: true
                 },
                 2: {
-                    color: '#000000',
-                    openWord: false
+                    color: "backgroundColor5",
+                    openWord: true
                 }
             },
             selectedLetters: {letters: []},
+            highlightedWord: {letters: []},
             openedLetters: [{x: 0, y: 1}, {x: 4, y: 3}],
             shownWords: [0],
             displayNotice: this.props.displayNotice || function () {
@@ -123,6 +124,7 @@ var BoardClass = Object.assign({}, {}, {
         state.boardData = this.props.boardData.rounds[state.roundIdx] || {};
         state.boardArr = this.boardConverter(state.boardData);
         state.wordsToFind = this.extractWordsToFind(state.boardData);
+        this.addFoundWordsToBoardArr(state.board, state.wordsToFind, state.boardArr);
         return state;
     },
 
@@ -164,6 +166,73 @@ var BoardClass = Object.assign({}, {}, {
         return wordsToFind;
     },
 
+    addFoundWordsToBoardArr: function (board, wordsToFind, boardArr) {
+        for (var k in board) {
+
+            if (!board[k].openWord) {
+                return;
+            }
+
+            var backgroundColor = board[k].color;
+
+            var currentWord = wordsToFind.words[k];
+
+            boardArr[currentWord.letters[0].y][currentWord.letters[0].x].classNames = {
+                backgroundColor: backgroundColor,
+                color: COLOR_COMPLETED,
+                linkVisibility: LINK_FADE
+            };
+
+            for (var i = 1; i < currentWord.letters.length; i++) {
+                var x = currentWord.letters[i].x;
+                var y = currentWord.letters[i].y;
+                var prevLetter = currentWord.letters[i - 1];
+                var prevX = prevLetter.x;
+                var prevY = prevLetter.y;
+
+                if (y == prevY + 1 && x == prevX) {
+                    boardArr[y][x].classNames = {
+                        linkBefore: BEFORE_LINK_TOP,
+                        linkVisibility: LINK_FADE,
+                        backgroundColor: backgroundColor,
+                        color: COLOR_COMPLETED
+                    };
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+                }
+
+                if (y == prevY - 1 && x == prevX) {
+                    boardArr[y][x].classNames = {
+                        linkBefore: BEFORE_LINK_BOTTOM,
+                        linkVisibility: LINK_FADE,
+                        backgroundColor: backgroundColor,
+                        color: COLOR_COMPLETED
+                    };
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+                }
+
+                if (x == prevX + 1 && y == prevY) {
+                    boardArr[y][x].classNames = {
+                        linkBefore: BEFORE_LINK_LEFT,
+                        linkVisibility: LINK_FADE,
+                        backgroundColor: backgroundColor,
+                        color: COLOR_COMPLETED
+                    };
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+                }
+
+                if (x == prevX - 1 && y == prevY) {
+                    boardArr[y][x].classNames = {
+                        linkBefore: BEFORE_LINK_RIGHT,
+                        linkVisibility: LINK_FADE,
+                        backgroundColor: backgroundColor,
+                        color: COLOR_COMPLETED
+                    };
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+                }
+            }
+        }
+    },
+
 
     onTouchStart: function (e) {
         this.preventDefaultOnEvent(e);
@@ -175,7 +244,7 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
-        if (this.checkIfLetterIsInCompleteWord(x, y) !== false) {
+        if (this.highlightCompletedWord(x, y)) {
             return;
         }
 
@@ -210,6 +279,8 @@ var BoardClass = Object.assign({}, {}, {
     onTouchEnd: function (e) {
         this.preventDefaultOnEvent(e);
 
+        this.fadeHighlightedWord();
+
         var completedWordIndex = this.checkForCompletedWord();
         if (completedWordIndex !== false) {
             this.addCompletedWordToBoard(completedWordIndex);
@@ -221,6 +292,9 @@ var BoardClass = Object.assign({}, {}, {
 
     onTouchCancel: function () {
         this.preventDefaultOnEvent(e);
+
+        this.fadeHighlightedWord();
+
         this.emptySelectedLetters();
     },
 
@@ -257,6 +331,40 @@ var BoardClass = Object.assign({}, {}, {
         return {x: x, y: y};
     },
 
+    highlightCompletedWord: function (x, y) {
+        var boardArr = this.state.boardArr;
+        var wordAlreadyCompleted = false;
+
+        var currentWord = this.checkIfLetterIsInCompleteWord(x, y);
+
+        if (currentWord !== false) {
+
+            currentWord.letters.map(function (letter) {
+                boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_VISIBLE;
+            });
+
+            this.setState({highlightedWord: {letters: currentWord.letters}});
+
+            wordAlreadyCompleted = true;
+        }
+
+        return wordAlreadyCompleted;
+    },
+
+    fadeHighlightedWord: function () {
+        var highlightedWord = this.state.highlightedWord.letters;
+
+        if (highlightedWord != []) {
+            var boardArr = this.state.boardArr;
+
+            highlightedWord.map(function (letter) {
+                boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+            });
+
+            this.setState({highlightedWord: {letters: []}});
+        }
+    },
+
     checkIfLetterIsInCompleteWord: function (x, y) {
         var completeWord = false;
         var completeWordIndex = false;
@@ -272,15 +380,11 @@ var BoardClass = Object.assign({}, {}, {
             });
         });
 
-        console.log(completeWordIndex);
-        console.log(this.state.board[completeWordIndex]);
-
         if (!this.state.board[completeWordIndex]) {
             return false;
         }
 
-        console.log(this.state.board[completeWordIndex]);
-        if(this.state.board[completeWordIndex].openWord === true) {
+        if (this.state.board[completeWordIndex].openWord === true) {
             return completeWord;
         }
 
@@ -305,7 +409,41 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     selectWordBackgroundColor: function () {
-        return "backgroundColor1"
+        var backgroundColor = '';
+        var wordsComplete = this.howManyCompleteWordsInBoard();
+
+        var backgroundColors = [
+            "backgroundColor1",
+            "backgroundColor2",
+            "backgroundColor3",
+            "backgroundColor4",
+            "backgroundColor5",
+            "backgroundColor6",
+            "backgroundColor7",
+            "backgroundColor8",
+            "backgroundColor9",
+            "backgroundColor10"
+        ];
+
+        //  +1 because word hasn't been added to completedWords yet
+        for (var i = 0; i < wordsComplete + 1; i++) {
+            backgroundColor = backgroundColors[i % backgroundColors.length];
+        }
+
+        return backgroundColor;
+    },
+
+    howManyCompleteWordsInBoard: function () {
+        var board = this.state.board;
+
+        var wordsComplete = 0;
+        for (var word in board) {
+            if (board[word].openWord == true) {
+                wordsComplete++;
+            }
+        }
+
+        return wordsComplete;
     },
 
     checkIfDifferentLetter: function (x, y) {
@@ -514,9 +652,10 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
+        console.log(this.state.boardArr);
         //console.log(this.state.selectedLetters);
-        //console.log(this.state.wordsToFind);
-        console.log(this.state.board);
+        console.log(this.state.wordsToFind);
+        //console.log(this.state.board);
 
         var boardArr = this.state.boardArr;
         var boardStyle = {
@@ -528,6 +667,7 @@ var BoardClass = Object.assign({}, {}, {
                        onTouchStart={this.onTouchStart}
                        onTouchMove={this.onTouchMove}
                        onTouchEnd={this.onTouchEnd}
+                       onTouchCancel={this.onTouchCancel}
                        style={boardStyle}>
 
                     {boardArr.map(function (row, rowId) {
