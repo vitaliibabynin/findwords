@@ -164,6 +164,7 @@ var BoardClass = Object.assign({}, {}, {
         return wordsToFind;
     },
 
+
     onTouchStart: function (e) {
         this.preventDefaultOnEvent(e);
 
@@ -200,8 +201,19 @@ var BoardClass = Object.assign({}, {}, {
 
     onTouchEnd: function (e) {
         this.preventDefaultOnEvent(e);
+
+        if (this.checkForCompletedWord()) {
+            return;
+        }
+
         this.emptySelectedLetters();
     },
+
+    onTouchCancel: function () {
+        this.preventDefaultOnEvent(e);
+        this.emptySelectedLetters();
+    },
+
 
     preventDefaultOnEvent: function (e) {
         e.stopPropagation();
@@ -373,6 +385,42 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+    checkForCompletedWord: function () {
+        var words = this.state.wordsToFind.words;
+        var selectedLetters = this.state.selectedLetters.letters;
+
+        var mainResult = false;
+        words.map(function (word) {
+            if (word.letters.length != selectedLetters.length) {
+                return false;
+            }
+
+            var result = true;
+            word.letters.map(function (letter, letterIndex) {
+                if (selectedLetters[letterIndex].letter != letter.letter) {
+                    result = false;
+                }
+
+                var resultCell = false;
+                selectedLetters.map(function (selectedLetter) {
+                    if (selectedLetter.x == letter.x && selectedLetter.y == letter.y) {
+                        resultCell = true;
+                    }
+                });
+
+                if (!resultCell) {
+                    result = false;
+                }
+            });
+
+            if (result) {
+                mainResult = true;
+            }
+        });
+
+        return mainResult;
+    },
+
     emptySelectedLetters: function () {
 
         var boardArr = this.state.boardArr;
@@ -393,9 +441,11 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
+
     render: function () {
 
         console.log(this.state.selectedLetters);
+        console.log(this.state.wordsToFind);
 
         var boardArr = this.state.boardArr;
         var boardStyle = {
