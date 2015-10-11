@@ -107,7 +107,7 @@ var BoardClass = Object.assign({}, {}, {
             board: {
                 0: {
                     color: '#000000',
-                    openWord: true
+                    openWord: false
                 },
                 2: {
                     color: '#000000',
@@ -175,6 +175,10 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
+        if (this.checkIfLetterIsInCompleteWord(x, y) !== false) {
+            return;
+        }
+
         this.addFirstLetterToSelectedLetters(x, y);
     },
 
@@ -192,6 +196,10 @@ var BoardClass = Object.assign({}, {}, {
             return;
         }
 
+        if (this.checkIfLetterIsInCompleteWord(x, y) !== false) {
+            return;
+        }
+
         if (this.removeSelectedLettersAfter(x, y)) {
             return;
         }
@@ -202,7 +210,9 @@ var BoardClass = Object.assign({}, {}, {
     onTouchEnd: function (e) {
         this.preventDefaultOnEvent(e);
 
-        if (this.checkForCompletedWord()) {
+        var completedWordIndex = this.checkForCompletedWord();
+        if (completedWordIndex !== false) {
+            this.addCompletedWordToBoard(completedWordIndex);
             return;
         }
 
@@ -245,6 +255,36 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         return {x: x, y: y};
+    },
+
+    checkIfLetterIsInCompleteWord: function (x, y) {
+        var completeWord = false;
+        var completeWordIndex = false;
+        var wordsToFind = this.state.wordsToFind.words;
+
+        wordsToFind.map(function (word, wordIndex) {
+
+            word.letters.map(function (letter) {
+                if (letter.x == x && letter.y == y) {
+                    completeWord = word;
+                    completeWordIndex = wordIndex;
+                }
+            });
+        });
+
+        console.log(completeWordIndex);
+        console.log(this.state.board[completeWordIndex]);
+
+        if (!this.state.board[completeWordIndex]) {
+            return false;
+        }
+
+        console.log(this.state.board[completeWordIndex]);
+        if(this.state.board[completeWordIndex].openWord === true) {
+            return completeWord;
+        }
+
+        return false;
     },
 
     addFirstLetterToSelectedLetters: function (x, y) {
@@ -390,7 +430,9 @@ var BoardClass = Object.assign({}, {}, {
         var selectedLetters = this.state.selectedLetters.letters;
 
         var mainResult = false;
-        words.map(function (word) {
+        var index = 0;
+        words.map(function (word, wordIndex) {
+
             if (word.letters.length != selectedLetters.length) {
                 return false;
             }
@@ -415,10 +457,38 @@ var BoardClass = Object.assign({}, {}, {
 
             if (result) {
                 mainResult = true;
+                index = wordIndex;
             }
         });
 
-        return mainResult;
+        if (mainResult) {
+            return index;
+        }
+
+        return false;
+    },
+
+    addCompletedWordToBoard: function (index) {
+        var boardArr = this.state.boardArr;
+        var selectedLetters = this.state.selectedLetters.letters;
+
+        selectedLetters.map(function (letter) {
+            boardArr[letter.y][letter.x].classNames.color = COLOR_COMPLETED;
+            boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+        });
+
+        var backgroundColor = boardArr[selectedLetters[0].y][selectedLetters[0].x].classNames.backgroundColor;
+        var board = this.state.board;
+        board[index] = {
+            color: backgroundColor,
+            openWord: true
+        };
+
+        this.setState({
+            boardArr: boardArr,
+            selectedLetters: {letters: []},
+            board: board
+        });
     },
 
     emptySelectedLetters: function () {
@@ -444,8 +514,9 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log(this.state.selectedLetters);
-        console.log(this.state.wordsToFind);
+        //console.log(this.state.selectedLetters);
+        //console.log(this.state.wordsToFind);
+        console.log(this.state.board);
 
         var boardArr = this.state.boardArr;
         var boardStyle = {
