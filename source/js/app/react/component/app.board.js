@@ -80,6 +80,8 @@ var AFTER_LINK_LEFT = "after-link-left";
 //var OPEN_LETTER_AFTER_LINK_RIGHT = "open-letter-after-link-right";
 //var OPEN_LETTER_AFTER_LINK_BOTTOM = "open-letter-after-link-bottom";
 //var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
+var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
+var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
 
 var BoardClass = Object.assign({}, {}, {
 
@@ -107,14 +109,15 @@ var BoardClass = Object.assign({}, {}, {
             board: {
                 0: {
                     color: "backgroundColor7",
-                    openWord: true
+                    openWord: false
                 },
                 2: {
                     color: "backgroundColor5",
-                    openWord: true
+                    openWord: false
                 }
             },
             selectedLetters: {letters: []},
+            prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
             openedLetters: [{x: 0, y: 1}, {x: 4, y: 3}],
             shownWords: [0],
@@ -170,7 +173,7 @@ var BoardClass = Object.assign({}, {}, {
         for (var k in board) {
 
             if (!board[k].openWord) {
-                return;
+                continue;
             }
 
             var backgroundColor = board[k].color;
@@ -286,6 +289,18 @@ var BoardClass = Object.assign({}, {}, {
             this.addCompletedWordToBoard(completedWordIndex);
             return;
         }
+
+        if (this.checkLettersInWordsToFind()) {
+            this.bringUpNotice(SELECT_DIFFERENTLY);
+            return;
+        }
+
+        if (this.selectedLettersEqualsPrevSelectedLetters()) {
+            this.bringUpNotice(NO_SUCH_WORD);
+            return;
+        }
+
+        this.copySelectedLettersToPrevSelectedLetters();
 
         this.emptySelectedLetters();
     },
@@ -572,7 +587,7 @@ var BoardClass = Object.assign({}, {}, {
         words.map(function (word, wordIndex) {
 
             if (word.letters.length != selectedLetters.length) {
-                return false;
+                return false; //ask about this
             }
 
             var result = true;
@@ -629,6 +644,80 @@ var BoardClass = Object.assign({}, {}, {
         });
     },
 
+    copySelectedLettersToPrevSelectedLetters: function () {
+        var selectedLetters = this.state.selectedLetters;
+
+        this.setState({
+            prevSelectedLetters: selectedLetters
+        })
+    },
+
+    checkLettersInWordsToFind: function () {
+
+        var words = this.state.wordsToFind.words;
+        var selectedLetters = this.state.selectedLetters.letters;
+
+        var mainResult = false;
+
+        words.map(function (word) {
+
+            if (word.letters.length == selectedLetters.length) {
+
+                var result = true;
+                word.letters.map(function (letter, letterIndex) {
+
+                    if (selectedLetters[letterIndex].letter != letter.letter) {
+                        result = false;
+                    }
+
+                });
+
+                if (result) {
+                    mainResult = true;
+                }
+
+            }
+        });
+
+        return mainResult;
+
+    },
+
+    selectedLettersEqualsPrevSelectedLetters: function () {
+
+        var selectedLetters = this.state.selectedLetters.letters;
+        var previousSelection = this.state.prevSelectedLetters.letters;
+
+        if (selectedLetters.length < 2) {
+            return false;
+        }
+
+        if (selectedLetters.length != previousSelection.length) {
+            return false;
+        }
+
+        var result = true;
+        for (var i = 0; i < selectedLetters.length; i++) {
+            if (selectedLetters[i].letter != previousSelection[i].letter) {
+                result = false;
+            }
+        }
+
+        return result;
+
+    },
+
+    bringUpNotice: function (type) {
+        var word = this.state.selectedLetters;
+        this.state.displayNotice(type, word);
+
+        this.copySelectedLettersToPrevSelectedLetters();
+
+        setTimeout(function () {
+            this.emptySelectedLetters();
+        }.bind(this), 3100);
+    },
+
     emptySelectedLetters: function () {
 
         var boardArr = this.state.boardArr;
@@ -652,9 +741,9 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log(this.state.boardArr);
+        //console.log(this.state.boardArr);
         //console.log(this.state.selectedLetters);
-        console.log(this.state.wordsToFind);
+        //console.log(this.state.wordsToFind);
         //console.log(this.state.board);
 
         var boardArr = this.state.boardArr;

@@ -10,7 +10,10 @@ var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
 var Board = require('./../component/app.board.js').Board;
+var Notice = require('./../component/app.notice.js').Notice;
 
+var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
+var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
 
 var PageGameMain = Object.assign({}, {}, {
 
@@ -23,9 +26,11 @@ var PageGameMain = Object.assign({}, {}, {
 
             roundsBundleIdx: 0,
             //roundIdx: router.getParam('roundidx') || 0,
-            roundIdx: 0
+            roundIdx: 0,
             //shownWords: [],
-            //lockScreen: false
+            //lockScreen: false,
+            noticeType: "",
+            noticeWord: {letters: []}
 
         };
 
@@ -89,21 +94,34 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
 
-    displayNotice: function () {
 
-    },
-
-    onChipOpenWordClick: function() {
+    onChipOpenWordClick: function () {
         //this.refs.board.openWord();
     },
 
-    onChipOpenLetterClick: function() {
+    onChipOpenLetterClick: function () {
         //this.refs.board.openLetter();
     },
 
-    onChipShowWordClick: function() {
+    onChipShowWordClick: function () {
         //this.addToShownWords();
     },
+
+
+    displayNotice: function (type, word) {
+        this.setState({
+            noticeType: type,
+            noticeWord: word
+        }, function () {
+            setTimeout(function () {
+                this.setState({
+                    noticeType: "",
+                    noticeWord: {letters: []}
+                });
+            }.bind(this), 3000);
+        });
+    },
+
 
     render: function () {
 
@@ -144,6 +162,11 @@ var PageGameMain = Object.assign({}, {}, {
                            roundBundleIdx={this.state.roundsBundleIdx}
                            roundIdx={this.state.roundIdx}
                            boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
+                        />
+
+                    <Notice classNames="notice"
+                            noticeType={this.state.noticeType}
+                            word={this.state.noticeWord}
                         />
 
                 </div>

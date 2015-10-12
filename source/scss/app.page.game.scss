@@ -365,9 +365,17 @@
         }
       }
     }
+  }
+
+  .lock-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 500;
 
     .notice {
-
       @-webkit-keyframes smooth-exit {
         0% {
           opacity: 1;
@@ -399,8 +407,8 @@
       transform: translate(-50%, -50%);
       z-index: 1000;
       $gamePage-notice-size: 11rem;
-      height: $gamePage-notice-size;
       width: $gamePage-notice-size;
+      min-height: $gamePage-notice-size;
       background-color: $gamePage-notice-bg-color;
       color: $gamePage-notice-color;
       background-repeat: no-repeat;
@@ -429,15 +437,6 @@
         }
       }
     }
-  }
-
-  .lock-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 500;
   }
 
   .shown-words {
