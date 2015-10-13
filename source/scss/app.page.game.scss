@@ -198,7 +198,6 @@
           opacity: 0;
           background-color: $gamePage-board-td-bg-color-link;
         }
-
         &.before-link-top.visible:before,
         &.before-link-right.visible:before,
         &.before-link-bottom.visible:before,
@@ -247,7 +246,6 @@
           top: 0;
           left: 47.5%;
         }
-
         &.open-letter-before-link-right:before,
         &.open-letter-after-link-right:after,
         &.before-link-right:before,
@@ -257,7 +255,6 @@
           top: 47.5%;
           right: 0;
         }
-
         &.open-letter-before-link-bottom:before,
         &.open-letter-after-link-bottom:after,
         &.before-link-bottom:before,
@@ -267,7 +264,6 @@
           bottom: 0;
           left: 47.5%;
         }
-
         &.open-letter-before-link-left:before,
         &.open-letter-after-link-left:after,
         &.before-link-left:before,
@@ -398,8 +394,8 @@
           opacity: 0;
         }
       }
-      -webkit-animation: smooth-exit 3s;
-      animation: smooth-exit 3s;
+      -webkit-animation: smooth-exit 2s;
+      animation: smooth-exit 2s;
 
       position: absolute;
       top: 50%;

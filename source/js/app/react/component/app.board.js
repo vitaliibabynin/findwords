@@ -193,7 +193,7 @@ var BoardClass = Object.assign({}, {}, {
             if (y == prevY + 1 && x == prevX) {
                 boardArr[y][x].classNames = {
                     openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_TOP,
-                    openLetterColor: OPEN_LETTER_COLOR
+                    openLetter: OPEN_LETTER_COLOR
                 };
                 boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM;
             }
@@ -723,14 +723,15 @@ var BoardClass = Object.assign({}, {}, {
         var openedLetters = this.state.openedLetters;
         var wordsToFind = this.state.wordsToFind;
         var word = wordsToFind.words[index].letters;
+        var boardArr = this.state.boardArr;
 
-        word.map(function(wordLetter){
-           openedLetters.map(function(openedLetter){
-              if  (wordLetter.x == openedLetter.x && wordLetter.y == openedLetter.y) {
-                  openedLetters = [];
-              }
-           });
-        });
+        if (word[0].x == openedLetters[0].x && word[0].y == openedLetters[0].y) {
+            openedLetters.map(function (openedLetter) {
+                delete boardArr[openedLetter.y][openedLetter.x].classNames.openLetterLinkAfter;
+                delete boardArr[openedLetter.y][openedLetter.x].classNames.openLetterLinkBefore;
+            });
+            openedLetters = [];
+        }
 
         return openedLetters;
     },
@@ -802,7 +803,7 @@ var BoardClass = Object.assign({}, {}, {
 
         setTimeout(function () {
             this.emptySelectedLetters();
-        }.bind(this), 3100);
+        }.bind(this), 2100);
     },
 
     emptySelectedLetters: function () {
@@ -867,7 +868,7 @@ var BoardClass = Object.assign({}, {}, {
             openedLetters.push({x: x, y: y});
             boardArr[y][x].classNames = {
                 openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_TOP,
-                openLetterColor: OPEN_LETTER_COLOR
+                openLetter: OPEN_LETTER_COLOR
             };
             boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM;
         }
@@ -1009,13 +1010,24 @@ var BoardClass = Object.assign({}, {}, {
     },
 
 
+    filterClassNames: function (cellClassNames) {
+        var filteredCellClassNames = JSON.parse(JSON.stringify(cellClassNames));
+
+        if (filteredCellClassNames.openLetter == OPEN_LETTER_COLOR && filteredCellClassNames.color == COLOR_SELECTED) {
+            delete filteredCellClassNames.openLetterLinkAfter;
+            delete filteredCellClassNames.openLetterLinkBefore;
+        }
+
+        return filteredCellClassNames;
+    },
+
     render: function () {
 
         //console.log(this.state.boardArr);
         //console.log(this.state.selectedLetters);
         //console.log(this.state.wordsToFind);
         //console.log(this.state.board);
-        console.log(this.state.openedLetters);
+        //console.log(this.state.openedLetters);
 
         var boardArr = this.state.boardArr;
         var boardStyle = {
@@ -1035,9 +1047,12 @@ var BoardClass = Object.assign({}, {}, {
                             <tr key={rowId}>
 
                                 {row.map(function (cell, cellId) {
+                                    var filteredCellClassNames = this.filterClassNames(cell.classNames);
                                     var properties = [];
-                                    for (var property in cell.classNames) {
-                                        properties.push(cell.classNames[property])
+                                    for (var property in filteredCellClassNames) {
+                                        if (filteredCellClassNames.hasOwnProperty(property)) {
+                                            properties.push(filteredCellClassNames[property]);
+                                        }
                                     }
                                     var letterClassNames = classNames(
                                         properties

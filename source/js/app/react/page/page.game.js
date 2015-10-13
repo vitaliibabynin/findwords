@@ -28,7 +28,6 @@ var PageGameMain = Object.assign({}, {}, {
             //roundIdx: router.getParam('roundidx') || 0,
             roundIdx: 0,
             //shownWords: [],
-            //lockScreen: false,
             noticeType: "",
             noticeWord: {letters: []}
 
@@ -118,7 +117,7 @@ var PageGameMain = Object.assign({}, {}, {
                     noticeType: "",
                     noticeWord: {letters: []}
                 });
-            }.bind(this), 3000);
+            }.bind(this), 2000);
         });
     },
 
