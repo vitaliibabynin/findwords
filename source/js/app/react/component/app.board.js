@@ -71,15 +71,15 @@ var AFTER_LINK_TOP = "after-link-top";
 var AFTER_LINK_RIGHT = "after-link-right";
 var AFTER_LINK_BOTTOM = "after-link-bottom";
 var AFTER_LINK_LEFT = "after-link-left";
-//var OPEN_LETTER_COLOR = "open-letter";
-//var OPEN_LETTER_BEFORE_LINK_TOP = "open-letter-before-link-top";
-//var OPEN_LETTER_BEFORE_LINK_RIGHT = "open-letter-before-link-right";
-//var OPEN_LETTER_BEFORE_LINK_BOTTOM = "open-letter-before-link-bottom";
-//var OPEN_LETTER_BEFORE_LINK_LEFT = "open-letter-before-link-left";
-//var OPEN_LETTER_AFTER_LINK_TOP = "open-letter-after-link-top";
-//var OPEN_LETTER_AFTER_LINK_RIGHT = "open-letter-after-link-right";
-//var OPEN_LETTER_AFTER_LINK_BOTTOM = "open-letter-after-link-bottom";
-//var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
+var OPEN_LETTER_COLOR = "open-letter";
+var OPEN_LETTER_BEFORE_LINK_TOP = "open-letter-before-link-top";
+var OPEN_LETTER_BEFORE_LINK_RIGHT = "open-letter-before-link-right";
+var OPEN_LETTER_BEFORE_LINK_BOTTOM = "open-letter-before-link-bottom";
+var OPEN_LETTER_BEFORE_LINK_LEFT = "open-letter-before-link-left";
+var OPEN_LETTER_AFTER_LINK_TOP = "open-letter-after-link-top";
+var OPEN_LETTER_AFTER_LINK_RIGHT = "open-letter-after-link-right";
+var OPEN_LETTER_AFTER_LINK_BOTTOM = "open-letter-after-link-bottom";
+var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
 var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
 var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
 
@@ -119,7 +119,7 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: {letters: []},
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
-            openedLetters: [{x: 0, y: 1}, {x: 4, y: 3}],
+            openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
             shownWords: [0],
             displayNotice: this.props.displayNotice || function () {
             }
@@ -127,6 +127,7 @@ var BoardClass = Object.assign({}, {}, {
         state.boardData = this.props.boardData.rounds[state.roundIdx] || {};
         state.boardArr = this.boardConverter(state.boardData);
         state.wordsToFind = this.extractWordsToFind(state.boardData);
+        this.addOpenedLettersToBoardArr(state.openedLetters, state.wordsToFind, state.boardArr);
         this.addFoundWordsToBoardArr(state.board, state.wordsToFind, state.boardArr);
         return state;
     },
@@ -167,6 +168,60 @@ var BoardClass = Object.assign({}, {}, {
         });
 
         return wordsToFind;
+    },
+
+    addOpenedLettersToBoardArr: function (openedLetters, wordsToFind, boardArr) {
+        var wordIndex = this.findWhichWordLetterIsIn(openedLetters, wordsToFind);
+
+        if (wordIndex === false) {
+            return;
+        }
+
+        var unopenedWord = wordsToFind.words[wordIndex].letters;
+
+        boardArr[unopenedWord[0].y][unopenedWord[0].x].classNames.openLetter = OPEN_LETTER_COLOR;
+
+        for (var i = 1; i < openedLetters.length; i++) {
+            var currentLetter = unopenedWord[i];
+            var x = currentLetter.x;
+            var y = currentLetter.y;
+
+            var prevLetter = openedLetters[i - 1];
+            var prevX = prevLetter.x;
+            var prevY = prevLetter.y;
+
+            if (y == prevY + 1 && x == prevX) {
+                boardArr[y][x].classNames = {
+                    openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_TOP,
+                    openLetterColor: OPEN_LETTER_COLOR
+                };
+                boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM;
+            }
+
+            if (y == prevY - 1 && x == prevX) {
+                boardArr[y][x].classNames = {
+                    openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_BOTTOM,
+                    openLetter: OPEN_LETTER_COLOR
+                };
+                boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_TOP;
+            }
+
+            if (x == prevX + 1 && y == prevY) {
+                boardArr[y][x].classNames = {
+                    openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_LEFT,
+                    openLetter: OPEN_LETTER_COLOR
+                };
+                boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_RIGHT;
+            }
+
+            if (x == prevX - 1 && y == prevY) {
+                boardArr[y][x].classNames = {
+                    openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_RIGHT,
+                    openLetter: OPEN_LETTER_COLOR
+                };
+                boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_LEFT;
+            }
+        }
     },
 
     addFoundWordsToBoardArr: function (board, wordsToFind, boardArr) {
@@ -234,6 +289,23 @@ var BoardClass = Object.assign({}, {}, {
                 }
             }
         }
+    },
+
+    findWhichWordLetterIsIn: function (openedLetters, wordsToFind) {
+        openedLetters = openedLetters || this.state.openedLetters;
+        wordsToFind = wordsToFind || this.state.wordsToFind;
+
+        if (openedLetters.length == 0) {
+            return false;
+        }
+
+        var result = false;
+        wordsToFind.words.map(function (word, wordIndex) {
+            if (openedLetters[0].x == word.letters[0].x && openedLetters[0].y == word.letters[0].y) {
+                result = wordIndex;
+            }
+        });
+        return result;
     },
 
 
@@ -637,11 +709,30 @@ var BoardClass = Object.assign({}, {}, {
             openWord: true
         };
 
+        var openedLetters = this.clearOpenedLettersInWord(index);
+
         this.setState({
             boardArr: boardArr,
             selectedLetters: {letters: []},
-            board: board
+            board: board,
+            openedLetters: openedLetters
         });
+    },
+
+    clearOpenedLettersInWord: function (index) {
+        var openedLetters = this.state.openedLetters;
+        var wordsToFind = this.state.wordsToFind;
+        var word = wordsToFind.words[index].letters;
+
+        word.map(function(wordLetter){
+           openedLetters.map(function(openedLetter){
+              if  (wordLetter.x == openedLetter.x && wordLetter.y == openedLetter.y) {
+                  openedLetters = [];
+              }
+           });
+        });
+
+        return openedLetters;
     },
 
     copySelectedLettersToPrevSelectedLetters: function () {
@@ -653,7 +744,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     checkLettersInWordsToFind: function () {
-
         var words = this.state.wordsToFind.words;
         var selectedLetters = this.state.selectedLetters.letters;
 
@@ -680,11 +770,9 @@ var BoardClass = Object.assign({}, {}, {
         });
 
         return mainResult;
-
     },
 
     selectedLettersEqualsPrevSelectedLetters: function () {
-
         var selectedLetters = this.state.selectedLetters.letters;
         var previousSelection = this.state.prevSelectedLetters.letters;
 
@@ -704,7 +792,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         return result;
-
     },
 
     bringUpNotice: function (type) {
@@ -719,7 +806,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     emptySelectedLetters: function () {
-
         var boardArr = this.state.boardArr;
         var selectedLetters = this.state.selectedLetters;
 
@@ -735,9 +821,89 @@ var BoardClass = Object.assign({}, {}, {
             boardArr: boardArr,
             selectedLetters: {letters: []}
         });
-
     },
 
+
+    openLetter: function () {
+        var unopenedWordIndex = this.findWhichWordLetterIsIn();
+
+        if (unopenedWordIndex === false) {
+            unopenedWordIndex = this.getUnopenedWordIndex();
+        }
+
+        if (unopenedWordIndex === false) {
+            return;
+        }
+
+        var boardArr = this.state.boardArr;
+        var openedLetters = this.state.openedLetters;
+        var unopenedWord = this.state.wordsToFind.words[unopenedWordIndex].letters;
+
+        if (openedLetters.length == 0) {
+            boardArr[unopenedWord[0].y][unopenedWord[0].x].classNames.openLetter = OPEN_LETTER_COLOR;
+            this.setState({
+                openedLetters: [{x: unopenedWord[0].x, y: unopenedWord[0].y}]
+            });
+            return;
+        }
+
+        if (openedLetters.length == unopenedWord.length - 1) {
+            this.openWord();
+            return;
+        }
+
+        var currentLetter = unopenedWord[openedLetters.length];
+        var x = currentLetter.x;
+        var y = currentLetter.y;
+
+        var prevLetter = openedLetters[openedLetters.length - 1];
+        var prevX = prevLetter.x;
+        var prevY = prevLetter.y;
+
+        console.log(currentLetter);
+        console.log(prevLetter);
+
+        if (y == prevY + 1 && x == prevX) {
+            openedLetters.push({x: x, y: y});
+            boardArr[y][x].classNames = {
+                openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_TOP,
+                openLetterColor: OPEN_LETTER_COLOR
+            };
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM;
+        }
+
+        if (y == prevY - 1 && x == prevX) {
+            openedLetters.push({x: x, y: y});
+            boardArr[y][x].classNames = {
+                openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_BOTTOM,
+                openLetter: OPEN_LETTER_COLOR
+            };
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_TOP;
+        }
+
+        if (x == prevX + 1 && y == prevY) {
+            openedLetters.push({x: x, y: y});
+            boardArr[y][x].classNames = {
+                openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_LEFT,
+                openLetter: OPEN_LETTER_COLOR
+            };
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_RIGHT;
+        }
+
+        if (x == prevX - 1 && y == prevY) {
+            openedLetters.push({x: x, y: y});
+            boardArr[y][x].classNames = {
+                openLetterLinkBefore: OPEN_LETTER_BEFORE_LINK_RIGHT,
+                openLetter: OPEN_LETTER_COLOR
+            };
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_LEFT;
+        }
+
+        this.setState({
+            boardArr: boardArr,
+            openedLetters: openedLetters
+        });
+    },
 
     openWord: function () {
         var board = this.state.board;
@@ -806,7 +972,6 @@ var BoardClass = Object.assign({}, {}, {
             }
         }
 
-        var board = this.state.board;
         board[index] = {
             color: backgroundColor,
             openWord: true
@@ -826,7 +991,6 @@ var BoardClass = Object.assign({}, {}, {
                 })
             }.bind(this), 200);
         });
-
     },
 
     getUnopenedWordIndex: function () {
@@ -851,6 +1015,7 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.state.selectedLetters);
         //console.log(this.state.wordsToFind);
         //console.log(this.state.board);
+        console.log(this.state.openedLetters);
 
         var boardArr = this.state.boardArr;
         var boardStyle = {

@@ -100,7 +100,7 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     onChipOpenLetterClick: function () {
-        //this.refs.board.openLetter();
+        this.refs.board.openLetter();
     },
 
     onChipShowWordClick: function () {
