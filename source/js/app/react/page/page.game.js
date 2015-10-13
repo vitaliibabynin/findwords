@@ -96,7 +96,7 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     onChipOpenWordClick: function () {
-        //this.refs.board.openWord();
+        this.refs.board.openWord();
     },
 
     onChipOpenLetterClick: function () {

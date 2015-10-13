@@ -113,7 +113,7 @@ var BoardClass = Object.assign({}, {}, {
                 },
                 2: {
                     color: "backgroundColor5",
-                    openWord: false
+                    openWord: true
                 }
             },
             selectedLetters: {letters: []},
@@ -736,6 +736,112 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: {letters: []}
         });
 
+    },
+
+
+    openWord: function () {
+        var board = this.state.board;
+        var index = this.getUnopenedWordIndex();
+
+        if (index === false) {
+            return;
+        }
+
+        var backgroundColor = this.selectWordBackgroundColor();
+        var wordsToFind = this.state.wordsToFind;
+        var currentWord = wordsToFind.words[index];
+        var boardArr = this.state.boardArr;
+
+        boardArr[currentWord.letters[0].y][currentWord.letters[0].x].classNames = {
+            backgroundColor: backgroundColor,
+            color: COLOR_COMPLETED,
+            linkVisibility: LINK_VISIBLE
+        };
+
+        for (var i = 1; i < currentWord.letters.length; i++) {
+            var x = currentWord.letters[i].x;
+            var y = currentWord.letters[i].y;
+            var prevLetter = currentWord.letters[i - 1];
+            var prevX = prevLetter.x;
+            var prevY = prevLetter.y;
+
+            if (y == prevY + 1 && x == prevX) {
+                boardArr[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_TOP,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+            }
+
+            if (y == prevY - 1 && x == prevX) {
+                boardArr[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_BOTTOM,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+            }
+
+            if (x == prevX + 1 && y == prevY) {
+                boardArr[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_LEFT,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+            }
+
+            if (x == prevX - 1 && y == prevY) {
+                boardArr[y][x].classNames = {
+                    linkBefore: BEFORE_LINK_RIGHT,
+                    linkVisibility: LINK_VISIBLE,
+                    backgroundColor: backgroundColor,
+                    color: COLOR_COMPLETED
+                };
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+            }
+        }
+
+        var board = this.state.board;
+        board[index] = {
+            color: backgroundColor,
+            openWord: true
+        };
+
+        this.setState({
+            boardArr: boardArr,
+            board: board,
+            openedLetters: []
+        }, function () {
+            currentWord.letters.map(function (letter) {
+                boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+            });
+            setTimeout(function () {
+                this.setState({
+                    boardArr: boardArr
+                })
+            }.bind(this), 200);
+        });
+
+    },
+
+    getUnopenedWordIndex: function () {
+        var board = this.state.board;
+        var wordsToFind = this.state.wordsToFind.words;
+        var index = false;
+
+        for (var i = 0; i < wordsToFind.length; i++) {
+            if (!board[i] || board[i].openWord === false) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
     },
 
 
