@@ -14,32 +14,25 @@ var LetterClass = Object.assign({}, {}, {
     displayName: 'Letter',
 
     propTypes: {
-
         classNames: React.PropTypes.string,
         cellSize: React.PropTypes.number
-
     },
 
     getInitialState: function () {
-
         return {
             classNames: this.props.classNames || "",
             cellSize: this.props.cellSize || 0
         };
-
     },
 
     componentWillReceiveProps: function (nextProps) {
-
         this.setState({
             classNames: nextProps.classNames || "",
             cellSize: nextProps.cellSize || 0
         });
-
     },
 
     render: function () {
-
         var cellStyle = {
             height: this.state.cellSize + "px",
             width: this.state.cellSize + "px"
@@ -51,7 +44,6 @@ var LetterClass = Object.assign({}, {}, {
                 <span>{this.props.children}</span>
             </td>
         );
-
     }
 
 });
@@ -100,7 +92,8 @@ var BoardClass = Object.assign({}, {}, {
             rounds: React.PropTypes.arrayOf(React.PropTypes.object)
         }),
         shownWords: React.PropTypes.arrayOf(React.PropTypes.number),
-        displayNotice: React.PropTypes.func
+        displayNotice: React.PropTypes.func,
+        addToShownWords: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -118,11 +111,13 @@ var BoardClass = Object.assign({}, {}, {
                 }
             },
             openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
-            shownWords: this.props.shownWords || [0],
+            shownWords: this.props.shownWords || [],
             selectedLetters: {letters: []},
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
             displayNotice: this.props.displayNotice || function () {
+            },
+            addToShownWords: this.props.addToShownWords || function () {
             }
         };
         state.boardData = this.props.boardData.rounds[state.roundIdx] || {};
@@ -290,8 +285,15 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     findWhichWordLetterIsIn: function (openedLetters, wordsToFind) {
-        openedLetters = openedLetters || this.state.openedLetters;
-        wordsToFind = wordsToFind.words || this.state.wordsToFind.words;
+        if (!wordsToFind) {
+            wordsToFind = this.state.wordsToFind.words;
+        } else {
+            wordsToFind = wordsToFind.words;
+        }
+
+        if (!openedLetters) {
+            openedLetters = this.state.openedLetters;
+        }
 
         if (openedLetters.length == 0) {
             return false;
@@ -829,7 +831,7 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (unopenedWordIndex === false) {
-            return;
+            return false;
         }
 
         var boardArr = this.state.boardArr;
@@ -904,7 +906,7 @@ var BoardClass = Object.assign({}, {}, {
         var index = this.getUnopenedWordIndex();
 
         if (index === false) {
-            return;
+            return false;
         }
 
         var backgroundColor = this.selectWordBackgroundColor();
@@ -987,8 +989,17 @@ var BoardClass = Object.assign({}, {}, {
         });
     },
 
-    getUnopenedUnshownWord: function () {
+    sendWordToShowToPageGame: function () {
+        var wordArr = this.getUnopenedUnshownWordAndIndex();
 
+        if (!wordArr) {
+            return false;
+        }
+
+        this.state.addToShownWords(wordArr[0], wordArr[1]);
+    },
+
+    getUnopenedUnshownWordAndIndex: function () {
         var words = this.state.wordsToFind.words;
         var board = this.state.board;
 
@@ -996,34 +1007,43 @@ var BoardClass = Object.assign({}, {}, {
             return false;
         }
 
-        var unopenedWord = false;
+        for (var wordIdx = 0; wordIdx < words.length; wordIdx++) {
+            var word = words[wordIdx].letters;
 
-        words.map(function (word) {
-
-            var wordIsOpen = this.checkIfWordIsOpen(word);
-            var wordIsShown = this.checkIfWordIsShown(word);
+            var wordIsOpen = this.checkIfWordIsOpen(wordIdx);
+            var wordIsShown = this.checkIfWordIsShown(wordIdx);
 
             if (!wordIsOpen && !wordIsShown) {
-                unopenedWord = word.letters;
+                return [word, wordIdx];
             }
-
-        }.bind(this));
-
-        if (unopenedWord !== false) {
-            var shownWords = this.state.shownWords;
-            shownWords.push(unopenedWord);
-            this.setState({shownWords: shownWords})
         }
 
-        return unopenedWord
-
-    },
-
-    checkIfWordIsOpen: function (word) {
         return false;
     },
 
-    checkIfWordIsShown: function (word) {
+    checkIfWordIsOpen: function (wordIdx) {
+        var board = this.state.board;
+
+        if (!board.hasOwnProperty(wordIdx)) {
+            return false;
+        }
+
+        return board[wordIdx].openWord;
+    },
+
+    checkIfWordIsShown: function (wordIdx) {
+        var shownWords = this.state.shownWords;
+
+        if (shownWords.length == 0) {
+            return false;
+        }
+
+        for (var shownWordIdx = 0; shownWordIdx < shownWords.length; shownWordIdx++) {
+            if (shownWords[shownWordIdx] === wordIdx) {
+                return true;
+            }
+        }
+
         return false;
     },
 
@@ -1056,6 +1076,8 @@ var BoardClass = Object.assign({}, {}, {
 
     render: function () {
 
+        //console.log({board: this.state.shownWords});
+        //console.log({boardProps: this.props.shownWords});
         //console.log(this.state.boardArr);
         //console.log(this.state.selectedLetters);
         console.log(this.state.wordsToFind);

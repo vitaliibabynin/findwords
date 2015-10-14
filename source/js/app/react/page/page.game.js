@@ -22,7 +22,6 @@ var PageGameMain = Object.assign({}, {}, {
     displayName: 'PageGameMain',
 
     getInitialState: function () {
-
         var state = {
 
             roundsBundleIdx: 0,
@@ -87,26 +86,37 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     onChipOpenWordClick: function () {
-        this.refs.board.openWord();
+        var result = this.refs.board.openWord();
+        if (result !== false) {
+            console.log("subtract chip count");
+        }
     },
 
     onChipOpenLetterClick: function () {
-        this.refs.board.openLetter();
+        var result = this.refs.board.openLetter();
+        if (result !== false) {
+            console.log("subtract chip count");
+        }
     },
 
     onChipShowWordClick: function () {
-        //this.addToShownWords();
+        var result = this.refs.board.sendWordToShowToPageGame();
+        if (result !== false) {
+            console.log("subtract chip count");
+        }
     },
 
-    addShownWords: function (word, wordIdx) {
-        var shownWords = this.state.shownWords
+    addToShownWords: function (word, wordIdx) {
+        var shownWords = this.state.shownWords;
+        var shownWordsLetters = this.state.shownWordsLetters;
 
+        shownWords.push(wordIdx);
+        shownWordsLetters.push(word);
 
         this.setState({
-
+            shownWords: shownWords,
+            shownWordsLetters: shownWordsLetters
         })
-
-
     },
 
 
@@ -126,6 +136,8 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     render: function () {
+
+        console.log({pageGame: this.state.shownWords});
 
         return (
             <div className="page-game">
@@ -165,6 +177,7 @@ var PageGameMain = Object.assign({}, {}, {
                            roundIdx={this.state.roundIdx}
                            boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
                            shownWords={this.state.shownWords}
+                           addToShownWords={this.addToShownWords}
                         />
 
                     <Notice classNames="notice"

@@ -6,17 +6,17 @@ var ShownWordsClass = Object.assign({}, {}, {
 
     displayName: 'ShownWords',
 
-    propTypes: {
-        shownWordsLetters: React.PropTypes.arrayOf(React.PropTypes.shape({
-                letters: React.PropTypes.arrayOf(React.PropTypes.shape({
-                    classNames: React.PropTypes.object,
-                    letter: React.PropTypes.string,
-                    x: React.PropTypes.number,
-                    y: React.PropTypes.number
-                }))
-            })
-        )
-    },
+    //propTypes: {
+    //    shownWordsLetters: React.PropTypes.arrayOf(React.PropTypes.shape({
+    //            letters: React.PropTypes.arrayOf(React.PropTypes.shape({
+    //                classNames: React.PropTypes.object,
+    //                letter: React.PropTypes.string,
+    //                x: React.PropTypes.number,
+    //                y: React.PropTypes.number
+    //            }))
+    //        })
+    //    )
+    //},
 
     getInitialState: function () {
         return {};
