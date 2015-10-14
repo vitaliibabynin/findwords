@@ -1,3 +1,6 @@
+"use strict";
+
+
 var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 var GameMixin = require('./app.mixin').GameMixin;

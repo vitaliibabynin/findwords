@@ -49,41 +49,6 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
 
-    //addToShownWords: function () {
-    //
-    //    var wordToShow = this.refs.board.getUnopenedUnshownWord();
-    //
-    //    if (!wordToShow) {
-    //        return
-    //    }
-    //
-    //    var shownWords = this.state.shownWords;
-    //    shownWords.push(wordToShow);
-    //    this.setState({shownWords: shownWords});
-    //
-    //},
-    //
-    //showWords: function () {
-    //
-    //    var shownWords = this.state.shownWords;
-    //
-    //    var toDisplay = [];
-    //
-    //    for (var i = 0; i < shownWords.length; i++) {
-    //
-    //        var word = "";
-    //
-    //        for (var j = 0; j < shownWords[i].length; j++) {
-    //            word += shownWords[i][j].letter
-    //        }
-    //
-    //        toDisplay.push(<div key={i + "_" + j}>{word}</div>)
-    //    }
-    //
-    //    return toDisplay
-    //
-    //},
-
 
     onChipOpenWordClick: function () {
         var result = this.refs.board.openWord();
@@ -119,6 +84,31 @@ var PageGameMain = Object.assign({}, {}, {
         })
     },
 
+    removeWordFromShownWords: function (wordIdx) {
+        var shownWords = this.state.shownWords;
+        var shownWordsLetters = this.state.shownWordsLetters;
+        var index = false;
+
+        for (var shownWordIdx = 0; shownWordIdx < shownWords.length; shownWordIdx++) {
+            if (shownWords[shownWordIdx] == wordIdx) {
+                index = shownWordIdx;
+                break;
+            }
+        }
+
+        if (index === false) {
+            return;
+        }
+
+        shownWords.splice(index, 1);
+        shownWordsLetters.splice(index, 1);
+
+        this.setState({
+            shownWords: shownWords,
+            shownWordsLetters: shownWordsLetters
+        })
+    },
+
 
     displayNotice: function (type, word) {
         this.setState({
@@ -136,8 +126,6 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     render: function () {
-
-        console.log({pageGame: this.state.shownWords});
 
         return (
             <div className="page-game">
@@ -178,6 +166,7 @@ var PageGameMain = Object.assign({}, {}, {
                            boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
                            shownWords={this.state.shownWords}
                            addToShownWords={this.addToShownWords}
+                           removeWordFromShownWords={this.removeWordFromShownWords}
                         />
 
                     <Notice classNames="notice"
@@ -191,6 +180,7 @@ var PageGameMain = Object.assign({}, {}, {
             </div>
         );
     }
+
 });
 module.exports = React.createClass(PageGameMain);
 module.exports.Class = PageGameMain;

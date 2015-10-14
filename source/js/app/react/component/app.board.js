@@ -93,7 +93,8 @@ var BoardClass = Object.assign({}, {}, {
         }),
         shownWords: React.PropTypes.arrayOf(React.PropTypes.number),
         displayNotice: React.PropTypes.func,
-        addToShownWords: React.PropTypes.func
+        addToShownWords: React.PropTypes.func,
+        removeWordFromShownWords: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -118,6 +119,8 @@ var BoardClass = Object.assign({}, {}, {
             displayNotice: this.props.displayNotice || function () {
             },
             addToShownWords: this.props.addToShownWords || function () {
+            },
+            removeWordFromShownWords: this.props.removeWordFromShownWords || function () {
             }
         };
         state.boardData = this.props.boardData.rounds[state.roundIdx] || {};
@@ -360,6 +363,9 @@ var BoardClass = Object.assign({}, {}, {
         var completedWordIndex = this.checkForCompletedWord();
         if (completedWordIndex !== false) {
             this.addCompletedWordToBoard(completedWordIndex);
+            if (this.checkIfWordIsShown(completedWordIndex)) {
+                this.state.removeWordFromShownWords(completedWordIndex);
+            }
             return;
         }
 
@@ -1080,7 +1086,7 @@ var BoardClass = Object.assign({}, {}, {
         //console.log({boardProps: this.props.shownWords});
         //console.log(this.state.boardArr);
         //console.log(this.state.selectedLetters);
-        console.log(this.state.wordsToFind);
+        //console.log(this.state.wordsToFind);
         //console.log(this.state.board);
         //console.log(this.state.openedLetters);
 
