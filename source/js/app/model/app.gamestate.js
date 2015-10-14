@@ -34,7 +34,6 @@ var GameState = Object.assign({}, {}, {
                                 openWord: false
                             }
                         },
-                        //completedWords: [],
                         openedLetters: [{x:0, y:1}, {x:4, y:3}],
                         shownWords: [0]
                     },

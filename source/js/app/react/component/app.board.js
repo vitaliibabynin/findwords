@@ -99,6 +99,7 @@ var BoardClass = Object.assign({}, {}, {
             numberOfRoundsRequired: React.PropTypes.number,
             rounds: React.PropTypes.arrayOf(React.PropTypes.object)
         }),
+        shownWords: React.PropTypes.arrayOf(React.PropTypes.number),
         displayNotice: React.PropTypes.func
     },
 
@@ -116,11 +117,11 @@ var BoardClass = Object.assign({}, {}, {
                     openWord: true
                 }
             },
+            openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
+            shownWords: this.props.shownWords || [0],
             selectedLetters: {letters: []},
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
-            openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
-            shownWords: [0],
             displayNotice: this.props.displayNotice || function () {
             }
         };
@@ -161,10 +162,7 @@ var BoardClass = Object.assign({}, {}, {
         var wordsToFind = {words: []};
 
         boardDataWords.map(function (word, wordIndex) {
-            wordsToFind.words[wordIndex] = {word: "", letters: word.letters};
-            word.letters.map(function (letter) {
-                wordsToFind.words[wordIndex].word += letter.letter;
-            });
+            wordsToFind.words[wordIndex] = {letters: word.letters};
         });
 
         return wordsToFind;
@@ -293,19 +291,20 @@ var BoardClass = Object.assign({}, {}, {
 
     findWhichWordLetterIsIn: function (openedLetters, wordsToFind) {
         openedLetters = openedLetters || this.state.openedLetters;
-        wordsToFind = wordsToFind || this.state.wordsToFind;
+        wordsToFind = wordsToFind.words || this.state.wordsToFind.words;
 
         if (openedLetters.length == 0) {
             return false;
         }
 
-        var result = false;
-        wordsToFind.words.map(function (word, wordIndex) {
-            if (openedLetters[0].x == word.letters[0].x && openedLetters[0].y == word.letters[0].y) {
-                result = wordIndex;
+        for (var wordIdx = 0; wordIdx < wordsToFind.length; wordIdx++) {
+            var word = wordsToFind[wordIdx].letters;
+            if (openedLetters[0].x == word[0].x && openedLetters[0].y == word[0].y) {
+                return wordIdx;
             }
-        });
-        return result;
+        }
+
+        return false;
     },
 
 
@@ -426,11 +425,11 @@ var BoardClass = Object.assign({}, {}, {
 
         if (currentWord !== false) {
 
-            currentWord.letters.map(function (letter) {
+            currentWord.map(function (letter) {
                 boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_VISIBLE;
             });
 
-            this.setState({highlightedWord: {letters: currentWord.letters}});
+            this.setState({highlightedWord: {letters: currentWord}});
 
             wordAlreadyCompleted = true;
         }
@@ -457,15 +456,23 @@ var BoardClass = Object.assign({}, {}, {
         var completeWordIndex = false;
         var wordsToFind = this.state.wordsToFind.words;
 
-        wordsToFind.map(function (word, wordIndex) {
+        for (var wordIdx = 0; wordIdx < wordsToFind.length; wordIdx++) {
+            var word = wordsToFind[wordIdx].letters;
 
-            word.letters.map(function (letter) {
+            for (var letterIdx = 0; letterIdx < word.length; letterIdx++) {
+                var letter = word[letterIdx];
+
                 if (letter.x == x && letter.y == y) {
                     completeWord = word;
-                    completeWordIndex = wordIndex;
+                    completeWordIndex = wordIdx;
+                    break;
                 }
-            });
-        });
+            }
+
+            if (completeWordIndex !== false) {
+                break;
+            }
+        }
 
         if (!this.state.board[completeWordIndex]) {
             return false;
@@ -534,7 +541,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     checkIfDifferentLetter: function (x, y) {
-
         var selectedLetters = this.state.selectedLetters.letters;
 
         if (selectedLetters.length == 0) {
@@ -542,11 +548,9 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         return !(y == selectedLetters[selectedLetters.length - 1].y && x == selectedLetters[selectedLetters.length - 1].x);
-
     },
 
     removeSelectedLettersAfter: function (x, y) {
-
         var lettersRemoved = false;
 
         var index = this.getIndexIfLetterIsSelected(x, y);
@@ -576,26 +580,22 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         return lettersRemoved;
-
     },
 
     getIndexIfLetterIsSelected: function (x, y) {
-
         var selectedLetters = this.state.selectedLetters.letters;
 
-        var index = false;
-        selectedLetters.map(function (letter, letterIndex) {
+        for (var letterIdx = 0; letterIdx < selectedLetters.length; letterIdx++) {
+            var letter = selectedLetters[letterIdx];
             if (y == letter.y && x == letter.x) {
-                index = letterIndex;
+                return letterIdx;
             }
-        });
+        }
 
-        return index;
-
+        return false;
     },
 
     addLetterToSelectedLetters: function (x, y) {
-
         var boardArr = this.state.boardArr;
         var selectedLetters = this.state.selectedLetters;
 
@@ -647,49 +647,44 @@ var BoardClass = Object.assign({}, {}, {
             boardArr: boardArr,
             selectedLetters: selectedLetters
         });
-
     },
 
     checkForCompletedWord: function () {
         var words = this.state.wordsToFind.words;
         var selectedLetters = this.state.selectedLetters.letters;
 
-        var mainResult = false;
-        var index = 0;
-        words.map(function (word, wordIndex) {
-
-            if (word.letters.length != selectedLetters.length) {
-                return false; //ask about this
+        for (var wordIdx = 0; wordIdx < words.length; wordIdx++) {
+            var word = words[wordIdx].letters;
+            if (word.length != selectedLetters.length) {
+                continue;
             }
 
-            var result = true;
-            word.letters.map(function (letter, letterIndex) {
-                if (selectedLetters[letterIndex].letter != letter.letter) {
-                    result = false;
+            var lettersAndCellsMatch = true;
+            for (var letterIdx = 0; letterIdx < word.length; letterIdx++) {
+                var letterInWord = word[letterIdx];
+                if (selectedLetters[letterIdx].letter != letterInWord.letter) {
+                    lettersAndCellsMatch = false;
+                    break;
                 }
 
-                var resultCell = false;
-                selectedLetters.map(function (selectedLetter) {
-                    if (selectedLetter.x == letter.x && selectedLetter.y == letter.y) {
-                        resultCell = true;
+                var cellsMatch = false;
+                for (var selectedLetterIdx = 0; selectedLetterIdx < selectedLetters.length; selectedLetterIdx++) {
+                    var selectedLetter = selectedLetters[selectedLetterIdx];
+                    if (selectedLetter.x == letterInWord.x && selectedLetter.y == letterInWord.y) {
+                        cellsMatch = true;
+                        break;
                     }
-                });
-
-                if (!resultCell) {
-                    result = false;
                 }
-            });
 
-            if (result) {
-                mainResult = true;
-                index = wordIndex;
+                if (!cellsMatch) {
+                    lettersAndCellsMatch = false;
+                }
             }
-        });
 
-        if (mainResult) {
-            return index;
+            if (lettersAndCellsMatch) {
+                return wordIdx;
+            }
         }
-
         return false;
     },
 
@@ -712,10 +707,10 @@ var BoardClass = Object.assign({}, {}, {
         var openedLetters = this.clearOpenedLettersInWord(index);
 
         this.setState({
+            openedLetters: openedLetters,
             boardArr: boardArr,
             selectedLetters: {letters: []},
-            board: board,
-            openedLetters: openedLetters
+            board: board
         });
     },
 
@@ -724,6 +719,10 @@ var BoardClass = Object.assign({}, {}, {
         var wordsToFind = this.state.wordsToFind;
         var word = wordsToFind.words[index].letters;
         var boardArr = this.state.boardArr;
+
+        if (openedLetters.length == 0) {
+            return openedLetters;
+        }
 
         if (word[0].x == openedLetters[0].x && word[0].y == openedLetters[0].y) {
             openedLetters.map(function (openedLetter) {
@@ -748,29 +747,26 @@ var BoardClass = Object.assign({}, {}, {
         var words = this.state.wordsToFind.words;
         var selectedLetters = this.state.selectedLetters.letters;
 
-        var mainResult = false;
-
-        words.map(function (word) {
-
-            if (word.letters.length == selectedLetters.length) {
-
-                var result = true;
-                word.letters.map(function (letter, letterIndex) {
-
-                    if (selectedLetters[letterIndex].letter != letter.letter) {
-                        result = false;
-                    }
-
-                });
-
-                if (result) {
-                    mainResult = true;
-                }
-
+        for (var wordIdx = 0; wordIdx < words.length; wordIdx++) {
+            var word = words[wordIdx].letters;
+            if (word.length != selectedLetters.length) {
+                continue;
             }
-        });
 
-        return mainResult;
+            var lettersMatch = true;
+            for (var letterIdx = 0; letterIdx < word.length; letterIdx++) {
+                var letterInWord = word[letterIdx];
+                if (selectedLetters[letterIdx].letter != letterInWord.letter) {
+                    lettersMatch = false;
+                    break;
+                }
+            }
+
+            if (lettersMatch) {
+                return true;
+            }
+        }
+        return false;
     },
 
     selectedLettersEqualsPrevSelectedLetters: function () {
@@ -860,9 +856,6 @@ var BoardClass = Object.assign({}, {}, {
         var prevLetter = openedLetters[openedLetters.length - 1];
         var prevX = prevLetter.x;
         var prevY = prevLetter.y;
-
-        console.log(currentLetter);
-        console.log(prevLetter);
 
         if (y == prevY + 1 && x == prevX) {
             openedLetters.push({x: x, y: y});
@@ -994,6 +987,46 @@ var BoardClass = Object.assign({}, {}, {
         });
     },
 
+    getUnopenedUnshownWord: function () {
+
+        var words = this.state.wordsToFind.words;
+        var board = this.state.board;
+
+        if (board.length == words.length) {
+            return false;
+        }
+
+        var unopenedWord = false;
+
+        words.map(function (word) {
+
+            var wordIsOpen = this.checkIfWordIsOpen(word);
+            var wordIsShown = this.checkIfWordIsShown(word);
+
+            if (!wordIsOpen && !wordIsShown) {
+                unopenedWord = word.letters;
+            }
+
+        }.bind(this));
+
+        if (unopenedWord !== false) {
+            var shownWords = this.state.shownWords;
+            shownWords.push(unopenedWord);
+            this.setState({shownWords: shownWords})
+        }
+
+        return unopenedWord
+
+    },
+
+    checkIfWordIsOpen: function (word) {
+        return false;
+    },
+
+    checkIfWordIsShown: function (word) {
+        return false;
+    },
+
     getUnopenedWordIndex: function () {
         var board = this.state.board;
         var wordsToFind = this.state.wordsToFind.words;
@@ -1025,7 +1058,7 @@ var BoardClass = Object.assign({}, {}, {
 
         //console.log(this.state.boardArr);
         //console.log(this.state.selectedLetters);
-        //console.log(this.state.wordsToFind);
+        console.log(this.state.wordsToFind);
         //console.log(this.state.board);
         //console.log(this.state.openedLetters);
 

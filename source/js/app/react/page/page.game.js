@@ -11,6 +11,7 @@ var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
 var Board = require('./../component/app.board.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
+var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
 var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
 var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
@@ -27,7 +28,8 @@ var PageGameMain = Object.assign({}, {}, {
             roundsBundleIdx: 0,
             //roundIdx: router.getParam('roundidx') || 0,
             roundIdx: 0,
-            //shownWords: [],
+            shownWords: [],
+            shownWordsLetters: [],
             noticeType: "",
             noticeWord: {letters: []}
 
@@ -82,16 +84,6 @@ var PageGameMain = Object.assign({}, {}, {
     //    return toDisplay
     //
     //},
-    //
-    //lockScreen: function (time) {
-    //
-    //    this.setState({lockScreen: true}, function () {
-    //        setTimeout(function () {
-    //            this.setState({lockScreen: false});
-    //        }.bind(this), time);
-    //    });
-    //
-    //},
 
 
     onChipOpenWordClick: function () {
@@ -104,6 +96,17 @@ var PageGameMain = Object.assign({}, {}, {
 
     onChipShowWordClick: function () {
         //this.addToShownWords();
+    },
+
+    addShownWords: function (word, wordIdx) {
+        var shownWords = this.state.shownWords
+
+
+        this.setState({
+
+        })
+
+
     },
 
 
@@ -161,12 +164,15 @@ var PageGameMain = Object.assign({}, {}, {
                            roundBundleIdx={this.state.roundsBundleIdx}
                            roundIdx={this.state.roundIdx}
                            boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
+                           shownWords={this.state.shownWords}
                         />
 
                     <Notice classNames="notice"
                             noticeType={this.state.noticeType}
                             word={this.state.noticeWord}
                         />
+
+                    <ShownWords shownWordsLetters={this.state.shownWordsLetters}/>
 
                 </div>
             </div>
