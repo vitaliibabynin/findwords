@@ -108,7 +108,7 @@ var BoardClass = Object.assign({}, {}, {
                 },
                 2: {
                     color: "backgroundColor5",
-                    openWord: true
+                    openWord: false
                 }
             },
             openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],

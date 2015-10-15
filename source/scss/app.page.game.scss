@@ -454,9 +454,9 @@
       }
 
       &.fade-enter.fade-enter-active {
-        -webkit-transition-duration: 2s;
+        -webkit-transition-duration: 1s;
         -webkit-transition-delay: 0s;
-        transition-duration: 2s;
+        transition-duration: 1s;
         transition-delay: 0s;
         opacity: 1;
       }
@@ -467,9 +467,9 @@
 
       &.fade-leave.fade-leave-active {
         opacity: 0.01;
-        -webkit-transition-duration: 2s;
+        -webkit-transition-duration: 1s;
         -webkit-transition-delay: 0s;
-        transition-duration: 2s;
+        transition-duration: 1s;
         transition-delay: 0s;
       }
     }

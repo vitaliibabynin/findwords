@@ -2,8 +2,6 @@
 
 
 var Object = {assign: require('react/lib/Object.assign')};
-//var classNames = require('classnames');
-//var GameMixin = require('./app.mixin').GameMixin;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 
@@ -27,37 +25,36 @@ var ShownWordsClass = Object.assign({}, {}, {
         var state = {
             shownWordsLetters: this.props.shownWordsLetters || []
         };
+        state.words = this.convertWords(state.shownWordsLetters);
 
         return state;
     },
 
     componentWillReceiveProps: function (nextProps) {
+        var shownWordsLetters = nextProps.shownWordsLetters || [];
+        var words = this.convertWords(shownWordsLetters);
+
         this.setState({
-            shownWordsLetters: nextProps.shownWordsLetters || []
+            shownWordsLetters: shownWordsLetters,
+            words: words
         });
     },
 
-    showWords: function () {
-        var shownWords = this.state.shownWordsLetters;
+    convertWords: function (shownWordsLetters) {
+        var words = [];
 
-        var toDisplay = [];
-
-        for (var i = 0; i < shownWords.length; i++) {
+        for (var i = 0; i < shownWordsLetters.length; i++) {
 
             var word = "";
 
-            for (var j = 0; j < shownWords[i].length; j++) {
-                word += shownWords[i][j].letter
+            for (var j = 0; j < shownWordsLetters[i].length; j++) {
+                word += shownWordsLetters[i][j].letter
             }
 
-            toDisplay.push(
-                <div key={i + "_" + j}>
-                    {word}
-                </div>
-            )
+            words.push(word);
         }
 
-        return toDisplay;
+        return words;
     },
 
     chooseFontSize: function () {
@@ -85,14 +82,22 @@ var ShownWordsClass = Object.assign({}, {}, {
             fontSize: whichFontSize + "rem"
         };
 
+        var words = this.state.words.map(function(word, i) {
+            return (
+                <div key={word} >
+                    {word}
+                </div>
+            );
+        });
+
         return (
             <div className="shown-words"
                  style={style}>
                 <ReactCSSTransitionGroup
                     transitionName="fade"
-                    transitionEnterTimeout={2000}
-                    transitionLeaveTimeout={2000}>
-                    {this.showWords()}
+                    transitionEnterTimeout={1000}
+                    transitionLeaveTimeout={1000}>
+                    {words}
                 </ReactCSSTransitionGroup>
             </div>
         );
