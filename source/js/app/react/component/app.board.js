@@ -979,6 +979,10 @@ var BoardClass = Object.assign({}, {}, {
             openWord: true
         };
 
+        if (this.checkIfWordIsShown(index)) {
+            this.state.removeWordFromShownWords(index);
+        }
+
         this.setState({
             boardArr: boardArr,
             board: board,

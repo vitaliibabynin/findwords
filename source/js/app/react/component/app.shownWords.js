@@ -33,21 +33,6 @@ var ShownWordsClass = Object.assign({}, {}, {
         });
     },
 
-    capitalizeWord: function () {
-        var initialWord = this.state.word.letters;
-
-        if (initialWord.length == 0) {
-            return false;
-        }
-
-        var word = initialWord[0].letter.toUpperCase();
-        for (var i = 1; i < initialWord.length; i++) {
-            word += initialWord[i].letter.toLowerCase();
-        }
-
-        return word;
-    },
-
     showWords: function () {
         var shownWords = this.state.shownWordsLetters;
 
@@ -61,15 +46,44 @@ var ShownWordsClass = Object.assign({}, {}, {
                 word += shownWords[i][j].letter
             }
 
-            toDisplay.push(<div key={i + "_" + j}>{word}</div>)
+            toDisplay.push(
+                <div key={i + "_" + j}>
+                    {word}
+                </div>
+            )
         }
 
         return toDisplay;
     },
 
+    chooseFontSize: function () {
+        var shownWordsLength = this.state.shownWordsLetters.length;
+
+        if (shownWordsLength <= 2) {
+            return 2;
+        }
+
+        if (shownWordsLength <= 8) {
+            return 1;
+        }
+
+        if (shownWordsLength <= 16) {
+            return 0.75;
+        }
+
+        return 87 / 128;
+    },
+
     render: function () {
+        var whichFontSize = this.chooseFontSize();
+
+        var style = {
+            fontSize: whichFontSize + "rem"
+        };
+
         return (
-            <div className="shown-words">
+            <div className="shown-words"
+                 style={style}>
                 {this.showWords()}
             </div>
         );

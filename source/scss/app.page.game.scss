@@ -436,18 +436,17 @@
   }
 
   .shown-words {
-    margin-left: 1.5625rem;
-    margin-right: 1.5625rem;
-    font-size: 1rem;
+    margin-left: 1.625rem;
+    margin-right: 1.625rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
     height: 3rem;
     color: $gamePage-shownWords-word-color;
+    line-height: 1;
 
     div {
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
-      height: 1.5rem;
       display: inline-block;
-      margin-right: 2.5%;
+      margin-right: 0.5rem;
       text-transform: capitalize;
     }
   }
