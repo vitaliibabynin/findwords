@@ -4,6 +4,8 @@
 var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 //var GameMixin = require('./app.mixin').GameMixin;
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 
 var ShownWordsClass = Object.assign({}, {}, {
 
@@ -22,9 +24,11 @@ var ShownWordsClass = Object.assign({}, {}, {
     },
 
     getInitialState: function () {
-        return {
+        var state = {
             shownWordsLetters: this.props.shownWordsLetters || []
         };
+
+        return state;
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -84,7 +88,12 @@ var ShownWordsClass = Object.assign({}, {}, {
         return (
             <div className="shown-words"
                  style={style}>
-                {this.showWords()}
+                <ReactCSSTransitionGroup
+                    transitionName="fade"
+                    transitionEnterTimeout={2000}
+                    transitionLeaveTimeout={2000}>
+                    {this.showWords()}
+                </ReactCSSTransitionGroup>
             </div>
         );
     }
