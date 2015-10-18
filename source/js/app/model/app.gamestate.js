@@ -26,16 +26,16 @@ var GameState = Object.assign({}, {}, {
                     0: {
                         board: {
                             0: {
-                                color: '#000000',
-                                openWord: true
+                                color: "backgroundColor7",
+                                openWord: false
                             },
                             2: {
-                                color: '#000000',
+                                color: "backgroundColor5",
                                 openWord: false
                             }
                         },
-                        openedLetters: [{x:0, y:1}, {x:4, y:3}],
-                        shownWords: [0]
+                        openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
+                        shownWords: []
                     },
                     1: {},
                     2: {}
@@ -59,7 +59,7 @@ var GameState = Object.assign({}, {}, {
                         },
                         //completedWords: [],
                         openedLetters: [{x:0, y:1}, {x:4, y:3}],
-                        shownWords: [0]
+                        shownWords: []
                     },
                     1: {},
                     2: {}
@@ -168,7 +168,6 @@ var GameState = Object.assign({}, {}, {
         this.saveGameState();
     },
     getRoundsBundles: function (bundleIndex) {
-
         if (bundleIndex == 'undefined') {
             return this.gameState.roundsBundles;
         }
@@ -178,14 +177,12 @@ var GameState = Object.assign({}, {}, {
         }
 
         return this.gameState.roundsBundles[bundleIndex];
-
     },
     setRound: function(bundleIndex, roundIndex, field, newValue){
         this.gameState.roundsBundles[bundleIndex].rounds[roundIndex][field] = newValue;
         this.saveGameState();
     },
     getRound: function (bundleIndex, roundIndex) {
-
         if (bundleIndex == 'undefined') {
             return this.gameState.roundsBundles;
         }
@@ -203,7 +200,6 @@ var GameState = Object.assign({}, {}, {
         }
 
         return this.gameState.roundsBundles[bundleIndex].rounds[roundIndex];
-
     }
 
 });

@@ -80,38 +80,43 @@ var BoardClass = Object.assign({}, {}, {
     displayName: 'Board',
 
     propTypes: {
-        roundsBundleIdx: React.PropTypes.number,
-        roundIdx: React.PropTypes.number,
         boardData: React.PropTypes.shape({
-            backgroundColor: React.PropTypes.string,
-            name: React.PropTypes.shape({
-                en: React.PropTypes.string,
-                ru: React.PropTypes.string
-            }),
-            numberOfRoundsRequired: React.PropTypes.number,
-            rounds: React.PropTypes.arrayOf(React.PropTypes.object)
+            rows: React.PropTypes.number,
+            cols: React.PropTypes.number,
+            words: React.PropTypes.arrayOf(
+                React.PropTypes.shape({
+                    words: React.PropTypes.arrayOf(
+                        React.PropTypes.shape({
+                            letters: React.PropTypes.arrayOf(
+                                React.PropTypes.shape({
+                                    x: React.PropTypes.number,
+                                    y: React.PropTypes.number,
+                                    letter: React.PropTypes.string
+                                })
+                            )
+                        })
+                    )
+                })
+            )
         }),
+        board: React.PropTypes.object,
+        openedLetters: React.PropTypes.arrayOf(
+            React.PropTypes.shape({
+                x: React.PropTypes.number,
+                y: React.PropTypes.number
+            })
+        ),
         shownWords: React.PropTypes.arrayOf(React.PropTypes.number),
         displayNotice: React.PropTypes.func,
         addToShownWords: React.PropTypes.func,
-        removeWordFromShownWords: React.PropTypes.func
+        removeWordFromShownWords: React.PropTypes.func,
+        setGameStateRoundField: React.PropTypes.func
     },
 
     getInitialState: function () {
         var state = {
-            roundsBundleIdx: this.props.roundsBundleIdx || 0,
-            roundIdx: this.props.roundIdx || 0,
-            board: {
-                0: {
-                    color: "backgroundColor7",
-                    openWord: false
-                },
-                2: {
-                    color: "backgroundColor5",
-                    openWord: false
-                }
-            },
-            openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
+            board: this.props.board || {},
+            openedLetters: this.props.openedLetters || [],
             shownWords: this.props.shownWords || [],
             selectedLetters: {letters: []},
             prevSelectedLetters: {letters: []},
@@ -121,9 +126,11 @@ var BoardClass = Object.assign({}, {}, {
             addToShownWords: this.props.addToShownWords || function () {
             },
             removeWordFromShownWords: this.props.removeWordFromShownWords || function () {
+            },
+            setGameStateRoundField: this.props.setGameStateRoundField || function () {
             }
         };
-        state.boardData = this.props.boardData.rounds[state.roundIdx] || {};
+        state.boardData = this.props.boardData || {};
         state.boardArr = this.boardConverter(state.boardData);
         state.wordsToFind = this.extractWordsToFind(state.boardData);
         this.addOpenedLettersToBoardArr(state.openedLetters, state.wordsToFind, state.boardArr);
@@ -139,9 +146,11 @@ var BoardClass = Object.assign({}, {}, {
 
     boardConverter: function (boardData) {
         var arr = new Array(boardData.rows);
+
         for (var i = 0; i < arr.length; i++) {
             arr[i] = new Array(boardData.cols);
         }
+
         boardData.words.map(function (word) {
             word.letters.map(function (letter) {
                 arr[letter.y][letter.x] = {
@@ -152,6 +161,7 @@ var BoardClass = Object.assign({}, {}, {
                 };
             })
         });
+
         return arr;
     },
 
@@ -714,6 +724,9 @@ var BoardClass = Object.assign({}, {}, {
 
         var openedLetters = this.clearOpenedLettersInWord(index);
 
+        this.state.setGameStateRoundField('openedLetters', openedLetters);
+        this.state.setGameStateRoundField('board', board);
+
         this.setState({
             openedLetters: openedLetters,
             boardArr: boardArr,
@@ -846,8 +859,10 @@ var BoardClass = Object.assign({}, {}, {
 
         if (openedLetters.length == 0) {
             boardArr[unopenedWord[0].y][unopenedWord[0].x].classNames.openLetter = OPEN_LETTER_COLOR;
+            var openedLetters = [{x: unopenedWord[0].x, y: unopenedWord[0].y}];
+            this.state.setGameStateRoundField('openedLetters', openedLetters);
             this.setState({
-                openedLetters: [{x: unopenedWord[0].x, y: unopenedWord[0].y}]
+                openedLetters: openedLetters
             });
             return;
         }
@@ -900,6 +915,8 @@ var BoardClass = Object.assign({}, {}, {
             };
             boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_LEFT;
         }
+
+        this.state.setGameStateRoundField('openedLetters', openedLetters);
 
         this.setState({
             boardArr: boardArr,
@@ -982,6 +999,9 @@ var BoardClass = Object.assign({}, {}, {
         if (this.checkIfWordIsShown(index)) {
             this.state.removeWordFromShownWords(index);
         }
+
+        this.state.setGameStateRoundField('openedLetters', []);
+        this.state.setGameStateRoundField('board', board);
 
         this.setState({
             boardArr: boardArr,

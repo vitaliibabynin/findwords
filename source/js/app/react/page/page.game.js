@@ -23,18 +23,47 @@ var PageGameMain = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-
             roundsBundleIdx: 0,
             //roundIdx: router.getParam('roundidx') || 0,
             roundIdx: 0,
-            shownWords: [],
             shownWordsLetters: [],
             noticeType: "",
             noticeWord: {letters: []}
-
         };
+        state.roundData =  appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
+        state.boardData = state.roundData.rounds[state.roundIdx] || {};
+        state.board = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "board") || {};
+        state.openedLetters = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "openedLetters") || [];
+        state.shownWords = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "shownWords") || [];
+        state.shownWordsLetters = this.shownWordsConverter(state.shownWords, state.boardData);
 
         return state;
+    },
+
+    shownWordsConverter: function (shownWords, boardData) {
+        var shownWordsLetters = [];
+
+        if (shownWords.length == 0) {
+            return shownWordsLetters;
+        }
+
+        for (var i = 0; i < shownWords.length; i++) {
+            var letters = boardData.words[shownWords[i]].letters;
+            shownWordsLetters.push(letters);
+        }
+
+        return shownWordsLetters;
+    },
+
+    setGameStateRoundField: function (field, newValue) {
+        var bundleIndex = this.state.roundsBundleIdx;
+        var roundIndex = this.state.roundIdx;
+
+        return appManager.getGameState().setRound(bundleIndex, roundIndex, field, newValue);
+    },
+
+    getGameStateRoundField: function (roundsBundleIdx, roundIdx, field) {
+        return appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field];
     },
 
     //componentDidMount: function() {
@@ -78,6 +107,8 @@ var PageGameMain = Object.assign({}, {}, {
         shownWords.push(wordIdx);
         shownWordsLetters.push(word);
 
+        this.setGameStateRoundField('shownWords', shownWords);
+
         this.setState({
             shownWords: shownWords,
             shownWordsLetters: shownWordsLetters
@@ -103,6 +134,8 @@ var PageGameMain = Object.assign({}, {}, {
         shownWords.splice(index, 1);
         shownWordsLetters.splice(index, 1);
 
+        this.setGameStateRoundField('shownWords', shownWords);
+
         this.setState({
             shownWords: shownWords,
             shownWordsLetters: shownWordsLetters
@@ -126,6 +159,9 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     render: function () {
+
+        //console.log(this.state.shownWords);
+        //console.log(this.state.shownWordsLetters);
 
         return (
             <div className="page-game">
@@ -160,13 +196,14 @@ var PageGameMain = Object.assign({}, {}, {
                     </div>
 
                     <Board ref="board"
-                           displayNotice={this.displayNotice}
-                           roundBundleIdx={this.state.roundsBundleIdx}
-                           roundIdx={this.state.roundIdx}
-                           boardData={appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx]}
+                           boardData={this.state.boardData}
+                           board={this.state.board}
+                           openedLetters={this.state.openedLetters}
                            shownWords={this.state.shownWords}
+                           displayNotice={this.displayNotice}
                            addToShownWords={this.addToShownWords}
                            removeWordFromShownWords={this.removeWordFromShownWords}
+                           setGameStateRoundField={this.setGameStateRoundField}
                         />
 
                     <Notice classNames="notice"
