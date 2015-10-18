@@ -83,12 +83,16 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     onChipOpenWordClick: function () {
+        if (this.state.chipsOpenWord < 1) {
+            console.log("no chips left");
+            return;
+        }
+
         var result = this.refs.board.openWord();
         if (result !== false) {
-            console.log("subtract chip count");
+            var chipsOpenWord = this.state.chipsOpenWord - 1;
 
-            var chipsOpenWord = this.state.chipsOpenWord;
-            var chipsOpenWord = chipsOpenWord - 1;
+            appManager.getGameState().setChipOpenWord(chipsOpenWord);
 
             this.setState({
                 chipsOpenWord: chipsOpenWord
@@ -97,16 +101,38 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     onChipOpenLetterClick: function () {
+        if (this.state.chipsOpenLetter < 1) {
+            console.log("no chips left");
+            return;
+        }
+
         var result = this.refs.board.openLetter();
         if (result !== false) {
-            console.log("subtract chip count");
+            var chipsOpenLetter = this.state.chipsOpenLetter - 1;
+
+            appManager.getGameState().setChipOpenLetter(chipsOpenLetter);
+
+            this.setState({
+                chipsOpenLetter: chipsOpenLetter
+            })
         }
     },
 
     onChipShowWordClick: function () {
+        if (this.state.chipsShowWord < 1) {
+            console.log("no chips left");
+            return;
+        }
+
         var result = this.refs.board.sendWordToShowToPageGame();
         if (result !== false) {
-            console.log("subtract chip count");
+            var chipsShowWord = this.state.chipsShowWord - 1;
+
+            appManager.getGameState().setChipShowWord(chipsShowWord);
+
+            this.setState({
+                chipsShowWord: chipsShowWord
+            })
         }
     },
 

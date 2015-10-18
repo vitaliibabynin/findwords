@@ -25,22 +25,7 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
         var state = {
             className: 'btn',
             isActive: false,
-            style: {
-                //width: '17.500rem',
-                //height: '3.500rem',
-                //lineHeight: '3.500rem',
-                //paddingLeft: '2rem',
-                //textShadow: '-0.063rem -0.063rem 0.063rem #223E85, \
-                //             0.063rem -0.063rem 0.063rem #223E85, \
-                //             -0.063rem 0.063rem 0.063rem #223E85, \
-                //             0.063rem 0.063rem 0.063rem #223E85',
-                //
-                //backgroundImage: "url('"+this.getImagePath(imgName)+"')",
-                //
-                //':hover': {
-                //    backgroundImage: "url('"+this.getPressedImagePath(imgName)+"')"
-                //}
-            }
+            style: {}
         };
 
         this.updateStyle(state.style);
@@ -149,14 +134,13 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
     },
 
     componentDidUpdate: function (prevProps, prevState) {
-        if (prevProps.icon == this.props.icon || prevProps.value == this.props.value) {
+        if (prevProps.icon == this.props.icon) {
             return;
         }
 
         this.updateStyle(this.state.style);
 
         this.setState({
-            value: this.props.value || 0,
             style: this.state.style
         });
     },
@@ -166,8 +150,6 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
     },
 
     render: function () {
-        console.log(this.state.value);
-        console.log(this.props.value);
 
         var buttonClasses = classNames(
             this.state.className,
@@ -182,7 +164,7 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
                  dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
 
                 <div className="text">{this.props.children}</div>
-                <div className="value">{this.state.value}</div>
+                <div className="value">{this.props.value}</div>
             </div>
         );
     }
