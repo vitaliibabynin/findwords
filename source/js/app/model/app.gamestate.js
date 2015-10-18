@@ -24,17 +24,8 @@ var GameState = Object.assign({}, {}, {
                 roundsComplete: 1,
                 rounds: {
                     0: {
-                        board: {
-                            0: {
-                                color: "backgroundColor7",
-                                openWord: false
-                            },
-                            2: {
-                                color: "backgroundColor5",
-                                openWord: false
-                            }
-                        },
-                        openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
+                        board: {},
+                        openedLetters: [],
                         shownWords: []
                     },
                     1: {},
@@ -49,16 +40,15 @@ var GameState = Object.assign({}, {}, {
                     0: {
                         board: {
                             0: {
-                                color: '#000000',
-                                openWord: true
+                                color: "backgroundColor7",
+                                openWord: false
                             },
                             2: {
-                                color: '#000000',
+                                color: "backgroundColor5",
                                 openWord: false
                             }
                         },
-                        //completedWords: [],
-                        openedLetters: [{x:0, y:1}, {x:4, y:3}],
+                        openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
                         shownWords: []
                     },
                     1: {},
