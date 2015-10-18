@@ -22,7 +22,6 @@ var ButtonClass = Object.assign({}, {}, Radium.wrap({
     },
 
     getInitialState: function () {
-
         var state = {
             className: 'btn',
             isActive: false,
@@ -142,35 +141,33 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
     },
 
     getInitialState: function () {
-
         var state = ButtonClass.getInitialState.call(this);
         state.className += ' chip';
         state.value = this.props.value || 0;
 
         return state;
-
     },
 
     componentDidUpdate: function (prevProps, prevState) {
-
         if (prevProps.icon == this.props.icon || prevProps.value == this.props.value) {
             return;
         }
 
         this.updateStyle(this.state.style);
+
         this.setState({
+            value: this.props.value || 0,
             style: this.state.style
         });
-
     },
 
     getBackgoundImageName: function () {
-
         return this.props.icon;
-
     },
 
     render: function () {
+        console.log(this.state.value);
+        console.log(this.props.value);
 
         var buttonClasses = classNames(
             this.state.className,
@@ -179,7 +176,6 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
         );
 
         return (
-
             <div className={buttonClasses}
                  style={this.state.style}
                  onClick={this.onClick}
@@ -188,9 +184,7 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
                 <div className="text">{this.props.children}</div>
                 <div className="value">{this.state.value}</div>
             </div>
-
         );
-
     }
 
 });

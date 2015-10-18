@@ -28,9 +28,12 @@ var PageGameMain = Object.assign({}, {}, {
             roundIdx: 0,
             shownWordsLetters: [],
             noticeType: "",
-            noticeWord: {letters: []}
+            noticeWord: {letters: []},
+            chipsOpenWord: appManager.getGameState().getChipOpenWord() || 0,
+            chipsOpenLetter: appManager.getGameState().getChipOpenLetter() || 0,
+            chipsShowWord: appManager.getGameState().getChipShowWord() || 0
         };
-        state.roundData =  appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
+        state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
         state.boardData = state.roundData.rounds[state.roundIdx] || {};
         state.board = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "board") || {};
         state.openedLetters = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "openedLetters") || [];
@@ -83,6 +86,13 @@ var PageGameMain = Object.assign({}, {}, {
         var result = this.refs.board.openWord();
         if (result !== false) {
             console.log("subtract chip count");
+
+            var chipsOpenWord = this.state.chipsOpenWord;
+            var chipsOpenWord = chipsOpenWord - 1;
+
+            this.setState({
+                chipsOpenWord: chipsOpenWord
+            })
         }
     },
 
@@ -174,21 +184,21 @@ var PageGameMain = Object.assign({}, {}, {
                     <div className="chips">
                         <ChipButton className="open-word"
                                     onClick={this.onChipOpenWordClick}
-                                    value={appManager.getGameState().getChipOpenWord()}
+                                    value={this.state.chipsOpenWord}
                                     icon="open_word">
 
                             <span>{i18n._('chip.open-word')}</span>
                         </ChipButton>
                         <ChipButton className="open-letter"
                                     onClick={this.onChipOpenLetterClick}
-                                    value={appManager.getGameState().getChipOpenLetter()}
+                                    value={this.state.chipsOpenLetter}
                                     icon="open_letter">
 
                             <span>{i18n._('chip.open-letter')}</span>
                         </ChipButton>
                         <ChipButton className="show-word"
                                     onClick={this.onChipShowWordClick}
-                                    value={appManager.getGameState().getChipShowWord()}
+                                    value={this.state.chipsShowWord}
                                     icon="show_word">
 
                             <span>{i18n._('chip.show-word')}</span>

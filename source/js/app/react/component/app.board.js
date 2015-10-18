@@ -135,6 +135,7 @@ var BoardClass = Object.assign({}, {}, {
         state.wordsToFind = this.extractWordsToFind(state.boardData);
         this.addOpenedLettersToBoardArr(state.openedLetters, state.wordsToFind, state.boardArr);
         this.addFoundWordsToBoardArr(state.board, state.wordsToFind, state.boardArr);
+
         return state;
     },
 
