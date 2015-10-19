@@ -302,10 +302,12 @@
             transform: initial;
           }
         }
-        &.completed span {
+        &.completed {
+          color: $gamePage-board-td-color-complete;
+        }
+        &.animation span {
           -webkit-animation: fontbulger 0.2s;
           animation: fontbulger 0.2s;
-          color: $gamePage-board-td-color-complete;
         }
       }
 

@@ -53,6 +53,7 @@ var Letter = React.createClass(LetterClass);
 var BOARD_MARGIN = 50;
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
+var ANIMATE_LETTER = "animation";
 var LINK_VISIBLE = "visible";
 var LINK_FADE = "fade";
 var BEFORE_LINK_TOP = "before-link-top";
@@ -110,7 +111,8 @@ var BoardClass = Object.assign({}, {}, {
         displayNotice: React.PropTypes.func,
         addToShownWords: React.PropTypes.func,
         removeWordFromShownWords: React.PropTypes.func,
-        setGameStateRoundField: React.PropTypes.func
+        setGameStateRoundField: React.PropTypes.func,
+        goToPageRoundComplete: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -128,6 +130,8 @@ var BoardClass = Object.assign({}, {}, {
             removeWordFromShownWords: this.props.removeWordFromShownWords || function () {
             },
             setGameStateRoundField: this.props.setGameStateRoundField || function () {
+            },
+            goToPageRoundComplete: this.props.goToPageRoundComplete || function () {
             }
         };
         state.boardData = this.props.boardData || {};
@@ -374,8 +378,13 @@ var BoardClass = Object.assign({}, {}, {
         var completedWordIndex = this.checkForCompletedWord();
         if (completedWordIndex !== false) {
             this.addCompletedWordToBoard(completedWordIndex);
+
             if (this.checkIfWordIsShown(completedWordIndex)) {
                 this.state.removeWordFromShownWords(completedWordIndex);
+            }
+
+            if (this.checkIfRoundComplete()) {
+                this.state.goToPageRoundComplete(1000);
             }
             return;
         }
@@ -714,6 +723,7 @@ var BoardClass = Object.assign({}, {}, {
         selectedLetters.map(function (letter) {
             boardArr[letter.y][letter.x].classNames.color = COLOR_COMPLETED;
             boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_FADE;
+            boardArr[letter.y][letter.x].classNames.animation = ANIMATE_LETTER;
         });
 
         var backgroundColor = boardArr[selectedLetters[0].y][selectedLetters[0].x].classNames.backgroundColor;
@@ -941,7 +951,8 @@ var BoardClass = Object.assign({}, {}, {
         boardArr[currentWord.letters[0].y][currentWord.letters[0].x].classNames = {
             backgroundColor: backgroundColor,
             color: COLOR_COMPLETED,
-            linkVisibility: LINK_VISIBLE
+            linkVisibility: LINK_VISIBLE,
+            animation: ANIMATE_LETTER
         };
 
         for (var i = 1; i < currentWord.letters.length; i++) {
@@ -956,7 +967,8 @@ var BoardClass = Object.assign({}, {}, {
                     linkBefore: BEFORE_LINK_TOP,
                     linkVisibility: LINK_VISIBLE,
                     backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
+                    color: COLOR_COMPLETED,
+                    animation: ANIMATE_LETTER
                 };
                 boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
             }
@@ -966,7 +978,8 @@ var BoardClass = Object.assign({}, {}, {
                     linkBefore: BEFORE_LINK_BOTTOM,
                     linkVisibility: LINK_VISIBLE,
                     backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
+                    color: COLOR_COMPLETED,
+                    animation: ANIMATE_LETTER
                 };
                 boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
             }
@@ -976,7 +989,8 @@ var BoardClass = Object.assign({}, {}, {
                     linkBefore: BEFORE_LINK_LEFT,
                     linkVisibility: LINK_VISIBLE,
                     backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
+                    color: COLOR_COMPLETED,
+                    animation: ANIMATE_LETTER
                 };
                 boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
             }
@@ -986,7 +1000,8 @@ var BoardClass = Object.assign({}, {}, {
                     linkBefore: BEFORE_LINK_RIGHT,
                     linkVisibility: LINK_VISIBLE,
                     backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
+                    color: COLOR_COMPLETED,
+                    animation: ANIMATE_LETTER
                 };
                 boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
             }
@@ -1093,6 +1108,19 @@ var BoardClass = Object.assign({}, {}, {
         return index;
     },
 
+    checkIfRoundComplete: function () {
+        var board = this.state.board;
+        var wordsToFind = this.state.wordsToFind.words;
+
+        var boardLength = Utils.countObjectProperties(board);
+
+        if (boardLength == wordsToFind.length) {
+            return true;
+        }
+
+        return false;
+    },
+
 
     filterClassNames: function (cellClassNames) {
         var filteredCellClassNames = JSON.parse(JSON.stringify(cellClassNames));
@@ -1114,6 +1142,7 @@ var BoardClass = Object.assign({}, {}, {
         //console.log(this.state.wordsToFind);
         //console.log(this.state.board);
         //console.log(this.state.openedLetters);
+        //console.log(this.checkIfRoundComplete());
 
         var boardArr = this.state.boardArr;
         var boardStyle = {

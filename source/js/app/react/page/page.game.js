@@ -97,7 +97,11 @@ var PageGameMain = Object.assign({}, {}, {
 
             this.setState({
                 chipsOpenWord: chipsOpenWord
-            })
+            });
+
+            if (this.refs.board.checkIfRoundComplete()){
+                this.goToPageRoundComplete(800);
+            }
         }
     },
 
@@ -115,7 +119,11 @@ var PageGameMain = Object.assign({}, {}, {
 
             this.setState({
                 chipsOpenLetter: chipsOpenLetter
-            })
+            });
+
+            if (this.refs.board.checkIfRoundComplete()){
+                this.goToPageRoundComplete(800);
+            }
         }
     },
 
@@ -198,11 +206,16 @@ var PageGameMain = Object.assign({}, {}, {
         });
     },
 
+    goToPageRoundComplete: function (time) {
+        time = time || 300;
+
+        setTimeout(function () {
+            router.navigate("game", "victory")
+        }.bind(this), time);
+    },
+
 
     render: function () {
-
-        //console.log(this.state.shownWords);
-        //console.log(this.state.shownWordsLetters);
 
         return (
             <div className="page-game">
@@ -245,6 +258,7 @@ var PageGameMain = Object.assign({}, {}, {
                            addToShownWords={this.addToShownWords}
                            removeWordFromShownWords={this.removeWordFromShownWords}
                            setGameStateRoundField={this.setGameStateRoundField}
+                           goToPageRoundComplete={this.goToPageRoundComplete}
                         />
 
                     <Notice noticeType={this.state.noticeType}
