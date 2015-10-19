@@ -56,6 +56,7 @@ window.CONST = {
             'notice.selectDifferently.after': 'по-другому',
             'notice.noSuchWord.before': 'Слово',
             'notice.noSuchWord.after': 'мы не загадывали',
+            'notice.noWordsToShow': 'Больше нету слов, чтобы показать',
 
             t: ''
         },
@@ -89,6 +90,7 @@ window.CONST = {
             'notice.selectDifferently.after': 'in a different way',
             'notice.noSuchWord.before': 'The word',
             'notice.noSuchWord.after': 'is not in the riddle',
+            'notice.noWordsToShow': 'No more words to show',
 
             t: ''
         }

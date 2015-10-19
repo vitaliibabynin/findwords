@@ -88,8 +88,16 @@ $gamePage-board-td-bg-color-7: grey;
 $gamePage-board-td-bg-color-8: purple;
 $gamePage-board-td-bg-color-9: pink;
 $gamePage-board-td-bg-color-10: darkblue;
-$gamePage-notice-bg-color: blue;
-$gamePage-notice-color: #ffffff;
+
+//gamePage-Notice
+$gamePage-notice-default-bg-color: blue;
+$gamePage-notice-default-color: #ffffff;
+$gamePage-notice-noSuchWord-bg-color: red;
+$gamePage-notice-noSuchWord-color: blue;
+$gamePage-notice-selectDifferently-bg-color: blue;
+$gamePage-notice-selectDifferently-color: yellow;
+$gamePage-notice-noWordsToShow-bg-color: pink;
+$gamePage-notice-noWordsToShow-color: green;
 
 //gamePage-ShownWords
 $gamePage-shownWords-word-color: #ffffff;

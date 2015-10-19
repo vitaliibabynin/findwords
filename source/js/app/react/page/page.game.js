@@ -15,6 +15,7 @@ var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
 var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
 var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
+var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
 
 var PageGameMain = Object.assign({}, {}, {
 
@@ -132,8 +133,12 @@ var PageGameMain = Object.assign({}, {}, {
 
             this.setState({
                 chipsShowWord: chipsShowWord
-            })
+            });
+
+            return;
         }
+
+        this.displayNotice(NO_WORDS_TO_SHOW, {letters: []});
     },
 
     addToShownWords: function (word, wordIdx) {
@@ -242,8 +247,7 @@ var PageGameMain = Object.assign({}, {}, {
                            setGameStateRoundField={this.setGameStateRoundField}
                         />
 
-                    <Notice classNames="notice"
-                            noticeType={this.state.noticeType}
+                    <Notice noticeType={this.state.noticeType}
                             word={this.state.noticeWord}
                         />
 

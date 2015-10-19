@@ -2,13 +2,17 @@
 
 
 var Object = {assign: require('react/lib/Object.assign')};
-//var classNames = require('classnames');
+var classNames = require('classnames');
 var GameMixin = require('./app.mixin').GameMixin;
 
 var SELECT_DIFFERENTLY = "selectDifferently";
-var NO_SUCH_WORD = "noSuchWord";
 module.exports.SELECT_DIFFERENTLY = SELECT_DIFFERENTLY;
+
+var NO_SUCH_WORD = "noSuchWord";
 module.exports.NO_SUCH_WORD = NO_SUCH_WORD;
+
+var NO_WORDS_TO_SHOW = "noWordsToShow";
+module.exports.NO_WORDS_TO_SHOW = NO_WORDS_TO_SHOW;
 
 var NoticeClass = Object.assign({}, {}, {
 
@@ -64,24 +68,30 @@ var NoticeClass = Object.assign({}, {}, {
             return false;
         }
 
-        if (this.capitalizeWord() === false) {
-            return false;
+        var capitalizedWord = this.capitalizeWord();
+        var textBefore = "";
+        var textAfter = "";
+
+        switch (this.state.noticeType) {
+            case NO_WORDS_TO_SHOW:
+                return i18n._('notice.noWordsToShow');
+            case NO_SUCH_WORD:
+                if (capitalizedWord === false) {
+                    return false;
+                }
+                textBefore = i18n._('notice.noSuchWord.before');
+                textAfter = i18n._('notice.noSuchWord.after');
+                return textBefore + ' "' + capitalizedWord + '" ' + textAfter;
+            case SELECT_DIFFERENTLY:
+                if (capitalizedWord === false) {
+                    return false;
+                }
+                textBefore = i18n._('notice.selectDifferently.before');
+                textAfter = i18n._('notice.selectDifferently.after');
+                return textBefore + ' "' + capitalizedWord + '" ' + textAfter;
+            default:
+                return false;
         }
-
-        var textBefore;
-        var textAfter;
-
-        if (this.state.noticeType == NO_SUCH_WORD) {
-            textBefore = i18n._('notice.noSuchWord.before');
-            textAfter = i18n._('notice.noSuchWord.after');
-        }
-
-        if (this.state.noticeType == SELECT_DIFFERENTLY) {
-            textBefore = i18n._('notice.selectDifferently.before');
-            textAfter = i18n._('notice.selectDifferently.after');
-        }
-
-        return textBefore + ' "' + this.capitalizeWord() + '" ' + textAfter;
     },
 
     render: function () {
@@ -95,9 +105,17 @@ var NoticeClass = Object.assign({}, {}, {
 
         var text = this.whichText() ? this.whichText() : "";
 
+        var noticeClassNames = classNames(
+            "notice",
+            this.state.classnames,
+            {'no-such-word': this.state.noticeType == NO_SUCH_WORD},
+            {'select-differently': this.state.noticeType == SELECT_DIFFERENTLY},
+            {'no-words-to-show': this.state.noticeType == NO_WORDS_TO_SHOW}
+        );
+
         return (
             <div className="lock-screen">
-                <div className={this.state.classNames}
+                <div className={noticeClassNames}
                      style={noticeImg}>
                     <div><span>{text}</span></div>
                 </div>

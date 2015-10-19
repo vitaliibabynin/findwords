@@ -405,12 +405,27 @@
       $gamePage-notice-size: 11rem;
       width: $gamePage-notice-size;
       min-height: $gamePage-notice-size;
-      background-color: $gamePage-notice-bg-color;
-      color: $gamePage-notice-color;
+      background-color: $gamePage-notice-default-bg-color;
+      color: $gamePage-notice-default-color;
       background-repeat: no-repeat;
       $notice-image-width: 5.125rem;
       background-size: $notice-image-width 5.1875rem;
       background-position: (($gamePage-notice-size - $notice-image-width) / 2) 1rem;
+
+      &.no-such-word {
+        background-color: $gamePage-notice-noSuchWord-bg-color;
+        color: $gamePage-notice-noSuchWord-color;
+      }
+
+      &.select-differently {
+        background-color: $gamePage-notice-selectDifferently-bg-color;
+        color: $gamePage-notice-selectDifferently-color;
+      }
+
+      &.no-words-to-show {
+        background-color: $gamePage-notice-noWordsToShow-bg-color;
+        color: $gamePage-notice-noWordsToShow-color;
+      }
 
       div {
         display: table;
