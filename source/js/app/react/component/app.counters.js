@@ -89,14 +89,12 @@ var ScoreCounterClass = Object.assign({}, CounterClass, {
     displayName: 'ScoreCounter',
 
     getInitialState: function () {
-
         var state = CounterClass.getInitialState.apply(this);
         state.imgPath = 'counter/star';
         state.className = "score";
         state.isDisplayPlusButton = this.props.isDisplayPlusButton || false;
 
         return state;
-
     }
 
 });
@@ -104,7 +102,6 @@ var ScoreCounter = React.createClass(ScoreCounterClass);
 
 
 var CoinsCounterClass = Object.assign({}, CounterClass, {
-
     displayName: 'CoinsCounter',
 
     getInitialState: function () {
@@ -115,7 +112,6 @@ var CoinsCounterClass = Object.assign({}, CounterClass, {
         state.isDisplayPlusButton = this.props.isDisplayPlusButton || true;
 
         return state;
-
     }
 
 });
@@ -128,13 +124,11 @@ var BackButtonClass = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     onButtonClick: function(){
-
-        router.navigate("main", "index");
-
+        //router.navigate("main", "index");
+        router.goBack();
     },
 
     render: function () {
-
         var backButtonImg = 'btn_back';
 
         return (
@@ -142,7 +136,6 @@ var BackButtonClass = Object.assign({}, {}, {
             <IconButton className="back-arrow" icon={backButtonImg} onClick={this.onButtonClick} />
 
         );
-
     }
 
 });
@@ -160,15 +153,11 @@ var CountersClass = Object.assign({}, {}, {
     },
 
     getInitialState: function () {
-
         var state = {
-
             isDisplayBackButton: this.props.isDisplayBackButton || false
-
         };
 
         return state;
-
     },
 
     showBackButton: function () {
@@ -182,7 +171,6 @@ var CountersClass = Object.assign({}, {}, {
     },
 
     render: function () {
-
         return (
 
             <div className="counters">
@@ -192,8 +180,8 @@ var CountersClass = Object.assign({}, {}, {
             </div>
 
         );
-
     }
+
 });
 module.exports.Counters = React.createClass(CountersClass);
 module.exports.Counters.Class = CountersClass;
