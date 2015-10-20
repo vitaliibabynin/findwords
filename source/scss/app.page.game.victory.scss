@@ -30,10 +30,15 @@
       text-align: center;
 
       div:nth-child(n) {
+        margin-right: 0.6875rem;
         display: inline-block;
         height: 3.0625rem;
         background-size: contain;
         background-repeat: no-repeat;
+      }
+
+      div:last-child {
+        margin-right: 0;
       }
 
       .star1,
@@ -46,6 +51,94 @@
       }
     }
 
-  }
+    .rounds-complete {
+      margin: 1.5rem auto;
+      width: 10.25rem;
+      position: relative;
+      height: 0.8125rem;
+      line-height: 0.8125rem;
+      text-align: center;
 
+      .stats {
+        top: 0.03125rem;
+        left: 0;
+        position: absolute;
+        font-size: 0.75rem;
+      }
+      .progress-bar {
+        display: inline-block;
+        position: relative;
+        height: 0.8125rem;
+        width: 6.250rem;
+        line-height: 0.8125rem;
+        vertical-align: top;
+
+        .panel {
+          position: absolute;
+          width: 6.250rem;
+          height: 0.6875rem;
+          background-color: $gamePageVictory-container-roundsComplete-panel-bg-color;
+          border-radius: 0.3125rem;
+          top: 0.0625rem;
+
+        }
+        .fill {
+          top: 0;
+          position: absolute;
+          height: 0.8125rem;
+          background-color: $gamePageVictory-container-roundsComplete-progress-bg-color;
+          border-radius: 0.4rem;
+        }
+      }
+    }
+
+    .your-reward {
+      text-align: center;
+      font-size: 1.15rem;
+    }
+
+    .rewards {
+      height: 1rem;
+      margin-top: 0.75rem;
+      text-align: center;
+      font-size: 0.875rem;
+
+      div:nth-child(n) {
+        text-align: initial;
+        display: inline-block;
+        height: 1rem;
+        background-repeat: no-repeat;
+        background-size: contain;
+        line-height: 1.125rem;
+        vertical-align: middle;
+      }
+      .score {
+        margin-right: 2.5rem;
+        padding-left: 1.25rem;
+      }
+      .coins {
+        padding-left: 1rem;
+      }
+    }
+
+    .continue {
+      height: 4.875rem;
+      margin-top: 1.25rem;
+      vertical-align: middle;
+      line-height: 4.875rem;
+      text-align: center;
+
+      .button {
+        display: inline-block;
+        border-radius: 0.425rem;
+        text-align: center;
+        height: 2.375rem;
+        background-color: $gamePageVictory-container-continue-button-bg-color;
+        width: 7.8125rem;
+        line-height: 2.365rem;
+        vertical-align: middle;
+        font-size: 1rem;
+      }
+    }
+  }
 }

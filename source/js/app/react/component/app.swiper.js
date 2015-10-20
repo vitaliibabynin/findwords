@@ -49,9 +49,7 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     getSlideGameState: function (idx) {
-
         return appManager.getGameState().getRoundsBundles(idx);
-
     },
 
     onClickEffect: function (e) {

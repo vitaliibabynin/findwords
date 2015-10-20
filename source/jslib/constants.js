@@ -63,6 +63,8 @@ window.CONST = {
 
             //GAME PAGE VICTORY
             'victory.excellent': 'Отлично!',
+            'victory.yourReward': 'Ваша награда:',
+            'victory.continue': 'Продолжить',
 
             t: ''
         },
@@ -103,6 +105,8 @@ window.CONST = {
 
             //GAME PAGE VICTORY
             'victory.excellent': 'Excellent!',
+            'victory.yourReward': 'Your reward:',
+            'victory.continue': 'Continue',
 
             t: ''
         }

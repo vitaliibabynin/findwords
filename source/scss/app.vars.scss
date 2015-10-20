@@ -57,7 +57,7 @@ $footerLabel-font-size: 1.500rem;
 //COLOR
 
 //gamePage
-$gamePage-bg-color: $mainPage-bg-color;
+$gamePage-bg-color: #81cfe0;
 
 //gamePage-Timer
 $gamePage-timer-bg-color: #2574a9;
@@ -111,10 +111,15 @@ $gamePage-shownWords-word-color: #ffffff;
 //COLOR
 
 //gamePageVictory
-$gamePageVictory-bg-color: $mainPage-bg-color;
+$gamePageVictory-bg-color: #81cfe0;
 
 //gamePageVictory-container
-$gamePageVictory-container-bg-color: red;
-$gamePageVictory-container-color: white;
+$gamePageVictory-container-bg-color: #ff4545;
+$gamePageVictory-container-color: #ffffff;
 
-//gamePageVictory-container-congrats
+//gamePageVictory-container-roundsComplete
+$gamePageVictory-container-roundsComplete-panel-bg-color: rgba(85,85,85,0.5);
+$gamePageVictory-container-roundsComplete-progress-bg-color: #ffffff;
+
+//gamePageVictory-container-continue-button
+$gamePageVictory-container-continue-button-bg-color: rgba(85,85,85,0.5);
