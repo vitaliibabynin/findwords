@@ -27,10 +27,12 @@ window.CONST = {
     LANGUAGE_EN: 'en',
     LANG_STRINGS: {
         ru: {
+            //LOADING SCREEN
             'loadingscreen.message.pleasewait': 'Пожалуйста, подождите...',
             'loadingscreen.errorloading.message': 'Произошла ошибка во время загрузки приложения. Пожалуйста, проверьте подключение к интернету и повторите загрузку',
             'loadingscreen.errorloading.button.reload': 'Повторить загрузку',
 
+            //MAIN PAGE
             'language.ru': 'Русский',
             'language.en': 'English',
             'button.fb': 'кнопка FBButton',
@@ -48,6 +50,7 @@ window.CONST = {
             'button.music': 'Музыка',
             'button.sound': 'Звук',
 
+            //GAME PAGE
             'chip.open-word': 'Открыть слово',
             'chip.open-letter': 'Открыть букву',
             'chip.show-word': 'Показать слово',
@@ -58,13 +61,18 @@ window.CONST = {
             'notice.noSuchWord.after': 'мы не загадывали',
             'notice.noWordsToShow': 'Больше нету слов, чтобы показать',
 
+            //GAME PAGE VICTORY
+            'victory.excellent': 'Отлично!',
+
             t: ''
         },
         en: {
+            //LOADING SCREEN
             'loadingscreen.message.pleasewait': 'Please wait...',
             'loadingscreen.errorloading.message': 'An error has occurred loading this game. Please check your internet connection and try again.',
             'loadingscreen.errorloading.button.reload': 'Try again',
 
+            //MAIN PAGE
             'language.ru': 'Русский',
             'language.en': 'English',
             'button.fb': 'button FBButton',
@@ -82,6 +90,7 @@ window.CONST = {
             'button.music': 'Music',
             'button.sound': 'Sound',
 
+            //GAME PAGE
             'chip.open-word': 'Open word',
             'chip.open-letter': 'Open letter',
             'chip.show-word': 'Show word',
@@ -91,6 +100,9 @@ window.CONST = {
             'notice.noSuchWord.before': 'The word',
             'notice.noSuchWord.after': 'is not in the riddle',
             'notice.noWordsToShow': 'No more words to show',
+
+            //GAME PAGE VICTORY
+            'victory.excellent': 'Excellent!',
 
             t: ''
         }

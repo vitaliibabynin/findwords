@@ -37,19 +37,15 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     getInitialState: function () {
-
         var state = {
-
             slideData: this.props.slideData || {},
             slideIndex: this.props.slideIndex || 0
-
         };
-
         var slideGameState = this.getSlideGameState(state.slideIndex);
         state.isUnlocked = slideGameState && slideGameState.isUnlocked ? true : false;
         state.layout = state.isUnlocked ? LAYOUT_UNLOCKED : LAYOUT_LOCKED;
-        return state;
 
+        return state;
     },
 
     getSlideGameState: function (idx) {
@@ -79,9 +75,7 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     onClickGame: function () {
-
         router.navigate("game", "main");
-
     },
 
     onClickInstructions: function () {
@@ -105,7 +99,6 @@ var SlideClass = Object.assign({}, {}, {
         this.onClickEffect(buttonProps);
 
         this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions();
-
     },
 
     renderUnlocked: function () {

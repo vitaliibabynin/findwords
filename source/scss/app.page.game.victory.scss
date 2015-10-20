@@ -10,4 +10,42 @@
   height: 100%;
   width: 100%;
 
+  .container {
+    background-color: $gamePageVictory-container-bg-color;
+    color: $gamePageVictory-container-color;
+    $margin-left-right: 2.8125rem;
+    margin-left: $margin-left-right;
+    margin-right: $margin-left-right;
+    margin-top: 2.25rem;
+
+    .excellent {
+      padding-top: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .stars {
+      margin-top: 1rem;
+      height: 3.125rem;
+      text-align: center;
+
+      div:nth-child(n) {
+        display: inline-block;
+        height: 3.0625rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .star1,
+      .star3 {
+        width: 2.125rem;
+      }
+
+      .star2 {
+        width: 2.75rem;
+      }
+    }
+
+  }
+
 }
