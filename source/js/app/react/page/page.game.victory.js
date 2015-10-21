@@ -16,15 +16,25 @@ var PageGameVictory = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            roundIdx: 0,
-            starsReceived: 2,
-            roundsComplete: 10,
-            roundsTotal: 15,
-            score: 99,
-            coins: 99999
+            roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
+            roundIdx: parseInt(router.getParam('roundIdx')) || 0,
+            rewardScore: 99999,
+            rewardCoins: 99999
         };
+        state.starsReceived = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, 'starsReceived') || 3;
+        state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
+        var rounds = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'rounds');
+        state.roundsTotal = Utils.countObjectProperties(rounds) || 1;
 
         return state;
+    },
+
+    getGameStateRoundsBundleField: function (roundsBundleIdx, field) {
+        return appManager.getGameState().getRoundsBundles(roundsBundleIdx)[field];
+    },
+
+    getGameStateRoundField: function (roundsBundleIdx, roundIdx, field) {
+        return appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field];
     },
 
     //componentDidMount: function () {
@@ -39,8 +49,50 @@ var PageGameVictory = Object.assign({}, {}, {
     //
     //},
 
+    roundsBundleIdx: function () {
+        var currentRoundsBundleIdx = this.state.roundsBundleIdx;
+        var roundsBundles = appManager.getGameState().getRoundsBundles();
+        var roundsBundlesTotal = Utils.countObjectProperties(roundsBundles);
+        var nextRoundsBundleIdx = currentRoundsBundleIdx + 1;
+
+        if (nextRoundsBundleIdx < roundsBundlesTotal) {
+            return nextRoundsBundleIdx;
+        }
+
+        return false;
+    },
+
+    nextRoundIdx: function () {
+        var currentRoundIdx = this.state.roundIdx;
+        var roundsTotal = this.state.roundsTotal;
+        var nextRoundIdx = currentRoundIdx + 1;
+
+        if (nextRoundIdx < roundsTotal) {
+            return nextRoundIdx;
+        }
+
+        return false;
+    },
+
     onClick: function () {
-        router.navigate("game", "main");
+        var nextRoundIdx = this.nextRoundIdx();
+        var nextRoundsBundleIdx = this.state.roundsBundleIdx;
+
+        if (nextRoundIdx === false) {
+            nextRoundsBundleIdx = this.roundsBundleIdx();
+            if (nextRoundsBundleIdx === false) {
+                router.navigate("main", "index");
+                return;
+            }
+            nextRoundIdx = 0;
+        }
+
+        var params = {
+            roundsBundleIdx: nextRoundsBundleIdx,
+            roundIdx: nextRoundIdx
+        };
+
+        router.navigate("game", "main", params);
     },
 
     selectStarArrangement: function () {
@@ -70,6 +122,10 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     render: function () {
+
+        console.log({roundsBundleIdxVictory: this.state.roundsBundleIdx});
+        console.log({roundIdxVictory: this.state.roundIdx});
+
         var starArrangement = this.selectStarArrangement();
         var styleStar1 = {
             backgroundImage: starArrangement[0]
@@ -122,8 +178,8 @@ var PageGameVictory = Object.assign({}, {}, {
                         <div className="your-reward">{i18n._('victory.yourReward')}</div>
 
                         <div className="rewards">
-                            <div className="score" style={rewardStar}>{this.state.score}</div>
-                            <div className="coins" style={rewardDollar}>{this.state.coins}</div>
+                            <div className="score" style={rewardStar}>{this.state.rewardScore}</div>
+                            <div className="coins" style={rewardDollar}>{this.state.rewardCoins}</div>
                         </div>
 
                         <div className="continue">

@@ -16,7 +16,8 @@ var TimerClass = Object.assign({}, {}, {
 
     propTypes: {
         isCountDownOn: React.PropTypes.bool,
-        secondsRemaining: React.PropTypes.number
+        secondsRemaining: React.PropTypes.number,
+        setGameStateRoundField: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -29,7 +30,9 @@ var TimerClass = Object.assign({}, {}, {
             timerImg: this.getImagePath('timer/timer'),
             starOneThirdOff: this.getImagePath('timer/star_off'),
             starTwoThirdsOff: this.getImagePath('timer/star_off'),
-            starsReceived: 3
+            starsReceived: 3,
+            setGameStateRoundField: this.props.setGameStateRoundField || function() {
+            }
         };
 
         if (this.props.isCountDownOn && this.props.secondsRemaining) {
@@ -50,10 +53,8 @@ var TimerClass = Object.assign({}, {}, {
             if (this.state.starsReceived == 1) {
                 return;
             }
-
+            this.state.setGameStateRoundField('starsReceived', 1);
             this.setState({starsReceived: 1});
-            console.log(this.state.starsReceived);
-
             return;
         }
 
@@ -61,9 +62,8 @@ var TimerClass = Object.assign({}, {}, {
             if (this.state.starsReceived == 2) {
                 return;
             }
-
+            this.state.setGameStateRoundField('starsReceived', 2);
             this.setState({starsReceived: 2});
-            console.log(this.state.starsReceived);
         }
     },
 

@@ -124,8 +124,8 @@ var BackButtonClass = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     onButtonClick: function(){
-        //router.navigate("main", "index");
-        router.goBack();
+        router.navigate("main", "index");
+        //router.goBack();
     },
 
     render: function () {

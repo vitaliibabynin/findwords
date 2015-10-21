@@ -21,7 +21,7 @@ var GameState = Object.assign({}, {}, {
             0: {
                 bundleScore: 99999,
                 isUnlocked: true,
-                roundsComplete: 1,
+                roundsComplete: 0,
                 rounds: {
                     0: {
                         board: {},
@@ -29,31 +29,55 @@ var GameState = Object.assign({}, {}, {
                         shownWords: [],
                         starsReceived: 3
                     },
-                    1: {},
-                    2: {}
+                    1: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    2: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    3: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    }
                 }
             },
             1: {
-                bundleScore: 99999,
-                isUnlocked: false,
-                roundsComplete: 2,
+                bundleScore: 9999,
+                isUnlocked: true,
+                roundsComplete: 0,
                 rounds: {
                     0: {
-                        board: {
-                            0: {
-                                color: "backgroundColor7",
-                                openWord: false
-                            },
-                            2: {
-                                color: "backgroundColor5",
-                                openWord: false
-                            }
-                        },
-                        openedLetters: [{x: 0, y: 0}, {x: 1, y: 0}],
-                        shownWords: []
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
                     },
-                    1: {},
-                    2: {}
+                    1: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    2: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    3: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    }
                 }
             }
         }
@@ -159,7 +183,7 @@ var GameState = Object.assign({}, {}, {
         this.saveGameState();
     },
     getRoundsBundles: function (bundleIndex) {
-        if (bundleIndex == 'undefined') {
+        if (typeof bundleIndex == 'undefined') {
             return this.gameState.roundsBundles;
         }
 
@@ -174,7 +198,7 @@ var GameState = Object.assign({}, {}, {
         this.saveGameState();
     },
     getRound: function (bundleIndex, roundIndex) {
-        if (bundleIndex == 'undefined') {
+        if (typeof bundleIndex == 'undefined') {
             return this.gameState.roundsBundles;
         }
 
@@ -182,7 +206,7 @@ var GameState = Object.assign({}, {}, {
             return false;
         }
 
-        if (roundIndex == 'undefined') {
+        if (typeof roundIndex == 'undefined') {
             return this.gameState.roundsBundles[bundleIndex];
         }
 

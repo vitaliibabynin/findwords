@@ -24,9 +24,8 @@ var PageGameMain = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            roundsBundleIdx: 0,
-            //roundIdx: router.getParam('roundidx') || 0,
-            roundIdx: 0,
+            roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
+            roundIdx: parseInt(router.getParam('roundIdx')) || 0,
             shownWordsLetters: [],
             noticeType: "",
             noticeWord: {letters: []},
@@ -57,6 +56,18 @@ var PageGameMain = Object.assign({}, {}, {
         }
 
         return shownWordsLetters;
+    },
+
+    setGameStateRoundsBundleField: function (field, newValue) {
+        var bundleIndex = this.state.roundsBundleIdx;
+
+        return appManager.getGameState().setRoundsBundles(bundleIndex, field, newValue);
+    },
+
+    getGameStateRoundsBundleField: function (field) {
+        var bundleIndex = this.state.roundsBundleIdx;
+
+        return appManager.getGameState().getRoundsBundles(bundleIndex)[field];
     },
 
     setGameStateRoundField: function (field, newValue) {
@@ -100,7 +111,7 @@ var PageGameMain = Object.assign({}, {}, {
             });
 
             if (this.refs.board.checkIfRoundComplete()){
-                this.goToPageRoundComplete(800);
+                this.goToPageRoundComplete(2000);
             }
         }
     },
@@ -122,7 +133,7 @@ var PageGameMain = Object.assign({}, {}, {
             });
 
             if (this.refs.board.checkIfRoundComplete()){
-                this.goToPageRoundComplete(800);
+                this.goToPageRoundComplete(2000);
             }
         }
     },
@@ -207,15 +218,27 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     goToPageRoundComplete: function (time) {
-        time = time || 300;
+        time = time || 2000;
+
+        var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
+        roundsComplete ++;
+        this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
+
+        var params = {
+            roundsBundleIdx: this.state.roundsBundleIdx,
+            roundIdx: this.state.roundIdx
+        };
 
         setTimeout(function () {
-            router.navigate("game", "victory")
+            router.navigate("game", "victory", params);
         }.bind(this), time);
     },
 
 
     render: function () {
+
+        console.log({roundsBundleIdx: this.state.roundsBundleIdx});
+        console.log({roundIdx: this.state.roundIdx});
 
         return (
             <div className="page-game">
@@ -223,7 +246,9 @@ var PageGameMain = Object.assign({}, {}, {
 
                     <Counters isDisplayBackButton={true}/>
 
-                    <Timer secondsRemaining={30} isCountDownOn={true}/>
+                    <Timer secondsRemaining={30}
+                           isCountDownOn={true}
+                           setGameStateRoundField={this.setGameStateRoundField}/>
 
                     <div className="chips">
                         <ChipButton className="open-word"

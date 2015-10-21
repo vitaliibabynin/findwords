@@ -73,7 +73,8 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     onClickGame: function () {
-        router.navigate("game", "main");
+        var params = this.getParams();
+        router.navigate("game", "main", params);
     },
 
     onClickInstructions: function () {
@@ -90,13 +91,24 @@ var SlideClass = Object.assign({}, {}, {
 
     onClickBuySet: function (buttonProps, e) {
         e.stopPropagation();
-        router.navigate("game", "main", {slideIdx: this.props.slideIndex});
+
+        this.onClickGame();
     },
 
     onClick: function (buttonProps, e) {
         this.onClickEffect(buttonProps);
 
         this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions();
+    },
+
+    getParams: function () {
+        var slideIdx = this.state.slideIndex;
+        var roundIdx = appManager.getGameState().getRoundsBundles(slideIdx).roundsComplete;
+
+        return {
+            roundsBundleIdx: slideIdx,
+            roundIdx: roundIdx
+        }
     },
 
     renderUnlocked: function () {
