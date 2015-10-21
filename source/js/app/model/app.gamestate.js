@@ -26,7 +26,8 @@ var GameState = Object.assign({}, {}, {
                     0: {
                         board: {},
                         openedLetters: [],
-                        shownWords: []
+                        shownWords: [],
+                        starsReceived: 3
                     },
                     1: {},
                     2: {}

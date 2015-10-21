@@ -15,16 +15,12 @@ var TimerClass = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     propTypes: {
-
         isCountDownOn: React.PropTypes.bool,
         secondsRemaining: React.PropTypes.number
-
     },
 
     getInitialState: function () {
-
         var state = {
-
             isCountDownOn: false,
             secondsRemaining: this.props.secondsRemaining || 0,
             starOneThirdOn: this.getImagePath('timer/star_on'),
@@ -32,8 +28,8 @@ var TimerClass = Object.assign({}, {}, {
             starBase: this.getImagePath('timer/star_on'),
             timerImg: this.getImagePath('timer/timer'),
             starOneThirdOff: this.getImagePath('timer/star_off'),
-            starTwoThirdsOff: this.getImagePath('timer/star_off')
-
+            starTwoThirdsOff: this.getImagePath('timer/star_off'),
+            starsReceived: 3
         };
 
         if (this.props.isCountDownOn && this.props.secondsRemaining) {
@@ -41,37 +37,49 @@ var TimerClass = Object.assign({}, {}, {
         }
 
         return state;
-
     },
 
     tick: function () {
-
         this.setState({secondsRemaining: this.state.secondsRemaining - 1});
 
         if (this.state.secondsRemaining <= 0) {
             clearInterval(this.interval);
         }
 
+        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 33.3) {
+            if (this.state.starsReceived == 1) {
+                return;
+            }
+
+            this.setState({starsReceived: 1});
+            console.log(this.state.starsReceived);
+
+            return;
+        }
+
+        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 66.6) {
+            if (this.state.starsReceived == 2) {
+                return;
+            }
+
+            this.setState({starsReceived: 2});
+            console.log(this.state.starsReceived);
+        }
     },
 
     componentDidMount: function () {
-
         if (!this.state.isCountDownOn) {
             return;
         }
 
         this.interval = setInterval(this.tick, 1000);
-
     },
 
     componentWillUnmount: function () {
-
         clearInterval(this.interval);
-
     },
 
     render: function () {
-
         var starOneThird = this.state.starOneThirdOn;
         var starTwoThirds = this.state.starTwoThirdsOn;
         var starBase = this.state.starBase;
@@ -80,21 +88,15 @@ var TimerClass = Object.assign({}, {}, {
         if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 66.6) {
             starTwoThirds = this.state.starTwoThirdsOff;
         }
-
         if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 33.3) {
             starOneThird = this.state.starOneThirdOff;
         }
 
         var stars = {
-
             backgroundImage: "url('" + starBase + "'), url('" + starOneThird + "'), url('" + starTwoThirds + "')"
-
         };
-
         var clock = {
-
             backgroundImage: "url('" + timerImg + "')"
-
         };
 
         var timeLine = {
