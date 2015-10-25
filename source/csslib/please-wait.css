@@ -186,8 +186,8 @@ body.pg-loading {
 /*ANIMATION*/
 #squaresWaveG {
     position: relative;
-    width: 104px;
-    height:11px;
+    width: 6.5rem;
+    height: 0.6875rem;
     margin: auto;
 }
 
@@ -195,8 +195,8 @@ body.pg-loading {
     position: absolute;
     top: 0;
     background-color: rgb(255, 255, 255);
-    width: 11px;
-    height: 11px;
+    width: 0.6875rem;
+    height: 0.6875rem;
     animation-name: bounce_squaresWaveG;
     -o-animation-name: bounce_squaresWaveG;
     -ms-animation-name: bounce_squaresWaveG;
@@ -229,7 +229,7 @@ body.pg-loading {
 }
 
 #squaresWaveG_2 {
-    left: 13px;
+    left: 0.8125rem;
     animation-delay: 0.75s;
     -o-animation-delay: 0.75s;
     -ms-animation-delay: 0.75s;
@@ -238,7 +238,7 @@ body.pg-loading {
 }
 
 #squaresWaveG_3 {
-    left: 26px;
+    left: 1.625rem;
     animation-delay: 0.9s;
     -o-animation-delay: 0.9s;
     -ms-animation-delay: 0.9s;
@@ -247,7 +247,7 @@ body.pg-loading {
 }
 
 #squaresWaveG_4 {
-    left: 39px;
+    left: 2.4375rem;
     animation-delay: 1.05s;
     -o-animation-delay: 1.05s;
     -ms-animation-delay: 1.05s;
@@ -256,7 +256,7 @@ body.pg-loading {
 }
 
 #squaresWaveG_5 {
-    left: 52px;
+    left: 3.25rem;
     animation-delay: 1.2s;
     -o-animation-delay: 1.2s;
     -ms-animation-delay: 1.2s;
@@ -265,7 +265,7 @@ body.pg-loading {
 }
 
 #squaresWaveG_6 {
-    left: 65px;
+    left: 4.0625rem;
     animation-delay: 1.35s;
     -o-animation-delay: 1.35s;
     -ms-animation-delay: 1.35s;
@@ -274,7 +274,7 @@ body.pg-loading {
 }
 
 #squaresWaveG_7 {
-    left: 78px;
+    left: 4.875rem;
     animation-delay: 1.5s;
     -o-animation-delay: 1.5s;
     -ms-animation-delay: 1.5s;
@@ -283,7 +283,7 @@ body.pg-loading {
 }
 
 #squaresWaveG_8 {
-    left: 91px;
+    left: 5.6875rem;
     animation-delay: 1.64s;
     -o-animation-delay: 1.64s;
     -ms-animation-delay: 1.64s;
