@@ -72,7 +72,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
 
                     this.emitOnInit();
 
-                    //window.loadingScreen.hide();
+                    window.loadingScreen.hide();
                 }.bind(this), function(){
                     console.log('appManager.init error');
                     window.loadingScreen.showErrorLoadingForm();

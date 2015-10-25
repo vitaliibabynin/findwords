@@ -23,8 +23,8 @@ var PageGameVictory = Object.assign({}, {}, {
         };
         state.starsReceived = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, 'starsReceived') || 3;
         state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
-        var rounds = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'rounds');
-        state.roundsTotal = Utils.countObjectProperties(rounds) || 1;
+        var rounds = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds;
+        state.roundsTotal = rounds.length || 1;
 
         return state;
     },
@@ -51,9 +51,12 @@ var PageGameVictory = Object.assign({}, {}, {
 
     roundsBundleIdx: function () {
         var currentRoundsBundleIdx = this.state.roundsBundleIdx;
-        var roundsBundles = appManager.getGameState().getRoundsBundles();
-        var roundsBundlesTotal = Utils.countObjectProperties(roundsBundles);
+        var roundsBundles = appManager.getSettings().getRoundsBundles();
+        var roundsBundlesTotal = roundsBundles.length;
         var nextRoundsBundleIdx = currentRoundsBundleIdx + 1;
+
+        console.log({roundsBundlesTotal: roundsBundlesTotal});
+        console.log({nextRoundsBundleIdx: nextRoundsBundleIdx});
 
         if (nextRoundsBundleIdx < roundsBundlesTotal) {
             return nextRoundsBundleIdx;
@@ -74,6 +77,29 @@ var PageGameVictory = Object.assign({}, {}, {
         return false;
     },
 
+    checkIfNextRoundsBundleIsComplete: function () {
+        var nextRoundsBundleIdx = this.state.roundsBundleIdx + 1;
+        var nextRoundsBundle = appManager.getGameState().getRoundsBundles(nextRoundsBundleIdx);
+        var nextRoundsBundleRoundsComplete = nextRoundsBundle.roundsComplete;
+        var nextRoundsBundleRoundsTotal = appManager.getSettings().getRoundsBundles()[nextRoundsBundleIdx].rounds.length;
+
+        if (nextRoundsBundleRoundsComplete == nextRoundsBundleRoundsTotal) {
+            return true;
+        }
+
+        return nextRoundsBundleRoundsComplete;
+    },
+
+    getParams: function () {
+        var roundsBundleIdx = this.state.roundsBundleIdx();
+        var roundIdx = appManager.getGameState().getRoundsBundles(roundsBundleIdx).roundsComplete;
+
+        return {
+            roundsBundleIdx: roundsBundleIdx,
+            roundIdx: roundIdx
+        }
+    },
+
     onClick: function () {
         var nextRoundIdx = this.nextRoundIdx();
         var nextRoundsBundleIdx = this.state.roundsBundleIdx;
@@ -83,8 +109,16 @@ var PageGameVictory = Object.assign({}, {}, {
             if (nextRoundsBundleIdx === false) {
                 router.navigate("main", "index");
                 return;
+
             }
-            nextRoundIdx = 0;
+
+            var nextRoundsBundlesRoundsComplete = this.checkIfNextRoundsBundleIsComplete();
+            if (nextRoundsBundlesRoundsComplete === true) {
+                router.navigate("main", "index");
+                return;
+            }
+
+            nextRoundIdx = nextRoundsBundlesRoundsComplete;
         }
 
         var params = {

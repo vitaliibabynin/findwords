@@ -74,6 +74,11 @@ var SlideClass = Object.assign({}, {}, {
 
     onClickGame: function () {
         var params = this.getParams();
+
+        if (params === false) {
+            return;
+        }
+
         router.navigate("game", "main", params);
     },
 
@@ -104,6 +109,12 @@ var SlideClass = Object.assign({}, {}, {
     getParams: function () {
         var slideIdx = this.state.slideIndex;
         var roundIdx = appManager.getGameState().getRoundsBundles(slideIdx).roundsComplete;
+        var roundsBundleGameData = appManager.getSettings().getRoundsBundles()[slideIdx].rounds;
+        var roundsTotal = roundsBundleGameData.length;
+
+        if (roundIdx >= roundsTotal) {
+            return false;
+        }
 
         return {
             roundsBundleIdx: slideIdx,

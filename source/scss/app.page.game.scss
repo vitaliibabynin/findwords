@@ -128,6 +128,7 @@
       border-collapse: collapse;
       border: 0.0625rem solid $gamePage-board-color-border;
       background-color: $gamePage-board-td-bg-color-default;
+      color: $gamePage-board-color;
       //table-layout: fixed;
 
       td {
