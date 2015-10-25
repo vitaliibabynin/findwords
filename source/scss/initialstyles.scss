@@ -183,8 +183,13 @@ html.desktop .btn:hover,
   font-weight: 300;
 }
 
+.pg-loading-screen .pg-loading-logo-header {
+  margin-bottom: 5rem;
+}
+
 .pg-loading-screen .pg-loading-html p.loading-message {
   font-size: 1.1rem;
+  margin: 0 auto;
   //margin-bottom: 6.250rem;
 }
 
