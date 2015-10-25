@@ -1,7 +1,7 @@
 
 var LoadingScreen = {
     getHTMLSpiner: function(){
-        return "<div class='sk-spinner sk-spinner-chasing-dots'><div class='sk-dot1'></div><div class='sk-dot2'></div></div>";
+        return '<div id="floatBarsG"> <div id="floatBarsG_1" class="floatBarsG"></div><div id="floatBarsG_2" class="floatBarsG"></div><div id="floatBarsG_3" class="floatBarsG"></div><div id="floatBarsG_4" class="floatBarsG"></div><div id="floatBarsG_5" class="floatBarsG"></div><div id="floatBarsG_6" class="floatBarsG"></div><div id="floatBarsG_7" class="floatBarsG"></div><div id="floatBarsG_8" class="floatBarsG"></div></div>';
     },
     getHTMLMessage: function(message){
         message = message || "";
@@ -14,8 +14,8 @@ var LoadingScreen = {
             //    updateLoadingHtml: function(html){
                     //console.log((cordova && cordova.file && cordova.file.applicationDirectory ? cordova.file.applicationDirectory + 'www/' : '') + CONST.STATIC_IMAGE_URL + "logo/logo-100x100.png");
                     window.pleeaseWaitObj = window.pleaseWait({
-                        logo: (window.cordova && window.cordova.file && window.cordova.file.applicationDirectory ? window.cordova.file.applicationDirectory + 'www/' : '') + CONST.STATIC_IMAGE_URL + (documentWidth >= 640 ? "man/man_logo_2x.png" : "man/man_logo.png"),
-                        backgroundColor: '#E6D2B8',
+                        logo: (window.cordova && window.cordova.file && window.cordova.file.applicationDirectory ? window.cordova.file.applicationDirectory + 'www/' : '') + CONST.STATIC_IMAGE_URL + (documentWidth >= 640 ? "loading/loading@2x.png" : "loading/loading.png"),
+                        backgroundColor: '#46D0E2',
                         loadingHtml: /*html ||*/ this.getHTMLMessage() + this.getHTMLSpiner()
                     });
             //    }
