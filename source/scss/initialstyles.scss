@@ -184,7 +184,8 @@ html.desktop .btn:hover,
 }
 
 .pg-loading-screen .pg-loading-logo-header {
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
+  margin-top: -1.5rem;
 }
 
 .pg-loading-screen .pg-loading-html p.loading-message {
@@ -198,6 +199,10 @@ html.desktop .btn:hover,
   margin-right: auto;
   width: 20rem;
   max-width: 90vw;
+}
+
+#squaresWaveG {
+  //margin-bottom: 5rem;
 }
 
 //.sk-spinner {
