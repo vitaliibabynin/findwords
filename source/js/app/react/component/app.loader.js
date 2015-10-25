@@ -7,27 +7,25 @@ module.exports = {};
 
 var Loader = {
 
-    getInitialState: function(){
-        return {
-
-        };
+    getInitialState: function () {
+        return {};
     },
 
 
-    render: function() {
+    render: function () {
         var classesLoader = classNames('loader', {hide: !this.props.show});
 
         return (
             <div className={classesLoader}>
-                <div id="floatBarsG">
-                    <div id="floatBarsG_1" class="floatBarsG"></div>
-                    <div id="floatBarsG_2" class="floatBarsG"></div>
-                    <div id="floatBarsG_3" class="floatBarsG"></div>
-                    <div id="floatBarsG_4" class="floatBarsG"></div>
-                    <div id="floatBarsG_5" class="floatBarsG"></div>
-                    <div id="floatBarsG_6" class="floatBarsG"></div>
-                    <div id="floatBarsG_7" class="floatBarsG"></div>
-                    <div id="floatBarsG_8" class="floatBarsG"></div>
+                <div id="squaresWaveG">
+                    <div id="squaresWaveG_1" class="squaresWaveG"></div>
+                    <div id="squaresWaveG_2" class="squaresWaveG"></div>
+                    <div id="squaresWaveG_3" class="squaresWaveG"></div>
+                    <div id="squaresWaveG_4" class="squaresWaveG"></div>
+                    <div id="squaresWaveG_5" class="squaresWaveG"></div>
+                    <div id="squaresWaveG_6" class="squaresWaveG"></div>
+                    <div id="squaresWaveG_7" class="squaresWaveG"></div>
+                    <div id="squaresWaveG_8" class="squaresWaveG"></div>
                 </div>
             </div>
         );
