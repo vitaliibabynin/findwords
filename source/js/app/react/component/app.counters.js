@@ -21,7 +21,6 @@ var CounterClass = Object.assign({}, {}, {
     },
 
     getInitialState: function () {
-
         var state = {
             className: "",
             imgPath: '',
@@ -31,7 +30,6 @@ var CounterClass = Object.assign({}, {}, {
         };
 
         return state;
-
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -123,8 +121,19 @@ var BackButtonClass = Object.assign({}, {}, {
     displayName: 'BackButton',
     mixins: [GameMixin],
 
+    propTypes: {
+        roundsBundleIdx: React.PropTypes.number
+    },
+
+    getInitialState: function () {
+        var state = CounterClass.getInitialState.apply(this);
+        state.roundsBundleIdx = this.props.roundsBundleIdx || 0;
+
+        return state;
+    },
+
     onButtonClick: function(){
-        router.navigate("main", "index");
+        router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
         //router.goBack();
     },
 
@@ -147,9 +156,8 @@ var CountersClass = Object.assign({}, {}, {
     displayName: 'Counters',
 
     propTypes: {
-
-        isDisplayBackButton: React.PropTypes.bool
-
+        isDisplayBackButton: React.PropTypes.bool,
+        roundsBundleIdx: React.PropTypes.number
     },
 
     getInitialState: function () {
@@ -164,7 +172,7 @@ var CountersClass = Object.assign({}, {}, {
 
         if (this.state.isDisplayBackButton) {
             return (
-                <BackButton />
+                <BackButton roundsBundleIdx={this.props.roundsBundleIdx}/>
             );
         }
 

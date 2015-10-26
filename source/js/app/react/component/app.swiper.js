@@ -252,6 +252,8 @@ var SwiperClass = Object.assign({}, {}, {
 
     displayName: 'Swiper',
 
+    propTypes: {initialSlide: React.PropTypes.number},
+
     componentDidMount: function () {
 
         if (null == this.swiper) {
@@ -263,7 +265,8 @@ var SwiperClass = Object.assign({}, {}, {
                 slidesPerView: 2,
                 centeredSlides: true,
                 paginationClickable: true,
-                spaceBetween: 0
+                spaceBetween: 0,
+                initialSlide: this.props.initialSlide || 0
 
             });
         }

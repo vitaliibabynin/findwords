@@ -101,7 +101,7 @@ var PageGameVictory = Object.assign({}, {}, {
                 }
 
                 if (i == roundsBundlesTotal - 1 && nextRoundsBundlesRoundsComplete === false) {
-                    router.navigate("main", "index");
+                    router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
                     return;
                 }
             }

@@ -18,14 +18,14 @@ var PageMain = Object.assign({}, {}, {
 
     displayName: 'PageMain',
 
-    //getInitialState: function () {
-    //
-    //    var state = {};
-    //
-    //    return state;
-    //
-    //},
-    //
+    getInitialState: function () {
+        var state = {
+            initialSlide: parseInt(router.getParam('roundsBundleIdx')) || 0
+        };
+
+        return state;
+    },
+
     //componentDidMount: function () {
     //
     //},
@@ -58,7 +58,7 @@ var PageMain = Object.assign({}, {}, {
                     <Counters />
 
                     <div className="main">
-                        <Swiper />
+                        <Swiper initialSlide={this.state.initialSlide}/>
                         <Navigation />
                     </div>
 

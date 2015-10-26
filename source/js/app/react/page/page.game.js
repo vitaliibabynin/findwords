@@ -244,7 +244,8 @@ var PageGameMain = Object.assign({}, {}, {
             <div className="page-game">
                 <div className="page-content">
 
-                    <Counters isDisplayBackButton={true}/>
+                    <Counters isDisplayBackButton={true}
+                              roundsBundleIdx={this.state.roundsBundleIdx}/>
 
                     <Timer secondsRemaining={30}
                            isCountDownOn={true}
