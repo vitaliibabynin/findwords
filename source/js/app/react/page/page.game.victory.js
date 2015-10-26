@@ -17,14 +17,14 @@ var PageGameVictory = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
-            roundIdx: parseInt(router.getParam('roundIdx')) || 0,
-            rewardScore: 99999,
-            rewardCoins: 99999
+            roundIdx: parseInt(router.getParam('roundIdx')) || 0
         };
         state.starsReceived = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, 'starsReceived') || 3;
         state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
         var rounds = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds;
         state.roundsTotal = rounds.length || 1;
+        state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].score * (state.starsReceived / 3) || 0;
+        state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].coins * (state.starsReceived / 3) || 0;
 
         return state;
     },

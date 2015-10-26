@@ -6,6 +6,8 @@ var gameData = {
             backgroundColor: "#d64541",
             rounds: [
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -40,6 +42,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -74,6 +78,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -108,6 +114,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -148,6 +156,8 @@ var gameData = {
             backgroundColor: "#0000ff",
             rounds: [
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -182,6 +192,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -216,6 +228,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -250,6 +264,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -290,6 +306,8 @@ var gameData = {
             backgroundColor: "#ff00ff",
             rounds: [
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -324,6 +342,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -358,6 +378,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -392,6 +414,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -432,6 +456,8 @@ var gameData = {
             backgroundColor: "#00ffff",
             rounds: [
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -466,6 +492,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -500,6 +528,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -534,6 +564,8 @@ var gameData = {
                     ]
                 },
                 {
+                    score: 999,
+                    coins: 999,
                     rows: 4,
                     cols: 4,
                     words: [
