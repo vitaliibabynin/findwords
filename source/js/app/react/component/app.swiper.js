@@ -14,6 +14,8 @@ module.exports = {};
 var LAYOUT_INSTRUCTIONS = 'instructions';
 var LAYOUT_LOCKED = 'locked';
 var LAYOUT_UNLOCKED = 'unlocked';
+var LAYOUT_COMPLETE = 'complete';
+var LAYOUT_COMPLETE_MESSAGE = 'message';
 
 
 var SlideClass = Object.assign({}, {}, {
@@ -21,7 +23,6 @@ var SlideClass = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     propTypes: {
-
         slideData: React.PropTypes.shape({
             backgroundColor: React.PropTypes.string,
             name: React.PropTypes.shape({
@@ -33,7 +34,6 @@ var SlideClass = Object.assign({}, {}, {
         }),
 
         slideIndex: React.PropTypes.number
-
     },
 
     getInitialState: function () {
@@ -44,6 +44,10 @@ var SlideClass = Object.assign({}, {}, {
         var slideGameState = this.getSlideGameState(state.slideIndex);
         state.isUnlocked = slideGameState && slideGameState.isUnlocked ? true : false;
         state.layout = state.isUnlocked ? LAYOUT_UNLOCKED : LAYOUT_LOCKED;
+        var slideComplete = this.checkIfSlideComplete(state.slideIndex, state.slideData);
+        if (slideComplete) {
+            state.layout = LAYOUT_COMPLETE;
+        }
 
         return state;
     },
@@ -52,8 +56,14 @@ var SlideClass = Object.assign({}, {}, {
         return appManager.getGameState().getRoundsBundles(idx);
     },
 
-    onClickEffect: function (e) {
+    checkIfSlideComplete (idx, slideData) {
+        var roundsComplete = this.getSlideGameState(idx).roundsComplete;
+        var roundsTotal = slideData.rounds.length;
 
+        return roundsComplete == roundsTotal;
+    },
+
+    onClickEffect: function (e) {
         e.preventDefault();
 
         if (!this.state.isActive) {
@@ -69,7 +79,6 @@ var SlideClass = Object.assign({}, {}, {
         if (this.props.onClick && typeof this.props.onClick == 'function') {
             this.props.onClick(this.props);
         }
-
     },
 
     onClickGame: function () {
@@ -83,15 +92,8 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     onClickInstructions: function () {
-
         var layout = this.state.layout == LAYOUT_INSTRUCTIONS ? LAYOUT_LOCKED : LAYOUT_INSTRUCTIONS;
-
-        var state = {
-            layout: layout
-        };
-
-        this.setState(state);
-
+        this.setState({layout: layout});
     },
 
     onClickBuySet: function (buttonProps, e) {
@@ -100,10 +102,19 @@ var SlideClass = Object.assign({}, {}, {
         this.onClickGame();
     },
 
+    onClickComplete: function () {
+        var layout = this.state.layout == LAYOUT_COMPLETE_MESSAGE ? LAYOUT_COMPLETE : LAYOUT_COMPLETE_MESSAGE;
+        this.setState({layout: layout});
+    },
+
     onClick: function (buttonProps, e) {
         this.onClickEffect(buttonProps);
 
         this.state.isUnlocked ? this.onClickGame() : this.onClickInstructions();
+
+        if (this.state.layout == LAYOUT_COMPLETE || this.state.layout == LAYOUT_COMPLETE_MESSAGE) {
+            this.onClickComplete();
+        }
     },
 
     getParams: function () {
@@ -122,8 +133,37 @@ var SlideClass = Object.assign({}, {}, {
         }
     },
 
-    renderUnlocked: function () {
+    renderComplete: function () {
+        var slideGameState = this.getSlideGameState(this.state.slideIndex);
 
+        var doneImg = {
+            backgroundImage: "url('" + this.getImagePath('slide/done') + "')"
+        };
+
+        return (
+
+            <div>
+
+                <div className="subheading">{i18n._('slide.complete')}</div>
+
+                <div className="done" style={doneImg}></div>
+
+                <div className="score">{i18n._('slide.score')} {slideGameState.bundleScore}</div>
+
+            </div>
+
+        );
+    },
+
+    renderCompleteMessage: function () {
+        return (
+            <div className="text">
+                <span>{i18n._('slide.complete.message')}</span>
+            </div>
+        );
+    },
+
+    renderUnlocked: function () {
         var slideGameState = this.getSlideGameState(this.state.slideIndex);
 
         var progressBar = {
@@ -155,11 +195,9 @@ var SlideClass = Object.assign({}, {}, {
             </div>
 
         );
-
     },
 
     renderLocked: function () {
-
         var lockImg = {
             backgroundImage: "url('" + this.getImagePath('slide/lock') + "')"
         };
@@ -167,18 +205,14 @@ var SlideClass = Object.assign({}, {}, {
         return (
 
             <div>
-
                 <div className="lock" style={lockImg}></div>
                 <div className="stats">0/{this.state.slideData.rounds.length}</div>
-
             </div>
 
         );
-
     },
 
     renderInstructions: function () {
-
         return (
 
             <div>
@@ -186,13 +220,14 @@ var SlideClass = Object.assign({}, {}, {
                 <div className="text">
                     <span>{i18n._('slide.instructions')}</span>
                 </div>
+
                 <IconButton onClick={this.onClickBuySet}
-                            className="purchase">{i18n._('slide.buy')}</IconButton>
+                            className="purchase">{i18n._('slide.buy')}
+                </IconButton>
 
             </div>
 
         )
-
     },
 
     render: function () {
@@ -225,6 +260,12 @@ var SlideClass = Object.assign({}, {}, {
             case LAYOUT_INSTRUCTIONS:
                 renderLayout = this.renderInstructions();
                 break;
+            case LAYOUT_COMPLETE:
+                renderLayout = this.renderComplete();
+                break;
+            case LAYOUT_COMPLETE_MESSAGE:
+                renderLayout = this.renderCompleteMessage();
+                break;
             default:
                 renderLayout = this.renderLocked();
         }
@@ -255,10 +296,8 @@ var SwiperClass = Object.assign({}, {}, {
     propTypes: {initialSlide: React.PropTypes.number},
 
     componentDidMount: function () {
-
         if (null == this.swiper) {
             this.swiper = new libSwiper(this.refs.swiperConatiner.getDOMNode(), {
-
                 direction: 'horizontal',
                 loop: false,
                 pagination: '.swiper-pagination',
@@ -267,7 +306,6 @@ var SwiperClass = Object.assign({}, {}, {
                 paginationClickable: true,
                 spaceBetween: 0,
                 initialSlide: this.props.initialSlide || 0
-
             });
         }
     },
@@ -277,9 +315,7 @@ var SwiperClass = Object.assign({}, {}, {
     },
 
     render: function () {
-
         var slides = this.getSlidesData().map(function (slide, slideIndex, allSlides) {
-
             return (
                 <Slide
                     key={'slide_' + slideIndex}
@@ -287,7 +323,6 @@ var SwiperClass = Object.assign({}, {}, {
                     slideIndex={slideIndex}
                     />
             )
-
         });
 
         return (
@@ -302,6 +337,7 @@ var SwiperClass = Object.assign({}, {}, {
             </div>
         );
     }
+
 });
 module.exports.Swiper = React.createClass(SwiperClass);
 module.exports.Swiper.Class = SwiperClass;

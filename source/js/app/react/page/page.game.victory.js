@@ -143,7 +143,6 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     render: function () {
-
         var starArrangement = this.selectStarArrangement();
         var styleStar1 = {
             backgroundImage: starArrangement[0]
