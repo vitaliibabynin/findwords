@@ -73,19 +73,20 @@ var PageGameVictory = Object.assign({}, {}, {
         return roundsBundleRoundsComplete;
     },
 
-    getParams: function () {
-        var roundsBundleIdx = this.state.roundsBundleIdx();
-        var roundIdx = appManager.getGameState().getRoundsBundles(roundsBundleIdx).roundsComplete;
+    openNextSlide: function () {
+        var numberOfRoundsRequired = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].numberOfRoundsRequired;
 
-        return {
-            roundsBundleIdx: roundsBundleIdx,
-            roundIdx: roundIdx
+        if (this.state.roundIdx == numberOfRoundsRequired - 1) {
+            var roundsBundleToOpen = this.state.roundsBundleIdx + 1;
+            appManager.getGameState().setRoundsBundles(roundsBundleToOpen, 'isUnlocked', true);
         }
     },
 
     onClick: function () {
         var nextRoundIdx = this.nextRoundIdx();
         var nextRoundsBundleIdx = this.state.roundsBundleIdx;
+
+        this.openNextSlide();
 
         if (nextRoundIdx === false) {
             var roundsBundlesTotal = appManager.getSettings().getRoundsBundles().length;
@@ -142,13 +143,6 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     render: function () {
-
-        console.log({roundsBundleIdxVictory: this.state.roundsBundleIdx});
-        console.log({roundIdxVictory: this.state.roundIdx});
-        console.log({round1: this.getRoundsBundleRoundsComplete(0)});
-        console.log({round2: this.getRoundsBundleRoundsComplete(1)});
-        console.log({round3: this.getRoundsBundleRoundsComplete(2)});
-        console.log({round4: this.getRoundsBundleRoundsComplete(3)});
 
         var starArrangement = this.selectStarArrangement();
         var styleStar1 = {

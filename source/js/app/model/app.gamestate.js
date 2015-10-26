@@ -51,7 +51,7 @@ var GameState = Object.assign({}, {}, {
             },
             1: {
                 bundleScore: 9999,
-                isUnlocked: true,
+                isUnlocked: false,
                 roundsComplete: 0,
                 rounds: {
                     0: {
@@ -82,7 +82,7 @@ var GameState = Object.assign({}, {}, {
             },
             2: {
                 bundleScore: 9999,
-                isUnlocked: true,
+                isUnlocked: false,
                 roundsComplete: 0,
                 rounds: {
                     0: {
@@ -113,7 +113,7 @@ var GameState = Object.assign({}, {}, {
             },
             3: {
                 bundleScore: 9999,
-                isUnlocked: true,
+                isUnlocked: false,
                 roundsComplete: 0,
                 rounds: {
                     0: {

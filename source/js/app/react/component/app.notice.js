@@ -64,10 +64,6 @@ var NoticeClass = Object.assign({}, {}, {
     },
 
     whichText: function () {
-        if (this.state.noticeType == "") {
-            return false;
-        }
-
         var capitalizedWord = this.capitalizeWord();
         var textBefore = "";
         var textAfter = "";
@@ -94,13 +90,26 @@ var NoticeClass = Object.assign({}, {}, {
         }
     },
 
+    whichImage: function () {
+        switch (this.state.noticeType) {
+            case NO_WORDS_TO_SHOW:
+                return "url('" + this.getImagePath('notice/wrong') + "')";
+            case NO_SUCH_WORD:
+                return "url('" + this.getImagePath('notice/wrong') + "')";
+            case SELECT_DIFFERENTLY:
+                return "url('" + this.getImagePath('notice/change') + "')";
+            default:
+                return "url('" + this.getImagePath('notice/wrong') + "')";
+        }
+    },
+
     render: function () {
         if (this.state.noticeType == "") {
             return (<div></div>)
         }
 
         var noticeImg = {
-            backgroundImage: "url('" + this.getImagePath('notice/wrong') + "')"
+            backgroundImage: this.whichImage()
         };
 
         var text = this.whichText() ? this.whichText() : "";
