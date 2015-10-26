@@ -79,6 +79,68 @@ var GameState = Object.assign({}, {}, {
                         starsReceived: 3
                     }
                 }
+            },
+            2: {
+                bundleScore: 9999,
+                isUnlocked: true,
+                roundsComplete: 0,
+                rounds: {
+                    0: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    1: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    2: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    3: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    }
+                }
+            },
+            3: {
+                bundleScore: 9999,
+                isUnlocked: true,
+                roundsComplete: 0,
+                rounds: {
+                    0: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    1: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    2: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    },
+                    3: {
+                        board: {},
+                        openedLetters: [],
+                        shownWords: [],
+                        starsReceived: 3
+                    }
+                }
             }
         }
 

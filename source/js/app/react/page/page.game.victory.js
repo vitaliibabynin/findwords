@@ -49,22 +49,6 @@ var PageGameVictory = Object.assign({}, {}, {
     //
     //},
 
-    roundsBundleIdx: function () {
-        var currentRoundsBundleIdx = this.state.roundsBundleIdx;
-        var roundsBundles = appManager.getSettings().getRoundsBundles();
-        var roundsBundlesTotal = roundsBundles.length;
-        var nextRoundsBundleIdx = currentRoundsBundleIdx + 1;
-
-        console.log({roundsBundlesTotal: roundsBundlesTotal});
-        console.log({nextRoundsBundleIdx: nextRoundsBundleIdx});
-
-        if (nextRoundsBundleIdx < roundsBundlesTotal) {
-            return nextRoundsBundleIdx;
-        }
-
-        return false;
-    },
-
     nextRoundIdx: function () {
         var currentRoundIdx = this.state.roundIdx;
         var roundsTotal = this.state.roundsTotal;
@@ -77,17 +61,16 @@ var PageGameVictory = Object.assign({}, {}, {
         return false;
     },
 
-    checkIfNextRoundsBundleIsComplete: function () {
-        var nextRoundsBundleIdx = this.state.roundsBundleIdx + 1;
-        var nextRoundsBundle = appManager.getGameState().getRoundsBundles(nextRoundsBundleIdx);
-        var nextRoundsBundleRoundsComplete = nextRoundsBundle.roundsComplete;
-        var nextRoundsBundleRoundsTotal = appManager.getSettings().getRoundsBundles()[nextRoundsBundleIdx].rounds.length;
+    getRoundsBundleRoundsComplete: function (roundsBundleIdx) {
+        var roundsBundle = appManager.getGameState().getRoundsBundles(roundsBundleIdx);
+        var roundsBundleRoundsComplete = roundsBundle.roundsComplete;
+        var roundsBundleRoundsTotal = appManager.getSettings().getRoundsBundles()[roundsBundleIdx].rounds.length;
 
-        if (nextRoundsBundleRoundsComplete == nextRoundsBundleRoundsTotal) {
-            return true;
+        if (roundsBundleRoundsComplete == roundsBundleRoundsTotal) {
+            return false;
         }
 
-        return nextRoundsBundleRoundsComplete;
+        return roundsBundleRoundsComplete;
     },
 
     getParams: function () {
@@ -105,20 +88,23 @@ var PageGameVictory = Object.assign({}, {}, {
         var nextRoundsBundleIdx = this.state.roundsBundleIdx;
 
         if (nextRoundIdx === false) {
-            nextRoundsBundleIdx = this.roundsBundleIdx();
-            if (nextRoundsBundleIdx === false) {
-                router.navigate("main", "index");
-                return;
+            var roundsBundlesTotal = appManager.getSettings().getRoundsBundles().length;
+            var nextRoundsBundlesRoundsComplete;
 
+            for (var i = nextRoundsBundleIdx; i < roundsBundlesTotal; i++) {
+                nextRoundsBundlesRoundsComplete = this.getRoundsBundleRoundsComplete(i);
+
+                if (nextRoundsBundlesRoundsComplete !== false) {
+                    nextRoundsBundleIdx = i;
+                    nextRoundIdx = nextRoundsBundlesRoundsComplete;
+                    break;
+                }
+
+                if (i == roundsBundlesTotal - 1 && nextRoundsBundlesRoundsComplete === false) {
+                    router.navigate("main", "index");
+                    return;
+                }
             }
-
-            var nextRoundsBundlesRoundsComplete = this.checkIfNextRoundsBundleIsComplete();
-            if (nextRoundsBundlesRoundsComplete === true) {
-                router.navigate("main", "index");
-                return;
-            }
-
-            nextRoundIdx = nextRoundsBundlesRoundsComplete;
         }
 
         var params = {
@@ -159,6 +145,10 @@ var PageGameVictory = Object.assign({}, {}, {
 
         console.log({roundsBundleIdxVictory: this.state.roundsBundleIdx});
         console.log({roundIdxVictory: this.state.roundIdx});
+        console.log({round1: this.getRoundsBundleRoundsComplete(0)});
+        console.log({round2: this.getRoundsBundleRoundsComplete(1)});
+        console.log({round3: this.getRoundsBundleRoundsComplete(2)});
+        console.log({round4: this.getRoundsBundleRoundsComplete(3)});
 
         var starArrangement = this.selectStarArrangement();
         var styleStar1 = {
