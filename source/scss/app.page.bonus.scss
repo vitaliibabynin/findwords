@@ -47,7 +47,8 @@
 
       }
       &.locked {
-
+        background-color: $gameBonus-day-locked-bg-color;
+        opacity: 0.5;
       }
       .line {
         position: absolute;
@@ -84,7 +85,7 @@
       }
       span {
         font-size: $gameBonus-day-font-size;
-        line-height: $gameBonus-day-font-size;
+        line-height: $gameBonus-day-font-size * 0.9;
         min-width: 8.75rem;
         text-align: center;
         display: table-cell;
