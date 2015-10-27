@@ -93,7 +93,7 @@ var NoticeClass = Object.assign({}, {}, {
     whichImage: function () {
         switch (this.state.noticeType) {
             case NO_WORDS_TO_SHOW:
-                return "url('" + this.getImagePath('notice/wrong') + "')";
+                return "url('" + this.getImagePath('notice/no_words_to_show') + "')";
             case NO_SUCH_WORD:
                 return "url('" + this.getImagePath('notice/wrong') + "')";
             case SELECT_DIFFERENTLY:
