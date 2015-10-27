@@ -1,0 +1,104 @@
+.page-bonus {
+  position: relative;
+  height: 100%;
+  background-color: $pageBonus-bg-color;
+  width: 100%;
+}
+
+.page-bonus > .page-content {
+  height: 100%;
+  width: 100%;
+
+  .container {
+    background-color: $gameBonus-container-bg-color;
+    color: $gameBonus-container-color;
+    $margin-left-right: 1.625rem;
+    margin-left: $margin-left-right;
+    margin-right: $margin-left-right;
+    margin-top: 0.5rem;
+    text-align: center;
+
+    .heading {
+      height: 2.5rem;
+      font-size: $gameBonus-heading-font-size;
+      $padding-top-bottom: 0.5rem;
+      padding-top: $padding-top-bottom;
+      padding-bottom: $padding-top-bottom;
+      vertical-align: middle;
+      line-height: $gameBonus-heading-font-size;
+    }
+    .day {
+      width: 100%;
+      position: relative;
+      display: table;
+      $day-height: 2.625rem;
+      height: 2.625rem;
+      $padding-left-right: 4rem;
+      padding-left: $padding-left-right;
+      padding-right: $padding-left-right;
+      background-repeat: no-repeat;
+      background-size: 2.375rem 2.375rem;
+      background-position: 5% center;
+
+      &.unlocked {
+        background-color: $gameBonus-day-unlocked-bg-color;
+      }
+      &.today {
+
+      }
+      &.locked {
+
+      }
+      .line {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(0deg, transparent 98.8%, $gameBonus-day-line-bg-color .0625rem);
+        background-size: 90% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .prize {
+        position: absolute;
+        $height: 1rem;
+        height: $height;
+        right: 5%;
+        top: ($day-height - $height) / 2;
+        background-repeat: no-repeat;
+        background-size: contain;
+        font-size: $gameBonus-coins-font-size;
+        background-position: right;
+        padding-right: 1rem;
+      }
+      .tick {
+        position: absolute;
+        $height: 1.5rem;
+        right: 5%;
+        top: ($day-height - $height) / 2;
+        width: 1.625rem;
+        height: $height;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      span {
+        font-size: $gameBonus-day-font-size;
+        line-height: $gameBonus-day-font-size;
+        min-width: 8.75rem;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+    .collect {
+      font-size: $gameBonus-collect-font-size;
+      background-color: $gameBonus-collect-bg-color;
+      $padding-top-bottom: 0.625rem;
+      padding-bottom: $padding-top-bottom;
+      padding-top: $padding-top-bottom;
+      vertical-align: middle;
+      line-height: $gameBonus-collect-font-size;
+    }
+  }
+}

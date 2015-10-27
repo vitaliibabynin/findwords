@@ -67,6 +67,17 @@ window.CONST = {
             'victory.yourReward': 'Ваша награда:',
             'victory.continue': 'Продолжить',
 
+            //BONUS PAGE
+            'bonus.heading': 'Бонусы',
+            'bonus.day1': 'Хороший старт!',
+            'bonus.day2': 'Уверенно идете!',
+            'bonus.day3': 'Неутомимый!',
+            'bonus.day4': 'Вы прошли больше половины пути!',
+            'bonus.day5': 'Нету времени отдыхать!',
+            'bonus.day6': 'На финешной прямой!',
+            'bonus.day7': 'Вы сделали невозможное!',
+            'bonus.collect': 'Получить',
+
             t: ''
         },
         en: {
@@ -110,6 +121,17 @@ window.CONST = {
             'victory.excellent': 'Excellent!',
             'victory.yourReward': 'Your reward:',
             'victory.continue': 'Continue',
+
+            //BONUS PAGE
+            'bonus.heading': 'Bonuses',
+            'bonus.day1': 'Good start!',
+            'bonus.day2': 'Solid progress!',
+            'bonus.day3': 'Tireless!',
+            'bonus.day4': 'You\'ve passed the half way point!',
+            'bonus.day5': 'No time to rest!',
+            'bonus.day6': 'Home stretch!',
+            'bonus.day7': 'You did the impossible!',
+            'bonus.collect': 'Collect',
 
             t: ''
         }

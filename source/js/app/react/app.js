@@ -5,7 +5,8 @@ var classNames = require('classnames');
 
 var PageMain = require('./page/page.main');
 var PageGame = require('./page/page.game');
-var PageGameVictory = require('./page/page.game.victory.js');
+var PageGameVictory = require('./page/page.game.victory');
+var PageBonus = require('./page/page.bonus');
 
 
 React.initializeTouchEvents(true);
@@ -56,6 +57,9 @@ var AppClass = {
         switch(router.getController()){
             case 'shop':
                 //this.renderPage(<PageGame parent={this} />);
+                break;
+            case "bonus":
+                this.renderPage(<PageBonus parent={this} />);
                 break;
             case "game":
                 switch(router.getAction()){
