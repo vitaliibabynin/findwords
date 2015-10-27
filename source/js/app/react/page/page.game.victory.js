@@ -25,6 +25,8 @@ var PageGameVictory = Object.assign({}, {}, {
         state.roundsTotal = rounds.length || 1;
         state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].score * (state.starsReceived / 3) || 0;
         state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].coins * (state.starsReceived / 3) || 0;
+        this.addRewardScore(state.rewardScore, state.roundsBundleIdx);
+        this.addRewardCoins(state.rewardCoins);
 
         return state;
     },
@@ -35,6 +37,22 @@ var PageGameVictory = Object.assign({}, {}, {
 
     getGameStateRoundField: function (roundsBundleIdx, roundIdx, field) {
         return appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field];
+    },
+
+    addRewardScore: function (rewardScore, roundsBundleIdx) {
+        var prevTotalScore = appManager.getGameState().getScore();
+        var newTotalScore = prevTotalScore + rewardScore;
+        appManager.getGameState().setScore(newTotalScore);
+
+        var prevRoundsBundleScore = appManager.getGameState().getRoundsBundles(roundsBundleIdx).bundleScore;
+        var newRoundsBundleScore = prevRoundsBundleScore + rewardScore;
+        appManager.getGameState().setRoundsBundles(roundsBundleIdx, 'bundleScore', newRoundsBundleScore);
+    },
+
+    addRewardCoins: function (rewardCoins) {
+        var prevTotalCoins = appManager.getGameState().getCoins();
+        var newTotalCoins = prevTotalCoins + rewardCoins;
+        appManager.getGameState().setCoins(newTotalCoins);
     },
 
     //componentDidMount: function () {
