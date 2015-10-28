@@ -69,6 +69,6 @@ var LoadingScreen = {
         }, 500);
 
     }
-};
+}
 
 module.exports = LoadingScreen;

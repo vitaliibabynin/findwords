@@ -13,7 +13,7 @@ window.refreshApp = function(){
     }else{
         document.location.reload();
     }
-};
+}
 
 window.requestAnimationFrame = (function(){
     return  window.requestAnimationFrame       ||
@@ -21,7 +21,7 @@ window.requestAnimationFrame = (function(){
     window.mozRequestAnimationFrame    ||
     window.oRequestAnimationFrame      ||
     window.msRequestAnimationFrame     ||
-    function(callback){
+    function(callback, element){
         window.setTimeout(callback, 1000 / 60);
     };
 })();
@@ -58,13 +58,13 @@ var createApp = function(){
         document.getElementById('app-content'), function(){
 
         });
-};
+}
 
 var initApp = function(){
     window.appManager.addOnInitListener(createApp);
     window.appManager.init();
 
-};
+}
 
 $(function() {
 
