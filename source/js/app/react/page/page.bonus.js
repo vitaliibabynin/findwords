@@ -4,9 +4,18 @@
 var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
-//var classNames = require('classnames');
+var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
+
+
+var DAY = "day";
+var UNLOCKED = "unlocked";
+var TODAY = "today";
+var LOCKED = "locked";
+var TICK = "tick";
+var PRIZE = "prize";
+var LINE = "line";
 
 
 var PageBonus = Object.assign({}, {}, {
@@ -15,24 +24,19 @@ var PageBonus = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     getInitialState: function () {
-        var state = {
-            coins: [9991, 992, 93, 4, 9995, 9996, 9997]
+        return {
+            bonusCoins: {
+                day1: 9991,
+                day2: 992,
+                day3: 93,
+                day4: 4,
+                day5: 9995,
+                day6: 9996,
+                day7: 9997
+            },
+            daysUnlocked: 4
         };
-
-        return state;
     },
-
-    //componentDidMount: function () {
-    //
-    //},
-    //
-    //componentDidUpdate: function (prevProps, prevState) {
-    //
-    //},
-    //
-    //componentWillUnmount: function () {
-    //
-    //},
 
     onClick: function () {
 
@@ -55,15 +59,99 @@ var PageBonus = Object.assign({}, {}, {
         }
     },
 
-    render: function () {
+    generateDays: function () {
+        var daysUnlocked = this.state.daysUnlocked;
+        var daysTotal = Utils.countObjectProperties(this.state.bonusCoins);
+        var daysRender = new Array(daysTotal);
+
+        for (var i = 0; i < daysTotal; i++) {
+            if (i < daysUnlocked - 1) {
+                daysRender[i] = this.getUnlockedDay(i);
+                continue;
+            }
+
+            if (i == daysUnlocked - 1) {
+                daysRender[i] = this.getToday(i);
+                continue;
+            }
+
+            daysRender[i] = this.getLockedDay(i);
+        }
+
+        return daysRender;
+    },
+
+    getUnlockedDay: function (dayIdx) {
+        var unlockedDayClassNames = classNames(
+            DAY,
+            UNLOCKED
+        );
+
+        var dayIdxConverter = "day" + (dayIdx + 1);
+        var unlockedDayImage = this.getDayImg(dayIdxConverter);
+        var bonusConverter = "bonus." + dayIdxConverter;
+
+        var tick = {
+            backgroundImage: "url('" + this.getImagePath('bonus/tick') + "')"
+        };
+
+        return (
+            <div key={UNLOCKED + dayIdx} className={unlockedDayClassNames} style={unlockedDayImage}>
+                <span>{i18n._(bonusConverter)}</span>
+
+                <div className={TICK} style={tick}></div>
+            </div>
+        );
+    },
+
+    getToday: function (dayIdx) {
+        var dollar = {
+            backgroundImage: "url('" + this.getImagePath('counter/coins') + "')"
+        };
+
+        var todayClassNames = classNames(
+            DAY,
+            TODAY
+        );
+
+        var dayIdxConverter = "day" + (dayIdx + 1);
+        var bonusConverter = "bonus." + dayIdxConverter;
+
+        return (
+            <div key={TODAY + dayIdx} className={todayClassNames} style={this.getDayImg("today")}>
+                <span>{i18n._(bonusConverter)}</span>
+
+                <div className={PRIZE} style={dollar}>{this.state.bonusCoins[dayIdxConverter]}</div>
+            </div>
+        )
+    },
+
+    getLockedDay: function (dayIdx) {
+        var lockedDayClassNames = classNames(
+            DAY,
+            LOCKED
+        );
 
         var dollar = {
             backgroundImage: "url('" + this.getImagePath('counter/coins') + "')"
         };
 
-        var tick = {
-            backgroundImage: "url('" + this.getImagePath('bonus/tick') + "')"
-        };
+        var dayIdxConverter = "day" + (dayIdx + 1);
+        var unlockedDayImage = this.getDayImg(dayIdxConverter);
+        var bonusConverter = "bonus." + dayIdxConverter;
+
+        return (
+            <div key={LOCKED + dayIdx} className={lockedDayClassNames} style={unlockedDayImage}>
+                <div className={LINE}></div>
+
+                <span>{i18n._(bonusConverter)}</span>
+
+                <div className={PRIZE} style={dollar}>{this.state.bonusCoins[dayIdxConverter]}</div>
+            </div>
+        )
+    },
+
+    render: function () {
 
         return (
 
@@ -75,45 +163,7 @@ var PageBonus = Object.assign({}, {}, {
                     <div className="container">
                         <div className="heading">{i18n._('bonus.heading')}</div>
 
-                        <div className="day unlocked" style={this.getDayImg("day1")}>
-                            <span>{i18n._('bonus.day1')}</span>
-                            <div className="tick" style={tick}></div>
-                        </div>
-
-                        <div className="day today" style={this.getDayImg("today")}>
-                            <span>{i18n._('bonus.day2')}</span>
-                            <div className="prize" style={dollar}>{this.state.coins[1]}</div>
-                        </div>
-
-                        <div className="day locked" style={this.getDayImg("day3")}>
-                            <div className="line"></div>
-                            <span>{i18n._('bonus.day3')}</span>
-                            <div className="prize" style={dollar}>{this.state.coins[2]}</div>
-                        </div>
-
-                        <div className="day locked" style={this.getDayImg("day4")}>
-                            <div className="line"></div>
-                            <span>{i18n._('bonus.day4')}</span>
-                            <div className="prize" style={dollar}>{this.state.coins[3]}</div>
-                        </div>
-
-                        <div className="day locked" style={this.getDayImg("day5")}>
-                            <div className="line"></div>
-                            <span>{i18n._('bonus.day5')}</span>
-                            <div className="prize" style={dollar}>{this.state.coins[4]}</div>
-                        </div>
-
-                        <div className="day locked" style={this.getDayImg("day6")}>
-                            <div className="line"></div>
-                            <span>{i18n._('bonus.day6')}</span>
-                            <div className="prize" style={dollar}>{this.state.coins[5]}</div>
-                        </div>
-
-                        <div className="day locked" style={this.getDayImg("day7")}>
-                            <div className="line"></div>
-                            <span>{i18n._('bonus.day7')}</span>
-                            <div className="prize" style={dollar}>{this.state.coins[6]}</div>
-                        </div>
+                        {this.generateDays()}
 
                         <div className="collect" onClick={this.onClick}>{i18n._('bonus.collect')}</div>
                     </div>
