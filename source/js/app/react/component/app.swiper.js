@@ -44,8 +44,9 @@ var SlideClass = Object.assign({}, {}, {
         var slideGameState = this.getSlideGameState(state.slideIndex);
         state.isUnlocked = slideGameState && slideGameState.isUnlocked ? true : false;
         state.layout = state.isUnlocked ? LAYOUT_UNLOCKED : LAYOUT_LOCKED;
-        var slideComplete = this.checkIfSlideComplete(state.slideIndex, state.slideData);
-        if (slideComplete) {
+        var roundsComplete = slideGameState.roundsComplete;
+        var roundsTotal = state.slideData.rounds.length;
+        if (roundsComplete == roundsTotal) {
             state.layout = LAYOUT_COMPLETE;
         }
 
@@ -54,13 +55,6 @@ var SlideClass = Object.assign({}, {}, {
 
     getSlideGameState: function (idx) {
         return appManager.getGameState().getRoundsBundles(idx);
-    },
-
-    checkIfSlideComplete (idx, slideData) {
-        var roundsComplete = this.getSlideGameState(idx).roundsComplete;
-        var roundsTotal = slideData.rounds.length;
-
-        return roundsComplete == roundsTotal;
     },
 
     onClickEffect: function (e) {
