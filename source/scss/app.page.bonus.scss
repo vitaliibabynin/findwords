@@ -37,8 +37,13 @@
       padding-left: $padding-left-right;
       padding-right: $padding-left-right;
 
-      //background-size: 2.375rem 2.375rem;
-      //background-position: 5% center;
+      .content {
+        font-size: $gameBonus-day-font-size;
+        line-height: $gameBonus-day-font-size * 0.9;
+        min-width: 8.75rem;
+        display: table-cell;
+        vertical-align: middle;
+      }
 
       .calendar {
         position: absolute;
@@ -49,6 +54,13 @@
         height: $calendar-size;
         background-size: contain;
         background-repeat: no-repeat;
+        padding-top: 0.95rem;
+        line-height: 0.5rem;
+
+        span {
+          font-size: 0.75rem;
+          vertical-align: middle;
+        }
       }
 
       &.unlocked {
@@ -59,8 +71,7 @@
       }
       &.locked {
         background-color: $gameBonus-day-locked-bg-color;
-        //opacity: 0.5;
-        color: rgba(255, 255, 255, 0.5);
+        color: $gameBonus-day-locked-color;
       }
       .line {
         position: absolute;
@@ -94,14 +105,6 @@
         height: $height;
         background-size: contain;
         background-repeat: no-repeat;
-      }
-      span {
-        font-size: $gameBonus-day-font-size;
-        line-height: $gameBonus-day-font-size * 0.9;
-        min-width: 8.75rem;
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
       }
     }
     .collect {

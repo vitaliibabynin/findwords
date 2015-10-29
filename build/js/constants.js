@@ -69,6 +69,7 @@ window.CONST = {
 
             //BONUS PAGE
             'bonus.heading': 'Бонусы',
+            'bonus.day': 'день',
             'bonus.day1': 'Хороший старт!',
             'bonus.day2': 'Уверенно идете!',
             'bonus.day3': 'Неутомимый!',
@@ -124,6 +125,7 @@ window.CONST = {
 
             //BONUS PAGE
             'bonus.heading': 'Bonuses',
+            'bonus.day': 'day',
             'bonus.day1': 'Good start!',
             'bonus.day2': 'Solid progress!',
             'bonus.day3': 'Tireless!',

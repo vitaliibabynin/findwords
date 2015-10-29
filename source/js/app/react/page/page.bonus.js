@@ -17,15 +17,13 @@ var TICK = "tick";
 var PRIZE = "prize";
 var LINE = "line";
 var CALENDAR = "calendar";
+var CONTENT = "content";
 
 
 var PageBonus = Object.assign({}, {}, {
 
     displayName: 'PageBonus',
     mixins: [GameMixin],
-
-
-
 
     getInitialState: function () {
         return {
@@ -38,7 +36,7 @@ var PageBonus = Object.assign({}, {}, {
                 day6: 9996,
                 day7: 9997
             },
-            daysUnlocked: 4
+            daysUnlocked: 2
         };
     },
 
@@ -87,9 +85,12 @@ var PageBonus = Object.assign({}, {}, {
 
         return (
             <div key={UNLOCKED + dayIdx} className={unlockedDayClassNames}>
-                <div className={CALENDAR} style={unlockedDayImage}></div>
+                <div className={CALENDAR} style={unlockedDayImage}>
+                    <span>{dayIdx + 1}</span><br />
+                    <span>{"" + i18n._('bonus.day')}</span>
+                </div>
 
-                <span>{i18n._(bonusConverter)}</span>
+                <span className={CONTENT}>{i18n._(bonusConverter)}</span>
 
                 <div className={TICK} style={tick}></div>
             </div>
@@ -117,7 +118,7 @@ var PageBonus = Object.assign({}, {}, {
             <div key={TODAY + dayIdx} className={todayClassNames}>
                 <div className={CALENDAR} style={today}></div>
 
-                <span>{i18n._(bonusConverter)}</span>
+                <span className={CONTENT}>{i18n._(bonusConverter)}</span>
 
                 <div className={PRIZE} style={dollar}>{this.state.bonusCoins[dayIdxConverter]}</div>
             </div>
@@ -145,9 +146,12 @@ var PageBonus = Object.assign({}, {}, {
             <div key={LOCKED + dayIdx} className={lockedDayClassNames}>
                 <div className={LINE}></div>
 
-                <div className = {CALENDAR} style={unlockedDayImage}></div>
+                <div className={CALENDAR} style={unlockedDayImage}>
+                    <span>{dayIdx + 1}</span><br />
+                    <span>{"" + i18n._('bonus.day')}</span>
+                </div>
 
-                <span>{i18n._(bonusConverter)}</span>
+                <span className={CONTENT}>{i18n._(bonusConverter)}</span>
 
                 <div className={PRIZE} style={dollar}>{this.state.bonusCoins[dayIdxConverter]}</div>
             </div>
