@@ -16,12 +16,16 @@ var LOCKED = "locked";
 var TICK = "tick";
 var PRIZE = "prize";
 var LINE = "line";
+var CALENDAR = "calendar";
 
 
 var PageBonus = Object.assign({}, {}, {
 
     displayName: 'PageBonus',
     mixins: [GameMixin],
+
+
+
 
     getInitialState: function () {
         return {
@@ -40,23 +44,6 @@ var PageBonus = Object.assign({}, {}, {
 
     onClick: function () {
 
-    },
-
-    getDayImg: function (day) {
-        var dayImages = {
-            day1: "url('" + this.getImagePath('bonus/1day') + "')",
-            day2: "url('" + this.getImagePath('bonus/2day') + "')",
-            day3: "url('" + this.getImagePath('bonus/3day') + "')",
-            day4: "url('" + this.getImagePath('bonus/4day') + "')",
-            day5: "url('" + this.getImagePath('bonus/5day') + "')",
-            day6: "url('" + this.getImagePath('bonus/6day') + "')",
-            day7: "url('" + this.getImagePath('bonus/7day') + "')",
-            today: "url('" + this.getImagePath('bonus/today') + "')"
-        };
-
-        return {
-            backgroundImage: dayImages[day]
-        }
     },
 
     generateDays: function () {
@@ -88,15 +75,20 @@ var PageBonus = Object.assign({}, {}, {
         );
 
         var dayIdxConverter = "day" + (dayIdx + 1);
-        var unlockedDayImage = this.getDayImg(dayIdxConverter);
         var bonusConverter = "bonus." + dayIdxConverter;
 
         var tick = {
             backgroundImage: "url('" + this.getImagePath('bonus/tick') + "')"
         };
 
+        var unlockedDayImage = {
+            backgroundImage: "url('" + this.getImagePath('bonus/day_frame') + "')"
+        };
+
         return (
-            <div key={UNLOCKED + dayIdx} className={unlockedDayClassNames} style={unlockedDayImage}>
+            <div key={UNLOCKED + dayIdx} className={unlockedDayClassNames}>
+                <div className={CALENDAR} style={unlockedDayImage}></div>
+
                 <span>{i18n._(bonusConverter)}</span>
 
                 <div className={TICK} style={tick}></div>
@@ -109,6 +101,10 @@ var PageBonus = Object.assign({}, {}, {
             backgroundImage: "url('" + this.getImagePath('counter/coins') + "')"
         };
 
+        var today = {
+            backgroundImage: "url('" + this.getImagePath('bonus/today') + "')"
+        };
+
         var todayClassNames = classNames(
             DAY,
             TODAY
@@ -118,7 +114,9 @@ var PageBonus = Object.assign({}, {}, {
         var bonusConverter = "bonus." + dayIdxConverter;
 
         return (
-            <div key={TODAY + dayIdx} className={todayClassNames} style={this.getDayImg("today")}>
+            <div key={TODAY + dayIdx} className={todayClassNames}>
+                <div className={CALENDAR} style={today}></div>
+
                 <span>{i18n._(bonusConverter)}</span>
 
                 <div className={PRIZE} style={dollar}>{this.state.bonusCoins[dayIdxConverter]}</div>
@@ -133,16 +131,21 @@ var PageBonus = Object.assign({}, {}, {
         );
 
         var dollar = {
-            backgroundImage: "url('" + this.getImagePath('counter/coins') + "')"
+            backgroundImage: "url('" + this.getImagePath('bonus/dollar50') + "')"
         };
 
         var dayIdxConverter = "day" + (dayIdx + 1);
-        var unlockedDayImage = this.getDayImg(dayIdxConverter);
         var bonusConverter = "bonus." + dayIdxConverter;
 
+        var unlockedDayImage = {
+            backgroundImage: "url('" + this.getImagePath('bonus/day_frame50') + "')"
+        };
+
         return (
-            <div key={LOCKED + dayIdx} className={lockedDayClassNames} style={unlockedDayImage}>
+            <div key={LOCKED + dayIdx} className={lockedDayClassNames}>
                 <div className={LINE}></div>
+
+                <div className = {CALENDAR} style={unlockedDayImage}></div>
 
                 <span>{i18n._(bonusConverter)}</span>
 

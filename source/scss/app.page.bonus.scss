@@ -36,9 +36,20 @@
       $padding-left-right: 4rem;
       padding-left: $padding-left-right;
       padding-right: $padding-left-right;
-      background-repeat: no-repeat;
-      background-size: 2.375rem 2.375rem;
-      background-position: 5% center;
+
+      //background-size: 2.375rem 2.375rem;
+      //background-position: 5% center;
+
+      .calendar {
+        position: absolute;
+        left: 5%;
+        $calendar-size: 2.375rem;
+        top: ($day-height - $calendar-size) / 2;
+        width: $calendar-size;
+        height: $calendar-size;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
 
       &.unlocked {
         background-color: $gameBonus-day-unlocked-bg-color;
@@ -48,7 +59,8 @@
       }
       &.locked {
         background-color: $gameBonus-day-locked-bg-color;
-        opacity: 0.5;
+        //opacity: 0.5;
+        color: rgba(255, 255, 255, 0.5);
       }
       .line {
         position: absolute;
