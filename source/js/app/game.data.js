@@ -1,4 +1,13 @@
 var gameData = {
+    bonusCoins: {
+        day1: 9991,
+        day2: 992,
+        day3: 93,
+        day4: 4,
+        day5: 9995,
+        day6: 9996,
+        day7: 9997
+    },
     roundsBundles: [
         {
             name: {ru: "Комплект №1 Гаврюша", en: "Set #1 Gavryusha"},
@@ -8,6 +17,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -44,6 +54,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -80,6 +91,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -116,6 +128,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -158,6 +171,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -194,6 +208,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -230,6 +245,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -266,6 +282,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -308,6 +325,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -344,6 +362,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -380,6 +399,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -416,6 +436,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -458,6 +479,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -494,6 +516,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -530,6 +553,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [
@@ -566,6 +590,7 @@ var gameData = {
                 {
                     score: 999,
                     coins: 999,
+                    time: 30,
                     rows: 4,
                     cols: 4,
                     words: [

@@ -27,16 +27,8 @@ var PageBonus = Object.assign({}, {}, {
 
     getInitialState: function () {
         return {
-            bonusCoins: {
-                day1: 9991,
-                day2: 992,
-                day3: 93,
-                day4: 4,
-                day5: 9995,
-                day6: 9996,
-                day7: 9997
-            },
-            daysUnlocked: 2
+            bonusCoins: appManager.getSettings().getBonusCoins() || {},
+            daysPlayed: appManager.getGameState().getDaysPlayed() || 0
         };
     },
 
@@ -45,17 +37,17 @@ var PageBonus = Object.assign({}, {}, {
     },
 
     generateDays: function () {
-        var daysUnlocked = this.state.daysUnlocked;
+        var daysPlayed = this.state.daysPlayed;
         var daysTotal = Utils.countObjectProperties(this.state.bonusCoins);
         var daysRender = new Array(daysTotal);
 
         for (var i = 0; i < daysTotal; i++) {
-            if (i < daysUnlocked - 1) {
+            if (i < daysPlayed - 1) {
                 daysRender[i] = this.getUnlockedDay(i);
                 continue;
             }
 
-            if (i == daysUnlocked - 1) {
+            if (i == daysPlayed - 1) {
                 daysRender[i] = this.getToday(i);
                 continue;
             }

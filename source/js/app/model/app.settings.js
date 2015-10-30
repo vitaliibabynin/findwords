@@ -42,6 +42,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getRoundsBundles: function(){
         return this.getSettingsValue('roundsBundles', []);
+    },
+
+    getBonusCoins: function () {
+        return this.getSettingsValue('bonusCoins', {});
     }
 
 });

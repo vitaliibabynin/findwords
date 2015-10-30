@@ -15,15 +15,14 @@ var TimerClass = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     propTypes: {
-        isCountDownOn: React.PropTypes.bool,
-        secondsRemaining: React.PropTypes.number,
-        setGameStateRoundField: React.PropTypes.func
+        time: React.PropTypes.number,
+        setGameStateRoundField: React.PropTypes.func,
+        getGameStateRoundField: React.PropTypes.func
     },
 
     getInitialState: function () {
         var state = {
-            isCountDownOn: false,
-            secondsRemaining: this.props.secondsRemaining || 0,
+            secondsRemaining: this.props.time || 0,
             starOneThirdOn: this.getImagePath('timer/star_on'),
             starTwoThirdsOn: this.getImagePath('timer/star_on'),
             starBase: this.getImagePath('timer/star_on'),
@@ -34,8 +33,9 @@ var TimerClass = Object.assign({}, {}, {
             setGameStateRoundField: this.props.setGameStateRoundField || function() {
             }
         };
+        //state.time = this.getGameStateRoundField("secondsRemaining", state.roundsBundleIdx, state.roundIdx) || 0;
 
-        if (this.props.isCountDownOn && this.props.secondsRemaining) {
+        if (state.secondsRemaining != 0) {
             state.isCountDownOn = true;
         }
 
@@ -48,6 +48,8 @@ var TimerClass = Object.assign({}, {}, {
         if (this.state.secondsRemaining <= 0) {
             clearInterval(this.interval);
         }
+
+
 
         if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 33.3) {
             if (this.state.starsReceived == 1) {

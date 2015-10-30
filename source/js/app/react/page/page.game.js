@@ -35,9 +35,11 @@ var PageGameMain = Object.assign({}, {}, {
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
         state.boardData = state.roundData.rounds[state.roundIdx] || {};
-        state.board = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "board") || {};
-        state.openedLetters = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "openedLetters") || [];
-        state.shownWords = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, "shownWords") || [];
+
+        state.time = state.roundData.time || 0;
+        state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
+        state.openedLetters = this.getGameStateRoundField("openedLetters", state.roundsBundleIdx, state.roundIdx) || [];
+        state.shownWords = this.getGameStateRoundField("shownWords", state.roundsBundleIdx, state.roundIdx) || [];
         state.shownWordsLetters = this.shownWordsConverter(state.shownWords, state.boardData);
 
         return state;
@@ -58,26 +60,41 @@ var PageGameMain = Object.assign({}, {}, {
         return shownWordsLetters;
     },
 
-    setGameStateRoundsBundleField: function (field, newValue) {
-        var bundleIndex = this.state.roundsBundleIdx;
+    setGameStateRoundsBundleField: function (field, newValue, roundsBundleIdx) {
+        if (typeof(roundsBundleIdx) == "undefined") {
+            roundsBundleIdx = this.state.roundsBundleIdx;
+        }
 
-        return appManager.getGameState().setRoundsBundles(bundleIndex, field, newValue);
+        return appManager.getGameState().setRoundsBundles(roundsBundleIdx, field, newValue);
     },
 
-    getGameStateRoundsBundleField: function (field) {
-        var bundleIndex = this.state.roundsBundleIdx;
+    getGameStateRoundsBundleField: function (field, roundsBundleIdx) {
+        if (typeof(roundsBundleIdx) == "undefined") {
+            roundsBundleIdx = this.state.roundsBundleIdx;
+        }
 
-        return appManager.getGameState().getRoundsBundles(bundleIndex)[field];
+        return appManager.getGameState().getRoundsBundles(roundsBundleIdx)[field];
     },
 
-    setGameStateRoundField: function (field, newValue) {
-        var bundleIndex = this.state.roundsBundleIdx;
-        var roundIndex = this.state.roundIdx;
+    setGameStateRoundField: function (field, newValue, roundsBundleIdx, roundIdx) {
+        if (typeof(roundsBundleIdx) == "undefined") {
+            roundsBundleIdx = this.state.roundsBundleIdx;
+        }
+        if (typeof(roundIdx) == "undefined") {
+            roundIdx = this.state.roundIdx;
+        }
 
-        return appManager.getGameState().setRound(bundleIndex, roundIndex, field, newValue);
+        return appManager.getGameState().setRound(roundsBundleIdx, roundIdx, field, newValue);
     },
 
-    getGameStateRoundField: function (roundsBundleIdx, roundIdx, field) {
+    getGameStateRoundField: function (field, roundsBundleIdx, roundIdx) {
+        if (typeof(roundsBundleIdx) == "undefined") {
+            roundsBundleIdx = this.state.roundsBundleIdx;
+        }
+        if (typeof(roundIdx) == "undefined") {
+            roundIdx = this.state.roundIdx;
+        }
+
         return appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field];
     },
 
@@ -110,7 +127,7 @@ var PageGameMain = Object.assign({}, {}, {
                 chipsOpenWord: chipsOpenWord
             });
 
-            if (this.refs.board.checkIfRoundComplete()){
+            if (this.refs.board.checkIfRoundComplete()) {
                 this.goToPageRoundComplete(2000);
             }
         }
@@ -132,7 +149,7 @@ var PageGameMain = Object.assign({}, {}, {
                 chipsOpenLetter: chipsOpenLetter
             });
 
-            if (this.refs.board.checkIfRoundComplete()){
+            if (this.refs.board.checkIfRoundComplete()) {
                 this.goToPageRoundComplete(2000);
             }
         }
@@ -221,7 +238,7 @@ var PageGameMain = Object.assign({}, {}, {
         time = time || 2000;
 
         var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
-        roundsComplete ++;
+        roundsComplete++;
         this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
 
         var params = {
@@ -237,9 +254,6 @@ var PageGameMain = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log({roundsBundleIdx: this.state.roundsBundleIdx});
-        console.log({roundIdx: this.state.roundIdx});
-
         return (
             <div className="page-game">
                 <div className="page-content">
@@ -247,9 +261,10 @@ var PageGameMain = Object.assign({}, {}, {
                     <Counters isDisplayBackButton={true}
                               roundsBundleIdx={this.state.roundsBundleIdx}/>
 
-                    <Timer secondsRemaining={30}
-                           isCountDownOn={true}
-                           setGameStateRoundField={this.setGameStateRoundField}/>
+                    <Timer time={this.state.time}
+                           setGameStateRoundField={this.setGameStateRoundField}
+                           getGameStateRoundField={this.getGameStateRoundField}
+                        />
 
                     <div className="chips">
                         <ChipButton className="open-word"

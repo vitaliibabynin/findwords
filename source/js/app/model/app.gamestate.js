@@ -5,7 +5,7 @@ var SETTINGS_GAMESTATE = 'game_state';
 var GameState = Object.assign({}, {}, {
 
     gameState: {
-
+        daysPlayed: 0,
         coins: 99999,
         score: 99999,
         chips: {
@@ -27,25 +27,29 @@ var GameState = Object.assign({}, {}, {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     1: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     2: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     3: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     }
                 }
             },
@@ -58,25 +62,29 @@ var GameState = Object.assign({}, {}, {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     1: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     2: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     3: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     }
                 }
             },
@@ -89,25 +97,29 @@ var GameState = Object.assign({}, {}, {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     1: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     2: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     3: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     }
                 }
             },
@@ -120,25 +132,29 @@ var GameState = Object.assign({}, {}, {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     1: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     2: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     },
                     3: {
                         board: {},
                         openedLetters: [],
                         shownWords: [],
-                        starsReceived: 3
+                        starsReceived: 3,
+                        secondsRemaining: 0
                     }
                 }
             }
@@ -173,17 +189,11 @@ var GameState = Object.assign({}, {}, {
 
         return this.gameState[field];
     },
-
-    setSettingsField: function (field, newValue) {
-        this.gameState.settings[field] = newValue;
-        this.saveGameState();
+    setDaysPlayed: function (newNumber) {
+        this.setGameStateField('daysPlayed', newNumber)
     },
-    getSettingsField: function (field, defaultValue) {
-        if (!this.gameState.settings || !this.gameState.settings.hasOwnProperty(field)) {
-            return defaultValue;
-        }
-
-        return this.gameState.settings[field];
+    getDaysPlayed: function () {
+        return this.getGameStateField('daysPlayed', 0);
     },
     setScore: function (newNumber) {
         this.setGameStateField('score', newNumber)
@@ -196,6 +206,18 @@ var GameState = Object.assign({}, {}, {
     },
     getCoins: function () {
         return this.getGameStateField('coins', 0);
+    },
+
+    setSettingsField: function (field, newValue) {
+        this.gameState.settings[field] = newValue;
+        this.saveGameState();
+    },
+    getSettingsField: function (field, defaultValue) {
+        if (!this.gameState.settings || !this.gameState.settings.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.settings[field];
     },
     setMusic: function (newBoolean) {
         this.setSettingsField('music', newBoolean);
