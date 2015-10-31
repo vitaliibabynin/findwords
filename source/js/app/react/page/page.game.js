@@ -36,7 +36,7 @@ var PageGameMain = Object.assign({}, {}, {
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
         state.boardData = state.roundData.rounds[state.roundIdx] || {};
 
-        state.time = state.roundData.time || 0;
+        state.time = state.boardData.time || 0;
         state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
         state.openedLetters = this.getGameStateRoundField("openedLetters", state.roundsBundleIdx, state.roundIdx) || [];
         state.shownWords = this.getGameStateRoundField("shownWords", state.roundsBundleIdx, state.roundIdx) || [];

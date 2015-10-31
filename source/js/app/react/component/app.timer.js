@@ -22,7 +22,6 @@ var TimerClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            secondsRemaining: this.props.time || 0,
             starOneThirdOn: this.getImagePath('timer/star_on'),
             starTwoThirdsOn: this.getImagePath('timer/star_on'),
             starBase: this.getImagePath('timer/star_on'),
@@ -30,10 +29,18 @@ var TimerClass = Object.assign({}, {}, {
             starOneThirdOff: this.getImagePath('timer/star_off'),
             starTwoThirdsOff: this.getImagePath('timer/star_off'),
             starsReceived: 3,
-            setGameStateRoundField: this.props.setGameStateRoundField || function() {
+            setGameStateRoundField: this.props.setGameStateRoundField || function () {
+            },
+            getGameStateRoundField: this.props.getGameStateRoundField || function () {
             }
         };
-        //state.time = this.getGameStateRoundField("secondsRemaining", state.roundsBundleIdx, state.roundIdx) || 0;
+        var timeGameState = state.getGameStateRoundField("secondsRemaining") || 0;
+
+        if (timeGameState == 0) {
+            state.secondsRemaining = this.props.time;
+        } else {
+            state.secondsRemaining = timeGameState;
+        }
 
         if (state.secondsRemaining != 0) {
             state.isCountDownOn = true;
@@ -48,10 +55,11 @@ var TimerClass = Object.assign({}, {}, {
         if (this.state.secondsRemaining <= 0) {
             clearInterval(this.interval);
         }
+        
+        
 
 
-
-        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 33.3) {
+        if (100 / this.props.time * this.state.secondsRemaining < 33.3) {
             if (this.state.starsReceived == 1) {
                 return;
             }
@@ -60,7 +68,7 @@ var TimerClass = Object.assign({}, {}, {
             return;
         }
 
-        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 66.6) {
+        if (100 / this.props.time * this.state.secondsRemaining < 66.6) {
             if (this.state.starsReceived == 2) {
                 return;
             }
@@ -87,10 +95,10 @@ var TimerClass = Object.assign({}, {}, {
         var starBase = this.state.starBase;
         var timerImg = this.state.timerImg;
 
-        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 66.6) {
+        if (100 / this.props.time * this.state.secondsRemaining < 66.6) {
             starTwoThirds = this.state.starTwoThirdsOff;
         }
-        if (100 / this.props.secondsRemaining * this.state.secondsRemaining < 33.3) {
+        if (100 / this.props.time * this.state.secondsRemaining < 33.3) {
             starOneThird = this.state.starOneThirdOff;
         }
 
@@ -104,7 +112,7 @@ var TimerClass = Object.assign({}, {}, {
         var timeLine = {
             width: (
                 this.state.isCountDownOn ?
-                100 / this.props.secondsRemaining * this.state.secondsRemaining : 100
+                100 / this.props.time * this.state.secondsRemaining : 100
             ) + "%"
         };
 
