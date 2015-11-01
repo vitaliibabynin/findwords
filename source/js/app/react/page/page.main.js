@@ -40,8 +40,6 @@ var PageMain = Object.assign({}, {}, {
 
     render: function () {
 
-        console.log(appManager.getGameState().getRoundsBundles());
-
         var headImgName = "head/head_img_" + router.getLanguage();
         var headStyle = {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"

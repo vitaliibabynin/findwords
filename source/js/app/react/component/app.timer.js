@@ -34,13 +34,14 @@ var TimerClass = Object.assign({}, {}, {
             getGameStateRoundField: this.props.getGameStateRoundField || function () {
             }
         };
-        var timeGameState = state.getGameStateRoundField("secondsRemaining") || 0;
 
-        if (timeGameState == 0) {
-            state.secondsRemaining = this.props.time;
-        } else {
-            state.secondsRemaining = timeGameState;
+        if (state.getGameStateRoundField("secondsRemaining") == 0) {
+            state.setGameStateRoundField("secondsRemaining", this.props.time);
+            state.lastSave = this.props.time;
         }
+
+        state.secondsRemaining = state.getGameStateRoundField("secondsRemaining") || 0;
+        state.lastSave = state.secondsRemaining;
 
         if (state.secondsRemaining != 0) {
             state.isCountDownOn = true;
@@ -50,16 +51,22 @@ var TimerClass = Object.assign({}, {}, {
     },
 
     tick: function () {
-        this.setState({secondsRemaining: this.state.secondsRemaining - 1});
+        var secondsRemaining = this.state.secondsRemaining;
+
+        this.setState({secondsRemaining: secondsRemaining - 1});
 
         if (this.state.secondsRemaining <= 0) {
             clearInterval(this.interval);
         }
-        
-        
 
+        if (this.state.lastSave - secondsRemaining >= this.props.time / 12) {
+            this.state.setGameStateRoundField("secondsRemaining", secondsRemaining);
+            this.setState({lastSave: secondsRemaining});
+        }
 
-        if (100 / this.props.time * this.state.secondsRemaining < 33.3) {
+        var timePercentLeft = 100 / this.props.time * secondsRemaining;
+
+        if (timePercentLeft < 33.3) {
             if (this.state.starsReceived == 1) {
                 return;
             }
@@ -68,7 +75,7 @@ var TimerClass = Object.assign({}, {}, {
             return;
         }
 
-        if (100 / this.props.time * this.state.secondsRemaining < 66.6) {
+        if (timePercentLeft < 66.6) {
             if (this.state.starsReceived == 2) {
                 return;
             }
