@@ -5,9 +5,13 @@ var SETTINGS_GAMESTATE = 'game_state';
 var GameState = Object.assign({}, {}, {
 
     gameState: {
-        daysPlayed: 0,
         coins: 99999,
         score: 99999,
+        bonus: {
+            lastAccessDate: 0,
+            bonusReceivedToday: false,
+            daysPlayedStreak: 1
+        },
         chips: {
             chipOpenWord: 999,
             chipOpenLetter: 9,
@@ -189,23 +193,47 @@ var GameState = Object.assign({}, {}, {
 
         return this.gameState[field];
     },
-    setDaysPlayed: function (newNumber) {
-        this.setGameStateField('daysPlayed', newNumber)
-    },
-    getDaysPlayed: function () {
-        return this.getGameStateField('daysPlayed', 0);
-    },
     setScore: function (newNumber) {
-        this.setGameStateField('score', newNumber)
+        this.setGameStateField('score', newNumber);
     },
     getScore: function () {
         return this.getGameStateField('score', 0);
     },
     setCoins: function (newNumber) {
-        this.setGameStateField('coins', newNumber)
+        this.setGameStateField('coins', newNumber);
     },
     getCoins: function () {
         return this.getGameStateField('coins', 0);
+    },
+
+    setBonusField: function (field, newValue) {
+        this.gameState.bonus[field] = newValue;
+        this.saveGameState();
+    },
+    getBonusField: function (field, defaultValue) {
+        if (!this.gameState.bonus || !this.gameState.bonus.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.bonus[field];
+    },
+    setLastAccessDate: function (newString) {
+        this.setBonusField('lastAccessDate', newString);
+    },
+    getLastAccessDate: function () {
+        return this.getBonusField('lastAccessDate', 0);
+    },
+    setBonusReceivedToday: function (newBoolean) {
+        this.setBonusField('bonusReceivedToday', newBoolean);
+    },
+    getBonusReceivedToday: function () {
+        return this.getBonusField('bonusReceivedToday', true);
+    },
+    setDaysPlayedStreak: function (newNumber) {
+        this.setBonusField('daysPlayedStreak', newNumber);
+    },
+    getDaysPlayedStreak: function () {
+        return this.getBonusField('daysPlayedStreak', 1);
     },
 
     setSettingsField: function (field, newValue) {

@@ -5,6 +5,7 @@ var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
+var moment = require('moment');
 
 var Counters = require('./../component/app.counters').Counters;
 var Swiper = require('./../component/app.swiper').Swiper;
@@ -26,10 +27,47 @@ var PageMain = Object.assign({}, {}, {
         return state;
     },
 
-    //componentDidMount: function () {
-    //
-    //},
-    //
+    componentDidMount: function () {
+        var lastAccessNumber = appManager.getGameState().getLastAccessDate();
+        var todayNumber = moment().format("YYYYMMDD");
+
+        //if first access ever
+        if (lastAccessNumber == 0) {
+            appManager.getGameState().setLastAccessDate(todayNumber);
+            return;
+        }
+
+        //daysPlayedStreak
+        var daysSinceLastAccess = moment().diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
+
+        if(daysSinceLastAccess >= 1) {
+            appManager.getGameState().setBonusReceivedToday(false);
+        }
+
+        if (daysSinceLastAccess > 1) {
+            appManager.getGameState().setDaysPlayedStreak(1);
+        }
+
+        if (daysSinceLastAccess == 1) {
+            var daysPlayedStreakIncrement = appManager.getGameState().getDaysPlayedStreak() + 1;
+            appManager.getGameState().setDaysPlayedStreak(daysPlayedStreakIncrement);
+        }
+
+        //bonusReceivedAlready
+        var bonusReceivedToday = appManager.getGameState().getBonusReceivedToday();
+
+        if (bonusReceivedToday) {
+            return;
+        }
+
+        //set lastAccessDate to now, flag bonus received
+        appManager.getGameState().setLastAccessDate(todayNumber);
+        appManager.getGameState().setBonusReceivedToday(true);
+
+        //go to bonus page
+        router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
+    },
+
     //componentDidUpdate: function (prevProps, prevState) {
     //
     //},

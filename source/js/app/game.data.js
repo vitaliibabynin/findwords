@@ -1,12 +1,12 @@
 var gameData = {
     bonusCoins: {
-        day1: 9991,
-        day2: 992,
-        day3: 93,
+        day1: 1,
+        day2: 2,
+        day3: 3,
         day4: 4,
-        day5: 9995,
-        day6: 9996,
-        day7: 9997
+        day5: 5,
+        day6: 6,
+        day7: 7
     },
     roundsBundles: [
         {

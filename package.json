@@ -11,7 +11,8 @@
     "babelfish": "1.1.0",
     "asyncstorage": "1.5.0",
     "classnames": "1.2.0",
-    "radium": "0.12.2"
+    "radium": "0.12.2",
+    "moment": "2.10.6"
   },
   "devDependencies": {
     "browserify": "11.0.1",

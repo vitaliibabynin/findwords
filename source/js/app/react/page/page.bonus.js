@@ -26,19 +26,30 @@ var PageBonus = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     getInitialState: function () {
-        return {
+        var state  = {
+            initialSlide: parseInt(router.getParam('initialSlide')) || 0,
             bonusCoins: appManager.getSettings().getBonusCoins() || {},
-            daysPlayed: appManager.getGameState().getDaysPlayed() || 0
+            daysPlayed: appManager.getGameState().getDaysPlayedStreak() || 0
         };
+        state.daysTotal = Utils.countObjectProperties(state.bonusCoins) || 0;
+        if (state.daysPlayed > state.daysTotal) {
+            state.daysPlayed = state.daysTotal;
+        }
+
+        return state;
     },
 
     onClick: function () {
+        var daysPlayedConverter = "day" + (this.state.daysPlayed);
+        var newCoins = appManager.getGameState().getCoins() + this.state.bonusCoins[daysPlayedConverter];
+        appManager.getGameState().setCoins(newCoins);
 
+        router.navigate("main", "index", {initialSlide: this.state.initialSlide});
     },
 
     generateDays: function () {
         var daysPlayed = this.state.daysPlayed;
-        var daysTotal = Utils.countObjectProperties(this.state.bonusCoins);
+        var daysTotal = this.state.daysTotal;
         var daysRender = new Array(daysTotal);
 
         for (var i = 0; i < daysTotal; i++) {

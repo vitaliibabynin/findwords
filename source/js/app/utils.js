@@ -151,6 +151,6 @@ module.exports = {
             }
         }
         return length;
-    },
+    }
 
 }
