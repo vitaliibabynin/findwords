@@ -22,28 +22,31 @@ var TimerClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
+            secondsRemaining: 0,
             starOneThirdOn: this.getImagePath('timer/star_on'),
             starTwoThirdsOn: this.getImagePath('timer/star_on'),
             starBase: this.getImagePath('timer/star_on'),
             timerImg: this.getImagePath('timer/timer'),
             starOneThirdOff: this.getImagePath('timer/star_off'),
             starTwoThirdsOff: this.getImagePath('timer/star_off'),
-            starsReceived: 3,
             setGameStateRoundField: this.props.setGameStateRoundField || function () {
             },
             getGameStateRoundField: this.props.getGameStateRoundField || function () {
             }
         };
+        state.starsReceived = state.getGameStateRoundField("starsReceived") || 3;
 
         if (state.getGameStateRoundField("secondsRemaining") == 0) {
             state.setGameStateRoundField("secondsRemaining", this.props.time);
             state.lastSave = this.props.time;
         }
 
-        state.secondsRemaining = state.getGameStateRoundField("secondsRemaining") || 0;
-        state.lastSave = state.secondsRemaining;
+        if (state.getGameStateRoundField("secondsRemaining") != -1) {
+            state.secondsRemaining = state.getGameStateRoundField("secondsRemaining") || 0;
+            state.lastSave = state.secondsRemaining;
+        }
 
-        if (state.secondsRemaining != 0) {
+        if (state.secondsRemaining > 0) {
             state.isCountDownOn = true;
         }
 
@@ -56,10 +59,11 @@ var TimerClass = Object.assign({}, {}, {
         this.setState({secondsRemaining: secondsRemaining - 1});
 
         if (this.state.secondsRemaining <= 0) {
+            this.state.setGameStateRoundField("secondsRemaining", -1);
             clearInterval(this.interval);
         }
 
-        if (this.state.lastSave - secondsRemaining >= this.props.time / 12) {
+        if (this.state.lastSave - secondsRemaining >= this.props.time / 100 * (100 / 12)) {
             this.state.setGameStateRoundField("secondsRemaining", secondsRemaining);
             this.setState({lastSave: secondsRemaining});
         }
@@ -119,7 +123,7 @@ var TimerClass = Object.assign({}, {}, {
         var timeLine = {
             width: (
                 this.state.isCountDownOn ?
-                100 / this.props.time * this.state.secondsRemaining : 100
+                100 / this.props.time * this.state.secondsRemaining : 0
             ) + "%"
         };
 
