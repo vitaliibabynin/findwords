@@ -10,8 +10,8 @@
   width: 100%;
 
   .container {
-    background-color: $gameBonus-container-bg-color;
-    color: $gameBonus-container-color;
+    background-color: $pageBonus-container-bg-color;
+    color: $pageBonus-container-color;
     $margin-left-right: 1.625rem;
     margin-left: $margin-left-right;
     margin-right: $margin-left-right;
@@ -20,12 +20,12 @@
 
     .heading {
       height: 2.5rem;
-      font-size: $gameBonus-heading-font-size;
+      font-size: $pageBonus-heading-font-size;
       $padding-top-bottom: 0.5rem;
       padding-top: $padding-top-bottom;
       padding-bottom: $padding-top-bottom;
       vertical-align: middle;
-      line-height: $gameBonus-heading-font-size;
+      line-height: $pageBonus-heading-font-size;
     }
     .day {
       width: 100%;
@@ -38,8 +38,8 @@
       padding-right: $padding-left-right;
 
       .content {
-        font-size: $gameBonus-day-font-size;
-        line-height: $gameBonus-day-font-size * 0.9;
+        font-size: $pageBonus-day-font-size;
+        line-height: $pageBonus-day-font-size * 0.9;
         min-width: 8.75rem;
         display: table-cell;
         vertical-align: middle;
@@ -64,14 +64,14 @@
       }
 
       &.unlocked {
-        background-color: $gameBonus-day-unlocked-bg-color;
+        background-color: $pageBonus-day-unlocked-bg-color;
       }
       &.today {
 
       }
       &.locked {
-        background-color: $gameBonus-day-locked-bg-color;
-        color: $gameBonus-day-locked-color;
+        background-color: $pageBonus-day-locked-bg-color;
+        color: $pageBonus-day-locked-color;
       }
       .line {
         position: absolute;
@@ -79,7 +79,7 @@
         height: 100%;
         top: 0;
         left: 0;
-        background: linear-gradient(0deg, transparent 98.8%, $gameBonus-day-line-bg-color .0625rem);
+        background: linear-gradient(0deg, transparent 98.8%, $pageBonus-day-line-bg-color .0625rem);
         background-size: 90% 100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -92,7 +92,7 @@
         top: ($day-height - $height) / 2;
         background-repeat: no-repeat;
         background-size: contain;
-        font-size: $gameBonus-coins-font-size;
+        font-size: $pageBonus-coins-font-size;
         background-position: right;
         padding-right: 1rem;
       }
@@ -108,13 +108,13 @@
       }
     }
     .collect {
-      font-size: $gameBonus-collect-font-size;
-      background-color: $gameBonus-collect-bg-color;
+      font-size: $pageBonus-collect-font-size;
+      background-color: $pageBonus-collect-bg-color;
       $padding-top-bottom: 0.625rem;
       padding-bottom: $padding-top-bottom;
       padding-top: $padding-top-bottom;
       vertical-align: middle;
-      line-height: $gameBonus-collect-font-size;
+      line-height: $pageBonus-collect-font-size;
     }
   }
 }

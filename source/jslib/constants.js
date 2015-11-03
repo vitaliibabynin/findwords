@@ -79,6 +79,11 @@ window.CONST = {
             'bonus.day7': 'Вы сделали невозможное!',
             'bonus.collect': 'Получить',
 
+            //SHOP PAGE
+            'shop.heading': 'Магазин',
+            'shop.free-coins': 'Бесплатные монеты',
+
+
             t: ''
         },
         en: {
@@ -134,6 +139,10 @@ window.CONST = {
             'bonus.day6': 'Home stretch!',
             'bonus.day7': 'You did the impossible!',
             'bonus.collect': 'Collect',
+
+            //SHOP PAGE
+            'shop.heading': 'Shop',
+            'shop.free-coins': 'Free Coins',
 
             t: ''
         }

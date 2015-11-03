@@ -30,9 +30,14 @@ var NavigationClass = Object.assign({}, {}, {
     displayName: 'Navigation',
     mixins: [GameMixin],
 
+    propTypes: {
+        initialSlide: React.PropTypes.number
+    },
+
     getInitialState: function () {
 
         var state = {
+            initialSlide: this.props.initialSlide || 0,
             buttonLayout: BUTTON_LAYOUT_MENU,
             buttonsData: this.getInitialButtonsData()
         };
@@ -143,6 +148,7 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_MENU_FACEBOOK:
                 break;
             case BUTTON_MENU_SHOP:
+                router.navigate("shop", "index", {initialSlide: this.state.initialSlide});
                 break;
             case BUTTON_SETTINGS:
                 this.setState({buttonLayout: this.state.buttonLayout == BUTTON_LAYOUT_MENU ? BUTTON_LAYOUT_SETTINGS : BUTTON_LAYOUT_MENU});

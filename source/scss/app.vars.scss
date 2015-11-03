@@ -133,18 +133,36 @@ $gamePageVictory-container-continue-button-bg-color: rgba(85,85,85,0.5);
 
 //pageBonus
 $pageBonus-bg-color: #81cfe0;
-$gameBonus-container-bg-color: #2574a9;
-$gameBonus-container-color: #ffffff;
-$gameBonus-day-unlocked-bg-color: #2ecc71;
-$gameBonus-day-line-bg-color: #ffffff;
-//$gameBonus-day-locked-bg-color: #253c4d;
-$gameBonus-day-locked-color: rgba(255, 255, 255, 0.5);
-$gameBonus-day-locked-bg-color: #3d647f;
-$gameBonus-collect-bg-color: #2ecc71;
+$pageBonus-container-bg-color: #2574a9;
+$pageBonus-container-color: #ffffff;
+$pageBonus-day-unlocked-bg-color: #2ecc71;
+$pageBonus-day-line-bg-color: #ffffff;
+//$pageBonus-day-locked-bg-color: #253c4d;
+$pageBonus-day-locked-color: rgba(255, 255, 255, 0.5);
+$pageBonus-day-locked-bg-color: #3d647f;
+$pageBonus-collect-bg-color: #2ecc71;
 
 
 //SIZE
-$gameBonus-heading-font-size: 1.5rem;
-$gameBonus-collect-font-size: 1.5rem;
-$gameBonus-day-font-size: 1rem;
-$gameBonus-coins-font-size: 0.875rem;
+$pageBonus-heading-font-size: 1.5rem;
+$pageBonus-collect-font-size: 1.5rem;
+$pageBonus-day-font-size: 1rem;
+$pageBonus-coins-font-size: 0.875rem;
+
+
+//SHOP PAGE
+//COLOR
+
+//pageShop
+$pageShop-bg-color: #81cfe0;
+$pageShop-container-bg-color: #2574a9;
+$pageShop-container-color: #ffffff;
+$pageShop-header-bg-color: #ff4545;
+$pageShop-inner-block-bg-color: #2ecc71;
+$pageShop-price-bg-color: #429063;
+
+
+//SIZE
+$pageShop-heading-font-size: 1.5rem;
+$pageShop-coins-font-size: 1rem;
+$pageShop-price-font-size: 1.1rem;
