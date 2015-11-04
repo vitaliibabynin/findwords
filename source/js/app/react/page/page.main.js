@@ -38,10 +38,11 @@ var PageMain = Object.assign({}, {}, {
         }
 
         //daysPlayedStreak
-        var daysSinceLastAccess = moment().diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
+        //var daysSinceLastAccess = moment(todayNumber, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
+        var daysSinceLastAccess = 1;
 
-        if(daysSinceLastAccess >= 1) {
-            appManager.getGameState().setBonusReceivedToday(false);
+        if(daysSinceLastAccess < 1) {
+            return;
         }
 
         if (daysSinceLastAccess > 1) {
@@ -53,19 +54,12 @@ var PageMain = Object.assign({}, {}, {
             appManager.getGameState().setDaysPlayedStreak(daysPlayedStreakIncrement);
         }
 
-        //bonusReceivedAlready
-        var bonusReceivedToday = appManager.getGameState().getBonusReceivedToday();
-
-        if (bonusReceivedToday) {
-            return;
-        }
-
-        //set lastAccessDate to now, flag bonus received
+        //set lastAccessDate to now
         appManager.getGameState().setLastAccessDate(todayNumber);
-        appManager.getGameState().setBonusReceivedToday(true);
 
         //go to bonus page
         router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
+        this.forceUpdate();
     },
 
     //componentDidUpdate: function (prevProps, prevState) {

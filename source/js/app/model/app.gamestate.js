@@ -9,8 +9,7 @@ var GameState = Object.assign({}, {}, {
         score: 99999,
         bonus: {
             lastAccessDate: 0,
-            bonusReceivedToday: false,
-            daysPlayedStreak: 1
+            daysPlayedStreak: 0
         },
         chips: {
             chipOpenWord: 999,
@@ -222,12 +221,6 @@ var GameState = Object.assign({}, {}, {
     },
     getLastAccessDate: function () {
         return this.getBonusField('lastAccessDate', 0);
-    },
-    setBonusReceivedToday: function (newBoolean) {
-        this.setBonusField('bonusReceivedToday', newBoolean);
-    },
-    getBonusReceivedToday: function () {
-        return this.getBonusField('bonusReceivedToday', true);
     },
     setDaysPlayedStreak: function (newNumber) {
         this.setBonusField('daysPlayedStreak', newNumber);
