@@ -26,7 +26,7 @@ var PageBonus = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     getInitialState: function () {
-        var state  = {
+        var state = {
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
             bonusCoins: appManager.getSettings().getBonusCoins() || {},
             daysPlayed: appManager.getGameState().getDaysPlayedStreak() || 0
@@ -55,14 +55,22 @@ var PageBonus = Object.assign({}, {}, {
         var daysPlayed = this.state.daysPlayed;
         var bonusDaysTotal = this.state.bonusDaysTotal;
 
-        console.log({daysPlayed: daysPlayed});
-        console.log({bonusDaysTotal: bonusDaysTotal});
-
-        if (daysPlayed < bonusDaysTotal) {
+        if (daysPlayed <= bonusDaysTotal) {
             return this.generateFirstSevenDays(daysPlayed, bonusDaysTotal);
         } else {
             return this.generateEightDayOnwards(daysPlayed, bonusDaysTotal);
         }
+    },
+
+    selectContentNumber: function (dayNumber, daysTotal) {
+        var number = 0;
+        var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+
+        for (var i = 0; i < dayNumber - daysTotal + 1; i++) {
+            number = numbers[i % numbers.length];
+        }
+
+        return number;
     },
 
     generateEightDayOnwards: function (daysPlayed, daysTotal) {
@@ -70,13 +78,17 @@ var PageBonus = Object.assign({}, {}, {
 
         for (var i = 0; i < daysTotal; i++) {
             var dayNumber = daysPlayed - daysTotal + i;
+            var bonusConverter = "bonus.day" + (daysTotal) + "." + this.selectContentNumber(dayNumber, daysTotal);
+            var content = i18n._(bonusConverter);
+
             if (dayNumber < daysPlayed - 1) {
-                daysRender[i] = this.getUnlockedDay(dayNumber, daysTotal);
+                daysRender[i] = this.getUnlockedDay(dayNumber, daysTotal, content);
                 continue;
             }
 
             if (dayNumber == daysPlayed - 1) {
-                daysRender[i] = this.getToday(dayNumber, daysTotal);
+                console.log(bonusConverter);
+                daysRender[i] = this.getToday(dayNumber, daysTotal, content);
             }
         }
 
@@ -87,13 +99,16 @@ var PageBonus = Object.assign({}, {}, {
         var daysRender = new Array(daysTotal);
 
         for (var i = 0; i < daysTotal; i++) {
+            var bonusConverter = "bonus.day" + (i + 1);
+            var content = i18n._(bonusConverter);
+
             if (i < daysPlayed - 1) {
                 daysRender[i] = this.getUnlockedDay(i, daysTotal);
                 continue;
             }
 
             if (i == daysPlayed - 1) {
-                daysRender[i] = this.getToday(i, daysTotal);
+                daysRender[i] = this.getToday(i, daysTotal, content);
                 continue;
             }
 
@@ -103,18 +118,17 @@ var PageBonus = Object.assign({}, {}, {
         return daysRender;
     },
 
-    getUnlockedDay: function (dayIdx, daysTotal) {
+    getUnlockedDay: function (dayIdx, daysTotal, content) {
         var unlockedDayClassNames = classNames(
             DAY,
             UNLOCKED
         );
 
-        var dayIdxConverter = "day" + (dayIdx + 1);
-        var bonusConverter = "bonus." + dayIdxConverter;
+        var bonusConverter = "bonus.day" + (dayIdx + 1);
+        var bonusContent = i18n._(bonusConverter);
 
         if (dayIdx >= daysTotal) {
-            var bonusCoinsDay = "day" + (daysTotal);
-            bonusConverter = "bonus." + bonusCoinsDay;
+            bonusContent = content;
         }
 
         var tick = {
@@ -132,14 +146,14 @@ var PageBonus = Object.assign({}, {}, {
                     <span>{i18n._('bonus.day')}</span>
                 </div>
 
-                <span className={CONTENT}>{i18n._(bonusConverter)}</span>
+                <span className={CONTENT}>{bonusContent}</span>
 
                 <div className={TICK} style={tick}></div>
             </div>
         );
     },
 
-    getToday: function (dayIdx, daysTotal) {
+    getToday: function (dayIdx, daysTotal, content) {
         var dollar = {
             backgroundImage: "url('" + this.getImagePath('counter/coins') + "')"
         };
@@ -153,20 +167,20 @@ var PageBonus = Object.assign({}, {}, {
             TODAY
         );
 
-        var dayIdxConverter = "day" + (dayIdx + 1);
-        var bonusCoinsDay = dayIdxConverter;
-        var bonusConverter = "bonus." + dayIdxConverter;
+        var bonusCoinsDay = "day" + (dayIdx + 1);
+        var bonusConverter = "bonus.day" + (dayIdx + 1);
+        var bonusContent = i18n._(bonusConverter);
 
         if (dayIdx >= daysTotal) {
             bonusCoinsDay = "day" + (daysTotal);
-            bonusConverter = "bonus." + bonusCoinsDay;
+            bonusContent = content;
         }
 
         return (
             <div key={TODAY + dayIdx} className={todayClassNames}>
                 <div className={CALENDAR} style={today}></div>
 
-                <span className={CONTENT}>{i18n._(bonusConverter)}</span>
+                <span className={CONTENT}>{bonusContent}</span>
 
                 <div className={PRIZE} style={dollar}>{this.state.bonusCoins[bonusCoinsDay]}</div>
             </div>

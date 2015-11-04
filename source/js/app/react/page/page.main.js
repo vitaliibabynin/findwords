@@ -38,8 +38,8 @@ var PageMain = Object.assign({}, {}, {
         }
 
         //daysPlayedStreak
-        //var daysSinceLastAccess = moment(todayNumber, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
-        var daysSinceLastAccess = 1;
+        var daysSinceLastAccess = moment(todayNumber, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
+        //var daysSinceLastAccess = 1;
 
         if(daysSinceLastAccess < 1) {
             return;
