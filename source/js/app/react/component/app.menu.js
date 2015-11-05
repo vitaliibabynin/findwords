@@ -57,6 +57,7 @@ var NavigationClass = Object.assign({}, {}, {
             id: BUTTON_MENU_FACEBOOK,
             title: i18n._('button.facebook.enter'),
             icon: "facebook_connect",
+            online: false,
             onClick: this.onClick
         };
         buttons[BUTTON_MENU_SHOP] = {
@@ -113,7 +114,13 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_LAYOUT_MENU:
                 buttonItems.push({id: BUTTON_SETTINGS, isPressed: false});
                 buttonItems.push({id: BUTTON_MENU_RATING, isPressed: false});
-                buttonItems.push({id: BUTTON_MENU_FACEBOOK, isPressed: false});
+                buttonItems.push({
+                    id: BUTTON_MENU_FACEBOOK,
+                    isPressed: false,
+                    online: appManager.getGameState().getFacebookOnline(),
+                    icon: appManager.getGameState().getFacebookOnline() ? "facebook_online" : "facebook_connect",
+                    title: i18n._('button.facebook.exit')
+                });
                 buttonItems.push({id: BUTTON_MENU_SHOP, isPressed: false});
                 break;
             case BUTTON_LAYOUT_SETTINGS:
@@ -146,6 +153,8 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_MENU_RATING:
                 break;
             case BUTTON_MENU_FACEBOOK:
+                appManager.getGameState().setFacebookOnline(!appManager.getGameState().getFacebookOnline());
+                this.forceUpdate();
                 break;
             case BUTTON_MENU_SHOP:
                 router.navigate("shop", "index", {initialSlide: this.state.initialSlide});
@@ -187,9 +196,14 @@ var NavigationClass = Object.assign({}, {}, {
 
         var buttons = this.getButtonsToShow().map(function (item, idx, allItems) {
             var button = this.state.buttonsData[item.id];
+            button.title = item.hasOwnProperty('title') ? item.title : button.title;
             button.icon = item.hasOwnProperty('icon') ? item.icon : button.icon;
 
-            var classes = classNames(item.id, item.isPressed ? "hover" : "");
+            var classes = classNames(
+                item.id,
+                item.isPressed ? "hover" : "",
+                item.online ? "online" : ""
+            );
 
             return (
                 <IconButton

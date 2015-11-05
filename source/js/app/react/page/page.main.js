@@ -58,7 +58,9 @@ var PageMain = Object.assign({}, {}, {
         appManager.getGameState().setLastAccessDate(todayNumber);
 
         //go to bonus page
-        router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
+        //router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
+        router.navigate("bonus", "index");
+        console.log("after router.navigate");
         this.forceUpdate();
     },
 

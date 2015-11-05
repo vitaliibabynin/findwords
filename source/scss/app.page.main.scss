@@ -226,6 +226,10 @@
       }
       &.facebook {
         background-color: $navigation-btn-facebook-bg-color;
+
+        &.online {
+          background-color: red;
+        }
       }
       &.shop {
         background-color: $navigation-btn-shop-bg-color;
