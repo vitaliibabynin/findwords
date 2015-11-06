@@ -235,29 +235,35 @@
 
           .profile-pic {
             position: absolute;
-            top: 0;
+            top: 0.25rem;
+            left: 0.25rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-size: contain;
+            border-radius: 5rem;
+            border: 0.15rem solid $navigation-btn-facebook-border-color;
           }
 
           .profile-name {
-            font-size: 0.5rem;
-            background-color: cyan;
             position: absolute;
             top: 0;
-            left: 1.5rem;
+            left: 2rem;
             display: table;
             word-wrap: break-word;
             overflow: hidden;
             $min-height: 2rem;
-            $max-width: 2.5rem;
+            $max-width: 2rem;
             min-height: $min-height;
             max-width: $max-width;
 
             span {
+              font-size: 0.55rem;
               min-height: $min-height;
               max-width: $max-width;
               display: table-cell;
               vertical-align: middle;
               line-height: 0.5rem;
+              text-align: initial;
             }
           }
 

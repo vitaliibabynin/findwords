@@ -177,9 +177,16 @@ module.exports.ChipButton.Class = ChipButtonClass;
 var FbButtonClass = Object.assign({}, IconButtonClass, {
     displayName: 'FbButton',
 
+    propTypes: {
+        profilePic: React.PropTypes.string,
+        profileName: React.PropTypes.string
+    },
+
     getInitialState: function () {
         var state = IconButtonClass.getInitialState.call(this);
         state.className += ' fb';
+        state.profilePic = this.props.profilePic || "";
+        state.profileName = this.props.profileName || "";
 
         return state;
     },
@@ -207,7 +214,7 @@ var FbButtonClass = Object.assign({}, IconButtonClass, {
         );
 
         var profilePic = {
-            backgroundImage: "url(" + this.getImagePath('counter/star') + ")"
+            backgroundImage: this.state.profilePic
         };
 
         return (
@@ -215,7 +222,7 @@ var FbButtonClass = Object.assign({}, IconButtonClass, {
                  dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
                 <span>{this.props.children}</span>
                 <div className="profile-pic" style={profilePic}></div>
-                <div className="profile-name"><span>First Last</span></div>
+                <div className="profile-name"><span>{this.state.profileName}</span></div>
 
             </div>
         );

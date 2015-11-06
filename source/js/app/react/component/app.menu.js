@@ -40,7 +40,9 @@ var NavigationClass = Object.assign({}, {}, {
             initialSlide: this.props.initialSlide || 0,
             buttonLayout: BUTTON_LAYOUT_MENU,
             buttonsData: this.getInitialButtonsData(),
-            facebookOnline: appManager.getGameState().getFacebookOnline()
+            facebookOnline: appManager.getGameState().getFacebookOnline(),
+            profilePic: "",
+            profileName: ""
         };
 
         return state;
@@ -152,10 +154,38 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_MENU_RATING:
                 break;
             case BUTTON_MENU_FACEBOOK:
-                var facebookStatusChange = !appManager.getGameState().getFacebookOnline();
-                appManager.getGameState().setFacebookOnline(facebookStatusChange);
+                if (!this.state.facebookOnline) {
+                    appFB.login().then(function (res) {
+                        return res;
+                    }.bind(this))
+                        .then(function (res) {
+                            var me = appFB.getMe();
+                            console.log({me: me});
+                            //var profilePic = me.picture.data.url;
+                            var profilePic = "";
+                            console.log({profilePic: profilePic});
+                            var profileName = me.first_name + " " + me.last_name;
+                            console.log({profileName: profileName});
 
-                this.setState({facebookOnline: facebookStatusChange});
+                            appManager.getGameState().setFacebookOnline(true);
+
+                            this.setState({
+                                facebookOnline: true,
+                                profilePic: profilePic,
+                                profileName: profileName
+                            })
+                        }.bind(this));
+                } else {
+                    appFB.logout();
+
+                    appManager.getGameState().setFacebookOnline(false);
+
+                    this.setState({
+                        facebookOnline: false,
+                        profilePic: "",
+                        profileName: ""
+                    });
+                }
                 break;
             case BUTTON_MENU_SHOP:
                 router.navigate("shop", "index", {initialSlide: this.state.initialSlide});
@@ -193,6 +223,8 @@ var NavigationClass = Object.assign({}, {}, {
 
 
     render: function () {
+        console.log({facebookOnline: this.state.facebookOnline});
+
         var classses = classNames("navigation", this.state.buttonLayout + '-layout');
 
         var buttons = this.getButtonsToShow().map(function (item, idx, allItems) {
@@ -214,6 +246,8 @@ var NavigationClass = Object.assign({}, {}, {
                         id={button.id}
                         className={classes}
                         icon={button.icon}
+                        profilePic={this.state.profilePic}
+                        profileName={this.state.profileName}
                         onClick={button.onClick}>
                         {button.title}
                     </FbButton>
