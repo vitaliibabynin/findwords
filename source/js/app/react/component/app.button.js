@@ -174,26 +174,55 @@ module.exports.ChipButton = React.createClass(ChipButtonClass);
 module.exports.ChipButton.Class = ChipButtonClass;
 
 
-//var FbButtonClass = Object.assign({}, IconButtonClass, {
-//    displayName: 'FbButton',
-//
-//    getInitialState: function () {
-//        var state = IconButtonClass.getInitialState.call(this);
-//        state.className += ' fb';
-//
-//        return state;
-//    },
-//
-//    getBackgoundImageName: function () {
-//        return this.props.icon;
-//    },
-//
-//    render: function () {
-//        return ButtonClass.render.call(this);
-//    }
-//});
-//module.exports.FbButton = React.createClass(FbButtonClass);
-//module.exports.FbButton.Class = FbButtonClass;
+var FbButtonClass = Object.assign({}, IconButtonClass, {
+    displayName: 'FbButton',
+
+    getInitialState: function () {
+        var state = IconButtonClass.getInitialState.call(this);
+        state.className += ' fb';
+
+        return state;
+    },
+
+    componentDidUpdate: function (prevProps, prevState) {
+        if (prevProps.icon == this.props.icon) {
+            return;
+        }
+
+        this.updateStyle(this.state.style);
+        this.setState({
+            style: this.state.style
+        });
+    },
+
+    getBackgoundImageName: function () {
+        return this.props.icon;
+    },
+
+    render: function () {
+        var buttonClasses = classNames(
+            this.state.className,
+            this.props.className,
+            {'hover': this.state.isActive || this.props.isActive}
+        );
+
+        var profilePic = {
+            backgroundImage: "url(" + this.getImagePath('counter/star') + ")"
+        };
+
+        return (
+            <div className={buttonClasses} style={this.state.style} onClick={this.onClick}
+                 dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
+                <span>{this.props.children}</span>
+                <div className="profile-pic" style={profilePic}></div>
+                <div className="profile-name"><span>First Last</span></div>
+
+            </div>
+        );
+    }
+});
+module.exports.FbButton = React.createClass(FbButtonClass);
+module.exports.FbButton.Class = FbButtonClass;
 
 
 //var VkButtonClass = Object.assign({}, IconButtonClass, {

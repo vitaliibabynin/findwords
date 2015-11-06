@@ -228,7 +228,43 @@
         background-color: $navigation-btn-facebook-bg-color;
 
         &.online {
-          background-color: red;
+          width: 4rem;
+          position: relative;
+          background-position: 0.75rem 2.1rem;
+          background-size: 0.5rem 0.8125rem;
+
+          .profile-pic {
+            position: absolute;
+            top: 0;
+          }
+
+          .profile-name {
+            font-size: 0.5rem;
+            background-color: cyan;
+            position: absolute;
+            top: 0;
+            left: 1.5rem;
+            display: table;
+            word-wrap: break-word;
+            overflow: hidden;
+            $min-height: 2rem;
+            $max-width: 2.5rem;
+            min-height: $min-height;
+            max-width: $max-width;
+
+            span {
+              min-height: $min-height;
+              max-width: $max-width;
+              display: table-cell;
+              vertical-align: middle;
+              line-height: 0.5rem;
+            }
+          }
+
+          span {
+            display: inline-block;
+            margin-left: 0.5rem;
+          }
         }
       }
       &.shop {

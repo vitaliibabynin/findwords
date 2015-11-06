@@ -5,7 +5,7 @@ var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 var IconButton = require('./app.button').IconButton;
-//var FbButton = require('./app.button').FbButton;
+var FbButton = require('./app.button').FbButton;
 
 module.exports = {};
 
@@ -39,7 +39,8 @@ var NavigationClass = Object.assign({}, {}, {
         var state = {
             initialSlide: this.props.initialSlide || 0,
             buttonLayout: BUTTON_LAYOUT_MENU,
-            buttonsData: this.getInitialButtonsData()
+            buttonsData: this.getInitialButtonsData(),
+            facebookOnline: appManager.getGameState().getFacebookOnline()
         };
 
         return state;
@@ -57,7 +58,6 @@ var NavigationClass = Object.assign({}, {}, {
             id: BUTTON_MENU_FACEBOOK,
             title: i18n._('button.facebook.enter'),
             icon: "facebook_connect",
-            online: false,
             onClick: this.onClick
         };
         buttons[BUTTON_MENU_SHOP] = {
@@ -117,9 +117,8 @@ var NavigationClass = Object.assign({}, {}, {
                 buttonItems.push({
                     id: BUTTON_MENU_FACEBOOK,
                     isPressed: false,
-                    online: appManager.getGameState().getFacebookOnline(),
                     icon: appManager.getGameState().getFacebookOnline() ? "facebook_online" : "facebook_connect",
-                    title: i18n._('button.facebook.exit')
+                    title: appManager.getGameState().getFacebookOnline() ? i18n._('button.facebook.exit') : i18n._('button.facebook.enter')
                 });
                 buttonItems.push({id: BUTTON_MENU_SHOP, isPressed: false});
                 break;
@@ -153,8 +152,10 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_MENU_RATING:
                 break;
             case BUTTON_MENU_FACEBOOK:
-                appManager.getGameState().setFacebookOnline(!appManager.getGameState().getFacebookOnline());
-                this.forceUpdate();
+                var facebookStatusChange = !appManager.getGameState().getFacebookOnline();
+                appManager.getGameState().setFacebookOnline(facebookStatusChange);
+
+                this.setState({facebookOnline: facebookStatusChange});
                 break;
             case BUTTON_MENU_SHOP:
                 router.navigate("shop", "index", {initialSlide: this.state.initialSlide});
@@ -201,9 +202,23 @@ var NavigationClass = Object.assign({}, {}, {
 
             var classes = classNames(
                 item.id,
-                item.isPressed ? "hover" : "",
-                item.online ? "online" : ""
+                item.isPressed ? "hover" : ""
             );
+
+            if (this.state.facebookOnline && item.id == BUTTON_MENU_FACEBOOK) {
+                classes += " online";
+
+                return (
+                    <FbButton
+                        key={button.id}
+                        id={button.id}
+                        className={classes}
+                        icon={button.icon}
+                        onClick={button.onClick}>
+                        {button.title}
+                    </FbButton>
+                )
+            }
 
             return (
                 <IconButton

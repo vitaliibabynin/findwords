@@ -59,9 +59,10 @@ var PageMain = Object.assign({}, {}, {
 
         //go to bonus page
         //router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
+        this.forceUpdate();
+        console.log("after this.forceUpdate()");
         router.navigate("bonus", "index");
         console.log("after router.navigate");
-        this.forceUpdate();
     },
 
     //componentDidUpdate: function (prevProps, prevState) {
