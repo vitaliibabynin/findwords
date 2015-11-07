@@ -125,11 +125,12 @@ var PageGameMain = Object.assign({}, {}, {
 
             this.setState({
                 chipsOpenWord: chipsOpenWord
+            }, function () {
+                if (this.refs.board.checkIfRoundComplete()) {
+                    //this.goToPageRoundComplete(2000);
+                    this.goToPageRoundComplete();
+                }
             });
-
-            if (this.refs.board.checkIfRoundComplete()) {
-                this.goToPageRoundComplete(2000);
-            }
         }
     },
 
@@ -147,11 +148,12 @@ var PageGameMain = Object.assign({}, {}, {
 
             this.setState({
                 chipsOpenLetter: chipsOpenLetter
+            }, function() {
+                if (this.refs.board.checkIfRoundComplete()) {
+                    //this.goToPageRoundComplete(2000);
+                    this.goToPageRoundComplete();
+                }
             });
-
-            if (this.refs.board.checkIfRoundComplete()) {
-                this.goToPageRoundComplete(2000);
-            }
         }
     },
 
@@ -235,7 +237,7 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     goToPageRoundComplete: function (time) {
-        time = time || 2000;
+        time = time || 0;
 
         var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
         roundsComplete++;

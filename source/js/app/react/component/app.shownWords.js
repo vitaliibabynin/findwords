@@ -23,7 +23,8 @@ var ShownWordsClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            shownWordsLetters: this.props.shownWordsLetters || []
+            shownWordsLetters: this.props.shownWordsLetters || [],
+            time: 1000
         };
         state.words = this.convertWords(state.shownWordsLetters);
 
@@ -75,6 +76,10 @@ var ShownWordsClass = Object.assign({}, {}, {
         return 87 / 128;
     },
 
+    componentWillUnmount() {
+      this.setState({time: false})
+    },
+
     render: function () {
         var whichFontSize = this.chooseFontSize();
 
@@ -95,8 +100,8 @@ var ShownWordsClass = Object.assign({}, {}, {
                  style={style}>
                 <ReactCSSTransitionGroup
                     transitionName="fade"
-                    transitionEnterTimeout={1000}
-                    transitionLeaveTimeout={1000}>
+                    transitionEnterTimeout={this.state.time}
+                    transitionLeaveTimeout={this.state.time}>
                     {words}
                 </ReactCSSTransitionGroup>
             </div>

@@ -103,11 +103,13 @@ var PageGameVictory = Object.assign({}, {}, {
     onClick: function () {
         var nextRoundIdx = this.nextRoundIdx();
         var nextRoundsBundleIdx = this.state.roundsBundleIdx;
+        var roundsBundlesTotal = appManager.getSettings().getRoundsBundles().length;
 
-        this.openNextSlide();
+        if (nextRoundsBundleIdx < roundsBundlesTotal - 1) {
+            this.openNextSlide();
+        }
 
         if (nextRoundIdx === false) {
-            var roundsBundlesTotal = appManager.getSettings().getRoundsBundles().length;
             var nextRoundsBundlesRoundsComplete;
 
             for (var i = nextRoundsBundleIdx; i < roundsBundlesTotal; i++) {

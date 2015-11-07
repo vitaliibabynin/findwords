@@ -384,7 +384,8 @@ var BoardClass = Object.assign({}, {}, {
             }
 
             if (this.checkIfRoundComplete()) {
-                this.state.goToPageRoundComplete(2200);
+                //this.state.goToPageRoundComplete(2200);
+                this.state.goToPageRoundComplete();
             }
             return;
         }
