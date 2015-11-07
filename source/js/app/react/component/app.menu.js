@@ -35,17 +35,41 @@ var NavigationClass = Object.assign({}, {}, {
     },
 
     getInitialState: function () {
-
         var state = {
             initialSlide: this.props.initialSlide || 0,
             buttonLayout: BUTTON_LAYOUT_MENU,
             buttonsData: this.getInitialButtonsData(),
-            facebookOnline: appManager.getGameState().getFacebookOnline(),
+            facebookOnline: appFB.isAuthorized(),
             profilePic: "",
             profileName: ""
         };
 
         return state;
+    },
+
+    componentDidMount() {
+        if (appFB.isAuthorized()) {
+            appFB.getMe().then(function (res) {
+                this.setState({
+                    profilePic: res.picture,
+                    profileName: res.first_name + " " + res.last_name
+                });
+            }.bind(this));
+        }
+
+        appFB.addLoginListener(this.appFbUpdated);
+        appFB.addLogoutListener(this.appFbUpdated);
+    },
+
+    componentWillUnmount: function () {
+        appFB.removeLoginListener(this.appFbUpdated);
+        appFB.removeLogoutListener(this.appFbUpdated);
+    },
+
+    appFbUpdated: function () {
+        this.setState({
+            facebookOnline: appFB.isAuthorized()
+        })
     },
 
     getInitialButtonsData: function () {
@@ -119,8 +143,8 @@ var NavigationClass = Object.assign({}, {}, {
                 buttonItems.push({
                     id: BUTTON_MENU_FACEBOOK,
                     isPressed: false,
-                    icon: appManager.getGameState().getFacebookOnline() ? "facebook_online" : "facebook_connect",
-                    title: appManager.getGameState().getFacebookOnline() ? i18n._('button.facebook.exit') : i18n._('button.facebook.enter')
+                    icon: this.state.facebookOnline ? "facebook_online" : "facebook_connect",
+                    title: this.state.facebookOnline ? i18n._('button.facebook.exit') : i18n._('button.facebook.enter')
                 });
                 buttonItems.push({id: BUTTON_MENU_SHOP, isPressed: false});
                 break;
@@ -156,18 +180,11 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_MENU_FACEBOOK:
                 if (!this.state.facebookOnline) {
                     appFB.login().then(function (res) {
-                        return res;
+                        return appFB.getMe();
                     }.bind(this))
                         .then(function (res) {
-                            var me = appFB.getMe();
-                            console.log({me: me});
-                            //var profilePic = me.picture.data.url;
-                            var profilePic = "";
-                            console.log({profilePic: profilePic});
-                            var profileName = me.first_name + " " + me.last_name;
-                            console.log({profileName: profileName});
-
-                            appManager.getGameState().setFacebookOnline(true);
+                            var profilePic = res.picture;
+                            var profileName = res.first_name + " " + res.last_name;
 
                             this.setState({
                                 facebookOnline: true,
@@ -177,8 +194,6 @@ var NavigationClass = Object.assign({}, {}, {
                         }.bind(this));
                 } else {
                     appFB.logout();
-
-                    appManager.getGameState().setFacebookOnline(false);
 
                     this.setState({
                         facebookOnline: false,
@@ -224,6 +239,8 @@ var NavigationClass = Object.assign({}, {}, {
 
     render: function () {
         console.log({facebookOnline: this.state.facebookOnline});
+        console.log({profilePic: this.state.profilePic});
+        console.log({profileName: this.state.profileName});
 
         var classses = classNames("navigation", this.state.buttonLayout + '-layout');
 

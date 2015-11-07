@@ -192,13 +192,15 @@ var FbButtonClass = Object.assign({}, IconButtonClass, {
     },
 
     componentDidUpdate: function (prevProps, prevState) {
-        if (prevProps.icon == this.props.icon) {
+        if (prevProps.icon == this.props.icon && prevProps.profilePic == this.props.profilePic && prevProps.profileName == this.props.profileName) {
             return;
         }
 
         this.updateStyle(this.state.style);
         this.setState({
-            style: this.state.style
+            style: this.state.style,
+            profilePic: this.props.profilePic || "",
+            profileName: this.props.profileName || ""
         });
     },
 
@@ -213,14 +215,17 @@ var FbButtonClass = Object.assign({}, IconButtonClass, {
             {'hover': this.state.isActive || this.props.isActive}
         );
 
+        var profilePicPath = "url('" + this.state.profilePic + "')";
+
         var profilePic = {
-            backgroundImage: this.state.profilePic
+            backgroundImage: profilePicPath
         };
 
         return (
             <div className={buttonClasses} style={this.state.style} onClick={this.onClick}
                  dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
                 <span>{this.props.children}</span>
+
                 <div className="profile-pic" style={profilePic}></div>
                 <div className="profile-name"><span>{this.state.profileName}</span></div>
 

@@ -7,7 +7,6 @@ var GameState = Object.assign({}, {}, {
     gameState: {
         coins: 99999,
         score: 99999,
-        facebookOnline: false,
         bonus: {
             lastAccessDate: 0,
             daysPlayedStreak: 0
@@ -204,12 +203,6 @@ var GameState = Object.assign({}, {}, {
     },
     getCoins: function () {
         return this.getGameStateField('coins', 0);
-    },
-    setFacebookOnline: function (newBoolean) {
-        this.setGameStateField('facebookOnline', newBoolean);
-    },
-    getFacebookOnline: function () {
-        return this.getGameStateField('facebookOnline', false);
     },
 
     setBonusField: function (field, newValue) {
