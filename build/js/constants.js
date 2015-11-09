@@ -18,7 +18,10 @@ window.CONST = {
     GCM_SENDER_ID: '',
     GA_ID: '',
     AD_PERIOD_INTERSTITIAL: 300,
-    FB_APP_ID: '473533802832988',
+    //Production
+    FB_APP_ID: '473524332833935',
+    //Developmet
+    //FB_APP_ID: '473533802832988',
     //FB_APP_ID: '',
 
 
