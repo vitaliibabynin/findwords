@@ -47,7 +47,7 @@ var NavigationClass = Object.assign({}, {}, {
         return state;
     },
 
-    componentDidMount() {
+    componentDidMount: function () {
         if (appFB.isAuthorized()) {
             appFB.getMe().then(function (res) {
                 this.setState({

@@ -76,7 +76,7 @@ var ShownWordsClass = Object.assign({}, {}, {
         return 87 / 128;
     },
 
-    componentWillUnmount() {
+    componentWillUnmount: function () {
       this.setState({time: false})
     },
 
