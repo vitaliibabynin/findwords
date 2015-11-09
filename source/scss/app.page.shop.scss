@@ -15,7 +15,7 @@
     $margin-left-right: 2.25rem;
     margin-left: $margin-left-right;
     margin-right: $margin-left-right;
-    margin-top: 2.625rem;
+    margin-top: 1.25rem;
     text-align: center;
 
     .heading {
@@ -27,7 +27,6 @@
       vertical-align: middle;
       line-height: $pageShop-heading-font-size;
       background-color: $pageShop-header-bg-color;
-      margin-bottom: 0.365rem;
     }
 
     .outer-block {
@@ -40,8 +39,8 @@
       padding-right: $padding-left-right;
 
       &:last-child {
-        height: 3.47rem;
-        padding-bottom: 0.73rem;
+        height: 3.105rem;
+        padding-bottom: 0.365rem;
       }
 
       .inner-block {
@@ -59,30 +58,47 @@
           background-position: center;
         }
 
+        .text {
+          float: left;
+          text-align: left;
+          width: 9rem;
+          margin-left: 5%;
+          font-size: $pageShop-coins-font-size;
+        }
+
+        .add-free-coins {
+          float: right;
+          width: 3rem;
+          margin-right: 5%;
+          text-align: right;
+        }
+
         .coins {
+          float: left;
+          text-align: left;
           width: 2.5rem;
           margin-left: 5%;
           font-size: $pageShop-coins-font-size;
         }
 
         .price {
-          position: absolute;
+          float: right;
           height: 1.625rem;
           width: 3.25rem;
-          right: 5%;
-          top: 0.375rem;
+          margin-right: 5%;
+          margin-top: 0.375rem;
           background-color: $pageShop-price-bg-color;
           border-radius: 0.25rem;
           vertical-align: middle;
           line-height: 1.625rem;
           font-size: $pageShop-price-font-size;
         }
-
       }
     }
 
     .free-coins {
-
+      font-size: $pageShop-freeCoins-font-size;
+      margin-top: 0.365rem;
     }
   }
 }

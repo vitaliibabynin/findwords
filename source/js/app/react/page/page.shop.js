@@ -13,6 +13,8 @@ var THREE_DOLLAR = 'shop/three_dollar';
 var MANY_DOLLAR = 'shop/many_dollar';
 var SACK_DOLLAR = 'shop/sack_dollar';
 var THREE_SACK_DOLLAR = 'shop/three_sack_dollar';
+var COINS_FOR_WATCHING_VIDEO = 50;
+var COINS_FOR_SHARING_WITH_FRIENDS = 100;
 
 var PageShop = Object.assign({}, {}, {
 
@@ -94,12 +96,25 @@ var PageShop = Object.assign({}, {}, {
                     <Counters isDisplayBackButton={true}/>
 
                     <div className="container">
+
                         <div className="heading">{i18n._('shop.heading')}</div>
 
                         {this.generateBlocks()}
 
+                        <div className="heading free-coins">{i18n._('shop.free-coins')}</div>
+
                         <div className="outer-block">
-                            <div className="inner-block free-coins">{i18n._('shop.free-coins')}</div>
+                            <div className="inner-block watch-video">
+                                <div className="text">{i18n._('shop.watch-video')}</div>
+                                <div className="add-free-coins">+{COINS_FOR_WATCHING_VIDEO}</div>
+                            </div>
+                        </div>
+
+                        <div className="outer-block">
+                            <div className="inner-block share">
+                                <div className="text">{i18n._('shop.share')}</div>
+                                <div className="add-free-coins">+{COINS_FOR_SHARING_WITH_FRIENDS}</div>
+                            </div>
                         </div>
 
                     </div>

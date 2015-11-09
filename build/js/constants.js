@@ -19,9 +19,9 @@ window.CONST = {
     GA_ID: '',
     AD_PERIOD_INTERSTITIAL: 300,
     //Production
-    //FB_APP_ID: '473524332833935',
+    FB_APP_ID: '473524332833935',
     //Developmet
-    FB_APP_ID: '473533802832988',
+    //FB_APP_ID: '473533802832988',
     //FB_APP_ID: '',
 
 
@@ -100,7 +100,8 @@ window.CONST = {
             //SHOP PAGE
             'shop.heading': 'Магазин',
             'shop.free-coins': 'Бесплатные монеты',
-
+            'shop.watch-video': 'Посмотреть видео',
+            'shop.share': 'Рассказать про игру',
 
             t: ''
         },
@@ -175,6 +176,8 @@ window.CONST = {
             //SHOP PAGE
             'shop.heading': 'Shop',
             'shop.free-coins': 'Free Coins',
+            'shop.watch-video': 'Watch a video',
+            'shop.share': 'Share with friends',
 
             t: ''
         }
