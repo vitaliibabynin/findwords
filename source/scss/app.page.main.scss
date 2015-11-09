@@ -228,15 +228,15 @@
         background-color: $navigation-btn-facebook-bg-color;
 
         &.online {
-          width: 4rem;
+          width: 6rem;
           position: relative;
-          background-position: 0.75rem 2.1rem;
+          background-position: 1.5rem 2.1rem;
           background-size: 0.5rem 0.8125rem;
 
           .profile-pic {
             position: absolute;
             top: 0.25rem;
-            left: 0.25rem;
+            left: 0.75rem;
             width: 1.5rem;
             height: 1.5rem;
             background-size: contain;
@@ -247,29 +247,25 @@
           .profile-name {
             position: absolute;
             top: 0;
-            left: 2rem;
+            left: 3rem;
             display: table;
             word-wrap: break-word;
             overflow: hidden;
-            $min-height: 2rem;
-            $max-width: 2rem;
-            min-height: $min-height;
-            max-width: $max-width;
+            height: 2rem;
+            width: 3rem;
 
             span {
               font-size: 0.55rem;
-              min-height: $min-height;
-              max-width: $max-width;
               display: table-cell;
-              vertical-align: middle;
               line-height: 0.5rem;
               text-align: initial;
+              vertical-align: middle;
             }
           }
 
           span {
             display: inline-block;
-            margin-left: 0.5rem;
+            margin-left: 1rem;
           }
         }
       }
