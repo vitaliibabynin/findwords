@@ -41,7 +41,8 @@ var NavigationClass = Object.assign({}, {}, {
             buttonsData: this.getInitialButtonsData(),
             facebookOnline: appFB.isAuthorized(),
             profilePic: "",
-            profileName: ""
+            profileFirstName: "",
+            profileLastName: ""
         };
 
         return state;
@@ -52,7 +53,8 @@ var NavigationClass = Object.assign({}, {}, {
             appFB.getMe().then(function (res) {
                 this.setState({
                     profilePic: res.picture,
-                    profileName: res.first_name + " " + res.last_name
+                    profileFirstName: res.first_name,
+                    profileLastName: res.last_name
                 });
             }.bind(this));
         }
@@ -184,12 +186,14 @@ var NavigationClass = Object.assign({}, {}, {
                     }.bind(this))
                         .then(function (res) {
                             var profilePic = res.picture;
-                            var profileName = res.first_name + " " + res.last_name;
+                            var profileFirstName = res.first_name;
+                            var profileLastName = res.last_name;
 
                             this.setState({
                                 facebookOnline: true,
                                 profilePic: profilePic,
-                                profileName: profileName
+                                profileName: profileFirstName,
+                                profileLastName: profileLastName
                             })
                         }.bind(this));
                 } else {
@@ -198,7 +202,8 @@ var NavigationClass = Object.assign({}, {}, {
                     this.setState({
                         facebookOnline: false,
                         profilePic: "",
-                        profileName: ""
+                        profileFirstName: "",
+                        profileLastName: ""
                     });
                 }
                 break;
@@ -239,8 +244,6 @@ var NavigationClass = Object.assign({}, {}, {
 
     render: function () {
         console.log({facebookOnline: this.state.facebookOnline});
-        console.log({profilePic: this.state.profilePic});
-        console.log({profileName: this.state.profileName});
 
         var classses = classNames("navigation", this.state.buttonLayout + '-layout');
 
@@ -264,7 +267,8 @@ var NavigationClass = Object.assign({}, {}, {
                         className={classes}
                         icon={button.icon}
                         profilePic={this.state.profilePic}
-                        profileName={this.state.profileName}
+                        profileFirstName={this.state.profileFirstName}
+                        profileLastName={this.state.profileLastName}
                         onClick={button.onClick}>
                         {button.title}
                     </FbButton>

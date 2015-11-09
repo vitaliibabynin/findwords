@@ -230,42 +230,58 @@
         &.online {
           width: 6rem;
           position: relative;
-          background-position: 1.5rem 2.1rem;
+          background-position: 1.75rem 2.1rem;
           background-size: 0.5rem 0.8125rem;
+
+          .enter-exit {
+            text-align: initial;
+            display: inline-block;
+            margin-left: 0.6rem;
+          }
 
           .profile-pic {
             position: absolute;
-            top: 0.25rem;
+            top: 0.2rem;
             left: 0.75rem;
-            width: 1.5rem;
-            height: 1.5rem;
+            width: 1.6rem;
+            height: 1.6rem;
             background-size: contain;
             border-radius: 5rem;
-            border: 0.15rem solid $navigation-btn-facebook-border-color;
+            border: 0.09rem solid $navigation-btn-facebook-border-color;
           }
 
           .profile-name {
+            margin: 0;
             position: absolute;
             top: 0;
             left: 3rem;
-            display: table;
-            word-wrap: break-word;
-            overflow: hidden;
-            height: 2rem;
-            width: 3rem;
+            $height: 2rem;
+            $width: 3rem;
+            height: $height;
+            width: $width;
 
-            span {
-              font-size: 0.55rem;
-              display: table-cell;
-              line-height: 0.5rem;
+            div {
+              position: relative;
+              height: $height / 2;
+              width: $width;
               text-align: initial;
-              vertical-align: middle;
-            }
-          }
 
-          span {
-            display: inline-block;
-            margin-left: 1rem;
+              span {
+                display: inline-block;
+                //overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-size: 0.55rem;
+                height: 0.55rem;
+                width: $width;
+                line-height: 0.55rem;
+              }
+
+              &:first-child span{
+                margin-top: 0.45rem;
+                line-height: 0.7rem;
+              }
+            }
           }
         }
       }

@@ -179,28 +179,33 @@ var FbButtonClass = Object.assign({}, IconButtonClass, {
 
     propTypes: {
         profilePic: React.PropTypes.string,
-        profileName: React.PropTypes.string
+        profileFirstName: React.PropTypes.string,
+        profileLastName: React.PropTypes.string
     },
 
     getInitialState: function () {
         var state = IconButtonClass.getInitialState.call(this);
         state.className += ' fb';
         state.profilePic = this.props.profilePic || "";
-        state.profileName = this.props.profileName || "";
+        state.profileFirstName = this.props.profileFirstName || "";
+        state.profileLastName = this.props.profileLastName || "";
 
         return state;
     },
 
     componentDidUpdate: function (prevProps, prevState) {
-        if (prevProps.icon == this.props.icon && prevProps.profilePic == this.props.profilePic && prevProps.profileName == this.props.profileName) {
-            return;
+        if (prevProps.icon == this.props.icon && prevProps.profilePic == this.props.profilePic) {
+            if (prevProps.profileFirstName == this.props.profileFirstName && prevProps.profileLastName == this.props.profileLastName) {
+                return;
+            }
         }
 
         this.updateStyle(this.state.style);
         this.setState({
             style: this.state.style,
             profilePic: this.props.profilePic || "",
-            profileName: this.props.profileName || ""
+            profileFirstName: this.props.profileFirstName || "",
+            profileLastName: this.props.profileLastName || ""
         });
     },
 
@@ -224,10 +229,13 @@ var FbButtonClass = Object.assign({}, IconButtonClass, {
         return (
             <div className={buttonClasses} style={this.state.style} onClick={this.onClick}
                  dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
-                <span>{this.props.children}</span>
+                <span className="enter-exit">{this.props.children}</span>
 
                 <div className="profile-pic" style={profilePic}></div>
-                <div className="profile-name"><span>{this.state.profileName}</span></div>
+                <div className="profile-name">
+                    <div><span>{this.state.profileFirstName}</span></div>
+                    <div><span>{this.state.profileLastName}</span></div>
+                </div>
 
             </div>
         );
