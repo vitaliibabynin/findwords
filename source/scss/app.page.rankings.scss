@@ -1,0 +1,32 @@
+.page-rankings {
+  position: relative;
+  height: 100%;
+  background-color: $pageRankings-bg-color;
+  width: 100%;
+}
+
+.page-rankings > .page-content {
+  height: 100%;
+  width: 100%;
+
+  .container {
+    background-color: $pageRankings-container-bg-color;
+    color: $pageRankings-container-color;
+    $margin-left-right: 2.25rem;
+    margin-left: $margin-left-right;
+    margin-right: $margin-left-right;
+    margin-top: 1.25rem;
+    text-align: center;
+
+    .heading {
+      height: 2.5rem;
+      font-size: $pageRankings-heading-font-size;
+      $padding-top-bottom: 0.5rem;
+      padding-top: $padding-top-bottom;
+      padding-bottom: $padding-top-bottom;
+      vertical-align: middle;
+      line-height: $pageRankings-heading-font-size;
+      background-color: $pageRankings-header-bg-color;
+    }
+  }
+}

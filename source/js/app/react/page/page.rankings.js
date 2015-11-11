@@ -29,7 +29,7 @@ var PageRankings = Object.assign({}, {}, {
 
                     <div className="container">
 
-                        <div className="heading">{i18n._('shop.heading')}</div>
+                        <div className="heading">{i18n._('rankings.heading')}</div>
 
                     </div>
 

@@ -103,6 +103,12 @@ window.CONST = {
             'shop.watch-video': 'Посмотреть видео',
             'shop.share': 'Рассказать про игру',
 
+            //RANKINGS PAGE
+            'rankings.heading': 'Рейтинг друзей',
+            'rankings.levels-complete': 'Пройдено уровней',
+            'rankings.invite-friends.get-coin': 'Приглашай друзей и получай монеты!',
+            'rankings.invite-friends': 'Пригласить друзей',
+
             t: ''
         },
         en: {
@@ -123,7 +129,7 @@ window.CONST = {
             'slide.complete.message': 'This level has already been completed',
 
             'button.settings': 'Settings',
-            'button.rating': 'Rating',
+            'button.rating': 'Rankings',
             'button.facebook.enter': 'Enter',
             'button.facebook.exit': 'Exit',
             'button.shop': 'Shop',
@@ -178,6 +184,12 @@ window.CONST = {
             'shop.free-coins': 'Free Coins',
             'shop.watch-video': 'Watch a video',
             'shop.share': 'Share with friends',
+
+            //RANKINGS PAGE
+            'rankings.heading': 'Friends rankings',
+            'rankings.levels-complete': 'Levels complete',
+            'rankings.invite-friends.get-coin': 'Invite friends and get coins!',
+            'rankings.invite-friends': 'Invite friends',
 
             t: ''
         }
