@@ -1,0 +1,30 @@
+.page-rate {
+  position: relative;
+  height: 100%;
+  background-color: $pageRate-bg-color;
+  width: 100%;
+}
+
+.page-rate > .page-content {
+  height: 100%;
+  width: 100%;
+
+  .container {
+    background-color: $pageRate-container-bg-color;
+    color: $pageRate-container-color;
+    $margin-left-right: 1.125rem;
+    margin-left: $margin-left-right;
+    margin-right: $margin-left-right;
+    margin-top: 0.75rem;
+    text-align: center;
+
+    .heading {
+      $height: 2.375rem;
+      height: $height;
+      font-size: $pageRate-heading-font-size;
+      vertical-align: middle;
+      line-height: $height;
+      background-color: $pageRate-header-bg-color;
+    }
+  }
+}

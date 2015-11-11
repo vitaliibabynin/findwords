@@ -8,9 +8,9 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 var Counters = require('./../component/app.counters').Counters;
 
-var PageRankings = Object.assign({}, {}, {
+var PageRate = Object.assign({}, {}, {
 
-    displayName: 'PageRankings',
+    displayName: 'PageRate',
     mixins: [GameMixin],
 
     getInitialState: function () {
@@ -28,7 +28,7 @@ var PageRankings = Object.assign({}, {}, {
 
         return (
 
-            <div className="page-rankings">
+            <div className="page-rate">
                 <div className="page-content">
 
                     <Counters isDisplayBackButton={true}/>
@@ -36,12 +36,6 @@ var PageRankings = Object.assign({}, {}, {
                     <div className="container">
 
                         <div className="heading">{i18n._('rankings.heading')}</div>
-
-                        <div className="friends-rankings"></div>
-
-                        <div className="invite-friends-fb-button" style={facebookImg}>
-                            <span>{i18n._('rankings.invite-friends')}</span>
-                        </div>
 
                     </div>
 
@@ -52,5 +46,5 @@ var PageRankings = Object.assign({}, {}, {
     }
 
 });
-module.exports = React.createClass(PageRankings);
-module.exports.Class = PageRankings;
+module.exports = React.createClass(PageRate);
+module.exports.Class = PageRate;

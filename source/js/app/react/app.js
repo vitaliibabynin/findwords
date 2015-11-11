@@ -9,7 +9,7 @@ var PageGameVictory = require('./page/page.game.victory');
 var PageBonus = require('./page/page.bonus');
 var PageShop = require('./page/page.shop');
 var PageRankings = require('./page/page.rankings');
-
+var PageRate = require('./page/page.rate');
 
 React.initializeTouchEvents(true);
 var AppClass = {
@@ -62,6 +62,9 @@ var AppClass = {
                 break;
             case "rankings":
                 this.renderPage(<PageRankings parent={this} />);
+                break;
+            case "rate":
+                this.renderPage(<PageRate parent={this} />);
                 break;
             case "bonus":
                 this.renderPage(<PageBonus parent={this} />);
