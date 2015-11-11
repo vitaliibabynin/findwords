@@ -22,7 +22,9 @@ var PageShop = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     getInitialState: function () {
-        var state = {};
+        var state = {
+            initialSlide: parseInt(router.getParam('initialSlide')) || 0
+        };
 
         return state;
     },

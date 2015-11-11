@@ -49,7 +49,7 @@ var NavigationClass = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        if (appFB.isAuthorized()) {
+        if (this.state.facebookOnline) {
             appFB.getMe().then(function (res) {
                 this.setState({
                     profilePic: res.picture,
@@ -178,6 +178,7 @@ var NavigationClass = Object.assign({}, {}, {
     onClick: function (buttonProps) {
         switch (buttonProps.id) {
             case BUTTON_MENU_RATING:
+                router.navigate("rankings", "index", {initialSlide: this.state.initialSlide});
                 break;
             case BUTTON_MENU_FACEBOOK:
                 if (!this.state.facebookOnline) {
@@ -192,7 +193,7 @@ var NavigationClass = Object.assign({}, {}, {
                             this.setState({
                                 facebookOnline: true,
                                 profilePic: profilePic,
-                                profileName: profileFirstName,
+                                profileFirstName: profileFirstName,
                                 profileLastName: profileLastName
                             })
                         }.bind(this));

@@ -63,6 +63,8 @@ var PageMain = Object.assign({}, {}, {
         console.log("after this.forceUpdate()");
         router.navigate("bonus", "index");
         console.log("after router.navigate");
+        this.forceUpdate();
+        console.log("after this.forceUpdate()2");
     },
 
     //componentDidUpdate: function (prevProps, prevState) {
