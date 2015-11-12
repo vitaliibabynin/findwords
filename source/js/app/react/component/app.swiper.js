@@ -82,7 +82,7 @@ var SlideClass = Object.assign({}, {}, {
             return;
         }
 
-        router.navigate("rate", "index", params);
+        router.navigate("game", "main", params);
     },
 
     onClickInstructions: function () {
@@ -93,7 +93,9 @@ var SlideClass = Object.assign({}, {}, {
     onClickBuySet: function (buttonProps, e) {
         e.stopPropagation();
 
-        this.onClickGame();
+        router.navigate("rate", "index");
+
+        //this.onClickGame();
     },
 
     onClickComplete: function () {

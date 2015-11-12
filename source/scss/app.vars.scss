@@ -195,12 +195,17 @@ $pageRankings-inviteFriendsFbButton-font-size: 0.875rem;
 
 //pageRate
 $pageRate-bg-color: #81cfe0;
-$pageRate-container-bg-color: #5c97bf;
+$pageRate-container-bg-color: #2574a9;
 $pageRate-container-color: #ffffff;
-$pageRate-header-bg-color: #049372;
-$pageRate-inviteFriendsFbButton-bg-color: #3a539b;
+$pageRate-header-bg-color: #2ecc71;
+$pageRate-review-bg-color: #f89406;
+$pageRate-later-bg-color: #67809f;
+$pageRate-never-bg-color: #67809f;
 
 
 //SIZE
-$pageRate-heading-font-size: 1rem;
-$pageRate-inviteFriendsFbButton-font-size: 0.875rem;
+$pageRate-heading-font-size: 1.5rem;
+$pageRate-description-font-size: 1.25rem;
+$pageRate-review-font-size: 1.5rem;
+$pageRate-later-font-size: 1.25rem;
+$pageRate-never-font-size: 1.25rem;

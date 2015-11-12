@@ -1,8 +1,6 @@
 "use strict";
 
 
-var GameMixin = require('./../component/app.mixin').GameMixin;
-
 var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 
@@ -11,20 +9,16 @@ var Counters = require('./../component/app.counters').Counters;
 var PageRate = Object.assign({}, {}, {
 
     displayName: 'PageRate',
-    mixins: [GameMixin],
 
     getInitialState: function () {
         var state = {
-            initialSlide: parseInt(router.getParam('initialSlide')) || 0
+            //initialSlide: parseInt(router.getParam('initialSlide')) || 0
         };
 
         return state;
     },
 
     render: function () {
-        var facebookImg = {
-            backgroundColor: "url('" + this.getImagePath('button/facebook_connect') + "')"
-        };
 
         return (
 
@@ -35,7 +29,13 @@ var PageRate = Object.assign({}, {}, {
 
                     <div className="container">
 
-                        <div className="heading">{i18n._('rankings.heading')}</div>
+                        <div className="heading">{i18n._('rate.heading')}</div>
+                        <div className="description">
+                            <span>{i18n._('rate.description')}</span>
+                        </div>
+                        <div className="review">{i18n._('rate.review')}</div>
+                        <div className="later">{i18n._('rate.remind.later')}</div>
+                        <div className="never">{i18n._('rate.remind.never')}</div>
 
                     </div>
 

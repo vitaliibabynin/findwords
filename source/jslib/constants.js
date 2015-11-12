@@ -109,6 +109,13 @@ window.CONST = {
             'rankings.invite-friends.get-coin': 'Приглашай друзей и получай монеты!',
             'rankings.invite-friends': 'Пригласить друзей',
 
+            //RATE PAGE
+            'rate.heading': 'Понравилась игра?',
+            'rate.description': 'Оставте отзыв. Спасибо за Вашу оценку!',
+            'rate.review': 'Оставить отзыв',
+            'rate.remind.later': 'Напомнить позже',
+            'rate.remind.never': 'Не показывать больше',
+
             t: ''
         },
         en: {
@@ -190,6 +197,13 @@ window.CONST = {
             'rankings.levels-complete': 'Levels complete',
             'rankings.invite-friends.get-coin': 'Invite friends and get coins!',
             'rankings.invite-friends': 'Invite friends',
+
+            //RATE PAGE
+            'rate.heading': 'Like the game?',
+            'rate.description': 'Write a review. Thanks for rating!',
+            'rate.review': 'Write a review',
+            'rate.remind.later': 'Ask later',
+            'rate.remind.never': 'Do not ask again',
 
             t: ''
         }
