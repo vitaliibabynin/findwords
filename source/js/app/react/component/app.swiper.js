@@ -280,7 +280,6 @@ var SlideClass = Object.assign({}, {}, {
 
     }
 
-
 });
 var Slide = React.createClass(SlideClass);
 

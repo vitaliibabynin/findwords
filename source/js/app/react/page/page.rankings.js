@@ -8,6 +8,31 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 var Counters = require('./../component/app.counters').Counters;
 
+
+var PlayerStatsClass = Object.assing({}, {}, {
+
+    displayName: 'PlayerStats',
+
+    getInitialState: function () {
+        var state = {
+            place: 1,
+            score: 9999999,
+            roundsComplete: 200,
+            roundsTotal: 300,
+            profilePicUrl: ""
+        };
+
+        return state;
+    },
+
+    render: function () {
+
+    }
+
+});
+var PlayerStats = React.createClass(PlayerStatsClass);
+
+
 var PageRankings = Object.assign({}, {}, {
 
     displayName: 'PageRankings',
@@ -23,7 +48,7 @@ var PageRankings = Object.assign({}, {}, {
 
     render: function () {
         var facebookImg = {
-            backgroundColor: "url('" + this.getImagePath('button/facebook_connect') + "')"
+            backgroundImage: "url('" + this.getImagePath('button/facebook_connect') + "')"
         };
 
         return (
@@ -39,8 +64,8 @@ var PageRankings = Object.assign({}, {}, {
 
                         <div className="friends-rankings"></div>
 
-                        <div className="invite-friends-fb-button" style={facebookImg}>
-                            <span>{i18n._('rankings.invite-friends')}</span>
+                        <div className="invite-friends-fb-button">
+                            <div style={facebookImg}>{i18n._('rankings.invite-friends')}</div>
                         </div>
 
                     </div>

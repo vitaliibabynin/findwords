@@ -38,11 +38,13 @@
       vertical-align: middle;
       line-height: $height;
       background-color: $pageRankings-inviteFriendsFbButton-bg-color;
-      background-size: 1rem 1.625rem;
-      background-repeat: no-repeat;
 
-      span {
-        margin-left: 2rem;
+      div {
+        display: inline-block;
+        padding-left: 2rem;
+        background-size: 2rem;
+        background-repeat: no-repeat;
+        background-position: 0 center;
       }
     }
   }
