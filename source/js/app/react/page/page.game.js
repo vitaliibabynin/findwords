@@ -237,7 +237,7 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     goToPageRoundComplete: function (time) {
-        time = time || 0;
+        time = time || 300;
 
         var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
         roundsComplete++;
