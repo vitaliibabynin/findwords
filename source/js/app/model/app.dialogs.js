@@ -750,12 +750,20 @@ var AuthSessionExpiredDialog = function(){
 var Dialogs = {
     _dialogs: {},
 
-    _getDialog: function(dialogId, dialogType){
-        if(!this._dialogs.hasOwnProperty(dialogId) && null == this._dialogs[dialogId]){
-            this._dialogs[dialogId] = new dialogType();
-        }
+    //_getDialog: function(dialogId, dialogType){
+    //    if(!this._dialogs.hasOwnProperty(dialogId) && null == this._dialogs[dialogId]){
+    //        this._dialogs[dialogId] = new dialogType();
+    //    }
+    //
+    //    return this._dialogs[dialogId];
+    //},
 
-        return this._dialogs[dialogId];
+    _getDialog: function(dialogId, dialogType){
+//        if(!this._dialogs.hasOwnProperty(dialogId) && null == this._dialogs[dialogId]){
+//            this._dialogs[dialogId] = new dialogType();
+//        }
+
+        return new dialogType();
     },
 
     /**

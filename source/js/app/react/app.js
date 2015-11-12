@@ -82,6 +82,7 @@ var AppClass = {
                 break;
             case "cleardb":
                 DB.getSettings().del('game_state');
+                DB.getSettings().del('dialogRateUs');
                 alert("game_state cleared");
                 break;
             default:
