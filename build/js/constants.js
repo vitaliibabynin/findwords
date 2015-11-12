@@ -116,6 +116,13 @@ window.CONST = {
             'rate.remind.later': 'Напомнить позже',
             'rate.remind.never': 'Не показывать больше',
 
+            //RATE DIALOG
+            'app.dialog.rateus.title': 'Понравилась игра?',
+            'app.dialog.rateus.description': 'Оставте отзыв. Спасибо за Вашу оценку!',
+            'app.dialog.rateus.button.rate': 'Оставить отзыв',
+            'app.dialog.rateus.button.later': 'Напомнить позже',
+            'app.dialog.rateus.button.never': 'Не показывать больше',
+
             t: ''
         },
         en: {
@@ -204,6 +211,13 @@ window.CONST = {
             'rate.review': 'Write a review',
             'rate.remind.later': 'Ask later',
             'rate.remind.never': 'Do not ask again',
+
+            //RATE DIALOG
+            'app.dialog.rateus.title': 'Like the game?',
+            'app.dialog.rateus.description': 'Write a review. Thanks for rating!',
+            'app.dialog.rateus.button.rate': 'Write a review',
+            'app.dialog.rateus.button.later': 'Ask later',
+            'app.dialog.rateus.button.never': 'Do not ask again',
 
             t: ''
         }

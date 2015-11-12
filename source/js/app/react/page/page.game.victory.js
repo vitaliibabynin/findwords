@@ -31,6 +31,10 @@ var PageGameVictory = Object.assign({}, {}, {
         return state;
     },
 
+    componentDidMount: function () {
+        appDialogs.getRateDialog().showIfTime();
+    },
+
     getGameStateRoundsBundleField: function (roundsBundleIdx, field) {
         return appManager.getGameState().getRoundsBundles(roundsBundleIdx)[field];
     },

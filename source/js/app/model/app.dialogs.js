@@ -353,6 +353,101 @@ var RequirePushDialog = function(){
     return dialog;
 }
 
+//var RateDialog = function(){
+//
+//    var dialog = new Dialog({
+//        dialogId: 'rateus-dialog',
+//        effect: 'slidebottom',
+//        title: i18n._('app.dialog.rateus.title')
+//    });
+//    dialog.isLoadedSettings = false;
+//    dialog.maxShowCount = 10;
+//    dialog.settingsNamespace = 'dialogRateUs';
+//    dialog.currentShowCount = 0;
+//    dialog.isNeverShow = false;
+//
+//    dialog.getContent = function(){
+//        return '<div class="md-content"> \
+//                        <p>'+i18n._('app.dialog.rateus.description')+'</p> \
+//                        <div><a href="#" class="btn rate-now">'+i18n._('app.dialog.rateus.button.rate')+'</a></div> \
+//                        <div><a href="#" class="btn brown rate-later">'+i18n._('app.dialog.rateus.button.later')+'</a></div> \
+//                        <div><a href="#" class="btn brown rate-never">'+i18n._('app.dialog.rateus.button.never')+'</a></div> \
+//                 </div> \
+//                ';
+//    }
+//
+//    dialog.prepareDialog = function(dialog){
+//        $('.rate-now', dialog).bind( 'click', function( e ) {
+//            Utils.openAppInMarket();
+//            this.saveNeverShow();
+//            this.hide();
+//            e.stopPropagation();
+//        }.bind(this));
+//        $('.rate-later', dialog).bind( 'click', function( e ) {
+//            this.hide();
+//            e.stopPropagation();
+//        }.bind(this));
+//        $('.rate-never', dialog).bind( 'click', function( e ) {
+//            this.saveNeverShow();
+//            this.hide();
+//            e.stopPropagation();
+//        }.bind(this));
+//    }
+//
+//    dialog.loadSettings = function(){
+//        return new Promise(function(onSuccess, onError){
+//            if(this.isLoadedSettings){
+//                onSuccess();
+//                return;
+//            }
+//
+//            DB.getSettings().get(this.settingsNamespace).then(function(settings){
+//                if(!settings){
+//                    onSuccess();
+//                    return;
+//                }
+//
+//                this.currentShowCount = settings.currentShowCount || 0;
+//                this.isNeverShow = settings.isNeverShow || false;
+//                this.isLoadedSettings = true;
+//                onSuccess();
+//            }.bind(this));
+//        }.bind(this));
+//    }
+//
+//    dialog.saveSettings = function(){
+//        DB.getSettings().set(this.settingsNamespace, {
+//            currentShowCount: this.currentShowCount,
+//            isNeverShow: this.isNeverShow
+//        });
+//    }
+//
+//    dialog.saveNeverShow = function(){
+//        this.isNeverShow = true;
+//        this.saveSettings();
+//    }
+//
+//    dialog.showIfTime = function(){
+//        this.loadSettings().then(function(){
+//            if(this.isNeverShow){
+//                return false;
+//            }
+//
+//            if(this.currentShowCount < this.maxShowCount){
+//                this.currentShowCount++;
+//                this.saveSettings();
+//                return false;
+//            }
+//
+//            this.currentShowCount = 0;
+//            this.show();
+//            this.saveSettings();
+//        }.bind(this));
+//    }
+//
+//    return dialog;
+//}
+
 var RateDialog = function(){
 
     var dialog = new Dialog({
@@ -361,7 +456,7 @@ var RateDialog = function(){
         title: i18n._('app.dialog.rateus.title')
     });
     dialog.isLoadedSettings = false;
-    dialog.maxShowCount = 10;
+    dialog.maxShowCount = 1;
     dialog.settingsNamespace = 'dialogRateUs';
     dialog.currentShowCount = 0;
     dialog.isNeverShow = false;
