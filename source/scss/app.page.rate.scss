@@ -79,10 +79,9 @@
     }
 
     &:after {
+      display: inline-block;
       content: "";
-      $height: 2.375rem;
-      line-height: $height;
-      padding-left: 1rem;
+      height: 2.375rem;
     }
   }
 }

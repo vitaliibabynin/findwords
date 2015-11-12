@@ -216,8 +216,8 @@ var GameState = Object.assign({}, {}, {
 
         return this.gameState.bonus[field];
     },
-    setLastAccessDate: function (newString) {
-        this.setBonusField('lastAccessDate', newString);
+    setLastAccessDate: function (newNumber) {
+        this.setBonusField('lastAccessDate', newNumber);
     },
     getLastAccessDate: function () {
         return this.getBonusField('lastAccessDate', 0);

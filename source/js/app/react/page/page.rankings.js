@@ -9,7 +9,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var Counters = require('./../component/app.counters').Counters;
 
 
-var PlayerStatsClass = Object.assing({}, {}, {
+var PlayerStatsClass = Object.assign({}, {}, {
 
     displayName: 'PlayerStats',
 
