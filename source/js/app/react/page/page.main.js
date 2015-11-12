@@ -27,7 +27,7 @@ var PageMain = Object.assign({}, {}, {
         return state;
     },
 
-    componentDidMount: function () {
+    componentWillMount: function () {
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
         var todayNumber = moment().format("YYYYMMDD");
 

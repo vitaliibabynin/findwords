@@ -19,9 +19,9 @@ window.CONST = {
     GA_ID: '',
     AD_PERIOD_INTERSTITIAL: 300,
     //Production
-    FB_APP_ID: '473524332833935',
+    //FB_APP_ID: '473524332833935',
     //Developmet
-    //FB_APP_ID: '473533802832988',
+    FB_APP_ID: '473533802832988',
     //FB_APP_ID: '',
 
 
