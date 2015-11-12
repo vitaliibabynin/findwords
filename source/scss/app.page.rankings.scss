@@ -28,7 +28,73 @@
     }
 
     .friends-rankings {
-      height: 19.125rem;
+      height: 18.125rem;
+
+      .player-stats {
+        $player-stats-height: 2.25rem;
+        vertical-align: middle;
+        height: $player-stats-height;
+        $padding-left-right: 0.125rem;
+        padding-left: $padding-left-right;
+        padding-right: $padding-left-right;
+        margin-top: 0.375rem;
+
+        &.selected {
+          background-color: $pageRankings-playerStats-selected-bg-color;
+        }
+
+        .place {
+          display: inline-block;
+          font-size: $pageRankings-playerStats-place-font-size;
+          float: left;
+          height: $player-stats-height;
+          line-height: $player-stats-height;
+        }
+        .center-block {
+          position: relative;
+          display: inline-block;
+          text-align: left;
+          height: $player-stats-height;
+          padding-left: 2.125rem;
+
+          .profile-pic {
+            position: absolute;
+            $size: 1.75rem;
+            height: $size;
+            width: $size;
+            border: 0.0625rem solid white;
+            border-radius: 5rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            top: ($player-stats-height - $size) / 2;
+            left: 0;
+          }
+          .profile-name {
+            margin-top: 0.5rem;
+            font-size: $pageRankings-playerStats-profileName-font-size;
+            height: ($player-stats-height - 1rem) / 2;
+            line-height: ($player-stats-height - 1rem) / 2;
+          }
+          .levels-complete {
+            font-size: $pageRankings-playerStats-levelsComplete-font-size;
+            height: ($player-stats-height - 1rem) / 2;
+            line-height: ($player-stats-height - 1rem) / 2;
+            margin-bottom: 0.5rem;
+          }
+        }
+        .score {
+          display: inline-block;
+          font-size: $pageRankings-playerStats-score-font-size;
+          float: right;
+          height: $player-stats-height;
+          line-height: $player-stats-height;
+        }
+      }
+    }
+
+    .invite-friends-text {
+      font-size: $pageRankings-inviteFriendsText-font-size;
+      margin-bottom: 0.375rem;
     }
 
     .invite-friends-fb-button {
