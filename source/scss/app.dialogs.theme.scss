@@ -1,65 +1,55 @@
 
 .md-overlay {
-    background: RGBA(92,70,105,0.7);
+  background: RGBA(92, 70, 105, 0.7);
 }
 
-.md-modal{
-    border-radius: 0.313rem;
-    max-width: 25.375rem;
-    box-shadow: 0 0.063rem 0.125rem rgba(0,0,0,.3);
-}
+.md-modal {
+  border-radius: 0.313rem;
+  max-width: 25.375rem;
+  box-shadow: 0 0.063rem 0.125rem rgba(0, 0, 0, .3);
 
-
-.md-modal .md-title{
+  .md-title {
     background-color: #F6EDDF;
-}
-    .md-modal .md-title.icon{
-        background-image: none;
-        padding-left: 0em;
+
+    .md-title.icon {
+      display: none;
     }
-
-    .md-modal .md-title h3 {
-        background: none;
-        opacity: 1;
-        font-size: 1.3rem;
-        font-weight: normal;
-        margin: 0.4rem 0;
-        /*color: #ffffff;*/
+    .md-title h3 {
+      background: $pageRate-header-bg-color;
+      opacity: 1;
+      font-size: $pageRate-heading-font-size;
+      font-weight: normal;
+      margin: 0.4rem 0;
+      /*color: #ffffff;*/
     }
+  }
 
-
-.md-modal .md-content {
-    color: #5A1B34;
-    background: #FFFFFF;
+  .md-content {
+    color: $pageRate-container-color;
+    background: $pageRate-container-bg-color;
     border-top-left-radius: 0em;
     border-top-right-radius: 0em;
     padding: 0.625em 1.250em 1.250em 1.250em;
-}
 
-
-.md-modal .md-content > p {
+    a {
+      display: block;
+      width: 100%;
+      font-size: 1.3em;
+    }
+  }
+  .md-content > p {
     margin: 0;
     padding: 0.625rem 0;
+  }
 }
-
-
-.md-modal .md-content a{
-    display: block;
-    width: 100%;
-    font-size: 1.3em;
-}
-
 
 #rateus-dialog.md-modal,
 #authrequest-dialog.md-modal,
 #autherror-dialog.md-modal,
 #authsessionexpired-dialog,
-#addcomment-dialog{
-    max-width: 26.875em;
+#addcomment-dialog {
+  max-width: 26.875rem;
 }
-
-
-
 
 /**
     Dialog Effects
@@ -67,7 +57,81 @@
 
 /* Slide from the bottom */
 .md-modal.md-effect-slidebottom .md-content {
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
 }
+
+//.md-overlay {
+//  background: RGBA(92,70,105,0.7);
+//}
+//
+//.md-modal{
+//  border-radius: 0.313rem;
+//  max-width: 25.375rem;
+//  box-shadow: 0 0.063rem 0.125rem rgba(0,0,0,.3);
+//}
+//
+//
+//.md-modal .md-title{
+//  background-color: #F6EDDF;
+//}
+//.md-modal .md-title.icon{
+//  background-image: none;
+//  padding-left: 0em;
+//}
+//
+//.md-modal .md-title h3 {
+//  background: none;
+//  opacity: 1;
+//  font-size: 1.3rem;
+//  font-weight: normal;
+//  margin: 0.4rem 0;
+//  /*color: #ffffff;*/
+//}
+//
+//
+//.md-modal .md-content {
+//  color: #5A1B34;
+//  background: #FFFFFF;
+//  border-top-left-radius: 0em;
+//  border-top-right-radius: 0em;
+//  padding: 0.625em 1.250em 1.250em 1.250em;
+//}
+//
+//
+//.md-modal .md-content > p {
+//  margin: 0;
+//  padding: 0.625rem 0;
+//}
+//
+//
+//.md-modal .md-content a{
+//  display: block;
+//  width: 100%;
+//  font-size: 1.3em;
+//}
+//
+//
+//#rateus-dialog.md-modal,
+//#authrequest-dialog.md-modal,
+//#autherror-dialog.md-modal,
+//#authsessionexpired-dialog,
+//#addcomment-dialog{
+//  max-width: 26.875em;
+//}
+//
+//
+//
+//
+///**
+//    Dialog Effects
+//**/
+//
+///* Slide from the bottom */
+//.md-modal.md-effect-slidebottom .md-content {
+//  -webkit-transition: all 0.3s;
+//  -moz-transition: all 0.3s;
+//  transition: all 0.3s;
+//}
+
