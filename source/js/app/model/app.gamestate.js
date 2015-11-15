@@ -8,7 +8,7 @@ var GameState = Object.assign({}, {}, {
         coins: 99999,
         score: 99999,
         bonus: {
-            lastAccessDate: 0,
+            lastAccessDate: "",
             daysPlayedStreak: 0
         },
         chips: {
@@ -168,8 +168,6 @@ var GameState = Object.assign({}, {}, {
     init: function () {
         console.log("gamestate.init gamestate");
         return new Promise(function (resolve, reject) {
-            this.gameState = {};
-
             DB.getSettings().get(SETTINGS_GAMESTATE).then(function (gameState) {
                 if (gameState) {
                     this.gameState = gameState;
@@ -210,6 +208,9 @@ var GameState = Object.assign({}, {}, {
     },
 
     setBonusField: function (field, newValue) {
+        console.log(this.gameState);
+        console.log(field);
+        console.log(newValue);
         this.gameState.bonus[field] = newValue;
         this.saveGameState();
     },
@@ -220,11 +221,11 @@ var GameState = Object.assign({}, {}, {
 
         return this.gameState.bonus[field];
     },
-    setLastAccessDate: function (newNumber) {
-        this.setBonusField('lastAccessDate', newNumber);
+    setLastAccessDate: function (newString) {
+        this.setBonusField('lastAccessDate', newString);
     },
     getLastAccessDate: function () {
-        return this.getBonusField('lastAccessDate', 0);
+        return this.getBonusField('lastAccessDate', "");
     },
     setDaysPlayedStreak: function (newNumber) {
         this.setBonusField('daysPlayedStreak', newNumber);

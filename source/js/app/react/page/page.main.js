@@ -28,20 +28,18 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentWillMount: function () {
-        console.log("componentWillMount");
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
-        //console.log(lastAccessNumber);
-        var todayNumber = moment().format("YYYYMMDD");
+        var todayString = moment().format("YYYYMMDD") || "";
 
         //if first access ever
-        if (lastAccessNumber == 0) {
-            appManager.getGameState().setLastAccessDate(todayNumber);
+        if (lastAccessNumber == "") {
+            console.log("first access ever");
+            appManager.getGameState().setLastAccessDate(todayString);
             return;
         }
 
         //daysPlayedStreak
-        var daysSinceLastAccess = moment(todayNumber, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
-        //var daysSinceLastAccess = 1;
+        var daysSinceLastAccess = moment(todayString, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
 
         if(daysSinceLastAccess < 1) {
             return;
@@ -56,13 +54,12 @@ var PageMain = Object.assign({}, {}, {
             appManager.getGameState().setDaysPlayedStreak(daysPlayedStreakIncrement);
         }
 
+        console.log("1 or more days since access");
         //set lastAccessDate to now
-        //console.log(todayNumber);
-        appManager.getGameState().setLastAccessDate(todayNumber);
+        appManager.getGameState().setLastAccessDate(todayString);
 
         //go to bonus page
-        //router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
-        router.navigate("bonus", "index");
+        router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
     },
 
     //componentDidUpdate: function (prevProps, prevState) {
