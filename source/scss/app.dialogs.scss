@@ -4,11 +4,11 @@
     top: 50%;
     /*left: 50%;*/
     width: 50%;
-    max-width: 39.375em;
-    min-width: 18.750em;
+    max-width: 39.375rem;
+    min-width: 18.750rem;
     height: auto;
     z-index: 2000;
-    margin: 1.875em auto;
+    margin: 1.875rem auto;
     /*will-change: visibility;*/
     /*visibility: hidden;*/
     -webkit-backface-visibility: hidden;
@@ -52,19 +52,19 @@
 
 .md-modal .md-title{
     background-color: #e74c3c;
-    border-radius: 0.188em 0.188em 0 0;
-    padding: 0.4em;
+    border-radius: 0.188rem 0.188rem 0 0;
+    padding: 0.4rem;
     text-align: center;
 }
     .md-modal .md-title.icon{
-        padding-left: 4.375em;
+        padding-left: 4.375rem;
         background-image: url("../../img/favicons/apple-touch-icon-57x57.png");
         background-repeat: no-repeat no-repeat;
-        background-position: 0.938em 0.813em;
+        background-position: 0.938rem 0.813rem;
     }
 .md-modal .md-title h3 {
     margin: 0;
-    font-size: 2.4em;
+    font-size: 2.4rem;
     font-weight: 300;
     background: rgba(0,0,0,0.1);
     opacity: 0.8;
@@ -74,36 +74,36 @@
     color: #fff;
     background: #e74c3c;
     position: relative;
-    border-radius: 0.188em;
+    border-radius: 0.188rem;
     margin: 0 auto;
 }
 
 .md-modal .md-content > p {
     margin: 0;
-    padding: 0.625em 0;
+    padding: 0.625rem 0;
 }
 
 .md-modal .md-content > ul {
     margin: 0;
-    padding: 0 0 1.875em 1.250em;
+    padding: 0 0 1.875rem 1.250rem;
 }
 
 .md-modal .md-content > ul li {
-    padding: 0.313em 0;
+    padding: 0.313rem 0;
 }
 
 .md-modal .md-content button {
     display: block;
     margin: 0 auto;
-    font-size: 0.8em;
+    font-size: 0.8rem;
 
     border: none;
-    padding: 0.6em 1.2em;
+    padding: 0.6rem 1.2rem;
     background: #c0392b;
     color: #fff;
     text-transform: uppercase;
     cursor: pointer;
-    border-radius: 0.125em;
+    border-radius: 0.125rem;
 }
     .md-modal .md-content button:hover {
         background: #A5281B;
@@ -142,9 +142,9 @@
 
 /* 3D flip horizontal */
 .md-modal.md-effect-3dflip {
-    -webkit-perspective: 81.250em;
-    -moz-perspective: 81.250em;
-    perspective: 81.250em;
+    -webkit-perspective: 81.250rem;
+    -moz-perspective: 81.250rem;
+    perspective: 81.250rem;
 }
 
 .md-modal.md-effect-3dflip .md-title,

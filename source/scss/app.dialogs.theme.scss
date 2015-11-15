@@ -4,43 +4,80 @@
 }
 
 .md-modal {
-  //border-radius: 0.313rem;
+  //top: 32%;
+  min-width: 18rem;
   max-width: 25.375rem;
-  box-shadow: 0 0.063rem 0.125rem rgba(0, 0, 0, .3);
+  //box-shadow: 0 0.063rem 0.125rem rgba(0, 0, 0, .3);
 
   .md-title {
-    background-color: $pageRate-header-bg-color;
+    background-color: $dialogRate-header-bg-color;
+    border-radius: 0;
 
     &.icon {
-      padding: 0.4rem;
+      //padding: 0.1rem;
+      padding: 0;
       background-image: none;
     }
     h3 {
-      background: $pageRate-header-bg-color;
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      vertical-align: middle;
+      text-align: center;
+      background: $dialogRate-header-bg-color;
       opacity: 1;
-      font-size: $pageRate-heading-font-size;
-      font-weight: normal;
-      margin: 0.4rem 0;
+      font-size: $dialogRate-heading-font-size;
+      font-weight: 100;
+      //margin: 0.2rem 0;
       color: #ffffff;
+      padding: 0;
     }
   }
 
   .md-content {
-    color: $pageRate-container-color;
-    background: $pageRate-container-bg-color;
-    border-top-left-radius: 0em;
-    border-top-right-radius: 0em;
-    padding: 0.625em 1.250em 1.250em 1.250em;
+    color: $dialogRate-content-color;
+    background: $dialogRate-content-bg-color;
+    padding: 0 0.875rem 2.375rem 0.875rem;
+    border-radius: 0;
+    font-size: $dialogRate-description-font-size;
+    font-weight: 100;
+    text-align: center;
 
     a {
       display: block;
       width: 100%;
-      font-size: 1.3em;
+      text-decoration: none;
+      color: $dialogRate-content-color;
+      font-weight: 100;
+      vertical-align: middle;
+    }
+    .rate-now {
+      font-size: $dialogRate-review-font-size;
+      background-color: $dialogRate-review-bg-color;
+      $height: 2.625rem;
+      height: $height;
+      line-height: $height;
+      margin-bottom: 0.5rem;
+    }
+    .rate-later,
+    .rate-never {
+      $height: 2rem;
+      height: $height;
+      line-height: $height;
+    }
+    .rate-later {
+      font-size: $dialogRate-later-font-size;
+      background-color: $dialogRate-later-bg-color;
+      margin-bottom: 0.375rem;
+    }
+    .rate-never {
+      font-size: $dialogRate-never-font-size;
+      background-color: $dialogRate-never-bg-color;
     }
   }
   .md-content > p {
     margin: 0;
-    padding: 0.625rem 0;
+    padding: 0.6875rem 0.875rem;
   }
 }
 

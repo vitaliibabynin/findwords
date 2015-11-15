@@ -465,8 +465,8 @@ var RateDialog = function(){
         return '<div class="md-content"> \
                         <p>'+i18n._('app.dialog.rateus.description')+'</p> \
                         <div><a href="#" class="btn rate-now">'+i18n._('app.dialog.rateus.button.rate')+'</a></div> \
-                        <div><a href="#" class="btn brown rate-later">'+i18n._('app.dialog.rateus.button.later')+'</a></div> \
-                        <div><a href="#" class="btn brown rate-never">'+i18n._('app.dialog.rateus.button.never')+'</a></div> \
+                        <div><a href="#" class="btn rate-later">'+i18n._('app.dialog.rateus.button.later')+'</a></div> \
+                        <div><a href="#" class="btn rate-never">'+i18n._('app.dialog.rateus.button.never')+'</a></div> \
                  </div> \
                 ';
     }
