@@ -27,13 +27,12 @@ var PageMain = Object.assign({}, {}, {
         return state;
     },
 
-    componentWillMount: function () {
+    componentDidMount: function () {
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
         var todayString = moment().format("YYYYMMDD") || "";
 
         //if first access ever
         if (lastAccessNumber == "") {
-            console.log("first access ever");
             appManager.getGameState().setLastAccessDate(todayString);
             return;
         }
@@ -54,7 +53,6 @@ var PageMain = Object.assign({}, {}, {
             appManager.getGameState().setDaysPlayedStreak(daysPlayedStreakIncrement);
         }
 
-        console.log("1 or more days since access");
         //set lastAccessDate to now
         appManager.getGameState().setLastAccessDate(todayString);
 

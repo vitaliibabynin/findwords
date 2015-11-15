@@ -25,9 +25,9 @@ var AppClass = {
     },
 
     componentDidMount: function() {
-        this.updatePage();
         router.addChangeListener(this.updatePage);
         appManager.addChangeListener(this.onApiSettingsUpdated);
+        this.updatePage();
     },
 
     componentDidUpdate: function(prevProps, prevState) {

@@ -166,7 +166,6 @@ var GameState = Object.assign({}, {}, {
     },
 
     init: function () {
-        console.log("gamestate.init gamestate");
         return new Promise(function (resolve, reject) {
             DB.getSettings().get(SETTINGS_GAMESTATE).then(function (gameState) {
                 if (gameState) {
@@ -208,9 +207,6 @@ var GameState = Object.assign({}, {}, {
     },
 
     setBonusField: function (field, newValue) {
-        console.log(this.gameState);
-        console.log(field);
-        console.log(newValue);
         this.gameState.bonus[field] = newValue;
         this.saveGameState();
     },
