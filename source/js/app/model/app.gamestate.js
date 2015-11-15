@@ -166,7 +166,10 @@ var GameState = Object.assign({}, {}, {
     },
 
     init: function () {
+        console.log("gamestate.init gamestate");
         return new Promise(function (resolve, reject) {
+            this.gameState = {};
+
             DB.getSettings().get(SETTINGS_GAMESTATE).then(function (gameState) {
                 if (gameState) {
                     this.gameState = gameState;
@@ -174,6 +177,7 @@ var GameState = Object.assign({}, {}, {
 
                 return resolve();
             }.bind(this));
+
         }.bind(this));
     },
 

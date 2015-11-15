@@ -87,7 +87,6 @@ var PageBonus = Object.assign({}, {}, {
             }
 
             if (dayNumber == daysPlayed - 1) {
-                console.log(bonusConverter);
                 daysRender[i] = this.getToday(dayNumber, daysTotal, content);
             }
         }

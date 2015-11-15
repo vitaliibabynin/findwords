@@ -4,23 +4,24 @@
 }
 
 .md-modal {
-  border-radius: 0.313rem;
+  //border-radius: 0.313rem;
   max-width: 25.375rem;
   box-shadow: 0 0.063rem 0.125rem rgba(0, 0, 0, .3);
 
   .md-title {
-    background-color: #F6EDDF;
+    background-color: $pageRate-header-bg-color;
 
-    .md-title.icon {
-      display: none;
+    &.icon {
+      padding: 0.4rem;
+      background-image: none;
     }
-    .md-title h3 {
+    h3 {
       background: $pageRate-header-bg-color;
       opacity: 1;
       font-size: $pageRate-heading-font-size;
       font-weight: normal;
       margin: 0.4rem 0;
-      /*color: #ffffff;*/
+      color: #ffffff;
     }
   }
 

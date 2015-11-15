@@ -28,7 +28,9 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentWillMount: function () {
+        console.log("componentWillMount");
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
+        //console.log(lastAccessNumber);
         var todayNumber = moment().format("YYYYMMDD");
 
         //if first access ever
@@ -55,6 +57,7 @@ var PageMain = Object.assign({}, {}, {
         }
 
         //set lastAccessDate to now
+        //console.log(todayNumber);
         appManager.getGameState().setLastAccessDate(todayNumber);
 
         //go to bonus page
