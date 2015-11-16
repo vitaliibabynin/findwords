@@ -31,7 +31,8 @@ var PageGameMain = Object.assign({}, {}, {
             noticeWord: {letters: []},
             chipsOpenWord: appManager.getGameState().getChipOpenWord() || 0,
             chipsOpenLetter: appManager.getGameState().getChipOpenLetter() || 0,
-            chipsShowWord: appManager.getGameState().getChipShowWord() || 0
+            chipsShowWord: appManager.getGameState().getChipShowWord() || 0,
+            shownWordsAnimationLeave: true
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
         state.boardData = state.roundData.rounds[state.roundIdx] || {};
@@ -117,21 +118,38 @@ var PageGameMain = Object.assign({}, {}, {
             return;
         }
 
-        var result = this.refs.board.openWord();
-        if (result !== false) {
-            var chipsOpenWord = this.state.chipsOpenWord - 1;
+        //var result = this.refs.board.openWord();
+        //if (result !== false) {
+        //    var chipsOpenWord = this.state.chipsOpenWord - 1;
+        //
+        //    appManager.getGameState().setChipOpenWord(chipsOpenWord);
+        //
+        //    this.setState({
+        //        chipsOpenWord: chipsOpenWord
+        //    }, function () {
+        //        if (this.refs.board.checkIfRoundComplete()) {
+        //            //this.goToPageRoundComplete(2000);
+        //            this.goToPageRoundComplete();
+        //        }
+        //    });
+        //}
 
-            appManager.getGameState().setChipOpenWord(chipsOpenWord);
+        this.refs.board.openWord().then(function(result){
+            if (result !== false) {
+                var chipsOpenWord = this.state.chipsOpenWord - 1;
 
-            this.setState({
-                chipsOpenWord: chipsOpenWord
-            }, function () {
-                if (this.refs.board.checkIfRoundComplete()) {
-                    //this.goToPageRoundComplete(2000);
-                    this.goToPageRoundComplete();
-                }
-            });
-        }
+                appManager.getGameState().setChipOpenWord(chipsOpenWord);
+
+                this.setState({
+                    chipsOpenWord: chipsOpenWord
+                }, function () {
+                    if (this.refs.board.checkIfRoundComplete()) {
+                        //this.goToPageRoundComplete(2000);
+                        this.goToPageRoundComplete();
+                    }
+                });
+            }
+        }.bind(this))
     },
 
     onChipOpenLetterClick: function () {
@@ -148,7 +166,7 @@ var PageGameMain = Object.assign({}, {}, {
 
             this.setState({
                 chipsOpenLetter: chipsOpenLetter
-            }, function() {
+            }, function () {
                 if (this.refs.board.checkIfRoundComplete()) {
                     //this.goToPageRoundComplete(2000);
                     this.goToPageRoundComplete();
@@ -221,6 +239,9 @@ var PageGameMain = Object.assign({}, {}, {
         })
     },
 
+    turnOffLeaveAnimationShownWords: function () {
+        this.setState({shownWordsAnimationLeave: false});
+    },
 
     displayNotice: function (type, word) {
         this.setState({
@@ -237,11 +258,13 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     goToPageRoundComplete: function (time) {
-        time = time || 300;
+        time = time || 0;
 
         var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
         roundsComplete++;
         this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
+
+        this.turnOffLeaveAnimationShownWords();
 
         var params = {
             roundsBundleIdx: this.state.roundsBundleIdx,
@@ -252,7 +275,6 @@ var PageGameMain = Object.assign({}, {}, {
             router.navigate("game", "victory", params);
         }.bind(this), time);
     },
-
 
     render: function () {
 
@@ -308,7 +330,8 @@ var PageGameMain = Object.assign({}, {}, {
                             word={this.state.noticeWord}
                         />
 
-                    <ShownWords shownWordsLetters={this.state.shownWordsLetters}/>
+                    <ShownWords shownWordsLetters={this.state.shownWordsLetters}
+                                shownWordsAnimationLeave={this.state.shownWordsAnimationLeave}/>
 
                 </div>
             </div>

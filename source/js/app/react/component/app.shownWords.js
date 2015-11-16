@@ -18,13 +18,15 @@ var ShownWordsClass = Object.assign({}, {}, {
                     y: React.PropTypes.number
                 })
             )
-        )
+        ),
+        shownWordsAnimationLeave: React.PropTypes.bool
     },
 
     getInitialState: function () {
         var state = {
             shownWordsLetters: this.props.shownWordsLetters || [],
-            time: 1000
+            time: 1000,
+            shownWordsAnimationLeave: this.props.shownWordsAnimationLeave || true
         };
         state.words = this.convertWords(state.shownWordsLetters);
 
@@ -35,9 +37,15 @@ var ShownWordsClass = Object.assign({}, {}, {
         var shownWordsLetters = nextProps.shownWordsLetters || [];
         var words = this.convertWords(shownWordsLetters);
 
+        var shownWordsAnimationLeave = nextProps.shownWordsAnimationLeave;
+        if (typeof nextProps.shownWordsAnimationLeave == "undefined") {
+            shownWordsAnimationLeave = true;
+        }
+
         this.setState({
             shownWordsLetters: shownWordsLetters,
-            words: words
+            words: words,
+            shownWordsAnimationLeave: shownWordsAnimationLeave
         });
     },
 
@@ -76,10 +84,6 @@ var ShownWordsClass = Object.assign({}, {}, {
         return 87 / 128;
     },
 
-    componentWillUnmount: function () {
-      this.setState({time: false})
-    },
-
     render: function () {
         var whichFontSize = this.chooseFontSize();
 
@@ -100,6 +104,8 @@ var ShownWordsClass = Object.assign({}, {}, {
                  style={style}>
                 <ReactCSSTransitionGroup
                     transitionName="fade"
+                    transitionEnter={true}
+                    transitionLeave={this.state.shownWordsAnimationLeave}
                     transitionEnterTimeout={this.state.time}
                     transitionLeaveTimeout={this.state.time}>
                     {words}
