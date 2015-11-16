@@ -1032,9 +1032,10 @@ var BoardClass = Object.assign({}, {}, {
                 setTimeout(function () {
                     this.setState({
                         boardArr: boardArr
+                    }, function () {
+                        resolve();
                     })
                 }.bind(this), 200);
-                resolve();
             });
         }.bind(this));
     },

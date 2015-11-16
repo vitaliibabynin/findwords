@@ -150,6 +150,18 @@ var PageGameMain = Object.assign({}, {}, {
                 });
             }
         }.bind(this))
+
+        //var chipsOpenWord = this.state.chipsOpenWord - 1;
+        //
+        //this.setState({
+        //    chipsOpenWord: chipsOpenWord
+        //}, function () {
+        //    //if (this.refs.board.checkIfRoundComplete()) {
+        //    //this.goToPageRoundComplete(2000);
+        //    //this.goToPageRoundComplete();
+        //    router.navigate("rate", "index");
+        //    //}
+        //});
     },
 
     onChipOpenLetterClick: function () {
@@ -288,7 +300,7 @@ var PageGameMain = Object.assign({}, {}, {
                     <Timer time={this.state.time}
                            setGameStateRoundField={this.setGameStateRoundField}
                            getGameStateRoundField={this.getGameStateRoundField}
-                        />
+                    />
 
                     <div className="chips">
                         <ChipButton className="open-word"
@@ -324,11 +336,11 @@ var PageGameMain = Object.assign({}, {}, {
                            removeWordFromShownWords={this.removeWordFromShownWords}
                            setGameStateRoundField={this.setGameStateRoundField}
                            goToPageRoundComplete={this.goToPageRoundComplete}
-                        />
+                    />
 
                     <Notice noticeType={this.state.noticeType}
                             word={this.state.noticeWord}
-                        />
+                    />
 
                     <ShownWords shownWordsLetters={this.state.shownWordsLetters}
                                 shownWordsAnimationLeave={this.state.shownWordsAnimationLeave}/>
