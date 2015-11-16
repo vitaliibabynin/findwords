@@ -46,6 +46,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getBonusCoins: function () {
         return this.getSettingsValue('bonusCoins', {});
+    },
+
+    getDialogs: function () {
+        return this.getSettingsValue('dialogs', {});
     }
 
 });
