@@ -123,6 +123,13 @@ window.CONST = {
             'app.dialog.rateus.button.later': 'Напомнить позже',
             'app.dialog.rateus.button.never': 'Не показывать больше',
 
+            //NO-COINS DIALOG
+            'app.dialog.nocoins.title': 'Недостаточно монет',
+            'app.dialog.nocoins.description': 'У вас не хватает монет, вы можете купить монеты или получить их бесплатно.',
+            'app.dialog.nocoins.button.buy': 'Купить',
+            'app.dialog.nocoins.button.earn': 'Получить бесплатно',
+            'app.dialog.nocoins.button.cancel': 'Отмена',
+
             t: ''
         },
         en: {
@@ -218,6 +225,13 @@ window.CONST = {
             'app.dialog.rateus.button.rate': 'Write a review',
             'app.dialog.rateus.button.later': 'Ask later',
             'app.dialog.rateus.button.never': 'Do not ask again',
+
+            //NO-COINS DIALOG
+            'app.dialog.nocoins.title': 'Not enough coins',
+            'app.dialog.nocoins.description': 'You do not have enough coins, you may buy some or get them for free.',
+            'app.dialog.nocoins.button.buy': 'Purchase',
+            'app.dialog.nocoins.button.earn': 'Get for free',
+            'app.dialog.nocoins.button.cancel': 'Cancel',
 
             t: ''
         }

@@ -166,7 +166,8 @@ var PageGameMain = Object.assign({}, {}, {
 
     onChipOpenLetterClick: function () {
         if (this.state.chipsOpenLetter < 1) {
-            console.log("no chips left");
+            appDialogs.getNoMoneyDialog().show();
+            //console.log("no chips left");
             return;
         }
 

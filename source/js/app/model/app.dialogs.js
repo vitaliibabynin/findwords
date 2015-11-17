@@ -143,11 +143,11 @@ var NoCoinsDialog = function(){
     });
 
     dialog.getContent = function(){
-        return '<div class="md-content"> \
+        return '<div class="md-content no-coins"> \
                         <p>'+i18n._('app.dialog.nocoins.description')+'</p> \
-                        <div><a href="#" class="btn yellow buy">'+i18n._('app.dialog.nocoins.button.buy')+'</a></div> \
-                        <div><a href="#" class="btn yellow earn">'+i18n._('app.dialog.nocoins.button.earn')+'</a></div> \
-                        <div><a href="#" class="btn brown cancel">'+i18n._('app.dialog.nocoins.button.cancel')+'</a></div> \
+                        <div><a href="#" class="btn buy">'+i18n._('app.dialog.nocoins.button.buy')+'</a></div> \
+                        <div><a href="#" class="btn earn">'+i18n._('app.dialog.nocoins.button.earn')+'</a></div> \
+                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.nocoins.button.cancel')+'</a></div> \
                  </div> \
                 ';
     }

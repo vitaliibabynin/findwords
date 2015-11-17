@@ -1,6 +1,6 @@
 var gameData = {
     dialogs: {
-        rateUsMaxShowCount: 1
+        rateUsMaxShowCount: 10
     },
     bonusCoins: {
         day1: 1,
