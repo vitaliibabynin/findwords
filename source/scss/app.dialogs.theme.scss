@@ -3,18 +3,15 @@
   background: RGBA(92, 70, 105, 0.7);
 }
 
+.md-modal,
 .md-modal {
-  //top: 32%;
   min-width: 18rem;
   max-width: 25.375rem;
-  //box-shadow: 0 0.063rem 0.125rem rgba(0, 0, 0, .3);
 
   .md-title {
-    background-color: $dialogRate-header-bg-color;
     border-radius: 0;
 
     &.icon {
-      //padding: 0.1rem;
       padding: 0;
       background-image: none;
     }
@@ -24,37 +21,52 @@
       line-height: $height;
       vertical-align: middle;
       text-align: center;
-      background: $dialogRate-header-bg-color;
       opacity: 1;
-      font-size: $dialogRate-heading-font-size;
-      font-weight: 100;
-      //margin: 0.2rem 0;
-      color: #ffffff;
+      font-weight: initial;
       padding: 0;
     }
   }
-
   .md-content {
-    color: $dialogRate-content-color;
-    background: $dialogRate-content-bg-color;
-    padding: 0 0.875rem 2.375rem 0.875rem;
     border-radius: 0;
-    font-size: $dialogRate-description-font-size;
     font-weight: 100;
     text-align: center;
 
     & > p {
       margin: 0;
-      padding: 0.6875rem 0.875rem;
     }
-
     a {
       display: block;
       width: 100%;
       text-decoration: none;
-      color: $dialogRate-content-color;
-      font-weight: 100;
+      font-weight: initial;
       vertical-align: middle;
+    }
+  }
+}
+
+#rateus-dialog.md-modal {
+  .md-title {
+    color: $dialogRate-header-color;
+    background-color: $dialogRate-header-bg-color;
+
+    h3 {
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      font-size: $dialogRate-heading-font-size;
+    }
+  }
+  .md-content {
+    padding: 0 0.875rem 2.375rem 0.875rem;
+    color: $dialogRate-content-color;
+    background: $dialogRate-content-bg-color;
+    font-size: $dialogRate-description-font-size;
+
+    & > p {
+      padding: 0.6875rem 0.875rem;
+    }
+    a {
+      color: $dialogRate-content-color;
     }
     .rate-now {
       font-size: $dialogRate-review-font-size;
@@ -79,44 +91,60 @@
       font-size: $dialogRate-never-font-size;
       background-color: $dialogRate-never-bg-color;
     }
+  }
+}
 
-    &.no-coins {
-      padding-bottom: 0;
-      padding-left: 0;
-      padding-right: 0;
+#nocoins-dialog.md-modal {
+  .md-title {
+    color: $dialogNoCoins-header-color;
+    background-color: $dialogNoCoins-header-bg-color;
 
-      & > p {
-        padding: 0.6875rem 1.75rem;
-      }
-      .buy,
-      .earn {
-        $height: 2.375rem;
-        height: $height;
-        line-height: $height;
-        margin-bottom: 0.75rem;
-        width: initial;
-      }
-      .buy {
-        font-size: $dialogNoCoins-buy-font-size;
-        background-color: $dialogNoCoins-buy-bg-color;
-        margin-left: 0.875rem;
-        margin-right: 0.875rem;
-      }
-      .earn {
-        font-size: $dialogNoCoins-earn-font-size;
-        background-color: $dialogNoCoins-earn-bg-color;
-        margin-left: 0.875rem;
-        margin-right: 0.875rem;
-      }
-      .cancel {
-        font-size: $dialogNoCoins-cancel-font-size;
-        background-color: $dialogNoCoins-cancel-bg-color;
-        width: 100%;
-        $height: 2.375rem;
-        height: $height;
-        line-height: $height;
-        margin-bottom: 0;
-      }
+    h3 {
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      font-size: $dialogNoCoins-heading-font-size;
+    }
+  }
+  .md-content {
+    color: $dialogNoCoins-content-color;
+    background: $dialogNoCoins-content-bg-color;
+    font-size: $dialogNoCoins-description-font-size;
+
+    & > p {
+      padding: 0.75rem 1.75rem;
+    }
+    a {
+      color: $dialogNoCoins-content-color;
+    }
+    .buy,
+    .earn {
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      width: initial;
+      margin-left: 0.875rem;
+      margin-right: 0.875rem;
+    }
+    .buy {
+      font-size: $dialogNoCoins-buy-font-size;
+      background-color: $dialogNoCoins-buy-bg-color;
+      margin-bottom: 0.625rem;
+
+    }
+    .earn {
+      font-size: $dialogNoCoins-earn-font-size;
+      background-color: $dialogNoCoins-earn-bg-color;
+      margin-bottom: 0.875rem;
+    }
+    .cancel {
+      font-size: $dialogNoCoins-cancel-font-size;
+      background-color: $dialogNoCoins-cancel-bg-color;
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      margin-bottom: 0;
+      width: 100%;
     }
   }
 }

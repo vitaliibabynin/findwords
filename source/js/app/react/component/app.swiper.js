@@ -93,7 +93,7 @@ var SlideClass = Object.assign({}, {}, {
     onClickBuySet: function (buttonProps, e) {
         e.stopPropagation();
 
-        router.navigate("rate", "index");
+        router.navigate("learn", "index");
 
         //this.onClickGame();
     },

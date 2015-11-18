@@ -11,31 +11,39 @@ var PageRate = Object.assign({}, {}, {
     displayName: 'PageRate',
 
     getInitialState: function () {
-        var state = {
-            //initialSlide: parseInt(router.getParam('initialSlide')) || 0
-        };
+        return {};
+    },
 
-        return state;
+    getImage: function () {
+        return "";
     },
 
     render: function () {
 
+        var imageStyle = {
+            backgroundImage: this.getImage()
+        };
+
         return (
 
-            <div className="page-rate">
+            <div className="page-learn">
                 <div className="page-content">
 
-                    <Counters isDisplayBackButton={true}/>
+                    <Counters isDisplayBackButton={false}/>
 
                     <div className="container">
 
-                        <div className="heading">{i18n._('rate.heading')}</div>
-                        <div className="description">
+                        <div className="aim-of-the-game">
                             <span>{i18n._('rate.description')}</span>
                         </div>
-                        <div className="review">{i18n._('rate.review')}</div>
-                        <div className="later">{i18n._('rate.remind.later')}</div>
-                        <div className="never">{i18n._('rate.remind.never')}</div>
+
+                        <div className="image-of-board" style={imageStyle}></div>
+
+                        <div className="how-to-play">
+                            <span>{i18n._('rate.description')}</span>
+                        </div>
+
+                        <div className="start">{i18n._('rate.remind.never')}</div>
 
                     </div>
 

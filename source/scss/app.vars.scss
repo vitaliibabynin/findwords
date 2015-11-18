@@ -95,12 +95,12 @@ $gamePage-board-td-bg-color-10: darkblue;
 //gamePage-Notice
 $gamePage-notice-default-bg-color: blue;
 $gamePage-notice-default-color: #ffffff;
-$gamePage-notice-noSuchWord-bg-color: red;
-$gamePage-notice-noSuchWord-color: blue;
-$gamePage-notice-selectDifferently-bg-color: green;
-$gamePage-notice-selectDifferently-color: white;
-$gamePage-notice-noWordsToShow-bg-color: pink;
-$gamePage-notice-noWordsToShow-color: green;
+$gamePage-notice-noSuchWord-bg-color: #2574a9;
+$gamePage-notice-noSuchWord-color: #ffffff;
+$gamePage-notice-selectDifferently-bg-color: #00b16a;
+$gamePage-notice-selectDifferently-color: #ffffff;
+$gamePage-notice-noWordsToShow-bg-color: #d86a43;
+$gamePage-notice-noWordsToShow-color: #ffffff;
 
 //gamePage-ShownWords
 $gamePage-shownWords-word-color: #ffffff;
@@ -199,22 +199,22 @@ $pageRankings-inviteFriendsText-font-size: 0.625rem;
 //RATE PAGE
 //COLOR
 
-//pageRate
-$pageRate-bg-color: #81cfe0;
-$pageRate-container-bg-color: #2574a9;
-$pageRate-container-color: #ffffff;
-$pageRate-header-bg-color: #2ecc71;
-$pageRate-review-bg-color: #f89406;
-$pageRate-later-bg-color: #67809f;
-$pageRate-never-bg-color: #67809f;
+//pageLearn
+$pageLearn-bg-color: #81cfe0;
+$pageLearn-container-bg-color: #2574a9;
+$pageLearn-container-color: #ffffff;
+$pageLearn-header-bg-color: #2ecc71;
+$pageLearn-review-bg-color: #f89406;
+$pageLearn-later-bg-color: #67809f;
+$pageLearn-never-bg-color: #67809f;
 
 
 //SIZE
-$pageRate-heading-font-size: 1.5rem;
-$pageRate-description-font-size: 1.25rem;
-$pageRate-review-font-size: 1.5rem;
-$pageRate-later-font-size: 1.25rem;
-$pageRate-never-font-size: 1.25rem;
+$pageLearn-heading-font-size: 1.5rem;
+$pageLearn-description-font-size: 1.25rem;
+$pageLearn-review-font-size: 1.5rem;
+$pageLearn-later-font-size: 1.25rem;
+$pageLearn-never-font-size: 1.25rem;
 
 
 
@@ -233,7 +233,7 @@ $dialogRate-never-bg-color: #67809f;
 
 //SIZE
 $dialogRate-heading-font-size: 1.5rem;
-$dialogRate-description-font-size: 1.25rem;
+$dialogRate-description-font-size: 1.2rem;
 $dialogRate-review-font-size: 1.5rem;
 $dialogRate-later-font-size: 1.25rem;
 $dialogRate-never-font-size: 1.25rem;
@@ -243,18 +243,18 @@ $dialogRate-never-font-size: 1.25rem;
 //COLOR
 
 //dialogNoCoins
-//$dialogNoCoins-header-color: #ffffff;
-//$dialogNoCoins-header-bg-color: #2ecc71;
-//$dialogNoCoins-content-color: #ffffff;
-//$dialogNoCoins-content-bg-color: #2574a9;
-$dialogNoCoins-buy-bg-color: #2ecc71;
-$dialogNoCoins-earn-bg-color: #2ecc71;
+$dialogNoCoins-header-color: #ffffff;
+$dialogNoCoins-header-bg-color: #ff4545;
+$dialogNoCoins-content-color: #ffffff;
+$dialogNoCoins-content-bg-color: #2574a9;
+$dialogNoCoins-buy-bg-color: #f89406;
+$dialogNoCoins-earn-bg-color: #f89406;
 $dialogNoCoins-cancel-bg-color: #2ecc71;
 
 
 //SIZE
-//$dialogNoCoins-heading-font-size: 1.5rem;
-//$dialogNoCoins-description-font-size: 1.25rem;
+$dialogNoCoins-heading-font-size: 1.5rem;
+$dialogNoCoins-description-font-size: 1.2rem;
 $dialogNoCoins-buy-font-size: 1.25rem;
 $dialogNoCoins-earn-font-size: 1.25rem;
 $dialogNoCoins-cancel-font-size: 1.25rem;

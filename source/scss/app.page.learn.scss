@@ -1,0 +1,22 @@
+.page-learn {
+  position: relative;
+  height: 100%;
+  background-color: $pageLearn-bg-color;
+  width: 100%;
+}
+
+.page-learn > .page-content {
+  height: 100%;
+  width: 100%;
+
+  .container {
+    background-color: $pageLearn-container-bg-color;
+    color: $pageLearn-container-color;
+    $margin-left-right: 1.125rem;
+    margin-left: $margin-left-right;
+    margin-right: $margin-left-right;
+    margin-top: 0.75rem;
+    text-align: center;
+    //height: 15.625rem;
+  }
+}

@@ -143,7 +143,7 @@ var NoCoinsDialog = function(){
     });
 
     dialog.getContent = function(){
-        return '<div class="md-content no-coins"> \
+        return '<div class="md-content"> \
                         <p>'+i18n._('app.dialog.nocoins.description')+'</p> \
                         <div><a href="#" class="btn buy">'+i18n._('app.dialog.nocoins.button.buy')+'</a></div> \
                         <div><a href="#" class="btn earn">'+i18n._('app.dialog.nocoins.button.earn')+'</a></div> \
@@ -456,7 +456,8 @@ var RateDialog = function(){
         title: i18n._('app.dialog.rateus.title')
     });
     dialog.isLoadedSettings = false;
-    dialog.maxShowCount = appManager.getSettings().getDialogs().rateUsMaxShowCount || 10;
+    //dialog.maxShowCount = appManager.getSettings().getDialogs().rateUsMaxShowCount || 10;
+    dialog.maxShowCount = 1;
     dialog.settingsNamespace = 'dialogRateUs';
     dialog.currentShowCount = 0;
     dialog.isNeverShow = false;
