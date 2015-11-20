@@ -456,8 +456,8 @@ var RateDialog = function(){
         title: i18n._('app.dialog.rateus.title')
     });
     dialog.isLoadedSettings = false;
-    //dialog.maxShowCount = appManager.getSettings().getDialogs().rateUsMaxShowCount || 10;
-    dialog.maxShowCount = 1;
+    dialog.maxShowCount = appManager.getSettings().getDialogs().rateUsMaxShowCount || 10;
+    //dialog.maxShowCount = 1;
     dialog.settingsNamespace = 'dialogRateUs';
     dialog.currentShowCount = 0;
     dialog.isNeverShow = false;

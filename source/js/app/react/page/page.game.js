@@ -35,8 +35,9 @@ var PageGameMain = Object.assign({}, {}, {
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
         state.boardData = state.roundData.rounds[state.roundIdx] || {};
 
-        state.time = state.boardData.time || 0;
         state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
+        state.time = state.boardData.time || 0;
+
         state.openedLetters = this.getGameStateRoundField("openedLetters", state.roundsBundleIdx, state.roundIdx) || [];
         state.shownWords = this.getGameStateRoundField("shownWords", state.roundsBundleIdx, state.roundIdx) || [];
         state.shownWordsLetters = this.shownWordsConverter(state.shownWords, state.boardData);
@@ -101,7 +102,7 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
     //
-    //componentDidUpdate: function(prevProps, prevState) {
+    ////componentDidUpdate: function(prevProps, prevState) {
     //
     //},
     //
@@ -109,10 +110,10 @@ var PageGameMain = Object.assign({}, {}, {
     //
     //},
 
-
     onChipOpenWordClick: function () {
         if (this.state.chipsOpenWord < 1) {
-            console.log("no chips left");
+            appDialogs.getNoMoneyDialog().show();
+            //console.log("no chips left");
             return;
         }
 
@@ -147,7 +148,7 @@ var PageGameMain = Object.assign({}, {}, {
                     }
                 });
             }
-        }.bind(this))
+        }.bind(this));
 
         //var chipsOpenWord = this.state.chipsOpenWord - 1;
         //
@@ -188,7 +189,8 @@ var PageGameMain = Object.assign({}, {}, {
 
     onChipShowWordClick: function () {
         if (this.state.chipsShowWord < 1) {
-            console.log("no chips left");
+            //console.log("no chips left");
+            appDialogs.getNoMoneyDialog().show();
             return;
         }
 

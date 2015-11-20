@@ -1,4 +1,3 @@
-
 var AbstractEventEmitter = require('./abstract.eventemitter');
 var Object = {assign: require('react/lib/Object.assign')};
 
@@ -7,7 +6,7 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     settings: require("./../game.data"),
 
 
-    setSettings: function(data){
+    setSettings: function (data) {
         this.settings = data;
 
         window.appAd.setSettings(this.getAdSettings());
@@ -16,35 +15,51 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
 
-    getSettingsValue: function(key, defaultValue){
-        if(!this.settings || !this.settings.hasOwnProperty(key)){
+    getSettingsValue: function (key, defaultValue) {
+        if (!this.settings || !this.settings.hasOwnProperty(key)) {
             return defaultValue;
         }
 
         return this.settings[key];
     },
 
-    getAppPlatforms: function(){
+    getAppPlatforms: function () {
         return this.getSettingsValue('appplatforms', {});
     },
 
-    getAdSettings: function(){
+    getAdSettings: function () {
         return this.getSettingsValue('ad_settings', {});
     },
 
-    getShareBonus: function(){
+    getShareBonus: function () {
         return this.getSettingsValue('share_bonus', 10);
     },
 
-    getShareAppLink: function(){
+    getShareAppLink: function () {
         return this.getSettingsValue('share_applink', false);
     },
 
-    getRoundsBundles: function(){
-        return this.getSettingsValue('roundsBundles', []);
+    getRoundsBundles: function () {
+        var defaultValue = [];
+        var roundsBundles = this.getSettingsValue('roundsBundles', defaultValue);
+
+        if (roundsBundles == defaultValue) {
+            return defaultValue;
+        }
+
+        switch (router.getLanguage()) {
+            case CONST.LANGUAGE_EN:
+                return roundsBundles.en;
+                break;
+            case CONST.LANGUAGE_RU:
+                return roundsBundles.ru;
+                break;
+            default:
+                return defaultValue;
+        }
     },
 
-    getPracticeRound: function() {
+    getPracticeRound: function () {
         return this.getSettingsValue('practiceRound', {});
     },
 

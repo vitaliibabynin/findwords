@@ -25,10 +25,7 @@ var SlideClass = Object.assign({}, {}, {
     propTypes: {
         slideData: React.PropTypes.shape({
             backgroundColor: React.PropTypes.string,
-            name: React.PropTypes.shape({
-                en: React.PropTypes.string,
-                ru: React.PropTypes.string
-            }),
+            name: React.PropTypes.string,
             numberOfRoundsRequired: React.PropTypes.number,
             rounds: React.PropTypes.arrayOf(React.PropTypes.object)
         }),
@@ -82,7 +79,30 @@ var SlideClass = Object.assign({}, {}, {
             return;
         }
 
+        var practiceRoundComplete = appManager.getGameState().getPracticeRoundComplete() || false;
+        if (practiceRoundComplete === false) {
+            var roundsComplete = this.countRoundsComplete();
+
+            if (roundsComplete == 0) {
+                router.navigate("learn", "index");
+                return;
+            }
+        }
+
         router.navigate("game", "main", params);
+    },
+
+    countRoundsComplete: function () {
+        var roundsBundlesState = appManager.getGameState().getRoundsBundles();
+        var roundsComplete = 0;
+
+        for (var key in roundsBundlesState) {
+            if (roundsBundlesState.hasOwnProperty(key)) {
+                roundsComplete += roundsBundlesState[key].roundsComplete;
+            }
+        }
+
+        return roundsComplete;
     },
 
     onClickInstructions: function () {
@@ -93,7 +113,7 @@ var SlideClass = Object.assign({}, {}, {
     onClickBuySet: function (buttonProps, e) {
         e.stopPropagation();
 
-        router.navigate("learn", "index");
+        appDialogs.getInfoDialog().show();
 
         //this.onClickGame();
     },
@@ -238,12 +258,13 @@ var SlideClass = Object.assign({}, {}, {
             backgroundColor: this.state.slideData.backgroundColor
         };
 
-        var slideTitle;
-        if (router.getLanguage() == "ru") {
-            slideTitle = this.state.slideData.name.ru;
-        } else if (router.getLanguage() == "en") {
-            slideTitle = this.state.slideData.name.en;
-        }
+        var slideTitle = this.state.slideData.name;
+
+        //if (router.getLanguage() == "ru") {
+        //    slideTitle = this.state.slideData.name.ru;
+        //} else if (router.getLanguage() == "en") {
+        //    slideTitle = this.state.slideData.name.en;
+        //}
 
         var renderLayout;
         switch (this.state.layout) {

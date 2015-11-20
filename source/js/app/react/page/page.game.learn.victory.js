@@ -22,13 +22,15 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         state.starsReceived = this.getStarsReceived() || 3;
         state.rewardScore = this.getRewardScore(state.round, state.starsReceived) || 0;
         state.rewardCoins = this.getRewardCoins(state.round, state.starsReceived) || 0;
-        this.addRewardScore(state.rewardScore, state.roundsBundleIdx);
-        this.addRewardCoins(state.rewardCoins);
 
         return state;
     },
 
     componentDidMount: function () {
+        this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
+        this.addRewardCoins(this.state.rewardCoins);
+        appManager.getGameState().setPracticeRoundComplete(true);
+
         appDialogs.getRateDialog().showIfTime();
     },
 
@@ -75,6 +77,8 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     onClick: function () {
+
+
         var params = {
             roundsBundleIdx: 0,
             roundIdx: 0

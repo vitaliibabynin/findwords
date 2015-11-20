@@ -21,6 +21,7 @@ var GameState = Object.assign({}, {}, {
             sound: true
         },
         practiceRound: {
+            complete: false,
             en: {
                 board: {},
                 openedLetters: [],
@@ -35,148 +36,291 @@ var GameState = Object.assign({}, {}, {
             }
         },
         roundsBundles: {
-            0: {
-                bundleScore: 99999,
-                isUnlocked: true,
-                roundsComplete: 0,
-                rounds: {
-                    0: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    1: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    2: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    3: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
+            en: {
+                0: {
+                    bundleScore: 99999,
+                    isUnlocked: true,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                1: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                2: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                3: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
                     }
                 }
             },
-            1: {
-                bundleScore: 9999,
-                isUnlocked: false,
-                roundsComplete: 0,
-                rounds: {
-                    0: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    1: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    2: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    3: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
+            ru: {
+                0: {
+                    bundleScore: 99999,
+                    isUnlocked: true,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
                     }
-                }
-            },
-            2: {
-                bundleScore: 9999,
-                isUnlocked: false,
-                roundsComplete: 0,
-                rounds: {
-                    0: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    1: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    2: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    3: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
+                },
+                1: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
                     }
-                }
-            },
-            3: {
-                bundleScore: 9999,
-                isUnlocked: false,
-                roundsComplete: 0,
-                rounds: {
-                    0: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    1: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    2: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
-                    },
-                    3: {
-                        board: {},
-                        openedLetters: [],
-                        shownWords: [],
-                        starsReceived: 3,
-                        secondsRemaining: 0
+                },
+                2: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                3: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
                     }
                 }
             }
         }
-
     },
 
     init: function () {
@@ -298,6 +442,17 @@ var GameState = Object.assign({}, {}, {
         return this.getChipsField('chipShowWord', 0);
     },
 
+    setPracticeRoundComplete: function (newBoolean) {
+        this.gameState.practiceRound.complete = newBoolean;
+        this.saveGameState();
+    },
+    getPracticeRoundComplete: function () {
+        if (!this.gameState.practiceRound || !this.gameState.practiceRound.hasOwnProperty("complete")) {
+            return false;
+        }
+
+        return this.gameState.practiceRound.complete;
+    },
     setPracticeRoundFieldEn: function (field, newValue) {
         this.gameState.practiceRound.en[field] = newValue;
         this.saveGameState();
@@ -322,42 +477,128 @@ var GameState = Object.assign({}, {}, {
     },
 
     setRoundsBundles: function (bundleIndex, field, newValue) {
-        this.gameState.roundsBundles[bundleIndex][field] = newValue;
+        switch (router.getLanguage()) {
+            case CONST.LANGUAGE_EN:
+                return this.setRoundsBundlesEn(bundleIndex, field, newValue);
+                break;
+            case CONST.LANGUAGE_RU:
+                return this.setRoundsBundlesRu(bundleIndex, field, newValue);
+                break;
+            default:
+                return;
+        }
+    },
+    getRoundsBundles: function (bundleIndex, field, newValue) {
+        switch (router.getLanguage()) {
+            case CONST.LANGUAGE_EN:
+                return this.getRoundsBundlesEn(bundleIndex, field, newValue);
+                break;
+            case CONST.LANGUAGE_RU:
+                return this.getRoundsBundlesRu(bundleIndex, field, newValue);
+                break;
+            default:
+                return;
+        }
+    },
+    setRound: function (bundleIndex, roundIndex, field, newValue) {
+        switch (router.getLanguage()) {
+            case CONST.LANGUAGE_EN:
+                return this.setRoundEn(bundleIndex, roundIndex, field, newValue);
+                break;
+            case CONST.LANGUAGE_RU:
+                return this.setRoundRu(bundleIndex, roundIndex, field, newValue);
+                break;
+            default:
+                return;
+        }
+    },
+    getRound: function (bundleIndex, roundIndex) {
+        switch (router.getLanguage()) {
+            case CONST.LANGUAGE_EN:
+                return this.getRoundEn(bundleIndex, roundIndex);
+                break;
+            case CONST.LANGUAGE_RU:
+                return this.getRoundRu(bundleIndex, roundIndex);
+                break;
+            default:
+                return;
+        }
+    },
+    setRoundsBundlesEn: function (bundleIndex, field, newValue) {
+        this.gameState.roundsBundles.en[bundleIndex][field] = newValue;
         this.saveGameState();
     },
-    getRoundsBundles: function (bundleIndex) {
+    getRoundsBundlesEn: function (bundleIndex) {
         if (typeof bundleIndex == 'undefined') {
-            return this.gameState.roundsBundles;
+            return this.gameState.roundsBundles.en;
         }
 
-        if (!this.gameState.roundsBundles.hasOwnProperty(bundleIndex)) {
+        if (!this.gameState.roundsBundles.en.hasOwnProperty(bundleIndex)) {
             return false;
         }
 
-        return this.gameState.roundsBundles[bundleIndex];
+        return this.gameState.roundsBundles.en[bundleIndex];
     },
-    setRound: function(bundleIndex, roundIndex, field, newValue){
-        this.gameState.roundsBundles[bundleIndex].rounds[roundIndex][field] = newValue;
+    setRoundsBundlesRu: function (bundleIndex, field, newValue) {
+        this.gameState.roundsBundles.ru[bundleIndex][field] = newValue;
         this.saveGameState();
     },
-    getRound: function (bundleIndex, roundIndex) {
+    getRoundsBundlesRu: function (bundleIndex) {
         if (typeof bundleIndex == 'undefined') {
-            return this.gameState.roundsBundles;
+            return this.gameState.roundsBundles.ru;
         }
 
-        if (!this.gameState.roundsBundles.hasOwnProperty(bundleIndex)) {
+        if (!this.gameState.roundsBundles.ru.hasOwnProperty(bundleIndex)) {
+            return false;
+        }
+
+        return this.gameState.roundsBundles.ru[bundleIndex];
+    },
+    setRoundEn: function (bundleIndex, roundIndex, field, newValue) {
+        this.gameState.roundsBundles.en[bundleIndex].rounds[roundIndex][field] = newValue;
+        this.saveGameState();
+    },
+    getRoundEn: function (bundleIndex, roundIndex) {
+        if (typeof bundleIndex == 'undefined') {
+            return this.gameState.roundsBundles.en;
+        }
+
+        if (!this.gameState.roundsBundles.en.hasOwnProperty(bundleIndex)) {
             return false;
         }
 
         if (typeof roundIndex == 'undefined') {
-            return this.gameState.roundsBundles[bundleIndex];
+            return this.gameState.roundsBundles.en[bundleIndex];
         }
 
-        if (!this.gameState.roundsBundles[bundleIndex].rounds.hasOwnProperty(roundIndex)) {
+        if (!this.gameState.roundsBundles.en[bundleIndex].rounds.hasOwnProperty(roundIndex)) {
             return false;
         }
 
-        return this.gameState.roundsBundles[bundleIndex].rounds[roundIndex];
+        return this.gameState.roundsBundles.en[bundleIndex].rounds[roundIndex];
+    },
+    setRoundRu: function (bundleIndex, roundIndex, field, newValue) {
+        this.gameState.roundsBundles.ru[bundleIndex].rounds[roundIndex][field] = newValue;
+        this.saveGameState();
+    },
+    getRoundRu: function (bundleIndex, roundIndex) {
+        if (typeof bundleIndex == 'undefined') {
+            return this.gameState.roundsBundles.ru;
+        }
+
+        if (!this.gameState.roundsBundles.ru.hasOwnProperty(bundleIndex)) {
+            return false;
+        }
+
+        if (typeof roundIndex == 'undefined') {
+            return this.gameState.roundsBundles.ru[bundleIndex];
+        }
+
+        if (!this.gameState.roundsBundles.ru[bundleIndex].rounds.hasOwnProperty(roundIndex)) {
+            return false;
+        }
+
+        return this.gameState.roundsBundles.ru[bundleIndex].rounds[roundIndex];
     }
 
 });

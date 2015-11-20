@@ -22,14 +22,38 @@ var PlayerStatsClass = Object.assign({}, {}, {
             place: 99999,
             score: 9999999,
             roundsComplete: 200,
-            roundsTotal: 300,
             profileFirstName: "FirstName",
             profileLastName: "LastName",
             selected: this.props.selected || false
         };
+        state.roundsBundlesState = appManager.getGameState().getRoundsBundles() || {};
+        state.roundsComplete = this.countRoundsComplete(state.roundsBundlesState) || 0;
+        state.roundsBundlesData = appManager.getSettings().getRoundsBundles() || {};
+        state.roundsTotal = this.countRoundsTotal(state.roundsBundlesData) || 1;
         state.profilePicUrl = "url('/build/img/counter/star.png')" || "";
 
         return state;
+    },
+
+    countRoundsComplete: function (roundsBundlesState) {
+        var roundsComplete = 0;
+        for (var key in roundsBundlesState) {
+            if (roundsBundlesState.hasOwnProperty(key)) {
+                roundsComplete += roundsBundlesState[key].roundsComplete;
+            }
+        }
+
+        return roundsComplete;
+    },
+
+    countRoundsTotal: function (roundsBundlesData) {
+        var roundsTotal = 0;
+
+        for (var i = 0; i < roundsBundlesData.length; i++) {
+            roundsTotal += roundsBundlesData[i].rounds.length;
+        }
+
+        return roundsTotal;
     },
 
     numberFormat: function (num) {
