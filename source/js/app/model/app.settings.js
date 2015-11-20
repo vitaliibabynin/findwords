@@ -44,6 +44,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return this.getSettingsValue('roundsBundles', []);
     },
 
+    getPracticeRound: function() {
+        return this.getSettingsValue('practiceRound', {});
+    },
+
     getBonusCoins: function () {
         return this.getSettingsValue('bonusCoins', {});
     },

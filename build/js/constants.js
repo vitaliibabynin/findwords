@@ -19,9 +19,9 @@ window.CONST = {
     GA_ID: '',
     AD_PERIOD_INTERSTITIAL: 300,
     //Production
-    FB_APP_ID: '473524332833935',
+    //FB_APP_ID: '473524332833935',
     //Developmet
-    //FB_APP_ID: '473533802832988',
+    FB_APP_ID: '473533802832988',
     //FB_APP_ID: '',
 
 
@@ -109,13 +109,6 @@ window.CONST = {
             'rankings.invite-friends.get-coin': 'Приглашай друзей и получай монеты!',
             'rankings.invite-friends': 'Пригласить друзей',
 
-            //RATE PAGE
-            'rate.heading': 'Понравилась игра?',
-            'rate.description': 'Оставте отзыв. Спасибо за Вашу оценку!',
-            'rate.review': 'Оставить отзыв',
-            'rate.remind.later': 'Напомнить позже',
-            'rate.remind.never': 'Не показывать больше',
-
             //RATE DIALOG
             'app.dialog.rateus.title': 'Понравилась игра?',
             'app.dialog.rateus.description': 'Оставте отзыв. Спасибо за Вашу оценку!',
@@ -129,6 +122,12 @@ window.CONST = {
             'app.dialog.nocoins.button.buy': 'Купить',
             'app.dialog.nocoins.button.earn': 'Получить бесплатно',
             'app.dialog.nocoins.button.cancel': 'Отмена',
+
+            //LEARN PAGE
+            'app.page.learn.aim-of-the-game': 'Для того чтобы пройти уровень, нужно отгадывать все загаданные слова на поле.',
+            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем с первой буквы слова к последней в правильном порядке.',
+            'app.page.learn.start': 'Начать',
+
 
             t: ''
         },
@@ -164,7 +163,7 @@ window.CONST = {
             'chip.show-word': 'Show word',
 
             'notice.selectDifferently.before': 'Try compiling the word',
-            'notice.selectDifferently.after': 'in a different way',
+            'notice.selectDifferently.after': 'another way',
             'notice.noSuchWord.before': 'The word',
             'notice.noSuchWord.after': 'is not in the riddle',
             'notice.noWordsToShow': 'No more words to show',
@@ -212,13 +211,6 @@ window.CONST = {
             'rankings.invite-friends.get-coin': 'Invite friends and get coins!',
             'rankings.invite-friends': 'Invite friends',
 
-            //RATE PAGE
-            'rate.heading': 'Like the game?',
-            'rate.description': 'Write a review. Thanks for rating!',
-            'rate.review': 'Write a review',
-            'rate.remind.later': 'Ask later',
-            'rate.remind.never': 'Do not ask again',
-
             //RATE DIALOG
             'app.dialog.rateus.title': 'Like the game?',
             'app.dialog.rateus.description': 'Write a review. Thanks for rating!',
@@ -232,6 +224,11 @@ window.CONST = {
             'app.dialog.nocoins.button.buy': 'Purchase',
             'app.dialog.nocoins.button.earn': 'Get for free',
             'app.dialog.nocoins.button.cancel': 'Cancel',
+
+            //LEARN PAGE
+            'app.page.learn.aim-of-the-game': 'In order to complete a level, you need to find all the hidden words on the board.',
+            'app.page.learn.how-to-play': 'To guess words you need to move your finger from the first letter, of the word, to the last in the correct order.',
+            'app.page.learn.start': 'Start',
 
             t: ''
         }

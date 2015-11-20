@@ -13,8 +13,6 @@ var Board = require('./../component/app.board.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
-var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
-var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
 
 var PageGameMain = Object.assign({}, {}, {
@@ -344,7 +342,8 @@ var PageGameMain = Object.assign({}, {}, {
                     />
 
                     <ShownWords shownWordsLetters={this.state.shownWordsLetters}
-                                shownWordsAnimationLeave={this.state.shownWordsAnimationLeave}/>
+                                shownWordsAnimationLeave={this.state.shownWordsAnimationLeave}
+                    />
 
                 </div>
             </div>

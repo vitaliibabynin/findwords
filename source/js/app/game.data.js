@@ -11,6 +11,68 @@ var gameData = {
         day6: 6,
         day7: 7
     },
+    practiceRound: {
+        en: {
+            score: 999,
+            coins: 999,
+            time: 30,
+            rows: 3,
+            cols: 3,
+            words: [
+                {
+                    letters: [
+                        {x: 0, y: 0, letter: "e"},
+                        {x: 0, y: 1, letter: "y"},
+                        {x: 1, y: 1, letter: "e"}
+                    ]
+                },
+                {
+                    letters: [
+                        {x: 1, y: 0, letter: "r"},
+                        {x: 2, y: 0, letter: "e"},
+                        {x: 2, y: 1, letter: "d"}
+                    ]
+                },
+                {
+                    letters: [
+                        {x: 0, y: 2, letter: "p"},
+                        {x: 1, y: 2, letter: "e"},
+                        {x: 2, y: 2, letter: "n"}
+                    ]
+                }
+            ]
+        },
+        ru: {
+            score: 999,
+            coins: 999,
+            time: 30,
+            rows: 3,
+            cols: 3,
+            words: [
+                {
+                    letters: [
+                        {x: 0, y: 0, letter: "ч"},
+                        {x: 0, y: 1, letter: "а"},
+                        {x: 1, y: 1, letter: "й"}
+                    ]
+                },
+                {
+                    letters: [
+                        {x: 1, y: 0, letter: "д"},
+                        {x: 2, y: 0, letter: "у"},
+                        {x: 2, y: 1, letter: "б"}
+                    ]
+                },
+                {
+                    letters: [
+                        {x: 0, y: 2, letter: "с"},
+                        {x: 1, y: 2, letter: "о"},
+                        {x: 2, y: 2, letter: "н"}
+                    ]
+                }
+            ]
+        }
+    },
     roundsBundles: [
         {
             name: {ru: "Комплект №1 Гаврюша", en: "Set #1 Gavryusha"},

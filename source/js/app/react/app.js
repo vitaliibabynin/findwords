@@ -10,6 +10,8 @@ var PageBonus = require('./page/page.bonus');
 var PageShop = require('./page/page.shop');
 var PageRankings = require('./page/page.rankings');
 var PageLearn = require('./page/page.learn');
+var PageGameLearn = require('./page/page.game.learn');
+var PageGameLearnVictory = require('./page/page.game.learn.victory');
 
 React.initializeTouchEvents(true);
 var AppClass = {
@@ -71,6 +73,12 @@ var AppClass = {
                 break;
             case "game":
                 switch(router.getAction()){
+                    case "learn":
+                        this.renderPage(<PageGameLearn parent={this} />);
+                        break;
+                    case "learn_victory":
+                        this.renderPage(<PageGameLearnVictory parent={this} />);
+                        break;
                     case "victory":
                         this.renderPage(<PageGameVictory parent={this} />);
                         break;

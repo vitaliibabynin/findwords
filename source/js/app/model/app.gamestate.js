@@ -20,6 +20,20 @@ var GameState = Object.assign({}, {}, {
             music: true,
             sound: true
         },
+        practiceRound: {
+            en: {
+                board: {},
+                openedLetters: [],
+                starsReceived: 3,
+                secondsRemaining: 0
+            },
+            ru: {
+                board: {},
+                openedLetters: [],
+                starsReceived: 3,
+                secondsRemaining: 0
+            }
+        },
         roundsBundles: {
             0: {
                 bundleScore: 99999,
@@ -282,6 +296,29 @@ var GameState = Object.assign({}, {}, {
     },
     getChipShowWord: function () {
         return this.getChipsField('chipShowWord', 0);
+    },
+
+    setPracticeRoundFieldEn: function (field, newValue) {
+        this.gameState.practiceRound.en[field] = newValue;
+        this.saveGameState();
+    },
+    getPracticeRoundFieldEn: function (field, defaultValue) {
+        if (!this.gameState.practiceRound.en || !this.gameState.practiceRound.en.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.practiceRound.en[field];
+    },
+    setPracticeRoundFieldRu: function (field, newValue) {
+        this.gameState.practiceRound.ru[field] = newValue;
+        this.saveGameState();
+    },
+    getPracticeRoundFieldRu: function (field, defaultValue) {
+        if (!this.gameState.practiceRound.ru || !this.gameState.practiceRound.ru.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.practiceRound.ru[field];
     },
 
     setRoundsBundles: function (bundleIndex, field, newValue) {

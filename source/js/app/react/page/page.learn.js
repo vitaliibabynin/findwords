@@ -1,21 +1,34 @@
 "use strict";
 
 
+var GameMixin = require('./../component/app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
 
-var PageRate = Object.assign({}, {}, {
+var PageLearn = Object.assign({}, {}, {
 
-    displayName: 'PageRate',
+    displayName: 'PageLearn',
+    mixins: [GameMixin],
 
     getInitialState: function () {
         return {};
     },
 
     getImage: function () {
-        return "";
+        switch (router.getLanguage()) {
+            case CONST.LANGUAGE_EN:
+                return "url('" + this.getImagePath('learn/learn_en') + "')";
+            case CONST.LANGUAGE_RU:
+                return "url('" + this.getImagePath('learn/learn_ru') + "')";
+            default:
+                return "url('" + this.getImagePath('learn/learn_en') + "')";
+        }
+    },
+
+    onClickStart: function () {
+        router.navigate("game","learn");
     },
 
     render: function () {
@@ -34,16 +47,16 @@ var PageRate = Object.assign({}, {}, {
                     <div className="container">
 
                         <div className="aim-of-the-game">
-                            <span>{i18n._('rate.description')}</span>
+                            <span>{i18n._('app.page.learn.aim-of-the-game')}</span>
                         </div>
 
                         <div className="image-of-board" style={imageStyle}></div>
 
                         <div className="how-to-play">
-                            <span>{i18n._('rate.description')}</span>
+                            <span>{i18n._('app.page.learn.how-to-play')}</span>
                         </div>
 
-                        <div className="start">{i18n._('rate.remind.never')}</div>
+                        <div className="btn start" onClick={this.onClickStart}>{i18n._('app.page.learn.start')}</div>
 
                     </div>
 
@@ -54,5 +67,5 @@ var PageRate = Object.assign({}, {}, {
     }
 
 });
-module.exports = React.createClass(PageRate);
-module.exports.Class = PageRate;
+module.exports = React.createClass(PageLearn);
+module.exports.Class = PageLearn;

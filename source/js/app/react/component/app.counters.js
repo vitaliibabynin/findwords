@@ -44,11 +44,15 @@ var CounterClass = Object.assign({}, {}, {
 
     },
 
+    onClick: function () {
+      router.navigate("shop", "index");
+    },
+
     showIcon: function () {
 
         if (this.state.isDisplayPlusButton) {
             return (
-                <IconButton icon={this.state.iconImg}></IconButton>
+                <IconButton icon={this.state.iconImg} onClick={this.onClick}></IconButton>
             );
         }
 
