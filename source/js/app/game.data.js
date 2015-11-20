@@ -1,4 +1,8 @@
 var gameData = {
+    //production
+    //facebookId: '473524332833935',
+    //development
+    facebookId: '473533802832988',
     dialogs: {
         rateUsMaxShowCount: 10
     },

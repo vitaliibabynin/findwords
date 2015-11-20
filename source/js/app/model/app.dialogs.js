@@ -127,6 +127,40 @@ var InfoDialog = function(){
     return dialog;
 }
 
+var ErrorDialog = function(){
+
+    var dialog = new Dialog({
+        dialogId: 'error-dialog',
+        effect: 'slidebottom',
+        title: i18n._('app.dialog.error.title')
+    });
+
+    dialog.contentText = '';
+    dialog.setContentText = function(text){
+        this.contentText = text;
+        this._dialog = null;
+
+        return this;
+    }
+
+    dialog.getContent = function(){
+        return '<div class="md-content"> \
+                        <p>'+this.contentText+'</p> \
+                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.error.button.cancel')+'</a></div> \
+                 </div> \
+                ';
+    }
+
+    dialog.prepareDialog = function(dialog){
+        $('.cancel', dialog).bind( 'click', function( e ) {
+            this.hide();
+            e.stopPropagation();
+        }.bind(this));
+    }
+
+    return dialog;
+}
+
 
 
 
@@ -772,6 +806,10 @@ var Dialogs = {
      */
     getInfoDialog: function(){
         return this._getDialog("InfoDialog", InfoDialog);
+    },
+
+    getErrorDialog: function(){
+        return this._getDialog("ErrorDialog", ErrorDialog);
     },
 
 

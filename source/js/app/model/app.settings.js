@@ -39,6 +39,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return this.getSettingsValue('share_applink', false);
     },
 
+    getFacebookId: function () {
+        return this.getSettingsValue('facebookId', "");
+    },
+
     getRoundsBundles: function () {
         var defaultValue = [];
         var roundsBundles = this.getSettingsValue('roundsBundles', defaultValue);

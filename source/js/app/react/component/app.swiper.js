@@ -113,7 +113,7 @@ var SlideClass = Object.assign({}, {}, {
     onClickBuySet: function (buttonProps, e) {
         e.stopPropagation();
 
-        appDialogs.getInfoDialog().show();
+        appDialogs.getErrorDialog().show();
 
         //this.onClickGame();
     },

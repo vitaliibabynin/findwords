@@ -19,7 +19,7 @@ window.CONST = {
     GA_ID: '',
     AD_PERIOD_INTERSTITIAL: 300,
     //Production
-    FB_APP_ID: '473524332833935',
+    //FB_APP_ID: '473524332833935',
     //Developmet
     //FB_APP_ID: '473533802832988',
     //FB_APP_ID: '',
@@ -117,6 +117,13 @@ window.CONST = {
             'app.dialog.rateus.button.never': 'Не показывать больше',
 
             //NO-COINS DIALOG
+            'app.dialog.nocoins.title': 'Недостаточно монет',
+            'app.dialog.nocoins.description': 'У вас не хватает монет, вы можете купить монеты или получить их бесплатно.',
+            'app.dialog.nocoins.button.buy': 'Купить',
+            'app.dialog.nocoins.button.earn': 'Получить бесплатно',
+            'app.dialog.nocoins.button.cancel': 'Отмена',
+
+            //ERROR DIALOG
             'app.dialog.nocoins.title': 'Недостаточно монет',
             'app.dialog.nocoins.description': 'У вас не хватает монет, вы можете купить монеты или получить их бесплатно.',
             'app.dialog.nocoins.button.buy': 'Купить',
