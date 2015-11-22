@@ -50,9 +50,6 @@
     background-color: $dialogRate-header-bg-color;
 
     h3 {
-      $height: 2.375rem;
-      height: $height;
-      line-height: $height;
       font-size: $dialogRate-heading-font-size;
     }
   }
@@ -100,9 +97,6 @@
     background-color: $dialogNoCoins-header-bg-color;
 
     h3 {
-      $height: 2.375rem;
-      height: $height;
-      line-height: $height;
       font-size: $dialogNoCoins-heading-font-size;
     }
   }
@@ -145,6 +139,76 @@
       line-height: $height;
       margin-bottom: 0;
       width: 100%;
+    }
+  }
+}
+
+#error-dialog.md-modal {
+  .md-title {
+    color: $dialogError-header-color;
+    background-color: $dialogError-header-bg-color;
+
+    h3 {
+      font-size: $dialogError-heading-font-size;
+    }
+  }
+  .md-content {
+    padding: 0 0.875rem 0.875rem;
+    color: $dialogError-content-color;
+    background: $dialogError-content-bg-color;
+    font-size: $dialogError-description-font-size;
+
+    & > p {
+      padding: 1rem 0.75rem;
+    }
+    a {
+      color: $dialogError-content-color;
+    }
+    .cancel {
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      background-color: $dialogError-cancel-bg-color;
+      font-size: $dialogError-cancel-font-size;
+    }
+  }
+}
+
+#requirepush-dialog.md-modal {
+  .md-title {
+    color: $dialogRequirePush-header-color;
+    background-color: $dialogRequirePush-header-bg-color;
+
+    h3 {
+      font-size: $dialogRequirePush-heading-font-size;
+    }
+  }
+  .md-content {
+    padding: 0 0.875rem 1.25rem;
+    color: $dialogRequirePush-content-color;
+    background: $dialogRequirePush-content-bg-color;
+    font-size: $dialogRequirePush-description-font-size;
+
+    & > p {
+      padding: 0.75rem;
+    }
+    a {
+      color: $dialogRequirePush-content-color;
+    }
+    .ok {
+      $height: 2.5rem;
+      height: $height;
+      line-height: $height;
+      background-color: $dialogRequirePush-ok-bg-color;
+      font-size: $dialogRequirePush-ok-font-size;
+      margin-bottom: 0.625rem;
+    }
+    .cancel {
+      $height: 1.875rem;
+      height: $height;
+      line-height: $height;
+      background-color: $dialogRequirePush-cancel-bg-color;
+      font-size: $dialogRequirePush-cancel-font-size;
     }
   }
 }

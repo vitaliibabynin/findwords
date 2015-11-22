@@ -321,15 +321,17 @@ var RequirePushDialog = function(){
         title: i18n._('app.dialog.requirepush.title')
     });
     dialog.isLoadedSettings = false;
-    dialog.showPeriod = 86400 * 5 * 1000;
+    //dialog.showPeriod = 86400 * 5 * 1000;
+    dialog.showPeriod = appManager.getSettings().getDialogs().requirePushShowPeriod || 86400 * 5 * 1000;
+
     dialog.settingsNamespace = 'dialogRequirePush';
     dialog.nextShowTime = 0;
 
     dialog.getContent = function(){
         return '<div class="md-content"> \
                         <p>'+i18n._('app.dialog.requirepush.description')+'</p> \
-                        <div><a href="#" class="btn yellow ok">'+i18n._('app.dialog.requirepush.button.ok')+'</a></div> \
-                        <div><a href="#" class="btn brown cancel">'+i18n._('app.dialog.requirepush.button.cancel')+'</a></div> \
+                        <div><a href="#" class="btn ok">'+i18n._('app.dialog.requirepush.button.ok')+'</a></div> \
+                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.requirepush.button.cancel')+'</a></div> \
                  </div> \
                 ';
     }

@@ -84,16 +84,19 @@ $gamePage-board-td-bg-color-default-transparent: rgba(232,232,232,0);
 $gamePage-board-td-bg-color-1: green;
 $gamePage-board-td-bg-color-2: blue;
 $gamePage-board-td-bg-color-3: cyan;
-$gamePage-board-td-bg-colo-4: orange;
+$gamePage-board-td-bg-color-4: orange;
 $gamePage-board-td-bg-color-5: indigo;
 $gamePage-board-td-bg-color-6: violet;
 $gamePage-board-td-bg-color-7: grey;
 $gamePage-board-td-bg-color-8: purple;
 $gamePage-board-td-bg-color-9: pink;
 $gamePage-board-td-bg-color-10: darkblue;
+$gamePage-board-td-learn-bg-color-1: #febd27;
+$gamePage-board-td-learn-bg-color-2: #d24a43;
+$gamePage-board-td-learn-bg-color-3: #ae8c64;
 
 //gamePage-Notice
-$gamePage-notice-default-bg-color: blue;
+$gamePage-notice-default-bg-color: #2574a9;
 $gamePage-notice-default-color: #ffffff;
 $gamePage-notice-noSuchWord-bg-color: #2574a9;
 $gamePage-notice-noSuchWord-color: #ffffff;
@@ -258,3 +261,39 @@ $dialogNoCoins-description-font-size: 1.2rem;
 $dialogNoCoins-buy-font-size: 1.25rem;
 $dialogNoCoins-earn-font-size: 1.25rem;
 $dialogNoCoins-cancel-font-size: 1.25rem;
+
+
+//ERROR DIALOG
+//COLOR
+
+//dialogError
+$dialogError-header-color: #ffffff;
+$dialogError-header-bg-color: #ff4545;
+$dialogError-content-color: #ffffff;
+$dialogError-content-bg-color: #2574a9;
+$dialogError-cancel-bg-color: #f89406;
+
+
+//SIZE
+$dialogError-heading-font-size: 1.5rem;
+$dialogError-description-font-size: 1.2rem;
+$dialogError-cancel-font-size: 1.25rem;
+
+
+//REQUIRE-PUSH DIALOG
+//COLOR
+
+//dialogRequirePush
+$dialogRequirePush-header-color: #ffffff;
+$dialogRequirePush-header-bg-color: #2ecc71;
+$dialogRequirePush-content-color: #ffffff;
+$dialogRequirePush-content-bg-color: #2574a9;
+$dialogRequirePush-ok-bg-color: #f89406;
+$dialogRequirePush-cancel-bg-color: #67809f;
+
+
+//SIZE
+$dialogRequirePush-heading-font-size: 1.5rem;
+$dialogRequirePush-description-font-size: 1.2rem;
+$dialogRequirePush-ok-font-size: 1.25rem;
+$dialogRequirePush-cancel-font-size: 1.25rem;

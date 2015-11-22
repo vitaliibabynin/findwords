@@ -32,8 +32,17 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        appDialogs.getRequirePushDialog().showIfTime();
         appDialogs.getRateDialog().showIfTime();
     },
+
+    //componentDidUpdate: function (prevProps, prevState) {
+    //
+    //},
+    //
+    //componentWillUnmount: function () {
+    //
+    //},
 
     getGameStateRoundsBundleField: function (roundsBundleIdx, field) {
         return appManager.getGameState().getRoundsBundles(roundsBundleIdx)[field];
@@ -58,18 +67,6 @@ var PageGameVictory = Object.assign({}, {}, {
         var newTotalCoins = prevTotalCoins + rewardCoins;
         appManager.getGameState().setCoins(newTotalCoins);
     },
-
-    //componentDidMount: function () {
-    //
-    //},
-    //
-    //componentDidUpdate: function (prevProps, prevState) {
-    //
-    //},
-    //
-    //componentWillUnmount: function () {
-    //
-    //},
 
     nextRoundIdx: function () {
         var currentRoundIdx = this.state.roundIdx;

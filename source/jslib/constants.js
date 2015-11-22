@@ -109,6 +109,11 @@ window.CONST = {
             'rankings.invite-friends.get-coin': 'Приглашай друзей и получай монеты!',
             'rankings.invite-friends': 'Пригласить друзей',
 
+            //LEARN PAGE
+            'app.page.learn.aim-of-the-game': 'Для того чтобы пройти уровень, нужно отгадывать все загаданные слова на поле.',
+            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем с первой буквы слова к последней в правильном порядке.',
+            'app.page.learn.start': 'Начать',
+
             //RATE DIALOG
             'app.dialog.rateus.title': 'Понравилась игра?',
             'app.dialog.rateus.description': 'Оставте отзыв. Спасибо за Вашу оценку!',
@@ -124,17 +129,15 @@ window.CONST = {
             'app.dialog.nocoins.button.cancel': 'Отмена',
 
             //ERROR DIALOG
-            'app.dialog.nocoins.title': 'Недостаточно монет',
-            'app.dialog.nocoins.description': 'У вас не хватает монет, вы можете купить монеты или получить их бесплатно.',
-            'app.dialog.nocoins.button.buy': 'Купить',
-            'app.dialog.nocoins.button.earn': 'Получить бесплатно',
-            'app.dialog.nocoins.button.cancel': 'Отмена',
+            'app.dialog.error.title': 'Ошибка',
+            'app.dialog.error.description': 'Произошел сбой.',
+            'app.dialog.error.button.cancel': 'ОК',
 
-            //LEARN PAGE
-            'app.page.learn.aim-of-the-game': 'Для того чтобы пройти уровень, нужно отгадывать все загаданные слова на поле.',
-            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем с первой буквы слова к последней в правильном порядке.',
-            'app.page.learn.start': 'Начать',
-
+            //REQUIRE-PUSH DIALOG
+            'app.dialog.requirepush.title': 'Уведомления',
+            'app.dialog.requirepush.description': 'Хотите знать когда придут бонусы? Подключайте уведомления.',
+            'app.dialog.requirepush.button.ok': 'Разрешить',
+            'app.dialog.requirepush.button.cancel': 'Не сейчас',
 
             t: ''
         },
@@ -218,6 +221,11 @@ window.CONST = {
             'rankings.invite-friends.get-coin': 'Invite friends and get coins!',
             'rankings.invite-friends': 'Invite friends',
 
+            //LEARN PAGE
+            'app.page.learn.aim-of-the-game': 'In order to complete a level, you need to find all the hidden words on the board.',
+            'app.page.learn.how-to-play': 'To guess words you need to move your finger from the first letter, of the word, to the last in the correct order.',
+            'app.page.learn.start': 'Start',
+
             //RATE DIALOG
             'app.dialog.rateus.title': 'Like the game?',
             'app.dialog.rateus.description': 'Write a review. Thanks for rating!',
@@ -232,10 +240,16 @@ window.CONST = {
             'app.dialog.nocoins.button.earn': 'Get for free',
             'app.dialog.nocoins.button.cancel': 'Cancel',
 
-            //LEARN PAGE
-            'app.page.learn.aim-of-the-game': 'In order to complete a level, you need to find all the hidden words on the board.',
-            'app.page.learn.how-to-play': 'To guess words you need to move your finger from the first letter, of the word, to the last in the correct order.',
-            'app.page.learn.start': 'Start',
+            //ERROR DIALOG
+            'app.dialog.error.title': 'Error',
+            'app.dialog.error.description': 'Something went wrong.',
+            'app.dialog.error.button.cancel': 'OK',
+
+            //REQUIRE-PUSH DIALOG
+            'app.dialog.requirepush.title': 'Notifications',
+            'app.dialog.requirepush.description': 'Want to know when you\'ve received a bonus? Allow notifications.',
+            'app.dialog.requirepush.button.ok': 'Allow',
+            'app.dialog.requirepush.button.cancel': 'Not now',
 
             t: ''
         }

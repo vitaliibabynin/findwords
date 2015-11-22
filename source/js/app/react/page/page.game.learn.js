@@ -98,6 +98,7 @@ var PageGameLearn = Object.assign({}, {}, {
                     <Board ref="board"
                            boardData={this.state.boardData}
                            board={this.state.board}
+                           isPracticeRound={true}
                            displayNotice={this.displayNotice}
                            setGameStateRoundField={this.setGameStateRoundField}
                            goToPageRoundComplete={this.goToPageRoundComplete}

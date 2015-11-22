@@ -108,6 +108,7 @@ var BoardClass = Object.assign({}, {}, {
             })
         ),
         shownWords: React.PropTypes.arrayOf(React.PropTypes.number),
+        isPracticeRound: React.PropTypes.bool,
         displayNotice: React.PropTypes.func,
         addToShownWords: React.PropTypes.func,
         removeWordFromShownWords: React.PropTypes.func,
@@ -123,6 +124,7 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: {letters: []},
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
+            isPracticeRound: this.props.isPracticeRound || false,
             displayNotice: this.props.displayNotice || function () {
             },
             addToShownWords: this.props.addToShownWords || function () {
@@ -535,18 +537,27 @@ var BoardClass = Object.assign({}, {}, {
         var backgroundColor = '';
         var wordsComplete = this.howManyCompleteWordsInBoard();
 
-        var backgroundColors = [
-            "backgroundColor1",
-            "backgroundColor2",
-            "backgroundColor3",
-            "backgroundColor4",
-            "backgroundColor5",
-            "backgroundColor6",
-            "backgroundColor7",
-            "backgroundColor8",
-            "backgroundColor9",
-            "backgroundColor10"
-        ];
+        var backgroundColors = [];
+        if (this.state.isPracticeRound) {
+            backgroundColors = [
+                "learn-bg-color-1",
+                "learn-bg-color-2",
+                "learn-bg-color-3"
+            ]
+        } else {
+            backgroundColors = [
+                "bg-color-1",
+                "bg-color-2",
+                "bg-color-3",
+                "bg-color-4",
+                "bg-color-5",
+                "bg-color-6",
+                "bg-color-7",
+                "bg-color-8",
+                "bg-color-9",
+                "bg-color-10"
+            ]
+        }
 
         //  +1 because word hasn't been added to completedWords yet
         for (var i = 0; i < wordsComplete + 1; i++) {
