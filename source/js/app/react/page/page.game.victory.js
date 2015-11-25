@@ -17,7 +17,7 @@ var PageGameVictory = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
-            roundIdx: parseInt(router.getParam('roundIdx')) || 0
+            roundIdx: parseInt(router.getParam('roundIdx')) || 0,
         };
         state.starsReceived = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, 'starsReceived') || 3;
         state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
@@ -25,13 +25,14 @@ var PageGameVictory = Object.assign({}, {}, {
         state.roundsTotal = rounds.length || 1;
         state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].score * (state.starsReceived / 3) || 0;
         state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].coins * (state.starsReceived / 3) || 0;
-        this.addRewardScore(state.rewardScore, state.roundsBundleIdx);
-        this.addRewardCoins(state.rewardCoins);
 
         return state;
     },
 
     componentDidMount: function () {
+        this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
+        this.addRewardCoins(this.state.rewardCoins);
+
         appDialogs.getRequirePushDialog().showIfTime();
         appDialogs.getRateDialog().showIfTime();
     },
@@ -71,6 +72,7 @@ var PageGameVictory = Object.assign({}, {}, {
     nextRoundIdx: function () {
         var currentRoundIdx = this.state.roundIdx;
         var roundsTotal = this.state.roundsTotal;
+
         var nextRoundIdx = currentRoundIdx + 1;
 
         if (nextRoundIdx < roundsTotal) {
@@ -102,6 +104,12 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     onClick: function () {
+        if (this.state.clickedContinue) {
+            return;
+        }
+
+        this.setState({clickedContinue: true});
+
         var nextRoundIdx = this.nextRoundIdx();
         var nextRoundsBundleIdx = this.state.roundsBundleIdx;
         var roundsBundlesTotal = appManager.getSettings().getRoundsBundles().length;

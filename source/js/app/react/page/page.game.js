@@ -45,6 +45,18 @@ var PageGameMain = Object.assign({}, {}, {
         return state;
     },
 
+    //componentDidMount: function() {
+    //
+    //},
+    //
+    ////componentDidUpdate: function(prevProps, prevState) {
+    //
+    //},
+    //
+    //componentWillUnmount: function() {
+    //
+    //},
+
     shownWordsConverter: function (shownWords, boardData) {
         var shownWordsLetters = [];
 
@@ -98,17 +110,6 @@ var PageGameMain = Object.assign({}, {}, {
         return appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field];
     },
 
-    //componentDidMount: function() {
-    //
-    //},
-    //
-    ////componentDidUpdate: function(prevProps, prevState) {
-    //
-    //},
-    //
-    //componentWillUnmount: function() {
-    //
-    //},
 
     onChipOpenWordClick: function () {
         if (this.state.chipsOpenWord < 1) {
@@ -133,7 +134,7 @@ var PageGameMain = Object.assign({}, {}, {
         //    });
         //}
 
-        this.refs.board.openWord().then(function(result){
+        this.refs.board.openWord().then(function (result) {
             if (result !== false) {
                 var chipsOpenWord = this.state.chipsOpenWord - 1;
 
@@ -210,6 +211,7 @@ var PageGameMain = Object.assign({}, {}, {
         this.displayNotice(NO_WORDS_TO_SHOW, {letters: []});
     },
 
+
     addToShownWords: function (word, wordIdx) {
         var shownWords = this.state.shownWords;
         var shownWordsLetters = this.state.shownWordsLetters;
@@ -246,15 +248,33 @@ var PageGameMain = Object.assign({}, {}, {
 
         this.setGameStateRoundField('shownWords', shownWords);
 
+        var shownWordsAnimationLeave = true;
+        if (this.checkIfOneWordLeft()) {
+            shownWordsAnimationLeave = false;
+        }
+
         this.setState({
+            shownWordsAnimationLeave: shownWordsAnimationLeave,
             shownWords: shownWords,
             shownWordsLetters: shownWordsLetters
         })
     },
 
-    turnOffLeaveAnimationShownWords: function () {
-        this.setState({shownWordsAnimationLeave: false});
+    checkIfOneWordLeft: function () {
+        var boardData = this.state.roundData.rounds[this.state.roundIdx] || {};
+        var wordsToFind = boardData.words.length || 100;
+
+        var board = this.getGameStateRoundField("board", this.state.roundsBundleIdx, this.state.roundIdx) || {};
+        var wordsFound = 0;
+        for (var k in board) {
+            if (board[k].openWord) {
+                wordsFound++;
+            }
+        }
+
+        return wordsFound == wordsToFind;
     },
+
 
     displayNotice: function (type, word) {
         this.setState({
@@ -271,13 +291,11 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     goToPageRoundComplete: function (time) {
-        time = time || 0;
+        time = time || 200;
 
         var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
         roundsComplete++;
         this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
-
-        this.turnOffLeaveAnimationShownWords();
 
         var params = {
             roundsBundleIdx: this.state.roundsBundleIdx,
@@ -288,6 +306,7 @@ var PageGameMain = Object.assign({}, {}, {
             router.navigate("game", "victory", params);
         }.bind(this), time);
     },
+
 
     render: function () {
 
