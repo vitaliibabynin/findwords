@@ -47,7 +47,7 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         var defaultValue = [];
         var roundsBundles = this.getSettingsValue('roundsBundles', defaultValue);
 
-        if (roundsBundles == defaultValue) {
+        if (typeof roundsBundles == "undefined") {
             return defaultValue;
         }
 

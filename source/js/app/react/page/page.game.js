@@ -32,23 +32,46 @@ var PageGameMain = Object.assign({}, {}, {
             chipsShowWord: appManager.getGameState().getChipShowWord() || 0,
             shownWordsAnimationLeave: true
         };
-        state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || {};
-        state.boardData = state.roundData.rounds[state.roundIdx] || {};
+        state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];
+        state.boardData = state.roundData.rounds[state.roundIdx] || {
+                score: 0,
+                coins: 0,
+                time: 1,
+                rows: 1,
+                cols: 1,
+                words: [
+                    {
+                        letters: [
+                            {x: 0, y: 0, letter: ""}
+                        ]
+                    }
+                ]
+            };
 
         state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
         state.time = state.boardData.time || 0;
 
         state.openedLetters = this.getGameStateRoundField("openedLetters", state.roundsBundleIdx, state.roundIdx) || [];
         state.shownWords = this.getGameStateRoundField("shownWords", state.roundsBundleIdx, state.roundIdx) || [];
-        state.shownWordsLetters = this.shownWordsConverter(state.shownWords, state.boardData);
+        state.shownWordsLetters = this.shownWordsConverter(state.shownWords, state.boardData) || [];
 
         return state;
     },
 
-    //componentDidMount: function() {
-    //
-    //},
-    //
+    componentDidMount: function () {
+        var roundsTotal = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds.length;
+        if (typeof roundsTotal == "undefined") {
+            return;
+        }
+
+        console.log({roundIdx: this.state.roundIdx});
+        console.log({roundsTotal: roundsTotal});
+
+        if (this.state.roundIdx > roundsTotal) {
+            router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
+        }
+    },
+
     ////componentDidUpdate: function(prevProps, prevState) {
     //
     //},

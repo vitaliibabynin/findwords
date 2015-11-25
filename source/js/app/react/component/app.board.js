@@ -158,6 +158,8 @@ var BoardClass = Object.assign({}, {}, {
             arr[i] = new Array(boardData.cols);
         }
 
+        console.log(boardData);
+
         boardData.words.map(function (word) {
             word.letters.map(function (letter) {
                 arr[letter.y][letter.x] = {
