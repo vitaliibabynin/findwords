@@ -30,7 +30,7 @@ var PageGameMain = Object.assign({}, {}, {
             //chipsOpenWord: appManager.getGameState().getChipOpenWord() || 0,
             //chipsOpenLetter: appManager.getGameState().getChipOpenLetter() || 0,
             //chipsShowWord: appManager.getGameState().getChipShowWord() || 0,
-            chipsOpenWord: 20000,
+            chipsOpenWord: 1000,
             chipsOpenLetter: 1000,
             chipsShowWord: 150,
             shownWordsAnimationLeave: true
@@ -138,9 +138,9 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     onChipOpenWordClick: function () {
-        if (this.state.chipsOpenWord < 1) {
+        var coins = appManager.getGameState().getCoins();
+        if (this.state.chipsOpenWord > coins) {
             appDialogs.getNoMoneyDialog().show();
-            //console.log("no chips left");
             return;
         }
 
@@ -162,18 +162,14 @@ var PageGameMain = Object.assign({}, {}, {
 
         this.refs.board.openWord().then(function (result) {
             if (result !== false) {
-                var chipsOpenWord = this.state.chipsOpenWord - 1;
+                var newCoins = coins - this.state.chipsOpenWord;
+                appManager.getGameState().setCoins(newCoins);
+                this.forceUpdate();
 
-                appManager.getGameState().setChipOpenWord(chipsOpenWord);
-
-                this.setState({
-                    chipsOpenWord: chipsOpenWord
-                }, function () {
-                    if (this.refs.board.checkIfRoundComplete()) {
-                        //this.goToPageRoundComplete(2000);
-                        this.goToPageRoundComplete();
-                    }
-                });
+                if (this.refs.board.checkIfRoundComplete()) {
+                    //this.goToPageRoundComplete(2000);
+                    this.goToPageRoundComplete();
+                }
             }
         }.bind(this));
 
@@ -191,45 +187,36 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     onChipOpenLetterClick: function () {
-        if (this.state.chipsOpenLetter < 1) {
+        var coins = appManager.getGameState().getCoins();
+        if (this.state.chipsOpenLetter > coins) {
             appDialogs.getNoMoneyDialog().show();
-            //console.log("no chips left");
             return;
         }
 
         var result = this.refs.board.openLetter();
         if (result !== false) {
-            var chipsOpenLetter = this.state.chipsOpenLetter - 1;
+            var newCoins = coins - this.state.chipsOpenLetter;
+            appManager.getGameState().setCoins(newCoins);
+            this.forceUpdate();
 
-            appManager.getGameState().setChipOpenLetter(chipsOpenLetter);
-
-            this.setState({
-                chipsOpenLetter: chipsOpenLetter
-            }, function () {
-                if (this.refs.board.checkIfRoundComplete()) {
-                    //this.goToPageRoundComplete(2000);
-                    this.goToPageRoundComplete();
-                }
-            });
+            if (this.refs.board.checkIfRoundComplete()) {
+                //this.goToPageRoundComplete(2000);
+                this.goToPageRoundComplete();
+            }
         }
     },
 
     onChipShowWordClick: function () {
-        if (this.state.chipsShowWord < 1) {
-            //console.log("no chips left");
+        var coins = appManager.getGameState().getCoins();
+        if (this.state.chipsShowWord > coins) {
             appDialogs.getNoMoneyDialog().show();
             return;
         }
 
         var result = this.refs.board.sendWordToShowToPageGame();
         if (result !== false) {
-            var chipsShowWord = this.state.chipsShowWord - 1;
-
-            appManager.getGameState().setChipShowWord(chipsShowWord);
-
-            this.setState({
-                chipsShowWord: chipsShowWord
-            });
+            var newCoins = coins - this.state.chipsShowWord;
+            appManager.getGameState().setCoins(newCoins);
 
             return;
         }
