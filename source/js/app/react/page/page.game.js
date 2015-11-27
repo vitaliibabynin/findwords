@@ -30,9 +30,9 @@ var PageGameMain = Object.assign({}, {}, {
             //chipsOpenWord: appManager.getGameState().getChipOpenWord() || 0,
             //chipsOpenLetter: appManager.getGameState().getChipOpenLetter() || 0,
             //chipsShowWord: appManager.getGameState().getChipShowWord() || 0,
-            chipsOpenWord: "20000",
-            chipsOpenLetter: "1000",
-            chipsShowWord: "150",
+            chipsOpenWord: 20000,
+            chipsOpenLetter: 1000,
+            chipsShowWord: 150,
             shownWordsAnimationLeave: true
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];

@@ -96,10 +96,17 @@
         }
       }
       .value {
-        width: 1.75rem;
         position: absolute;
         bottom: 0.4rem;
         left: 10%;
+        background-repeat: no-repeat;
+        background-position: left;
+        $original-width: 0.875rem;
+        $original-height: 1.375rem;
+        $scale: 0.6;
+        background-size: $scale * $original-width $scale * $original-height;
+        padding-left: 0.575rem;
+        text-align: left;
       }
     }
     .open-word {

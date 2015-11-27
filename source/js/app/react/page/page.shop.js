@@ -13,10 +13,11 @@ var THREE_DOLLAR = 'shop/three_dollar';
 var MANY_DOLLAR = 'shop/many_dollar';
 var SACK_DOLLAR = 'shop/sack_dollar';
 var THREE_SACK_DOLLAR = 'shop/three_sack_dollar';
-var DOLLAR = 'counter/coins';
 var CURRENCY = ' UAH ';
 var COINS_FOR_WATCHING_VIDEO = 50;
 var COINS_FOR_SHARING_WITH_FRIENDS = 100;
+
+var DOLLAR = require('./../component/app.button').DOLLAR;
 
 var PageShop = Object.assign({}, {}, {
 
@@ -38,8 +39,8 @@ var PageShop = Object.assign({}, {}, {
     getData: function () {
         return [
             {coins: 1000, price: 3.99},
-            {coins: 1500, price: 4.99},
-            {coins: 2000, price: 5.99},
+            {coins: 1500, price: 40.99},
+            {coins: 2000, price: 50.99},
             {coins: 2500, price: 160.99},
             {coins: 3000, price: 1700.99}
         ]

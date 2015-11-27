@@ -5,11 +5,12 @@ var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var Radium = require('radium');
 var classNames = require('classnames');
-var Board = require('./app.board').Board;
-
+//var Board = require('./app.board').Board;
 
 module.exports = {};
 
+var DOLLAR = 'counter/coins';
+module.exports.DOLLAR = DOLLAR;
 
 var ButtonClass = Object.assign({}, {}, Radium.wrap({
 
@@ -157,6 +158,12 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
             {'hover': this.state.isActive || this.props.isActive}
         );
 
+        console.log(DOLLAR);
+
+        var dollar = {
+            backgroundImage: "url('" + this.getImagePath(DOLLAR) + "')"
+        };
+
         return (
             <div className={buttonClasses}
                  style={this.state.style}
@@ -164,7 +171,7 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
                  dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}>
 
                 <div className="text">{this.props.children}</div>
-                <div className="value">{this.props.value}</div>
+                <div className="value" style={dollar}>{this.props.value}</div>
             </div>
         );
     }

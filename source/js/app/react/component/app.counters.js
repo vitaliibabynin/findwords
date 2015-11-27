@@ -6,9 +6,9 @@ var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 var IconButton = require('./app.button').IconButton;
 
-
 module.exports = {};
 
+var DOLLAR = require('./app.button').DOLLAR;
 
 var CounterClass = Object.assign({}, {}, {
 
@@ -109,7 +109,7 @@ var CoinsCounterClass = Object.assign({}, CounterClass, {
     getInitialState: function () {
 
         var state = CounterClass.getInitialState.apply(this);
-        state.imgPath = 'counter/coins';
+        state.imgPath = DOLLAR;
         state.className = "coins";
         state.isDisplayPlusButton = this.props.isDisplayPlusButton || true;
 
