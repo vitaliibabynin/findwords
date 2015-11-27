@@ -98,10 +98,10 @@ window.CONST = {
             'bonus.collect': 'Получить',
 
             //SHOP PAGE
-            'shop.heading': 'Магазин',
-            'shop.free-coins': 'Бесплатные монеты',
+            'shop.free-coins': 'Монеты бесплатно',
             'shop.watch-video': 'Посмотреть видео',
             'shop.share': 'Рассказать про игру',
+            'shop.buy-coins': 'Покупка монет',
 
             //RANKINGS PAGE
             'rankings.heading': 'Рейтинг друзей',
@@ -210,10 +210,10 @@ window.CONST = {
             'bonus.collect': 'Collect',
 
             //SHOP PAGE
-            'shop.heading': 'Shop',
             'shop.free-coins': 'Free Coins',
             'shop.watch-video': 'Watch a video',
             'shop.share': 'Share with friends',
+            'shop.buy-coins': 'Buy coins',
 
             //RANKINGS PAGE
             'rankings.heading': 'Friends rankings',

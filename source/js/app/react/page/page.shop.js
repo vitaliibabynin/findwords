@@ -13,6 +13,8 @@ var THREE_DOLLAR = 'shop/three_dollar';
 var MANY_DOLLAR = 'shop/many_dollar';
 var SACK_DOLLAR = 'shop/sack_dollar';
 var THREE_SACK_DOLLAR = 'shop/three_sack_dollar';
+var DOLLAR = 'counter/coins';
+var CURRENCY = ' UAH ';
 var COINS_FOR_WATCHING_VIDEO = 50;
 var COINS_FOR_SHARING_WITH_FRIENDS = 100;
 
@@ -38,8 +40,8 @@ var PageShop = Object.assign({}, {}, {
             {coins: 1000, price: 3.99},
             {coins: 1500, price: 4.99},
             {coins: 2000, price: 5.99},
-            {coins: 2500, price: 16.99},
-            {coins: 3000, price: 17.99}
+            {coins: 2500, price: 160.99},
+            {coins: 3000, price: 1700.99}
         ]
     },
 
@@ -71,7 +73,7 @@ var PageShop = Object.assign({}, {}, {
                 <div className="inner-block buy-coins" style={image}>
                     <div className="coins">{data.coins}</div>
                     <div className="price">
-                        <span>{this.changeDotToComma(data.price) + "$"}</span>
+                        <span>{this.changeDotToComma(data.price) + CURRENCY}</span>
                     </div>
                 </div>
             </div>
@@ -90,6 +92,10 @@ var PageShop = Object.assign({}, {}, {
 
     render: function () {
 
+        var dollar = {
+            backgroundImage: "url('" + this.getImagePath(DOLLAR) + "')"
+        };
+
         return (
 
             <div className="page-shop">
@@ -99,25 +105,25 @@ var PageShop = Object.assign({}, {}, {
 
                     <div className="container">
 
-                        <div className="heading">{i18n._('shop.heading')}</div>
-
-                        {this.generateBlocks()}
-
                         <div className="heading free-coins">{i18n._('shop.free-coins')}</div>
 
                         <div className="outer-block">
                             <div className="inner-block watch-video">
                                 <div className="text">{i18n._('shop.watch-video')}</div>
-                                <div className="add-free-coins">+{COINS_FOR_WATCHING_VIDEO}</div>
+                                <div className="add-free-coins" style={dollar}>+{COINS_FOR_WATCHING_VIDEO}</div>
                             </div>
                         </div>
 
                         <div className="outer-block">
                             <div className="inner-block share">
                                 <div className="text">{i18n._('shop.share')}</div>
-                                <div className="add-free-coins">+{COINS_FOR_SHARING_WITH_FRIENDS}</div>
+                                <div className="add-free-coins" style={dollar}>+{COINS_FOR_SHARING_WITH_FRIENDS}</div>
                             </div>
                         </div>
+
+                        <div className="heading buy-coins">{i18n._('shop.buy-coins')}</div>
+
+                        {this.generateBlocks()}
 
                     </div>
 
