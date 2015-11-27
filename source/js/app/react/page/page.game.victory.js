@@ -32,6 +32,7 @@ var PageGameVictory = Object.assign({}, {}, {
     componentDidMount: function () {
         this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(this.state.rewardCoins);
+        this.forceUpdate();
 
         appDialogs.getRequirePushDialog().showIfTime();
         appDialogs.getRateDialog().showIfTime();

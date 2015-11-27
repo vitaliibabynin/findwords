@@ -67,8 +67,8 @@ var PageGameMain = Object.assign({}, {}, {
             return;
         }
 
-        console.log({roundIdx: this.state.roundIdx});
-        console.log({roundsTotal: roundsTotal});
+        //console.log({roundIdx: this.state.roundIdx});
+        //console.log({roundsTotal: roundsTotal});
 
         if (this.state.roundIdx > roundsTotal) {
             router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
@@ -322,6 +322,8 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     render: function () {
+        //console.log({pageGameScore: appManager.getGameState().getScore()});
+        //console.log({pageGameCoins: appManager.getGameState().getCoins()});
 
         return (
             <div className="page-game">

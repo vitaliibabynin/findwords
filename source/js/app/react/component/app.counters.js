@@ -183,6 +183,9 @@ var CountersClass = Object.assign({}, {}, {
     },
 
     render: function () {
+        //console.log({countersScore: appManager.getGameState().getScore()});
+        //console.log({countersCoins: appManager.getGameState().getCoins()});
+
         return (
 
             <div className="counters">

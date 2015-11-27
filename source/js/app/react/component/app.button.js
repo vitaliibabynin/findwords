@@ -158,8 +158,6 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
             {'hover': this.state.isActive || this.props.isActive}
         );
 
-        console.log(DOLLAR);
-
         var dollar = {
             backgroundImage: "url('" + this.getImagePath(DOLLAR) + "')"
         };

@@ -11,11 +11,11 @@ var GameState = Object.assign({}, {}, {
             lastAccessDate: "",
             daysPlayedStreak: 0
         },
-        chips: {
-            chipOpenWord: 999,
-            chipOpenLetter: 9,
-            chipShowWord: 99999
-        },
+        //chips: {
+        //    chipOpenWord: 999,
+        //    chipOpenLetter: 9,
+        //    chipShowWord: 99999
+        //},
         settings: {
             music: true,
             sound: true
@@ -412,35 +412,35 @@ var GameState = Object.assign({}, {}, {
         return this.getSettingsField('sound', true);
     },
 
-    setChipsField: function (field, newValue) {
-        this.gameState.chips[field] = newValue;
-        this.saveGameState();
-    },
-    getChipsField: function (field, defaultValue) {
-        if (!this.gameState.chips || !this.gameState.chips.hasOwnProperty(field)) {
-            return defaultValue;
-        }
-
-        return this.gameState.chips[field];
-    },
-    setChipOpenWord: function (newNumber) {
-        this.setChipsField('chipOpenWord', newNumber);
-    },
-    getChipOpenWord: function () {
-        return this.getChipsField('chipOpenWord', 0);
-    },
-    setChipOpenLetter: function (newNumber) {
-        this.setChipsField('chipOpenLetter', newNumber);
-    },
-    getChipOpenLetter: function () {
-        return this.getChipsField('chipOpenLetter', 0);
-    },
-    setChipShowWord: function (newNumber) {
-        this.setChipsField('chipShowWord', newNumber);
-    },
-    getChipShowWord: function () {
-        return this.getChipsField('chipShowWord', 0);
-    },
+    //setChipsField: function (field, newValue) {
+    //    this.gameState.chips[field] = newValue;
+    //    this.saveGameState();
+    //},
+    //getChipsField: function (field, defaultValue) {
+    //    if (!this.gameState.chips || !this.gameState.chips.hasOwnProperty(field)) {
+    //        return defaultValue;
+    //    }
+    //
+    //    return this.gameState.chips[field];
+    //},
+    //setChipOpenWord: function (newNumber) {
+    //    this.setChipsField('chipOpenWord', newNumber);
+    //},
+    //getChipOpenWord: function () {
+    //    return this.getChipsField('chipOpenWord', 0);
+    //},
+    //setChipOpenLetter: function (newNumber) {
+    //    this.setChipsField('chipOpenLetter', newNumber);
+    //},
+    //getChipOpenLetter: function () {
+    //    return this.getChipsField('chipOpenLetter', 0);
+    //},
+    //setChipShowWord: function (newNumber) {
+    //    this.setChipsField('chipShowWord', newNumber);
+    //},
+    //getChipShowWord: function () {
+    //    return this.getChipsField('chipShowWord', 0);
+    //},
 
     setPracticeRoundComplete: function (newBoolean) {
         this.gameState.practiceRound.complete = newBoolean;
