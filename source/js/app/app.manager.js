@@ -43,7 +43,6 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                     return this.initLanguage();
                 }.bind(this))
             .then(function(){
-                console.log(1);
                     return Promise.all([
                         this.getGameState().init()
                         , window.appFB.init(this.getSettings().getFacebookId(), this.language)
@@ -52,7 +51,6 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                     ]);
                 }.bind(this))
             .then(function(){
-                console.log(2);
                     return new Promise(function(resolve, reject){
                         window.appNotificationLocal.hasPermissions().then(function(granted){
                             if(!granted){
