@@ -46,7 +46,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                     return Promise.all([
                         this.getGameState().init()
                         , window.appFB.init(this.getSettings().getFacebookId(), this.language)
-                        , window.appStore.init() //из-за этого пока не грузится на iOS девайсах, нужно завести в панельке аппстора приложение
+                        //, window.appStore.init() //из-за этого пока не грузится на iOS девайсах, нужно завести в панельке аппстора приложение
                         , window.appNotificationLocal.init()
                     ]);
                 }.bind(this))

@@ -35,7 +35,8 @@ var LetterClass = Object.assign({}, {}, {
     render: function () {
         var cellStyle = {
             height: this.state.cellSize + "px",
-            width: this.state.cellSize + "px"
+            width: this.state.cellSize + "px",
+            lineHeight: this.state.cellSize + "px"
         };
 
         return (
