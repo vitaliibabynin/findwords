@@ -14,13 +14,21 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     source = require('vinyl-source-stream'),
     runSequence = require('gulp-run-sequence'),
-    sass = require('gulp-sass')
+    sass = require('gulp-sass'),
+    replace = require('gulp-replace'),
+    exec = require('child_process').exec
     ;
 
 
 
 var path = {
+    cordova: {
+        root: 'cordova/',
+        www: 'cordova/www/',
+        wwwbuild: 'cordova/www/build/',
+    },
     build: { //Тут мы укажем куда складывать готовые после сборки файлы
+        root: 'build/',
         js: 'build/js/',
         css: 'build/css/',
         img: 'build/img/',
@@ -287,6 +295,60 @@ gulp.task('fonts:build', function(){
         .on('finish', function() {
             console.log('Fonts copied to '+path.build.fonts);
         });
+});
+
+
+gulp.task('cordova:clean', function (cb) {
+    gulp.src(path.cordova.www, {read: false})
+        .pipe(clean())
+        .on('finish', function () {
+            console.log('Cordova '+path.cordova.www+' cleaned.');
+            cb();
+        });
+});
+
+gulp.task('cordova:prepare:www', function (cb) {
+
+    var c = 0;
+
+    gulp.src('index.html')
+        .pipe(replace(/var[\s]*CURRENT_ENV[\s]*=[\s]*ENV_ALEK;/gi, 'var CURRENT_ENV = ENV_PRODUCTION;'))
+        .pipe(replace(/<\/script>/i,'</script>\n<script src="cordova.js" type="text/javascript"></script>'))
+        .pipe(replace(/\/build/gi,'build'))
+        .pipe(gulp.dest(path.cordova.www))
+        .on('finish', function() {
+            console.log('Cordova: index.html copied to '+path.cordova.www+' and ENV replaced');
+            c++;
+            if(c >= 2){
+                cb();
+            }
+        });
+    gulp
+        .src(path.build.root+'**/*.*')
+        .pipe(gulp.dest(path.cordova.wwwbuild))
+        .on('finish', function() {
+            console.log('Build '+path.build.root+'**/*.* copied to '+path.cordova.wwwbuild);
+            c++;
+            if(c >= 2){
+                cb();
+            }
+        });
+});
+
+gulp.task('cordova:prepare:app', function (cb) {
+    exec('cd ./cordova && cordova prepare', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+});
+
+gulp.task('cordova:all', function (cb) {
+    runSequence(
+        'cordova:clean',
+        'cordova:prepare:www',
+        'cordova:prepare:app',
+        cb);
 });
 
 gulp.task('build', function(cb) {

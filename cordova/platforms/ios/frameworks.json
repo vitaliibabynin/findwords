@@ -1,0 +1,20 @@
+{
+    "EventKit.framework": 1,
+    "EventKitUI.framework": 1,
+    "StoreKit.framework": 4,
+    "AdSupport.framework": 3,
+    "MessageUI.framework": 1,
+    "AVFoundation.framework": 2,
+    "Foundation.framework": 2,
+    "UIKit.framework": 2,
+    "SystemConfiguration.framework": 4,
+    "AudioToolbox.framework": 2,
+    "CoreTelephony.framework": 1,
+    "CFNetwork.framework": 1,
+    "CoreMedia.framework": 1,
+    "libz.dylib": 2,
+    "libsqlite3.dylib": 2,
+    "MediaPlayer.framework": 1,
+    "QuartzCore.framework": 1,
+    "CoreData.framework": 1
+}

@@ -40,7 +40,12 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getFacebookId: function () {
-        return this.getSettingsValue('facebookId', "");
+        var fbId = this.getSettingsValue('facebookId', "");
+        return fbId[CONST.ENV];
+    },
+
+    getAdSettings: function() {
+        return this.getSettingsValue("adSettings", {});
     },
 
     getRoundsBundles: function () {

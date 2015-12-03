@@ -25,7 +25,7 @@ module.exports = {
     },
 
     getStaticPath: function () {
-        return (window.cordova && window.cordova.file && window.cordova.file.applicationDirectory && CONST.CURRENT_PLATFORM != CONST.PLATFORM_ANDROID ? window.cordova.file.applicationDirectory + 'www/' : '');
+        return (window.cordova && window.cordova.file && window.cordova.file.applicationDirectory ? window.cordova.file.applicationDirectory + 'www/' : '');
     },
 
     getImgPath: function (imgName) {

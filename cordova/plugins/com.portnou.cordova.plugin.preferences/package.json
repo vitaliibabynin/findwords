@@ -1,0 +1,26 @@
+{
+    "version": "1.0.0",
+    "name": "com.portnou.cordova.plugin.preferences",
+    "cordova_name": "Cordova Preferences Plugin",
+    "description": "Plugin allows to save simple key-value pairs in device's persistent storage via NSUserDefaults/SharedPreferences.",
+    "license": "Apache 2.0",
+    "repo": "https://github.com/alexportnoy/cordova-prefs-plugin",
+    "keywords": [
+        "ios",
+        "android",
+        "key-value",
+        "preferences",
+        "sharedpreferences",
+        "userdefaults"
+    ],
+    "platforms": [
+        "android",
+        "ios"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0.0"
+        }
+    ]
+}

@@ -103,7 +103,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             store.when(PRODUCT.REMOVE_AD).updated(function (product) {
                 console.log("remove_ad "+(product.owned ? "OWNED" : "not owned")+"!");
 
-                appManager.setAdRemoved(product && product.owned ? true : false);
+                appAd.setAdRemoved(product && product.owned ? true : false);
             }.bind(this));
 
 

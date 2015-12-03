@@ -1,11 +1,27 @@
+
+var fbIds = {}
+fbIds[ENV_LOCAL] = '473533802832988';
+fbIds[ENV_PRODUCTION] = '473524332833935';
+fbIds[ENV_ALEK] = '';
+
+
 var gameData = {
     //production
-    facebookId: '473524332833935',
-    //development
-    //facebookId: '473533802832988',
+    facebookId: fbIds,
     dialogs: {
         rateUsMaxShowCount: 10,
         requirePushShowPeriod: 5 * 1000
+    },
+    "adSettings": {
+        "interstitialShowPeriod": 300,
+        "adMob": {
+            "default": "",
+            "intersitital": "",
+            "320x50": "",
+            "468x60": "",
+            "728x90": ""
+        },
+        "startAd": ""
     },
     bonusCoins: {
         day1: 1,

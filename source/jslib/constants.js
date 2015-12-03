@@ -1,31 +1,23 @@
+
 window.CONST = {
-    ENV: 'local',
-    IS_CORDOVA_APP: false,
+    ENV: CURRENT_ENV,
+    IS_CORDOVA_APP: window.cordova ? true : false,
 
     CURRENT_PLATFORM: 'site',
-    PLATFORM_WINDOWS8: 'win8',
+    PLATFORM_WINDOWS: 'win',
     PLATFORM_ANDROID: 'android',
     PLATFORM_IOS: 'ios',
     PLATFORM_SITE: 'site',
 
-    BASE_URL: 'http://words.game',
-    API_URL: 'http://api.words.game',
-    STATIC_IMAGE_URL: '/build/img/',
-    STATIC_CSS_URL: '/build/css/',
-    STATIC_JS_URL: '/build/js/',
+    STATIC_IMAGE_URL: 'build/img/',
+    STATIC_CSS_URL: 'build/css/',
+    STATIC_JS_URL: 'build/js/',
     CSS_APP_BUNDLE: 'bundle.app.css',
     JS_APP_BUNDLE: 'bundle.app.js?tm=' + Date.now() + '',
-    GCM_SENDER_ID: '',
-    GA_ID: '',
-    AD_PERIOD_INTERSTITIAL: 300,
-    //Production
-    //FB_APP_ID: '473524332833935',
-    //Developmet
-    //FB_APP_ID: '473533802832988',
-    //FB_APP_ID: '',
+    GA_ID: {},
+    //AD_PERIOD_INTERSTITIAL: 300,
 
-
-    CURRENT_LANGUAGE: 'ru',
+    CURRENT_LANGUAGE: 'en',
     LANGUAGE_RU: 'ru',
     LANGUAGE_EN: 'en',
     LANG_STRINGS: {
@@ -259,4 +251,29 @@ window.CONST = {
         en: 2
     }
 
+}
+CONST.GA_ID[CONST.PLATFORM_IOS] = '';
+CONST.GA_ID[CONST.PLATFORM_ANDROID] = '';
+CONST.GA_ID[CONST.PLATFORM_WINDOWS] = '';
+CONST.GA_ID[CONST.PLATFORM_SITE] = '';
+
+var ENV_SETTINGS = {};
+ENV_SETTINGS[ENV_LOCAL] = {
+    BASE_URL: 'http://words.game',
+    API_URL: 'http://api.words.game'
+}
+ENV_SETTINGS[ENV_ALEK] = {
+    BASE_URL: 'http://vitaliy.findwords.smalldev',
+    API_URL: 'http://api.vitaliy.findwords.smalldev'
+}
+ENV_SETTINGS[ENV_PRODUCTION] = {
+    BASE_URL: 'http://vitaliy.findwords.smalldev.alek.in.ua',
+    API_URL: 'http://api.vitaliy.findwords.smalldev.alek.in.ua'
+}
+
+if(ENV_SETTINGS.hasOwnProperty(CURRENT_ENV)){
+    for(var k in ENV_SETTINGS[CURRENT_ENV]){
+        if(!ENV_SETTINGS[CURRENT_ENV].hasOwnProperty(k)){ continue; }
+        CONST[k] = ENV_SETTINGS[CURRENT_ENV][k];
+    }
 }

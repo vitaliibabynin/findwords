@@ -1,0 +1,39 @@
+{
+  "name": "cordova-prefs-plugin",
+  "version": "1.0.0",
+  "description": "Plugin allows to save simple key-value pairs in device's persistent storage via NSUserDefaults/SharedPreferences.",
+  "cordova": {
+    "id": "com.portnou.cordova.plugin.preferences",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexportnoy/cordova-prefs-plugin.git"
+  },
+  "keywords": [
+    "ios",
+    "android",
+    "key-value",
+    "preferences",
+    "sharedpreferences",
+    "userdefaults",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Alexander S Portnoy",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/alexportnoy/cordova-prefs-plugin/issues"
+  },
+  "homepage": "https://github.com/alexportnoy/cordova-prefs-plugin"
+}

@@ -1,9 +1,5 @@
 
 
-
-require('./libs/device.js');
-window.deviceJS = device.noConflict();
-
 require('es6-promise').polyfill();
 
 

@@ -23,6 +23,7 @@
     "gulp-minify-css": "1.0.0",
     "gulp-out": "0.0.1",
     "gulp-plumber": "1.0.1",
+    "gulp-replace": "^0.5.4",
     "gulp-run-sequence": "0.3.2",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "1.5.1",
@@ -37,8 +38,10 @@
     "start": "gulp",
     "clean": "gulp clean:all",
     "build": "NODE_ENV=production npm run clean && NODE_ENV=production gulp build",
+    "preparecordova": "NODE_ENV=production gulp cordova:all",
+    "bpcordova": "npm run build && npm run preparecordova",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Aleksandr Bovtruk",
+  "author": "SmallDev team",
   "license": "MIT"
 }

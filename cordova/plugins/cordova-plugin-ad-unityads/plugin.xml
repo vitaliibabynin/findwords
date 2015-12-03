@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-ad-unityads"
+    version="1.0.33">
+	
+    <name>Cordova UnityAds plugin</name>
+    <description>Show unityads video ad and rewarded video ad</description>
+    <author>Sang Ki Kwon (Cranberrygame)</author>	
+    <license>MIT</license>
+    <keywords>cordova,plugin,ad,video,unityads,monetisation</keywords>
+    <repo>https://github.com/cranberrygame/cordova-plugin-ad-unityads</repo>
+    <issue>https://github.com/cranberrygame/cordova-plugin-ad-unityads/issues</issue>	
+	<engines>
+	    <engine name="cordova" version=">=3.0.0" />
+	</engines>
+ 	
+    <js-module src="www/unityads.js">
+        <clobbers target="window.unityads" />
+    </js-module>    
+    
+	<!-- android -->
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="UnityAdsPlugin">
+				<param name="android-package" value="com.cranberrygame.cordova.plugin.ad.unityads.UnityAdsPlugin"/>
+			</feature>
+		</config-file>
+
+		<source-file src="src/android/UnityAdsPlugin.java" target-dir="src/com/cranberrygame/cordova/plugin/ad/unityads" />
+	</platform>
+
+	<!-- ios -->
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="UnityAdsPlugin">
+				<param name="ios-package" value="UnityAdsPlugin" />
+			</feature>
+		</config-file>
+
+		<header-file src="src/ios/UnityAdsPlugin.h" />
+		<source-file src="src/ios/UnityAdsPlugin.m" />
+	</platform>
+	
+	<!-- dependency -->
+	<dependency id="cordova-plugin-ad-unityadssdk" url="https://github.com/cranberrygame/cordova-plugin-ad-unityadssdk" />	
+</plugin>

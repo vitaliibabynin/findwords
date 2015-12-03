@@ -43,15 +43,16 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                     return this.initLanguage();
                 }.bind(this))
             .then(function(){
+                console.log(1);
                     return Promise.all([
                         this.getGameState().init()
-                        //, window.appFB.init(CONST.FB_APP_ID, this.language)
                         , window.appFB.init(this.getSettings().getFacebookId(), this.language)
-                        , window.appStore.init()
+                        , window.appStore.init() //из-за этого пока не грузится на iOS девайсах, нужно завести в панельке аппстора приложение
                         , window.appNotificationLocal.init()
                     ]);
                 }.bind(this))
             .then(function(){
+                console.log(2);
                     return new Promise(function(resolve, reject){
                         window.appNotificationLocal.hasPermissions().then(function(granted){
                             if(!granted){

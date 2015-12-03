@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 "use strict";
 
 var AbstractEventEmitter = require('./abstract.eventemitter');
@@ -203,7 +202,10 @@ var SiteFB = Object.assign({}, AbstractFB, {
                 if (d.getElementById(id)) {return;}
                 js = d.createElement(s); js.id = id;
                 js.src = "//connect.facebook.net/"+(lang == CONST.LANGUAGE_RU ? 'ru_RU' : 'en_US')+"/sdk.js";
-                js.onerror = reject;
+                js.onerror = function(e){
+                    console.log('FB LOADING SCRIPT ERROR');
+                    resolve(); //продолжаем загрузку без FB
+                }.bind(this);
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         }.bind(this))
@@ -213,7 +215,6 @@ var SiteFB = Object.assign({}, AbstractFB, {
         return new Promise(function(resolve, reject){
             FB.login(function(response) {
                 // handle the response
-                console.log('login', response);
                 if(!this.isAuthorized()){
                     return reject();
                 }
@@ -228,6 +229,10 @@ var SiteFB = Object.assign({}, AbstractFB, {
 
 
     logout: function(){
+        if(!this.isAuthorized()) {
+            return;
+        }
+
         AbstractFB.logout.call(this);
         FB.logout(function(response) {
             console.log('SiteFB.logout', response);
@@ -237,7 +242,7 @@ var SiteFB = Object.assign({}, AbstractFB, {
     share: function(url){
         return new Promise(function(resolve, reject){
             if(!url){
-                url = Utils.getPlatformUrl(CONST.CURRENT_PLATFORM, true);
+                url = appManager.getSettings().getShareAppLink();
             }
 
             FB.ui(
@@ -301,8 +306,7 @@ var SiteFB = Object.assign({}, AbstractFB, {
                 return resolve(this.meInfo);
             }
 
-            FB.api('/me?fields=id,picture,first_name,last_name',  function(response) {
-                console.log('getMe', response);
+            FB.api('/me?fields=id,picture.width(150).height(150),first_name,last_name',  function(response) {
 
                 if(!response){
                     reject();
@@ -330,11 +334,10 @@ var SiteFB = Object.assign({}, AbstractFB, {
             var friendList = [];
             var pageLimit = 100;
             if(!nextPageUrl){
-                nextPageUrl = '/'+this.userId+'/friends?fields=id,picture,first_name,last_name';
+                nextPageUrl = '/'+this.userId+'/friends?fields=id,picture.width(150).height(150),first_name,last_name';
             }
-            console.log(nextPageUrl);
+
             FB.api(nextPageUrl, {limit: pageLimit}, function(response) {
-                console.log('getAppFriends', response);
 
                 if(!response || !response.data){
                     reject();
@@ -379,8 +382,8 @@ var CordovaFB = Object.assign({}, AbstractFB, {
     onAuthChange: function(response){
         this.clear();
 
-        if(response) {
-            //this.userId = response.userID;
+        if(response && response.accessToken) {
+            this.userId = response.userID;
             this.accessToken = response.accessToken;
             this.expireTime = response.expirationDate;
             this.emitLogin();
@@ -393,57 +396,68 @@ var CordovaFB = Object.assign({}, AbstractFB, {
 
     init: function(fbAppId, lang){
         return new Promise(function(resolve, reject){
-            this.fbAppId = fbAppId;
-            this.fbPlugin = new CC.CordovaFacebook();
+            if(!fbAppId){
+                console.log('FB APPID is empty.');
+                return resolve();
+            }
 
-            this.fbPlugin.init(
-                fbAppId,
-                i18n._('layout_Title'),
-                this.permisions,
-                function(response){
-                    this.onAuthChange(response),
+            this.fbAppId = fbAppId;
+            this.fbPlugin = window.CordovaFacebook;
+
+            this.fbPlugin.init({
+                onSuccess: function(response) {
+                    this.onAuthChange(response);
                     resolve();
-                }.bind(this),
-                reject);
+                }.bind(this)
+            });
         }.bind(this));
     },
 
-
     login: function(){
         return new Promise(function(resolve, reject){
-            this.fbPlugin.login(function(response){
-                this.onAuthChange(response);
-                resolve();
-            }.bind(this), function(err){
-                console.log('CordovaFB.login', err);
-                reject();
-            }.bind(this));
+            this.fbPlugin.login({
+                permissions: this.permisions,
+                onSuccess: function(result) {
+                    this.onAuthChange(result);
+
+                    resolve();
+                }.bind(this),
+                onFailure: function(result) {
+                    console.log('CordovaFB.login', result);
+                    reject();
+                }.bind(this)
+            });
+
         }.bind(this));
     },
 
     logout: function(){
+        if(!this.isAuthorized()) {
+            return;
+        }
+
         AbstractFB.logout.call(this);
-        this.fbPlugin.logout(function(){
-            console.log('CordovaFB.logout');
-        }.bind(this));
+        this.fbPlugin.logout({
+            onSuccess: function () {
+                console.log('CordovaFB.logout');
+            }.bind(this)
+        });
     },
 
     share: function(url){
         return new Promise(function(resolve, reject){
-            if(!url){
-                url = Utils.getPlatformUrl(CONST.CURRENT_PLATFORM, true);
-            }
-
-            this.fbPlugin.share(
-                i18n._('layout_Title'),
-                url,
-                CONST.BASE_URL + '/static/gametrueorfalse/img/man/man_logo_2x.png',
-                i18n._('share.caption'),
-                i18n._('share.description'),
-                function(response) {
-                    resolve(response);
-                },
-                reject);
+            this.fbPlugin.share({
+                shareLinkUrl: url || appManager.getSettings().getShareAppLink(),
+                title: i18n._('share.caption'),
+                description: i18n._('share.description'),
+                onSuccess: function(result) {
+                    resolve();
+                }.bind(this),
+                onFailure: function(result) {
+                    console.log('CordovaFB.share', result);
+                    reject(result);
+                }.bind(this)
+            });
 
         }.bind(this));
     },
@@ -451,35 +465,18 @@ var CordovaFB = Object.assign({}, AbstractFB, {
     invite: function(message, title, excludeIds){
         return new Promise(function(resolve, reject){
 
-            if(!message){
-                message = i18n._('app.invite.message');
-            }
-            if(!title){
-                title = i18n._('app.invite.title');
-            }
-            excludeIds = excludeIds || [];
+            this.fbPlugin.invite({
+                appLinkUrl: appManager.getSettings().getShareAppLink(),
+                appInvitePreviewImageURL: appManager.getSettings().getAppInviteImgUrl(),
+                onSuccess: function(result) {
 
-            this.fbPlugin.invite(message, title, function(response){
-                if (!response || response.error_code) {
-                    return reject(response);
-                }
-
-                if(response.to){
-                    return resolve(response);
-                }
-
-                var preparedResponse = {to: []};
-                for(var k in response){
-                    if(!response.hasOwnProperty(k)){ continue; };
-                    if(k.indexOf('to') > -1){
-                        preparedResponse.to.push(response[k]);
-                    }else{
-                        preparedResponse[k] = response[k];
-                    }
-                }
-
-                return resolve(preparedResponse);
-            }, reject);
+                    resolve(result);
+                }.bind(this),
+                onFailure: function(result) {
+                    console.log('CordovaFB.invite', result);
+                    reject(result);
+                }.bind(this)
+            });
 
         }.bind(this));
     },
@@ -491,23 +488,29 @@ var CordovaFB = Object.assign({}, AbstractFB, {
             }
 
 
-            this.fbPlugin.graphCall("me", {"fields": "id,picture,first_name,last_name"}, "GET", function(response) {
+            this.fbPlugin.graphRequest({
+                path: "me",
+                params: {"fields": "id,picture.width(150).height(150),first_name,last_name"},
+                onSuccess: function(response) {
+                    if(!response){
+                        reject();
+                        return;
+                    }
 
-                if(!response){
+                    this.userId = response.id;
+                    this.meInfo = {
+                        id: response.id,
+                        first_name: response.first_name,
+                        last_name: response.last_name,
+                        picture: response.picture.data.url
+                    };
+
+                    resolve(this.meInfo);
+                }.bind(this),
+                onFailure: function(response) {
                     reject();
-                    return;
-                }
-
-                this.userId = response.id;
-                this.meInfo = {
-                    id: response.id,
-                    first_name: response.first_name,
-                    last_name: response.last_name,
-                    picture: response.picture.data.url
-                };
-
-                resolve(this.meInfo);
-            }.bind(this), reject);
+                }.bind(this)
+            });
 
         }.bind(this));
     },
@@ -521,43 +524,49 @@ var CordovaFB = Object.assign({}, AbstractFB, {
             var friendList = [];
             var pageLimit = 100;
             if(!nextPageUrl){
-                nextPageUrl = 'me/friends?fields=id,picture,first_name,last_name';
+                nextPageUrl = 'me/friends?fields=id,picture.width(150).height(150),first_name,last_name';
                 if(CONST.CURRENT_PLATFORM == CONST.PLATFORM_ANDROID){
                     nextPageUrl += '&access_token='+this.getAccessToken()+'&a=1';
                 }
             }
 
-            this.fbPlugin.graphCall(nextPageUrl, {limit: pageLimit}, 'GET', function(response) {
-
-                if(!response || !response.data){
-                    reject();
-                    return;
-                }
-
-                for(var k in response.data){
-                    if(!response.data.hasOwnProperty(k)){
-                        continue;
+            this.fbPlugin.graphRequest({
+                path: nextPageUrl,
+                params: {limit: pageLimit},
+                onSuccess: function(response) {
+                    if(!response || !response.data){
+                        reject();
+                        return;
                     }
 
-                    friendList.push({
-                        id: response.data[k].id,
-                        first_name: response.data[k].first_name,
-                        last_name: response.data[k].last_name,
-                        picture: response.data[k].picture.data.url
-                    });
-                }
+                    for(var k in response.data){
+                        if(!response.data.hasOwnProperty(k)){
+                            continue;
+                        }
 
-                if(response.data.length >= pageLimit && response.paging && response.paging.next){
-                    this.getAppFriends(response.paging.next).then(function(nextFriendList){
-                        this.appFriends = friendList.concat(nextFriendList);
-                        resolve(this.appFriends);
-                    }.bind(this), reject);
-                    return;
-                }
+                        friendList.push({
+                            id: response.data[k].id,
+                            first_name: response.data[k].first_name,
+                            last_name: response.data[k].last_name,
+                            picture: response.data[k].picture.data.url
+                        });
+                    }
 
-                this.appFriends = friendList;
-                resolve(this.appFriends);
-            }.bind(this));
+                    if(response.data.length >= pageLimit && response.paging && response.paging.next){
+                        this.getAppFriends(response.paging.next).then(function(nextFriendList){
+                            this.appFriends = friendList.concat(nextFriendList);
+                            resolve(this.appFriends);
+                        }.bind(this), reject);
+                        return;
+                    }
+
+                    this.appFriends = friendList;
+                    resolve(this.appFriends);
+                }.bind(this),
+                onFailure: function(response) {
+                    reject();
+                }.bind(this)
+            });
 
         }.bind(this));
 
@@ -586,6 +595,3 @@ module.exports = {
     SiteFB: SiteFB,
     CordovaFB: CordovaFB
 };
-
-
-
