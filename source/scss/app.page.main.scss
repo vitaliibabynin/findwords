@@ -12,7 +12,8 @@
 }
 
 .page-main .page-content .head {
-  height: 6.875rem;
+  //height: 6.875rem;
+  height: 5.875rem;
   background-color: $header-bg-color;
   background-repeat: no-repeat;
   background-size: 14.813rem 4.313rem;
@@ -293,7 +294,9 @@
 
 .page-main .page-content .footer {
   background-color: $footer-bg-color;
-  height: 3.125rem;
+  //height: 3.125rem;
+  $height: 2.625rem;
+  height: $height;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -305,7 +308,8 @@
   .rsbc-switch-button {
     //height: 1.500rem*$footerSwitch-size;
     //line-height: 1.500rem*$footerSwitch-size;
-    line-height: 3.125rem;
+    //line-height: 3.125rem;
+    line-height: $height;
     display: inline-block;
     vertical-align: middle;
     //position: relative;
@@ -318,7 +322,7 @@
     font-size: $footerLabel-font-size;
     //height: 1.500rem*$footerLabelFont-size;
     //line-height: 1.500rem*$footerLabelFont-size;
-    line-height: 3.125rem;
+    line-height: $height;
     vertical-align: middle;
     //margin-right: 1rem;
     //padding-bottom: 1rem;
