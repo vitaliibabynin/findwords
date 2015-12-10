@@ -39,15 +39,11 @@
     "clean": "gulp clean:all",
 
     "build": "NODE_ENV=production npm run clean && NODE_ENV=production gulp build",
-
-    "winbuild": "SET NODE_ENV=production && npm run clean && SET NODE_ENV=production && gulp build",
-
     "preparecordova": "NODE_ENV=production gulp cordova:all",
-
-    "winpreparecordova": "SET NODE_ENV=production gulp cordova:all",
-
     "bpcordova": "npm run build && npm run preparecordova",
 
+    "winbuild": "SET NODE_ENV=production && npm run clean && gulp build",
+    "winpreparecordova": "SET NODE_ENV=production && gulp cordova:all",
     "winbpcordova": "npm run winbuild && npm run winpreparecordova",
 
     "test": "echo \"Error: no test specified\" && exit 1"

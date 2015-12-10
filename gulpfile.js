@@ -25,7 +25,7 @@ var path = {
     cordova: {
         root: 'cordova/',
         www: 'cordova/www/',
-        wwwbuild: 'cordova/www/build/',
+        wwwbuild: 'cordova/www/build/'
     },
     build: { //Тут мы укажем куда складывать готовые после сборки файлы
         root: 'build/',
@@ -312,7 +312,8 @@ gulp.task('cordova:prepare:www', function (cb) {
     var c = 0;
 
     gulp.src('index.html')
-        .pipe(replace(/var[\s]*CURRENT_ENV[\s]*=[\s]*ENV_ALEK;/gi, 'var CURRENT_ENV = ENV_PRODUCTION;'))
+        //.pipe(replace(/var[\s]*CURRENT_ENV[\s]*=[\s]*ENV_ALEK;/gi, 'var CURRENT_ENV = ENV_PRODUCTION;'))
+        .pipe(replace(/var[\s]*CURRENT_ENV[\s]*=[\s]*[\w_]+;/gi, 'var CURRENT_ENV = ENV_PRODUCTION;'))
         .pipe(replace(/<\/script>/i,'</script>\n<script src="cordova.js" type="text/javascript"></script>'))
         .pipe(replace(/\/build/gi,'build'))
         .pipe(gulp.dest(path.cordova.www))
