@@ -30,7 +30,7 @@
     .day {
       width: 100%;
       position: relative;
-      display: table;
+      display: inline-table;
       $day-height: 2.625rem;
       height: 2.625rem;
       $padding-left-right: 4rem;
@@ -59,7 +59,7 @@
 
         span {
           font-size: 0.75rem;
-          vertical-align: middle;
+          //vertical-align: middle;
         }
       }
 
