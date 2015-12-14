@@ -29,8 +29,8 @@ var PageMain = Object.assign({}, {}, {
 
     componentDidMount: function () {
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
-        //var todayString = moment().format("YYYYMMDD") || "";
-        var todayString = moment().format("YYYYMMDDHHmmss") || "";
+        var todayString = moment().format("YYYYMMDD") || "";
+        //var todayString = moment().format("YYYYMMDDHHmmss") || "";
 
         //if first access ever
         if (lastAccessNumber == "") {
@@ -39,18 +39,18 @@ var PageMain = Object.assign({}, {}, {
         }
 
         //daysPlayedStreak
-        //var daysSinceLastAccess = moment(todayString, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
-        var daysSinceLastAccess = moment(todayString, "YYYYMMDDHHmmss").diff(moment(lastAccessNumber, "YYYYMMDDHHmmss"), "seconds");
+        var daysSinceLastAccess = moment(todayString, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
+        //var daysSinceLastAccess = moment(todayString, "YYYYMMDDHHmmss").diff(moment(lastAccessNumber, "YYYYMMDDHHmmss"), "seconds");
 
         if(daysSinceLastAccess < 1) {
             return;
         }
 
-        if (daysSinceLastAccess > 10) {
+        if (daysSinceLastAccess > 1) {
             appManager.getGameState().setDaysPlayedStreak(1);
         }
 
-        if (daysSinceLastAccess == 3) {
+        if (daysSinceLastAccess == 1) {
             var daysPlayedStreakIncrement = appManager.getGameState().getDaysPlayedStreak() + 1;
             appManager.getGameState().setDaysPlayedStreak(daysPlayedStreakIncrement);
         }
