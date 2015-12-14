@@ -6,9 +6,11 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 
 var PRODUCT = {
-    COINS_10: CONST.CURRENT_PLATFORM == CONST.PLATFORM_ANDROID ? 'android_coins_10' : 'coins_10',
-    COINS_30: 'coins_30',
-    COINS_100: 'coins_100',
+    COINS_50: 'coins_50',
+    COINS_110: 'coins_110',
+    COINS_245: 'coins_245',
+    COINS_550: 'coins_550',
+    COINS_1100: 'coins_1100',
     REMOVE_AD: 'remove_ad'
 }
 
@@ -57,18 +59,28 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             }
 
             store.register({
-                id: PRODUCT.COINS_10,
-                alias: PRODUCT.COINS_10,
+                id: PRODUCT.COINS_50,
+                alias: PRODUCT.COINS_50,
                 type: store.CONSUMABLE
             });
             store.register({
-                id: PRODUCT.COINS_30,
-                alias: PRODUCT.COINS_30,
+                id: PRODUCT.COINS_110,
+                alias: PRODUCT.COINS_110,
                 type: store.CONSUMABLE
             });
             store.register({
-                id: PRODUCT.COINS_100,
-                alias: PRODUCT.COINS_100,
+                id: PRODUCT.COINS_245,
+                alias: PRODUCT.COINS_245,
+                type: store.CONSUMABLE
+            });
+            store.register({
+                id: PRODUCT.COINS_550,
+                alias: PRODUCT.COINS_550,
+                type: store.CONSUMABLE
+            });
+            store.register({
+                id: PRODUCT.COINS_1100,
+                alias: PRODUCT.COINS_1100,
                 type: store.CONSUMABLE
             });
             store.register({
@@ -83,16 +95,24 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                 resolve();
             });
 
-            store.when(PRODUCT.COINS_10).approved(function (order) {
-                this.addCoins(10);
+            store.when(PRODUCT.COINS_50).approved(function (order) {
+                this.addCoins(50);
                 order.finish();
             }.bind(this));
-            store.when(PRODUCT.COINS_30).approved(function (order) {
-                this.addCoins(30);
+            store.when(PRODUCT.COINS_110).approved(function (order) {
+                this.addCoins(110);
                 order.finish();
             }.bind(this));
-            store.when(PRODUCT.COINS_100).approved(function (order) {
-                this.addCoins(100);
+            store.when(PRODUCT.COINS_245).approved(function (order) {
+                this.addCoins(245);
+                order.finish();
+            }.bind(this));
+            store.when(PRODUCT.COINS_550).approved(function (order) {
+                this.addCoins(550);
+                order.finish();
+            }.bind(this));
+            store.when(PRODUCT.COINS_1100).approved(function (order) {
+                this.addCoins(1100);
                 order.finish();
             }.bind(this));
 

@@ -130,7 +130,8 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
             var url = '/'+newLang+'/';
 
             if(window.cordova && cordova.file && cordova.file.applicationDirectory){
-                url = document.location = cordova.file.applicationDirectory + 'www/index_'+device.platform.toLowerCase()+'.html';
+                //url = document.location = cordova.file.applicationDirectory + 'www/index_'+device.platform.toLowerCase()+'.html';
+                url = document.location = cordova.file.applicationDirectory + 'www/index.html';
             }
 
             document.location = url;
