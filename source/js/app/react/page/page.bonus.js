@@ -46,7 +46,10 @@ var PageBonus = Object.assign({}, {}, {
 
         var daysPlayedConverter = "day" + (daysPlayed);
         var newCoins = appManager.getGameState().getCoins() + this.state.bonusCoins[daysPlayedConverter];
-        appManager.getGameState().setCoins(newCoins);
+
+        if (!isNaN(newCoins)) {
+            appManager.getGameState().setCoins(newCoins);
+        }
 
         router.navigate("main", "index", {initialSlide: this.state.initialSlide});
     },
