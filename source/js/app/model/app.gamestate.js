@@ -363,6 +363,10 @@ var GameState = Object.assign({}, {}, {
     getCoins: function () {
         return this.getGameStateField('coins', 0);
     },
+    addCoins: function (coinsToAdd) {
+        newTotalCoins = this.getCoins() + coinsToAdd;
+        return this.setCoins(newTotalCoins);
+    },
 
     setBonusField: function (field, newValue) {
         this.gameState.bonus[field] = newValue;

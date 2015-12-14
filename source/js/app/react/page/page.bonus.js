@@ -208,6 +208,7 @@ var PageBonus = Object.assign({}, {}, {
 
         return (
             <div key={LOCKED + dayIdx} className={lockedDayClassNames}>
+
                 <div className={LINE}></div>
 
                 <div className={CALENDAR} style={unlockedDayImage}>

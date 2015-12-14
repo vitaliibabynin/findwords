@@ -17,6 +17,7 @@
     margin-right: $margin-left-right;
     margin-top: 0.5rem;
     text-align: center;
+    line-height: 50%;
 
     .heading {
       height: 2.5rem;
@@ -31,11 +32,13 @@
       width: 100%;
       position: relative;
       display: inline-table;
+      //display: table;
       $day-height: 2.625rem;
       height: $day-height;
       $padding-left-right: 4rem;
       padding-left: $padding-left-right;
       padding-right: $padding-left-right;
+      line-height: initial;
 
       .content {
         font-size: $pageBonus-day-font-size;

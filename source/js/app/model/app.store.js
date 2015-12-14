@@ -159,7 +159,8 @@ var CordovaStore = Object.assign({}, AbstractStore, {
     },
 
     addCoins: function(coins){
-        appSettings.addCoins(coins);
+        //appSettings.addCoins(coins);
+        appManager.getGameState().addCoins(coins);
         appDialogs.getInfoDialog()
             .setTitle(i18n._('app.dialog.info.addcoins.title'))
             .setContentText(i18n._('app.dialog.info.addcoins.description', coins))
