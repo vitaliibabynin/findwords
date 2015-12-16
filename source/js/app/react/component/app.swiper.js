@@ -313,6 +313,7 @@ var SwiperClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         return {
+            isActive: false,
             slideSoon: appManager.getSettings().getSlideSoon() || {
                 isShown: false,
                 backgroundColor: ""
@@ -332,6 +333,24 @@ var SwiperClass = Object.assign({}, {}, {
                 spaceBetween: 0,
                 initialSlide: this.props.initialSlide || 0
             });
+        }
+    },
+
+    onClickEffect: function (e) {
+        e.preventDefault();
+
+        if (!this.state.isActive) {
+            this.setState({isActive: true}, function () {
+                setTimeout(function () {
+                    if (this.isMounted()) {
+                        this.setState({isActive: false});
+                    }
+                }.bind(this), 300);
+            });
+        }
+
+        if (this.props.onClick && typeof this.props.onClick == 'function') {
+            this.props.onClick(this.props);
         }
     },
 
@@ -367,7 +386,7 @@ var SwiperClass = Object.assign({}, {}, {
                     <div className="swiper-wrapper">
                         {slides}
 
-                        <div className={slideClasses} style={slideStyle}>
+                        <div className={slideClasses} style={slideStyle} onClick={this.onClickEffect}>
                             <div className="message">
                                 <span>{i18n._('slide.soon')}</span>
                             </div>

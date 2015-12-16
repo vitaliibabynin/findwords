@@ -5,7 +5,6 @@ var GameMixin = require('./app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 var Radium = require('radium');
 var classNames = require('classnames');
-//var Board = require('./app.board').Board;
 
 module.exports = {};
 
@@ -292,3 +291,115 @@ module.exports.FbButton.Class = FbButtonClass;
 //});
 //module.exports.OkButton = React.createClass(OkButtonClass);
 //module.exports.OkButton.Class = OkButtonClass;
+
+
+var FreeCoinsClass = Object.assign({}, {}, {
+
+    displayName: 'FreeCoins',
+
+    propTypes: {
+        className: React.PropTypes.string
+    },
+
+    getInitialState: function () {
+        var state = {
+            className: 'btn',
+            isActive: false
+        };
+
+        return state;
+    },
+
+    onClick: function (e) {
+        e.preventDefault();
+
+        if (!this.state.isActive) {
+            this.setState({isActive: true}, function () {
+                setTimeout(function () {
+                    if (this.isMounted()) {
+                        this.setState({isActive: false});
+                    }
+                }.bind(this), 300);
+            }.bind(this));
+        }
+
+        if (this.props.onClick && typeof this.props.onClick == 'function') {
+            this.props.onClick(this.props, e);
+        }
+    },
+
+    render: function () {
+        var buttonClasses = classNames(
+            this.state.className,
+            this.props.className,
+            {'hover': this.state.isActive || this.props.isActive}
+        );
+
+        return (
+            <div className={buttonClasses} onClick={this.onClick}>
+                {this.props.children}
+            </div>
+        );
+    }
+});
+module.exports.FreeCoins = React.createClass(FreeCoinsClass);
+module.exports.FreeCoins.Class = FreeCoinsClass;
+
+
+var BuyCoinsClass = Object.assign({}, {FreeCoinsClass}, {
+
+    displayName: 'BuyCoins',
+
+    propTypes: {
+        className: React.PropTypes.string,
+        blockId: React.PropTypes.string,
+        style: React.PropTypes.shape({
+            backgroundImage: React.PropTypes.string
+        })
+    },
+
+    getInitialState: function () {
+        var state = {
+            className: 'btn',
+            isActive: false,
+            blockId: this.props.blockId || "",
+            style: this.props.style || {backgroundImage: ""}
+        };
+
+        return state;
+    },
+
+    onClick: function (e) {
+        e.preventDefault();
+
+        if (!this.state.isActive) {
+            this.setState({isActive: true}, function () {
+                setTimeout(function () {
+                    if (this.isMounted()) {
+                        this.setState({isActive: false});
+                    }
+                }.bind(this), 300);
+            }.bind(this));
+        }
+
+        if (this.props.onClick && typeof this.props.onClick == 'function') {
+            this.props.onClick(this.props, e);
+        }
+    },
+
+    render: function () {
+        var buttonClasses = classNames(
+            this.state.className,
+            this.props.className,
+            {'hover': this.state.isActive || this.props.isActive}
+        );
+
+        return (
+            <div id={this.state.blockId} style={this.state.style} className={buttonClasses} onClick={this.onClick}>
+                {this.props.children}
+            </div>
+        );
+    }
+});
+module.exports.BuyCoins = React.createClass(BuyCoinsClass);
+module.exports.BuyCoins.Class = BuyCoinsClass;

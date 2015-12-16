@@ -12,6 +12,8 @@ var SACK_DOLLAR = 'shop/sack_dollar';
 var THREE_SACK_DOLLAR = 'shop/three_sack_dollar';
 var DOLLAR = require('./../component/app.button').DOLLAR;
 var PRODUCT = require('./../../model/app.store').PRODUCT;
+var FreeCoins = require('./../component/app.button').FreeCoins;
+var BuyCoins = require('./../component/app.button').BuyCoins;
 
 
 var PageShop = Object.assign({}, {}, {
@@ -36,10 +38,10 @@ var PageShop = Object.assign({}, {}, {
         };
     },
 
-    onClickBuyCoins: function (e) {
-        console.log(e.target.id);
+    onClickBuyCoins: function (buttonProps) {
+        console.log(buttonProps.blockId);
 
-        //var purchaseID = e.target.id;
+        //var purchaseID = buttonProps.blockId;
         //appStore.order(purchaseID);
     },
 
@@ -106,12 +108,12 @@ var PageShop = Object.assign({}, {}, {
 
         return (
             <div key={"block" + i} className="outer-block">
-                <div id={data.id} onClick={this.onClickBuyCoins} className="inner-block buy-coins" style={image}>
+                <BuyCoins blockId={data.id} onClick={this.onClickBuyCoins} className="inner-block buy-coins" style={image}>
                     <div className="coins">{data.coins}</div>
                     <div className="price">
                         <span>{data.price}</span>
                     </div>
-                </div>
+                </BuyCoins>
             </div>
         );
     },
@@ -144,19 +146,19 @@ var PageShop = Object.assign({}, {}, {
                         <div className="heading free-coins">{i18n._('shop.free-coins')}</div>
 
                         <div className="outer-block">
-                            <div onClick={this.onClickWatchVideo} className="inner-block watch-video">
+                            <FreeCoins onClick={this.onClickWatchVideo} className="inner-block watch-video">
                                 <div className="text">{i18n._('shop.watch-video')}</div>
                                 <div className="add-free-coins" style={dollar}>
                                     +{this.state.freeCoins.watchVideo.coins}</div>
-                            </div>
+                            </FreeCoins>
                         </div>
 
                         <div className="outer-block">
-                            <div onClick={this.onClickShare} className="inner-block share">
+                            <FreeCoins onClick={this.onClickShare} className="inner-block share">
                                 <div className="text">{i18n._('shop.share')}</div>
                                 <div className="add-free-coins" style={dollar}>
                                     +{this.state.freeCoins.shareWithFrinds.coins}</div>
-                            </div>
+                            </FreeCoins>
                         </div>
 
                         <div className="heading buy-coins">{i18n._('shop.buy-coins')}</div>
