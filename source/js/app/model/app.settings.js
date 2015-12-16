@@ -27,9 +27,9 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return this.getSettingsValue('appplatforms', {});
     },
 
-    getAdSettings: function () {
-        return this.getSettingsValue('ad_settings', {});
-    },
+    //getAdSettings: function () {
+    //    return this.getSettingsValue('ad_settings', {});
+    //},
 
     getShareBonus: function () {
         return this.getSettingsValue('share_bonus', 10);
@@ -78,6 +78,14 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getDialogs: function () {
         return this.getSettingsValue('dialogs', {});
+    },
+
+    getPurchases: function () {
+        return this.getSettingsValue('purchases', {});
+    },
+
+    getFreeCoins: function () {
+        return this.getSettingsValue('freeCoins', {});
     }
 
 });

@@ -176,6 +176,216 @@ var GameState = Object.assign({}, {}, {
                             secondsRemaining: 0
                         }
                     }
+                },
+                4: {
+                    bundleScore: 99999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                5: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                6: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                7: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                8: {
+                    bundleScore: 99999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                9: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
                 }
             },
             ru: {
@@ -285,6 +495,216 @@ var GameState = Object.assign({}, {}, {
                     }
                 },
                 3: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                4: {
+                    bundleScore: 99999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                5: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                6: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                7: {
+                    bundleScore: 9999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                8: {
+                    bundleScore: 99999,
+                    isUnlocked: false,
+                    roundsComplete: 0,
+                    rounds: {
+                        0: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        1: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        2: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        },
+                        3: {
+                            board: {},
+                            openedLetters: [],
+                            shownWords: [],
+                            starsReceived: 3,
+                            secondsRemaining: 0
+                        }
+                    }
+                },
+                9: {
                     bundleScore: 9999,
                     isUnlocked: false,
                     roundsComplete: 0,

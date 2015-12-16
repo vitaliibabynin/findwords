@@ -32,6 +32,17 @@ var gameData = {
         day6: 6,
         day7: 7
     },
+    purchases: [
+        {id: 'coins_50', coins: 50},
+        {id: 'coins_110', coins: 110},
+        {id: 'coins_245', coins: 245},
+        {id: 'coins_550', coins: 550},
+        {id: 'coins_1100', coins: 1100}
+    ],
+    freeCoins: {
+        watchVideo: {coins: 50},
+        shareWithFrinds: {coins: 100}
+    },
     practiceRound: {
         en: {
             score: 999,
@@ -712,6 +723,932 @@ var gameData = {
                         ]
                     }
                 ]
+            },
+            {
+                name: "Set #5 Gavryusha",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#d64541",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "m"},
+                                    {x: 1, y: 0, letter: "a"},
+                                    {x: 2, y: 0, letter: "y"},
+                                    {x: 3, y: 0, letter: "h"},
+                                    {x: 3, y: 1, letter: "e"},
+                                    {x: 2, y: 1, letter: "m"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "t"},
+                                    {x: 1, y: 1, letter: "h"},
+                                    {x: 0, y: 1, letter: "i"},
+                                    {x: 0, y: 2, letter: "r"},
+                                    {x: 0, y: 3, letter: "s"},
+                                    {x: 1, y: 3, letter: "t"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "p"},
+                                    {x: 2, y: 2, letter: "y"},
+                                    {x: 3, y: 2, letter: "k"},
+                                    {x: 3, y: 3, letter: "e"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Set #6 Gavryusha",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#0000ff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Set #7 Gavryusha",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#ff00ff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Set #8 Gavryusha",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#00ffff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Set #9 Gavryusha",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#d64541",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "m"},
+                                    {x: 1, y: 0, letter: "a"},
+                                    {x: 2, y: 0, letter: "y"},
+                                    {x: 3, y: 0, letter: "h"},
+                                    {x: 3, y: 1, letter: "e"},
+                                    {x: 2, y: 1, letter: "m"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "t"},
+                                    {x: 1, y: 1, letter: "h"},
+                                    {x: 0, y: 1, letter: "i"},
+                                    {x: 0, y: 2, letter: "r"},
+                                    {x: 0, y: 3, letter: "s"},
+                                    {x: 1, y: 3, letter: "t"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "p"},
+                                    {x: 2, y: 2, letter: "y"},
+                                    {x: 3, y: 2, letter: "k"},
+                                    {x: 3, y: 3, letter: "e"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Set #10 Gavryusha",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#0000ff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ],
         ru: [
@@ -1181,6 +2118,932 @@ var gameData = {
                 name: "Комплект №4 Гаврюша",
                 numberOfRoundsRequired: 2,
                 backgroundColor: "#00ffff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Комплект №5 Гаврюша",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#d64541",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Комплект №6 Гаврюша",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#0000ff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Комплект №7 Гаврюша",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#ff00ff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Комплект №8 Гаврюша",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#00ffff",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: "Комплект №9 Гаврюша",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#d64541",
+                rounds: [
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "б"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "м"},
+                                    {x: 3, y: 0, letter: "б"},
+                                    {x: 3, y: 1, letter: "у"},
+                                    {x: 2, y: 1, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "а"},
+                                    {x: 1, y: 1, letter: "н"},
+                                    {x: 0, y: 1, letter: "а"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "а"},
+                                    {x: 1, y: 3, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "б"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "з"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "м"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "л"},
+                                    {x: 3, y: 0, letter: "о"},
+                                    {x: 3, y: 1, letter: "к"},
+                                    {x: 2, y: 1, letter: "о"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "м"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "м"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "н"},
+                                    {x: 1, y: 3, letter: "т"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "а"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "а"},
+                                    {x: 2, y: 0, letter: "р"},
+                                    {x: 3, y: 0, letter: "е"},
+                                    {x: 3, y: 1, letter: "т"},
+                                    {x: 2, y: 1, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "п"},
+                                    {x: 1, y: 1, letter: "о"},
+                                    {x: 0, y: 1, letter: "б"},
+                                    {x: 0, y: 2, letter: "е"},
+                                    {x: 0, y: 3, letter: "д"},
+                                    {x: 1, y: 3, letter: "а"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "п"},
+                                    {x: 2, y: 2, letter: "а"},
+                                    {x: 3, y: 2, letter: "р"},
+                                    {x: 3, y: 3, letter: "к"}
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        score: 999,
+                        coins: 999,
+                        time: 30,
+                        rows: 4,
+                        cols: 4,
+                        words: [
+                            {
+                                letters: [
+                                    {x: 0, y: 0, letter: "к"},
+                                    {x: 1, y: 0, letter: "о"},
+                                    {x: 2, y: 0, letter: "с"},
+                                    {x: 3, y: 0, letter: "м"},
+                                    {x: 3, y: 1, letter: "о"},
+                                    {x: 2, y: 1, letter: "с"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 1, y: 2, letter: "ч"},
+                                    {x: 1, y: 1, letter: "а"},
+                                    {x: 0, y: 1, letter: "й"},
+                                    {x: 0, y: 2, letter: "н"},
+                                    {x: 0, y: 3, letter: "и"},
+                                    {x: 1, y: 3, letter: "к"}
+                                ]
+                            },
+                            {
+                                letters: [
+                                    {x: 2, y: 3, letter: "к"},
+                                    {x: 2, y: 2, letter: "л"},
+                                    {x: 3, y: 2, letter: "е"},
+                                    {x: 3, y: 3, letter: "й"}
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, {
+                name: "Комплект №10 Гаврюша",
+                numberOfRoundsRequired: 2,
+                backgroundColor: "#0000ff",
                 rounds: [
                     {
                         score: 999,
