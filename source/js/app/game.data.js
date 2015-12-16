@@ -1,4 +1,3 @@
-
 var fbIds = {}
 fbIds[ENV_LOCAL] = '473533802832988';
 fbIds[ENV_PRODUCTION] = '473524332833935';
@@ -42,6 +41,10 @@ var gameData = {
     freeCoins: {
         watchVideo: {coins: 50},
         shareWithFrinds: {coins: 100}
+    },
+    slideSoon: {
+        isShown: true,
+        backgroundColor: "#d64541"
     },
     practiceRound: {
         en: {

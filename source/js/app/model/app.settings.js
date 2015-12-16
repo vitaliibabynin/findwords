@@ -86,6 +86,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getFreeCoins: function () {
         return this.getSettingsValue('freeCoins', {});
+    },
+
+    getSlideSoon: function () {
+        return this.getSettingsValue('slideSoon', {});
     }
 
 });

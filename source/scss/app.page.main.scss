@@ -36,7 +36,8 @@
     margin-bottom: 0.2rem;
 
     .swiper-slide {
-      height: 10.938rem;
+      $slide-height: 10.938rem;
+      height: $slide-height;
       text-align: center;
       color: $slide-text-color;
       cursor: pointer;
@@ -189,6 +190,23 @@
           }
         }
       }
+      &.slide-soon {
+        line-height: $slide-height;
+        vertical-align: middle;
+        text-align: center;
+
+        .message {
+          display: inline-block;
+          transform: rotate(-30deg);
+
+          span {
+            padding: 0.5rem;
+            font-size: 2rem;
+            border: 0.0625rem solid #ffffff;
+            border-radius: 0.3rem;
+          }
+        }
+      }
     }
   }
 
@@ -277,7 +295,7 @@
                 line-height: 0.55rem;
               }
 
-              &:first-child span{
+              &:first-child span {
                 margin-top: 0.45rem;
                 line-height: 0.7rem;
               }

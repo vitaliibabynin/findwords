@@ -311,6 +311,15 @@ var SwiperClass = Object.assign({}, {}, {
 
     propTypes: {initialSlide: React.PropTypes.number},
 
+    getInitialState: function () {
+        return {
+            slideSoon: appManager.getSettings().getSlideSoon() || {
+                isShown: false,
+                backgroundColor: ""
+            }
+        }
+    },
+
     componentDidMount: function () {
         if (null == this.swiper) {
             this.swiper = new libSwiper(this.refs.swiperConatiner.getDOMNode(), {
@@ -337,21 +346,52 @@ var SwiperClass = Object.assign({}, {}, {
                     key={'slide_' + slideIndex}
                     slideData={slide}
                     slideIndex={slideIndex}
-                    />
+                />
             )
         });
 
-        return (
-            <div ref="swiperConatiner" className="swiper-container">
+        if (this.state.slideSoon.isShown) {
+            var slideClasses = classNames(
+                'swiper-slide',
+                'slide-soon',
+                {'hover': this.state.isActive}
+            );
 
-                <div className="swiper-wrapper">
-                    {slides}
+            var slideStyle = {
+                backgroundColor: this.state.slideSoon.backgroundColor
+            };
+
+            return (
+                <div ref="swiperConatiner" className="swiper-container">
+
+                    <div className="swiper-wrapper">
+                        {slides}
+
+                        <div className={slideClasses} style={slideStyle}>
+                            <div className="message">
+                                <span>{i18n._('slide.soon')}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="swiper-pagination"></div>
+
                 </div>
+            )
+        } else {
+            return (
+                <div ref="swiperConatiner" className="swiper-container">
 
-                <div className="swiper-pagination"></div>
+                    <div className="swiper-wrapper">
+                        {slides}
+                    </div>
 
-            </div>
-        );
+                    <div className="swiper-pagination"></div>
+
+                </div>
+            )
+        }
     }
 
 });

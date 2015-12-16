@@ -34,7 +34,10 @@ var PageGameVictory = Object.assign({}, {}, {
         this.addRewardCoins(this.state.rewardCoins);
         this.forceUpdate();
 
-        appDialogs.getRequirePushDialog().showIfTime();
+        if (CONST.CURRENT_PLATFORM == CONST.PLATFORM_IOS) {
+            appDialogs.getRequirePushDialog().showIfTime();
+        }
+
         appDialogs.getRateDialog().showIfTime();
     },
 

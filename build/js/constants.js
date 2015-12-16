@@ -37,6 +37,7 @@ window.CONST = {
             'slide.buy': 'Купить за 0,99$',
             'slide.complete': 'Пройден',
             'slide.complete.message': 'Этот уровень уже был пройден',
+            'slide.soon': 'СКОРО',
 
             'button.settings': 'Настройки',
             'button.rating': 'Рейтинг',
@@ -149,6 +150,7 @@ window.CONST = {
             'slide.buy': 'Unlock for 0,99$',
             'slide.complete': 'Complete',
             'slide.complete.message': 'This level has already been completed',
+            'slide.soon': 'SOON',
 
             'button.settings': 'Settings',
             'button.rating': 'Rankings',
