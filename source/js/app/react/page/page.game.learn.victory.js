@@ -35,25 +35,11 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     getRound: function () {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return appManager.getSettings().getPracticeRound().en;
-            case CONST.LANGUAGE_RU:
-                return appManager.getSettings().getPracticeRound().ru;
-            default:
-                return {}
-        }
+        return appManager.getSettings().getPracticeRound()
     },
 
     getStarsReceived: function () {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return appManager.getGameState().getPracticeRoundFieldEn('starsReceived') || 3;
-            case CONST.LANGUAGE_RU:
-                return appManager.getGameState().getPracticeRoundFieldRu('starsReceived') || 3;
-            default:
-                return {}
-        }
+        return appManager.getGameState().getPracticeRoundField('starsReceived') || 3;
     },
 
     getRewardScore: function (round, starsReceived) {

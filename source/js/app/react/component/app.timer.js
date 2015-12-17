@@ -36,13 +36,13 @@ var TimerClass = Object.assign({}, {}, {
         };
         state.starsReceived = state.getGameStateRoundField("starsReceived") || 3;
 
-        if (state.getGameStateRoundField("secondsRemaining") == 0) {
+        if (state.getGameStateRoundField("secondsRemaining", 0) == 0) {
             state.setGameStateRoundField("secondsRemaining", this.props.time);
             state.lastSave = this.props.time;
         }
 
-        if (state.getGameStateRoundField("secondsRemaining") != -1) {
-            state.secondsRemaining = state.getGameStateRoundField("secondsRemaining") || 0;
+        if (state.getGameStateRoundField("secondsRemaining", 0) != -1) {
+            state.secondsRemaining = state.getGameStateRoundField("secondsRemaining", 0) || 0;
             state.lastSave = state.secondsRemaining;
         }
 

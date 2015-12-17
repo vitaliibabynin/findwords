@@ -346,7 +346,7 @@ module.exports.FreeCoins = React.createClass(FreeCoinsClass);
 module.exports.FreeCoins.Class = FreeCoinsClass;
 
 
-var BuyCoinsClass = Object.assign({}, {FreeCoinsClass}, {
+var BuyCoinsClass = Object.assign({}, FreeCoinsClass, {
 
     displayName: 'BuyCoins',
 

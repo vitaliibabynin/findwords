@@ -56,20 +56,18 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
             return defaultValue;
         }
 
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return roundsBundles.en;
-                break;
-            case CONST.LANGUAGE_RU:
-                return roundsBundles.ru;
-                break;
-            default:
-                return defaultValue;
-        }
+        return roundsBundles[router.getLanguage()];
     },
 
     getPracticeRound: function () {
-        return this.getSettingsValue('practiceRound', {});
+        var defaultValue = [];
+        var practiceRound = this.getSettingsValue('practiceRound', defaultValue);
+
+        if (typeof practiceRound == "undefined") {
+            return defaultValue;
+        }
+
+        return practiceRound[router.getLanguage()];
     },
 
     getBonusCoins: function () {
@@ -90,6 +88,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getSlideSoon: function () {
         return this.getSettingsValue('slideSoon', {});
+    },
+
+    getChipsCoinsCost: function () {
+        return this.getSettingsValue('chipsCoinsCost', {});
     }
 
 });

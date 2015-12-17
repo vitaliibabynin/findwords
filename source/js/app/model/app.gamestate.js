@@ -11,29 +11,24 @@ var GameState = Object.assign({}, {}, {
             lastAccessDate: "",
             daysPlayedStreak: 0
         },
-        //chips: {
-        //    chipOpenWord: 999,
-        //    chipOpenLetter: 9,
-        //    chipShowWord: 99999
-        //},
         settings: {
             music: true,
             sound: true
         },
         practiceRound: {
-            complete: false,
-            en: {
-                board: {},
-                openedLetters: [],
-                starsReceived: 3,
-                secondsRemaining: 0
-            },
-            ru: {
-                board: {},
-                openedLetters: [],
-                starsReceived: 3,
-                secondsRemaining: 0
-            }
+            //complete: false,
+            //en: {
+            //    board: {},
+            //    openedLetters: [],
+            //    starsReceived: 3,
+            //    secondsRemaining: 0
+            //},
+            //ru: {
+            //    board: {},
+            //    openedLetters: [],
+            //    starsReceived: 3,
+            //    secondsRemaining: 0
+            //}
         },
         roundsBundles: {
             en: {
@@ -789,7 +784,12 @@ var GameState = Object.assign({}, {}, {
     },
 
     setBonusField: function (field, newValue) {
+        if (!this.gameState.bonus) {
+            this.gameState.bonus = {};
+        }
+
         this.gameState.bonus[field] = newValue;
+
         this.saveGameState();
     },
     getBonusField: function (field, defaultValue) {
@@ -813,6 +813,10 @@ var GameState = Object.assign({}, {}, {
     },
 
     setSettingsField: function (field, newValue) {
+        if (!this.gameState.settings) {
+            this.gameState.settings = {};
+        }
+
         this.gameState.settings[field] = newValue;
         this.saveGameState();
     },
@@ -836,38 +840,17 @@ var GameState = Object.assign({}, {}, {
         return this.getSettingsField('sound', true);
     },
 
-    //setChipsField: function (field, newValue) {
-    //    this.gameState.chips[field] = newValue;
-    //    this.saveGameState();
-    //},
-    //getChipsField: function (field, defaultValue) {
-    //    if (!this.gameState.chips || !this.gameState.chips.hasOwnProperty(field)) {
-    //        return defaultValue;
-    //    }
-    //
-    //    return this.gameState.chips[field];
-    //},
-    //setChipOpenWord: function (newNumber) {
-    //    this.setChipsField('chipOpenWord', newNumber);
-    //},
-    //getChipOpenWord: function () {
-    //    return this.getChipsField('chipOpenWord', 0);
-    //},
-    //setChipOpenLetter: function (newNumber) {
-    //    this.setChipsField('chipOpenLetter', newNumber);
-    //},
-    //getChipOpenLetter: function () {
-    //    return this.getChipsField('chipOpenLetter', 0);
-    //},
-    //setChipShowWord: function (newNumber) {
-    //    this.setChipsField('chipShowWord', newNumber);
-    //},
-    //getChipShowWord: function () {
-    //    return this.getChipsField('chipShowWord', 0);
-    //},
-
     setPracticeRoundComplete: function (newBoolean) {
+        if (!this.gameState.practiceRound) {
+            this.gameState.practiceRound = {};
+        }
+
+        if (!this.gameState.practiceRound.complete) {
+            this.gameState.practiceRound.complete = {};
+        }
+
         this.gameState.practiceRound.complete = newBoolean;
+
         this.saveGameState();
     },
     getPracticeRoundComplete: function () {
@@ -877,152 +860,64 @@ var GameState = Object.assign({}, {}, {
 
         return this.gameState.practiceRound.complete;
     },
-    setPracticeRoundFieldEn: function (field, newValue) {
-        this.gameState.practiceRound.en[field] = newValue;
+    setPracticeRoundField: function (field, newValue) {
+        if (!this.gameState.practiceRound) {
+            this.gameState.practiceRound = {};
+        }
+
+        if (!this.gameState.practiceRound[router.getLanguage()]) {
+            this.gameState.practiceRound[router.getLanguage()] = {};
+        }
+
+        this.gameState.practiceRound[router.getLanguage()][field] = newValue;
+
         this.saveGameState();
     },
-    getPracticeRoundFieldEn: function (field, defaultValue) {
-        if (!this.gameState.practiceRound.en || !this.gameState.practiceRound.en.hasOwnProperty(field)) {
+    getPracticeRoundField: function (field, defaultValue) {
+        if (!this.gameState.practiceRound[router.getLanguage()] || !this.gameState.practiceRound[router.getLanguage()].hasOwnProperty(field)) {
             return defaultValue;
         }
 
-        return this.gameState.practiceRound.en[field];
-    },
-    setPracticeRoundFieldRu: function (field, newValue) {
-        this.gameState.practiceRound.ru[field] = newValue;
-        this.saveGameState();
-    },
-    getPracticeRoundFieldRu: function (field, defaultValue) {
-        if (!this.gameState.practiceRound.ru || !this.gameState.practiceRound.ru.hasOwnProperty(field)) {
-            return defaultValue;
-        }
-
-        return this.gameState.practiceRound.ru[field];
+        return this.gameState.practiceRound[router.getLanguage()][field];
     },
 
     setRoundsBundles: function (bundleIndex, field, newValue) {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return this.setRoundsBundlesEn(bundleIndex, field, newValue);
-                break;
-            case CONST.LANGUAGE_RU:
-                return this.setRoundsBundlesRu(bundleIndex, field, newValue);
-                break;
-            default:
-                return;
-        }
+        this.gameState.roundsBundles[router.getLanguage()][bundleIndex][field] = newValue;
+        this.saveGameState();
     },
-    getRoundsBundles: function (bundleIndex, field, newValue) {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return this.getRoundsBundlesEn(bundleIndex, field, newValue);
-                break;
-            case CONST.LANGUAGE_RU:
-                return this.getRoundsBundlesRu(bundleIndex, field, newValue);
-                break;
-            default:
-                return;
+    getRoundsBundles: function (bundleIndex) {
+        if (typeof bundleIndex == 'undefined') {
+            return this.gameState.roundsBundles[router.getLanguage()];
         }
+
+        if (!this.gameState.roundsBundles[router.getLanguage()].hasOwnProperty(bundleIndex)) {
+            return false;
+        }
+
+        return this.gameState.roundsBundles[router.getLanguage()][bundleIndex];
     },
     setRound: function (bundleIndex, roundIndex, field, newValue) {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return this.setRoundEn(bundleIndex, roundIndex, field, newValue);
-                break;
-            case CONST.LANGUAGE_RU:
-                return this.setRoundRu(bundleIndex, roundIndex, field, newValue);
-                break;
-            default:
-                return;
-        }
+        this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex][field] = newValue;
+        this.saveGameState();
     },
     getRound: function (bundleIndex, roundIndex) {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return this.getRoundEn(bundleIndex, roundIndex);
-                break;
-            case CONST.LANGUAGE_RU:
-                return this.getRoundRu(bundleIndex, roundIndex);
-                break;
-            default:
-                return;
-        }
-    },
-    setRoundsBundlesEn: function (bundleIndex, field, newValue) {
-        this.gameState.roundsBundles.en[bundleIndex][field] = newValue;
-        this.saveGameState();
-    },
-    getRoundsBundlesEn: function (bundleIndex) {
         if (typeof bundleIndex == 'undefined') {
-            return this.gameState.roundsBundles.en;
+            return this.gameState.roundsBundles[router.getLanguage()];
         }
 
-        if (!this.gameState.roundsBundles.en.hasOwnProperty(bundleIndex)) {
-            return false;
-        }
-
-        return this.gameState.roundsBundles.en[bundleIndex];
-    },
-    setRoundsBundlesRu: function (bundleIndex, field, newValue) {
-        this.gameState.roundsBundles.ru[bundleIndex][field] = newValue;
-        this.saveGameState();
-    },
-    getRoundsBundlesRu: function (bundleIndex) {
-        if (typeof bundleIndex == 'undefined') {
-            return this.gameState.roundsBundles.ru;
-        }
-
-        if (!this.gameState.roundsBundles.ru.hasOwnProperty(bundleIndex)) {
-            return false;
-        }
-
-        return this.gameState.roundsBundles.ru[bundleIndex];
-    },
-    setRoundEn: function (bundleIndex, roundIndex, field, newValue) {
-        this.gameState.roundsBundles.en[bundleIndex].rounds[roundIndex][field] = newValue;
-        this.saveGameState();
-    },
-    getRoundEn: function (bundleIndex, roundIndex) {
-        if (typeof bundleIndex == 'undefined') {
-            return this.gameState.roundsBundles.en;
-        }
-
-        if (!this.gameState.roundsBundles.en.hasOwnProperty(bundleIndex)) {
+        if (!this.gameState.roundsBundles[router.getLanguage()].hasOwnProperty(bundleIndex)) {
             return false;
         }
 
         if (typeof roundIndex == 'undefined') {
-            return this.gameState.roundsBundles.en[bundleIndex];
+            return this.gameState.roundsBundles[router.getLanguage()][bundleIndex];
         }
 
-        if (!this.gameState.roundsBundles.en[bundleIndex].rounds.hasOwnProperty(roundIndex)) {
+        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds.hasOwnProperty(roundIndex)) {
             return false;
         }
 
-        return this.gameState.roundsBundles.en[bundleIndex].rounds[roundIndex];
-    },
-    setRoundRu: function (bundleIndex, roundIndex, field, newValue) {
-        this.gameState.roundsBundles.ru[bundleIndex].rounds[roundIndex][field] = newValue;
-        this.saveGameState();
-    },
-    getRoundRu: function (bundleIndex, roundIndex) {
-        if (typeof bundleIndex == 'undefined') {
-            return this.gameState.roundsBundles.ru;
-        }
-
-        if (!this.gameState.roundsBundles.ru.hasOwnProperty(bundleIndex)) {
-            return false;
-        }
-
-        if (typeof roundIndex == 'undefined') {
-            return this.gameState.roundsBundles.ru[bundleIndex];
-        }
-
-        if (!this.gameState.roundsBundles.ru[bundleIndex].rounds.hasOwnProperty(roundIndex)) {
-            return false;
-        }
-
-        return this.gameState.roundsBundles.ru[bundleIndex].rounds[roundIndex];
+        return this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex];
     }
 
 });

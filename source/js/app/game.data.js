@@ -42,6 +42,11 @@ var gameData = {
         watchVideo: {coins: 50},
         shareWithFrinds: {coins: 100}
     },
+    chipsCoinsCost: {
+        chipsOpenWord: 1000,
+        chipsOpenLetter: 200,
+        chipsShowWord: 150
+    },
     slideSoon: {
         isShown: true,
         backgroundColor: "#d64541"

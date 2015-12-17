@@ -57,37 +57,37 @@ var PageShop = Object.assign({}, {}, {
         var purchases = this.state.purchases;
 
         //console.log(appStore.getProductPrice(PRODUCT.COINS_50));
-        //console.log(appStore.getProduct(PRODUCT.COINS_50));
+        console.log(appStore.getProduct(PRODUCT.COINS_50));
 
         return [
             {
                 id: PRODUCT.COINS_50,
                 coins: PRODUCT.COINS_50 == purchases[0].id ? purchases[0].coins : "n/a",
-                price: 1,
+                price: appStore.getProductPrice(PRODUCT.COINS_50),
                 image: "url('" + this.getImagePath(ONE_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_110,
                 coins: PRODUCT.COINS_110 == purchases[1].id ? purchases[1].coins : "n/a",
-                price: 1,
+                price: appStore.getProductPrice(PRODUCT.COINS_110),
                 image: "url('" + this.getImagePath(THREE_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_245,
                 coins: PRODUCT.COINS_245 == purchases[2].id ? purchases[2].coins : "n/a",
-                price: 1,
+                price: appStore.getProductPrice(PRODUCT.COINS_245),
                 image: "url('" + this.getImagePath(MANY_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_550,
                 coins: PRODUCT.COINS_550 == purchases[3].id ? purchases[3].coins : "n/a",
-                price: 1,
+                price: appStore.getProductPrice(PRODUCT.COINS_550),
                 image: "url('" + this.getImagePath(SACK_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_1100,
                 coins: PRODUCT.COINS_1100 == purchases[4].id ? purchases[4].coins : "n/a",
-                price: 1,
+                price: appStore.getProductPrice(PRODUCT.COINS_1100),
                 image: "url('" + this.getImagePath(THREE_SACK_DOLLAR) + "')"
             }
         ]

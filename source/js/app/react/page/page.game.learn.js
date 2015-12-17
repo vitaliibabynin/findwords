@@ -19,42 +19,21 @@ var PageGameLearn = Object.assign({}, {}, {
         };
         state.boardData = this.getBoardData() || {};
         state.time = state.boardData.time || 0;
-        state.board = this.getGameStateRoundField("board") || {};
+        state.board = this.getGameStateRoundField("board", {}) || {};
 
         return state;
     },
 
     getBoardData: function () {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return appManager.getSettings().getPracticeRound().en;
-            case CONST.LANGUAGE_RU:
-                return appManager.getSettings().getPracticeRound().ru;
-            default:
-                return {}
-        }
+        return appManager.getSettings().getPracticeRound();
     },
 
     setGameStateRoundField: function (field, newValue) {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return appManager.getGameState().setPracticeRoundFieldEn(field, newValue);
-            case CONST.LANGUAGE_RU:
-                return appManager.getGameState().setPracticeRoundFieldRu(field, newValue);
-            default:
-                return {}
-        }
+        return appManager.getGameState().setPracticeRoundField(field, newValue);
     },
 
-    getGameStateRoundField: function (field) {
-        switch (router.getLanguage()) {
-            case CONST.LANGUAGE_EN:
-                return appManager.getGameState().getPracticeRoundFieldEn([field]);
-            case CONST.LANGUAGE_RU:
-                return appManager.getGameState().getPracticeRoundFieldRu([field]);
-            default:
-                return {}
-        }
+    getGameStateRoundField: function (field, defaultValue) {
+        return appManager.getGameState().getPracticeRoundField(field, defaultValue);
     },
 
     displayNotice: function (type, word) {
