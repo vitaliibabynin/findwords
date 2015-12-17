@@ -71,6 +71,7 @@ var PageMain = Object.assign({}, {}, {
     //},
 
     render: function () {
+        //console.log(appManager.getGameState().gameState);
 
         var headImgName = "head/head_img_" + router.getLanguage();
         var headStyle = {

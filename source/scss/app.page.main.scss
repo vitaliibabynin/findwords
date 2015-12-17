@@ -75,9 +75,10 @@
         position: relative;
 
         .text {
-          padding: 0 1rem;
+          padding: 0 0.875rem;
           display: table;
           height: 6.138rem;
+          line-height: 0.875rem;
 
           span {
             display: table-cell;

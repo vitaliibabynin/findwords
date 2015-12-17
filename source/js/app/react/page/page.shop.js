@@ -53,6 +53,14 @@ var PageShop = Object.assign({}, {}, {
         console.log("share with friends");
     },
 
+    getProductPrice: function (productId) {
+        if (typeof(appStore.getProduct(productId)) == "undefined") {
+            return "n/a"
+        }
+
+        return appStore.getProductPrice(productId);
+    },
+
     getData: function () {
         var purchases = this.state.purchases;
 
@@ -63,31 +71,31 @@ var PageShop = Object.assign({}, {}, {
             {
                 id: PRODUCT.COINS_50,
                 coins: PRODUCT.COINS_50 == purchases[0].id ? purchases[0].coins : "n/a",
-                price: appStore.getProductPrice(PRODUCT.COINS_50),
+                price: this.getProductPrice(PRODUCT.COINS_50),
                 image: "url('" + this.getImagePath(ONE_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_110,
                 coins: PRODUCT.COINS_110 == purchases[1].id ? purchases[1].coins : "n/a",
-                price: appStore.getProductPrice(PRODUCT.COINS_110),
+                price: this.getProductPrice(PRODUCT.COINS_110),
                 image: "url('" + this.getImagePath(THREE_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_245,
                 coins: PRODUCT.COINS_245 == purchases[2].id ? purchases[2].coins : "n/a",
-                price: appStore.getProductPrice(PRODUCT.COINS_245),
+                price: this.getProductPrice(PRODUCT.COINS_245),
                 image: "url('" + this.getImagePath(MANY_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_550,
                 coins: PRODUCT.COINS_550 == purchases[3].id ? purchases[3].coins : "n/a",
-                price: appStore.getProductPrice(PRODUCT.COINS_550),
+                price: this.getProductPrice(PRODUCT.COINS_550),
                 image: "url('" + this.getImagePath(SACK_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_1100,
                 coins: PRODUCT.COINS_1100 == purchases[4].id ? purchases[4].coins : "n/a",
-                price: appStore.getProductPrice(PRODUCT.COINS_1100),
+                price: this.getProductPrice(PRODUCT.COINS_1100),
                 image: "url('" + this.getImagePath(THREE_SACK_DOLLAR) + "')"
             }
         ]
@@ -108,7 +116,8 @@ var PageShop = Object.assign({}, {}, {
 
         return (
             <div key={"block" + i} className="outer-block">
-                <BuyCoins blockId={data.id} onClick={this.onClickBuyCoins} className="inner-block buy-coins" style={image}>
+                <BuyCoins blockId={data.id} onClick={this.onClickBuyCoins} className="inner-block buy-coins"
+                          style={image}>
                     <div className="coins">{data.coins}</div>
                     <div className="price">
                         <span>{data.price}</span>

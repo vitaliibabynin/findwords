@@ -51,6 +51,17 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     getSlideGameState: function (idx) {
+        if (!appManager.getGameState().getRoundsBundles(idx)) {
+            appManager.getGameState().setRoundsBundles(idx, "bundleScore", 0);
+            appManager.getGameState().setRoundsBundles(idx, "roundsComplete", 0);
+
+            if (idx == 0) {
+                appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
+            } else {
+                appManager.getGameState().setRoundsBundles(idx, "isUnlocked", false);
+            }
+        }
+
         return appManager.getGameState().getRoundsBundles(idx);
     },
 
@@ -229,12 +240,17 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     renderInstructions: function () {
+        var index = this.state.slideIndex - 1;
+        var roundsCompletePrevSlide = appManager.getGameState().getRoundsBundles(index).roundsComplete;
+        var roundsNeededToUnlock = appManager.getSettings().getRoundsBundles()[index].numberOfRoundsRequired;
+        var roundsLeftTillUnlock = roundsNeededToUnlock - roundsCompletePrevSlide;
+
         return (
 
             <div>
 
                 <div className="text">
-                    <span>{i18n._('slide.instructions')}</span>
+                    <span>{i18n._('slide.instructions', roundsLeftTillUnlock)}</span>
                 </div>
 
                 <IconButton onClick={this.onClickBuySet}

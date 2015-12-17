@@ -44,7 +44,7 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return fbId[CONST.ENV];
     },
 
-    getAdSettings: function() {
+    getAdSettings: function () {
         return this.getSettingsValue("adSettings", {});
     },
 
@@ -92,6 +92,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getChipsCoinsCost: function () {
         return this.getSettingsValue('chipsCoinsCost', {});
+    },
+
+    getInitialCoins: function () {
+        return this.getSettingsValue('initialCoins', 0);
     }
 
 });

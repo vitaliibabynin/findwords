@@ -5,12 +5,12 @@ var SETTINGS_GAMESTATE = 'game_state';
 var GameState = Object.assign({}, {}, {
 
     gameState: {
-        coins: 99999,
-        score: 99999,
-        bonus: {
-            lastAccessDate: "",
-            daysPlayedStreak: 0
-        },
+        coins: appManager.getSettings().getInitialCoins(),
+        score: 0,
+        //bonus: {
+        //    lastAccessDate: "",
+        //    daysPlayedStreak: 0
+        //},
         settings: {
             music: true,
             sound: true
@@ -31,710 +31,680 @@ var GameState = Object.assign({}, {}, {
             //}
         },
         roundsBundles: {
-            en: {
-                0: {
-                    bundleScore: 99999,
-                    isUnlocked: true,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                1: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                2: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                3: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                4: {
-                    bundleScore: 99999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                5: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                6: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                7: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                8: {
-                    bundleScore: 99999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                9: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                }
-            },
-            ru: {
-                0: {
-                    bundleScore: 99999,
-                    isUnlocked: true,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                1: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                2: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                3: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                4: {
-                    bundleScore: 99999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                5: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                6: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                7: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                8: {
-                    bundleScore: 99999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                },
-                9: {
-                    bundleScore: 9999,
-                    isUnlocked: false,
-                    roundsComplete: 0,
-                    rounds: {
-                        0: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        1: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        2: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        },
-                        3: {
-                            board: {},
-                            openedLetters: [],
-                            shownWords: [],
-                            starsReceived: 3,
-                            secondsRemaining: 0
-                        }
-                    }
-                }
-            }
+            //en: {
+            //    //0: {
+            //        //bundleScore: 0,
+            //        //isUnlocked: true,
+            //        //roundsComplete: 0
+            //    //},
+            //    //1: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //2: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //3: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //4: {
+            //    //    bundleScore: 99999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //5: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //6: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //7: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //8: {
+            //    //    bundleScore: 99999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //9: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //}
+            //},
+            //ru: {
+            //    //0: {
+            //        //bundleScore: 0,
+            //        //isUnlocked: true,
+            //        //roundsComplete: 0,
+            //        //rounds: {
+            //        //    0: {
+            //        //        board: {},
+            //        //        openedLetters: [],
+            //        //        shownWords: [],
+            //        //        starsReceived: 3,
+            //        //        secondsRemaining: 0
+            //        //    },
+            //        //    1: {
+            //        //        board: {},
+            //        //        openedLetters: [],
+            //        //        shownWords: [],
+            //        //        starsReceived: 3,
+            //        //        secondsRemaining: 0
+            //        //    },
+            //        //    2: {
+            //        //        board: {},
+            //        //        openedLetters: [],
+            //        //        shownWords: [],
+            //        //        starsReceived: 3,
+            //        //        secondsRemaining: 0
+            //        //    },
+            //        //    3: {
+            //        //        board: {},
+            //        //        openedLetters: [],
+            //        //        shownWords: [],
+            //        //        starsReceived: 3,
+            //        //        secondsRemaining: 0
+            //        //    }
+            //        //}
+            //    //},
+            //    //1: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //2: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //3: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //4: {
+            //    //    bundleScore: 99999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //5: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //6: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //7: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //8: {
+            //    //    bundleScore: 99999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //},
+            //    //9: {
+            //    //    bundleScore: 9999,
+            //    //    isUnlocked: false,
+            //    //    roundsComplete: 0,
+            //    //    rounds: {
+            //    //        0: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        1: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        2: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        },
+            //    //        3: {
+            //    //            board: {},
+            //    //            openedLetters: [],
+            //    //            shownWords: [],
+            //    //            starsReceived: 3,
+            //    //            secondsRemaining: 0
+            //    //        }
+            //    //    }
+            //    //}
+            //}
         }
     },
 
@@ -882,10 +852,27 @@ var GameState = Object.assign({}, {}, {
     },
 
     setRoundsBundles: function (bundleIndex, field, newValue) {
+        if (!this.gameState.roundsBundles) {
+            this.gameState.roundsBundles = {};
+        }
+
+        if (!this.gameState.roundsBundles.hasOwnProperty(router.getLanguage())) {
+            this.gameState.roundsBundles[router.getLanguage()] = {};
+        }
+
+        if (!this.gameState.roundsBundles[router.getLanguage()].hasOwnProperty(bundleIndex)) {
+            this.gameState.roundsBundles[router.getLanguage()][bundleIndex] = {};
+        }
+
         this.gameState.roundsBundles[router.getLanguage()][bundleIndex][field] = newValue;
+
         this.saveGameState();
     },
     getRoundsBundles: function (bundleIndex) {
+        if (!this.gameState.roundsBundles || !this.gameState.roundsBundles[router.getLanguage()]) {
+            return false;
+        }
+
         if (typeof bundleIndex == 'undefined') {
             return this.gameState.roundsBundles[router.getLanguage()];
         }
@@ -897,15 +884,40 @@ var GameState = Object.assign({}, {}, {
         return this.gameState.roundsBundles[router.getLanguage()][bundleIndex];
     },
     setRound: function (bundleIndex, roundIndex, field, newValue) {
+        if (!this.gameState.roundsBundles) {
+            this.gameState.roundsBundles = {};
+        }
+
+        if (!this.gameState.roundsBundles[router.getLanguage()]) {
+            this.gameState.roundsBundles[router.getLanguage()] = {};
+        }
+
+        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex]) {
+            this.gameState.roundsBundles[router.getLanguage()][bundleIndex] = {};
+        }
+
+        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex].hasOwnProperty("rounds")) {
+            this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds = {};
+        }
+
+        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex]) {
+            this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex] = {};
+        }
+
         this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex][field] = newValue;
+
         this.saveGameState();
     },
     getRound: function (bundleIndex, roundIndex) {
+        if (!this.gameState.roundsBundles || !this.gameState.roundsBundles[router.getLanguage()]) {
+            return false;
+        }
+
         if (typeof bundleIndex == 'undefined') {
             return this.gameState.roundsBundles[router.getLanguage()];
         }
 
-        if (!this.gameState.roundsBundles[router.getLanguage()].hasOwnProperty(bundleIndex)) {
+        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex]) {
             return false;
         }
 
@@ -913,7 +925,11 @@ var GameState = Object.assign({}, {}, {
             return this.gameState.roundsBundles[router.getLanguage()][bundleIndex];
         }
 
-        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds.hasOwnProperty(roundIndex)) {
+        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds) {
+            return false;
+        }
+
+        if (!this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex]) {
             return false;
         }
 

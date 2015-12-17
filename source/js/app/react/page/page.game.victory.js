@@ -17,7 +17,7 @@ var PageGameVictory = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
-            roundIdx: parseInt(router.getParam('roundIdx')) || 0,
+            roundIdx: parseInt(router.getParam('roundIdx')) || 0
         };
         state.starsReceived = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, 'starsReceived') || 3;
         state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
