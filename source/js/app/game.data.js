@@ -9,7 +9,7 @@ var gameData = {
     facebookId: fbIds,
     dialogs: {
         rateUsMaxShowCount: 10,
-        requirePushShowPeriod: 5 * 1000
+        requirePushShowPeriod: 5
     },
     "adSettings": {
         "interstitialShowPeriod": 300,

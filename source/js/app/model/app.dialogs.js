@@ -322,7 +322,7 @@ var RequirePushDialog = function(){
     });
     dialog.isLoadedSettings = false;
     //dialog.showPeriod = 86400 * 5 * 1000;
-    dialog.showPeriod = appManager.getSettings().getDialogs().requirePushShowPeriod || 86400 * 5 * 1000;
+    dialog.showPeriod = appManager.getSettings().getDialogs().requirePushShowPeriod * 86400 * 1000 || 86400 * 5 * 1000;
 
     dialog.settingsNamespace = 'dialogRequirePush';
     dialog.nextShowTime = 0;
