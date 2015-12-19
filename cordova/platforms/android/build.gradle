@@ -162,7 +162,7 @@ android {
         config {
             keyAlias 'SmallDevTeam'
             keyPassword 'jK4r3dCxs8vQmpV2'
-            storeFile file('D:/WebServers/home/words.game/www/cordova/platforms/android/keystore/findwords_android.jks')
+            storeFile file('keystore/findwords_android.jks')
             storePassword 'jK4r3dCxs8vQmpV2'
         }
     }
