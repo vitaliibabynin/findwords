@@ -252,12 +252,12 @@ android {
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     // SUB-PROJECT DEPENDENCIES START
-    debugCompile project(path: 'CordovaLib', configuration: 'debug')
-    releaseCompile project(path: 'CordovaLib', configuration: 'release')
-    compile 'com.google.android.gms:play-services-analytics:+'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
-    compile 'com.android.support:support-v4:+'
-    compile 'com.facebook.android:facebook-android-sdk:4.3.+'
+    debugCompile project(path: "CordovaLib", configuration: "debug")
+    releaseCompile project(path: "CordovaLib", configuration: "release")
+    compile "com.google.android.gms:play-services-analytics:+"
+    compile "com.google.android.gms:play-services-ads:8.3.0"
+    compile "com.android.support:support-v4:+"
+    compile "com.facebook.android:facebook-android-sdk:4.3.+"
     // SUB-PROJECT DEPENDENCIES END
 }
 
