@@ -6,11 +6,11 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 
 var PRODUCT = {
-    COINS_50: 'coins_50',
-    COINS_110: 'coins_110',
-    COINS_245: 'coins_245',
-    COINS_550: 'coins_550',
-    COINS_1100: 'coins_1100',
+    COINS_50: 'coinspack_1',
+    COINS_110: 'coinspack_2',
+    COINS_245: 'coinspack_3',
+    COINS_550: 'coinspack_4',
+    COINS_1100: 'coinspack_5',
     REMOVE_AD: 'remove_ad'
 }
 

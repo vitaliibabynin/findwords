@@ -24,16 +24,16 @@ var PageShop = Object.assign({}, {}, {
     getInitialState: function () {
         return {
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
-            purchases: appManager.getSettings().getPurchases() || [
-                {id: '', coins: 0},
-                {id: '', coins: 0},
-                {id: '', coins: 0},
-                {id: '', coins: 0},
-                {id: '', coins: 0}
-            ],
+            purchases: appManager.getSettings().getPurchases() || {
+                "coinspack_1": 50,
+                "coinspack_2": 110,
+                "coinspack_3": 245,
+                "coinspack_4": 550,
+                "coinspack_5": 1100
+            },
             freeCoins: appManager.getSettings().getFreeCoins() || {
-                watchVideo: {coins: 0},
-                shareWithFrinds: {coins: 0}
+                watchVideo: 0,
+                sendInvite: 0
             }
         };
     },
@@ -61,40 +61,54 @@ var PageShop = Object.assign({}, {}, {
         return appStore.getProductPrice(productId);
     },
 
-    getData: function () {
+    getProductCoins: function (productId) {
         var purchases = this.state.purchases;
 
+        for (var k in purchases) {
+            if (!purchases.hasOwnProperty(k)) {
+                continue;
+            }
+
+            if (k == productId) {
+                return purchases[productId];
+            }
+        }
+
+        return "n/a";
+    },
+
+    getData: function () {
         //console.log(appStore.getProductPrice(PRODUCT.COINS_50));
-        console.log(appStore.getProduct(PRODUCT.COINS_50));
+        //console.log(appStore.getProduct(PRODUCT.COINS_50));
 
         return [
             {
                 id: PRODUCT.COINS_50,
-                coins: PRODUCT.COINS_50 == purchases[0].id ? purchases[0].coins : "n/a",
+                coins: this.getProductCoins(PRODUCT.COINS_50),
                 price: this.getProductPrice(PRODUCT.COINS_50),
                 image: "url('" + this.getImagePath(ONE_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_110,
-                coins: PRODUCT.COINS_110 == purchases[1].id ? purchases[1].coins : "n/a",
+                coins: this.getProductCoins(PRODUCT.COINS_110),
                 price: this.getProductPrice(PRODUCT.COINS_110),
                 image: "url('" + this.getImagePath(THREE_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_245,
-                coins: PRODUCT.COINS_245 == purchases[2].id ? purchases[2].coins : "n/a",
+                coins: this.getProductCoins(PRODUCT.COINS_245),
                 price: this.getProductPrice(PRODUCT.COINS_245),
                 image: "url('" + this.getImagePath(MANY_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_550,
-                coins: PRODUCT.COINS_550 == purchases[3].id ? purchases[3].coins : "n/a",
+                coins: this.getProductCoins(PRODUCT.COINS_550),
                 price: this.getProductPrice(PRODUCT.COINS_550),
                 image: "url('" + this.getImagePath(SACK_DOLLAR) + "')"
             },
             {
                 id: PRODUCT.COINS_1100,
-                coins: PRODUCT.COINS_1100 == purchases[4].id ? purchases[4].coins : "n/a",
+                coins: this.getProductCoins(PRODUCT.COINS_1100),
                 price: this.getProductPrice(PRODUCT.COINS_1100),
                 image: "url('" + this.getImagePath(THREE_SACK_DOLLAR) + "')"
             }
@@ -158,7 +172,7 @@ var PageShop = Object.assign({}, {}, {
                             <FreeCoins onClick={this.onClickWatchVideo} className="inner-block watch-video">
                                 <div className="text">{i18n._('shop.watch-video')}</div>
                                 <div className="add-free-coins" style={dollar}>
-                                    +{this.state.freeCoins.watchVideo.coins}</div>
+                                    +{this.state.freeCoins.watchVideo}</div>
                             </FreeCoins>
                         </div>
 
@@ -166,7 +180,7 @@ var PageShop = Object.assign({}, {}, {
                             <FreeCoins onClick={this.onClickShare} className="inner-block share">
                                 <div className="text">{i18n._('shop.share')}</div>
                                 <div className="add-free-coins" style={dollar}>
-                                    +{this.state.freeCoins.shareWithFrinds.coins}</div>
+                                    +{this.state.freeCoins.sendInvite}</div>
                             </FreeCoins>
                         </div>
 

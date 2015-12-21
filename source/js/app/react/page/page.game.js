@@ -27,9 +27,9 @@ var PageGameMain = Object.assign({}, {}, {
             shownWordsLetters: [],
             noticeType: "",
             noticeWord: {letters: []},
-            chipsOpenWord: appManager.getSettings().getChipsCoinsCost().OpenWord,
-            chipsOpenLetter: appManager.getSettings().getChipsCoinsCost().OpenLetter,
-            chipsShowWord: appManager.getSettings().getChipsCoinsCost().ShowWord,
+            chipsOpenWord: appManager.getSettings().getChipsCoinsCost().openWord || 0,
+            chipsOpenLetter: appManager.getSettings().getChipsCoinsCost().openLetter || 0,
+            chipsShowWord: appManager.getSettings().getChipsCoinsCost().showWord || 0,
             shownWordsAnimationLeave: true
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];

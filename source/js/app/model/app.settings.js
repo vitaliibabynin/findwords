@@ -23,6 +23,18 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return this.settings[key];
     },
 
+    getShopValue: function (key, defaultValue) {
+        if (!this.settings || !this.settings.hasOwnProperty("shop")) {
+            return defaultValue;
+        }
+
+        if (!this.settings.shop || !this.settings.shop.hasOwnProperty(key)) {
+            return defaultValue;
+        }
+
+        return this.settings.shop[key];
+    },
+
     getAppPlatforms: function () {
         return this.getSettingsValue('appplatforms', {});
     },
@@ -71,7 +83,7 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getBonusCoins: function () {
-        return this.getSettingsValue('bonusCoins', {});
+        return this.getSettingsValue('dailyBonusCoins', {});
     },
 
     getDialogs: function () {
@@ -79,11 +91,11 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getPurchases: function () {
-        return this.getSettingsValue('purchases', {});
+        return this.getShopValue('coins', {});
     },
 
     getFreeCoins: function () {
-        return this.getSettingsValue('freeCoins', {});
+        return this.getShopValue('freecoins', {});
     },
 
     getSlideSoon: function () {
