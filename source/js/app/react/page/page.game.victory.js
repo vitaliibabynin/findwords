@@ -23,8 +23,10 @@ var PageGameVictory = Object.assign({}, {}, {
         state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
         var rounds = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds;
         state.roundsTotal = rounds.length || 1;
-        state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].score * (state.starsReceived / 3) || 0;
-        state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].coins * (state.starsReceived / 3) || 0;
+        //state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].score * (state.starsReceived / 3) || 0;
+        //state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].coins * (state.starsReceived / 3) || 0;
+        state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].bonus[state.starsReceived].score || 0;
+        state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].bonus[state.starsReceived].coins || 0;
 
         return state;
     },

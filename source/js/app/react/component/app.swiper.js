@@ -245,6 +245,10 @@ var SlideClass = Object.assign({}, {}, {
         var roundsNeededToUnlock = appManager.getSettings().getRoundsBundles()[index].numberOfRoundsRequired;
         var roundsLeftTillUnlock = roundsNeededToUnlock - roundsCompletePrevSlide;
 
+        if (roundsLeftTillUnlock < 0) {
+            roundsLeftTillUnlock = 0;
+        }
+
         return (
 
             <div>
@@ -392,7 +396,7 @@ var SwiperClass = Object.assign({}, {}, {
                 {'hover': this.state.isActive}
             );
 
-            var slideStyle = {
+            var soonSlideStyle = {
                 backgroundColor: this.state.slideSoon.backgroundColor
             };
 
@@ -402,7 +406,7 @@ var SwiperClass = Object.assign({}, {}, {
                     <div className="swiper-wrapper">
                         {slides}
 
-                        <div className={slideClasses} style={slideStyle} onClick={this.onClickEffect}>
+                        <div className={slideClasses} style={soonSlideStyle} onClick={this.onClickEffect}>
                             <div className="message">
                                 <span>{i18n._('slide.soon')}</span>
                             </div>

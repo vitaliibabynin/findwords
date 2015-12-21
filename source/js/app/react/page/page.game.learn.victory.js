@@ -43,11 +43,13 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     getRewardScore: function (round, starsReceived) {
-        return round.score * (starsReceived / 3) || 0;
+        //return round.score * (starsReceived / 3) || 0;
+        return round.bonus[starsReceived].score || 0;
     },
 
     getRewardCoins: function (round, starsReceived) {
-        return round.coins * (starsReceived / 3) || 0;
+        //return round.coins * (starsReceived / 3) || 0;
+        return round.bonus[starsReceived].coins || 0;
     },
 
     addRewardScore: function (rewardScore) {
@@ -63,8 +65,6 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     onClick: function () {
-
-
         var params = {
             roundsBundleIdx: 0,
             roundIdx: 0

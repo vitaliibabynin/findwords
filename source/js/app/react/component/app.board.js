@@ -83,8 +83,10 @@ var BoardClass = Object.assign({}, {}, {
 
     propTypes: {
         boardData: React.PropTypes.shape({
-            rows: React.PropTypes.number,
-            cols: React.PropTypes.number,
+            board: React.PropTypes.shape({
+                rows: React.PropTypes.number,
+                cols: React.PropTypes.number
+            }),
             words: React.PropTypes.arrayOf(
                 React.PropTypes.shape({
                     words: React.PropTypes.arrayOf(
@@ -148,15 +150,17 @@ var BoardClass = Object.assign({}, {}, {
 
     componentDidMount: function () {
         this.setState({
-            cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.boardData.cols || 0
+            cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.boardData.board.cols || 0
         })
     },
 
     boardConverter: function (boardData) {
-        var arr = new Array(boardData.rows);
+        console.log(boardData);
+
+        var arr = new Array(boardData.board.rows);
 
         for (var i = 0; i < arr.length; i++) {
-            arr[i] = new Array(boardData.cols);
+            arr[i] = new Array(boardData.board.cols);
         }
 
         //console.log(boardData);
@@ -431,8 +435,8 @@ var BoardClass = Object.assign({}, {}, {
         var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
         var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
 
-        var rows = this.state.boardData.rows;
-        var cols = this.state.boardData.cols;
+        var rows = this.state.boardData.board.rows;
+        var cols = this.state.boardData.board.cols;
 
         var boardWidthX = e.currentTarget.getBoundingClientRect().width;
         var boardHeightY = e.currentTarget.getBoundingClientRect().height;

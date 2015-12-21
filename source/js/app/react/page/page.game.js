@@ -37,8 +37,10 @@ var PageGameMain = Object.assign({}, {}, {
                 score: 0,
                 coins: 0,
                 time: 1,
-                rows: 1,
-                cols: 1,
+                board: {
+                    rows: 1,
+                    cols: 1
+                },
                 words: [
                     {
                         letters: [
