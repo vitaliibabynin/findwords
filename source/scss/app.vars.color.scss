@@ -1,0 +1,191 @@
+//MAIN PAGE
+//mainPage
+$mainPage-bg-color: #81cfe0;
+
+//mainPage-Header
+$header-bg-color: #2574a9;
+
+//mainPage-Counters
+$counters-bg-color: #2ecc71;
+$countersPanel-bg-color: rgba(85,85,85,0.5);
+$countersNumbers-color: #ffffff;
+$scoreCounterPanel-bg-color: $countersPanel-bg-color;
+$scoreCounterNumbers-color: $countersNumbers-color;
+$coinsCounterPanel-bg-color: $countersPanel-bg-color;
+$coinsCounterNumbers-color: $countersNumbers-color;
+
+//mainPage-Menu
+$slide-onClick-bg-color: rgba(0,0,0,0.2);
+$slide-text-color: #ffffff;
+$slide-wordsComplete-panel-bg-color: rgba(85,85,85,0.5);
+$slide-wordsComplete-progress-bg-color: #ffffff;
+$slide-instructions-buy: #26c281;
+$swiper-pagination-bullet: #ffffff;
+$swiper-pagination-bullet-active: #e87e04;
+$hover-box-shadow: inset 999rem 0 rgba(0,0,0,0.2);
+$navigation-btn-bg-color: #26c281;
+$navigation-btn-rating-bg-color: #ff9d00;
+$navigation-btn-facebook-bg-color: #3a539b;
+$navigation-btn-shop-bg-color: #ff4545;
+$navigation-btn-facebook-border-color: #FFFFFF;
+
+//mainPage-Footer
+$footer-bg-color: #2574a9;
+$footerLabel-color: #ffffff;
+$footerSwitchOn-bg-color: #26c281;
+$footerSwitchBorderOn-bg-color: $footerSwitchOn-bg-color;
+$footerSwitchCircleOn-bg-color: $footerSwitchOn-bg-color;
+
+
+//GAME PAGE
+//gamePage
+$gamePage-bg-color: #81cfe0;
+
+//gamePage-Timer
+$gamePage-timer-bg-color: #2574a9;
+$gamePage-timer-timeLine-panel-bg-color: #555555;
+$gamePage-timer-timeLine-fill-bg-color: #ffffff;
+
+//gamePage-Chips
+$gamePage-chip-open-word-bg-color: #ff9d00;
+$gamePage-chip-open-letter-bg-color: #d24d57;
+$gamePage-chip-show-word-bg-color: #9b59b6;
+
+//gamePage-Board
+$gamePage-board-color: #2a456e;
+$gamePage-board-color-border: #2a456e;
+$gamePage-board-td-color-selected: #ffffff;
+$gamePage-board-td-color-complete: #ffffff;
+$gamePage-board-td-color-open-letter: red;
+$gamePage-board-td-bg-color-link: #ffffff;
+$gamePage-board-td-bg-color-link-open-letter: red;
+$gamePage-board-td-bg-color-default: #e8e8e8;
+$gamePage-board-td-bg-color-default-transparent: rgba(232,232,232,0);
+$gamePage-board-td-bg-color-1: green;
+$gamePage-board-td-bg-color-2: blue;
+$gamePage-board-td-bg-color-3: cyan;
+$gamePage-board-td-bg-color-4: orange;
+$gamePage-board-td-bg-color-5: indigo;
+$gamePage-board-td-bg-color-6: violet;
+$gamePage-board-td-bg-color-7: grey;
+$gamePage-board-td-bg-color-8: purple;
+$gamePage-board-td-bg-color-9: pink;
+$gamePage-board-td-bg-color-10: darkblue;
+$gamePage-board-td-learn-bg-color-1: #febd27;
+$gamePage-board-td-learn-bg-color-2: #d24a43;
+$gamePage-board-td-learn-bg-color-3: #ae8c64;
+
+//gamePage-Notice
+$gamePage-notice-default-bg-color: #2574a9;
+$gamePage-notice-default-color: #ffffff;
+$gamePage-notice-noSuchWord-bg-color: #2574a9;
+$gamePage-notice-noSuchWord-color: #ffffff;
+$gamePage-notice-selectDifferently-bg-color: #00b16a;
+$gamePage-notice-selectDifferently-color: #ffffff;
+$gamePage-notice-noWordsToShow-bg-color: #d86a43;
+$gamePage-notice-noWordsToShow-color: #ffffff;
+
+//gamePage-ShownWords
+$gamePage-shownWords-word-color: #ffffff;
+
+
+//GAME PAGE VICTORY
+//gamePageVictory
+$gamePageVictory-bg-color: #81cfe0;
+
+//gamePageVictory-container
+$gamePageVictory-container-bg-color: #ff4545;
+$gamePageVictory-container-color: #ffffff;
+
+//gamePageVictory-container-roundsComplete
+$gamePageVictory-container-roundsComplete-panel-bg-color: rgba(85,85,85,0.5);
+$gamePageVictory-container-roundsComplete-progress-bg-color: #ffffff;
+
+//gamePageVictory-container-continue-button
+$gamePageVictory-container-continue-button-bg-color: rgba(85,85,85,0.5);
+
+
+
+//BONUS PAGE
+//pageBonus
+$pageBonus-bg-color: #81cfe0;
+$pageBonus-container-bg-color: #2574a9;
+$pageBonus-container-color: #ffffff;
+$pageBonus-day-unlocked-bg-color: #2ecc71;
+$pageBonus-day-line-bg-color: #ffffff;
+//$pageBonus-day-locked-bg-color: #253c4d;
+$pageBonus-day-locked-color: rgba(255, 255, 255, 0.5);
+$pageBonus-day-locked-bg-color: #3d647f;
+$pageBonus-collect-bg-color: #2ecc71;
+
+
+//SHOP PAGE
+//pageShop
+$pageShop-bg-color: #81cfe0;
+$pageShop-container-bg-color: #2574a9;
+$pageShop-container-color: #ffffff;
+$pageShop-header-bg-color: #ff4545;
+$pageShop-inner-block-bg-color: #2ecc71;
+$pageShop-price-bg-color: #429063;
+
+
+//RANKINGS PAGE
+//pageRankings
+$pageRankings-bg-color: #81cfe0;
+$pageRankings-container-bg-color: #5c97bf;
+$pageRankings-container-color: #ffffff;
+$pageRankings-header-bg-color: #049372;
+$pageRankings-playerStats-selected-bg-color: #3eb5f1;
+$pageRankings-inviteFriendsFbButton-bg-color: #3a539b;
+
+
+//RATE PAGE
+//pageLearn
+$pageLearn-bg-color: #81cfe0;
+$pageLearn-container-bg-color: #2574a9;
+$pageLearn-container-color: #ffffff;
+$pageLearn-header-bg-color: #2ecc71;
+$pageLearn-review-bg-color: #f89406;
+$pageLearn-later-bg-color: #67809f;
+$pageLearn-never-bg-color: #67809f;
+
+
+//RATE DIALOG
+//dialogRate
+$dialogRate-header-color: #ffffff;
+$dialogRate-header-bg-color: #2ecc71;
+$dialogRate-content-color: #ffffff;
+$dialogRate-content-bg-color: #2574a9;
+$dialogRate-review-bg-color: #f89406;
+$dialogRate-later-bg-color: #67809f;
+$dialogRate-never-bg-color: #67809f;
+
+
+//NO-COINS DIALOG
+//dialogNoCoins
+$dialogNoCoins-header-color: #ffffff;
+$dialogNoCoins-header-bg-color: #ff4545;
+$dialogNoCoins-content-color: #ffffff;
+$dialogNoCoins-content-bg-color: #2574a9;
+$dialogNoCoins-buy-bg-color: #f89406;
+$dialogNoCoins-earn-bg-color: #f89406;
+$dialogNoCoins-cancel-bg-color: #2ecc71;
+
+
+//ERROR DIALOG
+//dialogError
+$dialogError-header-color: #ffffff;
+$dialogError-header-bg-color: #ff4545;
+$dialogError-content-color: #ffffff;
+$dialogError-content-bg-color: #2574a9;
+$dialogError-cancel-bg-color: #f89406;
+
+
+//REQUIRE-PUSH DIALOG
+//dialogRequirePush
+$dialogRequirePush-header-color: #ffffff;
+$dialogRequirePush-header-bg-color: #2ecc71;
+$dialogRequirePush-content-color: #ffffff;
+$dialogRequirePush-content-bg-color: #2574a9;
+$dialogRequirePush-ok-bg-color: #f89406;
+$dialogRequirePush-cancel-bg-color: #67809f;
