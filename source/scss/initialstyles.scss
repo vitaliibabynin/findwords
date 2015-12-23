@@ -162,7 +162,7 @@ html.desktop .btn:hover,
   height: 3.125rem;
   width: 3.438rem;
   display: inline-block;
-  color: #ffffff;
+  //color: #ffffff;
   text-align: center;
   text-decoration: none;
   font-size: 0.6rem;
@@ -219,14 +219,14 @@ html.desktop .btn:hover,
 
 
 @media screen and (min-width: 640px) and (max-width: 767px) and (orientation: portrait){
-    html{
-        font-size: 24px;
-    }
+  html{
+    font-size: 24px;
+  }
 }
 @media screen and (min-width: 413px) and (max-width: 639px) and (orientation: portrait){
-    html{
-        font-size: 21px;
-    }
+  html{
+    font-size: 21px;
+  }
 }
 
 @media screen and (min-width: 375px) and (max-width: 412px) and (orientation: portrait){

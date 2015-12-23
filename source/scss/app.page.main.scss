@@ -87,7 +87,7 @@
         }
         .purchase {
           display: block;
-          color: #ffffff;
+          color: $slide-instructions-buy-color;
           text-decoration: none;
           font-size: inherit;
           margin: 0;
@@ -100,7 +100,7 @@
           line-height: 1.5rem;
           bottom: 0;
           height: 1.5rem;
-          background-color: $slide-instructions-buy;
+          background-color: $slide-instructions-buy-bg-color;
         }
 
       }
@@ -203,7 +203,7 @@
           span {
             padding: 0.5rem;
             font-size: 2rem;
-            border: 0.0625rem solid #ffffff;
+            border: 0.0625rem solid $slide-soon-border-color;
             border-radius: 0.3rem;
           }
         }
@@ -232,6 +232,7 @@
 
     .btn {
       background-color: $navigation-btn-bg-color;
+      color: $navigation-btn-color;
 
       &.icon {
         background-size: 2rem 2rem;
