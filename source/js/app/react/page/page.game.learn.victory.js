@@ -30,6 +30,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(this.state.rewardCoins);
         appManager.getGameState().setPracticeRoundComplete(true);
+        appManager.getGameState().setGameStateField("practiceRound", {});
 
         appDialogs.getRateDialog().showIfTime();
     },
@@ -65,9 +66,22 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     onClick: function () {
+        var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();
+        var roundsBundleIdx = 0;
+        var roundIdx = 0;
+        for (var i = 0; i < roundsBundlesGameData.length; i++) {
+            var roundsBundlesGameState = appManager.getGameState().getRoundsBundles(i);
+
+            if (roundsBundlesGameState.roundsComplete < roundsBundlesGameData[i].rounds.length) {
+                roundsBundleIdx = i;
+                roundIdx = roundsBundlesGameState.roundsComplete;
+                break;
+            }
+        }
+
         var params = {
-            roundsBundleIdx: 0,
-            roundIdx: 0
+            roundsBundleIdx: roundsBundleIdx,
+            roundIdx: roundIdx
         };
 
         router.navigate("game", "main", params);

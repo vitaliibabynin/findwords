@@ -41,6 +41,9 @@ var PageShop = Object.assign({}, {}, {
     onClickBuyCoins: function (buttonProps) {
         console.log(buttonProps.blockId);
 
+        appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
+        this.forceUpdate();
+
         //var purchaseID = buttonProps.blockId;
         //appStore.order(purchaseID);
     },
