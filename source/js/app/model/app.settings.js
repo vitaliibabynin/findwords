@@ -68,7 +68,59 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
             return defaultValue;
         }
 
-        return roundsBundles[router.getLanguage()];
+        var safeRoundsBundles = roundsBundles[router.getLanguage()];
+
+        var roundBundleIdx = 0;
+        var roundIdx = 0;
+        var starsNumber = 1;
+        var wordIdx = 1;
+        var letterIdx = 1;
+        console.log({safeRoundsBundlesBefore: safeRoundsBundles});
+        console.log({numberOfRoundsRequired: typeof(safeRoundsBundles[roundBundleIdx].numberOfRoundsRequired)});
+        console.log({cols: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].board.cols)});
+        console.log({rows: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].board.rows)});
+        console.log({time: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].time)});
+        console.log({coins: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].bonus[starsNumber].coins)});
+        console.log({score: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].bonus[starsNumber].score)});
+        console.log({x: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].words[wordIdx].letters[letterIdx].x)});
+        console.log({y: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].words[wordIdx].letters[letterIdx].y)});
+
+        for (var i = 0; i < safeRoundsBundles.length; i++) {
+            safeRoundsBundles[i].numberOfRoundsRequired = parseInt(safeRoundsBundles[i].numberOfRoundsRequired);
+            for (var j = 0; j < safeRoundsBundles[i].rounds.length; j++) {
+                var safeRound = safeRoundsBundles[i].rounds[j];
+                safeRound.board.cols = parseInt(safeRound.board.cols);
+                safeRound.board.rows = parseInt(safeRound.board.rows);
+                safeRound.time = parseInt(safeRound.time);
+
+                for (var k in safeRound.bonus) {
+                    if (!safeRound.bonus.hasOwnProperty(k)) {
+                        continue;
+                    }
+                    safeRound.bonus[k].coins = parseInt(safeRound.bonus[k].coins);
+                    safeRound.bonus[k].score = parseInt(safeRound.bonus[k].score);
+                }
+
+                for (var l = 0; l < safeRound.words.length; l++) {
+                    for (var m = 0; m < safeRound.words[l].letters.length; m++) {
+                        safeRound.words[l].letters[m].x = parseInt(safeRound.words[l].letters[m].x);
+                        safeRound.words[l].letters[m].y = parseInt(safeRound.words[l].letters[m].y);
+                    }
+                }
+            }
+        }
+
+        console.log({safeRoundsBundlesAfter: safeRoundsBundles});
+        console.log({numberOfRoundsRequired: typeof(safeRoundsBundles[roundBundleIdx].numberOfRoundsRequired)});
+        console.log({cols: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].board.cols)});
+        console.log({rows: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].board.rows)});
+        console.log({time: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].time)});
+        console.log({coins: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].bonus[starsNumber].coins)});
+        console.log({score: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].bonus[starsNumber].score)});
+        console.log({x: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].words[wordIdx].letters[letterIdx].x)});
+        console.log({y: typeof(safeRoundsBundles[roundBundleIdx].rounds[roundIdx].words[wordIdx].letters[letterIdx].y)});
+
+        return safeRoundsBundles;
     },
 
     getPracticeRound: function () {
@@ -79,7 +131,42 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
             return defaultValue;
         }
 
-        return practiceRound[router.getLanguage()];
+        var safePracticeRound = practiceRound[router.getLanguage()];
+
+        console.log({safePracticeRoundBefore: safePracticeRound});
+        console.log({cols: typeof(safePracticeRound.board.cols)});
+        console.log({rows: typeof(safePracticeRound.board.rows)});
+        console.log({time: typeof(safePracticeRound.time)});
+        console.log({coins: typeof(safePracticeRound.bonus[1].coins)});
+        console.log({x: typeof(safePracticeRound.words[1].letters[1].x)});
+
+        safePracticeRound.board.cols = parseInt(safePracticeRound.board.cols);
+        safePracticeRound.board.rows = parseInt(safePracticeRound.board.rows);
+        safePracticeRound.time = parseInt(safePracticeRound.time);
+
+        for (var k in safePracticeRound.bonus) {
+            if (!safePracticeRound.bonus.hasOwnProperty(k)) {
+                continue;
+            }
+            safePracticeRound.bonus[k].coins = parseInt(safePracticeRound.bonus[k].coins);
+            safePracticeRound.bonus[k].score = parseInt(safePracticeRound.bonus[k].score);
+        }
+
+        for (var i = 0; i < safePracticeRound.words.length; i++) {
+            for (var j = 0; j < safePracticeRound.words[i].letters.length; j++) {
+                safePracticeRound.words[i].letters[j].x = parseInt(safePracticeRound.words[i].letters[j].x);
+                safePracticeRound.words[i].letters[j].y = parseInt(safePracticeRound.words[i].letters[j].y);
+            }
+        }
+
+        console.log({safePracticeRoundAfter: safePracticeRound});
+        console.log({cols: typeof(safePracticeRound.board.cols)});
+        console.log({rows: typeof(safePracticeRound.board.rows)});
+        console.log({time: typeof(safePracticeRound.time)});
+        console.log({coins: typeof(safePracticeRound.bonus[1].coins)});
+        console.log({x: typeof(safePracticeRound.words[1].letters[1].x)});
+
+        return safePracticeRound;
     },
 
     getBonusCoins: function () {

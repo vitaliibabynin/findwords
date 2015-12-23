@@ -75,13 +75,6 @@ var PageGameMain = Object.assign({}, {}, {
                 ]
             };
 
-        for (var i = 0; i < boardData.words.length; i++) {
-            for (var j = 0; j < boardData.words[i].letters.length; j++) {
-                boardData.words[i].letters[j].x = parseInt(boardData.words[i].letters[j].x);
-                boardData.words[i].letters[j].y = parseInt(boardData.words[i].letters[j].y);
-            }
-        }
-
         return boardData;
     },
 
