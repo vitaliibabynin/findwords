@@ -89,15 +89,11 @@ var BoardClass = Object.assign({}, {}, {
             }),
             words: React.PropTypes.arrayOf(
                 React.PropTypes.shape({
-                    words: React.PropTypes.arrayOf(
+                    letters: React.PropTypes.arrayOf(
                         React.PropTypes.shape({
-                            letters: React.PropTypes.arrayOf(
-                                React.PropTypes.shape({
-                                    x: React.PropTypes.number,
-                                    y: React.PropTypes.number,
-                                    letter: React.PropTypes.string
-                                })
-                            )
+                            x: React.PropTypes.number,
+                            y: React.PropTypes.number,
+                            letter: React.PropTypes.string
                         })
                     )
                 })
@@ -155,8 +151,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     boardConverter: function (boardData) {
-        console.log(boardData);
-
         var arr = new Array(boardData.board.rows);
 
         for (var i = 0; i < arr.length; i++) {

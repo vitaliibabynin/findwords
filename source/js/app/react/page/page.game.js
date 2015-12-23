@@ -33,22 +33,7 @@ var PageGameMain = Object.assign({}, {}, {
             shownWordsAnimationLeave: true
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];
-        state.boardData = state.roundData.rounds[state.roundIdx] || {
-                score: 0,
-                coins: 0,
-                time: 1,
-                board: {
-                    rows: 1,
-                    cols: 1
-                },
-                words: [
-                    {
-                        letters: [
-                            {x: 0, y: 0, letter: ""}
-                        ]
-                    }
-                ]
-            };
+        state.boardData = this.getBoardData(state.roundData, state.roundIdx);
 
         state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
         state.time = state.boardData.time || 0;
@@ -74,13 +59,31 @@ var PageGameMain = Object.assign({}, {}, {
         }
     },
 
-    ////componentDidUpdate: function(prevProps, prevState) {
-    //
-    //},
-    //
-    //componentWillUnmount: function() {
-    //
-    //},
+    getBoardData: function (roundData, roundIdx) {
+        var boardData = roundData.rounds[roundIdx] || {
+                time: 1,
+                board: {
+                    rows: 1,
+                    cols: 1
+                },
+                words: [
+                    {
+                        letters: [
+                            {x: 0, y: 0, letter: ""}
+                        ]
+                    }
+                ]
+            };
+
+        for (var i = 0; i < boardData.words.length; i++) {
+            for (var j = 0; j < boardData.words[i].letters.length; j++) {
+                boardData.words[i].letters[j].x = parseInt(boardData.words[i].letters[j].x);
+                boardData.words[i].letters[j].y = parseInt(boardData.words[i].letters[j].y);
+            }
+        }
+
+        return boardData;
+    },
 
     shownWordsConverter: function (shownWords, boardData) {
         var shownWordsLetters = [];

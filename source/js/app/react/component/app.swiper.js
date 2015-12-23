@@ -55,7 +55,10 @@ var SlideClass = Object.assign({}, {}, {
             appManager.getGameState().setRoundsBundles(idx, "bundleScore", 0);
             appManager.getGameState().setRoundsBundles(idx, "roundsComplete", 0);
 
-            if (idx == 0) {
+            var index = idx - 1 >= 0 ? idx - 1 : 0;
+            var numberOfRoundsRequired = parseInt(appManager.getSettings().getRoundsBundles()[index].numberOfRoundsRequired);
+
+            if (idx == 0 || numberOfRoundsRequired == 0) {
                 appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
             } else {
                 appManager.getGameState().setRoundsBundles(idx, "isUnlocked", false);

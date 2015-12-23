@@ -103,7 +103,7 @@ var PageGameVictory = Object.assign({}, {}, {
     openNextSlide: function () {
         var numberOfRoundsRequired = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].numberOfRoundsRequired;
 
-        if (this.state.roundIdx == numberOfRoundsRequired - 1) {
+        if (this.state.roundIdx >= numberOfRoundsRequired - 1) {
             var roundsBundleToOpen = this.state.roundsBundleIdx + 1;
             appManager.getGameState().setRoundsBundles(roundsBundleToOpen, 'isUnlocked', true);
         }
