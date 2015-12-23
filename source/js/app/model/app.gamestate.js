@@ -815,10 +815,6 @@ var GameState = Object.assign({}, {}, {
             this.gameState.practiceRound = {};
         }
 
-        if (!this.gameState.practiceRound.complete) {
-            this.gameState.practiceRound.complete = {};
-        }
-
         this.gameState.practiceRound.complete = newBoolean;
 
         this.saveGameState();

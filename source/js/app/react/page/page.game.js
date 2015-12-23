@@ -57,6 +57,8 @@ var PageGameMain = Object.assign({}, {}, {
         if (this.state.roundIdx > roundsTotal) {
             router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
         }
+
+        //console.log("pageGameComponentDidMount");
     },
 
     getBoardData: function (roundData, roundIdx) {
@@ -301,9 +303,9 @@ var PageGameMain = Object.assign({}, {}, {
     goToPageRoundComplete: function (time) {
         time = time || 200;
 
-        var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
-        roundsComplete++;
-        this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
+        //var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
+        //roundsComplete++;
+        //this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
 
         var params = {
             roundsBundleIdx: this.state.roundsBundleIdx,
@@ -319,6 +321,7 @@ var PageGameMain = Object.assign({}, {}, {
     render: function () {
         //console.log({pageGameScore: appManager.getGameState().getScore()});
         //console.log({pageGameCoins: appManager.getGameState().getCoins()});
+        //console.log({pageGameRoundsComplete: this.getGameStateRoundsBundleField("roundsComplete")});
 
         return (
             <div className="page-game">

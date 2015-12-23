@@ -29,8 +29,8 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     componentDidMount: function () {
         this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(this.state.rewardCoins);
-        appManager.getGameState().setPracticeRoundComplete(true);
         appManager.getGameState().setGameStateField("practiceRound", {});
+        appManager.getGameState().setPracticeRoundComplete(true);
 
         appDialogs.getRateDialog().showIfTime();
     },

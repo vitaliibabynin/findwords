@@ -25,11 +25,11 @@ var PageShop = Object.assign({}, {}, {
         return {
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
             purchases: appManager.getSettings().getPurchases() || {
-                "coinspack_1": 50,
-                "coinspack_2": 110,
-                "coinspack_3": 245,
-                "coinspack_4": 550,
-                "coinspack_5": 1100
+                "coinspack_1": 0,
+                "coinspack_2": 0,
+                "coinspack_3": 0,
+                "coinspack_4": 0,
+                "coinspack_5": 0
             },
             freeCoins: appManager.getSettings().getFreeCoins() || {
                 watchVideo: 0,
@@ -39,20 +39,26 @@ var PageShop = Object.assign({}, {}, {
     },
 
     onClickBuyCoins: function (buttonProps) {
-        console.log(buttonProps.blockId);
-
         appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
         this.forceUpdate();
+
+        console.log(buttonProps.blockId);
 
         //var purchaseID = buttonProps.blockId;
         //appStore.order(purchaseID);
     },
 
     onClickWatchVideo: function () {
+        appManager.getGameState().addCoins(this.state.freeCoins.watchVideo);
+        this.forceUpdate();
+
         console.log("watch a video");
     },
 
     onClickShare: function () {
+        appManager.getGameState().addCoins(this.state.freeCoins.sendInvite);
+        this.forceUpdate();
+
         console.log("share with friends");
     },
 

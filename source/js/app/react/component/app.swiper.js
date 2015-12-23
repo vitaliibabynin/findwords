@@ -94,7 +94,6 @@ var SlideClass = Object.assign({}, {}, {
         }
 
         var practiceRoundComplete = appManager.getGameState().getPracticeRoundComplete() || false;
-        console.log(practiceRoundComplete);
         if (practiceRoundComplete === false) {
             var roundsComplete = this.countRoundsComplete();
 
