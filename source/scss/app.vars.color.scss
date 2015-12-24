@@ -1,143 +1,148 @@
 //MAIN PAGE
 //mainPage
-$mainPage-bg-color: #81cfe0;
+$mainPage-bg-color: $color-5;
 
 //mainPage-Header
-$header-bg-color: #2574a9;
+$header-bg-color: $color-8;
 
 //mainPage-Counters
-$counters-bg-color: $color01;
-$countersPanel-bg-color: rgba(85,85,85,0.5);
-$countersNumbers-color: $color02;
+$counters-bg-color: $color-1;
+$countersPanel-bg-color: $color-11;
+$countersNumbers-color: $color-2;
 $scoreCounterPanel-bg-color: $countersPanel-bg-color;
 $scoreCounterNumbers-color: $countersNumbers-color;
 $coinsCounterPanel-bg-color: $countersPanel-bg-color;
 $coinsCounterNumbers-color: $countersNumbers-color;
 
 //mainPage-Menu
-$slide-onClick-bg-color: rgba(0,0,0,0.2);
-$slide-text-color: $color02;
-$slide-wordsComplete-panel-bg-color: rgba(85,85,85,0.5);
-$slide-wordsComplete-progress-bg-color: $color02;
-$slide-instructions-buy-color: $color02;
-$slide-instructions-buy-bg-color: #26c281;
-$slide-soon-border-color: $color02;
-$swiper-pagination-bullet: $color02;
+$slide-onClick-bg-color: $color-12;
+$slide-text-color: $color-2;
+$slide-wordsComplete-panel-bg-color: $color-11;
+$slide-wordsComplete-progress-bg-color: $color-2;
+$slide-instructions-buy-color: $color-2;
+$slide-instructions-buy-bg-color: $color-3;
+$slide-soon-border-color: $color-2;
+$swiper-pagination-bullet: $color-2;
 $swiper-pagination-bullet-active: #e87e04;
-$hover-box-shadow: inset 999rem 0 rgba(0,0,0,0.2);
-$navigation-btn-color: $color02;
-$navigation-btn-bg-color: #26c281;
-$navigation-btn-rating-bg-color: #ff9d00;
+$hover-box-shadow: inset 999rem 0 $color-12;
+$navigation-btn-color: $color-2;
+$navigation-btn-bg-color: $color-3;
+$navigation-btn-rating-bg-color: $color-10;
 $navigation-btn-facebook-bg-color: #3a539b;
-$navigation-btn-shop-bg-color: #ff4545;
-$navigation-btn-facebook-border-color: $color02;
+$navigation-btn-shop-bg-color: $color-4;
+$navigation-btn-facebook-border-color: $color-2;
 
 //mainPage-Footer
-$footer-bg-color: #2574a9;
-$footerLabel-color: $color02;
-$footerSwitchOn-bg-color: #26c281;
+$footer-bg-color: $color-8;
+$footerLabel-color: $color-2;
+$footerSwitchOn-bg-color: $color-3;
 $footerSwitchBorderOn-bg-color: $footerSwitchOn-bg-color;
 $footerSwitchCircleOn-bg-color: $footerSwitchOn-bg-color;
 
 
 //GAME PAGE
 //gamePage
-$gamePage-bg-color: #81cfe0;
+$gamePage-bg-color: $color-5;
 
 //gamePage-Timer
-$gamePage-timer-bg-color: #2574a9;
+$gamePage-timer-bg-color: $color-8;
 $gamePage-timer-timeLine-panel-bg-color: #555555;
-$gamePage-timer-timeLine-fill-bg-color: $color02;
+$gamePage-timer-timeLine-fill-bg-color: $color-2;
 
 //gamePage-Chips
-$gamePage-chip-color: $color02;
-$gamePage-chip-open-word-bg-color: #ff9d00;
+$gamePage-chip-color: $color-2;
+$gamePage-chip-open-word-bg-color: $color-10;
 $gamePage-chip-open-letter-bg-color: #d24d57;
 $gamePage-chip-show-word-bg-color: #9b59b6;
 
 //gamePage-Board
-$gamePage-board-color: #2a456e;
-$gamePage-board-color-border: #2a456e;
-$gamePage-board-td-color-selected: $color02;
-$gamePage-board-td-color-complete: $color02;
-$gamePage-board-td-color-open-letter: red;
-$gamePage-board-td-bg-color-link: $color02;
-$gamePage-board-td-bg-color-link-open-letter: red;
+$gamePage-board-color: $color-9;
+$gamePage-board-color-border: $color-9;
+$gamePage-board-td-color-selected: $color-2;
+$gamePage-board-td-color-complete: $color-2;
+$gamePage-board-td-color-open-letter: $color-4;
+$gamePage-board-td-bg-color-link: $color-2;
+$gamePage-board-td-bg-color-link-open-letter: $color-4;
 $gamePage-board-td-bg-color-default: #e8e8e8;
 $gamePage-board-td-bg-color-default-transparent: rgba(232,232,232,0);
-$gamePage-board-td-bg-color-1: green;
-$gamePage-board-td-bg-color-2: blue;
-$gamePage-board-td-bg-color-3: cyan;
-$gamePage-board-td-bg-color-4: orange;
-$gamePage-board-td-bg-color-5: indigo;
-$gamePage-board-td-bg-color-6: violet;
-$gamePage-board-td-bg-color-7: grey;
-$gamePage-board-td-bg-color-8: purple;
-$gamePage-board-td-bg-color-9: pink;
-$gamePage-board-td-bg-color-10: darkblue;
+$gamePage-board-td-bg-color-1: $board-color-1;
+$gamePage-board-td-bg-color-2: $board-color-2;
+$gamePage-board-td-bg-color-3: $board-color-3;
+$gamePage-board-td-bg-color-4: $board-color-4;
+$gamePage-board-td-bg-color-5: $board-color-5;
+$gamePage-board-td-bg-color-6: $board-color-6;
+$gamePage-board-td-bg-color-7: $board-color-7;
+$gamePage-board-td-bg-color-8: $board-color-8;
+$gamePage-board-td-bg-color-9: $board-color-9;
+$gamePage-board-td-bg-color-10: $board-color-10;
+$gamePage-board-td-bg-color-11: $board-color-11;
+$gamePage-board-td-bg-color-12: $board-color-12;
+$gamePage-board-td-bg-color-13: $board-color-13;
+$gamePage-board-td-bg-color-14: $board-color-14;
+$gamePage-board-td-bg-color-15: $board-color-15;
 $gamePage-board-td-learn-bg-color-1: #febd27;
 $gamePage-board-td-learn-bg-color-2: #d24a43;
 $gamePage-board-td-learn-bg-color-3: #ae8c64;
 
 //gamePage-Notice
-$gamePage-notice-default-bg-color: #2574a9;
-$gamePage-notice-default-color: $color02;
-$gamePage-notice-noSuchWord-bg-color: #2574a9;
-$gamePage-notice-noSuchWord-color: $color02;
+$gamePage-notice-default-bg-color: $color-8;
+$gamePage-notice-default-color: $color-2;
+$gamePage-notice-noSuchWord-bg-color: $color-8;
+$gamePage-notice-noSuchWord-color: $color-2;
 $gamePage-notice-selectDifferently-bg-color: #00b16a;
-$gamePage-notice-selectDifferently-color: $color02;
+$gamePage-notice-selectDifferently-color: $color-2;
 $gamePage-notice-noWordsToShow-bg-color: #d86a43;
-$gamePage-notice-noWordsToShow-color: $color02;
+$gamePage-notice-noWordsToShow-color: $color-2;
 
 //gamePage-ShownWords
-$gamePage-shownWords-word-color: $color02;
+$gamePage-shownWords-word-color: $color-2;
 
 
 //GAME PAGE VICTORY
 //gamePageVictory
-$gamePageVictory-bg-color: #81cfe0;
+$gamePageVictory-bg-color: $color-5;
 
 //gamePageVictory-container
-$gamePageVictory-container-bg-color: #ff4545;
-$gamePageVictory-container-color: $color02;
+$gamePageVictory-container-bg-color: $color-4;
+$gamePageVictory-container-color: $color-2;
 
 //gamePageVictory-container-roundsComplete
-$gamePageVictory-container-roundsComplete-panel-bg-color: rgba(85,85,85,0.5);
-$gamePageVictory-container-roundsComplete-progress-bg-color: $color02;
+$gamePageVictory-container-roundsComplete-panel-bg-color: $color-11;
+$gamePageVictory-container-roundsComplete-progress-bg-color: $color-2;
 
 //gamePageVictory-container-continue-button
-$gamePageVictory-container-continue-button-bg-color: rgba(85,85,85,0.5);
+$gamePageVictory-container-continue-button-bg-color: $color-11;
 
 
 
 //BONUS PAGE
 //pageBonus
-$pageBonus-bg-color: #81cfe0;
-$pageBonus-container-bg-color: #2574a9;
-$pageBonus-container-color: $color02;
-$pageBonus-day-unlocked-bg-color: $color01;
-$pageBonus-day-line-bg-color: $color02;
+$pageBonus-bg-color: $color-5;
+$pageBonus-container-bg-color: $color-8;
+$pageBonus-container-color: $color-2;
+$pageBonus-day-unlocked-bg-color: $color-1;
+$pageBonus-day-line-bg-color: $color-2;
 //$pageBonus-day-locked-bg-color: #253c4d;
 $pageBonus-day-locked-color: rgba(255, 255, 255, 0.5);
 $pageBonus-day-locked-bg-color: #3d647f;
-$pageBonus-collect-bg-color: $color01;
+$pageBonus-collect-bg-color: $color-1;
 
 
 //SHOP PAGE
 //pageShop
-$pageShop-bg-color: #81cfe0;
-$pageShop-container-bg-color: #2574a9;
-$pageShop-container-color: $color02;
-$pageShop-header-bg-color: #ff4545;
-$pageShop-inner-block-bg-color: $color01;
+$pageShop-bg-color: $color-5;
+$pageShop-container-bg-color: $color-8;
+$pageShop-container-color: $color-2;
+$pageShop-header-bg-color: $color-4;
+$pageShop-inner-block-bg-color: $color-1;
 $pageShop-price-bg-color: #429063;
 
 
 //RANKINGS PAGE
 //pageRankings
-$pageRankings-bg-color: #81cfe0;
+$pageRankings-bg-color: $color-5;
 $pageRankings-container-bg-color: #5c97bf;
-$pageRankings-container-color: $color02;
+$pageRankings-container-color: $color-2;
 $pageRankings-header-bg-color: #049372;
 $pageRankings-playerStats-selected-bg-color: #3eb5f1;
 $pageRankings-inviteFriendsFbButton-bg-color: #3a539b;
@@ -145,51 +150,51 @@ $pageRankings-inviteFriendsFbButton-bg-color: #3a539b;
 
 //LEARN PAGE
 //pageLearn
-$pageLearn-bg-color: #81cfe0;
-$pageLearn-container-bg-color: #2574a9;
-$pageLearn-container-color: $color02;
-$pageLearn-header-bg-color: $color01;
-$pageLearn-review-bg-color: #f89406;
-$pageLearn-later-bg-color: #67809f;
-$pageLearn-never-bg-color: #67809f;
+$pageLearn-bg-color: $color-5;
+$pageLearn-container-bg-color: $color-8;
+$pageLearn-container-color: $color-2;
+$pageLearn-header-bg-color: $color-1;
+$pageLearn-review-bg-color: $color-6;
+$pageLearn-later-bg-color: $color-7;
+$pageLearn-never-bg-color: $color-7;
 
 
 //RATE DIALOG
 //dialogRate
-$dialogRate-header-color: $color02;
-$dialogRate-header-bg-color: $color01;
-$dialogRate-content-color: $color02;
-$dialogRate-content-bg-color: #2574a9;
-$dialogRate-review-bg-color: #f89406;
-$dialogRate-later-bg-color: #67809f;
-$dialogRate-never-bg-color: #67809f;
+$dialogRate-header-color: $color-2;
+$dialogRate-header-bg-color: $color-1;
+$dialogRate-content-color: $color-2;
+$dialogRate-content-bg-color: $color-8;
+$dialogRate-review-bg-color: $color-6;
+$dialogRate-later-bg-color: $color-7;
+$dialogRate-never-bg-color: $color-7;
 
 
 //NO-COINS DIALOG
 //dialogNoCoins
-$dialogNoCoins-header-color: $color02;
-$dialogNoCoins-header-bg-color: #ff4545;
-$dialogNoCoins-content-color: $color02;
-$dialogNoCoins-content-bg-color: #2574a9;
-$dialogNoCoins-buy-bg-color: #f89406;
-$dialogNoCoins-earn-bg-color: #f89406;
-$dialogNoCoins-cancel-bg-color: $color01;
+$dialogNoCoins-header-color: $color-2;
+$dialogNoCoins-header-bg-color: $color-4;
+$dialogNoCoins-content-color: $color-2;
+$dialogNoCoins-content-bg-color: $color-8;
+$dialogNoCoins-buy-bg-color: $color-6;
+$dialogNoCoins-earn-bg-color: $color-6;
+$dialogNoCoins-cancel-bg-color: $color-1;
 
 
 //ERROR DIALOG
 //dialogError
-$dialogError-header-color: $color02;
-$dialogError-header-bg-color: #ff4545;
-$dialogError-content-color: $color02;
-$dialogError-content-bg-color: #2574a9;
-$dialogError-cancel-bg-color: #f89406;
+$dialogError-header-color: $color-2;
+$dialogError-header-bg-color: $color-4;
+$dialogError-content-color: $color-2;
+$dialogError-content-bg-color: $color-8;
+$dialogError-cancel-bg-color: $color-6;
 
 
 //REQUIRE-PUSH DIALOG
 //dialogRequirePush
-$dialogRequirePush-header-color: $color02;
-$dialogRequirePush-header-bg-color: $color01;
-$dialogRequirePush-content-color: $color02;
-$dialogRequirePush-content-bg-color: #2574a9;
-$dialogRequirePush-ok-bg-color: #f89406;
-$dialogRequirePush-cancel-bg-color: #67809f;
+$dialogRequirePush-header-color: $color-2;
+$dialogRequirePush-header-bg-color: $color-1;
+$dialogRequirePush-content-color: $color-2;
+$dialogRequirePush-content-bg-color: $color-8;
+$dialogRequirePush-ok-bg-color: $color-6;
+$dialogRequirePush-cancel-bg-color: $color-7;
