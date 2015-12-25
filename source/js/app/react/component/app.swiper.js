@@ -127,7 +127,19 @@ var SlideClass = Object.assign({}, {}, {
     onClickBuySet: function (buttonProps, e) {
         e.stopPropagation();
 
-        appDialogs.getErrorDialog().setContentText(i18n._('app.dialog.error.description')).show();
+        //appDialogs.getErrorDialog().setContentText(i18n._('app.dialog.error.description')).show();
+
+        //var coins = 50;
+        //
+        //appDialogs.getInfoDialog()
+        //    .setTitle(i18n._('app.dialog.info.addcoins.title'))
+        //    .setContentText(i18n._('app.dialog.info.addcoins.description', coins))
+        //    .show();
+
+        appDialogs.getInfoDialog()
+            .setTitle(i18n._('app.dialog.info.removead.title'))
+            .setContentText(i18n._('app.dialog.info.removead.description'))
+            .show();
 
         //this.onClickGame();
     },

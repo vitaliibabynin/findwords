@@ -51,8 +51,8 @@ var PageGameMain = Object.assign({}, {}, {
             return;
         }
 
-        //console.log({roundIdx: this.state.roundIdx});
-        //console.log({roundsTotal: roundsTotal});
+        console.log({roundIdx: this.state.roundIdx});
+        console.log({roundsTotal: roundsTotal});
 
         if (this.state.roundIdx > roundsTotal) {
             router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});

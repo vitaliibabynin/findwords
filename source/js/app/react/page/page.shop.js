@@ -39,13 +39,13 @@ var PageShop = Object.assign({}, {}, {
     },
 
     onClickBuyCoins: function (buttonProps) {
-        appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
-        this.forceUpdate();
-
+        //appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
+        //this.forceUpdate();
+        //
         console.log(buttonProps.blockId);
 
-        //var purchaseID = buttonProps.blockId;
-        //appStore.order(purchaseID);
+        var purchaseID = buttonProps.blockId;
+        appStore.order(purchaseID);
     },
 
     onClickWatchVideo: function () {

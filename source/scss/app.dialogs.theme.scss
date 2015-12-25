@@ -143,6 +143,37 @@
   }
 }
 
+#info-dialog.md-modal {
+  .md-title {
+    color: $dialogInfo-header-color;
+    background-color: $dialogInfo-header-bg-color;
+
+    h3 {
+      font-size: $dialogInfo-heading-font-size;
+    }
+  }
+  .md-content {
+    padding: 0 0.875rem 0.875rem;
+    color: $dialogInfo-content-color;
+    background: $dialogInfo-content-bg-color;
+    font-size: $dialogInfo-description-font-size;
+
+    & > p {
+      padding: 1rem 0.75rem;
+    }
+    a {
+      color: $dialogInfo-content-color;
+    }
+    .cancel {
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      background-color: $dialogInfo-cancel-bg-color;
+      font-size: $dialogInfo-cancel-font-size;
+    }
+  }
+}
+
 #error-dialog.md-modal {
   .md-title {
     color: $dialogError-header-color;

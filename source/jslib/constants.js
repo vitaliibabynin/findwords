@@ -1,4 +1,3 @@
-
 window.CONST = {
     ENV: CURRENT_ENV,
     IS_CORDOVA_APP: window.cordova ? true : false,
@@ -121,10 +120,20 @@ window.CONST = {
             'app.dialog.nocoins.button.earn': 'Получить бесплатно',
             'app.dialog.nocoins.button.cancel': 'Отмена',
 
+            //INFO DIALOG
+            'app.dialog.info.button.cancel': "OK",
+
+            //ADD-COINS DIALOG
+            'app.dialog.info.addcoins.title': 'Монеты добавлены',
+            'app.dialog.info.addcoins.description': '#{count} моне((та|ты|т)) добавлено.',
+
+            //REMOVE-ADS DIALOG
+            'app.dialog.info.removead.title': 'Отключение рекламы',
+            'app.dialog.info.removead.description': 'Реклама была отключена. Желаем приятной игры.',
+
             //ERROR DIALOG
             'app.dialog.error.title': 'Ошибка',
             'app.dialog.error.description': 'Произошел сбой.',
-            'app.dialog.error.button.cancel': 'ОК',
 
             //REQUIRE-PUSH DIALOG
             'app.dialog.requirepush.title': 'Уведомления',
@@ -234,10 +243,20 @@ window.CONST = {
             'app.dialog.nocoins.button.earn': 'Get for free',
             'app.dialog.nocoins.button.cancel': 'Cancel',
 
+            //INFO DIALOG
+            'app.dialog.info.button.cancel': "OK",
+
+            //ADD-COINS DIALOG
+            'app.dialog.info.addcoins.title': 'Coins added',
+            'app.dialog.info.addcoins.description': '#{count} coi((n|ns|ns)) added.',
+
+            //REMOVE-ADS DIALOG
+            'app.dialog.info.removead.title': 'Remove ads',
+            'app.dialog.info.removead.description': 'Ads were turned off. Enjoy your game.',
+
             //ERROR DIALOG
             'app.dialog.error.title': 'Error',
             'app.dialog.error.description': 'Something went wrong.',
-            'app.dialog.error.button.cancel': 'OK',
 
             //REQUIRE-PUSH DIALOG
             'app.dialog.requirepush.title': 'Notifications',
@@ -259,10 +278,10 @@ CONST.GA_ID[CONST.PLATFORM_ANDROID] = '';
 CONST.GA_ID[CONST.PLATFORM_WINDOWS] = '';
 CONST.GA_ID[CONST.PLATFORM_SITE] = '';
 
-if(!CONST.IS_CORDOVA_APP){
-    CONST.STATIC_IMAGE_URL = '/'+CONST.STATIC_IMAGE_URL;
-    CONST.STATIC_CSS_URL = '/'+CONST.STATIC_CSS_URL;
-    CONST.STATIC_JS_URL = '/'+CONST.STATIC_JS_URL;
+if (!CONST.IS_CORDOVA_APP) {
+    CONST.STATIC_IMAGE_URL = '/' + CONST.STATIC_IMAGE_URL;
+    CONST.STATIC_CSS_URL = '/' + CONST.STATIC_CSS_URL;
+    CONST.STATIC_JS_URL = '/' + CONST.STATIC_JS_URL;
 }
 
 var ENV_SETTINGS = {};
@@ -279,9 +298,11 @@ ENV_SETTINGS[ENV_PRODUCTION] = {
     API_URL: 'http://api.vitaliy.findwords.smalldev.alek.in.ua'
 }
 
-if(ENV_SETTINGS.hasOwnProperty(CURRENT_ENV)){
-    for(var k in ENV_SETTINGS[CURRENT_ENV]){
-        if(!ENV_SETTINGS[CURRENT_ENV].hasOwnProperty(k)){ continue; }
+if (ENV_SETTINGS.hasOwnProperty(CURRENT_ENV)) {
+    for (var k in ENV_SETTINGS[CURRENT_ENV]) {
+        if (!ENV_SETTINGS[CURRENT_ENV].hasOwnProperty(k)) {
+            continue;
+        }
         CONST[k] = ENV_SETTINGS[CURRENT_ENV][k];
     }
 }

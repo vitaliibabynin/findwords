@@ -146,7 +146,7 @@ var ErrorDialog = function(){
     dialog.getContent = function(){
         return '<div class="md-content"> \
                         <p>'+this.contentText+'</p> \
-                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.error.button.cancel')+'</a></div> \
+                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.info.button.cancel')+'</a></div> \
                  </div> \
                 ';
     }
