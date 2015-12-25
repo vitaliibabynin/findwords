@@ -41,7 +41,7 @@ var PageShop = Object.assign({}, {}, {
     onClickBuyCoins: function (buttonProps) {
         //appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
         //this.forceUpdate();
-        //
+
         console.log(buttonProps.blockId);
 
         var purchaseID = buttonProps.blockId;
@@ -87,38 +87,38 @@ var PageShop = Object.assign({}, {}, {
     },
 
     getData: function () {
-        //console.log(appStore.getProductPrice(PRODUCT.COINS_50));
-        //console.log(appStore.getProduct(PRODUCT.COINS_50));
+        //console.log(appStore.getProductPrice(PRODUCT.COINS.COINS_50));
+        //console.log(appStore.getProduct(PRODUCT.COINS.COINS_50));
 
         return [
             {
-                id: PRODUCT.COINS_50,
-                coins: this.getProductCoins(PRODUCT.COINS_50),
-                price: this.getProductPrice(PRODUCT.COINS_50),
+                id: PRODUCT.COINS.COINS_50,
+                coins: this.getProductCoins(PRODUCT.COINS.COINS_50),
+                price: this.getProductPrice(PRODUCT.COINS.COINS_50),
                 image: "url('" + this.getImagePath(ONE_DOLLAR) + "')"
             },
             {
-                id: PRODUCT.COINS_110,
-                coins: this.getProductCoins(PRODUCT.COINS_110),
-                price: this.getProductPrice(PRODUCT.COINS_110),
+                id: PRODUCT.COINS.COINS_110,
+                coins: this.getProductCoins(PRODUCT.COINS.COINS_110),
+                price: this.getProductPrice(PRODUCT.COINS.COINS_110),
                 image: "url('" + this.getImagePath(THREE_DOLLAR) + "')"
             },
             {
-                id: PRODUCT.COINS_245,
-                coins: this.getProductCoins(PRODUCT.COINS_245),
-                price: this.getProductPrice(PRODUCT.COINS_245),
+                id: PRODUCT.COINS.COINS_245,
+                coins: this.getProductCoins(PRODUCT.COINS.COINS_245),
+                price: this.getProductPrice(PRODUCT.COINS.COINS_245),
                 image: "url('" + this.getImagePath(MANY_DOLLAR) + "')"
             },
             {
-                id: PRODUCT.COINS_550,
-                coins: this.getProductCoins(PRODUCT.COINS_550),
-                price: this.getProductPrice(PRODUCT.COINS_550),
+                id: PRODUCT.COINS.COINS_550,
+                coins: this.getProductCoins(PRODUCT.COINS.COINS_550),
+                price: this.getProductPrice(PRODUCT.COINS.COINS_550),
                 image: "url('" + this.getImagePath(SACK_DOLLAR) + "')"
             },
             {
-                id: PRODUCT.COINS_1100,
-                coins: this.getProductCoins(PRODUCT.COINS_1100),
-                price: this.getProductPrice(PRODUCT.COINS_1100),
+                id: PRODUCT.COINS.COINS_1100,
+                coins: this.getProductCoins(PRODUCT.COINS.COINS_1100),
+                price: this.getProductPrice(PRODUCT.COINS.COINS_1100),
                 image: "url('" + this.getImagePath(THREE_SACK_DOLLAR) + "')"
             }
         ]

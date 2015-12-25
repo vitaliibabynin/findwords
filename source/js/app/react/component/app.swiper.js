@@ -17,6 +17,8 @@ var LAYOUT_UNLOCKED = 'unlocked';
 var LAYOUT_COMPLETE = 'complete';
 var LAYOUT_COMPLETE_MESSAGE = 'message';
 
+var PRODUCT = require('./../../model/app.store').PRODUCT;
+
 
 var SlideClass = Object.assign({}, {}, {
 
@@ -136,12 +138,64 @@ var SlideClass = Object.assign({}, {}, {
         //    .setContentText(i18n._('app.dialog.info.addcoins.description', coins))
         //    .show();
 
-        appDialogs.getInfoDialog()
-            .setTitle(i18n._('app.dialog.info.removead.title'))
-            .setContentText(i18n._('app.dialog.info.removead.description'))
-            .show();
+        //appDialogs.getInfoDialog()
+        //    .setTitle(i18n._('app.dialog.info.removead.title'))
+        //    .setContentText(i18n._('app.dialog.info.removead.description'))
+        //    .show();
 
         //this.onClickGame();
+
+
+        var productId = this.getProductId();
+        console.log(productId);
+
+        appStore.order(productId);
+
+        //var slideToUnlockNumber = this.state.slideIndex + 1;
+        //this.unlockRoundsBundle(slideToUnlockNumber);
+        //this.setState({layout: LAYOUT_UNLOCKED});
+    },
+
+    unlockRoundsBundle: function(number) {
+        var idx = number - 1;
+        appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
+        appDialogs.getInfoDialog()
+            .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
+            .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', number))
+            .show();
+    },
+
+    getProductId: function () {
+        var slideToUnlockNumber = this.state.slideIndex + 1;
+        var number = 1;
+        switch (router.getLanguage()) {
+            case "en":
+                for (var k in PRODUCT.ROUNDSBUNDLES.EN) {
+                    if (!PRODUCT.ROUNDSBUNDLES.EN.hasOwnProperty(k)) {
+                        continue;
+                    }
+
+                    number++;
+                    if (number == slideToUnlockNumber) {
+                        return PRODUCT.ROUNDSBUNDLES.EN[k];
+                    }
+                }
+                return;
+            case "ru":
+                for (k in PRODUCT.ROUNDSBUNDLES.RU) {
+                    if (!PRODUCT.ROUNDSBUNDLES.RU.hasOwnProperty(k)) {
+                        continue;
+                    }
+
+                    number++;
+                    if (number == slideToUnlockNumber) {
+                        return PRODUCT.ROUNDSBUNDLES.RU[k];
+                    }
+                }
+                return;
+            default:
+                return false;
+        }
     },
 
     onClickComplete: function () {

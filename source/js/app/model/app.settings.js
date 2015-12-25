@@ -61,13 +61,7 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getRoundsBundles: function () {
-        var defaultValue = [];
-        var roundsBundles = this.getSettingsValue('roundsBundles', defaultValue);
-
-        if (typeof roundsBundles == "undefined") {
-            return defaultValue;
-        }
-
+        var roundsBundles = this.getSettingsValue('roundsBundles', []);
         var safeRoundsBundles = roundsBundles[router.getLanguage()];
 
         for (var i = 0; i < safeRoundsBundles.length; i++) {
@@ -99,13 +93,7 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getPracticeRound: function () {
-        var defaultValue = [];
-        var practiceRound = this.getSettingsValue('practiceRound', defaultValue);
-
-        if (typeof practiceRound == "undefined") {
-            return defaultValue;
-        }
-
+        var practiceRound = this.getSettingsValue('practiceRound', []);
         var safePracticeRound = practiceRound[router.getLanguage()];
 
         safePracticeRound.board.cols = parseInt(safePracticeRound.board.cols);
@@ -131,19 +119,55 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getBonusCoins: function () {
-        return this.getSettingsValue('dailyBonusCoins', {});
+        var safeDailyBonusCoins = this.getSettingsValue('dailyBonusCoins', {});
+
+        for (var k in safeDailyBonusCoins) {
+            if (!safeDailyBonusCoins.hasOwnProperty(k)) {
+                continue;
+            }
+            safeDailyBonusCoins[k] = parseInt(safeDailyBonusCoins[k]);
+        }
+
+        return safeDailyBonusCoins;
     },
 
     getDialogs: function () {
-        return this.getSettingsValue('dialogs', {});
+        var safeDialogs = this.getSettingsValue('dialogs', {});
+
+        for (var k in safeDialogs) {
+            if (!safeDialogs.hasOwnProperty(k)) {
+                continue;
+            }
+            safeDialogs[k] = parseInt(safeDialogs[k]);
+        }
+
+        return safeDialogs;
     },
 
     getPurchases: function () {
-        return this.getShopValue('coins', {});
+        var safeCoins = this.getShopValue('coins', {});
+
+        for (var k in safeCoins) {
+            if (!safeCoins.hasOwnProperty(k)) {
+                continue;
+            }
+            safeCoins[k] = parseInt(safeCoins[k]);
+        }
+
+        return safeCoins;
     },
 
     getFreeCoins: function () {
-        return this.getShopValue('freecoins', {});
+        var safeFreeCoins = this.getShopValue('freecoins', {});
+
+        for (var k in safeFreeCoins) {
+            if (!safeFreeCoins.hasOwnProperty(k)) {
+                continue;
+            }
+            safeFreeCoins[k] = parseInt(safeFreeCoins[k]);
+        }
+
+        return safeFreeCoins;
     },
 
     getSlideSoon: function () {
@@ -151,11 +175,24 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getChipsCoinsCost: function () {
-        return this.getSettingsValue('chipsCoinsCost', {});
+        var safeChipsCoinsCost = this.getSettingsValue('chipsCoinsCost', {});
+
+        for (var k in safeChipsCoinsCost) {
+            if (!safeChipsCoinsCost.hasOwnProperty(k)) {
+                continue;
+            }
+            safeChipsCoinsCost[k] = parseInt(safeChipsCoinsCost[k]);
+        }
+
+        return safeChipsCoinsCost;
     },
 
     getInitialCoins: function () {
-        return this.getSettingsValue('initialCoins', 0);
+        var safeInitialCoins = this.getSettingsValue('initialCoins', 0);
+
+        safeInitialCoins = parseInt(safeInitialCoins);
+
+        return safeInitialCoins;
     }
 
 });

@@ -6,13 +6,59 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 
 var PRODUCT = {
-    COINS_50: 'coinspack_1',
-    COINS_110: 'coinspack_2',
-    COINS_245: 'coinspack_3',
-    COINS_550: 'coinspack_4',
-    COINS_1100: 'coinspack_5',
+    COINS: {
+        COINS_50: 'coinspack_1',
+        COINS_110: 'coinspack_2',
+        COINS_245: 'coinspack_3',
+        COINS_550: 'coinspack_4',
+        COINS_1100: 'coinspack_5'
+    },
+    ROUNDSBUNDLES: {
+        EN: {
+            EN_ROUNDSBUNDLE_2: 'en_roundsbundle_2',
+            EN_ROUNDSBUNDLE_3: 'en_roundsbundle_3',
+            EN_ROUNDSBUNDLE_4: 'en_roundsbundle_4',
+            EN_ROUNDSBUNDLE_5: 'en_roundsbundle_5',
+            EN_ROUNDSBUNDLE_6: 'en_roundsbundle_6',
+            EN_ROUNDSBUNDLE_7: 'en_roundsbundle_7',
+            EN_ROUNDSBUNDLE_8: 'en_roundsbundle_8',
+            EN_ROUNDSBUNDLE_9: 'en_roundsbundle_9',
+            EN_ROUNDSBUNDLE_10: 'en_roundsbundle_10',
+            EN_ROUNDSBUNDLE_11: 'en_roundsbundle_11',
+            EN_ROUNDSBUNDLE_12: 'en_roundsbundle_12',
+            EN_ROUNDSBUNDLE_13: 'en_roundsbundle_13',
+            EN_ROUNDSBUNDLE_14: 'en_roundsbundle_14',
+            EN_ROUNDSBUNDLE_15: 'en_roundsbundle_15',
+            EN_ROUNDSBUNDLE_16: 'en_roundsbundle_16',
+            EN_ROUNDSBUNDLE_17: 'en_roundsbundle_17',
+            EN_ROUNDSBUNDLE_18: 'en_roundsbundle_18',
+            EN_ROUNDSBUNDLE_19: 'en_roundsbundle_19',
+            EN_ROUNDSBUNDLE_20: 'en_roundsbundle_20'
+        },
+        RU: {
+            RU_ROUNDSBUNDLE_2: 'ru_roundsbundle_2',
+            RU_ROUNDSBUNDLE_3: 'ru_roundsbundle_3',
+            RU_ROUNDSBUNDLE_4: 'ru_roundsbundle_4',
+            RU_ROUNDSBUNDLE_5: 'ru_roundsbundle_5',
+            RU_ROUNDSBUNDLE_6: 'ru_roundsbundle_6',
+            RU_ROUNDSBUNDLE_7: 'ru_roundsbundle_7',
+            RU_ROUNDSBUNDLE_8: 'ru_roundsbundle_8',
+            RU_ROUNDSBUNDLE_9: 'ru_roundsbundle_9',
+            RU_ROUNDSBUNDLE_10: 'ru_roundsbundle_10',
+            RU_ROUNDSBUNDLE_11: 'ru_roundsbundle_11',
+            RU_ROUNDSBUNDLE_12: 'ru_roundsbundle_12',
+            RU_ROUNDSBUNDLE_13: 'ru_roundsbundle_13',
+            RU_ROUNDSBUNDLE_14: 'ru_roundsbundle_14',
+            RU_ROUNDSBUNDLE_15: 'ru_roundsbundle_15',
+            RU_ROUNDSBUNDLE_16: 'ru_roundsbundle_16',
+            RU_ROUNDSBUNDLE_17: 'ru_roundsbundle_17',
+            RU_ROUNDSBUNDLE_18: 'ru_roundsbundle_18',
+            RU_ROUNDSBUNDLE_19: 'ru_roundsbundle_19',
+            RU_ROUNDSBUNDLE_20: 'ru_roundsbundle_20'
+        }
+    },
     REMOVE_AD: 'remove_ad'
-}
+};
 
 var AbstractStore = Object.assign({}, AbstractEventEmitter, {
 
@@ -58,63 +104,83 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                 store.verbosity = store.DEBUG;
             }
 
-            store.register({
-                id: PRODUCT.COINS_50,
-                alias: PRODUCT.COINS_50,
-                type: store.CONSUMABLE
-            });
-            store.register({
-                id: PRODUCT.COINS_110,
-                alias: PRODUCT.COINS_110,
-                type: store.CONSUMABLE
-            });
-            store.register({
-                id: PRODUCT.COINS_245,
-                alias: PRODUCT.COINS_245,
-                type: store.CONSUMABLE
-            });
-            store.register({
-                id: PRODUCT.COINS_550,
-                alias: PRODUCT.COINS_550,
-                type: store.CONSUMABLE
-            });
-            store.register({
-                id: PRODUCT.COINS_1100,
-                alias: PRODUCT.COINS_1100,
-                type: store.CONSUMABLE
-            });
+            for (var k in PRODUCT.COINS) {
+                if (!PRODUCT.COINS.hasOwnProperty(k)) {
+                    continue;
+                }
+
+                store.register({
+                    id: PRODUCT.COINS[k],
+                    alias: PRODUCT.COINS[k],
+                    type: store.CONSUMABLE
+                });
+            }
+
+            for (k in PRODUCT.ROUNDSBUNDLES) {
+                if (!PRODUCT.ROUNDSBUNDLES.hasOwnProperty(k)) {
+                    continue;
+                }
+
+                for (var m in PRODUCT.ROUNDSBUNDLES[k]) {
+                    if (!PRODUCT.ROUNDSBUNDLES[k].hasOwnProperty(m)) {
+                        continue;
+                    }
+
+                    store.register({
+                        id: PRODUCT.ROUNDSBUNDLES[k][m],
+                        alias: PRODUCT.ROUNDSBUNDLES[k][m],
+                        type: store.NON_CONSUMABLE
+                    });
+                }
+            }
+
             store.register({
                 id: PRODUCT.REMOVE_AD,
                 alias: PRODUCT.REMOVE_AD,
                 type: store.NON_CONSUMABLE
             });
 
-
             store.ready(function() {
                 console.log('store.ready');
                 resolve();
             });
 
-            store.when(PRODUCT.COINS_50).approved(function (order) {
-                this.addCoins(50);
-                order.finish();
-            }.bind(this));
-            store.when(PRODUCT.COINS_110).approved(function (order) {
-                this.addCoins(110);
-                order.finish();
-            }.bind(this));
-            store.when(PRODUCT.COINS_245).approved(function (order) {
-                this.addCoins(245);
-                order.finish();
-            }.bind(this));
-            store.when(PRODUCT.COINS_550).approved(function (order) {
-                this.addCoins(550);
-                order.finish();
-            }.bind(this));
-            store.when(PRODUCT.COINS_1100).approved(function (order) {
-                this.addCoins(1100);
-                order.finish();
-            }.bind(this));
+            for (k in PRODUCT.COINS) {
+                if (!PRODUCT.COINS.hasOwnProperty(k)) {
+                    continue;
+                }
+
+                store.when(PRODUCT.COINS[k]).approved(function (order) {
+                    var coins = this.getCoins(PRODUCT.COINS[k]);
+                    this.addCoins(coins);
+                    order.finish();
+                }.bind(this));
+            }
+
+            for (k in PRODUCT.ROUNDSBUNDLES) {
+                if (!PRODUCT.ROUNDSBUNDLES.hasOwnProperty(k)) {
+                    continue;
+                }
+
+                var roundsBundleNumber = 1;
+                for (m in PRODUCT.ROUNDSBUNDLES[k]) {
+                    if (!PRODUCT.ROUNDSBUNDLES[k].hasOwnProperty(m)) {
+                        continue;
+                    }
+
+                    roundsBundleNumber++;
+                    store.when(PRODUCT.ROUNDSBUNDLES[k][m]).approved(function (order) {
+                        this.unlockRoundsBundle(roundsBundleNumber);
+                        order.finish();
+                    }.bind(this));
+                    store.when(PRODUCT.ROUNDSBUNDLES[k][m]).updated(function (product) {
+                        console.log(PRODUCT.ROUNDSBUNDLES[k][m]+(product.owned ? " OWNED" : " not owned")+"!");
+
+                        var productOwned = product && product.owned ? true : false;
+                        this.setRoundsBundle(roundsBundleNumber, productOwned);
+                    }.bind(this));
+                }
+            }
 
             store.when(PRODUCT.REMOVE_AD).approved(function (order) {
                 this.removeAd();
@@ -125,7 +191,6 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
                 appAd.setAdRemoved(product && product.owned ? true : false);
             }.bind(this));
-
 
 
             store.when('initiated', function(){
@@ -158,6 +223,22 @@ var CordovaStore = Object.assign({}, AbstractStore, {
         store.order(productId);
     },
 
+    getCoins: function(productId) {
+        var purchases = appManager.getSettings().getPurchases() || {};
+
+        for (var k in purchases) {
+            if (!purchases.hasOwnProperty(k)) {
+                continue;
+            }
+
+            if (k == productId) {
+                return purchases[productId];
+            }
+        }
+
+        return 0;
+    },
+
     addCoins: function(coins){
         //appSettings.addCoins(coins);
         appManager.getGameState().addCoins(coins);
@@ -167,11 +248,25 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             .show();
     },
 
-    removeAd: function(coins){
+    removeAd: function(){
         appDialogs.getInfoDialog()
             .setTitle(i18n._('app.dialog.info.removead.title'))
             .setContentText(i18n._('app.dialog.info.removead.description'))
             .show();
+    },
+
+    unlockRoundsBundle: function(roundsBundleNumber) {
+        var idx = roundsBundleNumber - 1;
+        appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
+        appDialogs.getInfoDialog()
+            .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
+            .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', number))
+            .show();
+    },
+
+    setRoundsBundle: function(roundsBundleNumber, boolean) {
+        var idx = roundsBundleNumber - 1;
+        appManager.getGameState().setRoundsBundles(idx, "isUnlocked", boolean);
     }
 
 });

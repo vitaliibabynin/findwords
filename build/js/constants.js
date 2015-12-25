@@ -131,6 +131,10 @@ window.CONST = {
             'app.dialog.info.removead.title': 'Отключение рекламы',
             'app.dialog.info.removead.description': 'Реклама была отключена. Желаем приятной игры.',
 
+            //UNLOCK-ROUNDSBUNDLE DIALOG
+            'app.dialog.info.unlockroundsbundle.title': 'Открытие комплекта',
+            'app.dialog.info.unlockroundsbundle.description': 'Комплект №#{count} открыт.',
+
             //ERROR DIALOG
             'app.dialog.error.title': 'Ошибка',
             'app.dialog.error.description': 'Произошел сбой.',
@@ -253,6 +257,10 @@ window.CONST = {
             //REMOVE-ADS DIALOG
             'app.dialog.info.removead.title': 'Remove ads',
             'app.dialog.info.removead.description': 'Ads were turned off. Enjoy your game.',
+
+            //UNLOCK-ROUNDSBUNDLE DIALOG
+            'app.dialog.info.unlockroundsbundle.title': 'Set unlock',
+            'app.dialog.info.unlockroundsbundle.description': 'Set ##{count} unlocked.',
 
             //ERROR DIALOG
             'app.dialog.error.title': 'Error',
