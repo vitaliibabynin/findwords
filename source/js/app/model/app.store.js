@@ -5,56 +5,127 @@ var AbstractEventEmitter = require('./abstract.eventemitter');
 var Object = {assign: require('react/lib/Object.assign')};
 
 
+//var PRODUCT = {
+//    COINS: {
+//        COINS_50: 'coinspack_1',
+//        COINS_110: 'coinspack_2',
+//        COINS_245: 'coinspack_3',
+//        COINS_550: 'coinspack_4',
+//        COINS_1100: 'coinspack_5'
+//    },
+//    ROUNDSBUNDLES: {
+//        EN: {
+//            EN_ROUNDSBUNDLE_2: 'en_roundsbundle_2',
+//            EN_ROUNDSBUNDLE_3: 'en_roundsbundle_3',
+//            EN_ROUNDSBUNDLE_4: 'en_roundsbundle_4',
+//            EN_ROUNDSBUNDLE_5: 'en_roundsbundle_5',
+//            EN_ROUNDSBUNDLE_6: 'en_roundsbundle_6',
+//            EN_ROUNDSBUNDLE_7: 'en_roundsbundle_7',
+//            EN_ROUNDSBUNDLE_8: 'en_roundsbundle_8',
+//            EN_ROUNDSBUNDLE_9: 'en_roundsbundle_9',
+//            EN_ROUNDSBUNDLE_10: 'en_roundsbundle_10',
+//            EN_ROUNDSBUNDLE_11: 'en_roundsbundle_11',
+//            EN_ROUNDSBUNDLE_12: 'en_roundsbundle_12',
+//            EN_ROUNDSBUNDLE_13: 'en_roundsbundle_13',
+//            EN_ROUNDSBUNDLE_14: 'en_roundsbundle_14',
+//            EN_ROUNDSBUNDLE_15: 'en_roundsbundle_15',
+//            EN_ROUNDSBUNDLE_16: 'en_roundsbundle_16',
+//            EN_ROUNDSBUNDLE_17: 'en_roundsbundle_17',
+//            EN_ROUNDSBUNDLE_18: 'en_roundsbundle_18',
+//            EN_ROUNDSBUNDLE_19: 'en_roundsbundle_19',
+//            EN_ROUNDSBUNDLE_20: 'en_roundsbundle_20'
+//        },
+//        RU: {
+//            RU_ROUNDSBUNDLE_2: 'ru_roundsbundle_2',
+//            RU_ROUNDSBUNDLE_3: 'ru_roundsbundle_3',
+//            RU_ROUNDSBUNDLE_4: 'ru_roundsbundle_4',
+//            RU_ROUNDSBUNDLE_5: 'ru_roundsbundle_5',
+//            RU_ROUNDSBUNDLE_6: 'ru_roundsbundle_6',
+//            RU_ROUNDSBUNDLE_7: 'ru_roundsbundle_7',
+//            RU_ROUNDSBUNDLE_8: 'ru_roundsbundle_8',
+//            RU_ROUNDSBUNDLE_9: 'ru_roundsbundle_9',
+//            RU_ROUNDSBUNDLE_10: 'ru_roundsbundle_10',
+//            RU_ROUNDSBUNDLE_11: 'ru_roundsbundle_11',
+//            RU_ROUNDSBUNDLE_12: 'ru_roundsbundle_12',
+//            RU_ROUNDSBUNDLE_13: 'ru_roundsbundle_13',
+//            RU_ROUNDSBUNDLE_14: 'ru_roundsbundle_14',
+//            RU_ROUNDSBUNDLE_15: 'ru_roundsbundle_15',
+//            RU_ROUNDSBUNDLE_16: 'ru_roundsbundle_16',
+//            RU_ROUNDSBUNDLE_17: 'ru_roundsbundle_17',
+//            RU_ROUNDSBUNDLE_18: 'ru_roundsbundle_18',
+//            RU_ROUNDSBUNDLE_19: 'ru_roundsbundle_19',
+//            RU_ROUNDSBUNDLE_20: 'ru_roundsbundle_20'
+//        }
+//    },
+//    REMOVE_AD: 'remove_ad'
+//};
+
 var PRODUCT = {
     COINS: {
-        COINS_50: 'coinspack_1',
-        COINS_110: 'coinspack_2',
-        COINS_245: 'coinspack_3',
-        COINS_550: 'coinspack_4',
-        COINS_1100: 'coinspack_5'
+        COINSPACK_1: 'coinspack_1',
+        COINSPACK_2: 'coinspack_2',
+        COINSPACK_3: 'coinspack_3',
+        COINSPACK_4: 'coinspack_4',
+        COINSPACK_5: 'coinspack_5'
     },
     ROUNDSBUNDLES: {
         EN: {
-            EN_ROUNDSBUNDLE_2: 'en_roundsbundle_2',
-            EN_ROUNDSBUNDLE_3: 'en_roundsbundle_3',
-            EN_ROUNDSBUNDLE_4: 'en_roundsbundle_4',
-            EN_ROUNDSBUNDLE_5: 'en_roundsbundle_5',
-            EN_ROUNDSBUNDLE_6: 'en_roundsbundle_6',
-            EN_ROUNDSBUNDLE_7: 'en_roundsbundle_7',
-            EN_ROUNDSBUNDLE_8: 'en_roundsbundle_8',
-            EN_ROUNDSBUNDLE_9: 'en_roundsbundle_9',
-            EN_ROUNDSBUNDLE_10: 'en_roundsbundle_10',
-            EN_ROUNDSBUNDLE_11: 'en_roundsbundle_11',
-            EN_ROUNDSBUNDLE_12: 'en_roundsbundle_12',
-            EN_ROUNDSBUNDLE_13: 'en_roundsbundle_13',
-            EN_ROUNDSBUNDLE_14: 'en_roundsbundle_14',
-            EN_ROUNDSBUNDLE_15: 'en_roundsbundle_15',
-            EN_ROUNDSBUNDLE_16: 'en_roundsbundle_16',
-            EN_ROUNDSBUNDLE_17: 'en_roundsbundle_17',
-            EN_ROUNDSBUNDLE_18: 'en_roundsbundle_18',
-            EN_ROUNDSBUNDLE_19: 'en_roundsbundle_19',
-            EN_ROUNDSBUNDLE_20: 'en_roundsbundle_20'
+            1: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_2'
+            },
+            2: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_3'
+            },
+            3: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_4'
+            },
+            4: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_5'
+            },
+            5: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_6'
+            },
+            6: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_7'
+            },
+            7: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_8'
+            },
+            8: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_9'
+            },
+            9: {
+                ROUNDSBUNDLE_ID: 'en_roundsbundle_10'
+            }
         },
         RU: {
-            RU_ROUNDSBUNDLE_2: 'ru_roundsbundle_2',
-            RU_ROUNDSBUNDLE_3: 'ru_roundsbundle_3',
-            RU_ROUNDSBUNDLE_4: 'ru_roundsbundle_4',
-            RU_ROUNDSBUNDLE_5: 'ru_roundsbundle_5',
-            RU_ROUNDSBUNDLE_6: 'ru_roundsbundle_6',
-            RU_ROUNDSBUNDLE_7: 'ru_roundsbundle_7',
-            RU_ROUNDSBUNDLE_8: 'ru_roundsbundle_8',
-            RU_ROUNDSBUNDLE_9: 'ru_roundsbundle_9',
-            RU_ROUNDSBUNDLE_10: 'ru_roundsbundle_10',
-            RU_ROUNDSBUNDLE_11: 'ru_roundsbundle_11',
-            RU_ROUNDSBUNDLE_12: 'ru_roundsbundle_12',
-            RU_ROUNDSBUNDLE_13: 'ru_roundsbundle_13',
-            RU_ROUNDSBUNDLE_14: 'ru_roundsbundle_14',
-            RU_ROUNDSBUNDLE_15: 'ru_roundsbundle_15',
-            RU_ROUNDSBUNDLE_16: 'ru_roundsbundle_16',
-            RU_ROUNDSBUNDLE_17: 'ru_roundsbundle_17',
-            RU_ROUNDSBUNDLE_18: 'ru_roundsbundle_18',
-            RU_ROUNDSBUNDLE_19: 'ru_roundsbundle_19',
-            RU_ROUNDSBUNDLE_20: 'ru_roundsbundle_20'
+            1: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_2'
+            },
+            2: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_3'
+            },
+            3: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_4'
+            },
+            4: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_5'
+            },
+            5: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_6'
+            },
+            6: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_7'
+            },
+            7: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_8'
+            },
+            8: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_9'
+            },
+            9: {
+                ROUNDSBUNDLE_ID: 'ru_roundsbundle_10'
+            }
         }
     },
     REMOVE_AD: 'remove_ad'
@@ -114,6 +185,11 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                     alias: PRODUCT.COINS[k],
                     type: store.CONSUMABLE
                 });
+                store.when(PRODUCT.COINS[k]).approved(function (order) {
+                    var coins = this.getCoins(PRODUCT.COINS[k]);
+                    this.addCoins(coins);
+                    order.finish();
+                }.bind(this));
             }
 
             for (k in PRODUCT.ROUNDSBUNDLES) {
@@ -131,44 +207,6 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                         alias: PRODUCT.ROUNDSBUNDLES[k][m],
                         type: store.NON_CONSUMABLE
                     });
-                }
-            }
-
-            store.register({
-                id: PRODUCT.REMOVE_AD,
-                alias: PRODUCT.REMOVE_AD,
-                type: store.NON_CONSUMABLE
-            });
-
-            store.ready(function() {
-                console.log('store.ready');
-                resolve();
-            });
-
-            for (k in PRODUCT.COINS) {
-                if (!PRODUCT.COINS.hasOwnProperty(k)) {
-                    continue;
-                }
-
-                store.when(PRODUCT.COINS[k]).approved(function (order) {
-                    var coins = this.getCoins(PRODUCT.COINS[k]);
-                    this.addCoins(coins);
-                    order.finish();
-                }.bind(this));
-            }
-
-            for (k in PRODUCT.ROUNDSBUNDLES) {
-                if (!PRODUCT.ROUNDSBUNDLES.hasOwnProperty(k)) {
-                    continue;
-                }
-
-                var roundsBundleNumber = 1;
-                for (m in PRODUCT.ROUNDSBUNDLES[k]) {
-                    if (!PRODUCT.ROUNDSBUNDLES[k].hasOwnProperty(m)) {
-                        continue;
-                    }
-
-                    roundsBundleNumber++;
                     store.when(PRODUCT.ROUNDSBUNDLES[k][m]).approved(function (order) {
                         this.unlockRoundsBundle(roundsBundleNumber);
                         order.finish();
@@ -182,6 +220,11 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                 }
             }
 
+            store.register({
+                id: PRODUCT.REMOVE_AD,
+                alias: PRODUCT.REMOVE_AD,
+                type: store.NON_CONSUMABLE
+            });
             store.when(PRODUCT.REMOVE_AD).approved(function (order) {
                 this.removeAd();
                 order.finish();
@@ -191,6 +234,59 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
                 appAd.setAdRemoved(product && product.owned ? true : false);
             }.bind(this));
+
+
+            store.ready(function() {
+                console.log('store.ready');
+                resolve();
+            });
+
+            //for (k in PRODUCT.COINS) {
+            //    if (!PRODUCT.COINS.hasOwnProperty(k)) {
+            //        continue;
+            //    }
+            //
+            //    store.when(PRODUCT.COINS[k]).approved(function (order) {
+            //        var coins = this.getCoins(PRODUCT.COINS[k]);
+            //        this.addCoins(coins);
+            //        order.finish();
+            //    }.bind(this));
+            //}
+
+            //for (k in PRODUCT.ROUNDSBUNDLES) {
+            //    if (!PRODUCT.ROUNDSBUNDLES.hasOwnProperty(k)) {
+            //        continue;
+            //    }
+            //
+            //    var roundsBundleNumber = 1;
+            //    for (m in PRODUCT.ROUNDSBUNDLES[k]) {
+            //        if (!PRODUCT.ROUNDSBUNDLES[k].hasOwnProperty(m)) {
+            //            continue;
+            //        }
+            //
+            //        roundsBundleNumber++;
+            //        store.when(PRODUCT.ROUNDSBUNDLES[k][m]).approved(function (order) {
+            //            this.unlockRoundsBundle(roundsBundleNumber);
+            //            order.finish();
+            //        }.bind(this));
+            //        store.when(PRODUCT.ROUNDSBUNDLES[k][m]).updated(function (product) {
+            //            console.log(PRODUCT.ROUNDSBUNDLES[k][m]+(product.owned ? " OWNED" : " not owned")+"!");
+            //
+            //            var productOwned = product && product.owned ? true : false;
+            //            this.setRoundsBundle(roundsBundleNumber, productOwned);
+            //        }.bind(this));
+            //    }
+            //}
+
+            //store.when(PRODUCT.REMOVE_AD).approved(function (order) {
+            //    this.removeAd();
+            //    order.finish();
+            //}.bind(this));
+            //store.when(PRODUCT.REMOVE_AD).updated(function (product) {
+            //    console.log("remove_ad "+(product.owned ? "OWNED" : "not owned")+"!");
+            //
+            //    appAd.setAdRemoved(product && product.owned ? true : false);
+            //}.bind(this));
 
 
             store.when('initiated', function(){
@@ -240,7 +336,6 @@ var CordovaStore = Object.assign({}, AbstractStore, {
     },
 
     addCoins: function(coins){
-        //appSettings.addCoins(coins);
         appManager.getGameState().addCoins(coins);
         appDialogs.getInfoDialog()
             .setTitle(i18n._('app.dialog.info.addcoins.title'))
@@ -255,8 +350,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             .show();
     },
 
-    unlockRoundsBundle: function(roundsBundleNumber) {
-        var idx = roundsBundleNumber - 1;
+    unlockRoundsBundle: function(idx) {
         appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
         appDialogs.getInfoDialog()
             .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
@@ -264,8 +358,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             .show();
     },
 
-    setRoundsBundle: function(roundsBundleNumber, boolean) {
-        var idx = roundsBundleNumber - 1;
+    setRoundsBundle: function(idx, boolean) {
         appManager.getGameState().setRoundsBundles(idx, "isUnlocked", boolean);
     }
 

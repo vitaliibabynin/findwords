@@ -156,47 +156,17 @@ var SlideClass = Object.assign({}, {}, {
         //this.setState({layout: LAYOUT_UNLOCKED});
     },
 
-    unlockRoundsBundle: function(number) {
-        var idx = number - 1;
-        appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
-        appDialogs.getInfoDialog()
-            .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
-            .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', number))
-            .show();
-    },
-
     getProductId: function () {
-        var slideToUnlockNumber = this.state.slideIndex + 1;
-        var number = 1;
-        switch (router.getLanguage()) {
-            case "en":
-                for (var k in PRODUCT.ROUNDSBUNDLES.EN) {
-                    if (!PRODUCT.ROUNDSBUNDLES.EN.hasOwnProperty(k)) {
-                        continue;
-                    }
-
-                    number++;
-                    if (number == slideToUnlockNumber) {
-                        return PRODUCT.ROUNDSBUNDLES.EN[k];
-                    }
-                }
-                return;
-            case "ru":
-                for (k in PRODUCT.ROUNDSBUNDLES.RU) {
-                    if (!PRODUCT.ROUNDSBUNDLES.RU.hasOwnProperty(k)) {
-                        continue;
-                    }
-
-                    number++;
-                    if (number == slideToUnlockNumber) {
-                        return PRODUCT.ROUNDSBUNDLES.RU[k];
-                    }
-                }
-                return;
-            default:
-                return false;
-        }
+        return PRODUCT.ROUNDSBUNDLES[router.getLanguage().toUpperCase()][this.state.slideIndex].ROUNDSBUNDLE_ID;
     },
+
+    //unlockRoundsBundle: function(idx) {
+    //    appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
+    //    appDialogs.getInfoDialog()
+    //        .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
+    //        .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', number))
+    //        .show();
+    //},
 
     onClickComplete: function () {
         var layout = this.state.layout == LAYOUT_COMPLETE_MESSAGE ? LAYOUT_COMPLETE : LAYOUT_COMPLETE_MESSAGE;
