@@ -38,9 +38,20 @@ var PageShop = Object.assign({}, {}, {
         };
     },
 
+    componentDidMount: function () {
+        appManager.getGameState().addChangeCoinsListener(this.update);
+    },
+
+    componentWillUnmount: function () {
+        appManager.getGameState().removeChangeCoinsListener(this.update);
+    },
+
+    update: function () {
+        this.forceUpdate();
+    },
+
     onClickBuyCoins: function (buttonProps) {
         //appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
-        //this.forceUpdate();
 
         console.log(buttonProps.blockId);
 
@@ -50,21 +61,19 @@ var PageShop = Object.assign({}, {}, {
 
     onClickWatchVideo: function () {
         appManager.getGameState().addCoins(this.state.freeCoins.watchVideo);
-        this.forceUpdate();
 
         console.log("watch a video");
     },
 
     onClickShare: function () {
         appManager.getGameState().addCoins(this.state.freeCoins.sendInvite);
-        this.forceUpdate();
 
         console.log("share with friends");
     },
 
     getProductPrice: function (productId) {
         if (typeof(appStore.getProduct(productId)) == "undefined") {
-            return "n/a"
+            return 0;
         }
 
         return appStore.getProductPrice(productId);
@@ -73,17 +82,11 @@ var PageShop = Object.assign({}, {}, {
     getProductCoins: function (productId) {
         var purchases = this.state.purchases;
 
-        for (var k in purchases) {
-            if (!purchases.hasOwnProperty(k)) {
-                continue;
-            }
-
-            if (k == productId) {
-                return purchases[productId];
-            }
+        if (!purchases.hasOwnProperty(productId)) {
+            return 0;
         }
 
-        return "n/a";
+        return purchases[productId];
     },
 
     getData: function () {

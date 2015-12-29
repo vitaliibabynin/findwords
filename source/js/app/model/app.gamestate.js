@@ -1,8 +1,9 @@
+var AbstractEventEmitter = require('./abstract.eventemitter');
 var Object = {assign: require('react/lib/Object.assign')};
 
 var SETTINGS_GAMESTATE = 'game_state';
 
-var GameState = Object.assign({}, {}, {
+var GameState = Object.assign({}, AbstractEventEmitter, {
 
     gameState: {
         coins: appManager.getSettings().getInitialCoins(),
@@ -744,6 +745,7 @@ var GameState = Object.assign({}, {}, {
     },
     setCoins: function (newNumber) {
         this.setGameStateField('coins', newNumber);
+        this.emitChangeCoins();
     },
     getCoins: function () {
         return this.getGameStateField('coins', 0);
@@ -863,6 +865,7 @@ var GameState = Object.assign({}, {}, {
         this.gameState.roundsBundles[router.getLanguage()][bundleIndex][field] = newValue;
 
         this.saveGameState();
+        this.emitChangeRoundsBundles();
     },
     getRoundsBundles: function (bundleIndex) {
         if (!this.gameState.roundsBundles || !this.gameState.roundsBundles[router.getLanguage()]) {

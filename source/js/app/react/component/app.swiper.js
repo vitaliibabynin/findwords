@@ -52,6 +52,23 @@ var SlideClass = Object.assign({}, {}, {
         return state;
     },
 
+    componentDidMount: function () {
+        appManager.getGameState().addChangeRoundsBundlesListener(this.update);
+    },
+
+    componentWillUnmount: function () {
+        appManager.getGameState().removeChangeRoundsBundlesListener(this.update);
+    },
+
+    update: function () {
+        if (appManager.getGameState().getRoundsBundles(this.state.slideIndex).isUnlocked == true) {
+            this.setState({
+                isUnlocked: true,
+                layout: LAYOUT_UNLOCKED
+            });
+        }
+    },
+
     getSlideGameState: function (idx) {
         if (!appManager.getGameState().getRoundsBundles(idx)) {
             appManager.getGameState().setRoundsBundles(idx, "bundleScore", 0);
@@ -151,20 +168,30 @@ var SlideClass = Object.assign({}, {}, {
 
         appStore.order(productId);
 
-        //var slideToUnlockNumber = this.state.slideIndex + 1;
-        //this.unlockRoundsBundle(slideToUnlockNumber);
-        //this.setState({layout: LAYOUT_UNLOCKED});
+        //this.unlockRoundsBundle(this.state.slideIndex);
     },
 
     getProductId: function () {
-        return PRODUCT.ROUNDSBUNDLES[router.getLanguage().toUpperCase()][this.state.slideIndex].ROUNDSBUNDLE_ID;
+        var roundsBundleIds = PRODUCT.ROUNDSBUNDLES[router.getLanguage().toUpperCase()];
+
+        for (var k in roundsBundleIds) {
+            if (!roundsBundleIds.hasOwnProperty(k)) {
+                continue;
+            }
+
+            if (roundsBundleIds[k] == this.state.slideIndex) {
+                return k;
+            }
+        }
+
+        return "";
     },
 
     //unlockRoundsBundle: function(idx) {
     //    appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
     //    appDialogs.getInfoDialog()
     //        .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
-    //        .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', number))
+    //        .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', idx + 1))
     //        .show();
     //},
 
