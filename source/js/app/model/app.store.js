@@ -199,17 +199,45 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             .show();
     },
 
+    getRoundsBundleIndex: function (productId) {
+        var roundsBundlesIds = PRODUCT.ROUNDSBUNDLES[router.getLanguage().toUpperCase()];
+
+        for (var k in roundsBundlesIds) {
+            if (!roundsBundlesIds.hasOwnProperty(k)) {
+                continue;
+            }
+
+            if (k == productId) {
+                return roundsBundlesIds[productId];
+            }
+        }
+
+        return false;
+    },
+
     unlockRoundsBundle: function (productId) {
-        var idx = PRODUCT.ROUNDSBUNDLES[router.getLanguage().toUpperCase()][productId];
+        var idx = this.getRoundsBundleIndex(productId);
+        if (idx === false) {
+            console.log("roundsBundle id is invalid, wrong language");
+            return;
+        }
+
+        var roundsBundle = appManager.getGameState().getRoundsBundles(idx);
         appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
-        appDialogs.getInfoDialog()
-            .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
-            .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', idx + 1))
-            .show();
+
+        if (roundsBundle.hasOwnProperty("dialogueWasShown") && roundsBundle.dialogueWasShown) {
+            console.log("dialog was already shown");
+        } else {
+            appDialogs.getInfoDialog()
+                .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
+                .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', idx + 1))
+                .show();
+            appManager.getGameState().setRoundsBundles(idx, "dialogueWasShown", true);
+        }
     },
 
     setRoundsBundle: function (productId, boolean) {
-        var idx = PRODUCT.ROUNDSBUNDLES[router.getLanguage().toUpperCase()][productId];
+        var idx = this.getRoundsBundleIndex(productId);
         appManager.getGameState().setRoundsBundles(idx, "isUnlocked", boolean);
     }
 
