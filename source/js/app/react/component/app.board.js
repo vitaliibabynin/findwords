@@ -556,7 +556,12 @@ var BoardClass = Object.assign({}, {}, {
                 "bg-color-7",
                 "bg-color-8",
                 "bg-color-9",
-                "bg-color-10"
+                "bg-color-10",
+                "bg-color-11",
+                "bg-color-12",
+                "bg-color-13",
+                "bg-color-14",
+                "bg-color-15"
             ]
         }
 

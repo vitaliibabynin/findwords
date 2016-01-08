@@ -74,6 +74,10 @@ var PageMain = Object.assign({}, {}, {
         //console.log(appManager.getGameState().gameState);
 
         var headImgName = "head/head_img_" + router.getLanguage();
+        if (CONST.CURRENT_PLATFORM == "ios" && router.getLanguage() == "en") {
+            headImgName = "head/head_img_ios_en";
+        }
+
         var headStyle = {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };

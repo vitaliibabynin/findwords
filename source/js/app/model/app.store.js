@@ -8,13 +8,22 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 var PRODUCT = {
     COINS: {
-        COINSPACK_1: 'coinspack_1',
-        COINSPACK_2: 'coinspack_2',
-        COINSPACK_3: 'coinspack_3',
-        COINSPACK_4: 'coinspack_4',
-        COINSPACK_5: 'coinspack_5'
+        //ANDROID: {
+            //COINSPACK_1: 'coinspack_1',
+            //COINSPACK_2: 'coinspack_2',
+            //COINSPACK_3: 'coinspack_3',
+            //COINSPACK_4: 'coinspack_4',
+            //COINSPACK_5: 'coinspack_5'
+        //},
+        //IOS: {
+            //COINSPACK_1: 'coinspack_1',
+            //COINSPACK_2: 'coinspack_2',
+            //COINSPACK_3: 'coinspack_3',
+            //COINSPACK_4: 'coinspack_4',
+            //COINSPACK_5: 'coinspack_5'
+        //}
     },
-    REMOVE_AD: 'remove_ad',
+    //REMOVE_AD: 'remove_ad',
     ROUNDSBUNDLES: {
         EN: {},
         RU: {}
@@ -56,13 +65,29 @@ var SiteStore = Object.assign({}, AbstractStore, {
 var CordovaStore = Object.assign({}, AbstractStore, {
     init: function () {
 
+        var coinsPurchaseIds = appManager.getSettings().getShopValue("coins");
+        for (var k in coinsPurchaseIds) {
+            if (!coinsPurchaseIds.hasOwnProperty(k)) {
+                continue;
+            }
+
+            var platform = k.toUpperCase();
+            PRODUCT.COINS[platform] = {};
+            for (var i = 0; i < coinsPurchaseIds[k].length; i++) {
+                PRODUCT.COINS[platform]["COINSPACK_" + (i + 1)] = coinsPurchaseIds[k][i].purchaseId;
+            }
+        }
+
         var roundsBundlesNumber = appManager.getSettings().getRoundsBundles().length;
-        for (var i = 1; i < roundsBundlesNumber; i++) {
-            PRODUCT.ROUNDSBUNDLES.EN["en_roundsbundle_" + (i + 1)] = i;
+        var roundsBundlePurchaseIdPrefixes = appManager.getSettings().getShopValue("roundsBundles");
+        for (i = 1; i < roundsBundlesNumber; i++) {
+            PRODUCT.ROUNDSBUNDLES.EN[roundsBundlePurchaseIdPrefixes.en + (i + 1)] = i;
         }
         for (i = 1; i < roundsBundlesNumber; i++) {
-            PRODUCT.ROUNDSBUNDLES.RU["ru_roundsbundle_" + (i + 1)] = i;
+            PRODUCT.ROUNDSBUNDLES.RU[roundsBundlePurchaseIdPrefixes.ru + (i + 1)] = i;
         }
+
+        PRODUCT.REMOVE_AD = appManager.getSettings().getShopValue("removeAds");
 
         console.log(PRODUCT);
 
@@ -76,17 +101,21 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                 store.verbosity = store.DEBUG;
             }
 
-            for (var k in PRODUCT.COINS) {
-                if (!PRODUCT.COINS.hasOwnProperty(k)) {
+            var platform = CONST.CURRENT_PLATFORM.toUpperCase();
+            console.log({platform: platform});
+
+            for (var k in PRODUCT.COINS[platform]) {
+                if (!PRODUCT.COINS[platform].hasOwnProperty(k)) {
                     continue;
                 }
 
+                console.log(PRODUCT.COINS[platform][k]);
                 store.register({
-                    id: PRODUCT.COINS[k],
-                    alias: PRODUCT.COINS[k],
+                    id: PRODUCT.COINS[platform][k],
+                    alias: PRODUCT.COINS[platform][k],
                     type: store.CONSUMABLE
                 });
-                store.when(PRODUCT.COINS[k]).approved(function (order) {
+                store.when(PRODUCT.COINS[platform][k]).approved(function (order) {
                     console.log(order);
 
                     var coins = this.getCoins(order.id);
@@ -181,7 +210,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             return 0;
         }
 
-        return purchases[productId];
+        return purchases[productId].purchaseCoins;
     },
 
     addCoins: function (coins) {

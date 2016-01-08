@@ -207,6 +207,10 @@ var PageGameVictory = Object.assign({}, {}, {
             backgroundImage: "url('" + this.getImagePath('counter/coins') + "')"
         };
 
+        var background = {
+            backgroundColor: appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].backgroundColor || "#ff5722"
+        };
+
         return (
 
             <div className="page-game-victory">
@@ -214,7 +218,7 @@ var PageGameVictory = Object.assign({}, {}, {
 
                     <Counters />
 
-                    <div className="container">
+                    <div className="container" style={background}>
 
                         <div className="excellent">{i18n._('victory.excellent')}</div>
 

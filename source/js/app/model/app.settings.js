@@ -145,13 +145,18 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getPurchases: function () {
-        var safeCoins = this.getShopValue('coins', {});
+        var coins = this.getShopValue('coins', {});
+        var safeCoins = coins[CONST.CURRENT_PLATFORM];
+
+        if (typeof(safeCoins) == "undefined") {
+            return {}
+        }
 
         for (var k in safeCoins) {
             if (!safeCoins.hasOwnProperty(k)) {
                 continue;
             }
-            safeCoins[k] = parseInt(safeCoins[k]);
+            safeCoins[k].purchaseCoins = parseInt(safeCoins[k].purchaseCoins);
         }
 
         return safeCoins;
