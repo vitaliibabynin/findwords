@@ -28,6 +28,24 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        var gameState = appManager.getGameState().gameState;
+        var roundsBundles = gameState.roundsBundles;
+
+        for (var k in roundsBundles) {
+            if (!roundsBundles.hasOwnProperty(k)) {
+                continue;
+            }
+            for (var m in roundsBundles[k]) {
+                if (!roundsBundles[k].hasOwnProperty(m)) {
+                    continue;
+                }
+                console.log("roundsBundle_" + k + "_number_" + (parseInt(m) + 1) + " isUnlocked: " + roundsBundles[k][m].isUnlocked);
+                console.log("roundsBundle_" + k + "_number_" + (parseInt(m) + 1) + " isPurchased: " + roundsBundles[k][m].isPurchased);
+            }
+        }
+
+
+
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
         var todayString = moment().format("YYYYMMDD") || "";
         //var todayString = moment().format("YYYYMMDDHHmmss") || "";

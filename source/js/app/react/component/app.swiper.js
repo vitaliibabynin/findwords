@@ -41,11 +41,19 @@ var SlideClass = Object.assign({}, {}, {
             slideIndex: this.props.slideIndex || 0
         };
         var slideGameState = this.getSlideGameState(state.slideIndex);
-        state.isUnlocked = slideGameState && slideGameState.isUnlocked ? true : false;
+
+        //console.log("slideIndex");
+        //console.log(state.slideIndex);
+        //console.log("isUnlocked");
+        //console.log(slideGameState.isUnlocked);
+        //console.log("isPurchased");
+        //console.log(slideGameState.isPurchased);
+
+        state.isUnlocked = slideGameState.isPurchased || slideGameState.isUnlocked ? true : false;
         state.layout = state.isUnlocked ? LAYOUT_UNLOCKED : LAYOUT_LOCKED;
         var roundsComplete = slideGameState.roundsComplete;
         var roundsTotal = state.slideData.rounds.length;
-        if (roundsComplete == roundsTotal) {
+        if (roundsComplete >= roundsTotal) {
             state.layout = LAYOUT_COMPLETE;
         }
 
@@ -61,12 +69,22 @@ var SlideClass = Object.assign({}, {}, {
     },
 
     update: function () {
-        if (appManager.getGameState().getRoundsBundles(this.state.slideIndex).isUnlocked == true) {
-            this.setState({
-                isUnlocked: true,
-                layout: LAYOUT_UNLOCKED
-            });
+        var slide = appManager.getGameState().getRoundsBundles(this.state.slideIndex);
+
+        if (!slide.isUnlocked && !slide.isPurchased) {
+            return;
         }
+
+        if (this.state.layout == LAYOUT_COMPLETE) {
+            return;
+        }
+
+        console.log("changing layout to unlocked slide number " + (this.state.slideIndex + 1));
+
+        this.setState({
+            isUnlocked: true,
+            layout: LAYOUT_UNLOCKED
+        });
     },
 
     getSlideGameState: function (idx) {
@@ -84,7 +102,7 @@ var SlideClass = Object.assign({}, {}, {
             }
         }
 
-        return appManager.getGameState().getRoundsBundles(idx);
+        return appManager.getGameState().getRoundsBundles(idx) || {};
     },
 
     onClickEffect: function (e) {

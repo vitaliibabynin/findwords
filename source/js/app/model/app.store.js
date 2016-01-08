@@ -7,23 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 
 var PRODUCT = {
-    COINS: {
-        //ANDROID: {
-            //COINSPACK_1: 'coinspack_1',
-            //COINSPACK_2: 'coinspack_2',
-            //COINSPACK_3: 'coinspack_3',
-            //COINSPACK_4: 'coinspack_4',
-            //COINSPACK_5: 'coinspack_5'
-        //},
-        //IOS: {
-            //COINSPACK_1: 'coinspack_1',
-            //COINSPACK_2: 'coinspack_2',
-            //COINSPACK_3: 'coinspack_3',
-            //COINSPACK_4: 'coinspack_4',
-            //COINSPACK_5: 'coinspack_5'
-        //}
-    },
-    //REMOVE_AD: 'remove_ad',
+    COINS: {},
     ROUNDSBUNDLES: {
         EN: {},
         RU: {}
@@ -247,12 +231,14 @@ var CordovaStore = Object.assign({}, AbstractStore, {
     unlockRoundsBundle: function (productId) {
         var idx = this.getRoundsBundleIndex(productId);
         if (idx === false) {
-            console.log("roundsBundle id is invalid, wrong language");
+            console.log("roundsBundleId is invalid, wrong language");
             return;
         }
 
         var roundsBundle = appManager.getGameState().getRoundsBundles(idx);
-        appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
+        if (roundsBundle.isPurchased == false) {
+            appManager.getGameState().setRoundsBundles(idx, "isPurchased", true);
+        }
 
         if (roundsBundle.hasOwnProperty("dialogueWasShown") && roundsBundle.dialogueWasShown) {
             console.log("dialog was already shown");
@@ -267,7 +253,12 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
     setRoundsBundle: function (productId, boolean) {
         var idx = this.getRoundsBundleIndex(productId);
-        appManager.getGameState().setRoundsBundles(idx, "isUnlocked", boolean);
+        var roundsBundle = appManager.getGameState().getRoundsBundles(idx);
+
+        if (roundsBundle.isPurchased != boolean) {
+            console.log("setting " + productId + " to: " + boolean);
+            appManager.getGameState().setRoundsBundles(idx, "isPurchased", boolean);
+        }
     }
 
 });
