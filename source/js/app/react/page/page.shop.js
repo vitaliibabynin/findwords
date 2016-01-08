@@ -90,72 +90,73 @@ var PageShop = Object.assign({}, {}, {
         //console.log(appStore.getProduct(PRODUCT.COINS.COINSPACK_1));
 
         var platform = CONST.CURRENT_PLATFORM.toUpperCase();
-        if (platform != "ANDROID" || platform != "IOS") {
+
+        if (platform == "ANDROID" || platform == "IOS") {
+            var product = PRODUCT.COINS[platform];
+
             return [
                 {
-                    id: "",
-                    coins: 0,
-                    price: "$0",
+                    id: product.COINSPACK_1,
+                    coins: this.getProductCoins(product.COINSPACK_1),
+                    price: this.getProductPrice(product.COINSPACK_1),
                     image: "url('" + this.getImagePath(ONE_DOLLAR) + "')"
                 },
                 {
-                    id: "",
-                    coins: 0,
-                    price: "$0",
+                    id: product.COINSPACK_2,
+                    coins: this.getProductCoins(product.COINSPACK_2),
+                    price: this.getProductPrice(product.COINSPACK_2),
                     image: "url('" + this.getImagePath(THREE_DOLLAR) + "')"
                 },
                 {
-                    id: "",
-                    coins: 0,
-                    price: "$0",
+                    id: PRODUCT.COINS.COINSPACK_3,
+                    coins: this.getProductCoins(product.COINSPACK_3),
+                    price: this.getProductPrice(product.COINSPACK_3),
                     image: "url('" + this.getImagePath(MANY_DOLLAR) + "')"
                 },
                 {
-                    id: "",
-                    coins: 0,
-                    price: "$0",
+                    id: product.COINSPACK_4,
+                    coins: this.getProductCoins(product.COINSPACK_4),
+                    price: this.getProductPrice(product.COINSPACK_4),
                     image: "url('" + this.getImagePath(SACK_DOLLAR) + "')"
                 },
                 {
-                    id: "",
-                    coins: 0,
-                    price: "$0",
+                    id: product.COINSPACK_5,
+                    coins: this.getProductCoins(product.COINSPACK_5),
+                    price: this.getProductPrice(product.COINSPACK_5),
                     image: "url('" + this.getImagePath(THREE_SACK_DOLLAR) + "')"
                 }
             ]
         }
 
-        var product = PRODUCT.COINS[platform];
-
         return [
             {
-                id: product.COINSPACK_1,
-                coins: this.getProductCoins(product.COINSPACK_1),
-                price: this.getProductPrice(product.COINSPACK_1),
+                id: "",
+                coins: 0,
+                price: "$0",
                 image: "url('" + this.getImagePath(ONE_DOLLAR) + "')"
             },
             {
-                id: product.COINSPACK_2,
-                coins: this.getProductCoins(product.COINSPACK_2),
-                price: this.getProductPrice(product.COINSPACK_2),
+                id: "",
+                coins: 0,
+                price: "$0",
                 image: "url('" + this.getImagePath(THREE_DOLLAR) + "')"
             },
             {
-                id: PRODUCT.COINS.COINSPACK_3,
-                coins: this.getProductCoins(product.COINSPACK_3),
-                price: this.getProductPrice(product.COINSPACK_3),
+                id: "",
+                coins: 0,
+                price: "$0",
                 image: "url('" + this.getImagePath(MANY_DOLLAR) + "')"
             },
             {
-                id: product.COINSPACK_4,
-                coins: this.getProductCoins(product.COINSPACK_4),
-                price: this.getProductPrice(product.COINSPACK_4),
+                id: "",
+                coins: 0,
+                price: "$0",
                 image: "url('" + this.getImagePath(SACK_DOLLAR) + "')"
             },
             {
-                id: product.COINSPACK_5,
-                coins: this.getProductCoins(product.COINSPACK_5),
-                price: this.getProductPrice(product.COINSPACK_5),
+                id: "",
+                coins: 0,
+                price: "$0",
                 image: "url('" + this.getImagePath(THREE_SACK_DOLLAR) + "')"
             }
         ]
