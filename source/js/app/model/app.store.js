@@ -49,21 +49,25 @@ var SiteStore = Object.assign({}, AbstractStore, {
 var CordovaStore = Object.assign({}, AbstractStore, {
     init: function () {
 
-        var coinsPurchaseIds = appManager.getSettings().getShopValue("coins");
-        for (var k in coinsPurchaseIds) {
-            if (!coinsPurchaseIds.hasOwnProperty(k)) {
-                continue;
-            }
+        var coinsPurchaseIds = appManager.getSettings().getShopValue("coins")[CONST.CURRENT_PLATFORM];
+        //for (var k in coinsPurchaseIds) {
+        //    if (!coinsPurchaseIds.hasOwnProperty(k)) {
+        //        continue;
+        //    }
+        //
+        //    var platform = k.toUpperCase();
+        //    PRODUCT.COINS[platform] = {};
+        //    for (var i = 0; i < coinsPurchaseIds[k].length; i++) {
+        //        PRODUCT.COINS[platform]["COINSPACK_" + (i + 1)] = coinsPurchaseIds[k][i].purchaseId;
+        //    }
+        //}
 
-            var platform = k.toUpperCase();
-            PRODUCT.COINS[platform] = {};
-            for (var i = 0; i < coinsPurchaseIds[k].length; i++) {
-                PRODUCT.COINS[platform]["COINSPACK_" + (i + 1)] = coinsPurchaseIds[k][i].purchaseId;
-            }
+        for (var i = 0; i < coinsPurchaseIds.length; i++) {
+            PRODUCT.COINS["COINSPACK_" + (i + 1)] = coinsPurchaseIds[i].purchaseId;
         }
 
         var roundsBundlesNumber = appManager.getSettings().getRoundsBundles().length;
-        var roundsBundlePurchaseIdPrefixes = appManager.getSettings().getShopValue("roundsBundles");
+        var roundsBundlePurchaseIdPrefixes = appManager.getSettings().getShopValue("roundsBundles")[CONST.CURRENT_PLATFORM];
         for (i = 1; i < roundsBundlesNumber; i++) {
             PRODUCT.ROUNDSBUNDLES.EN[roundsBundlePurchaseIdPrefixes.en + (i + 1)] = i;
         }
@@ -71,7 +75,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             PRODUCT.ROUNDSBUNDLES.RU[roundsBundlePurchaseIdPrefixes.ru + (i + 1)] = i;
         }
 
-        PRODUCT.REMOVE_AD = appManager.getSettings().getShopValue("removeAds");
+        PRODUCT.REMOVE_AD = appManager.getSettings().getShopValue("removeAds")[CONST.CURRENT_PLATFORM];
 
         console.log(PRODUCT);
 
@@ -85,21 +89,41 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                 store.verbosity = store.DEBUG;
             }
 
-            var platform = CONST.CURRENT_PLATFORM.toUpperCase();
-            console.log({platform: platform});
+            //var platform = CONST.CURRENT_PLATFORM.toUpperCase();
+            //console.log({platform: platform});
 
-            for (var k in PRODUCT.COINS[platform]) {
-                if (!PRODUCT.COINS[platform].hasOwnProperty(k)) {
+            //for (var k in PRODUCT.COINS[platform]) {
+            //    if (!PRODUCT.COINS[platform].hasOwnProperty(k)) {
+            //        continue;
+            //    }
+            //
+            //    console.log(PRODUCT.COINS[platform][k]);
+            //    store.register({
+            //        id: PRODUCT.COINS[platform][k],
+            //        alias: PRODUCT.COINS[platform][k],
+            //        type: store.CONSUMABLE
+            //    });
+            //    store.when(PRODUCT.COINS[platform][k]).approved(function (order) {
+            //        console.log(order);
+            //
+            //        var coins = this.getCoins(order.id);
+            //        this.addCoins(coins);
+            //        order.finish();
+            //    }.bind(this));
+            //}
+
+            for (var k in PRODUCT.COINS) {
+                if (!PRODUCT.COINS.hasOwnProperty(k)) {
                     continue;
                 }
 
-                console.log(PRODUCT.COINS[platform][k]);
+                console.log(PRODUCT.COINS[k]);
                 store.register({
-                    id: PRODUCT.COINS[platform][k],
-                    alias: PRODUCT.COINS[platform][k],
+                    id: PRODUCT.COINS[k],
+                    alias: PRODUCT.COINS[k],
                     type: store.CONSUMABLE
                 });
-                store.when(PRODUCT.COINS[platform][k]).approved(function (order) {
+                store.when(PRODUCT.COINS[k]).approved(function (order) {
                     console.log(order);
 
                     var coins = this.getCoins(order.id);
@@ -253,8 +277,12 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
     setRoundsBundle: function (productId, boolean) {
         var idx = this.getRoundsBundleIndex(productId);
-        var roundsBundle = appManager.getGameState().getRoundsBundles(idx);
+        if (idx === false) {
+            console.log("roundsBundleId is invalid, wrong language");
+            return;
+        }
 
+        var roundsBundle = appManager.getGameState().getRoundsBundles(idx);
         if (roundsBundle.isPurchased != boolean) {
             console.log("setting " + productId + " to: " + boolean);
             appManager.getGameState().setRoundsBundles(idx, "isPurchased", boolean);

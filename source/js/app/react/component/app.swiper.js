@@ -148,11 +148,18 @@ var SlideClass = Object.assign({}, {}, {
         var roundsComplete = 0;
 
         for (var key in roundsBundlesState) {
-            if (roundsBundlesState.hasOwnProperty(key)) {
-                roundsComplete += roundsBundlesState[key].roundsComplete;
+            if (!roundsBundlesState.hasOwnProperty(key)) {
+                continue;
             }
+
+            if (isNaN(roundsBundlesState[key].roundsComplete)) {
+                continue;
+            }
+
+            roundsComplete += roundsBundlesState[key].roundsComplete;
         }
 
+        console.log(roundsComplete);
         return roundsComplete;
     },
 

@@ -31,6 +31,8 @@ var PageMain = Object.assign({}, {}, {
         var gameState = appManager.getGameState().gameState;
         var roundsBundles = gameState.roundsBundles;
 
+        console.log(gameState);
+
         for (var k in roundsBundles) {
             if (!roundsBundles.hasOwnProperty(k)) {
                 continue;
