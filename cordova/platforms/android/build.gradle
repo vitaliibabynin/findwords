@@ -252,7 +252,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: '*.jar', dir: 'libs')
+    compile fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
     debugCompile project(path: 'CordovaLib', configuration: 'debug')
     releaseCompile project(path: 'CordovaLib', configuration: 'release')

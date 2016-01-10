@@ -32,6 +32,7 @@ var path = {
         js: 'build/js/',
         css: 'build/css/',
         img: 'build/img/',
+        music: 'build/music/',
         fonts: 'build/fonts/'
     },
     src: { //Пути откуда брать исходники
@@ -47,6 +48,7 @@ var path = {
         css: 'source/scss/**/*.scss',
         cssLib: 'source/csslib/**/*.css',
         img: 'source/img/**/*.*',
+        music: 'source/music/**/*.*',
         fonts: 'source/fonts/**/*.*'
     }
     //, clean: ['./build/css', './build/js', './build/fonts', './build/img']
@@ -58,6 +60,14 @@ gulp.task('clean:img', function() {
         .pipe(clean())
         .on('finish', function () {
             console.log('IMG cleaned');
+        });
+});
+
+gulp.task('clean:music', function() {
+    gulp.src(path.build.music+'**/*.*', {read: false})
+        .pipe(clean())
+        .on('finish', function () {
+            console.log('MUSIC cleaned');
         });
 });
 
@@ -87,6 +97,7 @@ gulp.task('clean:fonts', function() {
 
 gulp.task('clean:all', [
     'clean:img'
+    , 'clean:music'
     , 'clean:js'
     , 'clean:css'
     , 'clean:fonts'
@@ -288,6 +299,16 @@ gulp.task('img:build', function(){
         });
 });
 
+gulp.task('music:build', function(){
+    return gulp
+        .src(path.watch.music)
+        .pipe(gulp.dest(path.build.music))
+        .on('finish', function() {
+            console.log('MUSIC copied to '+path.build.music);
+        });
+});
+
+
 gulp.task('fonts:build', function(){
     return gulp
         .src(path.watch.fonts)
@@ -356,6 +377,7 @@ gulp.task('build', function(cb) {
     runSequence(
         'fonts:build',
         'img:build',
+        'music:build',
         'js:build',
         'css:build', cb);
 });
@@ -381,6 +403,9 @@ gulp.task('watch', function(){
     watch([path.watch.img], function(event, cb) {
         gulp.start('css:build');
         gulp.start('img:build');
+    });
+    watch([path.watch.music], function(event, cb) {
+        gulp.start('music:build');
     });
     watch([path.watch.fonts], function(event, cb) {
         gulp.start('css:build');

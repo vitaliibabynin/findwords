@@ -317,7 +317,7 @@ var SiteFB = Object.assign({}, AbstractFB, {
                     id: response.id,
                     first_name: response.first_name,
                     last_name: response.last_name,
-                    picture: response.picture.data.url
+                    picture: response.picture && response.picture.data ? response.picture.data.url : ''
                 };
 
                 resolve(this.meInfo);
@@ -502,7 +502,7 @@ var CordovaFB = Object.assign({}, AbstractFB, {
                         id: response.id,
                         first_name: response.first_name,
                         last_name: response.last_name,
-                        picture: response.picture.data.url
+                        picture: response.picture && response.picture.data ? response.picture.data.url : ''
                     };
 
                     resolve(this.meInfo);

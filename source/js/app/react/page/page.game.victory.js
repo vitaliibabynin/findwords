@@ -31,7 +31,13 @@ var PageGameVictory = Object.assign({}, {}, {
         return state;
     },
 
+    componentWillMount: function(){
+        appAd.showInterstitial();
+    },
+
     componentDidMount: function () {
+
+
         this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(this.state.rewardCoins);
         var roundsComplete = appManager.getGameState().getRoundsBundles(this.state.roundsBundleIdx).roundsComplete || 0;

@@ -57,7 +57,8 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getAdSettings: function () {
-        return this.getSettingsValue("adSettings", {});
+        var adSettings = this.getSettingsValue("adSettings", {});
+        return adSettings.hasOwnProperty(CONST.CURRENT_PLATFORM) ? adSettings[CONST.CURRENT_PLATFORM] : {};
     },
 
     getRoundsBundles: function () {

@@ -209,6 +209,17 @@
         }
       }
     }
+
+    .swiper-pagination {
+      -webkit-transition: none;
+      -moz-transition: none;
+      -o-transition: none;
+      transition: none;
+      -webkit-transform: none;
+      -ms-transform: none;
+      -o-transform: none;
+      transform: none;
+    }
   }
 
   .swiper-pagination-bullet {

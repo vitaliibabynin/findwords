@@ -45,6 +45,10 @@ var PageGameMain = Object.assign({}, {}, {
         return state;
     },
 
+    componentWillMount: function(){
+        appManager.getMusicManager().playGameMusic();
+    },
+
     componentDidMount: function () {
         var roundsTotal = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds.length;
         if (typeof roundsTotal == "undefined") {
@@ -58,7 +62,12 @@ var PageGameMain = Object.assign({}, {}, {
             router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
         }
 
+        appAd.prepareInterstitial();
         //console.log("pageGameComponentDidMount");
+    },
+
+    componentWillUnmount: function(){
+        appManager.getMusicManager().playMusic();
     },
 
     getBoardData: function (roundData, roundIdx) {

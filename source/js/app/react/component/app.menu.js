@@ -195,7 +195,9 @@ var NavigationClass = Object.assign({}, {}, {
                                 profilePic: profilePic,
                                 profileFirstName: profileFirstName,
                                 profileLastName: profileLastName
-                            })
+                            });
+                        }.bind(this), function(error){
+                            console.log(error);
                         }.bind(this));
                 } else {
                     appFB.logout();

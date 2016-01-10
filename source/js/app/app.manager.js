@@ -21,8 +21,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
     language: null,
     settings: null,
     gameState: null,
-    gameManager: null,
-    ratingManager: null,
+    musicManager: null,
     runtimeState: {},
 
 
@@ -52,6 +51,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                 }.bind(this))
             .then(function(){
                     return new Promise(function(resolve, reject){
+                        this.getMusicManager().playMusic();
                         window.appNotificationLocal.hasPermissions().then(function(granted){
                             if(!granted){
                                 return false;
@@ -155,6 +155,14 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
         }
 
         return this.gameState;
+    },
+
+    getMusicManager: function(){
+        if(null == this.musicManager){
+            this.musicManager = require('./model/app.music');
+        }
+
+        return this.musicManager;
     },
 
     addOnInitListener: function(callback){

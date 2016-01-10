@@ -11,6 +11,7 @@ window.CONST = {
     STATIC_IMAGE_URL: 'build/img/',
     STATIC_CSS_URL: 'build/css/',
     STATIC_JS_URL: 'build/js/',
+    STATIC_MUSIC_URL: 'build/music/',
     CSS_APP_BUNDLE: 'bundle.app.css',
     JS_APP_BUNDLE: 'bundle.app.js?tm=' + Date.now() + '',
     GA_ID: {},
@@ -290,6 +291,7 @@ if (!CONST.IS_CORDOVA_APP) {
     CONST.STATIC_IMAGE_URL = '/' + CONST.STATIC_IMAGE_URL;
     CONST.STATIC_CSS_URL = '/' + CONST.STATIC_CSS_URL;
     CONST.STATIC_JS_URL = '/' + CONST.STATIC_JS_URL;
+    CONST.STATIC_MUSIC_URL = '/' + CONST.STATIC_MUSIC_URL;
 }
 
 var ENV_SETTINGS = {};

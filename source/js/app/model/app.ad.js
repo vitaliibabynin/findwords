@@ -69,7 +69,7 @@ var Ad = function(currentPlatform, isCordovaApp){
 
     }
 
-    this.prepareInterstitial = function(autoShow){
+    this.prepareInterstitial = function(){
         if(this.adRemoved){
             return false;
         }
@@ -93,6 +93,8 @@ var Ad = function(currentPlatform, isCordovaApp){
                 if(isReady){
                     admob.showInterstitial();
                     this.updateLastShowInterstitialTime();
+                }else{
+                    this.prepareInterstitial();
                 }
             }.bind(this));
         }

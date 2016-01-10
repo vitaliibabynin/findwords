@@ -1,6 +1,10 @@
 var AbstractEventEmitter = require('./abstract.eventemitter');
 var Object = {assign: require('react/lib/Object.assign')};
 
+var EVENT_CHANGE_ROUNDS_BUNDLES = "eventChangeRoundsBundles";
+var EVENT_CHANGE_COINS = "eventChangeCoins";
+var EVENT_CHANGE_MUSICANDSFX = "eventChangeMusicAndSFX";
+
 var SETTINGS_GAMESTATE = 'game_state';
 
 var GameState = Object.assign({}, AbstractEventEmitter, {
@@ -801,12 +805,14 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     },
     setMusic: function (newBoolean) {
         this.setSettingsField('music', newBoolean);
+        this.emitChangeMusicAndSFX();
     },
     getMusic: function () {
         return this.getSettingsField('music', true);
     },
     setSound: function (newBoolean) {
         this.setSettingsField('sound', newBoolean);
+        this.emitChangeMusicAndSFX();
     },
     getSound: function () {
         return this.getSettingsField('sound', true);
@@ -933,6 +939,41 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         }
 
         return this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex];
+    },
+
+
+
+
+    addChangeMusicAndSFXListener: function(callback){
+        this.on(EVENT_CHANGE_MUSICANDSFX, callback);
+    },
+    removeChangeMusicAndSFXListener: function(callback){
+        this.removeListener(EVENT_CHANGE_MUSICANDSFX, callback);
+    },
+    emitChangeMusicAndSFX: function(){
+        this.emit(EVENT_CHANGE_MUSICANDSFX, this);
+    },
+
+
+    addChangeRoundsBundlesListener: function(callback){
+        this.on(EVENT_CHANGE_ROUNDS_BUNDLES, callback);
+    },
+    removeChangeRoundsBundlesListener: function(callback){
+        this.removeListener(EVENT_CHANGE_ROUNDS_BUNDLES, callback);
+    },
+    emitChangeRoundsBundles: function(){
+        this.emit(EVENT_CHANGE_ROUNDS_BUNDLES, this);
+    },
+
+
+    addChangeCoinsListener: function(callback){
+        this.on(EVENT_CHANGE_COINS, callback);
+    },
+    removeChangeCoinsListener: function(callback){
+        this.removeListener(EVENT_CHANGE_COINS, callback);
+    },
+    emitChangeCoins: function(){
+        this.emit(EVENT_CHANGE_COINS, this);
     }
 
 });
