@@ -189,7 +189,8 @@ var NoCoinsDialog = function(){
     dialog.prepareDialog = function(dialog){
         $('.buy', dialog).bind( 'click', function( e ) {
             setTimeout(function(){
-                appDialogs.getBuyMoneyDialog().show();
+                router.navigate("shop", "index");
+                //appDialogs.getBuyMoneyDialog().show();
             }, 1000);
             this.hide();
             e.stopPropagation();
