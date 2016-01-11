@@ -4,7 +4,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var EVENT_CHANGE_ROUNDS_BUNDLES = "eventChangeRoundsBundles";
 var EVENT_CHANGE_COINS = "eventChangeCoins";
 var EVENT_CHANGE_MUSICANDSFX = "eventChangeMusicAndSFX";
-var EVENT_SHOW_ADS = "eventChageShowAds";
+var EVENT_REMOVE_ADS = "eventChageRemoveAds";
 
 var SETTINGS_GAMESTATE = 'game_state';
 
@@ -14,6 +14,10 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         coins: appManager.getSettings().getInitialCoins(),
         score: 0,
         showAds: true,
+        adPreferences: {
+            removeAds: false,
+            removeAdsDialogueShown: false
+        },
         //bonus: {
         //    lastAccessDate: "",
         //    daysPlayedStreak: 0
@@ -159,12 +163,42 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         newTotalCoins = this.getCoins() + coinsToAdd;
         return this.setCoins(newTotalCoins);
     },
-    setShowAds: function (newBoolean) {
-        this.setGameStateField('showAds', newBoolean);
-        this.emitChangeShowAds();
+    //setShowAds: function (newBoolean) {
+    //    this.setGameStateField('showAds', newBoolean);
+    //    this.emitChangeShowAds();
+    //},
+    //getShowAds: function () {
+    //    return this.getGameStateField('showAds', true);
+    //},
+
+    setAdPreferencesField: function (field, newValue) {
+        if (!this.gameState.adPreferences) {
+            this.gameState.adPreferences = {};
+        }
+
+        this.gameState.adPreferences[field] = newValue;
+
+        this.saveGameState();
     },
-    getShowAds: function () {
-        return this.getGameStateField('showAds', true);
+    getAdPreferencesField: function (field, defaultValue) {
+        if (!this.gameState.adPreferences || !this.gameState.adPreferences.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.adPreferences[field];
+    },
+    setRemoveAds: function (newBoolean) {
+        this.setAdPreferencesField('removeAds', newBoolean);
+        this.emitChangeRemoveAds();
+    },
+    getRemoveAds: function () {
+        return this.getAdPreferencesField('removeAds', false);
+    },
+    setRemoveAdsDialogueShown: function (newBoolean) {
+        this.setAdPreferencesField('removeAdsDialogueShown', newBoolean);
+    },
+    getRemoveAdsDialogueShown: function () {
+        return this.getAdPreferencesField('removeAdsDialogueShown', "");
     },
 
     setBonusField: function (field, newValue) {
@@ -385,14 +419,14 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     },
 
 
-    addChangeShowAdsListener: function(callback){
-        this.on(EVENT_SHOW_ADS, callback);
+    addChangeRemoveAdsListener: function(callback){
+        this.on(EVENT_REMOVE_ADS, callback);
     },
-    removeChangeShowAdsListener: function(callback){
-        this.removeListener(EVENT_SHOW_ADS, callback);
+    removeChangeRemoveAdsListener: function(callback){
+        this.removeListener(EVENT_REMOVE_ADS, callback);
     },
-    emitChangeShowAds: function(){
-        this.emit(EVENT_SHOW_ADS, this);
+    emitChangeRemoveAds: function(){
+        this.emit(EVENT_REMOVE_ADS, this);
     }
 
 });

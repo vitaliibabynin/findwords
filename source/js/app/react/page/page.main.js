@@ -22,14 +22,14 @@ var PageMain = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             initialSlide: parseInt(router.getParam('roundsBundleIdx')) || 0,
-            showingAds: appManager.getGameState().getShowAds() ? true : false
+            adsRemoved: appManager.getGameState().getRemoveAds() ? true : false
         };
 
         return state;
     },
 
     componentDidMount: function () {
-        appManager.getGameState().addChangeShowAdsListener(this.updateAdSwitch);
+        appManager.getGameState().addChangeRemoveAdsListener(this.updateAdSwitch);
 
         //var gameState = appManager.getGameState().gameState;
         //var roundsBundles = gameState.roundsBundles;
@@ -85,7 +85,7 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentWillUnmount: function () {
-        appManager.getGameState().removeChangeShowAdsListener(this.updateAdSwitch);
+        appManager.getGameState().removeChangeRemoveAdsListener(this.updateAdSwitch);
     },
 
     //componentDidUpdate: function (prevProps, prevState) {
@@ -94,12 +94,12 @@ var PageMain = Object.assign({}, {}, {
 
     updateAdSwitch: function () {
         this.setState({
-            showingAds: appManager.getGameState().getShowAds() ? true : false
+            adsRemoved: appManager.getGameState().getRemoveAds() ? true : false
         })
     },
 
     adSwitchToggle: function () {
-        if (!this.state.showingAds) {
+        if (this.state.adsRemoved) {
             return;
         }
 
@@ -119,12 +119,10 @@ var PageMain = Object.assign({}, {}, {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };
 
-        //defaultChecked="checked"
-        var defaultChecked = this.state.showingAds ? "checked" : "";
-        console.log({GameStateShowAds: appManager.getGameState().getShowAds()});
-        console.log({StateShowAds: this.state.showingAds});
-        //console.log({defaultChecked: defaultChecked});
-        var checked = this.state.showingAds ? "checked" : "";
+        console.log({GameStateRemoveAds: appManager.getGameState().getRemoveAds()});
+        console.log({StateShowAds: this.state.adsRemoved});
+
+        var checked = this.state.adsRemoved ? "" : "checked";
         console.log({checked: checked});
 
         return (

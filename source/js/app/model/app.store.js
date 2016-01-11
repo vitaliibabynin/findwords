@@ -140,7 +140,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
                 appAd.setAdRemoved(product && product.owned ? true : false);
 
-                appManager.getGameState().setShowAds(product && product.owned ? false : true);
+                appManager.getGameState().setRemoveAds(product && product.owned ? true : false);
             }.bind(this));
 
 
@@ -198,11 +198,19 @@ var CordovaStore = Object.assign({}, AbstractStore, {
     },
 
     removeAd: function () {
-        appManager.getGameState().setShowAds(false);
+        appManager.getGameState().setRemoveAds(true);
+
+        if (appManager.getGameState().getRemoveAdsDialogueShown()) {
+            console.log("remove ads dialogue already shown");
+            return;
+        }
+
         appDialogs.getInfoDialog()
             .setTitle(i18n._('app.dialog.info.removead.title'))
             .setContentText(i18n._('app.dialog.info.removead.description'))
             .show();
+
+        appManager.getGameState().setRemoveAdsDialogueShown(true);
     },
 
     getRoundsBundleIndex: function (productId) {
