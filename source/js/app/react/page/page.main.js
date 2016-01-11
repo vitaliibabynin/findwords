@@ -21,31 +21,33 @@ var PageMain = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            initialSlide: parseInt(router.getParam('roundsBundleIdx')) || 0
+            initialSlide: parseInt(router.getParam('roundsBundleIdx')) || 0,
+            showingAds: appManager.getGameState().getShowAds() ? true : false
         };
 
         return state;
     },
 
     componentDidMount: function () {
-        var gameState = appManager.getGameState().gameState;
-        var roundsBundles = gameState.roundsBundles;
+        appManager.getGameState().addChangeShowAdsListener(this.updateAdSwitch);
 
-        console.log(gameState);
+        //var gameState = appManager.getGameState().gameState;
+        //var roundsBundles = gameState.roundsBundles;
+        //
+        //console.log(gameState);
 
-        for (var k in roundsBundles) {
-            if (!roundsBundles.hasOwnProperty(k)) {
-                continue;
-            }
-            for (var m in roundsBundles[k]) {
-                if (!roundsBundles[k].hasOwnProperty(m)) {
-                    continue;
-                }
-                console.log("roundsBundle_" + k + "_number_" + (parseInt(m) + 1) + " isUnlocked: " + roundsBundles[k][m].isUnlocked);
-                console.log("roundsBundle_" + k + "_number_" + (parseInt(m) + 1) + " isPurchased: " + roundsBundles[k][m].isPurchased);
-            }
-        }
-
+        //for (var k in roundsBundles) {
+        //    if (!roundsBundles.hasOwnProperty(k)) {
+        //        continue;
+        //    }
+        //    for (var m in roundsBundles[k]) {
+        //        if (!roundsBundles[k].hasOwnProperty(m)) {
+        //            continue;
+        //        }
+        //        console.log("roundsBundle_" + k + "_number_" + (parseInt(m) + 1) + " isUnlocked: " + roundsBundles[k][m].isUnlocked);
+        //        console.log("roundsBundle_" + k + "_number_" + (parseInt(m) + 1) + " isPurchased: " + roundsBundles[k][m].isPurchased);
+        //    }
+        //}
 
 
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
@@ -62,7 +64,7 @@ var PageMain = Object.assign({}, {}, {
         var daysSinceLastAccess = moment(todayString, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
         //var daysSinceLastAccess = moment(todayString, "YYYYMMDDHHmmss").diff(moment(lastAccessNumber, "YYYYMMDDHHmmss"), "seconds");
 
-        if(daysSinceLastAccess < 1) {
+        if (daysSinceLastAccess < 1) {
             return;
         }
 
@@ -82,16 +84,31 @@ var PageMain = Object.assign({}, {}, {
         router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
     },
 
+    componentWillUnmount: function () {
+        appManager.getGameState().removeChangeShowAdsListener(this.updateAdSwitch);
+    },
+
     //componentDidUpdate: function (prevProps, prevState) {
     //
     //},
-    //
-    //componentWillUnmount: function () {
-    //
-    //},
+
+    updateAdSwitch: function () {
+        this.setState({
+            showingAds: appManager.getGameState().getShowAds() ? true : false
+        })
+    },
+
+    adSwitchToggle: function () {
+        if (!this.state.showingAds) {
+            return;
+        }
+
+        appDialogs.getTurnOffAdsDialog().show();
+    },
 
     render: function () {
         //console.log(appManager.getGameState().gameState);
+        //console.log(this.state.checked);
 
         var headImgName = "head/head_img_" + router.getLanguage();
         if (CONST.CURRENT_PLATFORM == "ios" && router.getLanguage() == "en") {
@@ -101,6 +118,14 @@ var PageMain = Object.assign({}, {}, {
         var headStyle = {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };
+
+        //defaultChecked="checked"
+        var defaultChecked = this.state.showingAds ? "checked" : "";
+        console.log({GameStateShowAds: appManager.getGameState().getShowAds()});
+        console.log({StateShowAds: this.state.showingAds});
+        //console.log({defaultChecked: defaultChecked});
+        var checked = this.state.showingAds ? "checked" : "";
+        console.log({checked: checked});
 
         return (
 
@@ -120,7 +145,12 @@ var PageMain = Object.assign({}, {}, {
                     </div>
 
                     <div className="footer">
-                        <AdSwitch defaultChecked="checked" label={i18n._('switch.ad')}/>
+                        <AdSwitch
+                            name="adSwitch"
+                            label={i18n._('switch.ad')}
+                            onChange={this.adSwitchToggle}
+                            checked={checked}
+                        />
                     </div>
 
                 </div>

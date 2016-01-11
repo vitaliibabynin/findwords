@@ -164,7 +164,40 @@ var ErrorDialog = function(){
 
 
 
+var TurnOffAdsDialog = function() {
+    var dialog = new Dialog({
+        dialogId: 'turnoffads-dialog',
+        effect: 'slidebottom',
+        title: i18n._('app.dialog.turnoffads.title')
+    });
 
+    var productId = appManager.getSettings().getShopValue("removeAds")[CONST.CURRENT_PLATFORM];
+
+    dialog.getContent = function(){
+        var removeAdsPrice = appStore.getProductPrice(productId) || "$0";
+
+        return '<div class="md-content"> \
+                        <p>'+i18n._('app.dialog.turnoffads.description')+' '+removeAdsPrice+'</p> \
+                        <div><a href="#" class="btn turnoff">'+i18n._('app.dialog.turnoffads.button.turnoff')+'</a></div> \
+                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.turnoffads.button.cancel')+'</a></div> \
+                 </div> \
+                ';
+    }
+
+    dialog.prepareDialog = function(dialog){
+        $('.turnoff', dialog).bind( 'click', function( e ) {
+            appStore.order(productId);
+            this.hide();
+            e.stopPropagation();
+        }.bind(this));
+        $('.cancel', dialog).bind( 'click', function( e ) {
+            this.hide();
+            e.stopPropagation();
+        }.bind(this));
+    }
+
+    return dialog;
+}
 
 
 
@@ -188,20 +221,22 @@ var NoCoinsDialog = function(){
 
     dialog.prepareDialog = function(dialog){
         $('.buy', dialog).bind( 'click', function( e ) {
-            setTimeout(function(){
+            //setTimeout(function(){
                 router.navigate("shop", "index");
                 //appDialogs.getBuyMoneyDialog().show();
-            }, 1000);
+            //}, 1000);
             this.hide();
             e.stopPropagation();
         }.bind(this));
         $('.earn', dialog).bind( 'click', function( e ) {
+            //this.hide();
+            //setTimeout(function(){
+                router.navigate("shop", "index");
+                //appDialogs.getEarnMoneyDialog()
+                //    .setInvitedFriendsCount(appManager.getGameStatus().inviteFriends.length)
+                //    .show();
+            //}, 1000);
             this.hide();
-            setTimeout(function(){
-                appDialogs.getEarnMoneyDialog()
-                    .setInvitedFriendsCount(appManager.getGameStatus().inviteFriends.length)
-                    .show();
-            }, 1000);
             e.stopPropagation();
         }.bind(this));
         $('.cancel', dialog).bind( 'click', function( e ) {
@@ -816,11 +851,12 @@ var Dialogs = {
     },
 
 
-
-
-
-
-
+    /**
+     *  Выключить Рекламу
+     */
+    getTurnOffAdsDialog: function(){
+        return this._getDialog("TurnOffAdsDialog", TurnOffAdsDialog);
+    },
 
 
 

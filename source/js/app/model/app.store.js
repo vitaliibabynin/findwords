@@ -50,17 +50,6 @@ var CordovaStore = Object.assign({}, AbstractStore, {
     init: function () {
 
         var coinsPurchaseIds = appManager.getSettings().getShopValue("coins")[CONST.CURRENT_PLATFORM];
-        //for (var k in coinsPurchaseIds) {
-        //    if (!coinsPurchaseIds.hasOwnProperty(k)) {
-        //        continue;
-        //    }
-        //
-        //    var platform = k.toUpperCase();
-        //    PRODUCT.COINS[platform] = {};
-        //    for (var i = 0; i < coinsPurchaseIds[k].length; i++) {
-        //        PRODUCT.COINS[platform]["COINSPACK_" + (i + 1)] = coinsPurchaseIds[k][i].purchaseId;
-        //    }
-        //}
 
         for (var i = 0; i < coinsPurchaseIds.length; i++) {
             PRODUCT.COINS["COINSPACK_" + (i + 1)] = coinsPurchaseIds[i].purchaseId;
@@ -88,29 +77,6 @@ var CordovaStore = Object.assign({}, AbstractStore, {
             if (CONST.ENV != 'production') {
                 store.verbosity = store.DEBUG;
             }
-
-            //var platform = CONST.CURRENT_PLATFORM.toUpperCase();
-            //console.log({platform: platform});
-
-            //for (var k in PRODUCT.COINS[platform]) {
-            //    if (!PRODUCT.COINS[platform].hasOwnProperty(k)) {
-            //        continue;
-            //    }
-            //
-            //    console.log(PRODUCT.COINS[platform][k]);
-            //    store.register({
-            //        id: PRODUCT.COINS[platform][k],
-            //        alias: PRODUCT.COINS[platform][k],
-            //        type: store.CONSUMABLE
-            //    });
-            //    store.when(PRODUCT.COINS[platform][k]).approved(function (order) {
-            //        console.log(order);
-            //
-            //        var coins = this.getCoins(order.id);
-            //        this.addCoins(coins);
-            //        order.finish();
-            //    }.bind(this));
-            //}
 
             for (var k in PRODUCT.COINS) {
                 if (!PRODUCT.COINS.hasOwnProperty(k)) {
@@ -173,6 +139,8 @@ var CordovaStore = Object.assign({}, AbstractStore, {
                 console.log("remove_ad " + (product.owned ? "OWNED" : "not owned") + "!");
 
                 appAd.setAdRemoved(product && product.owned ? true : false);
+
+                appManager.getGameState().setShowAds(product && product.owned ? false : true);
             }.bind(this));
 
 
@@ -230,6 +198,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
     },
 
     removeAd: function () {
+        appManager.getGameState().setShowAds(false);
         appDialogs.getInfoDialog()
             .setTitle(i18n._('app.dialog.info.removead.title'))
             .setContentText(i18n._('app.dialog.info.removead.description'))

@@ -79,7 +79,7 @@ var SlideClass = Object.assign({}, {}, {
             return;
         }
 
-        console.log("changing layout to unlocked slide number " + (this.state.slideIndex + 1));
+        //console.log("changing layout to unlocked slide number " + (this.state.slideIndex + 1));
 
         this.setState({
             isUnlocked: true,
@@ -159,7 +159,7 @@ var SlideClass = Object.assign({}, {}, {
             roundsComplete += roundsBundlesState[key].roundsComplete;
         }
 
-        console.log(roundsComplete);
+        //console.log(roundsComplete);
         return roundsComplete;
     },
 
@@ -171,29 +171,10 @@ var SlideClass = Object.assign({}, {}, {
     onClickBuySet: function (buttonProps, e) {
         e.stopPropagation();
 
-        //appDialogs.getErrorDialog().setContentText(i18n._('app.dialog.error.description')).show();
-
-        //var coins = 50;
-        //
-        //appDialogs.getInfoDialog()
-        //    .setTitle(i18n._('app.dialog.info.addcoins.title'))
-        //    .setContentText(i18n._('app.dialog.info.addcoins.description', coins))
-        //    .show();
-
-        //appDialogs.getInfoDialog()
-        //    .setTitle(i18n._('app.dialog.info.removead.title'))
-        //    .setContentText(i18n._('app.dialog.info.removead.description'))
-        //    .show();
-
-        //this.onClickGame();
-
-
         var productId = this.getProductId();
         console.log(productId);
 
         appStore.order(productId);
-
-        //this.unlockRoundsBundle(this.state.slideIndex);
     },
 
     getProductId: function () {
@@ -211,14 +192,6 @@ var SlideClass = Object.assign({}, {}, {
 
         return "";
     },
-
-    //unlockRoundsBundle: function(idx) {
-    //    appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
-    //    appDialogs.getInfoDialog()
-    //        .setTitle(i18n._('app.dialog.info.unlockroundsbundle.title'))
-    //        .setContentText(i18n._('app.dialog.info.unlockroundsbundle.description', idx + 1))
-    //        .show();
-    //},
 
     onClickComplete: function () {
         var layout = this.state.layout == LAYOUT_COMPLETE_MESSAGE ? LAYOUT_COMPLETE : LAYOUT_COMPLETE_MESSAGE;
@@ -370,12 +343,6 @@ var SlideClass = Object.assign({}, {}, {
         };
 
         var slideTitle = this.state.slideData.name;
-
-        //if (router.getLanguage() == "ru") {
-        //    slideTitle = this.state.slideData.name.ru;
-        //} else if (router.getLanguage() == "en") {
-        //    slideTitle = this.state.slideData.name.en;
-        //}
 
         var renderLayout;
         switch (this.state.layout) {

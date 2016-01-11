@@ -4,6 +4,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var EVENT_CHANGE_ROUNDS_BUNDLES = "eventChangeRoundsBundles";
 var EVENT_CHANGE_COINS = "eventChangeCoins";
 var EVENT_CHANGE_MUSICANDSFX = "eventChangeMusicAndSFX";
+var EVENT_SHOW_ADS = "eventChageShowAds";
 
 var SETTINGS_GAMESTATE = 'game_state';
 
@@ -12,13 +13,14 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     gameState: {
         coins: appManager.getSettings().getInitialCoins(),
         score: 0,
+        showAds: true,
         //bonus: {
         //    lastAccessDate: "",
         //    daysPlayedStreak: 0
         //},
         settings: {
-            music: true,
-            sound: true
+            music: false,
+            sound: false
         },
         practiceRound: {
             //complete: false,
@@ -38,291 +40,6 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         roundsBundles: {
             //en: {
             //    //0: {
-            //        //bundleScore: 0,
-            //        //isUnlocked: true,
-            //        //roundsComplete: 0
-            //    //},
-            //    //1: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //2: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //3: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //4: {
-            //    //    bundleScore: 99999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //5: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //6: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //7: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //8: {
-            //    //    bundleScore: 99999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //9: {
             //    //    bundleScore: 9999,
             //    //    isUnlocked: false,
             //    //    roundsComplete: 0,
@@ -393,323 +110,7 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
             //        //        secondsRemaining: 0
             //        //    }
             //        //}
-            //    //},
-            //    //1: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //2: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //3: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //4: {
-            //    //    bundleScore: 99999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //5: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //6: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //7: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //8: {
-            //    //    bundleScore: 99999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
-            //    //},
-            //    //9: {
-            //    //    bundleScore: 9999,
-            //    //    isUnlocked: false,
-            //    //    roundsComplete: 0,
-            //    //    rounds: {
-            //    //        0: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        1: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        2: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        },
-            //    //        3: {
-            //    //            board: {},
-            //    //            openedLetters: [],
-            //    //            shownWords: [],
-            //    //            starsReceived: 3,
-            //    //            secondsRemaining: 0
-            //    //        }
-            //    //    }
             //    //}
-            //}
         }
     },
 
@@ -757,6 +158,13 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     addCoins: function (coinsToAdd) {
         newTotalCoins = this.getCoins() + coinsToAdd;
         return this.setCoins(newTotalCoins);
+    },
+    setShowAds: function (newBoolean) {
+        this.setGameStateField('showAds', newBoolean);
+        this.emitChangeShowAds();
+    },
+    getShowAds: function () {
+        return this.getGameStateField('showAds', true);
     },
 
     setBonusField: function (field, newValue) {
@@ -974,6 +382,17 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     },
     emitChangeCoins: function(){
         this.emit(EVENT_CHANGE_COINS, this);
+    },
+
+
+    addChangeShowAdsListener: function(callback){
+        this.on(EVENT_SHOW_ADS, callback);
+    },
+    removeChangeShowAdsListener: function(callback){
+        this.removeListener(EVENT_SHOW_ADS, callback);
+    },
+    emitChangeShowAds: function(){
+        this.emit(EVENT_SHOW_ADS, this);
     }
 
 });

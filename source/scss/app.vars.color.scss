@@ -178,9 +178,18 @@ $dialogNoCoins-header-color: $color-2;
 $dialogNoCoins-header-bg-color: $color-4;
 $dialogNoCoins-content-color: $color-2;
 $dialogNoCoins-content-bg-color: $color-8;
-$dialogNoCoins-buy-bg-color: $color-6;
-$dialogNoCoins-earn-bg-color: $color-6;
-$dialogNoCoins-cancel-bg-color: $color-1;
+$dialogNoCoins-buy-bg-color: $color-1;
+$dialogNoCoins-earn-bg-color: $color-1;
+$dialogNoCoins-cancel-bg-color: $color-6;
+
+
+//TURN-OFF-ADS DIALOG
+$dialogTurnOffAds-header-color: $color-2;
+$dialogTurnOffAds-header-bg-color: $color-1;
+$dialogTurnOffAds-content-color: $color-2;
+$dialogTurnOffAds-content-bg-color: $color-8;
+$dialogTurnOffAds-turnoff-bg-color: $color-1;
+$dialogTurnOffAds-cancel-bg-color: $color-6;
 
 
 //INFO DIALOG
@@ -196,7 +205,7 @@ $dialogError-header-color: $color-2;
 $dialogError-header-bg-color: $color-4;
 $dialogError-content-color: $color-2;
 $dialogError-content-bg-color: $color-8;
-$dialogError-cancel-bg-color: $color-6;
+$dialogError-cancel-bg-color: $color-1;
 
 
 //REQUIRE-PUSH DIALOG

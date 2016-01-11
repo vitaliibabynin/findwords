@@ -121,6 +121,12 @@ window.CONST = {
             'app.dialog.nocoins.button.earn': 'Получить бесплатно',
             'app.dialog.nocoins.button.cancel': 'Отмена',
 
+            //TURN-OFF-ADS DIALOG
+            'app.dialog.turnoffads.title': 'Выключить рекламу',
+            'app.dialog.turnoffads.description': 'Навсегда убрать рекламу с приложения за',
+            'app.dialog.turnoffads.button.turnoff': 'Выключить',
+            'app.dialog.turnoffads.button.cancel': 'Отмена',
+
             //INFO DIALOG
             'app.dialog.info.button.cancel': "OK",
 
@@ -247,6 +253,12 @@ window.CONST = {
             'app.dialog.nocoins.button.buy': 'Purchase',
             'app.dialog.nocoins.button.earn': 'Get for free',
             'app.dialog.nocoins.button.cancel': 'Cancel',
+
+            //TURN-OFF-ADS DIALOG
+            'app.dialog.turnoffads.title': 'Turn off advertisement',
+            'app.dialog.turnoffads.description': 'Permenantely remove ads from the app for',
+            'app.dialog.turnoffads.button.turnoff': 'Turn Off',
+            'app.dialog.turnoffads.button.cancel': 'Cancel',
 
             //INFO DIALOG
             'app.dialog.info.button.cancel': "OK",

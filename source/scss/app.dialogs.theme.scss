@@ -98,6 +98,7 @@
 
     h3 {
       font-size: $dialogNoCoins-heading-font-size;
+      //background: initial;
     }
   }
   .md-content {
@@ -134,6 +135,51 @@
     .cancel {
       font-size: $dialogNoCoins-cancel-font-size;
       background-color: $dialogNoCoins-cancel-bg-color;
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      margin-bottom: 0;
+      width: 100%;
+    }
+  }
+}
+
+#turnoffads-dialog.md-modal {
+  .md-title {
+    color: $dialogTurnOffAds-header-color;
+    background-color: $dialogTurnOffAds-header-bg-color;
+
+    h3 {
+      font-size: $dialogTurnOffAds-heading-font-size;
+      //background: initial;
+    }
+  }
+  .md-content {
+    color: $dialogTurnOffAds-content-color;
+    background: $dialogTurnOffAds-content-bg-color;
+    font-size: $dialogTurnOffAds-description-font-size;
+
+    & > p {
+      padding: 0.75rem 1.75rem 1rem;
+    }
+    a {
+      color: $dialogTurnOffAds-content-color;
+    }
+    .turnoff {
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      width: initial;
+      margin-left: 0.875rem;
+      margin-right: 0.875rem;
+      font-size: $dialogTurnOffAds-turnoff-font-size;
+      background-color: $dialogTurnOffAds-turnoff-bg-color;
+      //margin-bottom: 0.625rem;
+      margin-bottom: 1rem;
+    }
+    .cancel {
+      font-size: $dialogTurnOffAds-cancel-font-size;
+      background-color: $dialogTurnOffAds-cancel-bg-color;
       $height: 2.375rem;
       height: $height;
       line-height: $height;

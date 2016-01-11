@@ -246,7 +246,7 @@ var NavigationClass = Object.assign({}, {}, {
 
 
     render: function () {
-        console.log({facebookOnline: this.state.facebookOnline});
+        //console.log({facebookOnline: this.state.facebookOnline});
 
         var classses = classNames("navigation", this.state.buttonLayout + '-layout');
 
