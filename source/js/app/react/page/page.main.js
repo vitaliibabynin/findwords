@@ -120,7 +120,7 @@ var PageMain = Object.assign({}, {}, {
         };
 
         console.log({GameStateRemoveAds: appManager.getGameState().getRemoveAds()});
-        console.log({StateShowAds: this.state.adsRemoved});
+        console.log({StateAdsRemoved: this.state.adsRemoved});
 
         var checked = this.state.adsRemoved ? "" : "checked";
         console.log({checked: checked});

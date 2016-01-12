@@ -23,12 +23,12 @@ var TimerClass = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             secondsRemaining: 0,
-            starOneThirdOn: this.getImagePath('timer/star_on'),
-            starTwoThirdsOn: this.getImagePath('timer/star_on'),
-            starBase: this.getImagePath('timer/star_on'),
+            starOneThirdOn: this.getImagePath('timer/2star_on'),
+            starTwoThirdsOn: this.getImagePath('timer/3star_on'),
+            starBase: this.getImagePath('timer/1star_on'),
             timerImg: this.getImagePath('timer/timer'),
-            starOneThirdOff: this.getImagePath('timer/star_off'),
-            starTwoThirdsOff: this.getImagePath('timer/star_off'),
+            starOneThirdOff: this.getImagePath('timer/2star_off'),
+            starTwoThirdsOff: this.getImagePath('timer/3star_off'),
             setGameStateRoundField: this.props.setGameStateRoundField || function () {
             },
             getGameStateRoundField: this.props.getGameStateRoundField || function () {
