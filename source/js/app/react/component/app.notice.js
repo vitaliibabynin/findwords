@@ -29,14 +29,17 @@ var NoticeClass = Object.assign({}, {}, {
                 x: React.PropTypes.number,
                 y: React.PropTypes.number
             }))
-        })
+        }),
+        hideNotice: React.PropTypes.func
     },
 
     getInitialState: function () {
         return {
             classNames: this.props.classNames || "",
             noticeType: this.props.noticeType || "",
-            word: this.props.word || {letters: []}
+            word: this.props.word || {letters: []},
+            hideNotice: this.props.hideNotice || function () {
+            }
         };
     },
 
@@ -44,7 +47,9 @@ var NoticeClass = Object.assign({}, {}, {
         this.setState({
             classNames: nextProps.classNames || "",
             noticeType: nextProps.noticeType || "",
-            word: nextProps.word || {letters: []}
+            word: nextProps.word || {letters: []},
+            hideNotice: nextProps.hideNotice || function () {
+            }
         });
     },
 
@@ -125,7 +130,9 @@ var NoticeClass = Object.assign({}, {}, {
         return (
             <div className="lock-screen">
                 <div className={noticeClassNames}
-                     style={noticeImg}>
+                     style={noticeImg}
+                     onClick={this.state.hideNotice}
+                >
                     <div><span>{text}</span></div>
                 </div>
             </div>

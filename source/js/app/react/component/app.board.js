@@ -847,9 +847,9 @@ var BoardClass = Object.assign({}, {}, {
 
         this.copySelectedLettersToPrevSelectedLetters();
 
-        setTimeout(function () {
-            this.emptySelectedLetters();
-        }.bind(this), 2000);
+        //setTimeout(function () {
+        //    this.emptySelectedLetters();
+        //}.bind(this), 2000);
     },
 
     emptySelectedLetters: function () {

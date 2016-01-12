@@ -150,22 +150,6 @@ var PageGameMain = Object.assign({}, {}, {
             return;
         }
 
-        //var result = this.refs.board.openWord();
-        //if (result !== false) {
-        //    var chipsOpenWord = this.state.chipsOpenWord - 1;
-        //
-        //    appManager.getGameState().setChipOpenWord(chipsOpenWord);
-        //
-        //    this.setState({
-        //        chipsOpenWord: chipsOpenWord
-        //    }, function () {
-        //        if (this.refs.board.checkIfRoundComplete()) {
-        //            //this.goToPageRoundComplete(2000);
-        //            this.goToPageRoundComplete();
-        //        }
-        //    });
-        //}
-
         this.refs.board.openWord().then(function (result) {
             if (result !== false) {
                 var newCoins = coins - this.state.chipsOpenWord;
@@ -178,18 +162,6 @@ var PageGameMain = Object.assign({}, {}, {
                 }
             }
         }.bind(this));
-
-        //var chipsOpenWord = this.state.chipsOpenWord - 1;
-        //
-        //this.setState({
-        //    chipsOpenWord: chipsOpenWord
-        //}, function () {
-        //    //if (this.refs.board.checkIfRoundComplete()) {
-        //    //this.goToPageRoundComplete(2000);
-        //    //this.goToPageRoundComplete();
-        //    router.navigate("rate", "index");
-        //    //}
-        //});
     },
 
     onChipOpenLetterClick: function () {
@@ -301,12 +273,20 @@ var PageGameMain = Object.assign({}, {}, {
             noticeWord: word
         }, function () {
             setTimeout(function () {
-                this.setState({
-                    noticeType: "",
-                    noticeWord: {letters: []}
-                });
+                this.hideNotice();
             }.bind(this), 2000);
         });
+    },
+
+    hideNotice: function () {
+        this.setState({
+            noticeType: "",
+            noticeWord: {letters: []}
+        });
+
+        //setTimeout(function () {
+            this.refs.board.emptySelectedLetters();
+        //}.bind(this), 200);
     },
 
     goToPageRoundComplete: function (time) {
@@ -382,6 +362,7 @@ var PageGameMain = Object.assign({}, {}, {
 
                     <Notice noticeType={this.state.noticeType}
                             word={this.state.noticeWord}
+                            hideNotice={this.hideNotice}
                     />
 
                     <ShownWords shownWordsLetters={this.state.shownWordsLetters}
