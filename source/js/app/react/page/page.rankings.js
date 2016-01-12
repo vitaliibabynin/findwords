@@ -119,6 +119,10 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     render: function () {
+        appFB.getAppFriends().then(function(result){
+            console.log(result);
+        });
+
         var facebookImg = {
             backgroundImage: "url('" + this.getImagePath('button/facebook_connect') + "')"
         };
