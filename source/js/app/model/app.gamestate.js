@@ -13,11 +13,10 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     gameState: {
         coins: appManager.getSettings().getInitialCoins(),
         score: 0,
-        showAds: true,
-        adPreferences: {
-            removeAds: false,
-            removeAdsDialogueShown: false
-        },
+        //adPreferences: {
+        //    removeAds: false,
+        //    removeAdsDialogueShown: false
+        //},
         //bonus: {
         //    lastAccessDate: "",
         //    daysPlayedStreak: 0
@@ -163,13 +162,6 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         newTotalCoins = this.getCoins() + coinsToAdd;
         return this.setCoins(newTotalCoins);
     },
-    //setShowAds: function (newBoolean) {
-    //    this.setGameStateField('showAds', newBoolean);
-    //    this.emitChangeShowAds();
-    //},
-    //getShowAds: function () {
-    //    return this.getGameStateField('showAds', true);
-    //},
 
     setAdPreferencesField: function (field, newValue) {
         if (!this.gameState.adPreferences) {
