@@ -49,9 +49,12 @@
       width: 90%;
       //background-position: 2% 0.3125rem, 33% 0.3125rem, 63% 0.3125rem, 97.25% 0.3125rem;
       //background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem, 0.875rem 1rem;
+
       //background-position: 0 0.3125rem, 34.2% 0.3125rem, 67.66% 0.3125rem;
-      background-position: 0 0.3125rem, 34.33% 0.3125rem, 67.66% 0.3125rem;
-      background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem;
+      //background-size: 1rem 1rem, 1rem 1rem, 1rem 1rem;
+
+      background-position: 0 0.3125rem, 34.33% 0.28125rem, 67.66% 0.1875rem;
+      background-size: 1rem 1rem, 1.3125rem 1.0625rem, 1.8125rem 1.25rem;
       background-repeat: no-repeat;
     }
 
@@ -543,7 +546,7 @@ html.csscalc {
 
     .timer {
       .timer-stars {
-        background-position: 0 0.3125rem, calc(33.33% + .5rem) 0.3125rem, calc(66.66% + .5rem) 0.3125rem;
+        background-position: 0 0.3125rem, calc(33.33% + .5rem) 0.28125rem, calc(66.66% + .5rem) 0.1875rem;
       }
     }
 
