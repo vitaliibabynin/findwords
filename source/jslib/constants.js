@@ -152,6 +152,10 @@ window.CONST = {
             'app.dialog.requirepush.button.ok': 'Разрешить',
             'app.dialog.requirepush.button.cancel': 'Не сейчас',
 
+            //FACEBOOK INVITE
+            'app.invite.title': 'Выберите друзей, чтобы пригласить их в игру',
+            'app.invite.message': 'Примите участие в интеллектуальных состязаниях и помогите команде вашего пола победить',
+
             t: ''
         },
         en: {
@@ -284,6 +288,10 @@ window.CONST = {
             'app.dialog.requirepush.description': 'Want to know when you\'ve received a bonus? Allow notifications.',
             'app.dialog.requirepush.button.ok': 'Allow',
             'app.dialog.requirepush.button.cancel': 'Not now',
+
+            //FACEBOOK INVITE
+            'app.invite.title': 'Select friends to invite to the game',
+            'app.invite.message': 'Engage in intellectual battles and help your team achieve victory',
 
             t: ''
         }

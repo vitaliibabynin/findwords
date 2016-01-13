@@ -7,6 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
+var SimpleButton = require('./../component/app.button').SimpleButton;
 
 
 var PlayerStatsClass = Object.assign({}, {}, {
@@ -118,8 +119,13 @@ var PageRankings = Object.assign({}, {}, {
         return state;
     },
 
+    onClickInviteFriends: function () {
+        console.log("invite friends");
+        appFB.invite();
+    },
+
     render: function () {
-        appFB.getAppFriends().then(function(result){
+        appFB.getAppFriends().then(function (result) {
             console.log(result);
         });
 
@@ -146,9 +152,12 @@ var PageRankings = Object.assign({}, {}, {
 
                         <div className="invite-friends-text">{i18n._('rankings.invite-friends.get-coin')}</div>
 
-                        <div className="invite-friends-fb-button">
+                        <SimpleButton className="invite-friends-fb-button"
+                                      onClick={this.onClickInviteFriends}
+                                      displayName="InviteFriendsButton"
+                        >
                             <div style={facebookImg}>{i18n._('rankings.invite-friends')}</div>
-                        </div>
+                        </SimpleButton>
 
                     </div>
 

@@ -293,9 +293,9 @@ module.exports.FbButton.Class = FbButtonClass;
 //module.exports.OkButton.Class = OkButtonClass;
 
 
-var FreeCoinsClass = Object.assign({}, {}, {
+var SimpleButtonClass = Object.assign({}, {}, {
 
-    displayName: 'FreeCoins',
+    displayName: 'SimpleButton',
 
     propTypes: {
         className: React.PropTypes.string
@@ -342,11 +342,18 @@ var FreeCoinsClass = Object.assign({}, {}, {
         );
     }
 });
+module.exports.SimpleButton = React.createClass(SimpleButtonClass);
+module.exports.SimpleButton.Class = SimpleButtonClass;
+
+
+var FreeCoinsClass = Object.assign({}, SimpleButtonClass, {
+    displayName: 'FreeCoins'
+});
 module.exports.FreeCoins = React.createClass(FreeCoinsClass);
 module.exports.FreeCoins.Class = FreeCoinsClass;
 
 
-var BuyCoinsClass = Object.assign({}, FreeCoinsClass, {
+var BuyCoinsClass = Object.assign({}, SimpleButtonClass, {
 
     displayName: 'BuyCoins',
 
@@ -367,24 +374,6 @@ var BuyCoinsClass = Object.assign({}, FreeCoinsClass, {
         };
 
         return state;
-    },
-
-    onClick: function (e) {
-        e.preventDefault();
-
-        if (!this.state.isActive) {
-            this.setState({isActive: true}, function () {
-                setTimeout(function () {
-                    if (this.isMounted()) {
-                        this.setState({isActive: false});
-                    }
-                }.bind(this), 300);
-            }.bind(this));
-        }
-
-        if (this.props.onClick && typeof this.props.onClick == 'function') {
-            this.props.onClick(this.props, e);
-        }
     },
 
     render: function () {
