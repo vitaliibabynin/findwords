@@ -120,15 +120,36 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     onClickInviteFriends: function () {
-        console.log("invite friends");
+        //console.log("invite friends");
+
         appFB.invite().then(function (result) {
-            if (result.constructor !== Array) {
-                console.log("result type invalid");
+            if(!result){
+                //console.log("result equals false");
                 return;
             }
 
-            console.log({result: result});
-        });
+            if (!result.hasOwnProperty("to")) {
+                //console.log("hasOwnProperty test failed");
+                return;
+            }
+
+            if (result.to.constructor !== Array) {
+                //console.log("result type invalid");
+                return;
+            }
+
+            //console.log({result: result});
+            //console.log({resultTo: result.to});
+
+            var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
+            var coinsToAdd = result.to.length * coinsPerFriend;
+
+            //console.log({coinsToAdd: coinsToAdd});
+
+            appManager.getGameState().addCoins(coinsToAdd);
+        }).then(function () {
+            this.forceUpdate();
+        }.bind(this));
     },
 
     render: function () {

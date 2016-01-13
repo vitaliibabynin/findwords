@@ -27,7 +27,7 @@ var PageShop = Object.assign({}, {}, {
             purchases: appManager.getSettings().getPurchases() || {},
             freeCoins: appManager.getSettings().getFreeCoins() || {
                 watchVideo: 0,
-                sendInvite: 0
+                share: 0
             }
         };
     },
@@ -60,7 +60,7 @@ var PageShop = Object.assign({}, {}, {
     },
 
     onClickShare: function () {
-        appManager.getGameState().addCoins(this.state.freeCoins.sendInvite);
+        appManager.getGameState().addCoins(this.state.freeCoins.share);
 
         console.log("share with friends");
     },
