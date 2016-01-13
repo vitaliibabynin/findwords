@@ -274,7 +274,7 @@
           .profile-pic {
             position: absolute;
             top: 0.2rem;
-            left: 0.75rem;
+            left: 0.5rem;
             width: 1.6rem;
             height: 1.6rem;
             background-size: contain;
@@ -286,9 +286,9 @@
             margin: 0;
             position: absolute;
             top: 0;
-            left: 3rem;
+            left: 2.6rem;
             $height: 2rem;
-            $width: 3rem;
+            $width: 3.15rem;
             height: $height;
             width: $width;
 
@@ -301,6 +301,7 @@
               span {
                 display: inline-block;
                 white-space: nowrap;
+                overflow: hidden;
                 text-overflow: ellipsis;
                 font-size: 0.55rem;
                 height: 0.55rem;

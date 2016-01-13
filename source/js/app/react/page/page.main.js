@@ -119,11 +119,11 @@ var PageMain = Object.assign({}, {}, {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };
 
-        console.log({GameStateRemoveAds: appManager.getGameState().getRemoveAds()});
-        console.log({StateAdsRemoved: this.state.adsRemoved});
+        //console.log({GameStateRemoveAds: appManager.getGameState().getRemoveAds()});
+        //console.log({StateAdsRemoved: this.state.adsRemoved});
 
         var checked = this.state.adsRemoved ? "" : "checked";
-        console.log({checked: checked});
+        //console.log({checked: checked});
 
         return (
 

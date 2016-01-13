@@ -121,7 +121,14 @@ var PageRankings = Object.assign({}, {}, {
 
     onClickInviteFriends: function () {
         console.log("invite friends");
-        appFB.invite();
+        appFB.invite().then(function (result) {
+            if (result.constructor !== Array) {
+                console.log("result type invalid");
+                return;
+            }
+
+            console.log({result: result});
+        });
     },
 
     render: function () {
