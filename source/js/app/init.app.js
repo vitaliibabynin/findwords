@@ -5,7 +5,7 @@ require('es6-promise').polyfill();
 
 window.refreshApp = function(){
     if(window.cordova && cordova.file && cordova.file.applicationDirectory){
-        document.location = cordova.file.applicationDirectory + 'www/index_'+device.platform.toLowerCase()+'.html';
+        document.location = cordova.file.applicationDirectory + 'www/index.html';
     }else{
         document.location.reload();
     }
@@ -70,6 +70,7 @@ $(function() {
         if(CONST.IS_CORDOVA_APP){
             var appLoadTime = Date.now();
             document.addEventListener("deviceready", function(){
+                window.StatusBar.hide();
                 window.open = cordova.InAppBrowser.open;
                 initApp();
                 navigator.splashscreen.hide();

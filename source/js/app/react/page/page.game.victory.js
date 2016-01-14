@@ -7,6 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
+var StartAd = require('./../component/app.startad').StartAd;
 
 
 var PageGameVictory = Object.assign({}, {}, {
@@ -33,11 +34,10 @@ var PageGameVictory = Object.assign({}, {}, {
 
     componentWillMount: function(){
         appAd.showInterstitial();
+        appAd.hideBanner();
     },
 
     componentDidMount: function () {
-
-
         this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(this.state.rewardCoins);
         var roundsComplete = appManager.getGameState().getRoundsBundles(this.state.roundsBundleIdx).roundsComplete || 0;
@@ -57,9 +57,9 @@ var PageGameVictory = Object.assign({}, {}, {
     //
     //},
     //
-    //componentWillUnmount: function () {
-    //
-    //},
+    componentWillUnmount: function () {
+        appAd.showBottomBanner();
+    },
 
     getGameStateRoundsBundleField: function (roundsBundleIdx, field) {
         return appManager.getGameState().getRoundsBundles(roundsBundleIdx)[field];
@@ -255,6 +255,8 @@ var PageGameVictory = Object.assign({}, {}, {
                             <div className="button" onClick={this.onClick}>{i18n._('victory.continue')}</div>
                         </div>
 
+
+                        <StartAd />
                     </div>
 
                 </div>

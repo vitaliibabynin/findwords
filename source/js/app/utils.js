@@ -94,9 +94,9 @@ module.exports = {
             url = CONST.CURRENT_PLATFORM == CONST.PLATFORM_ANDROID && !returnFullUrl ? 'market://details?id=' : 'https://play.google.com/store/apps/details?id=';
             url += appPlatforms.android;
         } else if (platform == CONST.PLATFORM_IOS) {
-            url = appPlatforms.ios;
+            url = 'https://itunes.apple.com/app/id'+appPlatforms.ios+'?ls=1&mt=8';
         } else if (platform == CONST.PLATFORM_WINDOWS8) {
-            url = appPlatforms.windows8;
+            url = appPlatforms.windows;
         }
 
         return url;

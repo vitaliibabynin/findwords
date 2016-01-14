@@ -47,6 +47,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                         , window.appFB.init(this.getSettings().getFacebookId(), this.language)
                         , window.appStore.init() //из-за этого пока не грузится на iOS девайсах, нужно завести в панельке аппстора приложение
                         , window.appNotificationLocal.init()
+                        , window.appAd.init()
                     ]);
                 }.bind(this))
             .then(function(){

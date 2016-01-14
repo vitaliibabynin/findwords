@@ -9,10 +9,6 @@ window.loadingScreen = require('./loading.screen');
 window.appAnalytics = require('./model/app.analytics').AnalyticsFactory(CONST.CURRENT_PLATFORM);
 window.appAnalytics.init(CONST.GA_ID[CONST.CURRENT_PLATFORM]);
 
-window.refreshApp = function(){
-    document.location.reload();
-}
-
 
 
 //

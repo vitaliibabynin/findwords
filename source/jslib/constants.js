@@ -156,6 +156,9 @@ window.CONST = {
             'app.invite.title': 'Выберите друзей, чтобы пригласить их в игру',
             'app.invite.message': 'Примите участие в интеллектуальных состязаниях и помогите команде вашего пола победить',
 
+            //FOR STARTAD
+            'startad.recommendapp': 'Рекомендуем приложение',
+
             t: ''
         },
         en: {
@@ -292,6 +295,9 @@ window.CONST = {
             //FACEBOOK INVITE
             'app.invite.title': 'Select friends to invite to the game',
             'app.invite.message': 'Engage in intellectual battles and help your team achieve victory',
+
+            //FOR STARTAD
+            'startad.recommendapp': 'We recommend this app',
 
             t: ''
         }

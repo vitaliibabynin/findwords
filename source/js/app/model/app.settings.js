@@ -9,8 +9,6 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     setSettings: function (data) {
         this.settings = data;
 
-        window.appAd.setSettings(this.getAdSettings());
-
         this.emitChange();
     },
 
@@ -36,7 +34,7 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getAppPlatforms: function () {
-        return this.getSettingsValue('appplatforms', {});
+        return this.getSettingsValue('marketAppId', {});
     },
 
     //getAdSettings: function () {
@@ -48,7 +46,12 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getShareAppLink: function () {
-        return this.getSettingsValue('share_applink', false);
+        var shareLink = this.getSettingsValue('shareAppLink', false);
+        if(!shareLink){
+            shareLink = Utils.getPlatformUrl(CONST.CURRENT_PLATFORM);
+        }
+
+        return shareLink;
     },
 
     getFacebookId: function () {

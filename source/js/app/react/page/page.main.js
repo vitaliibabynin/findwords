@@ -28,6 +28,10 @@ var PageMain = Object.assign({}, {}, {
         return state;
     },
 
+    componentWillMount: function(){
+        appAd.hideBanner();
+    },
+
     componentDidMount: function () {
         appManager.getGameState().addChangeRemoveAdsListener(this.updateAdSwitch);
 
@@ -86,6 +90,7 @@ var PageMain = Object.assign({}, {}, {
 
     componentWillUnmount: function () {
         appManager.getGameState().removeChangeRemoveAdsListener(this.updateAdSwitch);
+        appAd.showBottomBanner();
     },
 
     //componentDidUpdate: function (prevProps, prevState) {

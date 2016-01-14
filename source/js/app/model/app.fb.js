@@ -489,9 +489,10 @@ var CordovaFB = Object.assign({}, AbstractFB, {
 
 
             this.fbPlugin.graphRequest({
-                path: "me",
-                params: {"fields": "id,picture.width(150).height(150),first_name,last_name"},
+                path: "me?fields=id,picture.width(150).height(150),first_name,last_name",
+                //params: {"fields": "id,picture.width(150).height(150),first_name,last_name"},
                 onSuccess: function(response) {
+                    console.log(response);
                     if(!response){
                         reject();
                         return;
@@ -530,9 +531,11 @@ var CordovaFB = Object.assign({}, AbstractFB, {
                 }
             }
 
+            nextPageUrl += '&limit='+pageLimit;
+
             this.fbPlugin.graphRequest({
                 path: nextPageUrl,
-                params: {limit: pageLimit},
+                //params: {limit: pageLimit},
                 onSuccess: function(response) {
                     if(!response || !response.data){
                         reject();

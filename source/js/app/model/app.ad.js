@@ -16,38 +16,53 @@ var Ad = function(currentPlatform, isCordovaApp){
     this.vungleInited = false;
 
     this.init = function(){
-        if(!this.settings){
-            return;
-        }
 
-        if(this.isCordovaApp){
-            if(this.settings.hasOwnProperty("adMob") && window.admob){
-                admob.initAdmob(this.settings.adMob.default, this.settings.adMob.intersitital);
-                document.addEventListener(
-                    admob.Event.onInterstitialReceive,
-                    this.onAdMobInterstitialReceive.bind(this),
-                    false);
-                this.admobInited = true;
+        return new Promise(function(resolve, reject){
+            this.settings = appManager.getSettings().getAdSettings();
+
+            if(!this.settings){
+                reject('Ad settings not defined.');
+                return;
             }
-        }
 
-        if(this.settings.hasOwnProperty("startAd")){
-            this.startAd = new StartAD(this.settings.startAd);
-        }
+            if(this.isCordovaApp){
+                if(this.settings.hasOwnProperty("adMob") && window.admob){
+                    var bannerId = this.settings.adMob['320x50'];
+                    if(window.screen.width >= 468){
+                        bannerId = this.settings.adMob['468x60'];
+                    }else if(window.screen.width >= 728){
+                        bannerId = this.settings.adMob['728x90'];
+                    }
 
-        if(this.settings.hasOwnProperty("unityAds") && window.unityads){
-            var videoAdPlacementId = "defaultZone";
-            var rewardedVideoAdPlacementId = "rewardedVideoZone";
-            window.unityads.setUp(this.settings.unityAds.id, videoAdPlacementId, rewardedVideoAdPlacementId, this.settings.unityAds.isTest);
+                    admob.initAdmob(bannerId.trim(), this.settings.adMob.interstitial.trim());
+                    document.addEventListener(
+                        admob.Event.onInterstitialReceive,
+                        this.onAdMobInterstitialReceive.bind(this),
+                        false);
+                    this.admobInited = true;
+                }
+            }
 
-            this.unityAdsInited = true;
-        }
+            if(this.settings.hasOwnProperty("startAd")){
+                this.startAd = new StartAD(this.settings.startAd.trim());
+            }
 
-        if(this.settings.hasOwnProperty("vungle") && window.vungle){
-            window.vungle.setUp(this.settings.vungle);
+            if(this.settings.hasOwnProperty("unityAds") && window.unityads){
+                var videoAdPlacementId = "defaultZone";
+                var rewardedVideoAdPlacementId = "rewardedVideoZone";
+                window.unityads.setUp(this.settings.unityAds.id.trim(), videoAdPlacementId, rewardedVideoAdPlacementId, this.settings.unityAds.isTest);
 
-            this.vungleInited = true;
-        }
+                this.unityAdsInited = true;
+            }
+
+            if(this.settings.hasOwnProperty("vungle") && window.vungle){
+                window.vungle.setUp(this.settings.vungle.trim());
+
+                this.vungleInited = true;
+            }
+
+            resolve();
+        }.bind(this));
 
     }
 
@@ -69,6 +84,13 @@ var Ad = function(currentPlatform, isCordovaApp){
 
     }
 
+    this.getAdMobParams = function(){
+        var admobParam = new  admob.Params();
+        admobParam.isTesting = true;
+
+        return admobParam;
+    },
+
     this.prepareInterstitial = function(){
         if(this.adRemoved){
             return false;
@@ -77,11 +99,37 @@ var Ad = function(currentPlatform, isCordovaApp){
         if(this.admobInited && window.admob){
             admob.isInterstitialReady(function(isReady){
                 if(!isReady){
-                    admob.cacheInterstitial();
+                    admob.cacheInterstitial(this.getAdMobParams());
                 }
             }.bind(this));
         }
     }
+
+    this.getAdMobBannerType = function(){
+        var bannerType = admob.BannerSize.BANNER;
+        if(window.screen.width >= 468){
+            bannerType = admob.BannerSize.IAB_BANNER;
+        }else if(window.screen.width >= 728){
+            bannerType = admob.BannerSize.IAB_LEADERBOARD;
+
+            if(deviceJS.ipad()){
+                bannerType = admob.BannerSize.IPAD_PORTRAIT;
+            }
+        }
+
+        return bannerType;
+    },
+
+    this.showBottomBanner = function(){
+        admob.showBanner(this.getAdMobBannerType(), admob.Position.BOTTOM_CENTER, this.getAdMobParams());
+    },
+
+    this.hideBanner = function(){
+        admob.hideBanner(
+            function(result){ console.log(result); },
+            function(error){ console.log(error); }
+        );
+    },
 
     this.showInterstitial = function(){
         if(this.adRemoved){
