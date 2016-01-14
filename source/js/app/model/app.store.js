@@ -199,6 +199,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
     removeAd: function () {
         appManager.getGameState().setRemoveAds(true);
+        appAd.setAdRemoved(true);
 
         if (appManager.getGameState().getRemoveAdsDialogueShown()) {
             console.log("remove ads dialogue already shown");

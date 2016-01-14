@@ -44,7 +44,7 @@ var TimerClass = Object.assign({}, {}, {
         }
 
         if (state.getGameStateRoundField("secondsRemaining") != -1 || typeof(initialTime) != "undefined") {
-            state.secondsRemaining = state.getGameStateRoundField("secondsRemaining") || 0;
+            state.secondsRemaining = Math.min(this.props.time, state.getGameStateRoundField("secondsRemaining")) || 0;
             state.lastSave = state.secondsRemaining;
         }
 
