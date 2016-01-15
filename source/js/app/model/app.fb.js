@@ -487,10 +487,16 @@ var CordovaFB = Object.assign({}, AbstractFB, {
                 return resolve(this.meInfo);
             }
 
+            var path = 'me';
+            var params = {"fields": "id,picture.width(150).height(150),first_name,last_name"};
+            if(CONST.CURRENT_PLATFORM == CONST.PLATFORM_IOS){
+                path += '?fields=id,picture.width(150).height(150),first_name,last_name';
+                params = {};
+            }
 
             this.fbPlugin.graphRequest({
-                path: "me?fields=id,picture.width(150).height(150),first_name,last_name",
-                //params: {"fields": "id,picture.width(150).height(150),first_name,last_name"},
+                path: path,
+                params: params,
                 onSuccess: function(response) {
                     console.log(response);
                     if(!response){
@@ -531,11 +537,15 @@ var CordovaFB = Object.assign({}, AbstractFB, {
                 }
             }
 
-            nextPageUrl += '&limit='+pageLimit;
+            var params = {limit: pageLimit};
+            if(CONST.CURRENT_PLATFORM == CONST.PLATFORM_IOS){
+                nextPageUrl += '&limit='+pageLimit;
+                params = {};
+            }
 
             this.fbPlugin.graphRequest({
                 path: nextPageUrl,
-                //params: {limit: pageLimit},
+                params: params,
                 onSuccess: function(response) {
                     if(!response || !response.data){
                         reject();

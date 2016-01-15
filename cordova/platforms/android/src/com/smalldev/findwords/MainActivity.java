@@ -25,6 +25,7 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.webkit.WebView;
 
 import org.apache.cordova.*;
 
@@ -37,6 +38,12 @@ public class MainActivity extends CordovaActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        if (appView == null) {
+            init();
+        }
+
+        ((WebView)this.appView.getView()).getSettings().setTextZoom(100);
+
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
 

@@ -54,6 +54,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return shareLink;
     },
 
+    getAppInviteImgUrl: function(){
+        this.getSettingsValue('inviteImgUrl', false)
+    },
+
     getFacebookId: function () {
         var fbId = this.getSettingsValue('facebookId', "");
         return fbId[CONST.ENV];

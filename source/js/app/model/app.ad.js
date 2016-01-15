@@ -48,8 +48,8 @@ var Ad = function(currentPlatform, isCordovaApp){
             }
 
             if(this.settings.hasOwnProperty("unityAds") && window.unityads){
-                var videoAdPlacementId = "defaultZone";
-                var rewardedVideoAdPlacementId = "rewardedVideoZone";
+                var videoAdPlacementId = "video";
+                var rewardedVideoAdPlacementId = "rewardedVideo";
                 window.unityads.setUp(this.settings.unityAds.id.trim(), videoAdPlacementId, rewardedVideoAdPlacementId, this.settings.unityAds.isTest);
 
                 this.unityAdsInited = true;
@@ -68,6 +68,9 @@ var Ad = function(currentPlatform, isCordovaApp){
 
     this.setAdRemoved = function(adRemoved){
         this.adRemoved = adRemoved;
+        if(adRemoved){
+            this.hideBanner();
+        }
     }
 
     this.setSettings = function(settings){
@@ -86,7 +89,7 @@ var Ad = function(currentPlatform, isCordovaApp){
 
     this.getAdMobParams = function(){
         var admobParam = new  admob.Params();
-        admobParam.isTesting = true;
+        admobParam.isTesting = this.settings.adMob.isTest ? true : false;
 
         return admobParam;
     },
@@ -121,14 +124,26 @@ var Ad = function(currentPlatform, isCordovaApp){
     },
 
     this.showBottomBanner = function(){
-        admob.showBanner(this.getAdMobBannerType(), admob.Position.BOTTOM_CENTER, this.getAdMobParams());
+        if(this.adRemoved){
+            return false;
+        }
+
+        if(this.admobInited && window.admob) {
+            admob.showBanner(this.getAdMobBannerType(), admob.Position.BOTTOM_CENTER, this.getAdMobParams());
+        }
     },
 
     this.hideBanner = function(){
-        admob.hideBanner(
-            function(result){ console.log(result); },
-            function(error){ console.log(error); }
-        );
+        if(this.admobInited && window.admob) {
+            admob.hideBanner(
+                function (result) {
+                    console.log(result);
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        }
     },
 
     this.showInterstitial = function(){

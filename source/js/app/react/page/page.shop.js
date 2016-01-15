@@ -54,9 +54,23 @@ var PageShop = Object.assign({}, {}, {
     },
 
     onClickWatchVideo: function () {
-        appManager.getGameState().addCoins(this.state.freeCoins.watchVideo);
-
-        console.log("watch a video");
+        appAd.hideBanner();
+        appAnalytics.trackEvent('ad', 'video_start', '', 1);
+        appAd.showRewardedVideo().then(function(){
+            appManager.getGameState().addCoins(this.state.freeCoins.watchVideo);
+            appDialogs.getInfoDialog()
+                .setTitle(i18n._('app.dialog.info.addcoins.title'))
+                .setContentText(i18n._('app.dialog.info.addcoins.description', this.state.freeCoins.watchVideo))
+                .show();
+            appAnalytics.trackEvent('ad', 'video_success', '', 1);
+            appAd.showBottomBanner();
+        }.bind(this), function(){
+            appDialogs.getInfoDialog()
+                .setContentText(i18n._('app.dialog.info.rewardedvideo.notfound'))
+                .show();
+            appAnalytics.trackEvent('ad', 'video_notfound', '', 1);
+            appAd.showBottomBanner();
+        }.bind(this));
     },
 
     onClickShare: function () {
