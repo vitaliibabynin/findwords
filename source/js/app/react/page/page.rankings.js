@@ -15,25 +15,59 @@ var PlayerStatsClass = Object.assign({}, {}, {
     displayName: 'PlayerStats',
 
     propTypes: {
-        selected: React.PropTypes.bool
+        selected: React.PropTypes.bool,
+        friend: React.PropTypes.object,
+        place: React.PropTypes.number,
+        score: React.PropTypes.number
     },
 
     getInitialState: function () {
         var state = {
-            place: 99999,
-            score: 9999999,
-            roundsComplete: 200,
-            profileFirstName: "FirstName",
-            profileLastName: "LastName",
-            selected: this.props.selected || false
+            friend: this.props.friend || {},
+            selected: this.props.selected || false,
+            place: this.props.place || 0,
+            score: this.props.score || 9999999,
+            roundsComplete: 0
         };
         state.roundsBundlesState = appManager.getGameState().getRoundsBundles() || {};
         state.roundsComplete = this.countRoundsComplete(state.roundsBundlesState) || 0;
         state.roundsBundlesData = appManager.getSettings().getRoundsBundles() || {};
         state.roundsTotal = this.countRoundsTotal(state.roundsBundlesData) || 1;
-        state.profilePicUrl = "url('/build/img/counter/star.png')" || "";
+        state.profilePicUrl = "url(" + state.friend.picture + ")" || "";
+        state.profileFirstName = state.friend.first_name || "FirstName";
+        state.profileLastName = state.friend.last_name || "LastName";
 
         return state;
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        //console.log({NextPropsFriend: nextProps.friend});
+        //console.log({NextPropsScore: nextProps.hasOwnProperty('score')});
+
+        var newState = {};
+        if (nextProps.hasOwnProperty('selected') && nextProps.value != this.state.selected) {
+            newState.selected = nextProps.selected || false;
+        }
+        if (nextProps.hasOwnProperty('friend') && nextProps.value != this.state.friend) {
+            newState.friend = nextProps.friend || {};
+            newState.profilePicUrl = "url(" + nextProps.friend.picture + ")" || "";
+            newState.profileFirstName = nextProps.friend.first_name || "FirstName";
+            newState.profileLastName = nextProps.friend.last_name || "LastName";
+        }
+        if (nextProps.hasOwnProperty('place') && nextProps.value != this.state.place) {
+            newState.place = nextProps.place || 0;
+        }
+        if (nextProps.hasOwnProperty('score') && nextProps.value != this.state.score) {
+            newState.score = nextProps.score || 9999998;
+        }
+        if (Utils.countObjectProperties(newState) == 0) {
+            console.log("props didn't change");
+            return;
+        }
+
+        //console.log({newState: newState});
+        //console.log("props changed");
+        this.setState(newState);
     },
 
     countRoundsComplete: function (roundsBundlesState) {
@@ -69,6 +103,7 @@ var PlayerStatsClass = Object.assign({}, {}, {
     },
 
     render: function () {
+        //console.log(this.state.friend);
 
         var playerStatsClassNames = classNames(
             "player-stats",
@@ -113,38 +148,51 @@ var PageRankings = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            initialSlide: parseInt(router.getParam('initialSlide')) || 0
+            initialSlide: parseInt(router.getParam('initialSlide')) || 0,
+            myData: {},
+            friendsData: []
         };
 
         return state;
     },
 
+    componentDidMount: function () {
+        if (!appFB.isAuthorized()) {
+            return;
+        }
+
+        appFB.getMe().then(function (result) {
+            if (result === null || typeof result !== 'object') {
+                console.log("getMe result invalid");
+            }
+
+            this.setState({myData: result});
+        }.bind(this));
+
+        appFB.getAppFriends().then(function (result) {
+            if (result.constructor !== Array) {
+                console.log("getAppFriends result invalid");
+                return;
+            }
+
+            this.setState({friendsData: result});
+        }.bind(this));
+    },
+
     onClickInviteFriends: function () {
-        //console.log("invite friends");
-
         appFB.invite().then(function (result) {
-            if(!result){
-                //console.log("result equals false");
+            if (!result) {
                 return;
             }
-
             if (!result.hasOwnProperty("to")) {
-                //console.log("hasOwnProperty test failed");
                 return;
             }
-
             if (result.to.constructor !== Array) {
-                //console.log("result type invalid");
                 return;
             }
-
-            //console.log({result: result});
-            //console.log({resultTo: result.to});
 
             var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
             var coinsToAdd = result.to.length * coinsPerFriend;
-
-            //console.log({coinsToAdd: coinsToAdd});
 
             appManager.getGameState().addCoins(coinsToAdd);
         }).then(function () {
@@ -152,14 +200,30 @@ var PageRankings = Object.assign({}, {}, {
         }.bind(this));
     },
 
-    render: function () {
-        appFB.getAppFriends().then(function (result) {
-            console.log(result);
-        });
+    friendsRankings: function () {
+        var friendsData = this.state.friendsData;
 
+        if (friendsData.length <= 0) {
+            return <div></div>;
+        }
+
+        return friendsData.map(function (friend, idx, allFriends) {
+            return (
+                <PlayerStats key={"player_"+idx}
+                             friend={friend}
+                             place={idx+1}
+                />
+            )
+        });
+    },
+
+    renderAuthorized: function () {
         var facebookImg = {
             backgroundImage: "url('" + this.getImagePath('button/facebook_connect') + "')"
         };
+
+        var myData = this.state.myData;
+        //console.log({myDataRender: myData});
 
         return (
 
@@ -173,10 +237,13 @@ var PageRankings = Object.assign({}, {}, {
                         <div className="heading">{i18n._('rankings.heading')}</div>
 
                         <div className="friends-rankings">
-                            <PlayerStats selected={true}/>
-                            <PlayerStats />
-                            <PlayerStats />
+                            <PlayerStats
+                                selected={true}
+                                friend={myData}
+                            />
+                            {this.friendsRankings()}
                         </div>
+
 
                         <div className="invite-friends-text">{i18n._('rankings.invite-friends.get-coin')}</div>
 
@@ -193,6 +260,34 @@ var PageRankings = Object.assign({}, {}, {
             </div>
 
         );
+    },
+
+    renderUnauthorized: function () {
+        return (
+
+            <div className="page-rankings">
+                <div className="page-content">
+
+                    <Counters isDisplayBackButton={true}/>
+
+                    <div className="container">
+
+                        <div className="heading">{i18n._('rankings.heading')}</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        );
+    },
+
+    render: function () {
+        if (appFB.isAuthorized()) {
+            return this.renderAuthorized();
+        }
+
+        return this.renderUnauthorized();
     }
 
 });
