@@ -149,6 +149,7 @@ var PageRankings = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
+            facebookOnline: appFB.isAuthorized(),
             myData: {},
             friendsData: []
         };
@@ -157,19 +158,23 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        if (!appFB.isAuthorized()) {
+        if (!this.state.facebookOnline) {
             return;
         }
 
+        this.retrieveFacebookData();
+    },
+
+    retrieveFacebookData: function () {
         appFB.getMe().then(function (result) {
             if (result === null || typeof result !== 'object') {
                 console.log("getMe result invalid");
             }
 
             this.setState({myData: result});
-        }.bind(this));
-
-        appFB.getAppFriends().then(function (result) {
+        }.bind(this)).then(function(){
+            return appFB.getAppFriends()
+        }).then(function (result) {
             if (result.constructor !== Array) {
                 console.log("getAppFriends result invalid");
                 return;
@@ -177,6 +182,23 @@ var PageRankings = Object.assign({}, {}, {
 
             this.setState({friendsData: result});
         }.bind(this));
+    },
+
+    friendsRankings: function () {
+        var friendsData = this.state.friendsData;
+
+        if (friendsData.length <= 0) {
+            return <div></div>;
+        }
+
+        return friendsData.map(function (friend, idx, allFriends) {
+            return (
+                <PlayerStats key={"player_"+idx}
+                             friend={friend}
+                             place={idx+1}
+                />
+            )
+        });
     },
 
     onClickInviteFriends: function () {
@@ -200,21 +222,14 @@ var PageRankings = Object.assign({}, {}, {
         }.bind(this));
     },
 
-    friendsRankings: function () {
-        var friendsData = this.state.friendsData;
-
-        if (friendsData.length <= 0) {
-            return <div></div>;
-        }
-
-        return friendsData.map(function (friend, idx, allFriends) {
-            return (
-                <PlayerStats key={"player_"+idx}
-                             friend={friend}
-                             place={idx+1}
-                />
-            )
-        });
+    onClickLoginToFacebook: function () {
+        appFB.login().then(function(res){
+            this.setState({
+                facebookOnline: appFB.isAuthorized()
+            });
+        }.bind(this)).then(function(res) {
+            this.retrieveFacebookData()
+        }.bind(this));
     },
 
     renderAuthorized: function () {
@@ -263,6 +278,10 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     renderUnauthorized: function () {
+        var rankingsImage = {
+            backgroundImage: "url('" + this.getImagePath('rankings/leader_big') + "')"
+        };
+
         return (
 
             <div className="page-rankings">
@@ -274,6 +293,19 @@ var PageRankings = Object.assign({}, {}, {
 
                         <div className="heading">{i18n._('rankings.heading')}</div>
 
+                        <div className="unautharized">
+
+                            <div className="description">{i18n._('rankings.login.description')}</div>
+                            <div className="image" style={rankingsImage}></div>
+
+                            <SimpleButton className="login"
+                                          onClick={this.onClickLoginToFacebook}>
+                                {i18n._('rankings.login.button')}
+                            </SimpleButton>
+
+                        </div>
+
+
                     </div>
 
                 </div>
@@ -283,7 +315,7 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     render: function () {
-        if (appFB.isAuthorized()) {
+        if (this.state.facebookOnline) {
             return this.renderAuthorized();
         }
 

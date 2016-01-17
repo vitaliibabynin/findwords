@@ -69,9 +69,14 @@ var NavigationClass = Object.assign({}, {}, {
     },
 
     appFbUpdated: function () {
-        this.setState({
-            facebookOnline: appFB.isAuthorized()
-        })
+        appFB.getMe().then(function (res) {
+            this.setState({
+                facebookOnline: appFB.isAuthorized(),
+                profilePic: res.picture,
+                profileFirstName: res.first_name,
+                profileLastName: res.last_name
+            });
+        }.bind(this))
     },
 
     getInitialButtonsData: function () {
@@ -183,8 +188,8 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_MENU_FACEBOOK:
                 if (!this.state.facebookOnline) {
                     appFB.login().then(function (res) {
-                        return appFB.getMe();
-                    }.bind(this))
+                            return appFB.getMe();
+                        }.bind(this))
                         .then(function (res) {
                             var profilePic = res.picture;
                             var profileFirstName = res.first_name;
@@ -196,7 +201,7 @@ var NavigationClass = Object.assign({}, {}, {
                                 profileFirstName: profileFirstName,
                                 profileLastName: profileLastName
                             });
-                        }.bind(this), function(error){
+                        }.bind(this), function (error) {
                             console.log(error);
                         }.bind(this));
                 } else {

@@ -101,6 +101,8 @@ window.CONST = {
             'rankings.levels-complete': 'Пройдено уровней',
             'rankings.invite-friends.get-coin': 'Приглашай друзей и получай монеты!',
             'rankings.invite-friends': 'Пригласить друзей',
+            'rankings.login.description': 'Войдите, пожалуйста, в ваш аккаунт Facebook для того, чтобы узнать рейтинг друзей и поделится своими достижениями.',
+            'rankings.login.button': 'Войти в Facebook',
 
             //LEARN PAGE
             'app.page.learn.aim-of-the-game': 'Для того чтобы пройти уровень, нужно отгадывать все загаданные слова на поле.',
@@ -241,6 +243,8 @@ window.CONST = {
             'rankings.levels-complete': 'Levels complete',
             'rankings.invite-friends.get-coin': 'Invite friends and get coins!',
             'rankings.invite-friends': 'Invite friends',
+            'rankings.login.description': 'Please login to Facebook, to see your friends rankings and share your achievements.',
+            'rankings.login.button': 'Login to Facebook',
 
             //LEARN PAGE
             'app.page.learn.aim-of-the-game': 'In order to complete a level, you need to find all the hidden words on the board.',

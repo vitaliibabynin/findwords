@@ -114,5 +114,30 @@
         background-position: 0 center;
       }
     }
+
+    .unautharized {
+      padding: 1rem 0.5rem 2rem;
+
+      .description {
+        font-size: $pageRankings-unauthorized-description-font-size;
+      }
+      .image {
+        height: 5.75rem;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        $margin-top-bottom: 2rem;
+        margin-top: $margin-top-bottom;
+        margin-bottom: $margin-top-bottom;
+      }
+      .login {
+        padding: 0.5rem 0;
+        background-color: $pageRankings-loginToFbButton-bg-color;
+        $margin-left-right: 1.75rem;
+        margin-right: $margin-left-right;
+        margin-left: $margin-left-right;
+        font-size: $pageRankings-unauthorized-loginToFbButton-font-size;
+      }
+    }
   }
 }
