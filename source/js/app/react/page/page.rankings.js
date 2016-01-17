@@ -256,6 +256,23 @@ var PageRankings = Object.assign({}, {}, {
                                 selected={true}
                                 friend={myData}
                             />
+
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+                            <PlayerStats friend={myData}/>
+
                             {this.friendsRankings()}
                         </div>
 

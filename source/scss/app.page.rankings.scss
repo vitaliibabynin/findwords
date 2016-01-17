@@ -28,7 +28,10 @@
     }
 
     .friends-rankings {
-      min-height: 18.125rem;
+      //min-height: 18.125rem;
+      //max-height: 18.125rem;
+      height: 17rem;
+      overflow: scroll;
 
       .player-stats {
         $player-stats-height: 2.25rem;
