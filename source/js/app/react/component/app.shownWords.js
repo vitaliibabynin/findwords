@@ -92,6 +92,8 @@ var ShownWordsClass = Object.assign({}, {}, {
         };
 
         var words = this.state.words.map(function(word, i) {
+            word = Utils.capitalizeWord(word);
+
             return (
                 <div key={word} >
                     {word}

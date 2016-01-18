@@ -22,7 +22,8 @@ var PageMain = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             initialSlide: parseInt(router.getParam('roundsBundleIdx')) || 0,
-            adsRemoved: appManager.getGameState().getRemoveAds() ? true : false
+            adsRemoved: appManager.getGameState().getRemoveAds() ? true : false,
+            bonusReceived: false
         };
 
         return state;
@@ -67,6 +68,9 @@ var PageMain = Object.assign({}, {}, {
         //daysPlayedStreak
         var daysSinceLastAccess = moment(todayString, "YYYYMMDD").diff(moment(lastAccessNumber, "YYYYMMDD"), "days");
         //var daysSinceLastAccess = moment(todayString, "YYYYMMDDHHmmss").diff(moment(lastAccessNumber, "YYYYMMDDHHmmss"), "seconds");
+
+        //console.log(lastAccessNumber);
+        //console.log(daysSinceLastAccess);
 
         if (daysSinceLastAccess < 1) {
             return;
@@ -114,6 +118,7 @@ var PageMain = Object.assign({}, {}, {
     render: function () {
         //console.log(appManager.getGameState().gameState);
         //console.log(this.state.checked);
+        //console.log(router.getController());
 
         var headImgName = "head/head_img_" + router.getLanguage();
         if (CONST.CURRENT_PLATFORM == "ios" && router.getLanguage() == "en") {

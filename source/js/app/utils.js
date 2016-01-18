@@ -144,6 +144,10 @@ module.exports = {
     },
 
     countObjectProperties: function (object) {
+        if (typeof object == "undefined") {
+            return false;
+        }
+
         var length = 0;
         for (var key in object) {
             if (object.hasOwnProperty(key)) {
@@ -151,6 +155,23 @@ module.exports = {
             }
         }
         return length;
+    },
+
+    capitalizeWord: function (initialWord) {
+        if (typeof initialWord == "undefined") {
+            return false;
+        }
+
+        if (initialWord.length == 0) {
+            return false;
+        }
+
+        var word = initialWord[0].toUpperCase();
+        for (var i = 1; i < initialWord.length; i++) {
+            word += initialWord[i].toLowerCase();
+        }
+
+        return word;
     }
 
 }
