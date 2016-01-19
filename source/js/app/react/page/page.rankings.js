@@ -16,43 +16,43 @@ var PlayerStatsClass = Object.assign({}, {}, {
 
     propTypes: {
         selected: React.PropTypes.bool,
-        friend: React.PropTypes.object,
+        player: React.PropTypes.object,
         place: React.PropTypes.number,
         score: React.PropTypes.number
     },
 
     getInitialState: function () {
         var state = {
-            friend: this.props.friend || {},
+            player: this.props.player || {},
             selected: this.props.selected || false,
             place: this.props.place || 0,
-            score: this.props.score || 9999999,
             roundsComplete: 0
         };
         state.roundsBundlesState = appManager.getGameState().getRoundsBundles() || {};
         state.roundsComplete = this.countRoundsComplete(state.roundsBundlesState) || 0;
         state.roundsBundlesData = appManager.getSettings().getRoundsBundles() || {};
         state.roundsTotal = this.countRoundsTotal(state.roundsBundlesData) || 1;
-        state.profilePicUrl = "url(" + state.friend.picture + ")" || "";
-        state.profileFirstName = state.friend.first_name || "FirstName";
-        state.profileLastName = state.friend.last_name || "LastName";
+        state.profilePicUrl = "url(" + state.player.picture + ")" || "";
+        state.profileFirstName = state.player.first_name || "FirstName";
+        state.profileLastName = state.player.last_name || "LastName";
+        state.score = state.player.score || 9999999;
 
         return state;
     },
 
     componentWillReceiveProps: function (nextProps) {
-        //console.log({NextPropsFriend: nextProps.friend});
+        //console.log({NextPropsFriend: nextProps.player});
         //console.log({NextPropsScore: nextProps.hasOwnProperty('score')});
 
         var newState = {};
         if (nextProps.hasOwnProperty('selected') && nextProps.value != this.state.selected) {
             newState.selected = nextProps.selected || false;
         }
-        if (nextProps.hasOwnProperty('friend') && nextProps.value != this.state.friend) {
-            newState.friend = nextProps.friend || {};
-            newState.profilePicUrl = "url(" + nextProps.friend.picture + ")" || "";
-            newState.profileFirstName = nextProps.friend.first_name || "FirstName";
-            newState.profileLastName = nextProps.friend.last_name || "LastName";
+        if (nextProps.hasOwnProperty('player') && nextProps.value != this.state.player) {
+            newState.player = nextProps.player || {};
+            newState.profilePicUrl = "url(" + nextProps.player.picture + ")" || "";
+            newState.profileFirstName = nextProps.player.first_name || "FirstName";
+            newState.profileLastName = nextProps.player.last_name || "LastName";
         }
         if (nextProps.hasOwnProperty('place') && nextProps.value != this.state.place) {
             newState.place = nextProps.place || 0;
@@ -103,7 +103,7 @@ var PlayerStatsClass = Object.assign({}, {}, {
     },
 
     render: function () {
-        //console.log(this.state.friend);
+        //console.log(this.state.player);
 
         var playerStatsClassNames = classNames(
             "player-stats",
@@ -151,7 +151,25 @@ var PageRankings = Object.assign({}, {}, {
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
             facebookOnline: appFB.isAuthorized(),
             myData: {},
-            friendsData: []
+            friendsData: [],
+            playersScores: [
+                {
+                    id: "101420906907102",
+                    score: 99
+                },
+                {
+                    id: "116363622077143",
+                    score: 997
+                },
+                {
+                    id: "131666247211378",
+                    score: 699
+                },
+                {
+                    id: "108861069494854",
+                    score: 9399
+                }
+            ]
         };
 
         return state;
@@ -172,7 +190,7 @@ var PageRankings = Object.assign({}, {}, {
             }
 
             this.setState({myData: result});
-        }.bind(this)).then(function(){
+        }.bind(this)).then(function () {
             return appFB.getAppFriends()
         }).then(function (result) {
             if (result.constructor !== Array) {
@@ -184,21 +202,86 @@ var PageRankings = Object.assign({}, {}, {
         }.bind(this));
     },
 
-    friendsRankings: function () {
-        var friendsData = this.state.friendsData;
+    combineData: function (playersData) {
+        //var playersScores = this.state.playersScores;
 
-        if (friendsData.length <= 0) {
+        //if (playersData.length != playersScores.length) {
+        //    return false;
+        //}
+
+        var playersDataSortedById = playersData.slice(0);
+        playersDataSortedById.sort(function (a, b) {
+            return a.id - b.id;
+        });
+
+        //var playersScoresSortedById = playersScores.slice(0);
+        //playersScoresSortedById.sort(function (a, b) {
+        //    return a.id - b.id;
+        //});
+
+        //console.log({playersDataSortedById: playersDataSortedById});
+        //console.log({playersScoresSortedById: playersScoresSortedById});
+
+        //for (var i = 0; i < playersDataSortedById.length; i++) {
+        //    if (playersDataSortedById[i].id == playersScoresSortedById[i].id) {
+        //        playersDataSortedById[i].score = playersScoresSortedById[i].score;
+        //    }
+        //}
+
+        for (var i = 0; i < playersDataSortedById.length; i++) {
+            playersDataSortedById[i].score = Math.floor(Math.random() * (99999 - 999 + 1)) + 999;
+        }
+
+        //console.log(playersDataSortedById);
+
+        return playersDataSortedById;
+    },
+
+    sortPlayersByScore: function (playersData) {
+        var sortedPlayersData = this.combineData(playersData);
+
+        if (sortedPlayersData === false) {
+            return [];
+        }
+
+        var PlayersDataSortedByScore = sortedPlayersData.slice(0);
+        PlayersDataSortedByScore.sort(function (a, b) {
+            return b.score - a.score;
+        });
+
+        return PlayersDataSortedByScore;
+    },
+
+    playersRankings: function () {
+        var friendsData = this.state.friendsData;
+        var myData = this.state.myData;
+
+        if (Utils.countObjectProperties(myData) <= 0 || friendsData.length <= 0) {
             return <div></div>;
         }
 
-        return friendsData.map(function (friend, idx, allFriends) {
+        friendsData.push(myData);
+
+        var playersData = this.sortPlayersByScore(friendsData);
+
+        return playersData.map(function (player, idx) {
+            if (player.id == this.state.myData.id) {
+                return (
+                    <PlayerStats key={"player_"+idx}
+                                 player={player}
+                                 selected={true}
+                                 place={idx+1}
+                    />
+                )
+            }
+
             return (
                 <PlayerStats key={"player_"+idx}
-                             friend={friend}
+                             player={player}
                              place={idx+1}
                 />
             )
-        });
+        }.bind(this));
     },
 
     onClickInviteFriends: function () {
@@ -223,11 +306,11 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     onClickLoginToFacebook: function () {
-        appFB.login().then(function(res){
+        appFB.login().then(function (res) {
             this.setState({
                 facebookOnline: appFB.isAuthorized()
             });
-        }.bind(this)).then(function(res) {
+        }.bind(this)).then(function (res) {
             this.retrieveFacebookData()
         }.bind(this));
     },
@@ -251,29 +334,8 @@ var PageRankings = Object.assign({}, {}, {
 
                         <div className="heading">{i18n._('rankings.heading')}</div>
 
-                        <div className="friends-rankings">
-                            <PlayerStats
-                                selected={true}
-                                friend={myData}
-                            />
-
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-                            <PlayerStats friend={myData}/>
-
-                            {this.friendsRankings()}
+                        <div className="players-rankings">
+                            {this.playersRankings()}
                         </div>
 
 

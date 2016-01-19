@@ -14,8 +14,8 @@
   bottom: 0;
 
   display: block;
-  /*overflow: auto;*/
-  overflow: hidden;
+  //overflow: auto;
+  //overflow: hidden;
   padding: 0;
   margin: 0;
 }
@@ -46,9 +46,10 @@ html.cordova.ios #app-content .page-layout .page {
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  overflow: auto;
 }
 
-.page-content .counters {
+.counters {
   //height: 2.375rem;
   position: relative;
   background-color: $counters-bg-color;
