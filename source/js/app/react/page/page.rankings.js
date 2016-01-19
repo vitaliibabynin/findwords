@@ -256,8 +256,19 @@ var PageRankings = Object.assign({}, {}, {
         var friendsData = this.state.friendsData;
         var myData = this.state.myData;
 
-        if (Utils.countObjectProperties(myData) <= 0 || friendsData.length <= 0) {
+        if (Utils.countObjectProperties(myData) <= 0) {
             return <div></div>;
+        }
+
+        if (friendsData.length <= 0) {
+            myData.score = appManager.getGameState().getScore();
+
+            return (
+                <PlayerStats player={myData}
+                             selected={true}
+                             place={1}
+                />
+            )
         }
 
         friendsData.push(myData);
