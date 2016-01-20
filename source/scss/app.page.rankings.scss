@@ -52,6 +52,8 @@
           float: left;
           height: $player-stats-height;
           line-height: $player-stats-height;
+          width: 20%;
+          text-align: left;
         }
         .center-block {
           position: relative;
@@ -59,6 +61,7 @@
           text-align: left;
           height: $player-stats-height;
           padding-left: 2.125rem;
+          width: 55%;
 
           .profile-pic {
             position: absolute;
@@ -91,6 +94,8 @@
           float: right;
           height: $player-stats-height;
           line-height: $player-stats-height;
+          width: 25%;
+          text-align: right;
         }
       }
     }

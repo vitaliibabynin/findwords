@@ -202,49 +202,56 @@ var PageRankings = Object.assign({}, {}, {
         }.bind(this));
     },
 
-    combineData: function (playersData) {
-        //var playersScores = this.state.playersScores;
+    noFriendsRankings: function (myData) {
+        myData.score = appManager.getGameState().getScore();
 
-        //if (playersData.length != playersScores.length) {
-        //    return false;
-        //}
+        return (
+            <PlayerStats player={myData}
+                         selected={true}
+                         place={1}
+            />
+        )
+    },
 
-        var playersDataSortedById = playersData.slice(0);
-        playersDataSortedById.sort(function (a, b) {
-            return a.id - b.id;
-        });
-
-        //var playersScoresSortedById = playersScores.slice(0);
-        //playersScoresSortedById.sort(function (a, b) {
-        //    return a.id - b.id;
-        //});
-
-        //console.log({playersDataSortedById: playersDataSortedById});
-        //console.log({playersScoresSortedById: playersScoresSortedById});
-
-        //for (var i = 0; i < playersDataSortedById.length; i++) {
-        //    if (playersDataSortedById[i].id == playersScoresSortedById[i].id) {
-        //        playersDataSortedById[i].score = playersScoresSortedById[i].score;
-        //    }
-        //}
-
-        for (var i = 0; i < playersDataSortedById.length; i++) {
-            playersDataSortedById[i].score = Math.floor(Math.random() * (99999 - 999 + 1)) + 999;
+    checkIfDataCombined: function (friendsData, myData) {
+        for (var i = 0; i < friendsData.length; i++) {
+            if (friendsData[i].id == myData.id) {
+                return i;
+            }
         }
 
-        //console.log(playersDataSortedById);
+        return false;
+    },
 
-        return playersDataSortedById;
+    combineData: function (friendsData, myData) {
+        var myDataIndex = this.checkIfDataCombined(friendsData, myData);
+
+        if (myDataIndex !== false) {
+            friendsData[myDataIndex] = myData;
+        } else {
+            friendsData.push(myData);
+        }
+
+        return friendsData;
+    },
+
+    //sortDataById: function (playersData) {
+    //    var playersDataSortedById = playersData.slice(0);
+    //    playersDataSortedById.sort(function (a, b) {
+    //        return a.id - b.id;
+    //    });
+    //},
+
+    addScore: function (playersData) {
+        for (var i = 0; i < playersData.length; i++) {
+            playersData[i].score = Math.floor(Math.random() * (99999 - 999 + 1)) + 999;
+        }
+
+        return playersData;
     },
 
     sortPlayersByScore: function (playersData) {
-        var sortedPlayersData = this.combineData(playersData);
-
-        if (sortedPlayersData === false) {
-            return [];
-        }
-
-        var PlayersDataSortedByScore = sortedPlayersData.slice(0);
+        var PlayersDataSortedByScore = playersData.slice(0);
         PlayersDataSortedByScore.sort(function (a, b) {
             return b.score - a.score;
         });
@@ -261,24 +268,19 @@ var PageRankings = Object.assign({}, {}, {
         }
 
         if (friendsData.length <= 0) {
-            myData.score = appManager.getGameState().getScore();
-
-            return (
-                <PlayerStats player={myData}
-                             selected={true}
-                             place={1}
-                />
-            )
+            return this.noFriendsRankings(myData);
         }
 
-        friendsData.push(myData);
-
-        var playersData = this.sortPlayersByScore(friendsData);
+        var playersData = this.combineData(friendsData, myData);
+        //playersData = this.sortDataById(playersData);
+        playersData = this.addScore(playersData);
+        playersData = this.sortPlayersByScore(playersData);
 
         return playersData.map(function (player, idx) {
-            if (player.id == this.state.myData.id) {
+            if (player.id == myData.id) {
+
                 return (
-                    <PlayerStats key={"player_"+idx}
+                    <PlayerStats key={"me_"+idx}
                                  player={player}
                                  selected={true}
                                  place={idx+1}
@@ -311,8 +313,12 @@ var PageRankings = Object.assign({}, {}, {
             var coinsToAdd = result.to.length * coinsPerFriend;
 
             appManager.getGameState().addCoins(coinsToAdd);
-        }).then(function () {
             this.forceUpdate();
+
+            appDialogs.getInfoDialog()
+                .setTitle(i18n._('app.dialog.info.addcoins.title'))
+                .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
+                .show();
         }.bind(this));
     },
 

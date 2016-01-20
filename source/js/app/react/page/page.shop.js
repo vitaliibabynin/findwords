@@ -74,6 +74,30 @@ var PageShop = Object.assign({}, {}, {
     },
 
     onClickShare: function () {
+        appFB.share().then(function (result) {
+            console.log({result: result});
+
+            //if (!result) {
+            //    return;
+            //}
+            //if (!result.hasOwnProperty("to")) {
+            //    return;
+            //}
+            //if (result.to.constructor !== Array) {
+            //    return;
+            //}
+            //
+            //var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
+            //var coinsToAdd = result.to.length * coinsPerFriend;
+            //
+            //appManager.getGameState().addCoins(coinsToAdd);
+
+            appManager.getGameState().addCoins(this.state.freeCoins.share);
+        }.bind(this)).then(function () {
+            this.forceUpdate();
+        }.bind(this));
+
+
         appManager.getGameState().addCoins(this.state.freeCoins.share);
 
         console.log("share with friends");
@@ -205,7 +229,7 @@ var PageShop = Object.assign({}, {}, {
                             <FreeCoins onClick={this.onClickShare} className="inner-block share">
                                 <div className="text">{i18n._('shop.share')}</div>
                                 <div className="add-free-coins" style={dollar}>
-                                    +{this.state.freeCoins.sendInvite}</div>
+                                    +{this.state.freeCoins.share}</div>
                             </FreeCoins>
                         </div>
 
