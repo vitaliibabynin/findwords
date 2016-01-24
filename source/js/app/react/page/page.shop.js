@@ -41,7 +41,9 @@ var PageShop = Object.assign({}, {}, {
     },
 
     update: function () {
-        this.forceUpdate();
+        if (this.isMounted()) {
+            this.forceUpdate();
+        }
     },
 
     onClickBuyCoins: function (buttonProps) {

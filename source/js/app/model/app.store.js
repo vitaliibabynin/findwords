@@ -182,11 +182,17 @@ var CordovaStore = Object.assign({}, AbstractStore, {
     getCoins: function (productId) {
         var purchases = appManager.getSettings().getPurchases() || {};
 
-        if (!purchases.hasOwnProperty(productId)) {
-            return 0;
+        for (var k in purchases) {
+            if (!purchases.hasOwnProperty(k)) {
+                continue;
+            }
+
+            if (purchases[k].purchaseId == productId) {
+                return purchases[k].purchaseCoins;
+            }
         }
 
-        return purchases[productId].purchaseCoins;
+        return 0;
     },
 
     addCoins: function (coins) {

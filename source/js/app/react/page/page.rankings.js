@@ -151,25 +151,13 @@ var PageRankings = Object.assign({}, {}, {
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
             facebookOnline: appFB.isAuthorized(),
             myData: {},
-            friendsData: [],
-            playersScores: [
-                {
-                    id: "101420906907102",
-                    score: 99
-                },
-                {
-                    id: "116363622077143",
-                    score: 997
-                },
-                {
-                    id: "131666247211378",
-                    score: 699
-                },
-                {
-                    id: "108861069494854",
-                    score: 9399
-                }
-            ]
+            friendsData: []
+            //playersScores: [
+                //{
+                //    id: "101420906907102",
+                //    score: 99
+                //}
+            //]
         };
 
         return state;
@@ -321,6 +309,31 @@ var PageRankings = Object.assign({}, {}, {
                 .show();
         }.bind(this));
     },
+
+    //onClickInviteFriends: function () {
+    //    appFB.invite().then(function (result) {
+    //        if (!result) {
+    //            return;
+    //        }
+    //        if (!result.hasOwnProperty("to")) {
+    //            return;
+    //        }
+    //        if (result.to.constructor !== Array) {
+    //            return;
+    //        }
+    //
+    //        var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
+    //        var coinsToAdd = result.to.length * coinsPerFriend;
+    //
+    //        appManager.getGameState().addCoins(coinsToAdd);
+    //        this.forceUpdate();
+    //
+    //        appDialogs.getInfoDialog()
+    //            .setTitle(i18n._('app.dialog.info.addcoins.title'))
+    //            .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
+    //            .show();
+    //    }.bind(this));
+    //},
 
     onClickLoginToFacebook: function () {
         appFB.login().then(function (res) {
