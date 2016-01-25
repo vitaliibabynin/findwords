@@ -344,7 +344,7 @@ var PageRankings = Object.assign({}, {}, {
                         </div>
 
 
-                        <div className="invite-friends-text">{i18n._('rankings.invite-friends.get-coin')}</div>
+                        <div className="invite-friends-text">{i18n._('rankings.invite-friends.get-coins')}</div>
 
                         <SimpleButton className="invite-friends-fb-button"
                                       onClick={this.onClickInviteFriends}

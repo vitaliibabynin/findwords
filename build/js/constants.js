@@ -93,13 +93,14 @@ window.CONST = {
             //SHOP PAGE
             'shop.free-coins': 'Монеты бесплатно',
             'shop.watch-video': 'Посмотреть видео',
+            'shop.invite-friends': 'Пригласить друзей',
             'shop.share': 'Рассказать про игру',
             'shop.buy-coins': 'Покупка монет',
 
             //RANKINGS PAGE
             'rankings.heading': 'Рейтинг друзей',
             'rankings.levels-complete': 'Пройдено уровней',
-            'rankings.invite-friends.get-coin': 'Приглашай друзей и получай монеты!',
+            'rankings.invite-friends.get-coins': 'Приглашай друзей и получай монеты!',
             'rankings.invite-friends': 'Пригласить друзей',
             'rankings.login.description': 'Войдите, пожалуйста, в ваш аккаунт Facebook для того, чтобы узнать рейтинг друзей и поделится своими достижениями.',
             'rankings.login.button': 'Войти в Facebook',
@@ -153,6 +154,10 @@ window.CONST = {
             'app.dialog.requirepush.description': 'Хотите знать когда придут бонусы? Подключайте уведомления.',
             'app.dialog.requirepush.button.ok': 'Разрешить',
             'app.dialog.requirepush.button.cancel': 'Не сейчас',
+
+            //WATCH VIDEO DIALOG
+            'app.dialog.info.rewardedvideo.notfound.title': 'Видео не найдено',
+            'app.dialog.info.rewardedvideo.notfound.description': 'На данный момент нет видео для просмотра. Пожалуйста, попробуйте немного позже.',
 
             //FACEBOOK INVITE
             'app.invite.title': 'Выберите друзей, чтобы пригласить их в игру',
@@ -235,13 +240,14 @@ window.CONST = {
             //SHOP PAGE
             'shop.free-coins': 'Free Coins',
             'shop.watch-video': 'Watch a video',
+            'shop.invite-friends': 'Invite friends',
             'shop.share': 'Share with friends',
             'shop.buy-coins': 'Buy coins',
 
             //RANKINGS PAGE
             'rankings.heading': 'Friends rankings',
             'rankings.levels-complete': 'Levels complete',
-            'rankings.invite-friends.get-coin': 'Invite friends and get coins!',
+            'rankings.invite-friends.get-coins': 'Invite friends and get coins!',
             'rankings.invite-friends': 'Invite friends',
             'rankings.login.description': 'Please login to Facebook, to see your friends rankings and share your achievements.',
             'rankings.login.button': 'Login to Facebook',
@@ -295,6 +301,10 @@ window.CONST = {
             'app.dialog.requirepush.description': 'Want to know when you\'ve received a bonus? Allow notifications.',
             'app.dialog.requirepush.button.ok': 'Allow',
             'app.dialog.requirepush.button.cancel': 'Not now',
+
+            //WATCH VIDEO DIALOG
+            'app.dialog.info.rewardedvideo.notfound.title': 'Video not found',
+            'app.dialog.info.rewardedvideo.notfound.description': 'There aren\'t any videos to watch at the moment. Please try again later.',
 
             //FACEBOOK INVITE
             'app.invite.title': 'Select friends to invite to the game',

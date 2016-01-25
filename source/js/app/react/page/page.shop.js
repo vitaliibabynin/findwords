@@ -68,11 +68,16 @@ var PageShop = Object.assign({}, {}, {
             appAd.showBottomBanner();
         }.bind(this), function(){
             appDialogs.getInfoDialog()
-                .setContentText(i18n._('app.dialog.info.rewardedvideo.notfound'))
+                .setTitle(i18n._('app.dialog.info.rewardedvideo.notfound.title'))
+                .setContentText(i18n._('app.dialog.info.rewardedvideo.notfound.description'))
                 .show();
             appAnalytics.trackEvent('ad', 'video_notfound', '', 1);
             appAd.showBottomBanner();
         }.bind(this));
+    },
+
+    onClickInviteFriends: function () {
+
     },
 
     onClickShare: function () {
@@ -224,6 +229,14 @@ var PageShop = Object.assign({}, {}, {
                                 <div className="text">{i18n._('shop.watch-video')}</div>
                                 <div className="add-free-coins" style={dollar}>
                                     +{this.state.freeCoins.watchVideo}</div>
+                            </FreeCoins>
+                        </div>
+
+                        <div className="outer-block">
+                            <FreeCoins onClick={this.onClickInviteFriends} className="inner-block share">
+                                <div className="text">{i18n._('shop.invite-friends')}</div>
+                                <div className="add-free-coins" style={dollar}>
+                                    +{this.state.freeCoins.sendInvite}</div>
                             </FreeCoins>
                         </div>
 
