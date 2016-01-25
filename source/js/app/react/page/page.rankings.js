@@ -310,31 +310,6 @@ var PageRankings = Object.assign({}, {}, {
         }.bind(this));
     },
 
-    //onClickInviteFriends: function () {
-    //    appFB.invite().then(function (result) {
-    //        if (!result) {
-    //            return;
-    //        }
-    //        if (!result.hasOwnProperty("to")) {
-    //            return;
-    //        }
-    //        if (result.to.constructor !== Array) {
-    //            return;
-    //        }
-    //
-    //        var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
-    //        var coinsToAdd = result.to.length * coinsPerFriend;
-    //
-    //        appManager.getGameState().addCoins(coinsToAdd);
-    //        this.forceUpdate();
-    //
-    //        appDialogs.getInfoDialog()
-    //            .setTitle(i18n._('app.dialog.info.addcoins.title'))
-    //            .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
-    //            .show();
-    //    }.bind(this));
-    //},
-
     onClickLoginToFacebook: function () {
         appFB.login().then(function (res) {
             this.setState({
