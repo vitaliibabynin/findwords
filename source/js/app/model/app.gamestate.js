@@ -242,10 +242,10 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         return this.gameState.facebook[field];
     },
     setLastShareDate: function (newString) {
-        this.setBonusField('lastShareDate', newString);
+        this.setFacebookField('lastShareDate', newString);
     },
     getLastShareDate: function () {
-        return this.getBonusField('lastShareDate', "");
+        return this.getFacebookField('lastShareDate', "");
     },
 
     setSettingsField: function (field, newValue) {
