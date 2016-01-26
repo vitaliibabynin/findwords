@@ -159,9 +159,15 @@ window.CONST = {
             'app.dialog.info.rewardedvideo.notfound.title': 'Видео не найдено',
             'app.dialog.info.rewardedvideo.notfound.description': 'На данный момент нет видео для просмотра. Пожалуйста, попробуйте немного позже.',
 
-            //FACEBOOK INVITE
-            'app.invite.title': 'Выберите друзей, чтобы пригласить их в игру',
-            'app.invite.message': 'Примите участие в интеллектуальных состязаниях и помогите команде вашего пола победить',
+            //FACEBOOK INVITE DIALOG
+            'app.dialog.invite-friends.title': 'Пригласить друзей в Facebook',
+            'app.dialog.invite-friends.description.invite': 'За каждого приглашенного друга вы получите #{count} моне((та|ты|т)).',
+            'app.dialog.invite-friends.description.accept': 'В добавок вы получите #{count} моне((та|ты|т)) за каждого друга, который примет ваше приглашение и присоединится к игре',
+            'app.dialog.invite-friends.button.invite': 'Пригласить друзей',
+            'app.dialog.invite-friends.button.cancel': 'Отмена',
+
+            //FACEBOOK INVITE WINDOW
+            'app.invite.title': 'Выберите друзей',
 
             //FOR STARTAD
             'startad.recommendapp': 'Рекомендуем приложение',
@@ -306,9 +312,15 @@ window.CONST = {
             'app.dialog.info.rewardedvideo.notfound.title': 'Video not found',
             'app.dialog.info.rewardedvideo.notfound.description': 'There aren\'t any videos to watch at the moment. Please try again later.',
 
-            //FACEBOOK INVITE
-            'app.invite.title': 'Select friends to invite to the game',
-            'app.invite.message': 'Engage in intellectual battles and help your team achieve victory',
+            //FACEBOOK INVITE DIALOG
+            'app.dialog.invite-friends.title': 'Invite friends on Facebook',
+            'app.dialog.invite-friends.description.invite': 'You will receive #{count} coi((n|ns|ns)) per friend invited.',
+            'app.dialog.invite-friends.description.accept': 'An additional #{count} coi((n|ns|ns)) will be given for every friend that accepts your invitation and joins the game.',
+            'app.dialog.invite-friends.button.invite': 'Invite friends',
+            'app.dialog.invite-friends.button.cancel': 'Cancel',
+
+            //FACEBOOK INVITE WINDOW
+            'app.invite.title': 'Select friends',
 
             //FOR STARTAD
             'startad.recommendapp': 'We recommend this app',

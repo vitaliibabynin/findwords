@@ -144,6 +144,51 @@
   }
 }
 
+#invite-friends-dialog.md-modal {
+  .md-title {
+    color: $dialogInviteFriends-header-color;
+    background-color: $dialogInviteFriends-header-bg-color;
+
+    h3 {
+      font-size: $dialogInviteFriends-heading-font-size;
+      //background: initial;
+    }
+  }
+  .md-content {
+    color: $dialogInviteFriends-content-color;
+    background: $dialogInviteFriends-content-bg-color;
+    font-size: $dialogInviteFriends-description-font-size;
+
+    & > p {
+      padding: 0.75rem 1.75rem 1rem;
+    }
+    a {
+      color: $dialogInviteFriends-content-color;
+    }
+    .invite {
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      width: initial;
+      margin-left: 0.875rem;
+      margin-right: 0.875rem;
+      font-size: $dialogInviteFriends-invite-font-size;
+      background-color: $dialogInviteFriends-invite-bg-color;
+      //margin-bottom: 0.625rem;
+      margin-bottom: 1rem;
+    }
+    .cancel {
+      font-size: $dialogInviteFriends-cancel-font-size;
+      background-color: $dialogInviteFriends-cancel-bg-color;
+      $height: 2.375rem;
+      height: $height;
+      line-height: $height;
+      margin-bottom: 0;
+      width: 100%;
+    }
+  }
+}
+
 #turnoffads-dialog.md-modal {
   .md-title {
     color: $dialogTurnOffAds-header-color;

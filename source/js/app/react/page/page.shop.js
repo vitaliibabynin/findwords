@@ -81,7 +81,7 @@ var PageShop = Object.assign({}, {}, {
     },
 
     onClickInviteFriends: function () {
-
+        appDialogs.getInviteFriendsDialog().show();
     },
 
     onClickShare: function () {

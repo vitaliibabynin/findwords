@@ -6,7 +6,8 @@ var Dialog = function(params){
     params = params || {};
 
     this._dialogId = params.dialogId || 'modalDialog';
-    this.title = params.title || CONFIG.lang._('app_dialog_Title');
+    //this.title = params.title || CONFIG.lang._('app_dialog_Title');
+    this.title = params.title || '';
 
     this._effect = 'md-effect-' + params.effect || 'slidebottom';
     this._isShowed = false;
@@ -163,6 +164,63 @@ var ErrorDialog = function(){
 
 
 
+var InviteFriendsDialog = function () {
+    var dialog = new Dialog({
+        dialogId: 'invite-friends-dialog',
+        effect: 'slidebottom',
+        title: i18n._('app.dialog.invite-friends.title')
+    });
+
+    //var productId = appManager.getSettings().getShopValue("removeAds")[CONST.CURRENT_PLATFORM];
+
+    dialog.getContent = function(){
+        var coinsForInvite = 3;
+        var coinsForAccept = 10;
+
+        return '<div class="md-content"> \
+                        <p>'+i18n._('app.dialog.invite-friends.description.invite', coinsForInvite)+' \
+                        '+i18n._('app.dialog.invite-friends.description.accept', coinsForAccept)+'</p> \
+                        <div><a href="#" class="btn invite">'+i18n._('app.dialog.invite-friends.button.invite')+'</a></div> \
+                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.invite-friends.button.cancel')+'</a></div> \
+                 </div> \
+                ';
+    }
+
+    dialog.prepareDialog = function(dialog){
+        $('.invite', dialog).bind( 'click', function( e ) {
+            appFB.invite().then(function (result) {
+                if (!result) {
+                    return;
+                }
+                if (!result.hasOwnProperty("to")) {
+                    return;
+                }
+                if (result.to.constructor !== Array) {
+                    return;
+                }
+
+                var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
+                var coinsToAdd = result.to.length * coinsPerFriend;
+
+                appManager.getGameState().addCoins(coinsToAdd);
+
+                appDialogs.getInfoDialog()
+                    .setTitle(i18n._('app.dialog.info.addcoins.title'))
+                    .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
+                    .show();
+            }.bind(this));
+
+            this.hide();
+            e.stopPropagation();
+        }.bind(this));
+        $('.cancel', dialog).bind( 'click', function( e ) {
+            this.hide();
+            e.stopPropagation();
+        }.bind(this));
+    }
+
+    return dialog;
+}
 
 var TurnOffAdsDialog = function() {
     var dialog = new Dialog({
@@ -852,7 +910,15 @@ var Dialogs = {
 
 
     /**
-     *  Выключить Рекламу
+     *  Пригласить друзей
+     */
+    getInviteFriendsDialog: function(){
+        return this._getDialog("InviteFriendsDialog", InviteFriendsDialog);
+    },
+
+
+    /**
+     *  Выключить рекламу
      */
     getTurnOffAdsDialog: function(){
         return this._getDialog("TurnOffAdsDialog", TurnOffAdsDialog);
