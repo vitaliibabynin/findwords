@@ -21,6 +21,9 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         //    lastAccessDate: "",
         //    daysPlayedStreak: 0
         //},
+        facebook: {
+            lastShareDate: ""
+        },
         settings: {
             music: false,
             sound: false
@@ -220,6 +223,29 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     },
     getDaysPlayedStreak: function () {
         return this.getBonusField('daysPlayedStreak', 1);
+    },
+
+    setFacebookField: function (field, newValue) {
+        if (!this.gameState.facebook) {
+            this.gameState.facebook = {};
+        }
+
+        this.gameState.facebook[field] = newValue;
+
+        this.saveGameState();
+    },
+    getFacebookField: function (field, defaultValue) {
+        if (!this.gameState.facebook || !this.gameState.facebook.hasOwnProperty(field)) {
+            return defaultValue;
+        }
+
+        return this.gameState.facebook[field];
+    },
+    setLastShareDate: function (newString) {
+        this.setBonusField('lastShareDate', newString);
+    },
+    getLastShareDate: function () {
+        return this.getBonusField('lastShareDate', "");
     },
 
     setSettingsField: function (field, newValue) {

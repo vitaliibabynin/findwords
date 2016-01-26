@@ -116,7 +116,7 @@ var PageMain = Object.assign({}, {}, {
     },
 
     render: function () {
-        //console.log(appManager.getGameState().gameState);
+        console.log(appManager.getGameState().gameState);
         //console.log(this.state.checked);
         //console.log(router.getController());
 

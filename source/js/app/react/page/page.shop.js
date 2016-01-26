@@ -4,6 +4,8 @@
 var GameMixin = require('./../component/app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
+var moment = require('moment');
+
 var Counters = require('./../component/app.counters').Counters;
 var ONE_DOLLAR = 'shop/one_dollar';
 var THREE_DOLLAR = 'shop/three_dollar';
@@ -28,6 +30,9 @@ var PageShop = Object.assign({}, {}, {
             freeCoins: appManager.getSettings().getFreeCoins() || {
                 watchVideo: 0,
                 share: 0
+            },
+            dollar: {
+                backgroundImage: "url('" + this.getImagePath(DOLLAR) + "')"
             }
         };
     },
@@ -48,8 +53,7 @@ var PageShop = Object.assign({}, {}, {
 
     onClickBuyCoins: function (buttonProps) {
         //appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
-
-        console.log(buttonProps.blockId);
+        //console.log(buttonProps.blockId);
 
         var purchaseID = buttonProps.blockId;
         appStore.order(purchaseID);
@@ -58,7 +62,7 @@ var PageShop = Object.assign({}, {}, {
     onClickWatchVideo: function () {
         appAd.hideBanner();
         appAnalytics.trackEvent('ad', 'video_start', '', 1);
-        appAd.showRewardedVideo().then(function(){
+        appAd.showRewardedVideo().then(function () {
             appManager.getGameState().addCoins(this.state.freeCoins.watchVideo);
             appDialogs.getInfoDialog()
                 .setTitle(i18n._('app.dialog.info.addcoins.title'))
@@ -66,7 +70,7 @@ var PageShop = Object.assign({}, {}, {
                 .show();
             appAnalytics.trackEvent('ad', 'video_success', '', 1);
             appAd.showBottomBanner();
-        }.bind(this), function(){
+        }.bind(this), function () {
             appDialogs.getInfoDialog()
                 .setTitle(i18n._('app.dialog.info.rewardedvideo.notfound.title'))
                 .setContentText(i18n._('app.dialog.info.rewardedvideo.notfound.description'))
@@ -82,32 +86,21 @@ var PageShop = Object.assign({}, {}, {
 
     onClickShare: function () {
         appFB.share().then(function (result) {
-            console.log({result: result});
+            //console.log({result: result});
 
-            //if (!result) {
-            //    return;
-            //}
-            //if (!result.hasOwnProperty("to")) {
-            //    return;
-            //}
-            //if (result.to.constructor !== Array) {
-            //    return;
-            //}
-            //
-            //var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
-            //var coinsToAdd = result.to.length * coinsPerFriend;
-            //
-            //appManager.getGameState().addCoins(coinsToAdd);
+            //set lastShareDateString to now
+            var todayDateString = moment().format("YYYYMMDD") || "";
+            //var todayDateString = moment().format("YYYYMMDDHHmmss") || "";
+            appManager.getGameState().setLastShareDate(todayDateString);
 
             appManager.getGameState().addCoins(this.state.freeCoins.share);
-        }.bind(this)).then(function () {
-            this.forceUpdate();
+            appDialogs.getInfoDialog()
+                .setTitle(i18n._('app.dialog.info.addcoins.title'))
+                .setContentText(i18n._('app.dialog.info.addcoins.description', this.state.freeCoins.share))
+                .show();
         }.bind(this));
 
-
-        appManager.getGameState().addCoins(this.state.freeCoins.share);
-
-        console.log("share with friends");
+        //console.log("share with friends");
     },
 
     getProductPrice: function (productId) {
@@ -207,11 +200,43 @@ var PageShop = Object.assign({}, {}, {
         return blocksRender;
     },
 
-    render: function () {
+    getShareButton: function () {
+        return (
+            <div className="outer-block">
+                <FreeCoins onClick={this.onClickShare} className="inner-block share">
+                    <div className="text">{i18n._('shop.share')}</div>
+                    <div className="add-free-coins" style={this.state.dollar}>
+                        +{this.state.freeCoins.share}</div>
+                </FreeCoins>
+            </div>
+        );
+    },
 
-        var dollar = {
-            backgroundImage: "url('" + this.getImagePath(DOLLAR) + "')"
-        };
+    showShareButton: function () {
+        var lastShareDateString = appManager.getGameState().getLastShareDate();
+        var todayDateString = moment().format("YYYYMMDD") || "";
+        //var todayDateString = moment().format("YYYYMMDDHHmmss") || "";
+
+        //if not shared ever
+        if (lastShareDateString == "") {
+            return this.getShareButton();
+        }
+
+        //daysSinceLastShare
+        var daysSinceLastShare = moment(todayDateString, "YYYYMMDD").diff(moment(lastShareDateString, "YYYYMMDD"), "days");
+        //var daysSinceLastShare = moment(todayDateString, "YYYYMMDDHHmmss").diff(moment(lastShareDateString, "YYYYMMDDHHmmss"), "seconds");
+
+        //console.log(lastShareDateString);
+        //console.log(daysSinceLastShare);
+
+        if (daysSinceLastShare < 2) {
+            return;
+        }
+
+        return this.getShareButton();
+    },
+
+    render: function () {
 
         return (
 
@@ -227,7 +252,7 @@ var PageShop = Object.assign({}, {}, {
                         <div className="outer-block">
                             <FreeCoins onClick={this.onClickWatchVideo} className="inner-block watch-video">
                                 <div className="text">{i18n._('shop.watch-video')}</div>
-                                <div className="add-free-coins" style={dollar}>
+                                <div className="add-free-coins" style={this.state.dollar}>
                                     +{this.state.freeCoins.watchVideo}</div>
                             </FreeCoins>
                         </div>
@@ -235,18 +260,12 @@ var PageShop = Object.assign({}, {}, {
                         <div className="outer-block">
                             <FreeCoins onClick={this.onClickInviteFriends} className="inner-block share">
                                 <div className="text">{i18n._('shop.invite-friends')}</div>
-                                <div className="add-free-coins" style={dollar}>
+                                <div className="add-free-coins" style={this.state.dollar}>
                                     +{this.state.freeCoins.sendInvite}</div>
                             </FreeCoins>
                         </div>
 
-                        <div className="outer-block">
-                            <FreeCoins onClick={this.onClickShare} className="inner-block share">
-                                <div className="text">{i18n._('shop.share')}</div>
-                                <div className="add-free-coins" style={dollar}>
-                                    +{this.state.freeCoins.share}</div>
-                            </FreeCoins>
-                        </div>
+                        {this.showShareButton()}
 
                         <div className="heading buy-coins">{i18n._('shop.buy-coins')}</div>
 
