@@ -37,13 +37,24 @@ var PageLearn = Object.assign({}, {}, {
             backgroundImage: this.getImage()
         };
 
+        var bannerHeight = 50;
+        if(window.screen.width >= 468){
+            bannerHeight = 60;
+        }else if(window.screen.width >= 728){
+            bannerHeight = 90;
+        }
+
+        var compensationForAd = {
+            paddingBottom: (window.devicePixelRatio * bannerHeight) + "px"
+        };
+
         return (
 
             <div className="page-learn">
 
                 <Counters isDisplayBackButton={false}/>
 
-                <div className="page-content">
+                <div className="page-content" style={compensationForAd}>
 
                     <div className="container">
 

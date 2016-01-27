@@ -1,15 +1,9 @@
 @media screen and (min-height: 560px) {
+  $ratio: 560 / 320;
+
   .page-learn > .page-content {
-    display: table;
-    $padding-left-right: 1.125rem;
-    padding-left: $padding-left-right;
-    padding-right: $padding-left-right;
-    padding-top: 0.5rem;
-    padding-bottom: 95px;
 
     .container {
-      display: table-cell;
-      vertical-align: middle;
 
       .aim-of-the-game {
         height: 6rem;
