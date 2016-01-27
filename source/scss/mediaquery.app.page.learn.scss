@@ -1,0 +1,31 @@
+@media screen and (min-height: 560px) {
+  .page-learn > .page-content {
+    display: table;
+    $padding-left-right: 1.125rem;
+    padding-left: $padding-left-right;
+    padding-right: $padding-left-right;
+    padding-top: 0.5rem;
+    padding-bottom: 60px;
+
+    .container {
+      display: table-cell;
+      vertical-align: middle;
+
+      .aim-of-the-game {
+        height: 6rem;
+      }
+      .image-of-board {
+        height: 11.5rem;
+      }
+      .how-to-play {
+        height: 7.75rem;
+      }
+      .start {
+        width: 11.5rem;
+        $height: 2.75rem;
+        height: $height;
+        line-height: $height;
+      }
+    }
+  }
+}

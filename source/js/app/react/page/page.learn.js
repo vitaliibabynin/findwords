@@ -40,9 +40,10 @@ var PageLearn = Object.assign({}, {}, {
         return (
 
             <div className="page-learn">
-                <div className="page-content">
 
-                    <Counters isDisplayBackButton={false}/>
+                <Counters isDisplayBackButton={false}/>
+
+                <div className="page-content">
 
                     <div className="container">
 
