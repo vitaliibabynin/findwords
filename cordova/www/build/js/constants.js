@@ -169,6 +169,11 @@ window.CONST = {
             //FACEBOOK INVITE WINDOW
             'app.invite.title': 'Выберите друзей',
 
+            //FACEBOOK FRIENDS JOINED DIALOG
+            'app.dialog.info.friends-joined.title': 'Монеты добавлены',
+            'app.dialog.info.friends-joined.description.friends': '#{count} дру((г|га|зей)) приня((л|ли|ли)) ваше приглашение.',
+            'app.dialog.info.friends-joined.description.coins': '#{count} моне((та|ты|т)) добавлено.',
+
             //FOR STARTAD
             'startad.recommendapp': 'Рекомендуем приложение',
 
@@ -321,6 +326,11 @@ window.CONST = {
 
             //FACEBOOK INVITE WINDOW
             'app.invite.title': 'Select friends',
+
+            //FACEBOOK FRIENDS JOINED DIALOG
+            'app.dialog.info.friends-joined.title': 'Coins added',
+            'app.dialog.info.friends-joined.description.friends': '#{count} frien((d|ds|ds)) accepted your invite.',
+            'app.dialog.info.friends-joined.description.coins': '#{count} coi((n|ns|ns)) added.',
 
             //FOR STARTAD
             'startad.recommendapp': 'We recommend this app',
