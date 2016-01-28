@@ -227,7 +227,7 @@ var PageShop = Object.assign({}, {}, {
         //console.log(lastShareDateString);
         //console.log(daysSinceLastShare);
 
-        if (daysSinceLastShare < 2) {
+        if (daysSinceLastShare < appManager.getSettings().getShopValue('shareDays')) {
             return;
         }
 

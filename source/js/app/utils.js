@@ -94,7 +94,7 @@ module.exports = {
             url = CONST.CURRENT_PLATFORM == CONST.PLATFORM_ANDROID && !returnFullUrl ? 'market://details?id=' : 'https://play.google.com/store/apps/details?id=';
             url += appPlatforms.android;
         } else if (platform == CONST.PLATFORM_IOS) {
-            url = 'https://itunes.apple.com/app/id'+appPlatforms.ios+'?ls=1&mt=8';
+            url = 'https://itunes.apple.com/app/id' + appPlatforms.ios + '?ls=1&mt=8';
         } else if (platform == CONST.PLATFORM_WINDOWS8) {
             url = appPlatforms.windows;
         }
@@ -172,6 +172,45 @@ module.exports = {
         }
 
         return word;
+    },
+
+    removeArrayDuplicates: function (array) {
+        var a = array.concat();
+        for (var i = 0; i < a.length; ++i) {
+            for (var j = i + 1; j < a.length; ++j) {
+                if (a[i] === a[j])
+                    a.splice(j--, 1);
+            }
+        }
+
+        return a;
+    },
+
+    getMatchingValues: function (array) {
+        var matches = [];
+        var a = array.concat();
+        for (var i = 0; i < a.length; ++i) {
+            for (var j = i + 1; j < a.length; ++j) {
+                if (a[i] === a[j])
+                    matches.push(a[i]);
+            }
+        }
+
+        return matches;
+    },
+
+    removeMatchingValues: function (arrayMain, arrayValuesToRemove) {
+        console.log({arrayMain: arrayMain})
+        var a = arrayMain.slice();
+        for (var i = 0; i < arrayValuesToRemove.length; i++) {
+            for (var j = 0; j < a.length; j++) {
+                if (arrayValuesToRemove[i] === a[j]) {
+                    a.splice(j--, 1);
+                }
+            }
+        }
+
+        return a;
     }
 
 }

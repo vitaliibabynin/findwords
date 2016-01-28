@@ -171,11 +171,9 @@ var InviteFriendsDialog = function () {
         title: i18n._('app.dialog.invite-friends.title')
     });
 
-    //var productId = appManager.getSettings().getShopValue("removeAds")[CONST.CURRENT_PLATFORM];
-
     dialog.getContent = function(){
-        var coinsForInvite = 3;
-        var coinsForAccept = 10;
+        var coinsForInvite = appManager.getSettings().getFreeCoins().sendInvite;
+        var coinsForAccept = appManager.getSettings().getFreeCoins().friendAdded;
 
         return '<div class="md-content"> \
                         <p>'+i18n._('app.dialog.invite-friends.description.invite', coinsForInvite)+' \
@@ -188,7 +186,9 @@ var InviteFriendsDialog = function () {
 
     dialog.prepareDialog = function(dialog){
         $('.invite', dialog).bind( 'click', function( e ) {
-            appFB.invite().then(function (result) {
+            var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
+
+            appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
                 if (!result) {
                     return;
                 }
@@ -199,8 +199,17 @@ var InviteFriendsDialog = function () {
                     return;
                 }
 
+                var friendsJustInvited = result.to;
+
+                if (friendsAlreadyInvited.length == 0) {
+                    appManager.getGameState().setFriendsInvited(friendsJustInvited);
+                } else {
+                    var friendsInvited = Utils.removeArrayDuplicates(friendsAlreadyInvited.concat(friendsJustInvited));
+                    appManager.getGameState().setFriendsInvited(friendsInvited);
+                }
+
                 var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
-                var coinsToAdd = result.to.length * coinsPerFriend;
+                var coinsToAdd = friendsJustInvited.length * coinsPerFriend;
 
                 appManager.getGameState().addCoins(coinsToAdd);
 

@@ -213,13 +213,16 @@ html.desktop .btn:hover,
   clear: both;
 }
 
-@media screen and (min-width: 768px) and (orientation: portrait) {
+@media screen and (min-width: 1000px) and (orientation: portrait) {
+  html {
+    font-size: 36px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 999px) and (orientation: portrait) {
   html {
     font-size: 28px;
   }
 }
-
-
 @media screen and (min-width: 640px) and (max-width: 767px) and (orientation: portrait){
   html{
     font-size: 24px;
@@ -230,7 +233,6 @@ html.desktop .btn:hover,
     font-size: 21px;
   }
 }
-
 @media screen and (min-width: 375px) and (max-width: 412px) and (orientation: portrait){
   html{
     font-size: 19px;

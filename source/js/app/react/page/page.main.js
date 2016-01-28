@@ -29,7 +29,7 @@ var PageMain = Object.assign({}, {}, {
         return state;
     },
 
-    componentWillMount: function(){
+    componentWillMount: function () {
         appAd.hideBanner();
     },
 
@@ -54,7 +54,69 @@ var PageMain = Object.assign({}, {}, {
         //    }
         //}
 
+        this.checkForBonuses();
+        this.checkForNewFriends();
+    },
 
+    componentWillUnmount: function () {
+        appManager.getGameState().removeChangeRemoveAdsListener(this.updateAdSwitch);
+        appAd.showBottomBanner();
+    },
+
+    //componentDidUpdate: function (prevProps, prevState) {
+    //
+    //},
+
+    checkForNewFriends: function () {
+        var friendsInvited = appManager.getGameState().getFriendsInvited();
+        if (friendsInvited.length == 0) {
+            return;
+        }
+
+        //console.log({friendsInvited: friendsInvited});
+
+        appFB.getAppFriends().then(function (result) {
+            if (result.constructor !== Array) {
+                console.log("getAppFriends result invalid");
+                return;
+            }
+            if (result.length == 0) {
+                return;
+            }
+
+            var friendsJoined = new Array(result.length);
+            for (var i = 0; i < friendsJoined.length; i++) {
+                friendsJoined[i] = result[i].id;
+            }
+
+            //friendsJoined.push("114199905627003");
+
+            var bonusFriends = Utils.getMatchingValues(friendsJoined.concat(friendsInvited));
+            if (bonusFriends.length == 0) {
+                return;
+            }
+
+            var newFriendsInvited = Utils.removeMatchingValues(friendsInvited, bonusFriends);
+            appManager.getGameState().setFriendsInvited(newFriendsInvited);
+
+            var coinsPerFriend = appManager.getSettings().getFreeCoins().friendAdded;
+            var coinsToAdd = bonusFriends.length * coinsPerFriend;
+            appManager.getGameState().addCoins(coinsToAdd);
+
+            this.forceUpdate();
+
+            appDialogs.getInfoDialog()
+                .setTitle(i18n._('app.dialog.info.friends-joined.title'))
+                .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', bonusFriends.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+                .show();
+        }.bind(this));
+
+        //var friendsInvitedTest = appManager.getGameState().getFriendsInvited();
+        //friendsInvitedTest.push("114199905627003");
+        //appManager.getGameState().setFriendsInvited(friendsInvitedTest);
+    },
+
+    checkForBonuses: function () {
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
         var todayString = moment().format("YYYYMMDD") || "";
         //var todayString = moment().format("YYYYMMDDHHmmss") || "";
@@ -91,15 +153,6 @@ var PageMain = Object.assign({}, {}, {
         //go to bonus page
         router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
     },
-
-    componentWillUnmount: function () {
-        appManager.getGameState().removeChangeRemoveAdsListener(this.updateAdSwitch);
-        appAd.showBottomBanner();
-    },
-
-    //componentDidUpdate: function (prevProps, prevState) {
-    //
-    //},
 
     updateAdSwitch: function () {
         this.setState({

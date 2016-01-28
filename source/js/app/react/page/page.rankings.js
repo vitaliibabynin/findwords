@@ -186,6 +186,7 @@ var PageRankings = Object.assign({}, {}, {
                 return;
             }
 
+            //console.log({friendsData: result});
             this.setState({friendsData: result});
         }.bind(this));
     },
@@ -199,28 +200,6 @@ var PageRankings = Object.assign({}, {}, {
                          place={1}
             />
         )
-    },
-
-    checkIfDataCombined: function (friendsData, myData) {
-        for (var i = 0; i < friendsData.length; i++) {
-            if (friendsData[i].id == myData.id) {
-                return i;
-            }
-        }
-
-        return false;
-    },
-
-    combineData: function (friendsData, myData) {
-        var myDataIndex = this.checkIfDataCombined(friendsData, myData);
-
-        if (myDataIndex !== false) {
-            friendsData[myDataIndex] = myData;
-        } else {
-            friendsData.push(myData);
-        }
-
-        return friendsData;
     },
 
     //sortDataById: function (playersData) {
@@ -259,7 +238,7 @@ var PageRankings = Object.assign({}, {}, {
             return this.noFriendsRankings(myData);
         }
 
-        var playersData = this.combineData(friendsData, myData);
+        var playersData = friendsData.concat(myData);
         //playersData = this.sortDataById(playersData);
         playersData = this.addScore(playersData);
         playersData = this.sortPlayersByScore(playersData);
@@ -286,7 +265,9 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     onClickInviteFriends: function () {
-        appFB.invite().then(function (result) {
+        var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
+
+        appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
             if (!result) {
                 return;
             }
@@ -297,10 +278,19 @@ var PageRankings = Object.assign({}, {}, {
                 return;
             }
 
-            var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
-            var coinsToAdd = result.to.length * coinsPerFriend;
+            var friendsJustInvited = result.to;
 
+            if (friendsAlreadyInvited.length == 0) {
+                appManager.getGameState().setFriendsInvited(friendsJustInvited);
+            } else {
+                var friendsInvited = Utils.removeArrayDuplicates(friendsAlreadyInvited.concat(friendsJustInvited));
+                appManager.getGameState().setFriendsInvited(friendsInvited);
+            }
+
+            var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
+            var coinsToAdd = friendsJustInvited.length * coinsPerFriend;
             appManager.getGameState().addCoins(coinsToAdd);
+
             this.forceUpdate();
 
             appDialogs.getInfoDialog()
@@ -324,9 +314,6 @@ var PageRankings = Object.assign({}, {}, {
         var facebookImg = {
             backgroundImage: "url('" + this.getImagePath('button/facebook_connect') + "')"
         };
-
-        var myData = this.state.myData;
-        //console.log({myDataRender: myData});
 
         return (
 

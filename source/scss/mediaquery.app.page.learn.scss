@@ -1,25 +1,166 @@
-@media screen and (min-height: 560px) {
-  $ratio: 560 / 320;
+//HEIGHT
+@media screen and (min-height: 560px) and (max-height: 619px) {
 
   .page-learn > .page-content {
+    $padding-left-right: 1.125rem;
+    padding-left: $padding-left-right;
+    padding-right: $padding-left-right;
+    padding-top: 0.5rem;
+    display: table;
+    height: 100%;
 
     .container {
+      display: table-cell;
+      vertical-align: middle;
 
       .aim-of-the-game {
-        height: 6rem;
+        height: 5.75rem;
       }
+      $imageHeight: 11.5rem;
       .image-of-board {
-        height: 11.5rem;
+        height: $imageHeight;
       }
       .how-to-play {
-        height: 7.75rem;
+        height: 7.25rem;
       }
       .start {
-        width: 11.5rem;
+        width: $imageHeight;
         $height: 2.75rem;
         height: $height;
         line-height: $height;
       }
     }
   }
+}
+
+@media screen and (min-height: 620px) and (max-height: 729px) {
+
+  .page-learn > .page-content {
+    $padding-left-right: 1.125rem;
+    padding-left: $padding-left-right;
+    padding-right: $padding-left-right;
+    padding-top: 0.5rem;
+    display: table;
+
+    .container {
+      display: table-cell;
+      padding-bottom: 2rem;
+      vertical-align: middle;
+
+      .aim-of-the-game {
+        height: 6rem;
+      }
+      $imageHeight: 13rem;
+      .image-of-board {
+        height: $imageHeight;
+      }
+      .how-to-play {
+        height: 7.5rem;
+      }
+      .start {
+        width: $imageHeight;
+        $height: 2.75rem;
+        height: $height;
+        line-height: $height;
+      }
+    }
+  }
+}
+
+@media screen and (min-height: 730px) and (max-height: 999px) {
+
+  .page-learn > .page-content {
+    $padding-left-right: 1.125rem;
+    padding-left: $padding-left-right;
+    padding-right: $padding-left-right;
+    padding-top: 0.5rem;
+    display: table;
+
+    .container {
+      display: table-cell;
+
+      .aim-of-the-game {
+        height: 5.75rem;
+      }
+      $imageHeight: 11.5rem;
+      .image-of-board {
+        height: $imageHeight;
+      }
+      .how-to-play {
+        height: 7.25rem;
+      }
+      .start {
+        width: $imageHeight;
+        $height: 2.75rem;
+        height: $height;
+        line-height: $height;
+      }
+    }
+  }
+}
+
+@media screen and (min-height: 1000px) {
+
+  .page-learn > .page-content {
+    $padding-left-right: 1.125rem;
+    padding-left: $padding-left-right;
+    padding-right: $padding-left-right;
+    padding-top: 0.5rem;
+    display: table;
+
+    .container {
+      display: table-cell;
+
+      .aim-of-the-game {
+        height: 5.75rem;
+      }
+      $imageHeight: 13rem;
+      .image-of-board {
+        height: $imageHeight;
+      }
+      .how-to-play {
+        height: 7.25rem;
+      }
+      .start {
+        width: $imageHeight;
+        $height: 2.75rem;
+        height: $height;
+        line-height: $height;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//WIDTH
+@media screen and (min-width: 768px) {
+
+}
+@media screen and (min-width: 640px) and (max-width: 767px) {
+
+}
+@media screen and (min-width: 413px) and (max-width: 639px) {
+
+}
+@media screen and (min-width: 375px) and (max-width: 412px) {
+
 }
