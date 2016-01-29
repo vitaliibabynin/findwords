@@ -16,6 +16,33 @@ var PageLearn = Object.assign({}, {}, {
         return {};
     },
 
+    componentDidMount: function () {
+        var countersHeight = this.refs.counters.getDOMNode().clientHeight;
+
+        this.setState({
+            countersHeight: countersHeight
+        });
+    },
+
+    getPageContentHeight: function () {
+        if (typeof this.state.countersHeight == "undefined") {
+            return "initial";
+        }
+
+        var bannerHeight = 50;
+        if (window.screen.width >= 468) {
+            bannerHeight = 60;
+        } else if (window.screen.width >= 728) {
+            bannerHeight = 90;
+        }
+        var adHeight = window.devicePixelRatio * bannerHeight;
+
+        var pageContentHeight = window.screen.height - this.state.countersHeight - adHeight;
+        console.log(pageContentHeight);
+
+        return pageContentHeight + "px";
+    },
+
     getImage: function () {
         switch (router.getLanguage()) {
             case CONST.LANGUAGE_EN:
@@ -28,7 +55,7 @@ var PageLearn = Object.assign({}, {}, {
     },
 
     onClickStart: function () {
-        router.navigate("game","learn");
+        router.navigate("game", "learn");
     },
 
     render: function () {
@@ -37,24 +64,18 @@ var PageLearn = Object.assign({}, {}, {
             backgroundImage: this.getImage()
         };
 
-        var bannerHeight = 50;
-        if(window.screen.width >= 468){
-            bannerHeight = 60;
-        }else if(window.screen.width >= 728){
-            bannerHeight = 90;
-        }
-
-        var compensationForAd = {
-            paddingBottom: (window.devicePixelRatio * bannerHeight) + "px"
+        var pageContentHeight = {
+            height: this.getPageContentHeight()
         };
 
         return (
 
             <div className="page-learn">
 
-                <Counters isDisplayBackButton={false}/>
+                <Counters ref="counters"
+                          isDisplayBackButton={false}/>
 
-                <div className="page-content" style={compensationForAd}>
+                <div className="page-content" style={pageContentHeight}>
 
                     <div className="container">
 
