@@ -12,20 +12,13 @@
   .container {
     background-color: $pageLearn-container-bg-color;
     color: $pageLearn-container-color;
-    $margin-left-right: 1.125rem;
-    margin-left: $margin-left-right;
-    margin-right: $margin-left-right;
+    margin: 0.3125rem 1.125rem;
     text-align: center;
-    //height: 15.625rem;
-    //padding: 0.25rem 0.75rem 0.75rem;
-    padding: 0.25rem 0.75rem 5rem;
-    position: relative;
-    transform: translateX(-0%) translateY(-50%);
-    top: 50%;
+    padding: 0.25rem 0.75rem 0.75rem;
 
     .aim-of-the-game {
       display: table;
-      height: 4.6rem;
+      height: 4.85rem;
 
       span {
         display: table-cell;
@@ -49,7 +42,6 @@
     }
     .start {
       background-color: #2ecc71;
-      //$height: 2.375rem;
       $height: 2.35rem;
       height: $height;
       line-height: $height;

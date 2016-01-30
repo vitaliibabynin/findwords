@@ -1,48 +1,77 @@
 //HEIGHT
-//@media screen and (min-height: 560px) and (max-height: 619px) {
-//
-//  .page-learn > .page-content {
-//    $ratio: 560 / 480;
-//    height: 100%;
-//
-//    .container {
-//      position: relative;
-//      transform: translateX(-0%) translateY(-50%);
-//      top: 45%;
-//    }
-//
-//  }
-//}
-//
-//@media screen and (min-height: 620px) and (max-height: 729px) {
-//
-//  .page-learn > .page-content {
-//    $ratio: 620 / 480;
-//
-//    .container {
-//      position: relative;
-//      transform: translateX(-0%) translateY(-50%);
-//      top: 45%;
-//
-//    }
-//
-//  }
-//}
-//
-//@media screen and (min-height: 730px) and (max-height: 999px) {
-//
-//  .page-learn > .page-content {
-//    $ratio: 730 / 480;
-//
-//    .container {
-//      position: relative;
-//      transform: translateX(-0%) translateY(-50%);
-//      top: 45%;
-//    }
-//
-//  }
-//}
-//
+@media screen and (min-height: 560px) and (max-height: 619px) {
+
+  .page-learn > .page-content {
+    $ratio: 560 / 480;
+
+    .container {
+      padding-top: 0.25rem * $ratio;
+      padding-bottom: 0.75rem * $ratio;
+      position: relative;
+      transform: translateX(-0%) translateY(-50%);
+      top: 50%;
+
+      .image-of-board {
+        height: 10rem * $ratio;
+      }
+      .start {
+        $height: 2.35rem * $ratio;
+        height: $height;
+        line-height: $height;
+      }
+    }
+  }
+}
+
+@media screen and (min-height: 620px) and (max-height: 729px) {
+
+  .page-learn > .page-content {
+    $ratio: 620 / 480;
+
+    .container {
+      padding-top: 0.25rem * $ratio;
+      padding-bottom: 0.75rem * $ratio;
+      position: relative;
+      transform: translateX(-0%) translateY(-50%);
+      top: 50%;
+
+      .image-of-board {
+        height: 10rem * $ratio;
+      }
+      .start {
+        $height: 2.35rem * $ratio;
+        height: $height;
+        line-height: $height;
+      }
+    }
+  }
+}
+
+@media screen and (min-height: 730px) and (max-height: 999px) {
+
+  .page-learn > .page-content {
+    $ratio: 730 / 480;
+
+    .container {
+      padding-top: 0.25rem * $ratio;
+      padding-bottom: 0.75rem * $ratio;
+      position: relative;
+      transform: translateX(-0%) translateY(-50%);
+      top: 50%;
+
+      .image-of-board {
+        height: 10rem * $ratio;
+      }
+      .start {
+        $height: 2.35rem * $ratio;
+        height: $height;
+        line-height: $height;
+      }
+    }
+
+  }
+}
+
 //@media screen and (min-height: 1000px) {
 //
 //  .page-learn > .page-content {
