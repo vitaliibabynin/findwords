@@ -1,147 +1,61 @@
 //HEIGHT
-@media screen and (min-height: 560px) and (max-height: 619px) {
-
-  .page-learn > .page-content {
-    $padding-left-right: 1.125rem;
-    padding-left: $padding-left-right;
-    padding-right: $padding-left-right;
-    padding-top: 0.5rem;
-    display: table;
-    height: 100%;
-
-    .container {
-      display: table-cell;
-      vertical-align: middle;
-
-      .aim-of-the-game {
-        height: 5.75rem;
-      }
-      $imageHeight: 11.5rem;
-      .image-of-board {
-        height: $imageHeight;
-      }
-      .how-to-play {
-        height: 7.25rem;
-      }
-      .start {
-        width: $imageHeight;
-        $height: 2.75rem;
-        height: $height;
-        line-height: $height;
-      }
-    }
-  }
-}
-
-@media screen and (min-height: 620px) and (max-height: 729px) {
-
-  .page-learn > .page-content {
-    //$padding-left-right: 1.125rem;
-    //padding-left: $padding-left-right;
-    //padding-right: $padding-left-right;
-    //padding-top: 0.5rem;
-    display: table;
-    //padding: auto;
-    //position: relative;
-    padding: 0;
-
-    .container {
-      //display: table-cell;
-      display: inline-block;
-      //position: absolute;
-      //padding-bottom: 1.375rem;
-      vertical-align: middle;
-      margin: 0;
-      height: 15.625rem;
-      padding: 0;
-      //top: 50%;
-      //left: 50%;
-      //position: relative;
-      //transform: translate(-50%, -50%);
-
-      .aim-of-the-game {
-        height: 4.75rem;
-      }
-      $imageHeight: 10.25rem;
-      .image-of-board {
-        height: $imageHeight;
-      }
-      .how-to-play {
-        height: 6.5rem;
-      }
-      .start {
-        width: $imageHeight;
-        $height: 2.75rem;
-        height: $height;
-        line-height: $height;
-      }
-    }
-  }
-}
-
-@media screen and (min-height: 730px) and (max-height: 999px) {
-
-  .page-learn > .page-content {
-    $padding-left-right: 1.125rem;
-    padding-left: $padding-left-right;
-    padding-right: $padding-left-right;
-    padding-top: 0.5rem;
-    display: table;
-
-    .container {
-      display: table-cell;
-
-      .aim-of-the-game {
-        height: 5.75rem;
-      }
-      $imageHeight: 11.5rem;
-      .image-of-board {
-        height: $imageHeight;
-      }
-      .how-to-play {
-        height: 7.25rem;
-      }
-      .start {
-        width: $imageHeight;
-        $height: 2.75rem;
-        height: $height;
-        line-height: $height;
-      }
-    }
-  }
-}
-
-@media screen and (min-height: 1000px) {
-
-  .page-learn > .page-content {
-    $padding-left-right: 1.125rem;
-    padding-left: $padding-left-right;
-    padding-right: $padding-left-right;
-    padding-top: 0.5rem;
-    display: table;
-
-    .container {
-      display: table-cell;
-
-      .aim-of-the-game {
-        height: 5.75rem;
-      }
-      $imageHeight: 13rem;
-      .image-of-board {
-        height: $imageHeight;
-      }
-      .how-to-play {
-        height: 7.25rem;
-      }
-      .start {
-        width: $imageHeight;
-        $height: 2.75rem;
-        height: $height;
-        line-height: $height;
-      }
-    }
-  }
-}
+//@media screen and (min-height: 560px) and (max-height: 619px) {
+//
+//  .page-learn > .page-content {
+//    $ratio: 560 / 480;
+//    height: 100%;
+//
+//    .container {
+//      position: relative;
+//      transform: translateX(-0%) translateY(-50%);
+//      top: 45%;
+//    }
+//
+//  }
+//}
+//
+//@media screen and (min-height: 620px) and (max-height: 729px) {
+//
+//  .page-learn > .page-content {
+//    $ratio: 620 / 480;
+//
+//    .container {
+//      position: relative;
+//      transform: translateX(-0%) translateY(-50%);
+//      top: 45%;
+//
+//    }
+//
+//  }
+//}
+//
+//@media screen and (min-height: 730px) and (max-height: 999px) {
+//
+//  .page-learn > .page-content {
+//    $ratio: 730 / 480;
+//
+//    .container {
+//      position: relative;
+//      transform: translateX(-0%) translateY(-50%);
+//      top: 45%;
+//    }
+//
+//  }
+//}
+//
+//@media screen and (min-height: 1000px) {
+//
+//  .page-learn > .page-content {
+//    $ratio: 1000 / 480;
+//
+//    .container {
+//      position: relative;
+//      transform: translateX(-0%) translateY(-50%);
+//      top: 45%;
+//    }
+//
+//  }
+//}
 
 
 

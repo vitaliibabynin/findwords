@@ -25,8 +25,8 @@ var PageLearn = Object.assign({}, {}, {
     },
 
     getPageContentHeight: function () {
-        if (typeof this.state.countersHeight == "undefined") {
-            return "initial";
+        if (!this.state.hasOwnProperty("countersHeight")) {
+            return "";
         }
 
         var bannerHeight = 50;
@@ -35,9 +35,8 @@ var PageLearn = Object.assign({}, {}, {
         } else if (window.screen.width >= 728) {
             bannerHeight = 90;
         }
-        var adHeight = window.devicePixelRatio * bannerHeight;
 
-        var pageContentHeight = window.screen.height - this.state.countersHeight - adHeight;
+        var pageContentHeight = window.screen.height - this.state.countersHeight - bannerHeight;
         console.log(pageContentHeight);
 
         return pageContentHeight + "px";

@@ -15,14 +15,17 @@
     $margin-left-right: 1.125rem;
     margin-left: $margin-left-right;
     margin-right: $margin-left-right;
-    margin-top: 0.5rem;
     text-align: center;
     //height: 15.625rem;
-    padding: 0 0.75rem 1.375rem;
+    //padding: 0.25rem 0.75rem 0.75rem;
+    padding: 0.25rem 0.75rem 5rem;
+    position: relative;
+    transform: translateX(-0%) translateY(-50%);
+    top: 50%;
 
     .aim-of-the-game {
       display: table;
-      height: 4.75rem;
+      height: 4.6rem;
 
       span {
         display: table-cell;
@@ -30,14 +33,14 @@
       }
     }
     .image-of-board {
-      height: 10.25rem;
+      height: 10rem;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
     }
     .how-to-play {
       display: table;
-      height: 6.5rem;
+      height: 5.8rem;
 
       span {
         display: table-cell;
@@ -46,7 +49,8 @@
     }
     .start {
       background-color: #2ecc71;
-      $height: 2.375rem;
+      //$height: 2.375rem;
+      $height: 2.35rem;
       height: $height;
       line-height: $height;
       vertical-align: middle;
