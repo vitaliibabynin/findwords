@@ -184,9 +184,9 @@ var PageGameLearnVictory = Object.assign({}, {}, {
                             <div className="button" onClick={this.onClick}>{i18n._('victory.continue')}</div>
                         </div>
 
-                    </div>
 
-                    <StartAd />
+                        <StartAd />
+                    </div>
 
                 </div>
             </div>
