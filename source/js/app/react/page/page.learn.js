@@ -16,9 +16,9 @@ var PageLearn = Object.assign({}, {}, {
         return {};
     },
 
-    componentDidMount: function () {
-
-    },
+    //componentDidMount: function () {
+    //
+    //},
 
     getImage: function () {
         switch (router.getLanguage()) {
@@ -48,7 +48,6 @@ var PageLearn = Object.assign({}, {}, {
         return (
 
             <div className="page page-learn">
-
                 <Counters ref="counters"
                           isDisplayBackButton={false}/>
 

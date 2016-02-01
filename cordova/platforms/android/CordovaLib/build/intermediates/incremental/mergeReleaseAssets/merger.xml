@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/alek/SmallDevelopers/www/findwords/vitaliy/www/cordova/platforms/android/CordovaLib/assets"/></dataSet><dataSet config="release"><source path="/Users/alek/SmallDevelopers/www/findwords/vitaliy/www/cordova/platforms/android/CordovaLib/src/release/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\WebServers\home\words.game\www\cordova\platforms\android\CordovaLib\assets"/></dataSet><dataSet config="release"><source path="D:\WebServers\home\words.game\www\cordova\platforms\android\CordovaLib\src\release\assets"/></dataSet></merger>

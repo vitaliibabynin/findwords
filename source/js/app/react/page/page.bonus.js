@@ -36,6 +36,10 @@ var PageBonus = Object.assign({}, {}, {
         return state;
     },
 
+    componentWillMount: function(){
+        appAd.hideBanner();
+    },
+
     onClick: function () {
         var daysPlayed = this.state.daysPlayed;
         var bonusDaysTotal = this.state.bonusDaysTotal;
@@ -52,6 +56,10 @@ var PageBonus = Object.assign({}, {}, {
         }
 
         router.navigate("main", "index", {initialSlide: this.state.initialSlide});
+    },
+
+    componentWillUnmount: function () {
+        appAd.showBottomBanner();
     },
 
     generateDays: function () {

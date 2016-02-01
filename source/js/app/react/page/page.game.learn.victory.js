@@ -6,6 +6,7 @@ var GameMixin = require('./../component/app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 
 var Counters = require('./../component/app.counters').Counters;
+var StartAd = require('./../component/app.startad').StartAd;
 
 
 var PageGameLearnVictory = Object.assign({}, {}, {
@@ -26,6 +27,11 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         return state;
     },
 
+    componentWillMount: function () {
+        appAd.showInterstitial();
+        appAd.hideBanner();
+    },
+
     componentDidMount: function () {
         this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(this.state.rewardCoins);
@@ -33,6 +39,10 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         appManager.getGameState().setPracticeRoundComplete(true);
 
         appDialogs.getRateDialog().showIfTime();
+    },
+
+    componentWillUnmount: function () {
+        appAd.showBottomBanner();
     },
 
     getRound: function () {
@@ -138,10 +148,10 @@ var PageGameLearnVictory = Object.assign({}, {}, {
 
         return (
 
-            <div className="page-game-victory">
-                <div className="page-content">
+            <div className="page page-game-victory">
+                <Counters />
 
-                    <Counters />
+                <div className="page-content">
 
                     <div className="container">
 
@@ -175,6 +185,8 @@ var PageGameLearnVictory = Object.assign({}, {}, {
                         </div>
 
                     </div>
+
+                    <StartAd />
 
                 </div>
             </div>

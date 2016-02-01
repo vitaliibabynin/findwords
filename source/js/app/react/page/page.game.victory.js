@@ -56,7 +56,7 @@ var PageGameVictory = Object.assign({}, {}, {
     //componentDidUpdate: function (prevProps, prevState) {
     //
     //},
-    //
+
     componentWillUnmount: function () {
         appAd.showBottomBanner();
     },
