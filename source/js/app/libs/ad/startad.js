@@ -7,12 +7,30 @@
         this.bannerList = {};
         this.zoom = null;
 
+        this.listeners = {
+            onLoad: null,
+            onError: null,
+            onAdNotFound: null
+        }
+
         this.setApplicationId = function(appId){
             this.appId = appId;
         }
 
         this.setZoom = function(zoom){
             this.zoom = zoom;
+        }
+
+        this.setOnLoadListener = function(listener){
+            this.listeners.onLoad = listener;
+        }
+
+        this.setOnErrorListener = function(listener){
+            this.listeners.onError = listener;
+        }
+
+        this.setOnAdNotFoundListener = function(listener){
+            this.listeners.onAdNotFound = listener;
         }
 
         this.showAd = function(layout, params){
@@ -56,12 +74,20 @@
                 try{
                     var response = JSON.parse(xmlRequest.responseText);
                     if(!response || !response.status || response.status != 'ok'){
+                        if(this.listeners.onError && typeof this.listeners.onError == 'function'){
+                            this.listeners.onError();
+                        }
                         return;
                     }
 
                     this._updateBannerList(params.placeid, response.data);
                     this._showInLayout(layout, params.placeid);
-                }catch(e){ console.log(e); }
+                }catch(e){
+                    console.log(e);
+                    if(this.listeners.onError && typeof this.listeners.onError == 'function'){
+                        this.listeners.onError();
+                    }
+                }
             }.bind(this);
             xmlRequest.send(null);
         }
@@ -94,6 +120,9 @@
         this._showInLayout = function(layout, placeId){
             if(!this.bannerList || !this.bannerList.hasOwnProperty(placeId)
                 || !this.bannerList[placeId].ad || this.bannerList[placeId].ad.length <= 0){
+                if(this.listeners.onAdNotFound && typeof this.listeners.onAdNotFound == 'function'){
+                    this.listeners.onAdNotFound();
+                }
                 return;
             }
 
@@ -104,6 +133,11 @@
 
             var html = bannerList.ad[this.bannerList[placeId].lastShowedIdx].html;
             html = html.replace('%targetOrigin%', document.location.protocol +'//'+ document.location.host);
+
+            var htmlFontSize = window.getComputedStyle(document.querySelector('html'), null).getPropertyValue('font-size');
+            if(htmlFontSize && htmlFontSize.length > 0){
+                html = html.replace('</style', ' html{font-size: '+htmlFontSize+'}</style');
+            }
             if(null != this.zoom && this.zoom != 0){
                 html = html.replace('</style', ' html{zoom: '+this.zoom+';}</style');
             }
@@ -122,6 +156,10 @@
             layout.style.height = bannerList.banner_size+'px';
             this.bannerList[placeId].lastShowedIdx++;
             this.bannerList[placeId].isShowed = true;
+
+            if(this.listeners.onLoad && typeof this.listeners.onLoad == 'function'){
+                this.listeners.onLoad();
+            }
         }
 
         this._getXmlHttpRequest = function(){

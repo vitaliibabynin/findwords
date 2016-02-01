@@ -188,7 +188,7 @@ var CountersClass = Object.assign({}, {}, {
 
         return (
 
-            <div className="counters">
+            <div className={classNames("counters", {"backbutton": this.state.isDisplayBackButton})}>
                 {this.showBackButton()}
                 <ScoreCounter value={appManager.getGameState().getScore()} />
                 <CoinsCounter value={appManager.getGameState().getCoins()} />

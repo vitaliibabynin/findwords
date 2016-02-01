@@ -316,33 +316,20 @@ var PageRankings = Object.assign({}, {}, {
         };
 
         return (
+            <div>
 
-            <div className="page-rankings">
-                <div className="page-content">
-
-                    <Counters isDisplayBackButton={true}/>
-
-                    <div className="container">
-
-                        <div className="heading">{i18n._('rankings.heading')}</div>
-
-                        <div className="players-rankings">
-                            {this.playersRankings()}
-                        </div>
-
-
-                        <div className="invite-friends-text">{i18n._('rankings.invite-friends.get-coins')}</div>
-
-                        <SimpleButton className="invite-friends-fb-button"
-                                      onClick={this.onClickInviteFriends}
-                                      displayName="InviteFriendsButton"
-                        >
-                            <div style={facebookImg}>{i18n._('rankings.invite-friends')}</div>
-                        </SimpleButton>
-
-                    </div>
-
+                <div className="players-rankings">
+                    {this.playersRankings()}
                 </div>
+
+                <div className="invite-friends-text">{i18n._('rankings.invite-friends.get-coins')}</div>
+
+                <SimpleButton className="invite-friends-fb-button"
+                              onClick={this.onClickInviteFriends}
+                              displayName="InviteFriendsButton" >
+                    <div style={facebookImg}>{i18n._('rankings.invite-friends')}</div>
+                </SimpleButton>
+
             </div>
 
         );
@@ -355,42 +342,39 @@ var PageRankings = Object.assign({}, {}, {
 
         return (
 
-            <div className="page-rankings">
-                <div className="page-content">
+            <div className="unautharized">
 
-                    <Counters isDisplayBackButton={true}/>
+                <div className="description">{i18n._('rankings.login.description')}</div>
+                <div className="image" style={rankingsImage}></div>
 
-                    <div className="container">
+                <SimpleButton className="login"
+                              onClick={this.onClickLoginToFacebook}>
+                    {i18n._('rankings.login.button')}
+                </SimpleButton>
 
-                        <div className="heading">{i18n._('rankings.heading')}</div>
-
-                        <div className="unautharized">
-
-                            <div className="description">{i18n._('rankings.login.description')}</div>
-                            <div className="image" style={rankingsImage}></div>
-
-                            <SimpleButton className="login"
-                                          onClick={this.onClickLoginToFacebook}>
-                                {i18n._('rankings.login.button')}
-                            </SimpleButton>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
             </div>
 
         );
     },
 
     render: function () {
-        if (this.state.facebookOnline) {
-            return this.renderAuthorized();
-        }
+        var pageContentHeight = {
+            paddingBottom: appAd.getBottomBannerHeight() + 'px'
+        };
 
-        return this.renderUnauthorized();
+        return (
+            <div className="page page-rankings">
+                <Counters isDisplayBackButton={true}/>
+
+                <div className="page-content" style={pageContentHeight}>
+                    <div className={classNames("container", {"unauth": !this.state.facebookOnline})} >
+                        <div className="heading">{i18n._('rankings.heading')}</div>
+                        {this.state.facebookOnline ? this.renderAuthorized() : this.renderUnauthorized()}
+                    </div>
+
+                </div>
+            </div>
+        )
     }
 
 });

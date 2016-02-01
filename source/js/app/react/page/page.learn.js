@@ -17,29 +17,7 @@ var PageLearn = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        var countersHeight = this.refs.counters.getDOMNode().clientHeight;
 
-        this.setState({
-            countersHeight: countersHeight
-        });
-    },
-
-    getPageContentHeight: function () {
-        if (!this.state.hasOwnProperty("countersHeight")) {
-            return "";
-        }
-
-        var bannerHeight = 50;
-        if (window.screen.width >= 468) {
-            bannerHeight = 60;
-        } else if (window.screen.width >= 728) {
-            bannerHeight = 90;
-        }
-
-        var pageContentHeight = window.screen.height - this.state.countersHeight - bannerHeight;
-        console.log(pageContentHeight);
-
-        return pageContentHeight + "px";
     },
 
     getImage: function () {
@@ -64,12 +42,12 @@ var PageLearn = Object.assign({}, {}, {
         };
 
         var pageContentHeight = {
-            height: this.getPageContentHeight()
+            paddingBottom: appAd.getBottomBannerHeight() + 'px'
         };
 
         return (
 
-            <div className="page-learn">
+            <div className="page page-learn">
 
                 <Counters ref="counters"
                           isDisplayBackButton={false}/>
@@ -77,7 +55,6 @@ var PageLearn = Object.assign({}, {}, {
                 <div className="page-content" style={pageContentHeight}>
 
                     <div className="container">
-
                         <div className="aim-of-the-game">
                             <span>{i18n._('app.page.learn.aim-of-the-game')}</span>
                         </div>
@@ -89,7 +66,6 @@ var PageLearn = Object.assign({}, {}, {
                         </div>
 
                         <div className="btn start" onClick={this.onClickStart}>{i18n._('app.page.learn.start')}</div>
-
                     </div>
 
                 </div>

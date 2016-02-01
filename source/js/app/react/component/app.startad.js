@@ -8,12 +8,28 @@ var StartAd = {
 
     getInitialState: function(){
         return {
-
+            isHidden: true
         };
     },
 
     componentDidMount: function() {
-        this.updateStartAdBanner();
+        if(appAd.canShowStartAdBanner()){
+            var startAd = appAd.getStartAd();
+
+            startAd.setOnLoadListener(this.show);
+            startAd.setOnErrorListener(this.hide);
+            startAd.setOnAdNotFoundListener(this.show);
+
+            this.updateStartAdBanner();
+        }
+    },
+
+    hide: function(){
+        this.setState({isHidden: true});
+    },
+
+    show: function(){
+        this.setState({isHidden: false});
     },
 
     updateStartAdBanner: function(){
@@ -24,7 +40,7 @@ var StartAd = {
         var classes = classNames('loader', {hide: !this.props.show});
 
         return (
-            <div className={classNames("startad", {"hide": !appAd.canShowStartAdBanner()})}>
+            <div className={classNames("startad", {"hide": this.state.isHidden})}>
                 <div className="title">{i18n._("startad.recommendapp")}</div>
                 <div className="content" >
                     <div ref="startAdLayout" className="startad-layout"></div>

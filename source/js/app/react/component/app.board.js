@@ -51,7 +51,7 @@ var LetterClass = Object.assign({}, {}, {
 var Letter = React.createClass(LetterClass);
 
 
-var BOARD_MARGIN = 50;
+//var BOARD_MARGIN = 50;
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
 var ANIMATE_LETTER = "animation";
@@ -146,7 +146,8 @@ var BoardClass = Object.assign({}, {}, {
 
     componentDidMount: function () {
         this.setState({
-            cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.boardData.board.cols || 0
+            //cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.boardData.board.cols || 0
+            cellSize: $('.game-board').width() / this.state.boardData.board.cols || 0
         })
     },
 

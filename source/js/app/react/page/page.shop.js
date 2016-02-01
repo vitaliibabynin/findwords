@@ -3,7 +3,7 @@
 
 var GameMixin = require('./../component/app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
-//var classNames = require('classnames');
+var classNames = require('classnames');
 var moment = require('moment');
 
 var Counters = require('./../component/app.counters').Counters;
@@ -25,6 +25,7 @@ var PageShop = Object.assign({}, {}, {
 
     getInitialState: function () {
         return {
+            containerExtraClass: [],
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
             purchases: appManager.getSettings().getPurchases() || {},
             freeCoins: appManager.getSettings().getFreeCoins() || {
@@ -39,6 +40,12 @@ var PageShop = Object.assign({}, {}, {
 
     componentDidMount: function () {
         appManager.getGameState().addChangeCoinsListener(this.update);
+
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        if(this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom')  > this.refs.container.getDOMNode().offsetHeight){
+            this.state.containerExtraClass.push('transform-center')
+            this.setState({containerExtraClass: this.state.containerExtraClass});
+        }
     },
 
     componentWillUnmount: function () {
@@ -236,14 +243,18 @@ var PageShop = Object.assign({}, {}, {
 
     render: function () {
 
+        var pageContentHeight = {
+            paddingBottom: appAd.getBottomBannerHeight() + 'px'
+        };
+
         return (
 
-            <div className="page-shop">
-                <div className="page-content">
+            <div className="page page-shop">
+                <Counters isDisplayBackButton={true}/>
 
-                    <Counters isDisplayBackButton={true}/>
+                <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
-                    <div className="container">
+                    <div ref="container" className={classNames("container", this.state.containerExtraClass)} >
 
                         <div className="heading free-coins">{i18n._('shop.free-coins')}</div>
 

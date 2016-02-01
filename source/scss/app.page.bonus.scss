@@ -1,21 +1,24 @@
 .page-bonus {
   position: relative;
-  height: 100%;
   background-color: $pageBonus-bg-color;
-  width: 100%;
 }
 
 .page-bonus > .page-content {
-  height: 100%;
-  width: 100%;
+  //height: 100%;
+  //width: 100%;
 
   .container {
+    position: relative;
+    transform: translateX(-0%) translateY(-50%);
+    top: 50%;
+
     background-color: $pageBonus-container-bg-color;
     color: $pageBonus-container-color;
     $margin-left-right: 1.625rem;
     margin-left: $margin-left-right;
     margin-right: $margin-left-right;
-    margin-top: 0.5rem;
+    //margin-top: 0.5rem;
+    margin-top: 0;
     text-align: center;
     line-height: 50%;
 
@@ -33,7 +36,7 @@
       position: relative;
       display: inline-table;
       //display: table;
-      $day-height: 2.625rem;
+      $day-height: 2.925rem;
       height: $day-height;
       $padding-left-right: 4rem;
       padding-left: $padding-left-right;

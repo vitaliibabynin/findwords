@@ -1,22 +1,25 @@
 .page-game-victory {
   position: relative;
-  height: 100%;
   background-color: $gamePageVictory-bg-color;
-  width: 100%;
 }
 
 .page-game-victory > .page-content {
   /*margin-top: 0rem;*/
-  height: 100%;
-  width: 100%;
+  //height: 100%;
+  //width: 100%;
 
   .container {
+    position: relative;
+    transform: translateX(-0%) translateY(-50%);
+    top: 50%;
+
     background-color: $gamePageVictory-container-bg-color;
     color: $gamePageVictory-container-color;
     $margin-left-right: 2.8125rem;
     margin-left: $margin-left-right;
     margin-right: $margin-left-right;
-    margin-top: 2.25rem;
+    //margin-top: 2.25rem;
+    margin-top: 0;
 
     .excellent {
       padding-top: 1rem;

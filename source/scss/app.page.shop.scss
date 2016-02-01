@@ -1,13 +1,9 @@
 .page-shop {
   position: relative;
-  height: 100%;
   background-color: $pageShop-bg-color;
-  width: 100%;
 }
 
 .page-shop > .page-content {
-  height: 100%;
-  width: 100%;
 
   .container {
     background-color: $pageShop-container-bg-color;
@@ -16,8 +12,17 @@
     margin-left: $margin-left-right;
     margin-right: $margin-left-right;
     //margin-top: 1.25rem;
-    margin-top: 0.625rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     text-align: center;
+
+    &.transform-center{
+      position: relative;
+      transform: translateX(-0%) translateY(-50%);
+      top: 50%;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
 
     .heading {
       $height: 2.5rem;
@@ -63,7 +68,7 @@
 
         &.buy-coins {
           background-repeat: no-repeat;
-          background-size: 3.125rem 2.1875rem;
+          background-size: 3.125rem 1.9875rem;
           background-position: 30% center;
         }
 

@@ -190,7 +190,7 @@ var PageMain = Object.assign({}, {}, {
 
         return (
 
-            <div className="page-main">
+            <div className="page page-main">
 
                 <div className="page-content">
 

@@ -312,13 +312,16 @@ var PageGameMain = Object.assign({}, {}, {
         //console.log({pageGameCoins: appManager.getGameState().getCoins()});
         //console.log({pageGameRoundsComplete: this.getGameStateRoundsBundleField("roundsComplete")});
 
+        var pageContentHeight = {
+            paddingBottom: appAd.getBottomBannerHeight() + 'px'
+        };
+
         return (
-            <div className="page-game">
-                <div className="page-content">
+            <div className="page page-game">
+                <Counters isDisplayBackButton={true}
+                        roundsBundleIdx={this.state.roundsBundleIdx}/>
 
-                    <Counters isDisplayBackButton={true}
-                              roundsBundleIdx={this.state.roundsBundleIdx}/>
-
+                <div className="page-content" style={pageContentHeight}>
                     <Timer time={this.state.time}
                            setGameStateRoundField={this.setGameStateRoundField}
                            getGameStateRoundField={this.getGameStateRoundField}

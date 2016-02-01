@@ -1,21 +1,22 @@
 .page-rankings {
   position: relative;
-  height: 100%;
   background-color: $pageRankings-bg-color;
-  width: 100%;
 }
 
 .page-rankings > .page-content {
-  height: 100%;
-  width: 100%;
 
   .container {
+    position: relative;
+    transform: translateX(-0%) translateY(-50%);
+    top: 50%;
+
     background-color: $pageRankings-container-bg-color;
     color: $pageRankings-container-color;
     $margin-left-right: 1.125rem;
     margin-left: $margin-left-right;
     margin-right: $margin-left-right;
-    margin-top: 0.75rem;
+    //margin-top: 0.75rem;
+    margin-top: 0;
     text-align: center;
 
     .heading {
@@ -52,8 +53,8 @@
           float: left;
           height: $player-stats-height;
           line-height: $player-stats-height;
-          width: 20%;
-          text-align: left;
+          width: 10%;
+          text-align: center;
         }
         .center-block {
           position: relative;
@@ -61,7 +62,7 @@
           text-align: left;
           height: $player-stats-height;
           padding-left: 2.125rem;
-          width: 55%;
+          width: 65%;
 
           .profile-pic {
             position: absolute;
@@ -85,7 +86,8 @@
             font-size: $pageRankings-playerStats-levelsComplete-font-size;
             height: ($player-stats-height - 1rem) / 2;
             line-height: ($player-stats-height - 1rem) / 2;
-            margin-bottom: 0.5rem;
+            //margin-bottom: 0.5rem;
+            margin-top: 0.2rem;
           }
         }
         .score {
@@ -96,6 +98,7 @@
           line-height: $player-stats-height;
           width: 25%;
           text-align: right;
+          padding-right: 0.3rem;
         }
       }
     }

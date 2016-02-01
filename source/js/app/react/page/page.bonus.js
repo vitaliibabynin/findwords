@@ -227,10 +227,10 @@ var PageBonus = Object.assign({}, {}, {
 
         return (
 
-            <div className="page-bonus">
-                <div className="page-content">
+            <div className="page page-bonus">
+                <Counters />
 
-                    <Counters />
+                <div className="page-content">
 
                     <div className="container">
                         <div className="heading">{i18n._('bonus.heading')}</div>

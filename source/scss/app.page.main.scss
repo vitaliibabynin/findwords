@@ -1,435 +1,446 @@
+
 .page-main {
   position: relative;
-  height: 100%;
   background-color: $mainPage-bg-color;
-  width: 100%;
 }
 
 .page-main > .page-content {
-  /*margin-top: 0rem;*/
-  height: 100%;
-  width: 100%;
-  padding-bottom: 2.625rem;
-  //overflow: initial;
-}
+    height: 100% !important;
+    padding-top: 8.25rem;
+    padding-bottom: 2.625rem;
 
-.page-main .page-content .head {
-  //height: 6.875rem;
-  height: 5.875rem;
-  background-color: $header-bg-color;
-  background-repeat: no-repeat;
-  background-size: 14.813rem 4.313rem;
-  background-position: center center;
-  width: 100%;
-}
+    .head {
+        //height: 6.875rem;
+        height: 5.875rem;
+        background-color: $header-bg-color;
+        background-repeat: no-repeat;
+        background-size: 14.813rem 4.313rem;
+        background-position: center center;
+        width: 100%;
 
-.page-main .page-content .main {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 0.875rem;
-  color: #000;
-  margin: 0;
-  padding: 0;
+        position: absolute;
+        top: 0;
+    }
 
-  .swiper-container {
-    width: 100%;
-    height: 12.688rem;
-    //margin: 1.125rem auto;
-    margin-top: 0.8rem;
-    margin-bottom: 0.2rem;
+    .counters{
+        position: absolute;
+        top: 5.875rem;
+        width: 100%;
+    }
 
-    .swiper-slide {
-      $slide-height: 10.938rem;
-      height: $slide-height;
-      text-align: center;
-      color: $slide-text-color;
-      cursor: pointer;
-
-      &:hover,
-      &.hover {
-        box-shadow: $hover-box-shadow;
-      }
-      &:nth-child(2n) {
-        width: 40%;
-      }
-      &:nth-child(3n) {
-        width: 20%;
-      }
-      .slide-title {
-        font-size: $slide-heading-font-size;
-        padding-top: 1rem;
-        height: 3.3rem;
-      }
-      &.locked {
-
-        .lock {
-          margin: 1rem auto 0;
-          height: 3.375rem;
-          width: 3.1875rem;
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
-        .stats {
-          margin-top: 0.8rem;
-          font-size: $slide-locked-progress-font-size;
-        }
-      }
-      &.instructions {
+    .main {
         position: relative;
+        transform: translateX(-0%) translateY(-50%);
+        top: 50%;
 
-        .text {
-          padding: 0 0.875rem;
-          display: table;
-          height: 6.138rem;
-          line-height: 0.875rem;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 0.875rem;
+        color: #000;
+        margin: 0;
+        padding: 0;
 
-          span {
-            display: table-cell;
-            vertical-align: middle;
-          }
-        }
-        .purchase {
-          display: block;
-          color: $slide-instructions-buy-color;
-          text-decoration: none;
-          font-size: inherit;
-          margin: 0;
-          cursor: pointer;
-          padding: 0;
+        .swiper-container {
+            width: 100%;
+            height: 12.688rem;
+            //margin: 1.125rem auto;
+//            margin-top: 0.8rem;
+//            margin-bottom: 0.2rem;
 
-          position: absolute;
-          width: 100%;
-          text-align: center;
-          line-height: 1.5rem;
-          bottom: 0;
-          height: 1.5rem;
-          background-color: $slide-instructions-buy-bg-color;
-        }
+            .swiper-slide {
+                $slide-height: 10.938rem;
+                height: $slide-height;
+                text-align: center;
+                color: $slide-text-color;
+                cursor: pointer;
 
-      }
-      &.unlocked {
+                &:hover,
+                &.hover {
+                    box-shadow: $hover-box-shadow;
+                }
+                &:nth-child(2n) {
+                    width: 40%;
+                }
+                &:nth-child(3n) {
+                    width: 20%;
+                }
+                .slide-title {
+                    font-size: $slide-heading-font-size;
+                    padding-top: 1rem;
+                    height: 3.3rem;
+                }
+                &.locked {
 
-        .rounds-complete {
-          margin: 0.6rem auto;
-          width: 100%;
-          height: 1rem;
+                    .lock {
+                        margin: 1rem auto 0;
+                        height: 3.375rem;
+                        width: 3.1875rem;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                    .stats {
+                        margin-top: 0.8rem;
+                        font-size: $slide-locked-progress-font-size;
+                    }
+                }
+                &.instructions {
+                    position: relative;
 
-          .stats {
-            display: inline-block;
-            font-size: $slide-progress-font-size;
-            margin-right: 0.55rem;
-            line-height: 1rem;
-            vertical-align: middle;
-          }
-          .progress-bar {
-            display: inline-block;
-            position: relative;
-            height: 0.750rem;
-            width: 6.250rem;
-            line-height: 1rem;
-            vertical-align: middle;
+                    .text {
+                        padding: 0 0.875rem;
+                        display: table;
+                        height: 6.138rem;
+                        line-height: 0.875rem;
 
-            .panel {
-              position: absolute;
-              width: 6.250rem;
-              height: 0.625rem;
-              background-color: $slide-wordsComplete-panel-bg-color;
-              border-radius: 0.3125rem;
-              top: 0.0625rem;
-              bottom: 0.625rem;
+                        span {
+                            display: table-cell;
+                            vertical-align: middle;
+                        }
+                    }
+                    .purchase {
+                        display: block;
+                        color: $slide-instructions-buy-color;
+                        text-decoration: none;
+                        font-size: inherit;
+                        margin: 0;
+                        cursor: pointer;
+                        padding: 0;
 
+                        position: absolute;
+                        width: 100%;
+                        text-align: center;
+                        line-height: 1.5rem;
+                        bottom: 0;
+                        height: 1.5rem;
+                        background-color: $slide-instructions-buy-bg-color;
+                    }
+
+                }
+                &.unlocked {
+
+                    .rounds-complete {
+                        margin: 0.6rem auto;
+                        width: 100%;
+                        height: 1rem;
+
+                        .stats {
+                            display: inline-block;
+                            font-size: $slide-progress-font-size;
+                            margin-right: 0.55rem;
+                            line-height: 1rem;
+                            vertical-align: middle;
+                        }
+                        .progress-bar {
+                            display: inline-block;
+                            position: relative;
+                            height: 0.750rem;
+                            width: 6.250rem;
+                            line-height: 1rem;
+                            vertical-align: middle;
+
+                            .panel {
+                                position: absolute;
+                                width: 6.250rem;
+                                height: 0.625rem;
+                                background-color: $slide-wordsComplete-panel-bg-color;
+                                border-radius: 0.3125rem;
+                                top: 0.0625rem;
+                                bottom: 0.625rem;
+
+                            }
+                            .fill {
+                                position: absolute;
+                                //width: 6.250rem * $slide-wordsComplete-progress-size;
+                                height: 0.688rem;
+                                background-color: $slide-wordsComplete-progress-bg-color;
+                                border-radius: 0.3125rem;
+                            }
+                        }
+                    }
+                    .play {
+                        margin: auto;
+                        height: 2.875rem;
+                        width: 2.875rem;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                    .score {
+                        font-size: $slide-score-font-size;
+                        margin-top: 0.6rem;
+                        margin-bottom: 1rem;
+                    }
+                }
+                &.complete {
+
+                    .subheading {
+                        height: 1rem;
+                        margin: 0.6rem auto;
+                        font-size: $slide-subheading-font-size;
+                    }
+                    .done {
+                        margin: auto;
+                        height: 2.875rem;
+                        width: 2.875rem;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                    .score {
+                        font-size: $slide-score-font-size;
+                        margin-top: 0.6rem;
+                        margin-bottom: 1rem;
+                    }
+                }
+                &.message {
+
+                    .text {
+                        padding: 0 1rem;
+                        display: table;
+                        height: 6.138rem;
+
+                        span {
+                            display: table-cell;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+                &.slide-soon {
+                    line-height: $slide-height;
+                    vertical-align: middle;
+                    text-align: center;
+
+                    .message {
+                        display: inline-block;
+                        transform: rotate(-30deg);
+
+                        span {
+                            padding: 0.5rem;
+                            font-size: 2rem;
+                            border: 0.0625rem solid $slide-soon-border-color;
+                            border-radius: 0.3rem;
+                        }
+                    }
+                }
             }
-            .fill {
-              position: absolute;
-              //width: 6.250rem * $slide-wordsComplete-progress-size;
-              height: 0.688rem;
-              background-color: $slide-wordsComplete-progress-bg-color;
-              border-radius: 0.3125rem;
+
+            .swiper-pagination {
+                -webkit-transition: none;
+                -moz-transition: none;
+                -o-transition: none;
+                transition: none;
+                -webkit-transform: none;
+                -ms-transform: none;
+                -o-transform: none;
+                transform: none;
             }
-          }
         }
-        .play {
-          margin: auto;
-          height: 2.875rem;
-          width: 2.875rem;
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
-        .score {
-          font-size: $slide-score-font-size;
-          margin-top: 0.6rem;
-          margin-bottom: 1rem;
-        }
-      }
-      &.complete {
 
-        .subheading {
-          height: 1rem;
-          margin: 0.6rem auto;
-          font-size: $slide-subheading-font-size;
-        }
-        .done {
-          margin: auto;
-          height: 2.875rem;
-          width: 2.875rem;
-          background-size: contain;
-          background-repeat: no-repeat;
-        }
-        .score {
-          font-size: $slide-score-font-size;
-          margin-top: 0.6rem;
-          margin-bottom: 1rem;
-        }
-      }
-      &.message {
-
-        .text {
-          padding: 0 1rem;
-          display: table;
-          height: 6.138rem;
-
-          span {
-            display: table-cell;
+        .swiper-pagination-bullet {
+            $spaceBetween: 0.313rem / 2;
+            margin-left: $spaceBetween;
+            margin-right: $spaceBetween;
+            opacity: 1;
+            line-height: 100%;
             vertical-align: middle;
-          }
+            background-color: $swiper-pagination-bullet;
         }
-      }
-      &.slide-soon {
-        line-height: $slide-height;
-        vertical-align: middle;
+        .swiper-pagination-bullet-active {
+            $side: 0.500rem * 1.25;
+            width: $side;
+            height: $side;
+            background-color: $swiper-pagination-bullet-active;
+        }
+
+        .navigation {
+            text-align: center;
+
+            .btn {
+                background-color: $navigation-btn-bg-color;
+                color: $navigation-btn-color;
+
+
+                &.icon {
+                    background-size: 2rem 2rem;
+                    background-position: center 0.25rem;
+                }
+                &:hover,
+                &.hover {
+                    box-shadow: $hover-box-shadow;
+                }
+                &.rating {
+                    background-color: $navigation-btn-rating-bg-color;
+                }
+                &.facebook {
+                    background-color: $navigation-btn-facebook-bg-color;
+
+                    &.online {
+                        width: 6rem;
+                        position: relative;
+                        background-position: 1.55rem 2.8rem;
+                        background-size: 0.5rem 0.8125rem;
+
+                        .enter-exit {
+                            text-align: initial;
+                            display: inline-block;
+                            margin-left: 0.6rem;
+                        }
+
+                        .profile-pic {
+                            position: absolute;
+                            top: 0.6rem;
+                            left: 0.5rem;
+                            width: 1.6rem;
+                            height: 1.6rem;
+                            background-size: contain;
+                            border-radius: 5rem;
+                            border: 0.09rem solid $navigation-btn-facebook-border-color;
+                        }
+
+                        .profile-name {
+                            margin: 0;
+                            position: absolute;
+                            top: 0.3rem;
+                            left: 2.5rem;
+                            $height: 2rem;
+                            $width: 3.15rem;
+                            height: $height;
+                            width: $width;
+
+                            div {
+                                position: relative;
+                                height: $height / 2;
+                                width: $width;
+                                text-align: initial;
+
+                                span {
+                                    display: inline-block;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    font-size: 0.55rem;
+                                    height: 0.55rem;
+                                    width: $width;
+                                    line-height: 0.55rem;
+                                }
+
+                                &:first-child span {
+                                    margin-top: 0.45rem;
+                                    line-height: 0.7rem;
+                                }
+                            }
+                        }
+                    }
+                }
+                &.shop {
+                    background-color: $navigation-btn-shop-bg-color;
+                }
+            }
+        }
+    }
+
+    .footer {
+        background-color: $footer-bg-color;
+        //height: 3.125rem;
+        $height: 2.625rem;
+        height: $height;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
         text-align: center;
+        //font-size: 2.083rem;
+        //padding: 0.300rem 0;
+        //padding: auto 0;
 
-        .message {
-          display: inline-block;
-          transform: rotate(-30deg);
-
-          span {
-            padding: 0.5rem;
-            font-size: 2rem;
-            border: 0.0625rem solid $slide-soon-border-color;
-            border-radius: 0.3rem;
-          }
-        }
-      }
-    }
-
-    .swiper-pagination {
-      -webkit-transition: none;
-      -moz-transition: none;
-      -o-transition: none;
-      transition: none;
-      -webkit-transform: none;
-      -ms-transform: none;
-      -o-transform: none;
-      transform: none;
-    }
-  }
-
-  .swiper-pagination-bullet {
-    $spaceBetween: 0.313rem / 2;
-    margin-left: $spaceBetween;
-    margin-right: $spaceBetween;
-    opacity: 1;
-    line-height: 100%;
-    vertical-align: middle;
-    background-color: $swiper-pagination-bullet;
-  }
-  .swiper-pagination-bullet-active {
-    $side: 0.500rem * 1.25;
-    width: $side;
-    height: $side;
-    background-color: $swiper-pagination-bullet-active;
-  }
-
-  .navigation {
-    text-align: center;
-
-    .btn {
-      background-color: $navigation-btn-bg-color;
-      color: $navigation-btn-color;
-
-      &.icon {
-        background-size: 2rem 2rem;
-        background-position: center 0.25rem;
-      }
-      &:hover,
-      &.hover {
-        box-shadow: $hover-box-shadow;
-      }
-      &.rating {
-        background-color: $navigation-btn-rating-bg-color;
-      }
-      &.facebook {
-        background-color: $navigation-btn-facebook-bg-color;
-
-        &.online {
-          width: 6rem;
-          position: relative;
-          background-position: 1.75rem 2.1rem;
-          background-size: 0.5rem 0.8125rem;
-
-          .enter-exit {
-            text-align: initial;
+        .rsbc-switch-button {
+            //height: 1.500rem*$footerSwitch-size;
+            //line-height: 1.500rem*$footerSwitch-size;
+            //line-height: 3.125rem;
+            line-height: $height;
             display: inline-block;
-            margin-left: 0.6rem;
-          }
-
-          .profile-pic {
-            position: absolute;
-            top: 0.2rem;
-            left: 0.5rem;
-            width: 1.6rem;
-            height: 1.6rem;
-            background-size: contain;
-            border-radius: 5rem;
-            border: 0.09rem solid $navigation-btn-facebook-border-color;
-          }
-
-          .profile-name {
-            margin: 0;
-            position: absolute;
-            top: 0;
-            left: 2.6rem;
-            $height: 2rem;
-            $width: 3.15rem;
-            height: $height;
-            width: $width;
-
-            div {
-              position: relative;
-              height: $height / 2;
-              width: $width;
-              text-align: initial;
-
-              span {
-                display: inline-block;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                font-size: 0.55rem;
-                height: 0.55rem;
-                width: $width;
-                line-height: 0.55rem;
-              }
-
-              &:first-child span {
-                margin-top: 0.45rem;
-                line-height: 0.7rem;
-              }
-            }
-          }
+            vertical-align: middle;
+            //position: relative;
         }
-      }
-      &.shop {
-        background-color: $navigation-btn-shop-bg-color;
-      }
+
+        .rsbc-switch-button label {
+            cursor: pointer;
+            display: inline-block;
+            color: $footerLabel-color;
+            font-size: $footerLabel-font-size;
+            //height: 1.500rem*$footerLabelFont-size;
+            //line-height: 1.500rem*$footerLabelFont-size;
+            line-height: $height;
+            vertical-align: middle;
+            //margin-right: 1rem;
+            //padding-bottom: 1rem;
+        }
+
+        .rsbc-switch-button input[type="checkbox"] {
+            margin-left: -624.938rem*$footerSwitch-size;
+        }
+
+        .rsbc-switch-button > label:first-child {
+            min-width: 0;
+            margin: 0 0.750rem 0 0
+        }
+
+        .rsbc-switch-button label + label {
+            /*margin-left: 0.375rem*$footerSwitch-size*/
+        }
+
+        .rsbc-switch-button input[type="checkbox"] + label {
+
+        }
+
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
+            padding: 0.125rem*$footerSwitch-size;
+            width: 3.000rem*$footerSwitch-size;
+            height: 1.500rem*$footerSwitch-size;
+            //line-height: 1.500rem*$footerSwitch-size;
+            //line-height: 2.1875rem;
+            /*background-color: #eee;*/
+            -webkit-border-radius: 3.750rem*$footerSwitch-size;
+            -moz-border-radius: 3.750rem*$footerSwitch-size;
+            border-radius: 3.750rem*$footerSwitch-size;
+        }
+
+        .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
+            //background-color: #6f6f6f;
+        }
+
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+
+        }
+
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
+            top: 0.125rem*$footerSwitch-size;
+            left: 0.125rem*$footerSwitch-size;
+            bottom: 0.125rem*$footerSwitch-size;
+            right: 0.125rem*$footerSwitch-size;
+            -webkit-border-radius: 3.750rem*$footerSwitch-size;
+            -moz-border-radius: 3.750rem*$footerSwitch-size;
+            border-radius: 3.750rem*$footerSwitch-size;
+        }
+
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
+            top: 0.250rem*$footerSwitch-size;
+            left: 0.250rem*$footerSwitch-size;
+            bottom: 0.250rem*$footerSwitch-size;
+            width: 1.000rem*$footerSwitch-size;
+            -webkit-border-radius: 3.250rem*$footerSwitch-size;
+            -moz-border-radius: 3.250rem*$footerSwitch-size;
+            border-radius: 3.250rem*$footerSwitch-size;
+        }
+
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
+            background-color: $footerSwitchBorderOn-bg-color;
+            //position: relative;
+            //position: absolute;
+            //content: 'ON';
+            //color: #000011;
+        }
+
+        .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
+            margin-left: 1.500rem*$footerSwitch-size;
+            background-color: $footerSwitchCircleOn-bg-color;
+        }
+
     }
-  }
-}
-
-.page-main .page-content .footer {
-  background-color: $footer-bg-color;
-  //height: 3.125rem;
-  $height: 2.625rem;
-  height: $height;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  //font-size: 2.083rem;
-  //padding: 0.300rem 0;
-  //padding: auto 0;
-
-  .rsbc-switch-button {
-    //height: 1.500rem*$footerSwitch-size;
-    //line-height: 1.500rem*$footerSwitch-size;
-    //line-height: 3.125rem;
-    line-height: $height;
-    display: inline-block;
-    vertical-align: middle;
-    //position: relative;
-  }
-
-  .rsbc-switch-button label {
-    cursor: pointer;
-    display: inline-block;
-    color: $footerLabel-color;
-    font-size: $footerLabel-font-size;
-    //height: 1.500rem*$footerLabelFont-size;
-    //line-height: 1.500rem*$footerLabelFont-size;
-    line-height: $height;
-    vertical-align: middle;
-    //margin-right: 1rem;
-    //padding-bottom: 1rem;
-  }
-
-  .rsbc-switch-button input[type="checkbox"] {
-    margin-left: -624.938rem*$footerSwitch-size;
-  }
-
-  .rsbc-switch-button > label:first-child {
-    min-width: 0;
-    margin: 0 0.750rem 0 0
-  }
-
-  .rsbc-switch-button label + label {
-    /*margin-left: 0.375rem*$footerSwitch-size*/
-  }
-
-  .rsbc-switch-button input[type="checkbox"] + label {
-
-  }
-
-  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
-    padding: 0.125rem*$footerSwitch-size;
-    width: 3.000rem*$footerSwitch-size;
-    height: 1.500rem*$footerSwitch-size;
-    //line-height: 1.500rem*$footerSwitch-size;
-    //line-height: 2.1875rem;
-    /*background-color: #eee;*/
-    -webkit-border-radius: 3.750rem*$footerSwitch-size;
-    -moz-border-radius: 3.750rem*$footerSwitch-size;
-    border-radius: 3.750rem*$footerSwitch-size;
-  }
-
-  .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label {
-    //background-color: #6f6f6f;
-  }
-
-  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before, .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
-
-  }
-
-  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:before {
-    top: 0.125rem*$footerSwitch-size;
-    left: 0.125rem*$footerSwitch-size;
-    bottom: 0.125rem*$footerSwitch-size;
-    right: 0.125rem*$footerSwitch-size;
-    -webkit-border-radius: 3.750rem*$footerSwitch-size;
-    -moz-border-radius: 3.750rem*$footerSwitch-size;
-    border-radius: 3.750rem*$footerSwitch-size;
-  }
-
-  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label:after {
-    top: 0.250rem*$footerSwitch-size;
-    left: 0.250rem*$footerSwitch-size;
-    bottom: 0.250rem*$footerSwitch-size;
-    width: 1.000rem*$footerSwitch-size;
-    -webkit-border-radius: 3.250rem*$footerSwitch-size;
-    -moz-border-radius: 3.250rem*$footerSwitch-size;
-    border-radius: 3.250rem*$footerSwitch-size;
-  }
-
-  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label {
-    background-color: $footerSwitchBorderOn-bg-color;
-    //position: relative;
-    //position: absolute;
-    //content: 'ON';
-    //color: #000011;
-  }
-
-  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after {
-    margin-left: 1.500rem*$footerSwitch-size;
-    background-color: $footerSwitchCircleOn-bg-color;
-  }
-
 }

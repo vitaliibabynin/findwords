@@ -12,6 +12,7 @@ var Ad = function(currentPlatform, isCordovaApp){
     this.adRemoved = false;
 
     this.admobInited = false;
+    this.bottomBannerHeight = 0;
     this.unityAdsInited = false;
     this.vungleInited = false;
 
@@ -28,11 +29,24 @@ var Ad = function(currentPlatform, isCordovaApp){
             if(this.isCordovaApp){
                 if(this.settings.hasOwnProperty("adMob") && window.admob){
                     var bannerId = this.settings.adMob['320x50'];
-                    if(window.screen.width >= 468){
-                        bannerId = this.settings.adMob['468x60'];
-                    }else if(window.screen.width >= 728){
+                    this.bottomBannerHeight = 50;
+
+                    var screenWidth = this.getScreenWidth();
+                    if(screenWidth >= 728){
                         bannerId = this.settings.adMob['728x90'];
+                        this.bottomBannerHeight = 90;
+                    }else if(screenWidth >= 468){
+                        bannerId = this.settings.adMob['468x60'];
+                        this.bottomBannerHeight = 60;
                     }
+
+                    //console.log('Ad Real ScreenWidth: ' + window.screen.width);
+                    //console.log('Ad Real ScreenHeight: ' + window.screen.height);
+                    //console.log('Ad ScreenWidth: ' + screenWidth);
+                    //console.log('Ad devicePixelRate: ' + window.devicePixelRatio);
+                    //console.log('Ad calced width: ' + window.screen.width * window.devicePixelRatio);
+                    //console.log('Ad calced div width: ' + parseInt(window.screen.width / window.devicePixelRatio));
+                    //console.log('Ad bottomHeight: ' + this.bottomBannerHeight);
 
                     admob.initAdmob(bannerId.trim(), this.settings.adMob.interstitial.trim());
                     document.addEventListener(
@@ -64,6 +78,12 @@ var Ad = function(currentPlatform, isCordovaApp){
             resolve();
         }.bind(this));
 
+    }
+
+    this.getScreenWidth = function(){
+        return CONST.CURRENT_PLATFORM == CONST.PLATFORM_ANDROID ?
+            parseInt(window.screen.width / window.devicePixelRatio)
+            : window.screen.width;
     }
 
     this.setAdRemoved = function(adRemoved){
@@ -109,18 +129,24 @@ var Ad = function(currentPlatform, isCordovaApp){
     }
 
     this.getAdMobBannerType = function(){
+        var screenWidth = this.getScreenWidth();
+
         var bannerType = admob.BannerSize.BANNER;
-        if(window.screen.width >= 468){
-            bannerType = admob.BannerSize.IAB_BANNER;
-        }else if(window.screen.width >= 728){
+        if(screenWidth >= 728){
             bannerType = admob.BannerSize.IAB_LEADERBOARD;
 
             if(deviceJS.ipad()){
                 bannerType = admob.BannerSize.IPAD_PORTRAIT;
             }
+        }else if(screenWidth >= 468){
+            bannerType = admob.BannerSize.IAB_BANNER;
         }
 
         return bannerType;
+    },
+
+    this.getBottomBannerHeight = function(){
+        return this.bottomBannerHeight;
     },
 
     this.showBottomBanner = function(){
@@ -174,6 +200,10 @@ var Ad = function(currentPlatform, isCordovaApp){
         }
 
         return true;
+    }
+
+    this.getStartAd = function(){
+        return this.startAd;
     }
 
     this.showStartAdBanner = function(layout){

@@ -219,10 +219,10 @@ var PageGameVictory = Object.assign({}, {}, {
 
         return (
 
-            <div className="page-game-victory">
-                <div className="page-content">
+            <div className="page page-game-victory">
+                <Counters />
 
-                    <Counters />
+                <div className="page-content">
 
                     <div className="container" style={background}>
 

@@ -177,24 +177,30 @@ html.desktop .btn:hover,
 }
 
 /** Loading Screen **/
-.pg-loading-screen .pg-loading-html {
-  margin-top: 1.875rem;
+.pg-loading-screen{
+    .pg-loading-html {
+        margin-top: 1.875rem;
+        p {
+            font-weight: 300;
+
+            &.loading-message {
+                font-size: 1.1rem;
+                margin: 0 auto;
+                //margin-bottom: 6.250rem;
+            }
+        }
+    }
+    .pg-loading-logo-header {
+        margin-bottom: 4rem;
+        margin-top: -1.5rem;
+
+        img{
+            width: 15.500rem;
+        }
+    }
 }
 
-.pg-loading-screen .pg-loading-html p {
-  font-weight: 300;
-}
 
-.pg-loading-screen .pg-loading-logo-header {
-  margin-bottom: 4rem;
-  margin-top: -1.5rem;
-}
-
-.pg-loading-screen .pg-loading-html p.loading-message {
-  font-size: 1.1rem;
-  margin: 0 auto;
-  //margin-bottom: 6.250rem;
-}
 
 .form-loadingscreen {
   margin-left: auto;
@@ -213,28 +219,73 @@ html.desktop .btn:hover,
   clear: both;
 }
 
+
+
+
+
+
+@media screen and (min-width: 360px) and (min-height: 580px) and (orientation: portrait){
+    html{
+        font-size: 19px;
+    }
+}
+//@media screen and (min-width: 375px) and (orientation: portrait){
+//  html{
+//    font-size: 19px;
+//  }
+//}
+@media screen and (min-width: 413px) and (orientation: portrait){
+    html{
+        font-size: 21px;
+    }
+}
+@media screen and (min-width: 600px) and (orientation: portrait){
+    html{
+        font-size: 28px;
+    }
+}
+@media screen and (min-width: 768px) and (orientation: portrait) {
+    html {
+        font-size: 32px;
+    }
+}
+@media screen and (min-width: 800px) and (min-height: 1200px) and (orientation: portrait) {
+    html {
+        font-size: 36px;
+    }
+}
 @media screen and (min-width: 1000px) and (orientation: portrait) {
-  html {
-    font-size: 33px;
-  }
+    html {
+        font-size: 40px;
+    }
 }
-@media screen and (min-width: 768px) and (max-width: 999px) and (orientation: portrait) {
-  html {
-    font-size: 28px;
-  }
+@media screen and (min-width: 1100px) and (orientation: portrait) {
+    html {
+        font-size: 46px;
+    }
 }
-@media screen and (min-width: 640px) and (max-width: 767px) and (orientation: portrait){
-  html{
-    font-size: 24px;
-  }
+@media screen and (min-width: 1200px) and (orientation: portrait) {
+    html {
+        font-size: 52px;
+    }
 }
-@media screen and (min-width: 413px) and (max-width: 639px) and (orientation: portrait){
-  html{
-    font-size: 21px;
-  }
+@media screen and (min-width: 1300px) and (orientation: portrait) {
+    html {
+        font-size: 58px;
+    }
 }
-@media screen and (min-width: 375px) and (max-width: 412px) and (orientation: portrait){
-  html{
-    font-size: 19px;
-  }
+@media screen and (min-width: 1400px) and (orientation: portrait) {
+    html {
+        font-size: 64px;
+    }
+}
+@media screen and (min-width: 1500px) and (orientation: portrait) {
+    html {
+        font-size: 70px;
+    }
+}
+@media screen and (min-width: 1600px) and (orientation: portrait) {
+    html {
+        font-size: 76px;
+    }
 }

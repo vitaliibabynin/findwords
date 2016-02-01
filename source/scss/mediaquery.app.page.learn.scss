@@ -1,75 +1,72 @@
 //HEIGHT
-@media screen and (min-height: 560px) and (max-height: 619px) {
+//@media screen and (min-height: 560px) and (max-height: 619px) {
+@media screen and (min-height: 560px) {
 
-  .page-learn > .page-content {
-    $ratio: 560 / 480;
-
-    .container {
-      padding-top: 0.25rem * $ratio;
-      padding-bottom: 0.75rem * $ratio;
-      //position: relative;
-      //transform: translateX(-0%) translateY(-50%);
-      //top: 50%;
-
-      .image-of-board {
-        height: 10rem * $ratio;
-      }
-      .start {
-        $height: 2.35rem * $ratio;
-        height: $height;
-        line-height: $height;
-      }
+    .page-learn > .page-content {
+        .container {
+            .aim-of-the-game {
+                margin: 1rem 0;
+            }
+            .how-to-play {
+                margin: 1rem 0;
+            }
+            .start{
+                margin-bottom: 1rem;
+            }
+        }
     }
-  }
+
+
+//  .page-learn > .page-content {
+//    $ratio: 560 / 480;
+//
+//    .container {
+//      padding-top: 0.25rem * $ratio;
+//      padding-bottom: 0.75rem * $ratio;
+//
+//      .image-of-board {
+//        height: 10rem * $ratio;
+//      }
+//
+//    }
+//  }
 }
 
-@media screen and (min-height: 620px) and (max-height: 729px) {
+//@media screen and (min-height: 620px) and (max-height: 729px) {
+@media screen and (min-height: 620px) {
 
-  .page-learn > .page-content {
-    $ratio: 620 / 480;
-
-    .container {
-      padding-top: 0.25rem * $ratio;
-      padding-bottom: 0.75rem * $ratio;
-      //position: relative;
-      //transform: translateX(-0%) translateY(-50%);
-      //top: 50%;
-
-      .image-of-board {
-        height: 10rem * $ratio;
-      }
-      .start {
-        $height: 2.35rem * $ratio;
-        height: $height;
-        line-height: $height;
-      }
-    }
-  }
+//  .page-learn > .page-content {
+//    $ratio: 620 / 480;
+//
+//    .container {
+//      padding-top: 0.25rem * $ratio;
+//      padding-bottom: 0.75rem * $ratio;
+//
+//      .image-of-board {
+//        height: 10rem * $ratio;
+//      }
+//
+//    }
+//  }
 }
 
-@media screen and (min-height: 730px) and (max-height: 999px) {
+//@media screen and (min-height: 730px) and (max-height: 999px) {
+@media screen and (min-height: 730px) {
 
-  .page-learn > .page-content {
-    $ratio: 730 / 480;
-
-    .container {
-      padding-top: 0.25rem * $ratio;
-      padding-bottom: 0.75rem * $ratio;
-      //position: relative;
-      //transform: translateX(-0%) translateY(-50%);
-      //top: 50%;
-
-      .image-of-board {
-        height: 10rem * $ratio;
-      }
-      .start {
-        $height: 2.35rem * $ratio;
-        height: $height;
-        line-height: $height;
-      }
-    }
-
-  }
+//  .page-learn > .page-content {
+//    $ratio: 730 / 480;
+//
+//    .container {
+//      padding-top: 0.25rem * $ratio;
+//      padding-bottom: 0.75rem * $ratio;
+//
+//      .image-of-board {
+//        height: 10rem * $ratio;
+//      }
+//
+//    }
+//
+//  }
 }
 
 //@media screen and (min-height: 1000px) {
@@ -89,26 +86,17 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //WIDTH
 @media screen and (min-width: 768px) {
 
+}
+@media screen and (min-width: 700px) {
+  .page-learn > .page-content {
+    .container {
+      max-width: 20rem;
+      margin: 0 auto;
+    }
+  }
 }
 @media screen and (min-width: 640px) and (max-width: 767px) {
 
