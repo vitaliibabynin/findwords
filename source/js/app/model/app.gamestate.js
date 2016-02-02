@@ -4,6 +4,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var EVENT_CHANGE_ROUNDS_BUNDLES = "eventChangeRoundsBundles";
 var EVENT_CHANGE_COINS = "eventChangeCoins";
 var EVENT_CHANGE_MUSICANDSFX = "eventChangeMusicAndSFX";
+var EVENT_CHANGE_SFX = "eventChangeSFX";
 var EVENT_REMOVE_ADS = "eventChageRemoveAds";
 
 var SETTINGS_GAMESTATE = 'game_state';
@@ -273,6 +274,8 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     setMusic: function (newBoolean) {
         this.setSettingsField('music', newBoolean);
         this.emitChangeMusicAndSFX();
+        console.log({music: this.gameState.settings.music});
+        console.log({sound: this.gameState.settings.sound});
     },
     getMusic: function () {
         return this.getSettingsField('music', true);
@@ -280,6 +283,8 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     setSound: function (newBoolean) {
         this.setSettingsField('sound', newBoolean);
         this.emitChangeMusicAndSFX();
+        console.log({music: this.gameState.settings.music});
+        console.log({sound: this.gameState.settings.sound});
     },
     getSound: function () {
         return this.getSettingsField('sound', true);
@@ -420,6 +425,17 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     emitChangeMusicAndSFX: function(){
         this.emit(EVENT_CHANGE_MUSICANDSFX, this);
     },
+
+
+    //addChangeSFXListener: function(callback){
+    //    this.on(EVENT_CHANGE_SFX, callback);
+    //},
+    //removeChangeSFXListener: function(callback){
+    //    this.removeListener(EVENT_CHANGE_SFX, callback);
+    //},
+    //emitChangeSFX: function(){
+    //    this.emit(EVENT_CHANGE_SFX, this);
+    //},
 
 
     addChangeRoundsBundlesListener: function(callback){
