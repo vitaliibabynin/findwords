@@ -1,111 +1,113 @@
 //HEIGHT
 @media screen and (min-height: 500px) {
 
-    .page-main > .page-content {
-        .main {
-            .navigation {
+  .page-main > .page-content {
+    .main {
+      .navigation {
 
-                .btn {
-                    height: 4.125rem;
-                    width: 4.438rem;
-                    padding-top: 2.875rem;
-                    font-size: .7rem;
+        .btn {
+          height: 4.125rem;
+          //width: 4.438rem;
+          width: 4rem;
+          padding-top: 2.875rem;
+          font-size: .7rem;
 
-                    &.icon {
-                        background-position: center .65rem;
-                    }
+          &.icon {
+            background-position: center .65rem;
+          }
 
-                    &.facebook {
-                        &.online {
-                            background-position: 1.55rem 2.85rem;
+          &.facebook {
+            &.online {
+              background-position: 1.55rem 2.85rem;
 
-                            .profile-pic {
-                                top: 0.6rem;
-                            }
+              .profile-pic {
+                top: 0.6rem;
+              }
 
-                            .profile-name {
-                                top: 0.3rem;
-                            }
-                        }
-                    }
-                }
+              .profile-name {
+                top: 0.3rem;
+              }
             }
+          }
         }
+      }
     }
+  }
 
 }
+
 @media screen and (min-height: 540px) {
 
-    .page-main > .page-content {
-        .main {
+  .page-main > .page-content {
+    .main {
 
-            .swiper-container {
-                height: 14.688rem;
+      .swiper-container {
+        height: 14.688rem;
 
-                .swiper-slide {
-                    $slide-height: 12.938rem;
-                    height: $slide-height;
+        .swiper-slide {
+          $slide-height: 12.938rem;
+          height: $slide-height;
 
-                    &.locked {
-                        .lock {
-                            margin: 1.5rem auto 0;
-                            height: 4.375rem;
-                            width: 4.1875rem;
-                        }
-                        .stats {
-                            margin-top: 1rem;
-                            font-size: 0.9rem;
-                        }
-                    }
-                    &.instructions {
-                        .text {
-                            height: 7.138rem;
-                            line-height: 1rem;
-                        }
-                        .purchase {
-                            line-height: 2rem;
-                            height: 2rem;
-                        }
-
-                    }
-                    &.unlocked {
-                        .play {
-                            margin-top: 1.5rem;
-                            margin-bottom: 1rem;
-
-                            height: 3.875rem;
-                            width: 3.875rem;
-                        }
-                    }
-                    &.complete {
-                        .subheading {
-                            margin: 0.8rem auto;
-                        }
-                        .done {
-                            height: 3.875rem;
-                            width: 3.875rem;
-                        }
-                        .score {
-                            margin-top: 0.8rem;
-                        }
-                    }
-                    &.message {
-                        .text {
-                            height: 8.138rem;
-                        }
-                    }
-                    &.slide-soon {
-                        line-height: $slide-height;
-                    }
-                }
+          &.locked {
+            .lock {
+              margin: 1.5rem auto 0;
+              height: 4.375rem;
+              width: 4.1875rem;
+            }
+            .stats {
+              margin-top: 1rem;
+              font-size: 0.9rem;
+            }
+          }
+          &.instructions {
+            .text {
+              height: 7.138rem;
+              line-height: 1rem;
+            }
+            .purchase {
+              line-height: 2rem;
+              height: 2rem;
             }
 
-            .navigation {
-                margin-top: 0.5rem;
-            }
+          }
+          &.unlocked {
+            .play {
+              margin-top: 1.5rem;
+              margin-bottom: 1rem;
 
+              height: 3.875rem;
+              width: 3.875rem;
+            }
+          }
+          &.complete {
+            .subheading {
+              margin: 0.8rem auto;
+            }
+            .done {
+              height: 3.875rem;
+              width: 3.875rem;
+            }
+            .score {
+              margin-top: 0.8rem;
+            }
+          }
+          &.message {
+            .text {
+              height: 8.138rem;
+            }
+          }
+          &.slide-soon {
+            line-height: $slide-height;
+          }
         }
+      }
+
+      .navigation {
+        margin-top: 0.5rem;
+      }
+
     }
+  }
 
 }
 
@@ -113,27 +115,27 @@
 
 }
 
-
 @media screen and (min-height: 730px) {
 
 }
-
-
-
 
 //WIDTH
 @media screen and (min-width: 768px) {
 
 }
+
 @media screen and (min-width: 700px) {
 
 }
+
 @media screen and (min-width: 640px) and (max-width: 767px) {
 
 }
+
 @media screen and (min-width: 413px) and (max-width: 639px) {
 
 }
+
 @media screen and (min-width: 375px) and (max-width: 412px) {
 
 }

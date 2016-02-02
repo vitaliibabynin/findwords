@@ -14,7 +14,6 @@ var AppMusic = Object.assign({}, AbstractEventEmitter, {
     getPlayer: function(){
         if(null == this.audioPlayer){
             this.audioPlayer = document.createElement('audio');
-            //this.audioPlayer.setAttribute("id", "music-player");
 
             if (typeof this.audioPlayer.loop == 'boolean') {
                 this.audioPlayer.loop = true;
@@ -32,10 +31,15 @@ var AppMusic = Object.assign({}, AbstractEventEmitter, {
     },
 
     updateMusicSettings: function(){
-        if(!appManager.getGameState().getMusic()){
-            this.stop();
-        }else{
+        if (appManager.getGameState().getMusic()) {
+            var player = this.getPlayer();
+            if (player.duration > 0 && !player.paused) {
+                return;
+            }
+
             this.play();
+        } else {
+            this.stop();
         }
     },
 
@@ -89,7 +93,6 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
     getPlayer: function(){
         if(null == this.SFXPlayer){
             this.SFXPlayer = document.createElement('audio');
-            //this.SFXPlayer.setAttribute("id", "sfx-player");
 
             appManager.getGameState().addChangeMusicAndSFXListener(this.updateSoundSettings.bind(this));
         }
@@ -100,8 +103,6 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
     updateSoundSettings: function(){
         if(!appManager.getGameState().getSound()){
             this.stopSoundEffect();
-        }else{
-            this.playSoundEffect();
         }
     },
 
@@ -119,7 +120,9 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
             return;
         }
 
-        fileName = fileName || MUSIC_FILE_NAME;
+        if (typeof fileName == "undefined") {
+            return;
+        }
 
         var player = this.getPlayer();
 

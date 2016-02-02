@@ -53,7 +53,6 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                 }.bind(this))
             .then(function(){
                     return new Promise(function(resolve, reject){
-                        console.log("appManager plays music");
                         this.getMusicManager().playMusic();
                         window.appNotificationLocal.hasPermissions().then(function(granted){
                             if(!granted){
