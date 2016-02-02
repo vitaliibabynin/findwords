@@ -124,7 +124,7 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
         var player = this.getPlayer();
 
         player.src = Utils.getStaticPath() + CONST.STATIC_MUSIC_URL + fileName;
-        player.playSoundEffect();
+        player.play();
     },
 
     playButton: function(){
