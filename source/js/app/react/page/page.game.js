@@ -55,8 +55,8 @@ var PageGameMain = Object.assign({}, {}, {
             return;
         }
 
-        console.log({roundIdx: this.state.roundIdx});
-        console.log({roundsTotal: roundsTotal});
+        //console.log({roundIdx: this.state.roundIdx});
+        //console.log({roundsTotal: roundsTotal});
 
         if (this.state.roundIdx > roundsTotal) {
             router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
@@ -70,8 +70,21 @@ var PageGameMain = Object.assign({}, {}, {
         appManager.getMusicManager().playMusic();
     },
 
+    checkIfBoardFitsOnScreen: function (boardHeight) {
+        console.log(boardHeight);
+
+        if (typeof boardHeight == "undefined") {
+            return false;
+        }
+
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        console.log(this.refs.pageContent.getDOMNode().clientHeight);
+        console.log($pageContent.css('padding-bottom'));
+        return (this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom') > boardHeight);
+    },
+
     getBoardData: function (roundData, roundIdx) {
-        var boardData = roundData.rounds[roundIdx] || {
+        return roundData.rounds[roundIdx] || {
                 time: 1,
                 board: {
                     rows: 1,
@@ -85,8 +98,6 @@ var PageGameMain = Object.assign({}, {}, {
                     }
                 ]
             };
-
-        return boardData;
     },
 
     shownWordsConverter: function (shownWords, boardData) {
@@ -321,7 +332,7 @@ var PageGameMain = Object.assign({}, {}, {
                 <Counters isDisplayBackButton={true}
                         roundsBundleIdx={this.state.roundsBundleIdx}/>
 
-                <div className="page-content" style={pageContentHeight}>
+                <div ref="pageContent" className="page-content" style={pageContentHeight}>
                     <Timer time={this.state.time}
                            setGameStateRoundField={this.setGameStateRoundField}
                            getGameStateRoundField={this.getGameStateRoundField}
@@ -361,6 +372,7 @@ var PageGameMain = Object.assign({}, {}, {
                            removeWordFromShownWords={this.removeWordFromShownWords}
                            setGameStateRoundField={this.setGameStateRoundField}
                            goToPageRoundComplete={this.goToPageRoundComplete}
+                           checkIfBoardFitsOnScreen={this.checkIfBoardFitsOnScreen}
                     />
 
                     <Notice noticeType={this.state.noticeType}

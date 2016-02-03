@@ -41,9 +41,14 @@ var PageShop = Object.assign({}, {}, {
     componentDidMount: function () {
         appManager.getGameState().addChangeCoinsListener(this.update);
 
+        //console.log(this.refs.container.getDOMNode());
+
         var $pageContent = $(this.refs.pageContent.getDOMNode());
+        console.log(this.refs.pageContent.getDOMNode().clientHeight);
+        console.log($pageContent.css('padding-bottom'));
+        console.log(this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom'));
         if(this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom')  > this.refs.container.getDOMNode().offsetHeight){
-            this.state.containerExtraClass.push('transform-center')
+            this.state.containerExtraClass.push('transform-center');
             this.setState({containerExtraClass: this.state.containerExtraClass});
         }
     },

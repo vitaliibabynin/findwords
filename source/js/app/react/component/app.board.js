@@ -112,11 +112,13 @@ var BoardClass = Object.assign({}, {}, {
         addToShownWords: React.PropTypes.func,
         removeWordFromShownWords: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
-        goToPageRoundComplete: React.PropTypes.func
+        goToPageRoundComplete: React.PropTypes.func,
+        checkIfBoardFitsOnScreen: React.PropTypes.func
     },
 
     getInitialState: function () {
         var state = {
+            boardExtraClass: [],
             board: this.props.board || {},
             openedLetters: this.props.openedLetters || [],
             shownWords: this.props.shownWords || [],
@@ -133,7 +135,8 @@ var BoardClass = Object.assign({}, {}, {
             setGameStateRoundField: this.props.setGameStateRoundField || function () {
             },
             goToPageRoundComplete: this.props.goToPageRoundComplete || function () {
-            }
+            },
+            checkIfBoardFitsOnScreen: this.props.checkIfBoardFitsOnScreen || function () {}
         };
         state.boardData = this.props.boardData || {};
         state.boardArr = this.boardConverter(state.boardData);
@@ -148,7 +151,19 @@ var BoardClass = Object.assign({}, {}, {
         this.setState({
             //cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.boardData.board.cols || 0
             cellSize: $('.game-board').width() / this.state.boardData.board.cols || 0
-        })
+        });
+    },
+
+    componentDidUpdate: function () {
+        this.centerBoard();
+    },
+
+    centerBoard: function () {
+        var boardHeight = this.refs.board.getDOMNode().offsetHeight;
+        if (this.state.checkIfBoardFitsOnScreen(boardHeight)) {
+            this.state.boardExtraClass.push('transform-center');
+            this.setState({boardExtraClass: this.state.boardExtraClass});
+        };
     },
 
     boardConverter: function (boardData) {
@@ -1171,8 +1186,9 @@ var BoardClass = Object.assign({}, {}, {
             fontSize: (this.state.cellSize / 2) + "px"
         };
         return (
-            <div className="game-board">
-                <table className="board"
+            <div className={classNames("game-board", this.state.boardExtraClass)}>
+                <table ref="board"
+                       className="board"
                        onTouchStart={this.onTouchStart}
                        onTouchMove={this.onTouchMove}
                        onTouchEnd={this.onTouchEnd}
