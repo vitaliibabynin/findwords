@@ -7,6 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 var Counters = require('./../component/app.counters').Counters;
 var StartAd = require('./../component/app.startad').StartAd;
+var SimpleButton = require('./../component/app.button').SimpleButton;
 
 
 var PageGameLearnVictory = Object.assign({}, {}, {
@@ -181,7 +182,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
                         </div>
 
                         <div className="continue">
-                            <div className="button" onClick={this.onClick}>{i18n._('victory.continue')}</div>
+                            <SimpleButton className="button" onClick={this.onClick}>{i18n._('victory.continue')}</SimpleButton>
                         </div>
 
 

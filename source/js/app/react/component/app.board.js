@@ -357,6 +357,8 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
+        appManager.getSFXManager().playButtonGame();
+
         if (this.highlightCompletedWord(x, y)) {
             return;
         }
@@ -374,13 +376,15 @@ var BoardClass = Object.assign({}, {}, {
         var x = cellCoordinates.x;
         var y = cellCoordinates.y;
 
-        if (!this.checkIfDifferentLetter(x, y)) {
+        if (!this.checkIfValidLetter(x, y)) {
             return;
         }
 
         if (this.checkIfLetterIsInCompleteWord(x, y) !== false) {
             return;
         }
+
+        appManager.getSFXManager().playButtonGame();
 
         if (this.removeSelectedLettersAfter(x, y)) {
             return;
@@ -396,6 +400,8 @@ var BoardClass = Object.assign({}, {}, {
 
         var completedWordIndex = this.checkForCompletedWord();
         if (completedWordIndex !== false) {
+            appManager.getSFXManager().playButtonGameCorrect();
+
             this.addCompletedWordToBoard(completedWordIndex);
 
             if (this.checkIfWordIsShown(completedWordIndex)) {
@@ -408,6 +414,8 @@ var BoardClass = Object.assign({}, {}, {
             }
             return;
         }
+
+        appManager.getSFXManager().playButtonGameWrong();
 
         if (this.checkLettersInWordsToFind()) {
             this.bringUpNotice(SELECT_DIFFERENTLY);
@@ -602,14 +610,37 @@ var BoardClass = Object.assign({}, {}, {
         return wordsComplete;
     },
 
-    checkIfDifferentLetter: function (x, y) {
+    checkIfValidLetter: function (x, y) {
         var selectedLetters = this.state.selectedLetters.letters;
 
         if (selectedLetters.length == 0) {
             return false;
         }
 
-        return !(y == selectedLetters[selectedLetters.length - 1].y && x == selectedLetters[selectedLetters.length - 1].x);
+        var prevX = selectedLetters[selectedLetters.length - 1].x;
+        var prevY = selectedLetters[selectedLetters.length - 1].y;
+
+        if (y == prevY && x == prevX) {
+            return false;
+        }
+
+        if (y == prevY + 1 && x == prevX) {
+            return true;
+        }
+
+        if (y == prevY - 1 && x == prevX) {
+            return true;
+        }
+
+        if (x == prevX + 1 && y == prevY) {
+            return true;
+        }
+
+        if (x == prevX - 1 && y == prevY) {
+            return true;
+        }
+
+        return false;
     },
 
     removeSelectedLettersAfter: function (x, y) {
@@ -638,7 +669,6 @@ var BoardClass = Object.assign({}, {}, {
             });
 
             lettersRemoved = true;
-
         }
 
         return lettersRemoved;
@@ -903,6 +933,8 @@ var BoardClass = Object.assign({}, {}, {
         var unopenedWord = this.state.wordsToFind.words[unopenedWordIndex].letters;
 
         if (openedLetters.length == 0) {
+            appManager.getSFXManager().playButtonGame();
+
             boardArr[unopenedWord[0].y][unopenedWord[0].x].classNames.openLetter = OPEN_LETTER_COLOR;
             openedLetters = [{x: unopenedWord[0].x, y: unopenedWord[0].y}];
             this.state.setGameStateRoundField('openedLetters', openedLetters);
@@ -916,6 +948,8 @@ var BoardClass = Object.assign({}, {}, {
             this.openWord();
             return;
         }
+
+        appManager.getSFXManager().playButtonGame();
 
         var currentLetter = unopenedWord[openedLetters.length];
         var x = currentLetter.x;
@@ -977,6 +1011,8 @@ var BoardClass = Object.assign({}, {}, {
             if (index === false) {
                 return false;
             }
+
+            appManager.getSFXManager().playButtonGameCorrect();
 
             var backgroundColor = this.selectWordBackgroundColor();
             var wordsToFind = this.state.wordsToFind;

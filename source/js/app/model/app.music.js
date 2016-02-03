@@ -5,20 +5,23 @@ module.exports = {};
 
 
 const MUSIC_FILE_NAME = 'music_main_menu.mp3';
+module.exports.MUSIC_FILE_NAME = MUSIC_FILE_NAME;
+
 const MUSIC_GAME_FILE_NAME = 'music_game.mp3';
 
 var AppMusic = Object.assign({}, AbstractEventEmitter, {
 
     audioPlayer: null,
+    currentMusic: null,
 
-    getPlayer: function(){
-        if(null == this.audioPlayer){
+    getPlayer: function () {
+        if (null == this.audioPlayer) {
             this.audioPlayer = document.createElement('audio');
 
             if (typeof this.audioPlayer.loop == 'boolean') {
                 this.audioPlayer.loop = true;
             } else {
-                this.audioPlayer.addEventListener('ended', function() {
+                this.audioPlayer.addEventListener('ended', function () {
                     this.currentTime = 0;
                     this.play();
                 }, false);
@@ -30,7 +33,7 @@ var AppMusic = Object.assign({}, AbstractEventEmitter, {
         return this.audioPlayer;
     },
 
-    updateMusicSettings: function(){
+    updateMusicSettings: function () {
         if (appManager.getGameState().getMusic()) {
             var player = this.getPlayer();
             if (player.duration > 0 && !player.paused) {
@@ -43,17 +46,25 @@ var AppMusic = Object.assign({}, AbstractEventEmitter, {
         }
     },
 
-    stop: function(){
+    getCurrentMusic: function () {
+        if (this.currentMusic === null && typeof this.currentMusic === "object") {
+            return false;
+        }
+
+        return this.currentMusic;
+    },
+
+    stop: function () {
         var player = this.getPlayer();
-        if(player.duration > 0 && !player.paused){
+        if (player.duration > 0 && !player.paused) {
             //player.stop();
             player.pause();
             //player.currentTime = 0;
         }
     },
 
-    play: function(fileName){
-        if(!appManager.getGameState().getMusic()){
+    play: function (fileName) {
+        if (!appManager.getGameState().getMusic()) {
             this.stop();
             return;
         }
@@ -67,12 +78,14 @@ var AppMusic = Object.assign({}, AbstractEventEmitter, {
         player.play();
     },
 
-    playMusic: function(){
+    playMusic: function () {
         this.play(MUSIC_FILE_NAME);
+        this.currentMusic = MUSIC_FILE_NAME;
     },
 
-    playGameMusic: function(){
+    playGameMusic: function () {
         this.play(MUSIC_GAME_FILE_NAME);
+        this.currentMusic = MUSIC_GAME_FILE_NAME;
     }
 
 });
@@ -82,16 +95,17 @@ module.exports.AppMusic = AppMusic;
 
 const MUSIC_BUTTON = 'button.mp3';
 const MUSIC_BUTTON_GAME = 'button_game.mp3';
-const MUSIC_BUTTON_GAME_CORRECT = 'button_game_correct.mp3';
+const MUSIC_BUTTON_GAME_CORRECT = 'button_game_correct.wav';
 const MUSIC_BUTTON_GAME_WRONG = 'button_game_wrong.mp3';
 const MUSIC_WIN = 'win.mp3';
 
 var AppSound = Object.assign({}, AbstractEventEmitter, {
 
     SFXPlayer: null,
+    buttonGamePlayer: null,
 
-    getPlayer: function(){
-        if(null == this.SFXPlayer){
+    getPlayer: function () {
+        if (null == this.SFXPlayer) {
             this.SFXPlayer = document.createElement('audio');
 
             appManager.getGameState().addChangeMusicAndSFXListener(this.updateSoundSettings.bind(this));
@@ -100,22 +114,37 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
         return this.SFXPlayer;
     },
 
-    updateSoundSettings: function(){
-        if(!appManager.getGameState().getSound()){
+    getButtonGamePlayer: function () {
+        if (null == this.buttonGamePlayer) {
+            this.buttonGamePlayer = document.createElement('audio');
+            this.buttonGamePlayer.src = Utils.getStaticPath() + CONST.STATIC_MUSIC_URL + MUSIC_BUTTON_GAME;
+
+            appManager.getGameState().addChangeMusicAndSFXListener(this.updateSoundSettings.bind(this));
+        }
+
+        return this.buttonGamePlayer;
+    },
+
+    updateSoundSettings: function () {
+        if (!appManager.getGameState().getSound()) {
             this.stopSoundEffect();
         }
     },
 
-    stopSoundEffect: function(){
+    stopSoundEffect: function () {
         var player = this.getPlayer();
+        if (player.duration > 0 && !player.paused) {
+            player.pause();
+        }
 
-        if(player.duration > 0 && !player.paused){
+        player = this.getButtonGamePlayer();
+        if (player.duration > 0 && !player.paused) {
             player.pause();
         }
     },
 
     playSoundEffect: function (fileName) {
-        if(!appManager.getGameState().getSound()){
+        if (!appManager.getGameState().getSound()) {
             this.stopSoundEffect();
             return;
         }
@@ -130,27 +159,95 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
         player.play();
     },
 
-    playButton: function(){
+    playButton: function () {
         this.playSoundEffect(MUSIC_BUTTON);
     },
 
-    playButtonGame: function(){
-        this.playSoundEffect(MUSIC_BUTTON_GAME);
+    playButtonGame: function () {
+        if (!appManager.getGameState().getSound()) {
+            this.stopSoundEffect();
+            return;
+        }
+
+        var player = this.getButtonGamePlayer();
+        player.cloneNode(true).play();
     },
 
-    playButtonGameCorrect: function(){
+    playButtonGameCorrect: function () {
         this.playSoundEffect(MUSIC_BUTTON_GAME_CORRECT);
     },
 
-    playButtonGameWrong: function(){
+    playButtonGameWrong: function () {
         this.playSoundEffect(MUSIC_BUTTON_GAME_WRONG);
     },
 
-    playWin: function(){
+    playWin: function () {
         this.playSoundEffect(MUSIC_WIN);
     }
 
 });
 
 module.exports.AppSound = AppSound;
+
+
+//var AppSound = Object.assign({}, AbstractEventEmitter, {
+//
+//    ButtonGamePlayer: null,
+//
+//    getPlayer: function () {
+//
+//    },
+//
+//    updateSoundSettings: function () {
+//        if (!appManager.getGameState().getSound()) {
+//            this.stopSoundEffect();
+//        }
+//    },
+//
+//    stopSoundEffect: function () {
+//        var player = this.getPlayer();
+//
+//        if (player.duration > 0 && !player.paused) {
+//            player.pause();
+//        }
+//    },
+//
+//    playSoundEffect: function (fileName) {
+//        if (!appManager.getGameState().getSound()) {
+//            this.stopSoundEffect();
+//            return;
+//        }
+//        //
+//        //if (typeof fileName == "undefined") {
+//        //    return;
+//        //}
+//        //
+//        var player = this.getPlayer();
+//
+//        player.cloneNode(true).play();
+//    },
+//
+//    playButton: function () {
+//        this.playSoundEffect(MUSIC_BUTTON);
+//    },
+//
+//    playButtonGame: function () {
+//        this.playSoundEffect(MUSIC_BUTTON_GAME);
+//    },
+//
+//    playButtonGameCorrect: function () {
+//        this.playSoundEffect(MUSIC_BUTTON_GAME_CORRECT);
+//    },
+//
+//    playButtonGameWrong: function () {
+//        this.playSoundEffect(MUSIC_BUTTON_GAME_WRONG);
+//    },
+//
+//    playWin: function () {
+//        this.playSoundEffect(MUSIC_WIN);
+//    }
+//
+//});
+//
+//module.exports.AppSound = AppSound;
 

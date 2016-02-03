@@ -211,6 +211,10 @@ module.exports = {
         }
 
         return a;
+    },
+
+    difference: function (a, b) {
+        return Math.abs(a - b)
     }
 
 }

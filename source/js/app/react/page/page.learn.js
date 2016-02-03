@@ -6,6 +6,10 @@ var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
+var SimpleButton = require('./../component/app.button').SimpleButton;
+
+var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
+
 
 var PageLearn = Object.assign({}, {}, {
 
@@ -13,12 +17,27 @@ var PageLearn = Object.assign({}, {}, {
     mixins: [GameMixin],
 
     getInitialState: function () {
-        return {};
+        return {
+            goToPracticeRound: false
+        };
+    },
+
+    componentWillMount: function () {
+        var currentMusic = appManager.getMusicManager().getCurrentMusic();
+        if (currentMusic === false || currentMusic == MUSIC_FILE_NAME) {
+            appManager.getMusicManager().playGameMusic();
+        }
     },
 
     //componentDidMount: function () {
     //
     //},
+
+    componentWillUnmount: function () {
+        if (!this.state.goToPracticeRound) {
+            appManager.getMusicManager().playMusic();
+        }
+    },
 
     getImage: function () {
         switch (router.getLanguage()) {
@@ -32,7 +51,9 @@ var PageLearn = Object.assign({}, {}, {
     },
 
     onClickStart: function () {
-        router.navigate("game", "learn");
+        this.setState({goToPracticeRound: true}, function () {
+            router.navigate("game", "learn");
+        });
     },
 
     render: function () {
@@ -64,7 +85,7 @@ var PageLearn = Object.assign({}, {}, {
                             <span>{i18n._('app.page.learn.how-to-play')}</span>
                         </div>
 
-                        <div className="btn start" onClick={this.onClickStart}>{i18n._('app.page.learn.start')}</div>
+                        <SimpleButton className="btn start" onClick={this.onClickStart}>{i18n._('app.page.learn.start')}</SimpleButton>
                     </div>
 
                 </div>

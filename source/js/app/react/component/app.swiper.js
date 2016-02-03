@@ -109,6 +109,8 @@ var SlideClass = Object.assign({}, {}, {
         e.preventDefault();
 
         if (!this.state.isActive) {
+            appManager.getSFXManager().playButton();
+
             this.setState({isActive: true}, function () {
                 setTimeout(function () {
                     if (this.isMounted()) {
@@ -418,6 +420,8 @@ var SwiperClass = Object.assign({}, {}, {
         e.preventDefault();
 
         if (!this.state.isActive) {
+            appManager.getSFXManager().playButton();
+
             this.setState({isActive: true}, function () {
                 setTimeout(function () {
                     if (this.isMounted()) {

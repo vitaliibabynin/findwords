@@ -8,20 +8,37 @@ var Timer = require('./../component/app.timer').Timer;
 var Board = require('./../component/app.board.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
 
+var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
+
 var PageGameLearn = Object.assign({}, {}, {
 
     displayName: 'PageGameLearn',
 
     getInitialState: function () {
         var state = {
+            goToVictory: false,
             noticeType: "",
             noticeWord: {letters: []}
+
         };
         state.boardData = this.getBoardData() || {};
         state.time = state.boardData.time || 0;
         state.board = this.getGameStateRoundField("board", {}) || {};
 
         return state;
+    },
+
+    componentWillMount: function () {
+        var currentMusic = appManager.getMusicManager().getCurrentMusic();
+        if (currentMusic === false || currentMusic == MUSIC_FILE_NAME) {
+            appManager.getMusicManager().playGameMusic();
+        }
+    },
+
+    componentWillUnmount: function () {
+        if (!this.state.goToVictory) {
+            appManager.getMusicManager().playMusic();
+        }
     },
 
     getBoardData: function () {
@@ -53,9 +70,11 @@ var PageGameLearn = Object.assign({}, {}, {
     goToPageRoundComplete: function (time) {
         time = time || 0;
 
-        setTimeout(function () {
-            router.navigate("game", "learn_victory");
-        }.bind(this), time);
+        this.setState({goToVictory: true}, function () {
+            setTimeout(function () {
+                router.navigate("game", "learn_victory");
+            }.bind(this), time);
+        }.bind(this));
     },
 
     render: function () {

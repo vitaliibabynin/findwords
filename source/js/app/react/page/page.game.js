@@ -14,6 +14,7 @@ var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
+var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
 
 var PageGameMain = Object.assign({}, {}, {
 
@@ -22,6 +23,7 @@ var PageGameMain = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
+            goToVictory: false,
             roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
             roundIdx: parseInt(router.getParam('roundIdx')) || 0,
             shownWordsLetters: [],
@@ -46,7 +48,10 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     componentWillMount: function(){
-        appManager.getMusicManager().playGameMusic();
+        var currentMusic = appManager.getMusicManager().getCurrentMusic();
+        if (currentMusic === false || currentMusic == MUSIC_FILE_NAME) {
+            appManager.getMusicManager().playGameMusic();
+        }
     },
 
     componentDidMount: function () {
@@ -67,19 +72,21 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     componentWillUnmount: function(){
-        appManager.getMusicManager().playMusic();
+        if (!this.state.goToVictory) {
+            appManager.getMusicManager().playMusic();
+        }
     },
 
     checkIfBoardFitsOnScreen: function (boardHeight) {
-        console.log(boardHeight);
+        //console.log(boardHeight);
 
         if (typeof boardHeight == "undefined") {
             return false;
         }
 
         var $pageContent = $(this.refs.pageContent.getDOMNode());
-        console.log(this.refs.pageContent.getDOMNode().clientHeight);
-        console.log($pageContent.css('padding-bottom'));
+        //console.log(this.refs.pageContent.getDOMNode().clientHeight);
+        //console.log($pageContent.css('padding-bottom'));
         return (this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom') > boardHeight);
     },
 
@@ -312,9 +319,11 @@ var PageGameMain = Object.assign({}, {}, {
             roundIdx: this.state.roundIdx
         };
 
-        setTimeout(function () {
-            router.navigate("game", "victory", params);
-        }.bind(this), time);
+        this.setState({goToVictory: true}, function () {
+            setTimeout(function () {
+                router.navigate("game", "victory", params);
+            }.bind(this), time);
+        }.bind(this));
     },
 
 

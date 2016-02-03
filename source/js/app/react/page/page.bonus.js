@@ -7,6 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
+var SimpleButton = require('./../component/app.button').SimpleButton;
 
 
 var DAY = "day";
@@ -245,7 +246,7 @@ var PageBonus = Object.assign({}, {}, {
 
                         {this.generateDays()}
 
-                        <div className="collect" onClick={this.onClick}>{i18n._('bonus.collect')}</div>
+                        <SimpleButton className="collect" onClick={this.onClick}>{i18n._('bonus.collect')}</SimpleButton>
                     </div>
 
                 </div>

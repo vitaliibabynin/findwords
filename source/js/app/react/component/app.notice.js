@@ -108,6 +108,11 @@ var NoticeClass = Object.assign({}, {}, {
         }
     },
 
+    onClick: function () {
+        appManager.getSFXManager().playButton();
+        this.state.hideNotice();
+    },
+
     render: function () {
         if (this.state.noticeType == "") {
             return (<div></div>)
@@ -131,7 +136,7 @@ var NoticeClass = Object.assign({}, {}, {
             <div className="lock-screen">
                 <div className={noticeClassNames}
                      style={noticeImg}
-                     onClick={this.state.hideNotice}
+                     onClick={this.onClick}
                 >
                     <div><span>{text}</span></div>
                 </div>
