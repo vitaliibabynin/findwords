@@ -30,7 +30,9 @@ var PageBonus = Object.assign({}, {}, {
         var state = {
             initialSlide: parseInt(router.getParam('initialSlide')) || 0,
             bonusCoins: appManager.getSettings().getBonusCoins() || {},
-            daysPlayed: appManager.getGameState().getDaysPlayedStreak() || 0
+            //daysPlayed: appManager.getGameState().getDaysPlayedStreak() || 0
+
+            daysPlayed: 14
         };
         state.bonusDaysTotal = Utils.countObjectProperties(state.bonusCoins) || 0;
 
@@ -67,11 +69,38 @@ var PageBonus = Object.assign({}, {}, {
         var daysPlayed = this.state.daysPlayed;
         var bonusDaysTotal = this.state.bonusDaysTotal;
 
-        if (daysPlayed <= bonusDaysTotal) {
-            return this.generateFirstSevenDays(daysPlayed, bonusDaysTotal);
-        } else {
-            return this.generateEightDayOnwards(daysPlayed, bonusDaysTotal);
+        //if (daysPlayed <= bonusDaysTotal) {
+        //    return this.generateFirstSevenDays(daysPlayed, bonusDaysTotal);
+        //} else {
+        //    return this.generateEightDayOnwards(daysPlayed, bonusDaysTotal);
+        //}
+
+        return this.generateAllDays(daysPlayed, bonusDaysTotal);
+    },
+
+    generateAllDays: function (daysPlayed, daysTotal) {
+        var daysRender = new Array(daysTotal);
+
+        for (var i = 0; i < daysTotal; i++) {
+            var dayNumber = daysPlayed - daysTotal + i;
+            var bonusConverter = "bonus.day" + (daysTotal) + "." + this.selectContentNumber(dayNumber, daysTotal);
+            var content = i18n._(bonusConverter);
+
+            if (dayNumber < daysPlayed - 1) {
+                daysRender[i] = this.getUnlockedDay(dayNumber, daysTotal, content);
+                continue;
+            }
+
+            if (dayNumber == daysPlayed - 1) {
+                daysRender[i] = this.getToday(dayNumber, daysTotal, content);
+            }
+
+            if (dayNumber > daysPlayed -1) {
+                daysRender[i] = this.getLockedDay(i);
+            }
         }
+
+        return daysRender;
     },
 
     selectContentNumber: function (dayNumber, daysTotal) {
@@ -89,7 +118,7 @@ var PageBonus = Object.assign({}, {}, {
         var daysRender = new Array(daysTotal);
 
         for (var i = 0; i < daysTotal; i++) {
-            var dayNumber = daysPlayed - daysTotal + i;
+            var dayNumber = daysPlayed - daysTotal + i + 1;
             var bonusConverter = "bonus.day" + (daysTotal) + "." + this.selectContentNumber(dayNumber, daysTotal);
             var content = i18n._(bonusConverter);
 
@@ -100,6 +129,10 @@ var PageBonus = Object.assign({}, {}, {
 
             if (dayNumber == daysPlayed - 1) {
                 daysRender[i] = this.getToday(dayNumber, daysTotal, content);
+            }
+
+            if (dayNumber > daysPlayed -1) {
+                daysRender[i] = this.getLockedDay(i);
             }
         }
 
@@ -152,6 +185,9 @@ var PageBonus = Object.assign({}, {}, {
 
         return (
             <div key={UNLOCKED + dayIdx} className={unlockedDayClassNames}>
+
+                <div className={LINE}></div>
+
                 <div className={CALENDAR} style={unlockedDayImage}>
                     <span>{dayIdx + 1}</span><br />
                     <span>{i18n._('bonus.day')}</span>
@@ -189,6 +225,7 @@ var PageBonus = Object.assign({}, {}, {
 
         return (
             <div key={TODAY + dayIdx} className={todayClassNames}>
+
                 <div className={CALENDAR} style={today}></div>
 
                 <span className={CONTENT}>{bonusContent}</span>
@@ -214,6 +251,22 @@ var PageBonus = Object.assign({}, {}, {
         var unlockedDayImage = {
             backgroundImage: "url('" + this.getImagePath('bonus/day_frame50') + "')"
         };
+
+        if (this.state.daysPlayed == dayIdx) {
+            return (
+                <div key={LOCKED + dayIdx} className={lockedDayClassNames}>
+
+                    <div className={CALENDAR} style={unlockedDayImage}>
+                        <span>{dayIdx + 1}</span><br />
+                        <span>{i18n._('bonus.day')}</span>
+                    </div>
+
+                    <span className={CONTENT}>{i18n._(bonusConverter)}</span>
+
+                    <div className={PRIZE} style={dollar}>{this.state.bonusCoins[dayIdxConverter]}</div>
+                </div>
+            )
+        }
 
         return (
             <div key={LOCKED + dayIdx} className={lockedDayClassNames}>

@@ -70,10 +70,10 @@
       }
 
       &.unlocked {
-        background-color: $pageBonus-day-unlocked-bg-color;
+        //background-color: $pageBonus-day-unlocked-bg-color;
       }
       &.today {
-
+        background-color: $pageBonus-day-today-bg-color;
       }
       &.locked {
         background-color: $pageBonus-day-locked-bg-color;
