@@ -4,7 +4,6 @@ var Object = {assign: require('react/lib/Object.assign')};
 var EVENT_CHANGE_ROUNDS_BUNDLES = "eventChangeRoundsBundles";
 var EVENT_CHANGE_COINS = "eventChangeCoins";
 var EVENT_CHANGE_MUSICANDSFX = "eventChangeMusicAndSFX";
-var EVENT_CHANGE_SFX = "eventChangeSFX";
 var EVENT_REMOVE_ADS = "eventChageRemoveAds";
 
 var SETTINGS_GAMESTATE = 'game_state';
@@ -12,8 +11,9 @@ var SETTINGS_GAMESTATE = 'game_state';
 var GameState = Object.assign({}, AbstractEventEmitter, {
 
     gameState: {
-        coins: appManager.getSettings().getInitialCoins(),
-        score: 0,
+        coins: appManager.getSettings().getInitialCoins()
+        //score: 0,
+        //boardColorIdx: 0,
         //adPreferences: {
         //    removeAds: false,
         //    removeAdsDialogueShown: false
@@ -22,15 +22,15 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         //    lastAccessDate: "",
         //    daysPlayedStreak: 0
         //},
-        facebook: {
-            lastShareDate: "",
-            friendsInvited: []
-        },
-        settings: {
-            music: false,
-            sound: false
-        },
-        practiceRound: {
+        //facebook: {
+        //    lastShareDate: "",
+        //    friendsInvited: []
+        //},
+        //settings: {
+        //    music: false,
+        //    sound: false
+        //},
+        //practiceRound: {
             //complete: false,
             //en: {
             //    board: {},
@@ -44,8 +44,8 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
             //    starsReceived: 3,
             //    secondsRemaining: 0
             //}
-        },
-        roundsBundles: {
+        //},
+        //roundsBundles: {
             //en: {
             //    //0: {
             //    //    bundleScore: 9999,
@@ -119,7 +119,7 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
             //        //    }
             //        //}
             //    //}
-        }
+        //}
     },
 
     init: function () {
@@ -166,6 +166,12 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     addCoins: function (coinsToAdd) {
         newTotalCoins = this.getCoins() + coinsToAdd;
         return this.setCoins(newTotalCoins);
+    },
+    setBoardColorIdx: function (newNumber) {
+        this.setGameStateField('boardColorIdx', newNumber);
+    },
+    getBoardColorIdx: function () {
+        return this.getGameStateField('boardColorIdx', 0);
     },
 
     setAdPreferencesField: function (field, newValue) {
@@ -274,20 +280,16 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     setMusic: function (newBoolean) {
         this.setSettingsField('music', newBoolean);
         this.emitChangeMusicAndSFX();
-        console.log({music: this.gameState.settings.music});
-        console.log({sound: this.gameState.settings.sound});
     },
     getMusic: function () {
-        return this.getSettingsField('music', true);
+        return this.getSettingsField('music', false);
     },
     setSound: function (newBoolean) {
         this.setSettingsField('sound', newBoolean);
         this.emitChangeMusicAndSFX();
-        console.log({music: this.gameState.settings.music});
-        console.log({sound: this.gameState.settings.sound});
     },
     getSound: function () {
-        return this.getSettingsField('sound', true);
+        return this.getSettingsField('sound', false);
     },
 
     setPracticeRoundComplete: function (newBoolean) {
@@ -320,6 +322,10 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         this.saveGameState();
     },
     getPracticeRoundField: function (field, defaultValue) {
+        if (!this.gameState.practiceRound) {
+            return defaultValue;
+        }
+
         if (!this.gameState.practiceRound[router.getLanguage()] || !this.gameState.practiceRound[router.getLanguage()].hasOwnProperty(field)) {
             return defaultValue;
         }
@@ -425,17 +431,6 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     emitChangeMusicAndSFX: function(){
         this.emit(EVENT_CHANGE_MUSICANDSFX, this);
     },
-
-
-    //addChangeSFXListener: function(callback){
-    //    this.on(EVENT_CHANGE_SFX, callback);
-    //},
-    //removeChangeSFXListener: function(callback){
-    //    this.removeListener(EVENT_CHANGE_SFX, callback);
-    //},
-    //emitChangeSFX: function(){
-    //    this.emit(EVENT_CHANGE_SFX, this);
-    //},
 
 
     addChangeRoundsBundlesListener: function(callback){

@@ -136,11 +136,13 @@ var BoardClass = Object.assign({}, {}, {
             },
             goToPageRoundComplete: this.props.goToPageRoundComplete || function () {
             },
-            checkIfBoardFitsOnScreen: this.props.checkIfBoardFitsOnScreen || function () {}
+            checkIfBoardFitsOnScreen: this.props.checkIfBoardFitsOnScreen || function () {
+            }
         };
         state.boardData = this.props.boardData || {};
         state.boardArr = this.boardConverter(state.boardData);
         state.wordsToFind = this.extractWordsToFind(state.boardData);
+        state.backgroundColors = this.getBackgroundColors(state.isPracticeRound) || [];
         this.addOpenedLettersToBoardArr(state.openedLetters, state.wordsToFind, state.boardArr);
         this.addFoundWordsToBoardArr(state.board, state.wordsToFind, state.boardArr);
 
@@ -163,7 +165,8 @@ var BoardClass = Object.assign({}, {}, {
         if (this.state.checkIfBoardFitsOnScreen(boardHeight)) {
             this.state.boardExtraClass.push('transform-center');
             this.setState({boardExtraClass: this.state.boardExtraClass});
-        };
+        }
+        ;
     },
 
     boardConverter: function (boardData) {
@@ -558,17 +561,14 @@ var BoardClass = Object.assign({}, {}, {
 
     },
 
-    selectWordBackgroundColor: function () {
-        var backgroundColor = '';
-        var wordsComplete = this.howManyCompleteWordsInBoard();
-
+    getBackgroundColors: function (isPracticeRound) {
         var backgroundColors = [];
-        if (this.state.isPracticeRound) {
+        if (isPracticeRound) {
             backgroundColors = [
                 "learn-bg-color-1",
                 "learn-bg-color-2",
                 "learn-bg-color-3"
-            ]
+            ];
         } else {
             backgroundColors = [
                 "bg-color-1",
@@ -586,15 +586,40 @@ var BoardClass = Object.assign({}, {}, {
                 "bg-color-13",
                 "bg-color-14",
                 "bg-color-15"
-            ]
+            ];
         }
 
-        //  +1 because word hasn't been added to completedWords yet
-        for (var i = 0; i < wordsComplete + 1; i++) {
-            backgroundColor = backgroundColors[i % backgroundColors.length];
+        return backgroundColors;
+    },
+
+    selectWordBackgroundColor: function () {
+        var backgroundColor = '';
+        var backgroundColors = this.state.backgroundColors || [];
+        var wordsComplete = this.howManyCompleteWordsInBoard();
+
+        if (this.state.isPracticeRound) {
+            //  +1 because word hasn't been added to completedWords yet
+            for (var i = 0; i < wordsComplete + 1; i++) {
+                backgroundColor = backgroundColors[i % backgroundColors.length];
+            }
+        } else {
+            var colorIdx = appManager.getGameState().getBoardColorIdx();
+            backgroundColor = backgroundColors[colorIdx];
         }
 
         return backgroundColor;
+    },
+
+    nextColorIdx: function () {
+        var backgroundColors = this.state.backgroundColors || [];
+        var colorIdx = appManager.getGameState().getBoardColorIdx();
+
+        colorIdx++;
+        if (colorIdx >= backgroundColors.length) {
+            colorIdx = colorIdx - backgroundColors.length;
+        }
+
+        appManager.getGameState().setBoardColorIdx(colorIdx);
     },
 
     howManyCompleteWordsInBoard: function () {
@@ -602,6 +627,10 @@ var BoardClass = Object.assign({}, {}, {
 
         var wordsComplete = 0;
         for (var word in board) {
+            if (!board.hasOwnProperty(word)) {
+                continue;
+            }
+
             if (board[word].openWord == true) {
                 wordsComplete++;
             }
@@ -781,6 +810,8 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     addCompletedWordToBoard: function (index) {
+        this.nextColorIdx();
+
         var boardArr = this.state.boardArr;
         var selectedLetters = this.state.selectedLetters.letters;
 
@@ -1015,6 +1046,8 @@ var BoardClass = Object.assign({}, {}, {
             appManager.getSFXManager().playButtonGameCorrect();
 
             var backgroundColor = this.selectWordBackgroundColor();
+            this.nextColorIdx();
+
             var wordsToFind = this.state.wordsToFind;
             var currentWord = wordsToFind.words[index];
             var boardArr = this.state.boardArr;
