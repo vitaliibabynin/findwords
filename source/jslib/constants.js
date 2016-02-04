@@ -168,14 +168,23 @@ window.CONST = {
 
             //FACEBOOK INVITE WINDOW
             'app.invite.title': 'Выберите друзей',
+            //'app.invite.message': 'Привет, я играю в интересную игру "Филворды: найди слово"! Присоединяйся, будем играть вместе!',
 
             //FACEBOOK FRIENDS JOINED DIALOG
             'app.dialog.info.friends-joined.title': 'Монеты добавлены',
             'app.dialog.info.friends-joined.description.friends': '#{count} дру((г|га|зей)) приня((л|ли|ли)) ваше приглашение.',
             'app.dialog.info.friends-joined.description.coins': '#{count} моне((та|ты|т)) добавлено.',
 
+            //FACEBOOK SHARE
+            'share.caption': 'Филворды',
+            'share.description': 'Увлекательная игра "Филворды: найди слово". Присоеденяйся, вместе веселее!',
+
             //FOR STARTAD
             'startad.recommendapp': 'Рекомендуем приложение',
+
+            //NOTIFICATIONS
+            'notification.weekly.notify.title': 'Бонусы',
+            'notification.weekly.notify.description': 'Ты давно не заходил в игру, мы начислили бонусы, зайди проверь!',
 
             t: ''
         },
@@ -326,14 +335,23 @@ window.CONST = {
 
             //FACEBOOK INVITE WINDOW
             'app.invite.title': 'Select friends',
+            //'app.invite.message': 'Hello, I am playing an interesting game called "findwords"! Join, and let\'s play together!',
 
             //FACEBOOK FRIENDS JOINED DIALOG
             'app.dialog.info.friends-joined.title': 'Coins added',
             'app.dialog.info.friends-joined.description.friends': '#{count} frien((d|ds|ds)) accepted your invite.',
             'app.dialog.info.friends-joined.description.coins': '#{count} coi((n|ns|ns)) added.',
 
+            //FACEBOOK SHARE
+            'share.caption': 'Findwords',
+            'share.description': 'Exciting game "Findwords"! Join, more fun together!',
+
             //FOR STARTAD
             'startad.recommendapp': 'We recommend this app',
+
+            //NOTIFICATIONS
+            'notification.weekly.notify.title': 'Bonuses',
+            'notification.weekly.notify.description': 'You haven\'t played in a while, we gave you some bonuses, come and collect them!',
 
             t: ''
         }
