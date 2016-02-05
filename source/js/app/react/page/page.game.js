@@ -23,7 +23,6 @@ var PageGameMain = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            goToVictory: false,
             roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
             roundIdx: parseInt(router.getParam('roundIdx')) || 0,
             shownWordsLetters: [],
@@ -47,11 +46,8 @@ var PageGameMain = Object.assign({}, {}, {
         return state;
     },
 
-    componentWillMount: function(){
-        var currentMusic = appManager.getMusicManager().getCurrentMusic();
-        if (currentMusic === false || currentMusic == MUSIC_FILE_NAME) {
-            appManager.getMusicManager().playGameMusic();
-        }
+    componentWillMount: function () {
+        appManager.getMusicManager().playGameMusic();
     },
 
     componentDidMount: function () {
@@ -71,10 +67,8 @@ var PageGameMain = Object.assign({}, {}, {
         //console.log("pageGameComponentDidMount");
     },
 
-    componentWillUnmount: function(){
-        if (!this.state.goToVictory) {
-            appManager.getMusicManager().playMusic();
-        }
+    componentWillUnmount: function () {
+        appManager.getMusicManager().playMusic();
     },
 
     checkIfBoardFitsOnScreen: function (boardHeight) {
@@ -303,7 +297,7 @@ var PageGameMain = Object.assign({}, {}, {
         });
 
         //setTimeout(function () {
-            this.refs.board.emptySelectedLetters();
+        this.refs.board.emptySelectedLetters();
         //}.bind(this), 200);
     },
 
@@ -319,11 +313,9 @@ var PageGameMain = Object.assign({}, {}, {
             roundIdx: this.state.roundIdx
         };
 
-        this.setState({goToVictory: true}, function () {
-            setTimeout(function () {
-                router.navigate("game", "victory", params);
-            }.bind(this), time);
-        }.bind(this));
+        setTimeout(function () {
+            router.navigate("game", "victory", params);
+        }.bind(this), time);
     },
 
 
@@ -339,7 +331,7 @@ var PageGameMain = Object.assign({}, {}, {
         return (
             <div className="page page-game">
                 <Counters isDisplayBackButton={true}
-                        roundsBundleIdx={this.state.roundsBundleIdx}/>
+                          roundsBundleIdx={this.state.roundsBundleIdx}/>
 
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
                     <Timer time={this.state.time}

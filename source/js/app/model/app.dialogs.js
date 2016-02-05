@@ -192,9 +192,13 @@ var InviteFriendsDialog = function () {
         $('.invite', dialog).bind( 'click', function( e ) {
             appManager.getSFXManager().playButton();
 
-            var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
+            this.hide();
+            e.stopPropagation();
 
+            var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
             appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
+                console.log(result);
+
                 if (!result) {
                     return;
                 }
@@ -225,8 +229,6 @@ var InviteFriendsDialog = function () {
                     .show();
             }.bind(this));
 
-            this.hide();
-            e.stopPropagation();
         }.bind(this));
         $('.cancel', dialog).bind( 'click', function( e ) {
             appManager.getSFXManager().playButton();

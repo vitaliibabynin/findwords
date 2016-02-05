@@ -16,7 +16,6 @@ var PageGameLearn = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            goToVictory: false,
             noticeType: "",
             noticeWord: {letters: []}
 
@@ -29,16 +28,11 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     componentWillMount: function () {
-        var currentMusic = appManager.getMusicManager().getCurrentMusic();
-        if (currentMusic === false || currentMusic == MUSIC_FILE_NAME) {
-            appManager.getMusicManager().playGameMusic();
-        }
+        //appManager.getMusicManager().playGameMusic();
     },
 
     componentWillUnmount: function () {
-        if (!this.state.goToVictory) {
-            appManager.getMusicManager().playMusic();
-        }
+        appManager.getMusicManager().playMusic();
     },
 
     getBoardData: function () {
@@ -70,11 +64,9 @@ var PageGameLearn = Object.assign({}, {}, {
     goToPageRoundComplete: function (time) {
         time = time || 0;
 
-        this.setState({goToVictory: true}, function () {
-            setTimeout(function () {
-                router.navigate("game", "learn_victory");
-            }.bind(this), time);
-        }.bind(this));
+        setTimeout(function () {
+            router.navigate("game", "learn_victory");
+        }.bind(this), time);
     },
 
     render: function () {

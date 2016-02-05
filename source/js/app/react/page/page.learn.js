@@ -23,10 +23,7 @@ var PageLearn = Object.assign({}, {}, {
     },
 
     componentWillMount: function () {
-        var currentMusic = appManager.getMusicManager().getCurrentMusic();
-        if (currentMusic === false || currentMusic == MUSIC_FILE_NAME) {
-            appManager.getMusicManager().playGameMusic();
-        }
+        appManager.getMusicManager().playGameMusic();
     },
 
     //componentDidMount: function () {
@@ -85,7 +82,8 @@ var PageLearn = Object.assign({}, {}, {
                             <span>{i18n._('app.page.learn.how-to-play')}</span>
                         </div>
 
-                        <SimpleButton className="btn start" onClick={this.onClickStart}>{i18n._('app.page.learn.start')}</SimpleButton>
+                        <SimpleButton className="btn start"
+                                      onClick={this.onClickStart}>{i18n._('app.page.learn.start')}</SimpleButton>
                     </div>
 
                 </div>

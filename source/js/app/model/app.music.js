@@ -12,7 +12,6 @@ const MUSIC_GAME_FILE_NAME = 'music_game.mp3';
 var AppMusic = Object.assign({}, AbstractEventEmitter, {
 
     audioPlayer: null,
-    currentMusic: null,
 
     getPlayer: function () {
         if (null == this.audioPlayer) {
@@ -44,14 +43,6 @@ var AppMusic = Object.assign({}, AbstractEventEmitter, {
         } else {
             this.stop();
         }
-    },
-
-    getCurrentMusic: function () {
-        if (this.currentMusic === null && typeof this.currentMusic === "object") {
-            return false;
-        }
-
-        return this.currentMusic;
     },
 
     stop: function () {

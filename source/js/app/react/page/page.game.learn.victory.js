@@ -29,6 +29,8 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     componentWillMount: function () {
+        appManager.getMusicManager().getPlayer().pause();
+        appManager.getSFXManager().playWin();
         appAd.showInterstitial();
         appAd.hideBanner();
     },

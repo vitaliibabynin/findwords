@@ -34,13 +34,13 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     componentWillMount: function(){
+        appManager.getMusicManager().getPlayer().pause();
+        appManager.getSFXManager().playWin();
         appAd.showInterstitial();
         appAd.hideBanner();
     },
 
     componentDidMount: function () {
-        appManager.getSFXManager().playWin();
-
         this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(this.state.rewardCoins);
         var roundsComplete = appManager.getGameState().getRoundsBundles(this.state.roundsBundleIdx).roundsComplete || 0;
