@@ -89,17 +89,35 @@ const MUSIC_BUTTON_GAME = 'button_game.mp3';
 const MUSIC_BUTTON_GAME_CORRECT = 'button_game_correct.wav';
 const MUSIC_BUTTON_GAME_WRONG = 'button_game_wrong.mp3';
 const MUSIC_WIN = 'win.mp3';
+const MUSIC_MIX_SOUND = 'mix_sound.mp3';
 
 var AppSound = Object.assign({}, AbstractEventEmitter, {
 
-    SFXPlayer: null,
     buttonGamePlayer: null,
+    SFXPlayer: null,
+    segmentEnd: null,
+    SFXTimes: [
+        {name: MUSIC_BUTTON, timeStart: 0, timeStop: 0.182},
+        {name: MUSIC_BUTTON_GAME_CORRECT, timeStart: 0.364, timeStop: 1.253},
+        {name: MUSIC_BUTTON_GAME_WRONG, timeStart: 1.253, timeStop: 1.6},
+        {name: MUSIC_WIN, timeStart: 1.6, timeStop: 3.689}
+    ],
 
     getPlayer: function () {
         if (null == this.SFXPlayer) {
             this.SFXPlayer = document.createElement('audio');
+            this.SFXPlayer.src = Utils.getStaticPath() + CONST.STATIC_MUSIC_URL + MUSIC_MIX_SOUND;
+            this.SFXPlayer.preload = "auto";
+
 
             appManager.getGameState().addChangeMusicAndSFXListener(this.updateSoundSettings.bind(this));
+
+            this.SFXPlayer.addEventListener('timeupdate', function (){
+                if (this.segmentEnd && this.SFXPlayer.currentTime >= this.segmentEnd) {
+                    this.SFXPlayer.pause();
+                }
+                console.log(this.SFXPlayer.currentTime);
+            }.bind(this), false);
         }
 
         return this.SFXPlayer;
@@ -109,6 +127,7 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
         if (null == this.buttonGamePlayer) {
             this.buttonGamePlayer = document.createElement('audio');
             this.buttonGamePlayer.src = Utils.getStaticPath() + CONST.STATIC_MUSIC_URL + MUSIC_BUTTON_GAME;
+            this.buttonGamePlayer.preload = "auto";
 
             appManager.getGameState().addChangeMusicAndSFXListener(this.updateSoundSettings.bind(this));
         }
@@ -134,24 +153,66 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
         }
     },
 
-    playSoundEffect: function (fileName) {
+    playSoundEffect: function (timeStart, timeStop) {
         if (!appManager.getGameState().getSound()) {
             this.stopSoundEffect();
             return;
         }
 
-        if (typeof fileName == "undefined") {
+        if (typeof timeStart == "undefined" || typeof timeStop == "undefined") {
             return;
         }
 
         var player = this.getPlayer();
-
-        player.src = Utils.getStaticPath() + CONST.STATIC_MUSIC_URL + fileName;
+        this.segmentEnd = timeStop;
+        player.currentTime = timeStart;
         player.play();
     },
 
+    getSoundEffectTimes: function (name) {
+        for (var i = 0; i < this.SFXTimes.length; i++) {
+            if (this.SFXTimes[i].name == name) {
+                return this.SFXTimes[i];
+            }
+        }
+
+        return false;
+    },
+
     playButton: function () {
-        this.playSoundEffect(MUSIC_BUTTON);
+        var times = this.getSoundEffectTimes(MUSIC_BUTTON);
+        if (times === false) {
+            return;
+        }
+
+        this.playSoundEffect(times.timeStart, times.timeStop);
+    },
+
+    playButtonGameCorrect: function () {
+        var times = this.getSoundEffectTimes(MUSIC_BUTTON_GAME_CORRECT);
+        if (times === false) {
+            return;
+        }
+
+        this.playSoundEffect(times.timeStart, times.timeStop);
+    },
+
+    playButtonGameWrong: function () {
+        var times = this.getSoundEffectTimes(MUSIC_BUTTON_GAME_WRONG);
+        if (times === false) {
+            return;
+        }
+
+        this.playSoundEffect(times.timeStart, times.timeStop);
+    },
+
+    playWin: function () {
+        var times = this.getSoundEffectTimes(MUSIC_WIN);
+        if (times === false) {
+            return;
+        }
+
+        this.playSoundEffect(times.timeStart, times.timeStop);
     },
 
     playButtonGame: function () {
@@ -162,18 +223,6 @@ var AppSound = Object.assign({}, AbstractEventEmitter, {
 
         var player = this.getButtonGamePlayer();
         player.cloneNode(true).play();
-    },
-
-    playButtonGameCorrect: function () {
-        this.playSoundEffect(MUSIC_BUTTON_GAME_CORRECT);
-    },
-
-    playButtonGameWrong: function () {
-        this.playSoundEffect(MUSIC_BUTTON_GAME_WRONG);
-    },
-
-    playWin: function () {
-        this.playSoundEffect(MUSIC_WIN);
     }
 
 });
