@@ -25,11 +25,17 @@ var StartAd = {
     },
 
     hide: function(){
-        this.setState({isHidden: true});
+        this.setState({isHidden: true}, this.onUpdate);
     },
 
     show: function(){
-        this.setState({isHidden: false});
+        this.setState({isHidden: false}, this.onUpdate);
+    },
+
+    onUpdate: function(){
+        if(this.props.onUpdate && typeof this.props.onUpdate == 'function'){
+            this.props.onUpdate();
+        }
     },
 
     updateStartAdBanner: function(){

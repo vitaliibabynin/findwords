@@ -455,19 +455,22 @@ var CordovaFB = Object.assign({}, AbstractFB, {
             promise = Promise.resolve();
         }
 
-        promise.then(function (resolve, reject) {
-            this.fbPlugin.share({
-                shareLinkUrl: url || appManager.getSettings().getShareAppLink(),
-                title: i18n._('share.caption'),
-                description: i18n._('share.description'),
-                onSuccess: function (result) {
-                    resolve();
-                }.bind(this),
-                onFailure: function (result) {
-                    console.log('CordovaFB.share', result);
-                    reject(result);
-                }.bind(this)
-            });
+
+        promise.then(function () {
+            return new Promise(function(resolve, reject){
+                this.fbPlugin.share({
+                    shareLinkUrl: url || appManager.getSettings().getShareAppLink(),
+                    title: i18n._('share.caption'),
+                    description: i18n._('share.description'),
+                    onSuccess: function (result) {
+                        resolve();
+                    }.bind(this),
+                    onFailure: function (result) {
+                        console.log('CordovaFB.share', result);
+                        reject(result);
+                    }.bind(this)
+                });
+            }.bind(this));
         }.bind(this));
 
         return promise;
@@ -503,11 +506,11 @@ var CordovaFB = Object.assign({}, AbstractFB, {
         }
 
         promise.then(function () {
+            return new Promise(function(resolve, reject){
                 this.fbPlugin.invite({
                     appLinkUrl: appManager.getSettings().getShareAppLink(),
                     appInvitePreviewImageURL: appManager.getSettings().getAppInviteImgUrl(),
                     onSuccess: function (result) {
-
                         resolve(result);
                     }.bind(this),
                     onFailure: function (result) {
@@ -515,6 +518,7 @@ var CordovaFB = Object.assign({}, AbstractFB, {
                         reject(result);
                     }.bind(this)
                 });
+            }.bind(this));
         }.bind(this));
 
         return promise;

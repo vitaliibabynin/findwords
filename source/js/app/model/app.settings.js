@@ -55,7 +55,8 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
     },
 
     getAppInviteImgUrl: function(){
-        this.getSettingsValue('inviteImgUrl', false)
+        var inviteUrl = this.getSettingsValue('inviteImgUrl', false)
+        return inviteUrl ? inviteUrl[router.getLanguage()] : ''
     },
 
     getFacebookId: function () {

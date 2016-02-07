@@ -197,7 +197,7 @@ var InviteFriendsDialog = function () {
 
             var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
             appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
-                console.log(result);
+                console.log('fbInvite:',result);
 
                 if (!result) {
                     return;

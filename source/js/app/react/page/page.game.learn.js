@@ -17,8 +17,8 @@ var PageGameLearn = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             noticeType: "",
-            noticeWord: {letters: []}
-
+            noticeWord: {letters: []},
+            gameBoarMaxdHeight: 0
         };
         state.boardData = this.getBoardData() || {};
         state.time = state.boardData.time || 0;
@@ -29,6 +29,14 @@ var PageGameLearn = Object.assign({}, {}, {
 
     componentWillMount: function () {
         //appManager.getMusicManager().playGameMusic();
+    },
+
+    componentDidMount: function () {
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        var gameBoarMaxdHeight = this.refs.pageContent.getDOMNode().clientHeight
+            - parseInt($pageContent.css('padding-bottom'));
+
+        this.setState({gameBoarMaxdHeight: gameBoarMaxdHeight});
     },
 
     componentWillUnmount: function () {
@@ -75,24 +83,23 @@ var PageGameLearn = Object.assign({}, {}, {
             <div className="page page-game">
                 <Counters isDisplayBackButton={true}
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
-
-                <div className="page-content">
-
-                    <Timer time={this.state.time}
-                           setGameStateRoundField={this.setGameStateRoundField}
-                           getGameStateRoundField={this.getGameStateRoundField}
+                <Timer time={this.state.time}
+                    setGameStateRoundField={this.setGameStateRoundField}
+                    getGameStateRoundField={this.getGameStateRoundField}
                     />
+                <div ref="pageContent" className="page-content">
 
-                    <div className="blank-space"></div>
-
-                    <Board ref="board"
-                           boardData={this.state.boardData}
-                           board={this.state.board}
-                           isPracticeRound={true}
-                           displayNotice={this.displayNotice}
-                           setGameStateRoundField={this.setGameStateRoundField}
-                           goToPageRoundComplete={this.goToPageRoundComplete}
-                    />
+                    <div className="container transform-center">
+                        {this.state.gameBoarMaxdHeight > 0 ? <Board ref="board"
+                               boardMaxHeight={this.state.gameBoarMaxdHeight}
+                               boardData={this.state.boardData}
+                               board={this.state.board}
+                               isPracticeRound={true}
+                               displayNotice={this.displayNotice}
+                               setGameStateRoundField={this.setGameStateRoundField}
+                               goToPageRoundComplete={this.goToPageRoundComplete}
+                        /> : ''}
+                    </div>
 
                     <Notice noticeType={this.state.noticeType}
                             word={this.state.noticeWord}

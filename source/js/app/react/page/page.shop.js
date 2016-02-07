@@ -44,10 +44,10 @@ var PageShop = Object.assign({}, {}, {
         //console.log(this.refs.container.getDOMNode());
 
         var $pageContent = $(this.refs.pageContent.getDOMNode());
-        console.log(this.refs.pageContent.getDOMNode().clientHeight);
-        console.log($pageContent.css('padding-bottom'));
-        console.log(this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom'));
-        if(this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom')  > this.refs.container.getDOMNode().offsetHeight){
+        //console.log(this.refs.pageContent.getDOMNode().clientHeight);
+        //console.log(parseInt($pageContent.css('padding-bottom')));
+        //console.log(this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom')));
+        if(this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom'))  > this.refs.container.getDOMNode().offsetHeight){
             this.state.containerExtraClass.push('transform-center');
             this.setState({containerExtraClass: this.state.containerExtraClass});
         }
@@ -96,7 +96,7 @@ var PageShop = Object.assign({}, {}, {
 
     onClickShare: function () {
         appFB.share().then(function (result) {
-            //console.log({result: result});
+            console.log('shareResult', result);
 
             //set lastShareDateString to now
             var todayDateString = moment().format("YYYYMMDD") || "";

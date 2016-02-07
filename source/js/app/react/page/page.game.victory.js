@@ -4,7 +4,7 @@
 var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
-//var classNames = require('classnames');
+var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
 var StartAd = require('./../component/app.startad').StartAd;
@@ -18,6 +18,7 @@ var PageGameVictory = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
+            containerExtraClass: '',
             roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
             roundIdx: parseInt(router.getParam('roundIdx')) || 0
         };
@@ -54,6 +55,7 @@ var PageGameVictory = Object.assign({}, {}, {
         }
 
         appDialogs.getRateDialog().showIfTime();
+        this.onStartAdUpdate();
     },
 
     //componentDidUpdate: function (prevProps, prevState) {
@@ -191,6 +193,17 @@ var PageGameVictory = Object.assign({}, {}, {
         return starArrangement;
     },
 
+    onStartAdUpdate: function(){
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        if(this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom'))  > this.refs.container.getDOMNode().offsetHeight){
+            this.state.containerExtraClass = 'transform-center';
+        }else{
+            this.state.containerExtraClass = '';
+        }
+
+        this.setState({containerExtraClass: this.state.containerExtraClass});
+    },
+
     render: function () {
         //console.log({victoryRoundsComplete: appManager.getGameState().getRoundsBundles(this.state.roundsBundleIdx).roundsComplete});
 
@@ -225,9 +238,9 @@ var PageGameVictory = Object.assign({}, {}, {
             <div className="page page-game-victory">
                 <Counters />
 
-                <div className="page-content">
+                <div ref="pageContent" className="page-content">
 
-                    <div className="container" style={background}>
+                    <div ref="container" className={classNames("container", this.state.containerExtraClass)} style={background} >
 
                         <div className="excellent">{i18n._('victory.excellent')}</div>
 
@@ -259,7 +272,7 @@ var PageGameVictory = Object.assign({}, {}, {
                         </div>
 
 
-                        <StartAd />
+                        <StartAd onUpdate={this.onStartAdUpdate} />
                     </div>
 
                 </div>

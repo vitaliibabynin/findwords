@@ -9,17 +9,22 @@
   //width: 100%;
 
   .container {
-    position: relative;
-    transform: translateX(-0%) translateY(-50%);
-    top: 50%;
-
     background-color: $gamePageVictory-container-bg-color;
     color: $gamePageVictory-container-color;
     $margin-left-right: 2.8125rem;
-    margin-left: $margin-left-right;
-    margin-right: $margin-left-right;
+//    margin-left: $margin-left-right;
+//    margin-right: $margin-left-right;
     //margin-top: 2.25rem;
-    margin-top: 0;
+//    margin-top: 0;
+      margin: 1.5rem $margin-left-right;
+
+      &.transform-center{
+          position: relative;
+          transform: translateX(-0%) translateY(-50%);
+          top: 50%;
+          margin-top: 0;
+          margin-bottom: 0;
+      }
 
     .excellent {
       padding-top: 1rem;

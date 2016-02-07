@@ -31,7 +31,8 @@ var PageGameMain = Object.assign({}, {}, {
             chipsOpenWord: appManager.getSettings().getChipsCoinsCost().openWord || 0,
             chipsOpenLetter: appManager.getSettings().getChipsCoinsCost().openLetter || 0,
             chipsShowWord: appManager.getSettings().getChipsCoinsCost().showWord || 0,
-            shownWordsAnimationLeave: true
+            shownWordsAnimationLeave: true,
+            gameBoarMaxdHeight: 0
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];
         state.boardData = this.getBoardData(state.roundData, state.roundIdx);
@@ -63,6 +64,17 @@ var PageGameMain = Object.assign({}, {}, {
             router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
         }
 
+
+
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        //console.log(this.refs.pageContent.getDOMNode().clientHeight);
+        //console.log(parseInt($pageContent.css('padding-bottom')));
+        var gameBoarMaxdHeight = this.refs.pageContent.getDOMNode().clientHeight
+            - this.refs.shownWords.getDOMNode().offsetHeight
+            - parseInt($pageContent.css('padding-bottom'));
+
+        this.setState({gameBoarMaxdHeight: gameBoarMaxdHeight});
+
         appAd.prepareInterstitial();
         //console.log("pageGameComponentDidMount");
     },
@@ -71,18 +83,23 @@ var PageGameMain = Object.assign({}, {}, {
         appManager.getMusicManager().playMusic();
     },
 
-    checkIfBoardFitsOnScreen: function (boardHeight) {
-        //console.log(boardHeight);
-
-        if (typeof boardHeight == "undefined") {
-            return false;
-        }
-
-        var $pageContent = $(this.refs.pageContent.getDOMNode());
-        //console.log(this.refs.pageContent.getDOMNode().clientHeight);
-        //console.log($pageContent.css('padding-bottom'));
-        return (this.refs.pageContent.getDOMNode().clientHeight - $pageContent.css('padding-bottom') > boardHeight);
-    },
+    //checkIfBoardFitsOnScreen: function (boardHeight) {
+    //    //console.log(boardHeight);
+    //
+    //    if (typeof boardHeight == "undefined") {
+    //        return false;
+    //    }
+    //
+    //    var $pageContent = $(this.refs.pageContent.getDOMNode());
+    //    //console.log(this.refs.pageContent.getDOMNode().clientHeight);
+    //    //console.log(parseInt($pageContent.css('padding-bottom')));
+    //    var contentHeight = this.refs.pageContent.getDOMNode().clientHeight
+    //                            - this.refs.timer.getDOMNode().clientHeight
+    //                            - this.refs.chips.getDOMNode().clientHeight
+    //                            - parseInt($pageContent.css('padding-bottom'));
+    //
+    //    return contentHeight > boardHeight;
+    //},
 
     getBoardData: function (roundData, roundIdx) {
         return roundData.rounds[roundIdx] || {
@@ -332,58 +349,61 @@ var PageGameMain = Object.assign({}, {}, {
             <div className="page page-game">
                 <Counters isDisplayBackButton={true}
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
+                <Timer ref="timer" time={this.state.time}
+                setGameStateRoundField={this.setGameStateRoundField}
+                getGameStateRoundField={this.getGameStateRoundField}
+                />
 
+                <div ref="chips" className="chips">
+                    <ChipButton className="open-word"
+                    onClick={this.onChipOpenWordClick}
+                    value={this.state.chipsOpenWord}
+                    icon="open_word">
+
+                        <span>{i18n._('chip.open-word')}</span>
+                    </ChipButton>
+                    <ChipButton className="open-letter"
+                    onClick={this.onChipOpenLetterClick}
+                    value={this.state.chipsOpenLetter}
+                    icon="open_letter">
+
+                        <span>{i18n._('chip.open-letter')}</span>
+                    </ChipButton>
+                    <ChipButton className="show-word"
+                    onClick={this.onChipShowWordClick}
+                    value={this.state.chipsShowWord}
+                    icon="show_word">
+
+                        <span>{i18n._('chip.show-word')}</span>
+                    </ChipButton>
+                </div>
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
-                    <Timer time={this.state.time}
-                           setGameStateRoundField={this.setGameStateRoundField}
-                           getGameStateRoundField={this.getGameStateRoundField}
-                    />
 
-                    <div className="chips">
-                        <ChipButton className="open-word"
-                                    onClick={this.onChipOpenWordClick}
-                                    value={this.state.chipsOpenWord}
-                                    icon="open_word">
+                    <div className="container transform-center">
+                    {this.state.gameBoarMaxdHeight > 0 ? <Board ref="board"
+                            boardMaxHeight={this.state.gameBoarMaxdHeight}
+                            boardData={this.state.boardData}
+                            board={this.state.board}
+                            openedLetters={this.state.openedLetters}
+                            shownWords={this.state.shownWords}
+                            displayNotice={this.displayNotice}
+                            addToShownWords={this.addToShownWords}
+                            removeWordFromShownWords={this.removeWordFromShownWords}
+                            setGameStateRoundField={this.setGameStateRoundField}
+                            goToPageRoundComplete={this.goToPageRoundComplete}
+                            checkIfBoardFitsOnScreen={this.checkIfBoardFitsOnScreen}
+                            /> : ''}
 
-                            <span>{i18n._('chip.open-word')}</span>
-                        </ChipButton>
-                        <ChipButton className="open-letter"
-                                    onClick={this.onChipOpenLetterClick}
-                                    value={this.state.chipsOpenLetter}
-                                    icon="open_letter">
 
-                            <span>{i18n._('chip.open-letter')}</span>
-                        </ChipButton>
-                        <ChipButton className="show-word"
-                                    onClick={this.onChipShowWordClick}
-                                    value={this.state.chipsShowWord}
-                                    icon="show_word">
-
-                            <span>{i18n._('chip.show-word')}</span>
-                        </ChipButton>
+                        <ShownWords ref="shownWords" shownWordsLetters={this.state.shownWordsLetters}
+                                    shownWordsAnimationLeave={this.state.shownWordsAnimationLeave}
+                        />
                     </div>
 
-                    <Board ref="board"
-                           boardData={this.state.boardData}
-                           board={this.state.board}
-                           openedLetters={this.state.openedLetters}
-                           shownWords={this.state.shownWords}
-                           displayNotice={this.displayNotice}
-                           addToShownWords={this.addToShownWords}
-                           removeWordFromShownWords={this.removeWordFromShownWords}
-                           setGameStateRoundField={this.setGameStateRoundField}
-                           goToPageRoundComplete={this.goToPageRoundComplete}
-                           checkIfBoardFitsOnScreen={this.checkIfBoardFitsOnScreen}
-                    />
-
                     <Notice noticeType={this.state.noticeType}
-                            word={this.state.noticeWord}
-                            hideNotice={this.hideNotice}
-                    />
-
-                    <ShownWords shownWordsLetters={this.state.shownWordsLetters}
-                                shownWordsAnimationLeave={this.state.shownWordsAnimationLeave}
-                    />
+                        word={this.state.noticeWord}
+                        hideNotice={this.hideNotice}
+                        />
 
                 </div>
             </div>

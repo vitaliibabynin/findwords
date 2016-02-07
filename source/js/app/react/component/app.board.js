@@ -126,18 +126,12 @@ var BoardClass = Object.assign({}, {}, {
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
             isPracticeRound: this.props.isPracticeRound || false,
-            displayNotice: this.props.displayNotice || function () {
-            },
-            addToShownWords: this.props.addToShownWords || function () {
-            },
-            removeWordFromShownWords: this.props.removeWordFromShownWords || function () {
-            },
-            setGameStateRoundField: this.props.setGameStateRoundField || function () {
-            },
-            goToPageRoundComplete: this.props.goToPageRoundComplete || function () {
-            },
-            checkIfBoardFitsOnScreen: this.props.checkIfBoardFitsOnScreen || function () {
-            }
+            displayNotice: this.props.displayNotice || function () {},
+            addToShownWords: this.props.addToShownWords || function () {},
+            removeWordFromShownWords: this.props.removeWordFromShownWords || function () {},
+            setGameStateRoundField: this.props.setGameStateRoundField || function () {},
+            goToPageRoundComplete: this.props.goToPageRoundComplete || function () {},
+            checkIfBoardFitsOnScreen: this.props.checkIfBoardFitsOnScreen || function () {}
         };
         state.boardData = this.props.boardData || {};
         state.boardArr = this.boardConverter(state.boardData);
@@ -152,22 +146,25 @@ var BoardClass = Object.assign({}, {}, {
     componentDidMount: function () {
         this.setState({
             //cellSize: ($('.page-content').width() - BOARD_MARGIN) / this.state.boardData.board.cols || 0
-            cellSize: $('.game-board').width() / this.state.boardData.board.cols || 0
+            cellSize: Math.min(
+                ($('.game-board').width() - this.state.boardData.board.cols) / this.state.boardData.board.cols,
+                (this.props.boardMaxHeight - this.state.boardData.board.rows - 5) / this.state.boardData.board.rows
+            ) || 0
         });
     },
 
     componentDidUpdate: function () {
-        this.centerBoard();
+        //this.centerBoard();
     },
 
-    centerBoard: function () {
-        var boardHeight = this.refs.board.getDOMNode().offsetHeight;
-        if (this.state.checkIfBoardFitsOnScreen(boardHeight)) {
-            this.state.boardExtraClass.push('transform-center');
-            this.setState({boardExtraClass: this.state.boardExtraClass});
-        }
-        ;
-    },
+    //centerBoard: function () {
+    //    var boardHeight = this.refs.board.getDOMNode().offsetHeight;
+    //    if (!this.state.boardExtraClass.indexOf('transform-center') && this.state.checkIfBoardFitsOnScreen(boardHeight)) {
+    //        this.state.boardExtraClass.push('transform-center');
+    //        this.setState({boardExtraClass: this.state.boardExtraClass});
+    //    }
+    //    ;
+    //},
 
     boardConverter: function (boardData) {
         var arr = new Array(boardData.board.rows);
