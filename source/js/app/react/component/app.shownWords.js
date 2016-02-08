@@ -84,11 +84,17 @@ var ShownWordsClass = Object.assign({}, {}, {
         return 87 / 128;
     },
 
+    choosePaddingTop: function () {
+        return this.state.shownWordsLetters.length <= 2 ? 0 : 0.25;
+    },
+
     render: function () {
         var whichFontSize = this.chooseFontSize();
+        var whichPadding = this.choosePaddingTop();
 
         var style = {
-            fontSize: whichFontSize + "rem"
+            fontSize: whichFontSize + "rem",
+            paddingTop: whichPadding + "rem"
         };
 
         var words = this.state.words.map(function(word, i) {

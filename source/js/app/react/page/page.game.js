@@ -14,7 +14,7 @@ var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
-var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
+//var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
 
 var PageGameMain = Object.assign({}, {}, {
 
@@ -32,7 +32,7 @@ var PageGameMain = Object.assign({}, {}, {
             chipsOpenLetter: appManager.getSettings().getChipsCoinsCost().openLetter || 0,
             chipsShowWord: appManager.getSettings().getChipsCoinsCost().showWord || 0,
             shownWordsAnimationLeave: true,
-            gameBoarMaxdHeight: 0
+            gameBoardMaxHeight: 0
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];
         state.boardData = this.getBoardData(state.roundData, state.roundIdx);
@@ -69,11 +69,11 @@ var PageGameMain = Object.assign({}, {}, {
         var $pageContent = $(this.refs.pageContent.getDOMNode());
         //console.log(this.refs.pageContent.getDOMNode().clientHeight);
         //console.log(parseInt($pageContent.css('padding-bottom')));
-        var gameBoarMaxdHeight = this.refs.pageContent.getDOMNode().clientHeight
+        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
             - this.refs.shownWords.getDOMNode().offsetHeight
             - parseInt($pageContent.css('padding-bottom'));
 
-        this.setState({gameBoarMaxdHeight: gameBoarMaxdHeight});
+        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
 
         appAd.prepareInterstitial();
         //console.log("pageGameComponentDidMount");
@@ -380,8 +380,8 @@ var PageGameMain = Object.assign({}, {}, {
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
                     <div className="container transform-center">
-                    {this.state.gameBoarMaxdHeight > 0 ? <Board ref="board"
-                            boardMaxHeight={this.state.gameBoarMaxdHeight}
+                    {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
+                            boardMaxHeight={this.state.gameBoardMaxHeight}
                             boardData={this.state.boardData}
                             board={this.state.board}
                             openedLetters={this.state.openedLetters}

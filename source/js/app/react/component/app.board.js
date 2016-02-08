@@ -432,7 +432,7 @@ var BoardClass = Object.assign({}, {}, {
         this.emptySelectedLetters();
     },
 
-    onTouchCancel: function () {
+    onTouchCancel: function (e) {
         this.preventDefaultOnEvent(e);
 
         this.fadeHighlightedWord();

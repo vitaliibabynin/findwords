@@ -18,7 +18,7 @@ var PageGameLearn = Object.assign({}, {}, {
         var state = {
             noticeType: "",
             noticeWord: {letters: []},
-            gameBoarMaxdHeight: 0
+            gameBoardMaxHeight: 0
         };
         state.boardData = this.getBoardData() || {};
         state.time = state.boardData.time || 0;
@@ -33,10 +33,10 @@ var PageGameLearn = Object.assign({}, {}, {
 
     componentDidMount: function () {
         var $pageContent = $(this.refs.pageContent.getDOMNode());
-        var gameBoarMaxdHeight = this.refs.pageContent.getDOMNode().clientHeight
+        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
             - parseInt($pageContent.css('padding-bottom'));
 
-        this.setState({gameBoarMaxdHeight: gameBoarMaxdHeight});
+        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
     },
 
     componentWillUnmount: function () {
@@ -90,8 +90,8 @@ var PageGameLearn = Object.assign({}, {}, {
                 <div ref="pageContent" className="page-content">
 
                     <div className="container transform-center">
-                        {this.state.gameBoarMaxdHeight > 0 ? <Board ref="board"
-                               boardMaxHeight={this.state.gameBoarMaxdHeight}
+                        {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
+                               boardMaxHeight={this.state.gameBoardMaxHeight}
                                boardData={this.state.boardData}
                                board={this.state.board}
                                isPracticeRound={true}
