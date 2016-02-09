@@ -1,4 +1,5 @@
-cordova.define("com.portnou.cordova.plugin.preferences.Preferences", function(require, exports, module) { var exec = require('cordova/exec');
+cordova.define("com.portnou.cordova.plugin.preferences.Preferences", function(require, exports, module) {
+var exec = require('cordova/exec');
 var cordova = require('cordova');
 
 var Preferences = exports;

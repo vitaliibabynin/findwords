@@ -8,39 +8,27 @@
         Apache Cordova Team
     </author>
     <content src="index.html" />
-
-    <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
-    
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
-
     <allow-navigation href="data:*" />
     <allow-navigation href="file:///*/*" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
-    
-    
-    <!-- for all -->
-    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="SplashScreen" value="splash" />
     <preference name="SplashScreenDelay" value="30000" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="Orientation" value="portrait" />
-    
-    
-    <!-- for IOS -->
-    <preference name="MediaPlaybackRequiresUserAction" value="false"/>
-    <preference name="AllowInlineMediaPlayback" value="true"/>
-    <preference name="SuppressesIncrementalRendering" value="true"/>
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="AllowInlineMediaPlayback" value="true" />
+    <preference name="SuppressesIncrementalRendering" value="true" />
     <preference name="UIWebViewDecelerationSpeed" value="normal" />
-
-
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
@@ -48,4 +36,9 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <plugin name="cordova-plugin-file" spec="~4.1.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~1.2.1" />
+    <plugin name="cordova-plugin-splashscreen" spec="~3.1.0" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.1.0" />
+    <plugin name="cordova-plugin-whitelist" spec="~1.2.1" />
 </widget>

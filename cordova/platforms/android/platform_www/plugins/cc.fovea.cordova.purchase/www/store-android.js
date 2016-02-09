@@ -1,4 +1,5 @@
-cordova.define("cc.fovea.cordova.purchase.InAppBillingPlugin", function(require, exports, module) { var store = {};
+cordova.define("cc.fovea.cordova.purchase.InAppBillingPlugin", function(require, exports, module) {
+var store = {};
 
 store.verbosity = 0;
 

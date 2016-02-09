@@ -9,15 +9,7 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"AdmobPlugin\"><param name=\"ios-package\" value=\"AdmobAdPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"UnityAdsPlugin\"><param name=\"ios-package\" value=\"UnityAdsPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Vungle\"><param name=\"ios-package\" value=\"Vungle\" /></feature>",
+                            "xml": "<feature name=\"Preferences\"><param name=\"ios-package\" value=\"Preferences\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -29,11 +21,27 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"CordovaFacebook\"><param name=\"ios-package\" value=\"CDVFacebook\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"UniversalAnalytics\"><param name=\"ios-package\" value=\"UniversalAnalyticsPlugin\" /></feature>",
                             "count": 1
                         },
                         {
                             "xml": "<feature name=\"LocalNotification\"><param name=\"ios-package\" onload=\"true\" value=\"APPLocalNotification\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -49,31 +57,13 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"InAppPurchase\"><param name=\"ios-package\" value=\"InAppPurchase\" /></feature>",
                             "count": 1
-                        },
+                        }
+                    ],
+                    "/widget": [
                         {
-                            "xml": "<feature name=\"Preferences\"><param name=\"ios-package\" value=\"Preferences\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"CordovaFacebook\"><param name=\"ios-package\" value=\"CDVFacebook\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"AndroidPersistentFileLocation\" value=\"Internal\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"File\"><param name=\"ios-package\" value=\"CDVFile\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
+                            "xml": "<feature name=\"AppodealPlugin\"><param name=\"ios-package\" value=\"AppodealPlugin\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -110,25 +100,18 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "com.admob.plugin": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "cordova-plugin-ad-unityadssdk": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "cordova-plugin-ad-unityads": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "cordova-plugin-ad-vungle": {
+        "com.portnou.cordova.plugin.preferences": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "cordova-plugin-facebook": {
+            "FACEBOOK_APP_ID": "473524332833935",
+            "FACEBOOK_DISPLAY_NAME": "Findwords",
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "cordova-plugin-google-analytics": {
@@ -140,54 +123,36 @@
         "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
-        "cordova-plugin-statusbar": {
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
         "cc.fovea.cordova.purchase": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
-        "com.portnou.cordova.plugin.preferences": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "cordova-plugin-facebook": {
-            "FACEBOOK_APP_ID": "473524332833935",
-            "FACEBOOK_DISPLAY_NAME": "Findwords",
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "cordova-plugin-inappbrowser": {
+        "com.appodeal.plugin": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         }
     },
     "dependent_plugins": {},
     "modules": [
         {
-            "file": "plugins/com.admob.plugin/www/AdmobPlugin.js",
-            "id": "com.admob.plugin.AdmobAd",
-            "pluginId": "com.admob.plugin",
+            "file": "plugins/com.portnou.cordova.plugin.preferences/www/preferences.js",
+            "id": "com.portnou.cordova.plugin.preferences.Preferences",
+            "pluginId": "com.portnou.cordova.plugin.preferences",
             "clobbers": [
-                "window.admob"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-ad-unityads/www/unityads.js",
-            "id": "cordova-plugin-ad-unityads.unityads",
-            "pluginId": "cordova-plugin-ad-unityads",
-            "clobbers": [
-                "window.unityads"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-ad-vungle/www/vungle.js",
-            "id": "cordova-plugin-ad-vungle.vungle",
-            "pluginId": "cordova-plugin-ad-vungle",
-            "clobbers": [
-                "window.vungle"
+                "Preferences"
             ]
         },
         {
@@ -212,6 +177,14 @@
             "pluginId": "cordova-plugin-device",
             "clobbers": [
                 "device"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-facebook/www/CordovaFacebook.js",
+            "id": "cordova-plugin-facebook.CordovaFacebook",
+            "pluginId": "cordova-plugin-facebook",
+            "clobbers": [
+                "CordovaFacebook"
             ]
         },
         {
@@ -247,46 +220,6 @@
             "merges": [
                 "cordova.plugins.notification.local.core",
                 "plugin.notification.local.core"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-            "id": "cordova-plugin-statusbar.statusbar",
-            "pluginId": "cordova-plugin-statusbar",
-            "clobbers": [
-                "window.StatusBar"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "pluginId": "cordova-plugin-splashscreen",
-            "clobbers": [
-                "navigator.splashscreen"
-            ]
-        },
-        {
-            "file": "plugins/cc.fovea.cordova.purchase/www/store-ios.js",
-            "id": "cc.fovea.cordova.purchase.InAppPurchase",
-            "pluginId": "cc.fovea.cordova.purchase",
-            "clobbers": [
-                "store"
-            ]
-        },
-        {
-            "file": "plugins/com.portnou.cordova.plugin.preferences/www/preferences.js",
-            "id": "com.portnou.cordova.plugin.preferences.Preferences",
-            "pluginId": "com.portnou.cordova.plugin.preferences",
-            "clobbers": [
-                "Preferences"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-facebook/www/CordovaFacebook.js",
-            "id": "cordova-plugin-facebook.CordovaFacebook",
-            "pluginId": "cordova-plugin-facebook",
-            "clobbers": [
-                "CordovaFacebook"
             ]
         },
         {
@@ -464,25 +397,38 @@
                 "cordova.InAppBrowser.open",
                 "window.open"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "pluginId": "cordova-plugin-splashscreen",
+            "clobbers": [
+                "navigator.splashscreen"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+            "id": "cordova-plugin-statusbar.statusbar",
+            "pluginId": "cordova-plugin-statusbar",
+            "clobbers": [
+                "window.StatusBar"
+            ]
+        },
+        {
+            "file": "plugins/cc.fovea.cordova.purchase/www/store-ios.js",
+            "id": "cc.fovea.cordova.purchase.InAppPurchase",
+            "pluginId": "cc.fovea.cordova.purchase",
+            "clobbers": [
+                "store"
+            ]
+        },
+        {
+            "file": "plugins/com.appodeal.plugin/www/appodeal.js",
+            "id": "com.appodeal.plugin.AppodealPlugin",
+            "pluginId": "com.appodeal.plugin",
+            "clobbers": [
+                "Appodeal"
+            ]
         }
-    ],
-    "plugin_metadata": {
-        "cordova-plugin-whitelist": "1.2.0",
-        "com.admob.plugin": "5.2.0",
-        "cordova-plugin-ad-unityadssdk": "1.0.0",
-        "cordova-plugin-ad-unityads": "1.0.33",
-        "cordova-plugin-ad-vungle": "1.0.60",
-        "cordova-plugin-console": "1.0.2",
-        "cordova-plugin-device": "1.1.0",
-        "cordova-plugin-google-analytics": "0.8.1",
-        "de.appplant.cordova.common.registerusernotificationsettings": "1.0.1",
-        "de.appplant.cordova.plugin.local-notification": "0.8.2",
-        "cordova-plugin-statusbar": "2.0.0",
-        "cordova-plugin-splashscreen": "3.0.0",
-        "cc.fovea.cordova.purchase": "4.0.0",
-        "com.portnou.cordova.plugin.preferences": "1.0.0",
-        "cordova-plugin-facebook": "0.2.2",
-        "cordova-plugin-file": "3.0.0",
-        "cordova-plugin-inappbrowser": "1.1.0"
-    }
+    ]
 }

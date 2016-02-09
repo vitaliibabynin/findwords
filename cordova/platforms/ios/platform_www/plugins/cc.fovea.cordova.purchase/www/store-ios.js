@@ -1,4 +1,5 @@
-cordova.define("cc.fovea.cordova.purchase.InAppPurchase", function(require, exports, module) { var store = {};
+cordova.define("cc.fovea.cordova.purchase.InAppPurchase", function(require, exports, module) {
+var store = {};
 
 store.verbosity = 0;
 
@@ -1241,6 +1242,7 @@ store.verbosity = 0;
                 title: validProducts[i].title,
                 price: validProducts[i].price,
                 description: validProducts[i].description,
+                currency: validProducts[i].currency,
                 state: store.VALID
             });
             p.trigger("loaded");
@@ -1400,7 +1402,6 @@ store.verbosity = 0;
             timeRemaining: timeRemaining,
             state: store.DOWNLOADING
         });
-        p.stateChanged();
     }
     function storekitDownloadFailed(transactionIdentifier, productId, errorCode, errorText) {
         store.log.error("ios -> download failed: " + productId + "; errorCode=" + errorCode + "; errorText=" + errorText);
@@ -1488,4 +1489,5 @@ store.verbosity = 0;
 })();
 
 module.exports = store;
+
 });

@@ -13,7 +13,7 @@
 // Help create NSNull objects for nil items (since neither NSArray nor NSDictionary can store nil values).
 #define NILABLE(obj) ((obj) != nil ? (NSObject *)(obj) : (NSObject *)[NSNull null])
 
-static BOOL g_debugEnabled = YES;
+static BOOL g_debugEnabled = NO;
 static BOOL g_autoFinishEnabled = YES;
 
 #define DLog(fmt, ...) { \
@@ -448,7 +448,7 @@ unsigned char* unbase64( const char* ascii, int len, int *flen )
             case SKPaymentTransactionStatePurchased:
                 state = @"PaymentTransactionStatePurchased";
                 transactionIdentifier = transaction.transactionIdentifier;
-                transactionReceipt = [[transaction transactionReceipt] cdv_base64EncodedString];
+                transactionReceipt = [[transaction transactionReceipt] base64EncodedStringWithOptions:0];
                 productId = transaction.payment.productIdentifier;
                 downloads = transaction.downloads;
                 canFinish = YES;
@@ -474,7 +474,7 @@ unsigned char* unbase64( const char* ascii, int len, int *flen )
                 transactionIdentifier = transaction.transactionIdentifier;
                 if (!transactionIdentifier)
                     transactionIdentifier = transaction.originalTransaction.transactionIdentifier;
-                transactionReceipt = [[transaction transactionReceipt] cdv_base64EncodedString];
+                transactionReceipt = [[transaction transactionReceipt] base64EncodedStringWithOptions:0];
                 productId = transaction.originalTransaction.payment.productIdentifier;
                 downloads = transaction.downloads;
                 canFinish = YES;
@@ -498,9 +498,9 @@ unsigned char* unbase64( const char* ascii, int len, int *flen )
             [callbackArgs JSONSerialize]];
         // DLog(@"js: %@", js);
         [self.commandDelegate evalJs:js];
-        
-        if(downloads){
-            [[SKPaymentQueue defaultQueue] startDownloads:transaction.downloads];
+
+        if (downloads && [downloads count] > 0) {
+            [[SKPaymentQueue defaultQueue] startDownloads:downloads];
         }
         else if (g_autoFinishEnabled && canFinish) {
             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -703,7 +703,7 @@ static NSString *rootAppleCA = @"MIIEuzCCA6OgAwIBAgIBAjANBgkqhkiG9w0BAQUFADBiMQs
         
         SKPaymentTransaction *transaction = download.transaction;
         NSString *transactionId = transaction.transactionIdentifier;
-        NSString *transactionReceipt = [[transaction transactionReceipt] cdv_base64EncodedString];
+        NSString *transactionReceipt = [[transaction transactionReceipt] base64EncodedStringWithOptions:0];
         SKPayment *payment = transaction.payment;
         NSString *productId = payment.productIdentifier;
         
@@ -937,6 +937,13 @@ static NSString *rootAppleCA = @"MIIEuzCCA6OgAwIBAgIBAjANBgkqhkiG9w0BAQUFADBiMQs
     NSMutableArray *validProducts = [NSMutableArray array];
     DLog(@"Has %li validProducts", (unsigned long)[response.products count]);
     for (SKProduct *product in response.products) {
+        // Get the currency code from the NSLocale object
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+        [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [numberFormatter setLocale:product.priceLocale];
+        NSString *currencyCode = [numberFormatter currencyCode];
+        
         DLog(@" - %@: %@", product.productIdentifier, product.localizedTitle);
         [validProducts addObject:
          [NSDictionary dictionaryWithObjectsAndKeys:
@@ -944,6 +951,7 @@ static NSString *rootAppleCA = @"MIIEuzCCA6OgAwIBAgIBAjANBgkqhkiG9w0BAQUFADBiMQs
           NILABLE(product.localizedTitle),       @"title",
           NILABLE(product.localizedDescription), @"description",
           NILABLE(product.localizedPrice),       @"price",
+          NILABLE(currencyCode),                 @"currency",
           nil]];
         [self.plugin.list setObject:product forKey:[NSString stringWithFormat:@"%@", product.productIdentifier]];
     }

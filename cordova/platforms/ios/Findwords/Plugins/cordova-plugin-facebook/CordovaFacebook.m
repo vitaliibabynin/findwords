@@ -339,8 +339,6 @@
     } else {
         return [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No Arguments Supplied"] callbackId:command.callbackId];
     }
-
-    self.dialogCallbackId = command.callbackId;
     
     FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
     content.appLinkURL = [NSURL URLWithString:appLinkUrl];
@@ -352,10 +350,8 @@
     [FBSDKAppInviteDialog showWithContent:content
                                  delegate:self];
     
-
-    
-//    NSMutableDictionary *cdvResult = [NSMutableDictionary dictionary];
-//    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:cdvResult] callbackId:command.callbackId];
+    NSMutableDictionary *cdvResult = [NSMutableDictionary dictionary];
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:cdvResult] callbackId:command.callbackId];
 }
 
 - (void) graphRequest: (CDVInvokedUrlCommand *) command {
@@ -485,28 +481,9 @@
 # pragma mark FBSDKAppInviteDialogDelegate
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results{
     NSLog(@"FB: INVITE didCompleteWithResults\n");
-    if (!self.dialogCallbackId) {
-        return;
-    }
-    
-    CDVPluginResult *pluginResult;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                 messageAsDictionary:results];
-    
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.dialogCallbackId];
-    self.dialogCallbackId = nil;
 }
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error{
     NSLog(@"FB: INVITE didFailWithError\n");
-    if (!self.dialogCallbackId) {
-        return;
-    }
-    
-    CDVPluginResult *pluginResult;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                     messageAsString:[NSString stringWithFormat:@"Error: %@", error.description]];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.dialogCallbackId];
-    self.dialogCallbackId = nil;
 }
 
 @end

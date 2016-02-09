@@ -1241,6 +1241,7 @@ store.verbosity = 0;
                 title: validProducts[i].title,
                 price: validProducts[i].price,
                 description: validProducts[i].description,
+                currency: validProducts[i].currency,
                 state: store.VALID
             });
             p.trigger("loaded");
@@ -1400,7 +1401,6 @@ store.verbosity = 0;
             timeRemaining: timeRemaining,
             state: store.DOWNLOADING
         });
-        p.stateChanged();
     }
     function storekitDownloadFailed(transactionIdentifier, productId, errorCode, errorText) {
         store.log.error("ios -> download failed: " + productId + "; errorCode=" + errorCode + "; errorText=" + errorText);

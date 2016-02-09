@@ -1,27 +1,11 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/com.admob.plugin/www/AdmobPlugin.js",
-        "id": "com.admob.plugin.AdmobAd",
-        "pluginId": "com.admob.plugin",
+        "file": "plugins/com.portnou.cordova.plugin.preferences/www/preferences.js",
+        "id": "com.portnou.cordova.plugin.preferences.Preferences",
+        "pluginId": "com.portnou.cordova.plugin.preferences",
         "clobbers": [
-            "window.admob"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-ad-unityads/www/unityads.js",
-        "id": "cordova-plugin-ad-unityads.unityads",
-        "pluginId": "cordova-plugin-ad-unityads",
-        "clobbers": [
-            "window.unityads"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-ad-vungle/www/vungle.js",
-        "id": "cordova-plugin-ad-vungle.vungle",
-        "pluginId": "cordova-plugin-ad-vungle",
-        "clobbers": [
-            "window.vungle"
+            "Preferences"
         ]
     },
     {
@@ -46,6 +30,14 @@ module.exports = [
         "pluginId": "cordova-plugin-device",
         "clobbers": [
             "device"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-facebook/www/CordovaFacebook.js",
+        "id": "cordova-plugin-facebook.CordovaFacebook",
+        "pluginId": "cordova-plugin-facebook",
+        "clobbers": [
+            "CordovaFacebook"
         ]
     },
     {
@@ -81,46 +73,6 @@ module.exports = [
         "merges": [
             "cordova.plugins.notification.local.core",
             "plugin.notification.local.core"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-        "id": "cordova-plugin-statusbar.statusbar",
-        "pluginId": "cordova-plugin-statusbar",
-        "clobbers": [
-            "window.StatusBar"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "pluginId": "cordova-plugin-splashscreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
-        "file": "plugins/cc.fovea.cordova.purchase/www/store-ios.js",
-        "id": "cc.fovea.cordova.purchase.InAppPurchase",
-        "pluginId": "cc.fovea.cordova.purchase",
-        "clobbers": [
-            "store"
-        ]
-    },
-    {
-        "file": "plugins/com.portnou.cordova.plugin.preferences/www/preferences.js",
-        "id": "com.portnou.cordova.plugin.preferences.Preferences",
-        "pluginId": "com.portnou.cordova.plugin.preferences",
-        "clobbers": [
-            "Preferences"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-facebook/www/CordovaFacebook.js",
-        "id": "cordova-plugin-facebook.CordovaFacebook",
-        "pluginId": "cordova-plugin-facebook",
-        "clobbers": [
-            "CordovaFacebook"
         ]
     },
     {
@@ -298,28 +250,42 @@ module.exports = [
             "cordova.InAppBrowser.open",
             "window.open"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "pluginId": "cordova-plugin-splashscreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "pluginId": "cordova-plugin-statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
+    },
+    {
+        "file": "plugins/cc.fovea.cordova.purchase/www/store-ios.js",
+        "id": "cc.fovea.cordova.purchase.InAppPurchase",
+        "pluginId": "cc.fovea.cordova.purchase",
+        "clobbers": [
+            "store"
+        ]
+    },
+    {
+        "file": "plugins/com.appodeal.plugin/www/appodeal.js",
+        "id": "com.appodeal.plugin.AppodealPlugin",
+        "pluginId": "com.appodeal.plugin",
+        "clobbers": [
+            "Appodeal"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
-{
-    "cordova-plugin-whitelist": "1.2.0",
-    "com.admob.plugin": "5.2.0",
-    "cordova-plugin-ad-unityadssdk": "1.0.0",
-    "cordova-plugin-ad-unityads": "1.0.33",
-    "cordova-plugin-ad-vungle": "1.0.60",
-    "cordova-plugin-console": "1.0.2",
-    "cordova-plugin-device": "1.1.0",
-    "cordova-plugin-google-analytics": "0.8.1",
-    "de.appplant.cordova.common.registerusernotificationsettings": "1.0.1",
-    "de.appplant.cordova.plugin.local-notification": "0.8.2",
-    "cordova-plugin-statusbar": "2.0.0",
-    "cordova-plugin-splashscreen": "3.0.0",
-    "cc.fovea.cordova.purchase": "4.0.0",
-    "com.portnou.cordova.plugin.preferences": "1.0.0",
-    "cordova-plugin-facebook": "0.2.2",
-    "cordova-plugin-file": "3.0.0",
-    "cordova-plugin-inappbrowser": "1.1.0"
-}
+{}
 // BOTTOM OF METADATA
 });

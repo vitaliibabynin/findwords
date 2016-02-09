@@ -75,7 +75,6 @@ var PageGameMain = Object.assign({}, {}, {
 
         this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
 
-        appAd.prepareInterstitial();
         //console.log("pageGameComponentDidMount");
     },
 

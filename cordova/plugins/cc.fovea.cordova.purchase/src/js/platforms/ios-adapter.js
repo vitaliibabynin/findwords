@@ -57,7 +57,7 @@ store.when("finished", function(product) {
 
 function storekitFinish(product) {
     if (product.type === store.CONSUMABLE) {
-        if (product.transaction.id)
+        if (product.transaction && product.transaction.id)
             storekit.finish(product.transaction.id);
     }
     else if (product.transactions) {
@@ -213,6 +213,7 @@ function storekitLoaded(validProducts, invalidProductIds) {
             title: validProducts[i].title,
             price: validProducts[i].price,
             description: validProducts[i].description,
+            currency: validProducts[i].currency,
             state: store.VALID
         });
         p.trigger("loaded");
@@ -439,7 +440,6 @@ function storekitDownloadActive(transactionIdentifier, productId, progress, time
         timeRemaining: timeRemaining,
         state: store.DOWNLOADING
     });
-    p.stateChanged();
 }
 function storekitDownloadFailed(transactionIdentifier, productId, errorCode, errorText) {
     store.log.error("ios -> download failed: " + productId + "; errorCode=" + errorCode + "; errorText=" + errorText);

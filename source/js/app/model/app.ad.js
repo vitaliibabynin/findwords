@@ -11,10 +11,8 @@ var Ad = function(currentPlatform, isCordovaApp){
     this.startAd = null;
     this.adRemoved = false;
 
-    this.admobInited = false;
+    this.appodelInited = false;
     this.bottomBannerHeight = 0;
-    this.unityAdsInited = false;
-    this.vungleInited = false;
 
     this.init = function(){
 
@@ -27,52 +25,25 @@ var Ad = function(currentPlatform, isCordovaApp){
             }
 
             if(this.isCordovaApp){
-                if(this.settings.hasOwnProperty("adMob") && window.admob){
-                    var bannerId = this.settings.adMob['320x50'];
+                if(this.settings.hasOwnProperty("appodeal") && window.Appodeal){
+
+                    Appodeal.initialize(this.settings.appodeal.appid, Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO | Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
+
                     this.bottomBannerHeight = 50;
 
                     var screenWidth = this.getScreenWidth();
                     if(screenWidth >= 728){
-                        bannerId = this.settings.adMob['728x90'];
                         this.bottomBannerHeight = 90;
                     }else if(screenWidth >= 468){
-                        bannerId = this.settings.adMob['468x60'];
                         this.bottomBannerHeight = 60;
                     }
 
-                    //console.log('Ad Real ScreenWidth: ' + window.screen.width);
-                    //console.log('Ad Real ScreenHeight: ' + window.screen.height);
-                    //console.log('Ad ScreenWidth: ' + screenWidth);
-                    //console.log('Ad devicePixelRate: ' + window.devicePixelRatio);
-                    //console.log('Ad calced width: ' + window.screen.width * window.devicePixelRatio);
-                    //console.log('Ad calced div width: ' + parseInt(window.screen.width / window.devicePixelRatio));
-                    //console.log('Ad bottomHeight: ' + this.bottomBannerHeight);
-
-                    admob.initAdmob(bannerId.trim(), this.settings.adMob.interstitial.trim());
-                    document.addEventListener(
-                        admob.Event.onInterstitialReceive,
-                        this.onAdMobInterstitialReceive.bind(this),
-                        false);
-                    this.admobInited = true;
+                    this.appodelInited = true;
                 }
             }
 
             if(this.settings.hasOwnProperty("startAd")){
                 this.startAd = new StartAD(this.settings.startAd.trim());
-            }
-
-            if(this.settings.hasOwnProperty("unityAds") && window.unityads){
-                var videoAdPlacementId = "video";
-                var rewardedVideoAdPlacementId = "rewardedVideo";
-                window.unityads.setUp(this.settings.unityAds.id.trim(), videoAdPlacementId, rewardedVideoAdPlacementId, this.settings.unityAds.isTest);
-
-                this.unityAdsInited = true;
-            }
-
-            if(this.settings.hasOwnProperty("vungle") && window.vungle){
-                window.vungle.setUp(this.settings.vungle.trim());
-
-                this.vungleInited = true;
             }
 
             resolve();
@@ -103,47 +74,7 @@ var Ad = function(currentPlatform, isCordovaApp){
         this.lastShowInterstitialTime = Date.now() + this.showIntersititalPeriod;
     }
 
-    this.onAdMobInterstitialReceive = function(message) {
 
-    }
-
-    this.getAdMobParams = function(){
-        var admobParam = new  admob.Params();
-        admobParam.isTesting = this.settings.adMob.isTest ? true : false;
-
-        return admobParam;
-    },
-
-    this.prepareInterstitial = function(){
-        if(this.adRemoved){
-            return false;
-        }
-
-        if(this.admobInited && window.admob){
-            admob.isInterstitialReady(function(isReady){
-                if(!isReady){
-                    admob.cacheInterstitial(this.getAdMobParams());
-                }
-            }.bind(this));
-        }
-    }
-
-    this.getAdMobBannerType = function(){
-        var screenWidth = this.getScreenWidth();
-
-        var bannerType = admob.BannerSize.BANNER;
-        if(screenWidth >= 728){
-            bannerType = admob.BannerSize.IAB_LEADERBOARD;
-
-            if(deviceJS.ipad()){
-                bannerType = admob.BannerSize.IPAD_PORTRAIT;
-            }
-        }else if(screenWidth >= 468){
-            bannerType = admob.BannerSize.IAB_BANNER;
-        }
-
-        return bannerType;
-    },
 
     this.getBottomBannerHeight = function(){
         return this.bottomBannerHeight;
@@ -154,21 +85,14 @@ var Ad = function(currentPlatform, isCordovaApp){
             return false;
         }
 
-        if(this.admobInited && window.admob) {
-            admob.showBanner(this.getAdMobBannerType(), admob.Position.BOTTOM_CENTER, this.getAdMobParams());
+        if(this.appodelInited) {
+            Appodeal.show(Appodeal.BANNER_BOTTOM);
         }
     },
 
     this.hideBanner = function(){
-        if(this.admobInited && window.admob) {
-            admob.hideBanner(
-                function (result) {
-                    console.log(result);
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
+        if(this.appodelInited) {
+            Appodeal.hide(Appodeal.BANNER);
         }
     },
 
@@ -177,14 +101,23 @@ var Ad = function(currentPlatform, isCordovaApp){
             return false;
         }
 
-        if(this.admobInited && this.isCordovaApp && this.lastShowInterstitialTime < Date.now() && window.admob){
-            admob.isInterstitialReady(function(isReady){
-                if(isReady){
-                    admob.showInterstitial();
+        if(this.appodelInited && this.isCordovaApp && this.lastShowInterstitialTime < Date.now()){
+            Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO, function(result){
+                console.log('isLoaded SKIPPABLE_VIDEO', result);
+                if(result){
+                    Appodeal.show(Appodeal.SKIPPABLE_VIDEO);
                     this.updateLastShowInterstitialTime();
-                }else{
-                    this.prepareInterstitial();
+                    return;
                 }
+
+                Appodeal.isLoaded(Appodeal.INTERSTITIAL, function(result){
+                    console.log('isLoaded INTERSTITIAL', result);
+                    if(result){
+                        Appodeal.show(Appodeal.INTERSTITIAL);
+                        this.updateLastShowInterstitialTime();
+                        return;
+                    }
+                }.bind(this));
             }.bind(this));
         }
     }
@@ -217,19 +150,18 @@ var Ad = function(currentPlatform, isCordovaApp){
     this.showRewardedVideo = function(){
         return new Promise(function(resolve, reject){
 
-            if(this.unityAdsInited && window.unityads.loadedRewardedVideoAd()){
-                window.unityads.onRewardedVideoAdCompleted = function() {
-                    resolve();
-                };
-                window.unityads.showRewardedVideoAd();
-                return;
-            }
+            if(this.appodelInited){
 
-            if(this.vungleInited && window.vungle.loadedRewardedVideoAd()){
-                window.vungle.onRewardedVideoAdCompleted = function() {
+                document.addEventListener('onRewardedVideoFinished', function(data){
+                    console.log('Reward:' + data.amount + ' ' + data.name);  //data.amount  - amount of reward, data.name - reward name
                     resolve();
-                };
-                window.vungle.showRewardedVideoAd();
+                });
+                Appodeal.isLoaded(Appodeal.REWARDED_VIDEO, function(result){
+                    if(result){
+                        Appodeal.show(Appodeal.REWARDED_VIDEO);
+                    }
+                }.bind(this));
+
                 return;
             }
 
