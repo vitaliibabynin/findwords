@@ -247,13 +247,13 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
-    debugCompile project(path: 'CordovaLib', configuration: 'debug')
-    releaseCompile project(path: 'CordovaLib', configuration: 'release')
+    debugCompile project(path: "CordovaLib", configuration: "debug")
+    releaseCompile project(path: "CordovaLib", configuration: "release")
+    compile "com.facebook.android:facebook-android-sdk:4.3.+"
+    compile "com.google.android.gms:play-services-analytics:8.3.0"
+    compile "com.google.android.gms:play-services-ads:8.3.0"
+    compile "com.android.support:support-v4:+"
     // SUB-PROJECT DEPENDENCIES END
-    compile 'com.facebook.android:facebook-android-sdk:4.3.+'
-    compile 'com.google.android.gms:play-services-analytics:8.3.0'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
-    compile 'com.android.support:support-v4:23.1.1'
 }
 
 def promptForReleaseKeyPassword() {
