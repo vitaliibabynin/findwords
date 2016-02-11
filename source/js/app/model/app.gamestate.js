@@ -418,6 +418,21 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
 
         return this.gameState.roundsBundles[router.getLanguage()][bundleIndex].rounds[roundIndex];
     },
+    getCompletedRoundsCount: function(){
+        var completedRounds = 0;
+        var roundsBundles = this.getRoundsBundles();
+        if(!roundsBundles){
+            return completedRounds;
+        }
+
+        for(var k in roundsBundles){
+            if(!roundsBundles.hasOwnProperty(k)){ continue; }
+            if(!roundsBundles[k].roundsComplete){ continue; }
+            completedRounds += roundsBundles[k].roundsComplete;
+        }
+
+        return completedRounds;
+    },
 
 
 

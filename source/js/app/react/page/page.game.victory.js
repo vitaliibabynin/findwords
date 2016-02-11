@@ -47,6 +47,18 @@ var PageGameVictory = Object.assign({}, {}, {
         var roundsComplete = appManager.getGameState().getRoundsBundles(this.state.roundsBundleIdx).roundsComplete || 0;
         roundsComplete++;
         appManager.getGameState().setRoundsBundles(this.state.roundsBundleIdx, "roundsComplete", roundsComplete);
+
+        if(appFB.isAuthorized()){
+            appApi.updateRating(
+                appFB.getAccessToken(),
+                CONST.GAME_TYPE,
+                appManager.getSettings().getGameId(),
+                appManager.getGameState().getScore(),
+                appManager.getGameState().getCompletedRoundsCount()
+            );
+        }
+
+
         this.setState({roundsComplete: roundsComplete});
         //this.forceUpdate();
 

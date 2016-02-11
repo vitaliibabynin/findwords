@@ -97,7 +97,9 @@ var AbstractFB = Object.assign({}, AbstractEventEmitter, {
                     ids.push(this.appFriends[i].id);
                 }
 
-                return appApi.getFriendStats(ids);
+                return ids.length > 0 ?
+                    appApi.getAccountsStats(ids, CONST.GAME_TYPE, appManager.getSettings().getGameId())
+                    : {};
             }.bind(this)).then(function (friendStats) {
                 if (!friendStats.accounts || friendStats.accounts.length <= 0) {
                     return resolve([]);
@@ -508,7 +510,7 @@ var CordovaFB = Object.assign({}, AbstractFB, {
 
             promise.then(function () {
                 this.fbPlugin.invite({
-                    appLinkUrl: appManager.getSettings().getShareAppLink(),
+                    appLinkUrl: appManager.getSettings().getInviteAppUrl(),
                     appInvitePreviewImageURL: appManager.getSettings().getAppInviteImgUrl(),
                     onSuccess: function (result) {
                         resolve(result);

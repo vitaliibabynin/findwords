@@ -33,6 +33,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return this.settings.shop[key];
     },
 
+    getGameId: function () {
+        return this.getSettingsValue('gameId', "");
+    },
+
     getAppPlatforms: function () {
         return this.getSettingsValue('marketAppId', {});
     },
@@ -52,6 +56,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         }
 
         return shareLink;
+    },
+
+    getInviteAppUrl: function(){
+        return this.getSettingsValue('inviteAppLink', false);
     },
 
     getAppInviteImgUrl: function(){
@@ -125,6 +133,22 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         }
 
         return safePracticeRound;
+    },
+
+    getRoundsTotal: function(){
+        var totalRounds = 0;
+        var roundsBundles = this.getRoundsBundles();
+        if(!roundsBundles){
+            return totalRounds;
+        }
+
+        for(var k in roundsBundles){
+            if(!roundsBundles.hasOwnProperty(k)){ continue; }
+            if(!roundsBundles[k].rounds){ continue; }
+            totalRounds += roundsBundles[k].rounds.length;
+        }
+
+        return totalRounds;
     },
 
     getBonusCoins: function () {

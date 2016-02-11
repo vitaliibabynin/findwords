@@ -108,9 +108,35 @@ var ApiClass = function(apiUrl, apiVersion){
     }
 */
 
+    this.updateRating = function(fbToken, gameType, gameId, score, levelsCompleted){
+        var params = {
+            t: fbToken,
+            gt: gameType,
+            gid: gameId,
+            s: score,
+            lc: levelsCompleted
+        }
+
+        return this.makeRequest('POST', 'smalldev/ratingupdate', params);
+    }
+
+    this.getAccountsStats = function(ids, gameType, gameId){
+        var params = {
+            aids: ids.join(','),
+            gt: gameType,
+            gid: gameId
+        }
+
+        return this.makeRequest('POST', 'smalldev/ratingaccountstats', params);
+    }
+
 };
 
-module.exports = ApiClass;
+
+
+module.exports = {
+    ApiClass: ApiClass
+};
 
 
 

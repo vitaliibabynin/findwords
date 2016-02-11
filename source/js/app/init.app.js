@@ -70,7 +70,14 @@ $(function() {
         if(CONST.IS_CORDOVA_APP){
             var appLoadTime = Date.now();
             document.addEventListener("deviceready", function(){
+
+                var intervalId = setInterval(function(){
+                    //это хак, на появление статус бара в андроид 5 во время игры.
+                    //Пока не понятно от чего.
+                    window.StatusBar.hide();
+                }.bind(this), 5000);
                 window.StatusBar.hide();
+
                 window.open = cordova.InAppBrowser.open;
                 initApp();
                 navigator.splashscreen.hide();

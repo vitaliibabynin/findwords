@@ -9,7 +9,7 @@ var AdClass = require('./model/app.ad').Ad;
 var FBFactory = require('./model/app.fb').FBFactory;
 var StoreFactory = require('./model/app.store').StoreFactory;
 var NotoficationLocalFactory = require('./model/app.notification.local').NotoficationLocalFactory;
-var ApiClass = require('./model/app.api');
+var ApiClass = require('./model/app.api').ApiClass;
 
 window.Utils = require('./utils');
 window.router = require('./model/app.router');

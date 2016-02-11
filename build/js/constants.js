@@ -2,6 +2,8 @@ window.CONST = {
     ENV: CURRENT_ENV,
     IS_CORDOVA_APP: window.cordova ? true : false,
 
+    GAME_TYPE: 'findwords',
+
     CURRENT_PLATFORM: 'site',
     PLATFORM_WINDOWS: 'win',
     PLATFORM_ANDROID: 'android',
@@ -377,15 +379,16 @@ if (!CONST.IS_CORDOVA_APP) {
 var ENV_SETTINGS = {};
 ENV_SETTINGS[ENV_LOCAL] = {
     BASE_URL: 'http://words.game',
-    API_URL: 'http://api.words.game'
+    API_URL: 'http://api.timetosmile.net/'
 }
 ENV_SETTINGS[ENV_ALEK] = {
     BASE_URL: 'http://vitaliy.findwords.smalldev',
-    API_URL: 'http://api.vitaliy.findwords.smalldev'
+    API_URL: 'http://api.vitaliy.findwords.smalldev',
+    API_URL: 'http://mobileapi/'
 }
 ENV_SETTINGS[ENV_PRODUCTION] = {
     BASE_URL: 'http://vitaliy.findwords.smalldev.alek.in.ua',
-    API_URL: 'http://api.vitaliy.findwords.smalldev.alek.in.ua'
+    API_URL: 'http://api.timetosmile.net/'
 }
 
 if (ENV_SETTINGS.hasOwnProperty(CURRENT_ENV)) {
