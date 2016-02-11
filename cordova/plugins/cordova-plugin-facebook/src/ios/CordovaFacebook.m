@@ -1,23 +1,15 @@
+
+#import <objc/runtime.h>
+
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import <math.h>
 #import "CordovaFacebook.h"
 
-#import <FBSDKShareKit/FBSDKShareKit.h>
-#import <objc/runtime.h>
-
-@interface CDVFacebook ()
-
-@property (strong, nonatomic) NSString* dialogCallbackId;
-- (NSDictionary *)responseObject;
-- (NSDictionary*)parseURLParams:(NSString *)query;
-- (BOOL)isPublishPermission:(NSString*)permission;
-- (BOOL)areAllPermissionsReadPermissions:(NSArray*)permissions;
-@end
-
 @implementation CDVFacebook
 
-# pragma mark CDVPlugin
+
 
 - (void) pluginInitialize
 {
@@ -34,7 +26,7 @@
     [defaultCenter addObserver:self selector:@selector(onHandleOpenURL:) name:CDVPluginHandleOpenURLNotification object:nil];
 
     [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
-
+    
     self.fbLogin = [[FBSDKLoginManager alloc] init];
     self.fbLogin.loginBehavior = FBSDKLoginBehaviorSystemAccount;
 }
@@ -183,6 +175,7 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+
 - (void) init: (CDVInvokedUrlCommand*) command {
     FBSDKAccessToken* accessToken = [FBSDKAccessToken currentAccessToken];
     
@@ -199,6 +192,7 @@
     
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:cdvResult] callbackId:command.callbackId];
 }
+
 
 - (void) login: (CDVInvokedUrlCommand*) command {
     NSArray* args = command.arguments;
@@ -244,7 +238,7 @@
         if (accessToken) {
             [cdvResult setObject:[accessToken tokenString] forKey:@"accessToken"];
             [cdvResult setObject:[accessToken userID] forKey:@"userID"];
-            
+
             long long timestamp = (long long)[[accessToken expirationDate] timeIntervalSince1970]*1000.0;
             [cdvResult setObject:[[NSNumber numberWithLongLong:timestamp] stringValue]forKey:@"expirationDate"];
         }
@@ -285,74 +279,50 @@
 }
 
 
-- (void) share: (CDVInvokedUrlCommand*) command {
-    NSArray* args = command.arguments;
-    
-    if([args count] <= 0) {
-        return [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot make Graph Request without a Path"] callbackId:command.callbackId];
-    }
-    
-    
-    [self.commandDelegate runInBackground:^{
-        
-        
-        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-        content.contentURL = [NSURL URLWithString:[args objectAtIndex: 0]];
-        if([args count] > 1){
-            content.contentTitle = [args objectAtIndex: 1];
-        }
-        if([args count] > 2){
-            content.contentDescription = [args objectAtIndex: 2];
-        }
-        
-        self.dialogCallbackId = command.callbackId;
-        
-        [FBSDKShareDialog showFromViewController:self.viewController
-                                     withContent:content
-                                        delegate:self];
-        
-        
-        
-        //        FBSDKShareDialog *shareDialog = [FBSDKShareDialog new];
-        //        [shareDialog setMode:FBSDKShareDialogModeAutomatic];
-        //        [shareDialog setShareContent:content];
-        //        [shareDialog setDelegate:self];
-        //        [shareDialog setFromViewController:self.viewController];
-        //        [shareDialog show];
-    }];
-    
-    
-}
+- (void)share:(CDVInvokedUrlCommand*)command
+{
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentURL = [NSURL URLWithString:[command.arguments objectAtIndex:0]];
+    content.contentTitle = [command.arguments objectAtIndex:1];
+    content.contentDescription = [command.arguments objectAtIndex:2];
 
+    self.callbackId = command.callbackId;
+    [FBSDKShareDialog showFromViewController:self.viewController
+                                 withContent:content
+                                    delegate:self];
+}
 
 
 - (void) invite: (CDVInvokedUrlCommand*) command {
     NSArray* args = command.arguments;
     NSString* appLinkUrl;
     NSString* appInvitePreviewImageURL;
-    
+
     if([args count] > 0) {
         appLinkUrl = [args objectAtIndex: 0];
         if([args count] > 1) {
             appInvitePreviewImageURL = [args objectAtIndex: 1];
         }
     } else {
-        return [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No Arguments Supplied"] callbackId:command.callbackId];
+        return [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Cannot make Graph Request without a Path"] callbackId:command.callbackId];
     }
     
     FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
     content.appLinkURL = [NSURL URLWithString:appLinkUrl];
-    //optionally set previewImageURL
     content.appInvitePreviewImageURL = [NSURL URLWithString:appInvitePreviewImageURL];
     
     // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
+
     
+    self.callbackId = command.callbackId;
     [FBSDKAppInviteDialog showWithContent:content
-                                 delegate:self];
-    
+                                     delegate:self];
+
     NSMutableDictionary *cdvResult = [NSMutableDictionary dictionary];
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:cdvResult] callbackId:command.callbackId];
 }
+
+
 
 - (void) graphRequest: (CDVInvokedUrlCommand *) command {
     CDVCommandStatus status;
@@ -437,57 +407,85 @@
 }
 
 
+#pragma mark FBSDKSharingDelegate
 
-
-# pragma mark - FBSDKSharingDelegate
-
-- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
-    if (!self.dialogCallbackId) {
+/*!
+ @abstract Sent to the delegate when the share completes without error or cancellation.
+ @param sharer The FBSDKSharing that completed.
+ @param results The results from the sharer.  This may be nil or empty.
+ */
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    if(!self.callbackId){
         return;
     }
     
-    CDVPluginResult *pluginResult;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                 messageAsDictionary:results];
-    
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.dialogCallbackId];
-    self.dialogCallbackId = nil;
+    NSMutableDictionary *cdvResult = [NSMutableDictionary dictionary];
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:cdvResult] callbackId:self.callbackId];
+    self.callbackId = nil;
 }
 
-- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
-    if (!self.dialogCallbackId) {
+/*!
+ @abstract Sent to the delegate when the sharer encounters an error.
+ @param sharer The FBSDKSharing that completed.
+ @param error The error.
+ */
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    if(!self.callbackId){
         return;
     }
     
-    CDVPluginResult *pluginResult;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                     messageAsString:[NSString stringWithFormat:@"Error: %@", error.description]];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.dialogCallbackId];
-    self.dialogCallbackId = nil;
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Share error"] callbackId:self.callbackId];
+    self.callbackId = nil;
 }
 
-- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
-    if (!self.dialogCallbackId) {
+/*!
+ @abstract Sent to the delegate when the sharer is cancelled.
+ @param sharer The FBSDKSharing that completed.
+ */
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    if(!self.callbackId){
         return;
     }
     
-    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                                      messageAsString:@"User cancelled."];
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:self.dialogCallbackId];
-    self.dialogCallbackId = nil;
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Canceled by user"] callbackId:self.callbackId];
+    self.callbackId = nil;
 }
 
 
-# pragma mark FBSDKAppInviteDialogDelegate
+#pragma mark FBSDKAppInviteDialogDelegate
+
+/*!
+ @abstract Sent to the delegate when the app invite completes without error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param results The results from the dialog.  This may be nil or empty.
+ */
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results{
-    NSLog(@"FB: INVITE didCompleteWithResults\n");
+    if(!self.callbackId){
+        return;
+    }
+    
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:results] callbackId:self.callbackId];
+    self.callbackId = nil;
 }
+
+/*!
+ @abstract Sent to the delegate when the app invite encounters an error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param error The error.
+ */
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error{
-    NSLog(@"FB: INVITE didFailWithError\n");
+    if(!self.callbackId){
+        return;
+    }
+    
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invite error"] callbackId:self.callbackId];
+    self.callbackId = nil;
 }
 
 @end
-
 
 
 

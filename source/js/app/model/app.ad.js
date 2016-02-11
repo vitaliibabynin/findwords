@@ -26,8 +26,11 @@ var Ad = function(currentPlatform, isCordovaApp){
 
             if(this.isCordovaApp){
                 if(this.settings.hasOwnProperty("appodeal") && window.Appodeal){
-
-                    Appodeal.initialize(this.settings.appodeal.appid, Appodeal.INTERSTITIAL | Appodeal.SKIPPABLE_VIDEO | Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
+                    Appodeal.setAutoCache(Appodeal.INTERSTITIAL | Appodeal.VIDEO | Appodeal.REWARDED_VIDEO, true);
+                    Appodeal.initialize(this.settings.appodeal.appid, Appodeal.INTERSTITIAL | Appodeal.VIDEO | Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
+                    Appodeal.enableInterstitialCallbacks(true);
+                    Appodeal.enableVideoCallbacks(true);
+                    Appodeal.enableRewardedVideoCallbacks(true);
 
                     this.bottomBannerHeight = 50;
 
@@ -102,22 +105,13 @@ var Ad = function(currentPlatform, isCordovaApp){
         }
 
         if(this.appodelInited && this.isCordovaApp && this.lastShowInterstitialTime < Date.now()){
-            Appodeal.isLoaded(Appodeal.SKIPPABLE_VIDEO, function(result){
-                console.log('isLoaded SKIPPABLE_VIDEO', result);
+            Appodeal.isLoaded(Appodeal.VIDEO | Appodeal.INTERSTITIAL, function(result){
+                console.log('isLoaded Appodeal.VIDEO | Appodeal.INTERSTITIAL', result);
                 if(result){
-                    Appodeal.show(Appodeal.SKIPPABLE_VIDEO);
+                    Appodeal.show(Appodeal.VIDEO | Appodeal.INTERSTITIAL);
                     this.updateLastShowInterstitialTime();
                     return;
                 }
-
-                Appodeal.isLoaded(Appodeal.INTERSTITIAL, function(result){
-                    console.log('isLoaded INTERSTITIAL', result);
-                    if(result){
-                        Appodeal.show(Appodeal.INTERSTITIAL);
-                        this.updateLastShowInterstitialTime();
-                        return;
-                    }
-                }.bind(this));
             }.bind(this));
         }
     }

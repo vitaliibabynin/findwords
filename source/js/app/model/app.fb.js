@@ -448,32 +448,33 @@ var CordovaFB = Object.assign({}, AbstractFB, {
     },
 
     share: function (url) {
-        var promise;
-        if (!appFB.isAuthorized()) {
-            promise = appFB.login();
-        } else {
-            promise = Promise.resolve();
-        }
+        return new Promise(function(resolve, reject){
+            var promise;
+            if (!appFB.isAuthorized()) {
+                promise = appFB.login();
+            } else {
+                promise = Promise.resolve();
+            }
 
+            promise.then(function () {
+                    this.fbPlugin.share({
+                        shareLinkUrl: url || appManager.getSettings().getShareAppLink(),
+                        title: i18n._('share.caption'),
+                        description: i18n._('share.description'),
+                        onSuccess: function (result) {
+                            if(!result || !result.postId){
+                                return reject()
+                            }
+                            resolve(result.postId);
+                        }.bind(this),
+                        onFailure: function (result) {
+                            console.log('CordovaFB.share', result);
+                            reject(result);
+                        }.bind(this)
+                    });
+            }.bind(this), reject);
 
-        promise.then(function () {
-            return new Promise(function(resolve, reject){
-                this.fbPlugin.share({
-                    shareLinkUrl: url || appManager.getSettings().getShareAppLink(),
-                    title: i18n._('share.caption'),
-                    description: i18n._('share.description'),
-                    onSuccess: function (result) {
-                        resolve();
-                    }.bind(this),
-                    onFailure: function (result) {
-                        console.log('CordovaFB.share', result);
-                        reject(result);
-                    }.bind(this)
-                });
-            }.bind(this));
         }.bind(this));
-
-        return promise;
     },
 
     invite: function (message, title, excludeIds) {
@@ -497,16 +498,15 @@ var CordovaFB = Object.assign({}, AbstractFB, {
         //}.bind(this));
 
 
+        return new Promise(function(resolve, reject){
+            var promise;
+            if (!appFB.isAuthorized()) {
+                promise = appFB.login();
+            } else {
+                promise = Promise.resolve();
+            }
 
-        var promise;
-        if (!appFB.isAuthorized()) {
-            promise = appFB.login();
-        } else {
-            promise = Promise.resolve();
-        }
-
-        promise.then(function () {
-            return new Promise(function(resolve, reject){
+            promise.then(function () {
                 this.fbPlugin.invite({
                     appLinkUrl: appManager.getSettings().getShareAppLink(),
                     appInvitePreviewImageURL: appManager.getSettings().getAppInviteImgUrl(),
@@ -520,8 +520,6 @@ var CordovaFB = Object.assign({}, AbstractFB, {
                 });
             }.bind(this));
         }.bind(this));
-
-        return promise;
     },
 
     getMe: function () {

@@ -3,6 +3,7 @@ package com.blakeisrael.cordova;
 import android.app.Activity;
 
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 
 import android.content.Intent;
@@ -453,6 +454,39 @@ public class CordovaFacebook extends CordovaPlugin {
         callbackContext.success();
     }
 
+
+    private void graphRequestGetData(GraphRequest gr, final CallbackContext callbackContext){
+        final GraphResponse response = gr.executeAndWait();
+
+        if(response == null) {
+            callbackContext.error("GraphResponse was null");
+            return;
+        }
+
+        final FacebookRequestError error = response.getError();
+
+        if(error != null) {
+            callbackContext.error(error.getErrorMessage());
+            return;
+        }
+
+        final JSONObject responseObject = response.getJSONObject();
+
+        if(responseObject != null) {
+            callbackContext.success(responseObject);
+            return;
+        }
+
+        final JSONArray responseArray = response.getJSONArray();
+
+        if(responseArray != null) {
+            callbackContext.success(responseArray);
+            return;
+        }
+
+        callbackContext.error("Response was blank");
+    }
+
     private void graphRequest(JSONArray args, final CallbackContext callbackContext) {
 
         final int argc = args.length();
@@ -484,35 +518,22 @@ public class CordovaFacebook extends CordovaPlugin {
             gr.setParameters(CordovaFacebook.jsonObjectAsBundle(params));
         }
 
-        final GraphResponse response = gr.executeAndWait();
-
-        if(response == null) {
-            callbackContext.error("GraphResponse was null");
+        if (Build.VERSION.SDK_INT >= 17) {
+            this.graphRequestGetData(gr, callbackContext);
             return;
         }
 
-        final FacebookRequestError error = response.getError();
+        new Thread(){
+            @Override
+            public void run(){
+                try{
+                    CordovaFacebook.this.graphRequestGetData(gr, callbackContext);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }.start();
 
-        if(error != null) {
-            callbackContext.error(error.getErrorMessage());
-            return;
-        }
-
-        final JSONObject responseObject = response.getJSONObject();
-
-        if(responseObject != null) {
-            callbackContext.success(responseObject);
-            return;
-        }
-
-        final JSONArray responseArray = response.getJSONArray();
-
-        if(responseArray != null) {
-            callbackContext.success(responseArray);
-            return;
-        }
-
-        callbackContext.error("Response was blank");
     }
 
     private void init(JSONArray args, final CallbackContext callbackContext){
@@ -548,8 +569,38 @@ public class CordovaFacebook extends CordovaPlugin {
                 .setPreviewImageUrl(appInvitePreviewImageURL)
                 .build();
         AppInviteDialog.show(this.getActivity(), content);
-
         callbackContext.success();
+
+        AppInviteDialog d = new AppInviteDialog(this.getActivity());
+        d.registerCallback(this.callbackManager, new FacebookCallback<AppInviteDialog.Result>() {
+            @Override
+            public void onSuccess(AppInviteDialog.Result result) {
+                Map<String, Object> mappedResult = new ArrayMap<String, Object>();
+
+                Bundle dataResult = result.getData();
+                if (null == dataResult) {
+                    callbackContext.error(new JSONObject(mappedResult));
+                    return;
+                }
+
+                mappedResult.put("data", dataResult);
+                callbackContext.success(new JSONObject(mappedResult));
+            }
+
+            @Override
+            public void onCancel() {
+                Map<String, Object> mappedResult = new ArrayMap<String, Object>();
+                callbackContext.error(new JSONObject(mappedResult));
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                callbackContext.error(null != error ? error.getMessage() : "Facebook error");
+            }
+        });
+        d.show(content);
+
+
     }
 
     private void share(JSONArray args, final CallbackContext callbackContext){
@@ -577,7 +628,7 @@ public class CordovaFacebook extends CordovaPlugin {
                     return;
                 }
 
-                mappedResult.put("postid", var1.getPostId());
+                mappedResult.put("postId", var1.getPostId());
                 callbackContext.success(new JSONObject(mappedResult));
             }
 
