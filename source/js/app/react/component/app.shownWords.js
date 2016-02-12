@@ -26,7 +26,7 @@ var ShownWordsClass = Object.assign({}, {}, {
         var state = {
             shownWordsLetters: this.props.shownWordsLetters || [],
             time: 1000,
-            shownWordsAnimationLeave: this.props.shownWordsAnimationLeave || true
+            shownWordsAnimationLeave: typeof this.props.shownWordsAnimationLeave == "undefined" ? true : this.props.shownWordsAnimationLeave
         };
         state.words = this.convertWords(state.shownWordsLetters);
 
@@ -34,19 +34,12 @@ var ShownWordsClass = Object.assign({}, {}, {
     },
 
     componentWillReceiveProps: function (nextProps) {
-        var shownWordsLetters = nextProps.shownWordsLetters || [];
-        var words = this.convertWords(shownWordsLetters);
+        var newState = {};
+        newState.shownWordsLetters = nextProps.shownWordsLetters || [];
+        newState.words = this.convertWords(newState.shownWordsLetters);
+        newState.shownWordsAnimationLeave = typeof nextProps.shownWordsAnimationLeave == "undefined" ? true : nextProps.shownWordsAnimationLeave;
 
-        var shownWordsAnimationLeave = nextProps.shownWordsAnimationLeave;
-        if (typeof nextProps.shownWordsAnimationLeave == "undefined") {
-            shownWordsAnimationLeave = true;
-        }
-
-        this.setState({
-            shownWordsLetters: shownWordsLetters,
-            words: words,
-            shownWordsAnimationLeave: shownWordsAnimationLeave
-        });
+        this.setState(newState);
     },
 
     convertWords: function (shownWordsLetters) {

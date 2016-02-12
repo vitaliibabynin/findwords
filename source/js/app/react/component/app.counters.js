@@ -26,31 +26,17 @@ var CounterClass = Object.assign({}, {}, {
             imgPath: '',
             value: this.props.value || 0,
             iconImg: this.props.iconImg || "plus",
-            isDisplayPlusButton: this.props.isDisplayPlusButton || false
+            isDisplayPlusButton: typeof this.props.isDisplayPlusButton == "undefined" ? false : this.props.isDisplayPlusButton
         };
 
         return state;
     },
 
     componentWillReceiveProps: function (nextProps) {
-        //var propsChanged = false;
-
-        if (!nextProps.hasOwnProperty('value') || nextProps.value == this.state.value) {
-            return
-        }
-
-        if (!nextProps.hasOwnProperty('isDisplayPlusButton') || nextProps.value == this.state.isDisplayPlusButton) {
-            return
-        }
-
-        //if (propsChanged) {
-        //
-        //}
-
         this.setState({
-            value: nextProps.value
+            value: nextProps.value || this.state.value,
+            isDisplayPlusButton: typeof nextProps.isDisplayPlusButton == "undefined" ? this.state.isDisplayPlusButton : nextProps.isDisplayPlusButton
         })
-
     },
 
     onClick: function () {
@@ -62,13 +48,11 @@ var CounterClass = Object.assign({}, {}, {
     },
 
     showIcon: function () {
-
         if (this.state.isDisplayPlusButton) {
             return (
                 <IconButton icon={this.state.iconImg} onClick={this.onClick}></IconButton>
             );
         }
-
     },
 
     render: function () {
@@ -107,7 +91,6 @@ var ScoreCounterClass = Object.assign({}, CounterClass, {
         var state = CounterClass.getInitialState.apply(this);
         state.imgPath = 'counter/star';
         state.className = "score";
-        state.isDisplayPlusButton = this.props.isDisplayPlusButton || false;
 
         return state;
     }
@@ -120,11 +103,10 @@ var CoinsCounterClass = Object.assign({}, CounterClass, {
     displayName: 'CoinsCounter',
 
     getInitialState: function () {
-
         var state = CounterClass.getInitialState.apply(this);
         state.imgPath = DOLLAR;
         state.className = "coins";
-        state.isDisplayPlusButton = this.props.isDisplayPlusButton || true;
+        state.isDisplayPlusButton = typeof this.props.isDisplayPlusButton == "undefined" ? true : this.props.isDisplayPlusButton;
 
         return state;
     }
@@ -186,29 +168,32 @@ var CountersClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            isDisplayBackButton: this.props.isDisplayBackButton || false,
-            isDisplayPlusButtonScore: this.props.isDisplayPlusButtonScore || false,
-            isDisplayPlusButtonCoins: this.props.isDisplayPlusButtonCoins || true
+            isDisplayBackButton: typeof this.props.isDisplayBackButton == "undefined" ? false : this.props.isDisplayBackButton,
+            isDisplayPlusButtonScore: typeof this.props.isDisplayPlusButtonScore == "undefined" ? false : this.props.isDisplayPlusButtonScore,
+            isDisplayPlusButtonCoins: typeof this.props.isDisplayPlusButtonCoins == "undefined" ? true : this.props.isDisplayPlusButtonCoins
         };
 
         return state;
     },
 
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({
+            isDisplayBackButton: typeof nextProps.isDisplayBackButton == "undefined" ? this.state.isDisplayBackButton : nextProps.isDisplayBackButton,
+            isDisplayPlusButtonScore: typeof nextProps.isDisplayPlusButtonScore == "undefined" ? this.state.isDisplayPlusButtonScore : nextProps.isDisplayPlusButtonScore,
+            isDisplayPlusButtonCoins: typeof nextProps.isDisplayPlusButtonCoins == "undefined" ? this.state.isDisplayPlusButtonCoins : nextProps.isDisplayPlusButtonCoins
 
+        })
+    },
 
     showBackButton: function () {
-
         if (this.state.isDisplayBackButton) {
             return (
                 <BackButton onClick={this.props.onBackButtonClick} roundsBundleIdx={this.props.roundsBundleIdx}/>
             );
         }
-
     },
 
     render: function () {
-        //console.log({countersScore: appManager.getGameState().getScore()});
-        //console.log({countersCoins: appManager.getGameState().getCoins()});
 
         return (
 
@@ -217,10 +202,10 @@ var CountersClass = Object.assign({}, {}, {
                 {this.showBackButton()}
 
                 <ScoreCounter value={appManager.getGameState().getScore()}
-                              isDisplayPlusButton={this.state.isDisplayPlusButtonScore} />
+                              isDisplayPlusButton={this.props.isDisplayPlusButtonScore} />
 
                 <CoinsCounter value={appManager.getGameState().getCoins()}
-                              isDisplayPlusButton={this.state.isDisplayPlusButtonCoins} />
+                              isDisplayPlusButton={this.props.isDisplayPlusButtonCoins} />
 
             </div>
 

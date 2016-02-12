@@ -126,7 +126,7 @@ var BoardClass = Object.assign({}, {}, {
             selectedLetters: {letters: [], idx: {}},
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
-            isPracticeRound: this.props.isPracticeRound || false,
+            isPracticeRound: typeof this.props.isPracticeRound == "undefined" ? false : this.props.isPracticeRound,
             displayNotice: this.props.displayNotice || function () {},
             addToShownWords: this.props.addToShownWords || function () {},
             removeWordFromShownWords: this.props.removeWordFromShownWords || function () {},
