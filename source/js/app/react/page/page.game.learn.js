@@ -29,6 +29,7 @@ var PageGameLearn = Object.assign({}, {}, {
 
     componentWillMount: function () {
         //appManager.getMusicManager().playGameMusic();
+        appAd.hideBanner();
     },
 
     componentDidMount: function () {
@@ -41,6 +42,7 @@ var PageGameLearn = Object.assign({}, {}, {
 
     componentWillUnmount: function () {
         appManager.getMusicManager().playMusic();
+        appAd.showBottomBanner();
     },
 
     getBoardData: function () {

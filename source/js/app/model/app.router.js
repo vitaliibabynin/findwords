@@ -135,6 +135,10 @@ var AppRouter = Object.assign({}, AbstractEventEmitter, {
         return this.urlState.params[paramName];
     },
 
+    getParams: function(){
+        return this.urlState.params || {};
+    },
+
     navigate: function(controller, action, params, replace){
         replace = replace || false;
 

@@ -119,5 +119,13 @@
         }
       }
     }
+
+    .btn.restore{
+        background-color: transparent;
+        text-decoration: underline;
+        height: 3rem;
+        vertical-align: middle;
+        line-height: 3rem;
+    }
   }
 }

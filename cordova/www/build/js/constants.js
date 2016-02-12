@@ -98,6 +98,7 @@ window.CONST = {
             'shop.invite-friends': 'Пригласить друзей',
             'shop.share': 'Рассказать про игру',
             'shop.buy-coins': 'Покупка монет',
+            'shop.button.restore': 'Восстановить покупки',
 
             //RANKINGS PAGE
             'rankings.heading': 'Рейтинг друзей',
@@ -265,6 +266,7 @@ window.CONST = {
             'shop.invite-friends': 'Invite friends',
             'shop.share': 'Share with friends',
             'shop.buy-coins': 'Buy coins',
+            'shop.button.restore': 'Restore purchases',
 
             //RANKINGS PAGE
             'rankings.heading': 'Friends rankings',

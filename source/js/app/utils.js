@@ -215,6 +215,29 @@ module.exports = {
 
     difference: function (a, b) {
         return Math.abs(a - b)
+    },
+
+
+    cloneArray: function(obj) {
+        var clone = [];
+        for(var i in obj) {
+            if(typeof(obj[i])=="object" && obj[i] != null)
+                clone[i] = this.cloneObject(obj[i]);
+            else
+                clone[i] = obj[i];
+        }
+        return clone;
+    },
+
+    cloneObject: function(obj) {
+        var clone = {};
+        for(var i in obj) {
+            if(typeof(obj[i])=="object" && obj[i] != null)
+                clone[i] = this.cloneObject(obj[i]);
+            else
+                clone[i] = obj[i];
+        }
+        return clone;
     }
 
 }

@@ -35,6 +35,11 @@ var AbstractStore = Object.assign({}, AbstractEventEmitter, {
 
     order: function (productId) {
         console.log('Order not implemented.');
+    },
+
+    refresh: function(){
+        console.log('Rfresh not implemented.');
+        return Promise.resolve();
     }
 
 });
@@ -66,7 +71,7 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
         PRODUCT.REMOVE_AD = appManager.getSettings().getShopValue("removeAds")[CONST.CURRENT_PLATFORM];
 
-        console.log(PRODUCT);
+        //console.log(PRODUCT);
 
         return new Promise(function (resolve, reject) {
             if (!window.hasOwnProperty('store')) {
@@ -177,6 +182,17 @@ var CordovaStore = Object.assign({}, AbstractStore, {
 
     order: function (productId) {
         store.order(productId);
+    },
+
+    refresh: function(){
+        return new Promise(function(resolve, reject){
+            store.when('refreshed', function(){
+                console.log('refresh:store.refreshed');
+                resolve();
+            }.bind(this));
+
+            store.refresh();
+        }.bind(this));
     },
 
     getCoins: function (productId) {

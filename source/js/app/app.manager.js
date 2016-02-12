@@ -24,6 +24,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
     musicManager: null,
     SFXManager: null,
     runtimeState: {},
+    hardwareBackBtnEnabled: true,
 
 
     init: function(){
@@ -71,6 +72,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                 }.bind(this))
             .then(function(){
                     router.addChangeLanguageListener(this.onLanguageChanged.bind(this));
+                    document.addEventListener("backbutton", this.onHardwareBackBtnClick.bind(this), false);
 
                     this.emitOnInit();
 
@@ -142,6 +144,15 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
         }.bind(this));
     },
 
+    setHardwareBackBtnEnable: function(newValue){
+        this.hardwareBackBtnEnabled = newValue;
+    },
+
+    onHardwareBackBtnClick: function(){
+        if(!this.hardwareBackBtnEnabled){ return; }
+
+        router.navigate('game', 'main');
+    },
 
     getSettings: function(){
         if(null == this.settings){

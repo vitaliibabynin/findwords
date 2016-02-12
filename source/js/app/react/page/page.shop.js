@@ -16,6 +16,7 @@ var DOLLAR = require('./../component/app.button').DOLLAR;
 var PRODUCT = require('./../../model/app.store').PRODUCT;
 var FreeCoins = require('./../component/app.button').FreeCoins;
 var BuyCoins = require('./../component/app.button').BuyCoins;
+var Button = require('./../component/app.button').Button;
 
 
 var PageShop = Object.assign({}, {}, {
@@ -246,6 +247,28 @@ var PageShop = Object.assign({}, {}, {
         return this.getShareButton();
     },
 
+    restorePurchase: function(){
+        var loadingDialog = appDialogs.getLoadingDialog();
+        loadingDialog.show();
+        appStore.refresh().then(function(){
+            setTimeout(function(){
+                loadingDialog.hide();
+            }, 3000);
+        }.bind(this), function(){
+            loadingDialog.hide();
+        }.bind(this));
+    },
+
+    onBackButtonClick: function(){
+        var controller = router.getParam('backcontroller') || 'main';
+        var action = router.getParam('backaction') || 'index';
+        var params = router.getParams();
+        delete params.backcontroller;
+        delete params.backaction;
+
+        router.navigate(controller, action, params);
+    },
+
     render: function () {
 
         var pageContentHeight = {
@@ -255,7 +278,7 @@ var PageShop = Object.assign({}, {}, {
         return (
 
             <div className="page page-shop">
-                <Counters isDisplayBackButton={true}/>
+                <Counters isDisplayBackButton={true} onBackButtonClick={this.onBackButtonClick} />
 
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
@@ -284,6 +307,8 @@ var PageShop = Object.assign({}, {}, {
                         <div className="heading buy-coins">{i18n._('shop.buy-coins')}</div>
 
                         {this.generateBlocks()}
+
+                        <Button className="restore" onClick={this.restorePurchase}>{i18n._('shop.button.restore')}</Button>
 
                     </div>
 

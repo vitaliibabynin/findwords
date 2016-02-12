@@ -45,7 +45,11 @@ var CounterClass = Object.assign({}, {}, {
     },
 
     onClick: function () {
-      router.navigate("shop", "index");
+        var params = router.getParams();
+        params.backaction = router.getAction();
+        params.backcontroller = router.getController();
+
+        router.navigate("shop", "index", params);
     },
 
     showIcon: function () {
@@ -137,6 +141,11 @@ var BackButtonClass = Object.assign({}, {}, {
     },
 
     onButtonClick: function(){
+        if(this.props.onClick && typeof this.props.onClick == 'function'){
+            this.props.onClick();
+            return
+        }
+
         router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
         //router.goBack();
     },
@@ -176,7 +185,7 @@ var CountersClass = Object.assign({}, {}, {
 
         if (this.state.isDisplayBackButton) {
             return (
-                <BackButton roundsBundleIdx={this.props.roundsBundleIdx}/>
+                <BackButton onClick={this.props.onBackButtonClick} roundsBundleIdx={this.props.roundsBundleIdx}/>
             );
         }
 

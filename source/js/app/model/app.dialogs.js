@@ -306,7 +306,11 @@ var NoCoinsDialog = function(){
             appManager.getSFXManager().playButton();
 
             //setTimeout(function(){
-                router.navigate("shop", "index");
+                var params = router.getParams();
+                params.backaction = router.getAction();
+                params.backcontroller = router.getController();
+
+                router.navigate("shop", "index", params);
                 //appDialogs.getBuyMoneyDialog().show();
             //}, 1000);
 
@@ -317,7 +321,11 @@ var NoCoinsDialog = function(){
             appManager.getSFXManager().playButton();
 
             //setTimeout(function(){
-                router.navigate("shop", "index");
+                var params = router.getParams();
+                params.backaction = router.getAction();
+                params.backcontroller = router.getController();
+
+                router.navigate("shop", "index", params);
                 //appDialogs.getEarnMoneyDialog()
                 //    .setInvitedFriendsCount(appManager.getGameStatus().inviteFriends.length)
                 //    .show();
@@ -521,6 +529,29 @@ var RateDialog = function(){
             this.saveSettings();
         }.bind(this));
     }
+
+    return dialog;
+}
+
+
+var LoadingDialog = function(){
+
+    var dialog = new Dialog({
+        dialogId: 'loading-dialog',
+        effect: 'slidebottom'
+    });
+
+    dialog.getTitle = function(){
+        return '';
+    }
+
+    dialog.getContent = function(){
+        return '<div class="md-content"> \
+                    <p>Вставить лоадер</p> \
+                 </div> \
+                ';
+    }
+
 
     return dialog;
 }
@@ -1023,7 +1054,12 @@ var Dialogs = {
     },
 
 
-
+    /**
+     * Диалог лоадинга
+     */
+    getLoadingDialog: function(){
+        return this._getDialog("loadingDialog", LoadingDialog);
+    },
 
 
 

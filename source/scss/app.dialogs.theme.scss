@@ -44,6 +44,12 @@
   }
 }
 
+#loading-dialog{
+    .md-content {
+        background: $dialogRate-content-bg-color;
+    }
+}
+
 #rateus-dialog.md-modal {
   .md-title {
     color: $dialogRate-header-color;
@@ -342,6 +348,10 @@
 #addcomment-dialog {
   max-width: 26.875rem;
 }
+
+
+
+
 
 /**
     Dialog Effects

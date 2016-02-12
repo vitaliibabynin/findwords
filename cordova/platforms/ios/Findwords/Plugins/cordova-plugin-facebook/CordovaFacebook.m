@@ -315,11 +315,10 @@
 
     
     self.callbackId = command.callbackId;
-    [FBSDKAppInviteDialog showWithContent:content
-                                     delegate:self];
+    [FBSDKAppInviteDialog showWithContent:content delegate:self];
 
-    NSMutableDictionary *cdvResult = [NSMutableDictionary dictionary];
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:cdvResult] callbackId:command.callbackId];
+//    NSMutableDictionary *cdvResult = [NSMutableDictionary dictionary];
+//    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:cdvResult] callbackId:command.callbackId];
 }
 
 

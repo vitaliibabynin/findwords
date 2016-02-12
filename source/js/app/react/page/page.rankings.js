@@ -209,7 +209,7 @@ var PageRankings = Object.assign({}, {}, {
             appFB.getFriendsRating(),
             appFB.getMe()
         ]).then(function(result){
-            var friendsData = result[0];
+            var friendsData = Utils.cloneArray(result[0]);
             result[1].score = appManager.getGameState().getScore();
             result[1].levelscompleted = appManager.getGameState().getCompletedRoundsCount();
 

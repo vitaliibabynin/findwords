@@ -153,7 +153,10 @@ var Ad = function(currentPlatform, isCordovaApp){
                 Appodeal.isLoaded(Appodeal.REWARDED_VIDEO, function(result){
                     if(result){
                         Appodeal.show(Appodeal.REWARDED_VIDEO);
+                        return;
                     }
+
+                    reject();
                 }.bind(this));
 
                 return;
