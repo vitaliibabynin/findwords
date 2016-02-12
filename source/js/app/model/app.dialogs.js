@@ -547,9 +547,20 @@ var LoadingDialog = function(){
 
     dialog.getContent = function(){
         return '<div class="md-content"> \
-                    <p>Вставить лоадер</p> \
-                 </div> \
-                ';
+                    <p>\
+                        <p class="loading-message">Loading...</p> \
+                        <div id="squaresWaveG"> \
+                        <div id="squaresWaveG_1" class="squaresWaveG"> \
+                        </div><div id="squaresWaveG_2" class="squaresWaveG"> \
+                        </div><div id="squaresWaveG_3" class="squaresWaveG">\
+                        </div><div id="squaresWaveG_4" class="squaresWaveG">\
+                        </div><div id="squaresWaveG_5" class="squaresWaveG">\
+                        </div><div id="squaresWaveG_6" class="squaresWaveG">\
+                        </div><div id="squaresWaveG_7" class="squaresWaveG">\
+                        </div><div id="squaresWaveG_8" class="squaresWaveG">\
+                        </div></div>\
+                    </p> \
+                 </div>';
     }
 
 

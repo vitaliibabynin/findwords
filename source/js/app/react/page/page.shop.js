@@ -252,10 +252,10 @@ var PageShop = Object.assign({}, {}, {
         loadingDialog.show();
         appStore.refresh().then(function(){
             setTimeout(function(){
-                loadingDialog.hide();
+                //loadingDialog.hide();
             }, 3000);
         }.bind(this), function(){
-            loadingDialog.hide();
+            //loadingDialog.hide();
         }.bind(this));
     },
 
@@ -278,7 +278,10 @@ var PageShop = Object.assign({}, {}, {
         return (
 
             <div className="page page-shop">
-                <Counters isDisplayBackButton={true} onBackButtonClick={this.onBackButtonClick} />
+                <Counters isDisplayBackButton={true}
+                          onBackButtonClick={this.onBackButtonClick}
+                          isDisplayPlusButtonCoins={false}
+                />
 
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
