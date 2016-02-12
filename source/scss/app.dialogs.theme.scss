@@ -44,10 +44,10 @@
   }
 }
 
-#loading-dialog{
-    .md-content {
-        background: $dialogRate-content-bg-color;
-    }
+#loading-dialog {
+  .md-content {
+    background: $dialogRate-content-bg-color;
+  }
 }
 
 #rateus-dialog.md-modal {
@@ -93,6 +93,21 @@
     .rate-never {
       font-size: $dialogRate-never-font-size;
       background-color: $dialogRate-never-bg-color;
+    }
+  }
+}
+
+#loading-dialog.md-modal {
+  .md-content {
+    #loader {
+      border-top-color: $dialogLoading-color1;
+
+      &:before {
+        border-top-color: $dialogLoading-color2;
+      }
+      &:after {
+        border-top-color: $dialogLoading-color3;
+      }
     }
   }
 }
@@ -348,10 +363,6 @@
 #addcomment-dialog {
   max-width: 26.875rem;
 }
-
-
-
-
 
 /**
     Dialog Effects
