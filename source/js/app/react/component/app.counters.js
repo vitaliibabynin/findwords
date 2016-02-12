@@ -33,10 +33,19 @@ var CounterClass = Object.assign({}, {}, {
     },
 
     componentWillReceiveProps: function (nextProps) {
+        //var propsChanged = false;
 
         if (!nextProps.hasOwnProperty('value') || nextProps.value == this.state.value) {
-            return;
+            return
         }
+
+        if (!nextProps.hasOwnProperty('isDisplayPlusButton') || nextProps.value == this.state.isDisplayPlusButton) {
+            return
+        }
+
+        //if (propsChanged) {
+        //
+        //}
 
         this.setState({
             value: nextProps.value
@@ -170,16 +179,22 @@ var CountersClass = Object.assign({}, {}, {
 
     propTypes: {
         isDisplayBackButton: React.PropTypes.bool,
+        isDisplayPlusButtonScore: React.PropTypes.bool,
+        isDisplayPlusButtonCoins: React.PropTypes.bool,
         roundsBundleIdx: React.PropTypes.number
     },
 
     getInitialState: function () {
         var state = {
-            isDisplayBackButton: this.props.isDisplayBackButton || false
+            isDisplayBackButton: this.props.isDisplayBackButton || false,
+            isDisplayPlusButtonScore: this.props.isDisplayPlusButtonScore || false,
+            isDisplayPlusButtonCoins: this.props.isDisplayPlusButtonCoins || true
         };
 
         return state;
     },
+
+
 
     showBackButton: function () {
 
@@ -198,9 +213,15 @@ var CountersClass = Object.assign({}, {}, {
         return (
 
             <div className={classNames("counters", {"backbutton": this.state.isDisplayBackButton})}>
+
                 {this.showBackButton()}
-                <ScoreCounter value={appManager.getGameState().getScore()} />
-                <CoinsCounter value={appManager.getGameState().getCoins()} />
+
+                <ScoreCounter value={appManager.getGameState().getScore()}
+                              isDisplayPlusButton={this.state.isDisplayPlusButtonScore} />
+
+                <CoinsCounter value={appManager.getGameState().getCoins()}
+                              isDisplayPlusButton={this.state.isDisplayPlusButtonCoins} />
+
             </div>
 
         );

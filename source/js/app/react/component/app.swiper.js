@@ -422,7 +422,6 @@ var SwiperClass = Object.assign({}, {}, {
         appManager.getGameState().setRoundsBundles(9, "isPurchased", true);
         appManager.getGameState().addCoins(9999);
 
-
         if (!this.state.isActive) {
             appManager.getSFXManager().playButton();
 
