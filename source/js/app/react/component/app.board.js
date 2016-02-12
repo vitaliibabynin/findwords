@@ -3,6 +3,7 @@
 
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
+var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 //var GameMixin = require('./app.mixin').GameMixin;
 
 
@@ -10,7 +11,7 @@ module.exports = {};
 
 
 var LetterClass = Object.assign({}, {}, {
-
+    mixins: [PureRenderMixin],
     displayName: 'Letter',
 
     propTypes: {
@@ -122,7 +123,7 @@ var BoardClass = Object.assign({}, {}, {
             board: this.props.board || {},
             openedLetters: this.props.openedLetters || [],
             shownWords: this.props.shownWords || [],
-            selectedLetters: {letters: []},
+            selectedLetters: {letters: [], idx: {}},
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
             isPracticeRound: this.props.isPracticeRound || false,
@@ -175,12 +176,13 @@ var BoardClass = Object.assign({}, {}, {
 
         //console.log(boardData);
 
-        boardData.words.map(function (word) {
-            word.letters.map(function (letter) {
+        boardData.words.map(function (word, wordIdx) {
+            word.letters.map(function (letter, letterIdx) {
                 arr[letter.y][letter.x] = {
                     x: letter.x,
                     y: letter.y,
                     letter: letter.letter,
+                    wordIdx: wordIdx,
                     classNames: {}
                 };
             })
@@ -359,11 +361,14 @@ var BoardClass = Object.assign({}, {}, {
 
         appManager.getSFXManager().playButtonGame();
 
-        if (this.highlightCompletedWord(x, y)) {
+        var newState = {};
+        if (this.highlightCompletedWord(x, y, newState)) {
+            this.setState(newState);
             return;
         }
 
-        this.addFirstLetterToSelectedLetters(x, y);
+        this.addFirstLetterToSelectedLetters(x, y, newState);
+        this.setState(newState);
     },
 
     onTouchMove: function (e) {
@@ -386,11 +391,14 @@ var BoardClass = Object.assign({}, {}, {
 
         appManager.getSFXManager().playButtonGame();
 
-        if (this.removeSelectedLettersAfter(x, y)) {
+        var newState = {};
+        if (this.removeSelectedLettersAfter(x, y, newState)) {
+            this.setState(newState);
             return;
         }
 
-        this.addLetterToSelectedLetters(x, y);
+        this.addLetterToSelectedLetters(x, y, newState);
+        this.setState(newState);
     },
 
     onTouchEnd: function (e) {
@@ -450,14 +458,16 @@ var BoardClass = Object.assign({}, {}, {
         var screenX = e.touches[0].clientX;
         var screenY = e.touches[0].clientY;
 
-        var boardX = screenX - e.currentTarget.getBoundingClientRect().left;
-        var boardY = screenY - e.currentTarget.getBoundingClientRect().top;
+        var clientRect = e.currentTarget.getBoundingClientRect();
+
+        var boardX = screenX - clientRect.left;
+        var boardY = screenY - clientRect.top;
 
         var rows = this.state.boardData.board.rows;
         var cols = this.state.boardData.board.cols;
 
-        var boardWidthX = e.currentTarget.getBoundingClientRect().width;
-        var boardHeightY = e.currentTarget.getBoundingClientRect().height;
+        var boardWidthX = clientRect.width;
+        var boardHeightY = clientRect.height;
 
         var cellWidthX = boardWidthX / cols;
         var cellHeightY = boardHeightY / rows;
@@ -473,8 +483,8 @@ var BoardClass = Object.assign({}, {}, {
         return {x: x, y: y};
     },
 
-    highlightCompletedWord: function (x, y) {
-        var boardArr = this.state.boardArr;
+    highlightCompletedWord: function (x, y, newState) {
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
         var wordAlreadyCompleted = false;
 
         var currentWord = this.checkIfLetterIsInCompleteWord(x, y);
@@ -485,7 +495,11 @@ var BoardClass = Object.assign({}, {}, {
                 boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_VISIBLE;
             });
 
-            this.setState({highlightedWord: {letters: currentWord}});
+            if(newState){
+                newState.highlightedWord = {letters: currentWord};
+            }else{
+                this.setState({highlightedWord: {letters: currentWord}});
+            }
 
             wordAlreadyCompleted = true;
         }
@@ -508,27 +522,36 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     checkIfLetterIsInCompleteWord: function (x, y) {
-        var completeWord = false;
-        var completeWordIndex = false;
-        var wordsToFind = this.state.wordsToFind.words;
 
-        for (var wordIdx = 0; wordIdx < wordsToFind.length; wordIdx++) {
-            var word = wordsToFind[wordIdx].letters;
 
-            for (var letterIdx = 0; letterIdx < word.length; letterIdx++) {
-                var letter = word[letterIdx];
-
-                if (letter.x == x && letter.y == y) {
-                    completeWord = word;
-                    completeWordIndex = wordIdx;
-                    break;
-                }
-            }
-
-            if (completeWordIndex !== false) {
-                break;
-            }
+        var boardArr = this.state.boardArr;
+        if(!boardArr || !boardArr[y] || !boardArr[y][x]){
+            return false;
         }
+        var completeWordIndex = boardArr[y][x].wordIdx;
+        var completeWord = this.state.boardData[completeWordIndex];
+
+
+        //var completeWord = false;
+        //var completeWordIndex = false;
+        //var wordsToFind = this.state.wordsToFind.words;
+        //for (var wordIdx = 0; wordIdx < wordsToFind.length; wordIdx++) {
+        //    var word = wordsToFind[wordIdx].letters;
+        //
+        //    for (var letterIdx = 0; letterIdx < word.length; letterIdx++) {
+        //        var letter = word[letterIdx];
+        //
+        //        if (letter.x == x && letter.y == y) {
+        //            completeWord = word;
+        //            completeWordIndex = wordIdx;
+        //            break;
+        //        }
+        //    }
+        //
+        //    if (completeWordIndex !== false) {
+        //        break;
+        //    }
+        //}
 
         if (!this.state.board[completeWordIndex]) {
             return false;
@@ -541,21 +564,27 @@ var BoardClass = Object.assign({}, {}, {
         return false;
     },
 
-    addFirstLetterToSelectedLetters: function (x, y) {
+    addFirstLetterToSelectedLetters: function (x, y, newState) {
 
-        var boardArr = this.state.boardArr;
-        var selectedLetters = this.state.selectedLetters;
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
 
         selectedLetters.letters.push(boardArr[y][x]);
+        selectedLetters.idx[y+'_'+x] = selectedLetters.letters.length - 1;
+
         boardArr[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
         boardArr[y][x].classNames.color = COLOR_SELECTED;
         boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
 
-        this.setState({
-            boardArr: boardArr,
-            selectedLetters: selectedLetters
-        });
-
+        if(newState){
+            newState.boardArr = boardArr;
+            newState.selectedLetters = selectedLetters;
+        }else{
+            this.setState({
+                boardArr: boardArr,
+                selectedLetters: selectedLetters
+            });
+        }
     },
 
     getBackgroundColors: function (isPracticeRound) {
@@ -669,14 +698,15 @@ var BoardClass = Object.assign({}, {}, {
         return false;
     },
 
-    removeSelectedLettersAfter: function (x, y) {
+    removeSelectedLettersAfter: function (x, y, newState) {
         var lettersRemoved = false;
 
         var index = this.getIndexIfLetterIsSelected(x, y);
         if (index !== false) {
 
-            var boardArr = this.state.boardArr;
-            var selectedLetters = this.state.selectedLetters.letters;
+            var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+            var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters.letters : this.state.selectedLetters.letters;
+            var selectedIdx = newState && newState.selectedLetters ? newState.selectedLetters.idx : this.state.selectedLetters.idx;
 
             for (var i = index + 1; i < selectedLetters.length; i++) {
                 delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkBefore;
@@ -684,15 +714,21 @@ var BoardClass = Object.assign({}, {}, {
                 delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkVisibility;
                 delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.backgroundColor;
                 delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color;
+                delete selectedIdx[selectedLetters[i].y+'_'+selectedLetters[i].x];
             }
 
             delete boardArr[selectedLetters[index].y][selectedLetters[index].x].classNames.linkAfter;
 
             selectedLetters.splice(index + 1, selectedLetters.length - (index - 1));
 
-            this.setState({
-                selectedLetters: {letters: selectedLetters}
-            });
+
+            if(newState){
+                newState.selectedLetters = {letters: selectedLetters, idx: selectedIdx};
+            }else{
+                this.setState({
+                    selectedLetters: {letters: selectedLetters, idx: selectedIdx}
+                });
+            }
 
             lettersRemoved = true;
         }
@@ -701,21 +737,29 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     getIndexIfLetterIsSelected: function (x, y) {
-        var selectedLetters = this.state.selectedLetters.letters;
+        var selectedIdx = this.state.selectedLetters.idx;
 
-        for (var letterIdx = 0; letterIdx < selectedLetters.length; letterIdx++) {
-            var letter = selectedLetters[letterIdx];
-            if (y == letter.y && x == letter.x) {
-                return letterIdx;
-            }
+        var key = y+'_'+x;
+        if(!selectedIdx.hasOwnProperty(key)){
+            return false;
         }
 
-        return false;
+        return selectedIdx[key];
+
+        //var selectedLetters = this.state.selectedLetters.letters;
+        //for (var letterIdx = 0; letterIdx < selectedLetters.length; letterIdx++) {
+        //    var letter = selectedLetters[letterIdx];
+        //    if (y == letter.y && x == letter.x) {
+        //        return letterIdx;
+        //    }
+        //}
+        //
+        //return false;
     },
 
-    addLetterToSelectedLetters: function (x, y) {
-        var boardArr = this.state.boardArr;
-        var selectedLetters = this.state.selectedLetters;
+    addLetterToSelectedLetters: function (x, y, newState) {
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
 
         var previousLetter = selectedLetters.letters[selectedLetters.letters.length - 1];
 
@@ -725,8 +769,11 @@ var BoardClass = Object.assign({}, {}, {
         var prevY = previousLetter.y;
         var prevColor = previousLetter.classNames.backgroundColor;
 
+
+        selectedLetters.letters.push(boardArr[y][x]);
+        selectedLetters.idx[y+'_'+x] = selectedLetters.letters.length - 1;
+
         if (y == prevY + 1 && x == prevX) {
-            selectedLetters.letters.push(boardArr[y][x]);
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP;
             boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
             boardArr[y][x].classNames.backgroundColor = prevColor;
@@ -735,7 +782,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (y == prevY - 1 && x == prevX) {
-            selectedLetters.letters.push(boardArr[y][x]);
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM;
             boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
             boardArr[y][x].classNames.backgroundColor = prevColor;
@@ -744,7 +790,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (x == prevX + 1 && y == prevY) {
-            selectedLetters.letters.push(boardArr[y][x]);
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_LEFT;
             boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
             boardArr[y][x].classNames.backgroundColor = prevColor;
@@ -753,7 +798,6 @@ var BoardClass = Object.assign({}, {}, {
         }
 
         if (x == prevX - 1 && y == prevY) {
-            selectedLetters.letters.push(boardArr[y][x]);
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_RIGHT;
             boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
             boardArr[y][x].classNames.backgroundColor = prevColor;
@@ -761,10 +805,15 @@ var BoardClass = Object.assign({}, {}, {
             boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
         }
 
-        this.setState({
-            boardArr: boardArr,
-            selectedLetters: selectedLetters
-        });
+        if(newState){
+            newState.boardArr = boardArr;
+            newState.selectedLetters = selectedLetters;
+        }else{
+            this.setState({
+                boardArr: boardArr,
+                selectedLetters: selectedLetters
+            });
+        }
     },
 
     checkForCompletedWord: function () {
@@ -833,7 +882,7 @@ var BoardClass = Object.assign({}, {}, {
         this.setState({
             openedLetters: openedLetters,
             boardArr: boardArr,
-            selectedLetters: {letters: []},
+            selectedLetters: {letters: [], idx: {}},
             board: board
         });
     },
@@ -940,7 +989,7 @@ var BoardClass = Object.assign({}, {}, {
 
         this.setState({
             boardArr: boardArr,
-            selectedLetters: {letters: []}
+            selectedLetters: {letters: [], idx: {}}
         });
     },
 
