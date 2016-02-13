@@ -252,10 +252,10 @@ var PageShop = Object.assign({}, {}, {
         loadingDialog.show();
         appStore.refresh().then(function(){
             setTimeout(function(){
-                //loadingDialog.hide();
+                loadingDialog.hide();
             }, 3000);
         }.bind(this), function(){
-            //loadingDialog.hide();
+            loadingDialog.hide();
         }.bind(this));
     },
 
