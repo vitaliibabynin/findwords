@@ -67,6 +67,9 @@
     <feature name="InAppPurchase">
         <param name="ios-package" value="InAppPurchase" />
     </feature>
+    <feature name="NativeAudio">
+        <param name="ios-package" value="NativeAudio" />
+    </feature>
     <feature name="AppodealPlugin">
         <param name="ios-package" value="AppodealPlugin" />
     </feature>

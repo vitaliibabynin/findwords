@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		0350AA645B314DFC9BD21A03 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B511BA67A7214AF5AEC2B459 /* EventKit.framework */; };
@@ -110,6 +109,9 @@
 		FCA34DAB7306427596713228 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFA55D2E8A44C849FCEFE74 /* libxml2.2.dylib */; };
 		FE83D92B25A94E5D90558D48 /* RFMAdSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965A571FA99F4BE09558CC7D /* RFMAdSDK.bundle */; };
 		FEE999342E0942AB85984114 /* appodeal_pattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A342B43A3CB746B8B6D6CA7E /* appodeal_pattern@2x.png */; };
+		3977DDF51122439483F550D7 /* NativeAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 1429C62200084C52BE76EAE6 /* NativeAudio.m */; };
+		B1CCEB2E3DE543CF8C0A9FE3 /* NativeAudioAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 549BC2409DC649448977A3CD /* NativeAudioAsset.m */; };
+		811D9F9B87AF4F64963CA0B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721C8D38CA5243A69A4EFD50 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -274,6 +276,11 @@
 		FA1902255FCA43A9978276F1 /* MPUnmutedBtn@1x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = "MPUnmutedBtn@1x.png"; sourceTree = "<group>"; };
 		FABDE72AA30C40359D5A13D4 /* CDVStatusBar.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVStatusBar.h; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; };
 		FAF2D6710418462D831A5619 /* appodeal_pattern.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = appodeal_pattern.png; sourceTree = "<group>"; };
+		1429C62200084C52BE76EAE6 /* NativeAudio.m */ = {isa = PBXFileReference; name = "NativeAudio.m"; path = "cordova-plugin-nativeaudio/NativeAudio.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		549BC2409DC649448977A3CD /* NativeAudioAsset.m */ = {isa = PBXFileReference; name = "NativeAudioAsset.m"; path = "cordova-plugin-nativeaudio/NativeAudioAsset.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		2D51AF648796416497B6DF7E /* NativeAudio.h */ = {isa = PBXFileReference; name = "NativeAudio.h"; path = "cordova-plugin-nativeaudio/NativeAudio.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		753EF8F8FC014E16A9ED31F1 /* NativeAudioAsset.h */ = {isa = PBXFileReference; name = "NativeAudioAsset.h"; path = "cordova-plugin-nativeaudio/NativeAudioAsset.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		721C8D38CA5243A69A4EFD50 /* Foundation.framework */ = {isa = PBXFileReference; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +322,7 @@
 				29EA12F3E0DF4404A3CD0A81 /* libc++.dylib in Frameworks */,
 				FCA34DAB7306427596713228 /* libxml2.2.dylib in Frameworks */,
 				489E01073524477FBFF140F9 /* Appodeal.framework in Frameworks */,
+				811D9F9B87AF4F64963CA0B2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +465,7 @@
 				C8506C25B3AE4563929A4587 /* libc++.dylib */,
 				3CFA55D2E8A44C849FCEFE74 /* libxml2.2.dylib */,
 				4CF0D2E020D741B89E3B64C5 /* Appodeal.framework */,
+				721C8D38CA5243A69A4EFD50 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -534,6 +543,10 @@
 				568427A471C343C8873CEF9E /* FileUtility.h */,
 				5B200A9C78DC4E81903D1637 /* AppodealPlugin.m */,
 				80410C9D3C34471AB8FC8A92 /* AppodealPlugin.h */,
+				1429C62200084C52BE76EAE6 /* NativeAudio.m */,
+				549BC2409DC649448977A3CD /* NativeAudioAsset.m */,
+				2D51AF648796416497B6DF7E /* NativeAudio.h */,
+				753EF8F8FC014E16A9ED31F1 /* NativeAudioAsset.h */,
 			);
 			name = Plugins;
 			path = Findwords/Plugins;
@@ -712,6 +725,8 @@
 				B2435DFA989245C9AAD60846 /* SKProduct+LocalizedPrice.m in Sources */,
 				0D90EC07BBDD420DA80C2FA1 /* FileUtility.m in Sources */,
 				1BE7D7DF84F1451AA3D890D1 /* AppodealPlugin.m in Sources */,
+				3977DDF51122439483F550D7 /* NativeAudio.m in Sources */,
+				B1CCEB2E3DE543CF8C0A9FE3 /* NativeAudioAsset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

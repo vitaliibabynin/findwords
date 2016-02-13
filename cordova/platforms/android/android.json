@@ -192,6 +192,14 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
                             "count": 1
                         }
                     ]
@@ -242,6 +250,10 @@
                         },
                         {
                             "xml": "<feature name=\"AppodealPlugin\"><param name=\"android-package\" value=\"com.appodeal.plugin.AppodealPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NativeAudio\"><param name=\"android-package\" value=\"com.rjfun.cordova.plugin.nativeaudio.NativeAudio\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -343,6 +355,9 @@
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "com.appodeal.plugin": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "cordova-plugin-nativeaudio": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         }
     },
@@ -585,6 +600,13 @@
             "id": "com.appodeal.plugin.AppodealPlugin",
             "clobbers": [
                 "Appodeal"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+            "id": "cordova-plugin-nativeaudio.nativeaudio",
+            "clobbers": [
+                "window.plugins.NativeAudio"
             ]
         }
     ]

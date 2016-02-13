@@ -38,6 +38,9 @@
     <feature name="AppodealPlugin">
         <param name="android-package" value="com.appodeal.plugin.AppodealPlugin" />
     </feature>
+    <feature name="NativeAudio">
+        <param name="android-package" value="com.rjfun.cordova.plugin.nativeaudio.NativeAudio" />
+    </feature>
     <feature name="CordovaFacebook">
         <param name="android-package" value="com.blakeisrael.cordova.CordovaFacebook" />
         <param name="onload" value="true" />

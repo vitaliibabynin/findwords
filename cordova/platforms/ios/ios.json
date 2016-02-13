@@ -59,6 +59,10 @@
                         {
                             "xml": "<feature name=\"InAppPurchase\"><param name=\"ios-package\" value=\"InAppPurchase\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NativeAudio\"><param name=\"ios-package\" value=\"NativeAudio\" /></feature>",
+                            "count": 1
                         }
                     ],
                     "/widget": [
@@ -142,6 +146,9 @@
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "com.appodeal.plugin": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "cordova-plugin-nativeaudio": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         }
     },
@@ -428,6 +435,14 @@
             "pluginId": "com.appodeal.plugin",
             "clobbers": [
                 "Appodeal"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+            "id": "cordova-plugin-nativeaudio.nativeaudio",
+            "pluginId": "cordova-plugin-nativeaudio",
+            "clobbers": [
+                "window.plugins.NativeAudio"
             ]
         }
     ]

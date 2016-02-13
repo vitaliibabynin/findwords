@@ -35,7 +35,7 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     componentWillMount: function(){
-        appManager.getMusicManager().getPlayer().pause();
+        appManager.getMusicManager().getPlayer().stop();
         appManager.getSFXManager().playWin();
         appAd.showInterstitial();
         appAd.hideBanner();

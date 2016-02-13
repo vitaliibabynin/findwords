@@ -14,7 +14,6 @@ var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
-//var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
 
 var PageGameMain = Object.assign({}, {}, {
 

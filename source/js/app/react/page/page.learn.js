@@ -8,8 +8,6 @@ var Object = {assign: require('react/lib/Object.assign')};
 var Counters = require('./../component/app.counters').Counters;
 var SimpleButton = require('./../component/app.button').SimpleButton;
 
-var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
-
 
 var PageLearn = Object.assign({}, {}, {
 

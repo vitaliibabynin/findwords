@@ -8,7 +8,6 @@ var Timer = require('./../component/app.timer').Timer;
 var Board = require('./../component/app.board.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
 
-var MUSIC_FILE_NAME = require('./../../model/app.music.js').MUSIC_FILE_NAME;
 
 var PageGameLearn = Object.assign({}, {}, {
 

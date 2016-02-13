@@ -51,6 +51,9 @@
         },
         "com.appodeal.plugin": {
             "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "cordova-plugin-nativeaudio": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
         }
     },
     "dependent_plugins": {}

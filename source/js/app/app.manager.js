@@ -151,7 +151,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
     onHardwareBackBtnClick: function(){
         if(!this.hardwareBackBtnEnabled){ return; }
 
-        router.navigate('game', 'main');
+        router.navigate('main', 'index');
     },
 
     getSettings: function(){
@@ -172,7 +172,8 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
 
     getMusicManager: function(){
         if(null == this.musicManager){
-            this.musicManager = require('./model/app.music').AppMusic;
+            this.musicManager = require('./model/app.music').AppMusic(CONST.CURRENT_PLATFORM);
+            this.musicManager.init();
         }
 
         return this.musicManager;
@@ -180,7 +181,8 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
 
     getSFXManager: function(){
         if(null == this.SFXManager){
-            this.SFXManager = require('./model/app.music').AppSound;
+            this.SFXManager = require('./model/app.music').AppSFX(CONST.CURRENT_PLATFORM);
+            this.SFXManager.init();
         }
 
         return this.SFXManager;
