@@ -70,11 +70,49 @@ var PageGameLearn = Object.assign({}, {}, {
         });
     },
 
+    getStarsReceived: function () {
+        return appManager.getGameState().getPracticeRoundField('starsReceived') || 3;
+    },
+
+    getRewardScore: function (round, starsReceived) {
+        //return round.score * (starsReceived / 3) || 0;
+        return round.bonus[starsReceived].score || 0;
+    },
+
+    getRewardCoins: function (round, starsReceived) {
+        //return round.coins * (starsReceived / 3) || 0;
+        return round.bonus[starsReceived].coins || 0;
+    },
+
+    addRewardScore: function (rewardScore) {
+        var prevTotalScore = appManager.getGameState().getScore();
+        var newTotalScore = prevTotalScore + rewardScore;
+        appManager.getGameState().setScore(newTotalScore);
+    },
+
+    addRewardCoins: function (rewardCoins) {
+        var prevTotalCoins = appManager.getGameState().getCoins();
+        var newTotalCoins = prevTotalCoins + rewardCoins;
+        appManager.getGameState().setCoins(newTotalCoins);
+    },
+
     goToPageRoundComplete: function (time) {
         time = time || 0;
 
+        var round = this.state.boardData;
+        var params = {};
+        params.starsReceived = this.getStarsReceived() || 3;
+        params.rewardScore = this.getRewardScore(round, params.starsReceived) || 0;
+        params.rewardCoins = this.getRewardCoins(round, params.starsReceived) || 0;
+
+        this.addRewardScore(params.rewardScore);
+        this.addRewardCoins(params.rewardCoins);
+
+        appManager.getGameState().setGameStateField("practiceRound", {});
+        appManager.getGameState().setPracticeRoundComplete(true);
+
         setTimeout(function () {
-            router.navigate("game", "learn_victory");
+            router.navigate("game", "learn_victory", params);
         }.bind(this), time);
     },
 
@@ -85,20 +123,20 @@ var PageGameLearn = Object.assign({}, {}, {
                 <Counters isDisplayBackButton={true}
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
                 <Timer time={this.state.time}
-                    setGameStateRoundField={this.setGameStateRoundField}
-                    getGameStateRoundField={this.getGameStateRoundField}
-                    />
+                       setGameStateRoundField={this.setGameStateRoundField}
+                       getGameStateRoundField={this.getGameStateRoundField}
+                />
                 <div ref="pageContent" className="page-content">
 
                     <div className="container transform-center">
                         {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
-                               boardMaxHeight={this.state.gameBoardMaxHeight}
-                               boardData={this.state.boardData}
-                               board={this.state.board}
-                               isPracticeRound={true}
-                               displayNotice={this.displayNotice}
-                               setGameStateRoundField={this.setGameStateRoundField}
-                               goToPageRoundComplete={this.goToPageRoundComplete}
+                                                                    boardMaxHeight={this.state.gameBoardMaxHeight}
+                                                                    boardData={this.state.boardData}
+                                                                    board={this.state.board}
+                                                                    isPracticeRound={true}
+                                                                    displayNotice={this.displayNotice}
+                                                                    setGameStateRoundField={this.setGameStateRoundField}
+                                                                    goToPageRoundComplete={this.goToPageRoundComplete}
                         /> : ''}
                     </div>
 

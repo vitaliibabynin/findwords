@@ -18,12 +18,11 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             roundsComplete: 1,
-            roundsTotal: 1
+            roundsTotal: 1,
+            starsReceived: parseInt(router.getParam('starsReceived')) || 3,
+            rewardScore: parseInt(router.getParam('rewardScore')) || 0,
+            rewardCoins: parseInt(router.getParam('rewardCoins')) || 0
         };
-        state.round = this.getRound();
-        state.starsReceived = this.getStarsReceived() || 3;
-        state.rewardScore = this.getRewardScore(state.round, state.starsReceived) || 0;
-        state.rewardCoins = this.getRewardCoins(state.round, state.starsReceived) || 0;
 
         return state;
     },
@@ -36,46 +35,11 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
-        this.addRewardCoins(this.state.rewardCoins);
-        appManager.getGameState().setGameStateField("practiceRound", {});
-        appManager.getGameState().setPracticeRoundComplete(true);
-
         appDialogs.getRateDialog().showIfTime();
     },
 
     componentWillUnmount: function () {
         appAd.showBottomBanner();
-    },
-
-    getRound: function () {
-        return appManager.getSettings().getPracticeRound()
-    },
-
-    getStarsReceived: function () {
-        return appManager.getGameState().getPracticeRoundField('starsReceived') || 3;
-    },
-
-    getRewardScore: function (round, starsReceived) {
-        //return round.score * (starsReceived / 3) || 0;
-        return round.bonus[starsReceived].score || 0;
-    },
-
-    getRewardCoins: function (round, starsReceived) {
-        //return round.coins * (starsReceived / 3) || 0;
-        return round.bonus[starsReceived].coins || 0;
-    },
-
-    addRewardScore: function (rewardScore) {
-        var prevTotalScore = appManager.getGameState().getScore();
-        var newTotalScore = prevTotalScore + rewardScore;
-        appManager.getGameState().setScore(newTotalScore);
-    },
-
-    addRewardCoins: function (rewardCoins) {
-        var prevTotalCoins = appManager.getGameState().getCoins();
-        var newTotalCoins = prevTotalCoins + rewardCoins;
-        appManager.getGameState().setCoins(newTotalCoins);
     },
 
     onClick: function () {
@@ -184,7 +148,8 @@ var PageGameLearnVictory = Object.assign({}, {}, {
                         </div>
 
                         <div className="continue">
-                            <SimpleButton className="button" onClick={this.onClick}>{i18n._('victory.continue')}</SimpleButton>
+                            <SimpleButton className="button"
+                                          onClick={this.onClick}>{i18n._('victory.continue')}</SimpleButton>
                         </div>
 
 
