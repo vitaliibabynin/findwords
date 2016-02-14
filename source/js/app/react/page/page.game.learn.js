@@ -62,12 +62,20 @@ var PageGameLearn = Object.assign({}, {}, {
             noticeWord: word
         }, function () {
             setTimeout(function () {
-                this.setState({
-                    noticeType: "",
-                    noticeWord: {letters: []}
-                });
+                this.hideNotice();
             }.bind(this), 2000);
         });
+    },
+
+    hideNotice: function () {
+        this.setState({
+            noticeType: "",
+            noticeWord: {letters: []}
+        });
+
+        //setTimeout(function () {
+        this.refs.board.emptySelectedLetters();
+        //}.bind(this), 200);
     },
 
     getStarsReceived: function () {
@@ -96,9 +104,7 @@ var PageGameLearn = Object.assign({}, {}, {
         appManager.getGameState().setCoins(newTotalCoins);
     },
 
-    goToPageRoundComplete: function (time) {
-        time = time || 0;
-
+    addRewards: function () {
         var round = this.state.boardData;
         var params = {};
         params.starsReceived = this.getStarsReceived() || 3;
@@ -108,9 +114,20 @@ var PageGameLearn = Object.assign({}, {}, {
         this.addRewardScore(params.rewardScore);
         this.addRewardCoins(params.rewardCoins);
 
+        return params;
+    },
+
+    setPracticeRoundComplete: function () {
         appManager.getGameState().setGameStateField("practiceRound", {});
         appManager.getGameState().setPracticeRoundComplete(true);
+    },
 
+    goToPageRoundComplete: function (time) {
+        this.setPracticeRoundComplete();
+
+        var params = this.addRewards();
+
+        time = time || 0;
         setTimeout(function () {
             router.navigate("game", "learn_victory", params);
         }.bind(this), time);
@@ -142,6 +159,7 @@ var PageGameLearn = Object.assign({}, {}, {
 
                     <Notice noticeType={this.state.noticeType}
                             word={this.state.noticeWord}
+                            hideNotice={this.hideNotice}
                     />
 
                 </div>

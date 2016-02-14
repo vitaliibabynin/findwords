@@ -316,18 +316,61 @@ var PageGameMain = Object.assign({}, {}, {
         //}.bind(this), 200);
     },
 
+
+    getStarsReceived: function () {
+        return this.getGameStateRoundField('starsReceived', this.state.roundsBundleIdx, this.state.roundIdx) || 3;
+    },
+
+    getRewardScore: function (starsReceived) {
+        return appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds[this.state.roundIdx].bonus[starsReceived].score || 0;
+    },
+
+    getRewardCoins: function (starsReceived) {
+        return appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds[this.state.roundIdx].bonus[starsReceived].coins || 0;
+    },
+
+    addRewardScore: function (rewardScore, roundsBundleIdx) {
+        var prevTotalScore = appManager.getGameState().getScore();
+        var newTotalScore = prevTotalScore + rewardScore;
+        appManager.getGameState().setScore(newTotalScore);
+
+        var prevRoundsBundleScore = appManager.getGameState().getRoundsBundles(roundsBundleIdx).bundleScore;
+        var newRoundsBundleScore = prevRoundsBundleScore + rewardScore;
+        appManager.getGameState().setRoundsBundles(roundsBundleIdx, 'bundleScore', newRoundsBundleScore);
+    },
+
+    addRewardCoins: function (rewardCoins) {
+        var prevTotalCoins = appManager.getGameState().getCoins();
+        var newTotalCoins = prevTotalCoins + rewardCoins;
+        appManager.getGameState().setCoins(newTotalCoins);
+    },
+
+    addRewards: function () {
+        var params = {};
+        params.starsReceived = this.getStarsReceived() || 3;
+        params.rewardScore = this.getRewardScore(params.starsReceived) || 0;
+        params.rewardCoins = this.getRewardCoins(params.starsReceived) || 0;
+
+        this.addRewardScore(params.rewardScore, this.state.roundsBundleIdx);
+        this.addRewardCoins(params.rewardCoins);
+
+        return params;
+    },
+
+    setRoundComplete: function () {
+        var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
+        roundsComplete++;
+        this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
+    },
+
     goToPageRoundComplete: function (time) {
+        this.setRoundComplete();
+
+        var params = this.addRewards();
+        params.roundsBundleIdx = this.state.roundsBundleIdx;
+        params.roundIdx = this.state.roundIdx;
+
         time = time || 200;
-
-        //var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
-        //roundsComplete++;
-        //this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
-
-        var params = {
-            roundsBundleIdx: this.state.roundsBundleIdx,
-            roundIdx: this.state.roundIdx
-        };
-
         setTimeout(function () {
             router.navigate("game", "victory", params);
         }.bind(this), time);

@@ -20,16 +20,14 @@ var PageGameVictory = Object.assign({}, {}, {
         var state = {
             containerExtraClass: '',
             roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
-            roundIdx: parseInt(router.getParam('roundIdx')) || 0
+            roundIdx: parseInt(router.getParam('roundIdx')) || 0,
+            starsReceived: parseInt(router.getParam('starsReceived')) || 3,
+            rewardScore: parseInt(router.getParam('rewardScore')) || 0,
+            rewardCoins: parseInt(router.getParam('rewardCoins')) || 0
         };
-        state.starsReceived = this.getGameStateRoundField(state.roundsBundleIdx, state.roundIdx, 'starsReceived') || 3;
-        //state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
+        state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
         var rounds = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds;
         state.roundsTotal = rounds.length || 1;
-        //state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].score * (state.starsReceived / 3) || 0;
-        //state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].coins * (state.starsReceived / 3) || 0;
-        state.rewardScore = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].bonus[state.starsReceived].score || 0;
-        state.rewardCoins = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds[state.roundIdx].bonus[state.starsReceived].coins || 0;
 
         return state;
     },
@@ -42,12 +40,6 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        this.addRewardScore(this.state.rewardScore, this.state.roundsBundleIdx);
-        this.addRewardCoins(this.state.rewardCoins);
-        var roundsComplete = appManager.getGameState().getRoundsBundles(this.state.roundsBundleIdx).roundsComplete || 0;
-        roundsComplete++;
-        appManager.getGameState().setRoundsBundles(this.state.roundsBundleIdx, "roundsComplete", roundsComplete);
-
         if(appFB.isAuthorized()){
             appApi.updateRating(
                 appFB.getAccessToken(),
@@ -57,10 +49,6 @@ var PageGameVictory = Object.assign({}, {}, {
                 appManager.getGameState().getCompletedRoundsCount()
             );
         }
-
-
-        this.setState({roundsComplete: roundsComplete});
-        //this.forceUpdate();
 
         if (CONST.CURRENT_PLATFORM == CONST.PLATFORM_IOS) {
             appDialogs.getRequirePushDialog().showIfTime();
@@ -84,22 +72,6 @@ var PageGameVictory = Object.assign({}, {}, {
 
     getGameStateRoundField: function (roundsBundleIdx, roundIdx, field) {
         return appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field];
-    },
-
-    addRewardScore: function (rewardScore, roundsBundleIdx) {
-        var prevTotalScore = appManager.getGameState().getScore();
-        var newTotalScore = prevTotalScore + rewardScore;
-        appManager.getGameState().setScore(newTotalScore);
-
-        var prevRoundsBundleScore = appManager.getGameState().getRoundsBundles(roundsBundleIdx).bundleScore;
-        var newRoundsBundleScore = prevRoundsBundleScore + rewardScore;
-        appManager.getGameState().setRoundsBundles(roundsBundleIdx, 'bundleScore', newRoundsBundleScore);
-    },
-
-    addRewardCoins: function (rewardCoins) {
-        var prevTotalCoins = appManager.getGameState().getCoins();
-        var newTotalCoins = prevTotalCoins + rewardCoins;
-        appManager.getGameState().setCoins(newTotalCoins);
     },
 
     nextRoundIdx: function () {
