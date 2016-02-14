@@ -237,8 +237,13 @@ var CordovaMusic = Object.assign({}, CordovaSound, {
     },
 
     stop: function () {
-        this.getPlayer().stop(this.lastSound);
-        this.unload(this.lastSound);
+        try{
+            this.getPlayer().stop(this.lastSound);
+            this.unload(this.lastSound);
+        }catch(e){
+            console.log(e.getMessage());
+        }
+
     }
 });
 
