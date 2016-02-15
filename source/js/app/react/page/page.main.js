@@ -54,8 +54,9 @@ var PageMain = Object.assign({}, {}, {
         //    }
         //}
 
-        this.checkForBonuses();
-        this.checkForNewFriends();
+        if (this.checkForBonuses() === false) {
+            this.checkForNewFriends();
+        }
     },
 
     componentWillUnmount: function () {
@@ -67,13 +68,61 @@ var PageMain = Object.assign({}, {}, {
     //
     //},
 
+    //checkForNewFriends2: function () {
+    //    var friendsInvited = appManager.getGameState().getFriendsInvited();
+    //    if (friendsInvited.length == 0) {
+    //        return;
+    //    }
+    //
+    //    //console.log({friendsInvited: friendsInvited});
+    //
+    //    appFB.getAppFriends().then(function (result) {
+    //        if (result.constructor !== Array) {
+    //            console.log("getAppFriends result invalid");
+    //            return;
+    //        }
+    //        if (result.length == 0) {
+    //            return;
+    //        }
+    //
+    //        var friendsJoined = new Array(result.length);
+    //        for (var i = 0; i < friendsJoined.length; i++) {
+    //            friendsJoined[i] = result[i].id;
+    //        }
+    //
+    //        //friendsJoined.push("114199905627003");
+    //
+    //        var bonusFriends = Utils.getMatchingValues(friendsJoined.concat(friendsInvited));
+    //        if (bonusFriends.length == 0) {
+    //            return;
+    //        }
+    //
+    //        var newFriendsInvited = Utils.removeMatchingValues(friendsInvited, bonusFriends);
+    //        appManager.getGameState().setFriendsInvited(newFriendsInvited);
+    //
+    //        var coinsPerFriend = appManager.getSettings().getFreeCoins().friendAdded;
+    //        var coinsToAdd = bonusFriends.length * coinsPerFriend;
+    //        appManager.getGameState().addCoins(coinsToAdd);
+    //
+    //        this.forceUpdate();
+    //
+    //        appDialogs.getInfoDialog()
+    //            .setTitle(i18n._('app.dialog.info.friends-joined.title'))
+    //            .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', bonusFriends.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+    //            .show();
+    //    }.bind(this));
+    //
+    //    //var friendsInvitedTest = appManager.getGameState().getFriendsInvited();
+    //    //friendsInvitedTest.push("114199905627003");
+    //    //appManager.getGameState().setFriendsInvited(friendsInvitedTest);
+    //},
+
     checkForNewFriends: function () {
-        var friendsInvited = appManager.getGameState().getFriendsInvited();
-        if (friendsInvited.length == 0) {
+        if (appFB.isAuthorized() === false) {
             return;
         }
 
-        //console.log({friendsInvited: friendsInvited});
+        var friendsInGameState = appManager.getGameState().getFriendsInGame();
 
         appFB.getAppFriends().then(function (result) {
             if (result.constructor !== Array) {
@@ -84,36 +133,45 @@ var PageMain = Object.assign({}, {}, {
                 return;
             }
 
-            var friendsJoined = new Array(result.length);
-            for (var i = 0; i < friendsJoined.length; i++) {
-                friendsJoined[i] = result[i].id;
+            var friendsFacebook = new Array(result.length);
+            for (var i = 0; i < friendsFacebook.length; i++) {
+                friendsFacebook[i] = result[i].id;
             }
 
-            //friendsJoined.push("114199905627003");
+            var coinsPerFriend = appManager.getSettings().getFreeCoins().friendAdded;
 
-            var bonusFriends = Utils.getMatchingValues(friendsJoined.concat(friendsInvited));
-            if (bonusFriends.length == 0) {
+            if (friendsInGameState.length == 0) {
+                appManager.getGameState().setFriendsInGame(friendsFacebook);
+
+                var coinsToAdd = friendsFacebook.length * coinsPerFriend;
+                appManager.getGameState().addCoins(coinsToAdd);
+                this.forceUpdate();
+
+                appDialogs.getInfoDialog()
+                    .setTitle(i18n._('app.dialog.info.friends-joined.title'))
+                    .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', friendsFacebook.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+                    .show();
+
                 return;
             }
 
-            var newFriendsInvited = Utils.removeMatchingValues(friendsInvited, bonusFriends);
-            appManager.getGameState().setFriendsInvited(newFriendsInvited);
+            var allFriends = friendsFacebook.concat(friendsInGameState);
+            var newFriends = Utils.getUniqueValues(allFriends);
+            if (newFriends.length == 0) {
+                return;
+            }
 
-            var coinsPerFriend = appManager.getSettings().getFreeCoins().friendAdded;
-            var coinsToAdd = bonusFriends.length * coinsPerFriend;
+            appManager.getGameState().setFriendsInGame(allFriends);
+
+            coinsToAdd = newFriends.length * coinsPerFriend;
             appManager.getGameState().addCoins(coinsToAdd);
-
             this.forceUpdate();
 
             appDialogs.getInfoDialog()
                 .setTitle(i18n._('app.dialog.info.friends-joined.title'))
-                .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', bonusFriends.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+                .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', newFriends.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
                 .show();
         }.bind(this));
-
-        //var friendsInvitedTest = appManager.getGameState().getFriendsInvited();
-        //friendsInvitedTest.push("114199905627003");
-        //appManager.getGameState().setFriendsInvited(friendsInvitedTest);
     },
 
     checkForBonuses: function () {
@@ -124,7 +182,7 @@ var PageMain = Object.assign({}, {}, {
         //if first access ever
         if (lastAccessNumber == "") {
             appManager.getGameState().setLastAccessDate(todayString);
-            return;
+            return false;
         }
 
         //daysPlayedStreak
@@ -135,7 +193,7 @@ var PageMain = Object.assign({}, {}, {
         //console.log(daysSinceLastAccess);
 
         if (daysSinceLastAccess < 1) {
-            return;
+            return false;
         }
 
         if (daysSinceLastAccess > 1) {

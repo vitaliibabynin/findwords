@@ -337,40 +337,44 @@ var PageRankings = Object.assign({}, {}, {
         //}.bind(this));
     },
 
+    //onClickInviteFriends2: function () {
+    //    var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
+    //
+    //    appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
+    //        if (!result) {
+    //            return;
+    //        }
+    //        if (!result.hasOwnProperty("to")) {
+    //            return;
+    //        }
+    //        if (result.to.constructor !== Array) {
+    //            return;
+    //        }
+    //
+    //        var friendsJustInvited = result.to;
+    //
+    //        if (friendsAlreadyInvited.length == 0) {
+    //            appManager.getGameState().setFriendsInvited(friendsJustInvited);
+    //        } else {
+    //            var friendsInvited = Utils.removeArrayDuplicates(friendsAlreadyInvited.concat(friendsJustInvited));
+    //            appManager.getGameState().setFriendsInvited(friendsInvited);
+    //        }
+    //
+    //        var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
+    //        var coinsToAdd = friendsJustInvited.length * coinsPerFriend;
+    //        appManager.getGameState().addCoins(coinsToAdd);
+    //
+    //        this.forceUpdate();
+    //
+    //        appDialogs.getInfoDialog()
+    //            .setTitle(i18n._('app.dialog.info.addcoins.title'))
+    //            .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
+    //            .show();
+    //    }.bind(this));
+    //},
+
     onClickInviteFriends: function () {
-        var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
-
-        appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
-            if (!result) {
-                return;
-            }
-            if (!result.hasOwnProperty("to")) {
-                return;
-            }
-            if (result.to.constructor !== Array) {
-                return;
-            }
-
-            var friendsJustInvited = result.to;
-
-            if (friendsAlreadyInvited.length == 0) {
-                appManager.getGameState().setFriendsInvited(friendsJustInvited);
-            } else {
-                var friendsInvited = Utils.removeArrayDuplicates(friendsAlreadyInvited.concat(friendsJustInvited));
-                appManager.getGameState().setFriendsInvited(friendsInvited);
-            }
-
-            var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
-            var coinsToAdd = friendsJustInvited.length * coinsPerFriend;
-            appManager.getGameState().addCoins(coinsToAdd);
-
-            this.forceUpdate();
-
-            appDialogs.getInfoDialog()
-                .setTitle(i18n._('app.dialog.info.addcoins.title'))
-                .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
-                .show();
-        }.bind(this));
+        appFB.invite();
     },
 
     onClickLoginToFacebook: function () {

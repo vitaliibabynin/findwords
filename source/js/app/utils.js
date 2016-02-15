@@ -200,7 +200,6 @@ module.exports = {
     },
 
     removeMatchingValues: function (arrayMain, arrayValuesToRemove) {
-        console.log({arrayMain: arrayMain})
         var a = arrayMain.slice();
         for (var i = 0; i < arrayValuesToRemove.length; i++) {
             for (var j = 0; j < a.length; j++) {
@@ -213,15 +212,20 @@ module.exports = {
         return a;
     },
 
+    getUniqueValues: function (array) {
+        var matchingValues = this.getMatchingValues(array);
+        return this.removeMatchingValues(array, matchingValues);
+    },
+
     difference: function (a, b) {
         return Math.abs(a - b)
     },
 
 
-    cloneArray: function(obj) {
+    cloneArray: function (obj) {
         var clone = [];
-        for(var i in obj) {
-            if(typeof(obj[i])=="object" && obj[i] != null)
+        for (var i in obj) {
+            if (typeof(obj[i]) == "object" && obj[i] != null)
                 clone[i] = this.cloneObject(obj[i]);
             else
                 clone[i] = obj[i];
@@ -229,10 +233,10 @@ module.exports = {
         return clone;
     },
 
-    cloneObject: function(obj) {
+    cloneObject: function (obj) {
         var clone = {};
-        for(var i in obj) {
-            if(typeof(obj[i])=="object" && obj[i] != null)
+        for (var i in obj) {
+            if (typeof(obj[i]) == "object" && obj[i] != null)
                 clone[i] = this.cloneObject(obj[i]);
             else
                 clone[i] = obj[i];

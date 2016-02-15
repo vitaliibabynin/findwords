@@ -74,7 +74,7 @@ window.CONST = {
             'bonus.day3': 'Неутомимый!',
             'bonus.day4': 'Вы прошли больше половины пути!',
             'bonus.day5': 'Нету времени отдыхать!',
-            'bonus.day6': 'На финешной прямой!',
+            'bonus.day6': 'На финишной прямой!',
             'bonus.day7': 'Вы сделали невозможное!',
             'bonus.day7.1': 'Так держать!',
             'bonus.day7.2': 'Напрягитесь, осталось совсем немного!',
@@ -105,12 +105,12 @@ window.CONST = {
             'rankings.levels-complete': 'Пройдено уровней',
             'rankings.invite-friends.get-coins': 'Приглашай друзей и получай монеты!',
             'rankings.invite-friends': 'Пригласить друзей',
-            'rankings.login.description': 'Войдите, пожалуйста, в ваш аккаунт Facebook для того, чтобы узнать рейтинг друзей и поделится своими достижениями.',
+            'rankings.login.description': 'Войдите, пожалуйста, в ваш аккаунт Facebook для того, что бы узнать рейтинг друзей и поделиться своими достижениями.',
             'rankings.login.button': 'Войти в Facebook',
 
             //LEARN PAGE
-            'app.page.learn.aim-of-the-game': 'Для того чтобы пройти уровень, нужно отгадывать все загаданные слова на поле.',
-            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем с первой буквы слова к последней в правильном порядке.',
+            'app.page.learn.aim-of-the-game': 'Для того, что бы пройти уровень, нужно отгадать все загаданные слова на поле.',
+            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем от первой буквы слова к последней, в правильном порядке.',
             'app.page.learn.start': 'Начать',
 
             //RATE DIALOG
@@ -164,8 +164,8 @@ window.CONST = {
 
             //FACEBOOK INVITE DIALOG
             'app.dialog.invite-friends.title': 'Пригласить друзей в Facebook',
-            'app.dialog.invite-friends.description.invite': 'За каждого приглашенного друга вы получите #{count} моне((та|ты|т)).',
-            'app.dialog.invite-friends.description.accept': 'В добавок вы получите #{count} моне((та|ты|т)) за каждого друга, который примет ваше приглашение и присоединится к игре',
+            //'app.dialog.invite-friends.description.invite': 'За каждого приглашенного друга вы получите #{count} моне((та|ты|т)).',
+            'app.dialog.invite-friends.description.accept': 'Вы получите #{count} моне((та|ты|т)) за каждого друга, который примет ваше приглашение и присоединится к игре ',
             'app.dialog.invite-friends.button.invite': 'Пригласить друзей',
             'app.dialog.invite-friends.button.cancel': 'Отмена',
 
@@ -273,12 +273,12 @@ window.CONST = {
             'rankings.levels-complete': 'Levels complete',
             'rankings.invite-friends.get-coins': 'Invite friends and get coins!',
             'rankings.invite-friends': 'Invite friends',
-            'rankings.login.description': 'Please login to Facebook, to see your friends rankings and share your achievements.',
+            'rankings.login.description': 'Please login to Facebook, to see your friends\' rankings and share your achievements.',
             'rankings.login.button': 'Login to Facebook',
 
             //LEARN PAGE
             'app.page.learn.aim-of-the-game': 'In order to complete a level, you need to find all the hidden words on the board.',
-            'app.page.learn.how-to-play': 'To guess words you need to move your finger from the first letter, of the word, to the last in the correct order.',
+            'app.page.learn.how-to-play': 'To guess a word you need to swipe your finger from the first letter to the last, in the correct order.',
             'app.page.learn.start': 'Start',
 
             //RATE DIALOG
@@ -332,8 +332,8 @@ window.CONST = {
 
             //FACEBOOK INVITE DIALOG
             'app.dialog.invite-friends.title': 'Invite friends on Facebook',
-            'app.dialog.invite-friends.description.invite': 'You will receive #{count} coi((n|ns|ns)) per friend invited.',
-            'app.dialog.invite-friends.description.accept': 'An additional #{count} coi((n|ns|ns)) will be given for every friend that accepts your invitation and joins the game.',
+            //'app.dialog.invite-friends.description.invite': 'You will receive #{count} coi((n|ns|ns)) per friend invited.',
+            'app.dialog.invite-friends.description.accept': 'You will receive #{count} coi((n|ns|ns)) for every friend that accepts your invitation and joins the game.',
             'app.dialog.invite-friends.button.invite': 'Invite friends',
             'app.dialog.invite-friends.button.cancel': 'Cancel',
 

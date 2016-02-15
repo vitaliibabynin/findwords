@@ -24,7 +24,7 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         //},
         //facebook: {
         //    lastShareDate: "",
-        //    friendsInvited: []
+        //    friendsInGame: []
         //},
         //settings: {
         //    music: false,
@@ -255,12 +255,18 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
     getLastShareDate: function () {
         return this.getFacebookField('lastShareDate', "");
     },
-    setFriendsInvited: function (newArray) {
-        this.setFacebookField('friendsInvited', newArray);
+    setFriendsInGame: function (newArray) {
+        this.setFacebookField('friendsInGame', newArray);
     },
-    getFriendsInvited: function () {
-        return this.getFacebookField('friendsInvited', []);
+    getFriendsInGame: function () {
+        return this.getFacebookField('friendsInGame', []);
     },
+    //setFriendsInvited: function (newArray) {
+    //    this.setFacebookField('friendsInvited', newArray);
+    //},
+    //getFriendsInvited: function () {
+    //    return this.getFacebookField('friendsInvited', []);
+    //},
 
     setSettingsField: function (field, newValue) {
         if (!this.gameState.settings) {

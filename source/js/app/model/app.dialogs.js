@@ -176,12 +176,19 @@ var InviteFriendsDialog = function () {
     });
 
     dialog.getContent = function(){
-        var coinsForInvite = appManager.getSettings().getFreeCoins().sendInvite;
+        //var coinsForInvite = appManager.getSettings().getFreeCoins().sendInvite;
         var coinsForAccept = appManager.getSettings().getFreeCoins().friendAdded;
 
+        //return '<div class="md-content"> \
+        //                <p>'+i18n._('app.dialog.invite-friends.description.invite', coinsForInvite)+' \
+        //                '+i18n._('app.dialog.invite-friends.description.accept', coinsForAccept)+'</p> \
+        //                <div><a href="#" class="btn invite">'+i18n._('app.dialog.invite-friends.button.invite')+'</a></div> \
+        //                <div><a href="#" class="btn cancel">'+i18n._('app.dialog.invite-friends.button.cancel')+'</a></div> \
+        //         </div> \
+        //        ';
+
         return '<div class="md-content"> \
-                        <p>'+i18n._('app.dialog.invite-friends.description.invite', coinsForInvite)+' \
-                        '+i18n._('app.dialog.invite-friends.description.accept', coinsForAccept)+'</p> \
+                        <p>'+i18n._('app.dialog.invite-friends.description.accept', coinsForAccept)+'</p> \
                         <div><a href="#" class="btn invite">'+i18n._('app.dialog.invite-friends.button.invite')+'</a></div> \
                         <div><a href="#" class="btn cancel">'+i18n._('app.dialog.invite-friends.button.cancel')+'</a></div> \
                  </div> \
@@ -195,39 +202,41 @@ var InviteFriendsDialog = function () {
             this.hide();
             e.stopPropagation();
 
-            var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
-            appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
-                console.log('fbInvite:',result);
+            //var friendsAlreadyInvited = appManager.getGameState().getFriendsInvited();
+            //appFB.invite(null, null, friendsAlreadyInvited).then(function (result) {
+            //    console.log('fbInvite:',result);
+            //
+            //    if (!result) {
+            //        return;
+            //    }
+            //    if (!result.hasOwnProperty("to")) {
+            //        return;
+            //    }
+            //    if (result.to.constructor !== Array) {
+            //        return;
+            //    }
+            //
+            //    var friendsJustInvited = result.to;
+            //
+            //    if (friendsAlreadyInvited.length == 0) {
+            //        appManager.getGameState().setFriendsInvited(friendsJustInvited);
+            //    } else {
+            //        var friendsInvited = Utils.removeArrayDuplicates(friendsAlreadyInvited.concat(friendsJustInvited));
+            //        appManager.getGameState().setFriendsInvited(friendsInvited);
+            //    }
+            //
+            //    var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
+            //    var coinsToAdd = friendsJustInvited.length * coinsPerFriend;
+            //
+            //    appManager.getGameState().addCoins(coinsToAdd);
+            //
+            //    appDialogs.getInfoDialog()
+            //        .setTitle(i18n._('app.dialog.info.addcoins.title'))
+            //        .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
+            //        .show();
+            //}.bind(this));
 
-                if (!result) {
-                    return;
-                }
-                if (!result.hasOwnProperty("to")) {
-                    return;
-                }
-                if (result.to.constructor !== Array) {
-                    return;
-                }
-
-                var friendsJustInvited = result.to;
-
-                if (friendsAlreadyInvited.length == 0) {
-                    appManager.getGameState().setFriendsInvited(friendsJustInvited);
-                } else {
-                    var friendsInvited = Utils.removeArrayDuplicates(friendsAlreadyInvited.concat(friendsJustInvited));
-                    appManager.getGameState().setFriendsInvited(friendsInvited);
-                }
-
-                var coinsPerFriend = appManager.getSettings().getFreeCoins().sendInvite;
-                var coinsToAdd = friendsJustInvited.length * coinsPerFriend;
-
-                appManager.getGameState().addCoins(coinsToAdd);
-
-                appDialogs.getInfoDialog()
-                    .setTitle(i18n._('app.dialog.info.addcoins.title'))
-                    .setContentText(i18n._('app.dialog.info.addcoins.description', coinsToAdd))
-                    .show();
-            }.bind(this));
+            appFB.invite();
 
         }.bind(this));
         $('.cancel', dialog).bind( 'click', function( e ) {
