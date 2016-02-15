@@ -4,6 +4,7 @@
 var GameMixin = require('./../component/app.mixin').GameMixin;
 
 var Object = {assign: require('react/lib/Object.assign')};
+var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
 var StartAd = require('./../component/app.startad').StartAd;
@@ -90,22 +91,53 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         return starArrangement;
     },
 
-    render: function () {
-        var starArrangement = this.selectStarArrangement();
-        var styleStar1 = {
-            backgroundImage: starArrangement[0]
-        };
-        var styleStar2 = {
-            backgroundImage: starArrangement[1]
-        };
-        var styleStar3 = {
-            backgroundImage: starArrangement[2]
-        };
+    getStarClasses: function () {
+        var starsReceived = this.state.starsReceived;
+        var starFull = "star-full";
+        var starEmpty = "star-empty";
+        var starClasses = [];
 
+        switch (starsReceived) {
+            case 1:
+                starClasses = [starFull, starEmpty, starEmpty];
+                break;
+            case 2:
+                starClasses = [starFull, starFull, starEmpty];
+                break;
+            case 3:
+                starClasses = [starFull, starFull, starFull];
+                break;
+            default:
+                starClasses = [starFull, starEmpty, starEmpty];
+        }
+
+        return starClasses;
+    },
+
+    getStars: function () {
+        var starArrangement = this.selectStarArrangement();
+        var styleStar1 = {backgroundImage: starArrangement[0]};
+        var styleStar2 = {backgroundImage: starArrangement[1]};
+        var styleStar3 = {backgroundImage: starArrangement[2]};
+
+        var starClasses = this.getStarClasses();
+        var star1Classes = classNames("star1", starClasses[0]);
+        var star2Classes = classNames("star2", starClasses[1]);
+        var star3Classes = classNames("star3", starClasses[2]);
+
+        return (
+            <div className="stars">
+                <div className={star1Classes} style={styleStar1}></div>
+                <div className={star2Classes} style={styleStar2}></div>
+                <div className={star3Classes} style={styleStar3}></div>
+            </div>
+        )
+    },
+
+    render: function () {
         var progressBar = {
             width: (this.state.roundsComplete / this.state.roundsTotal * 6.250) + "rem"
         };
-
         var rewardStar = {
             backgroundImage: "url('" + this.getImagePath('counter/star') + "')"
         };
@@ -124,11 +156,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
 
                         <div className="excellent">{i18n._('victory.excellent')}</div>
 
-                        <div className="stars">
-                            <div className="star1" style={styleStar1}></div>
-                            <div className="star2" style={styleStar2}></div>
-                            <div className="star3" style={styleStar3}></div>
-                        </div>
+                        {this.getStars()}
 
                         <div className="rounds-complete">
                             <div className="progress-bar">

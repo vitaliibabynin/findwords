@@ -49,6 +49,7 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     setGameStateRoundField: function (field, newValue) {
+        console.log([field, newValue]);
         return appManager.getGameState().setPracticeRoundField(field, newValue);
     },
 
@@ -123,9 +124,8 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     goToPageRoundComplete: function (time) {
-        this.setPracticeRoundComplete();
-
         var params = this.addRewards();
+        this.setPracticeRoundComplete();
 
         time = time || 0;
         setTimeout(function () {
