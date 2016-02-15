@@ -57,6 +57,42 @@
       .star2 {
         width: 2.75rem;
       }
+
+      .star1.star-full {
+        $name: tada;
+        $duration: 1s;
+
+        -webkit-animation-name: $name;
+        -webkit-animation-duration: $duration;
+        animation: $name;
+        animation-duration: $duration;
+      }
+
+      .star2.star-full {
+        $name: tada;
+        $duration: 1s;
+        $delay: 0.25s;
+
+        -webkit-animation-name: $name;
+        -webkit-animation-duration: $duration;
+        -webkit-animation-delay: $delay;
+        animation: $name;
+        animation-duration: $duration;
+        animation-delay: $delay;
+      }
+
+      .star3.star-full {
+        $name: tada;
+        $duration: 1s;
+        $delay: 0.5s;
+
+        -webkit-animation-name: $name;
+        -webkit-animation-duration: $duration;
+        -webkit-animation-delay: $delay;
+        animation: $name;
+        animation-duration: $duration;
+        animation-delay: $delay;
+      }
     }
 
     .rounds-complete {
