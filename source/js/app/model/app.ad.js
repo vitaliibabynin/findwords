@@ -27,6 +27,7 @@ var Ad = function(currentPlatform, isCordovaApp){
             if(this.isCordovaApp){
                 if(this.settings.hasOwnProperty("appodeal") && window.Appodeal){
                     Appodeal.setAutoCache(Appodeal.INTERSTITIAL | Appodeal.VIDEO | Appodeal.REWARDED_VIDEO, true);
+                    Appodeal.disableLocationPermissionCheck();
                     Appodeal.initialize(this.settings.appodeal.appid, Appodeal.INTERSTITIAL | Appodeal.VIDEO | Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
                     Appodeal.enableInterstitialCallbacks(true);
                     Appodeal.enableVideoCallbacks(true);

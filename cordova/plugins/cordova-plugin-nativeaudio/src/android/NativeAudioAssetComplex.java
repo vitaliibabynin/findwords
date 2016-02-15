@@ -16,7 +16,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 
-public class NativeAudioAssetComplex implements OnPreparedListener, OnCompletionListener {
+public class NativeAudioAssetComplex implements NativeAudioAsset.NativAudioAsset, OnPreparedListener, OnCompletionListener {
 
 	private static final int INVALID = 0;
 	private static final int PREPARED = 1;
@@ -33,10 +33,11 @@ public class NativeAudioAssetComplex implements OnPreparedListener, OnCompletion
 	{
 		state = INVALID;
 		mp = new MediaPlayer();
+		mp.reset();
         mp.setOnCompletionListener(this);
         mp.setOnPreparedListener(this);
 		mp.setDataSource( afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-		mp.setAudioStreamType(AudioManager.STREAM_MUSIC); 
+		mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		mp.setVolume(volume, volume);
 		mp.prepare();
 	}
@@ -62,8 +63,7 @@ public class NativeAudioAssetComplex implements OnPreparedListener, OnCompletion
 			state = (loop ? PENDING_LOOP : PENDING_PLAY);
 			onPrepared( mp );
 		}
-		else if ( !playing )
-		{
+		else if ( !playing ) {
 			state = (loop ? PENDING_LOOP : PENDING_PLAY);
 			mp.setLooping(loop);
 			mp.start();

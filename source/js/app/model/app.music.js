@@ -86,15 +86,19 @@ var CordovaSound = Object.assign({}, AbstractSound, {
     },
 
     prepareSound: function(sound){
-        this.getPlayer().preloadSimple(
-            sound,
-            this.getSoundPath(sound),
-            function(msg){
-                console.log('success:' + msg);
-            }, function(msg){
-                console.log('error: ' + msg);
-            }
-        );
+        return new Promise(function(resolve, reject){
+            this.getPlayer().preloadSimple(
+                sound,
+                this.getSoundPath(sound),
+                function(msg){
+                    console.log('success:' + msg);
+                    resolve(msg);
+                }, function(msg){
+                    console.log('error: ' + msg);
+                    reject(msg);
+                }
+            );
+        }.bind(this))
     },
 
     getPlayer: function () {
@@ -199,21 +203,23 @@ var CordovaMusic = Object.assign({}, CordovaSound, {
         AbstractSound.updateSoundSettings.call(this);
     },
 
-    prepareSound: function(sound, onSuccess, onError){
-        this.getPlayer().preloadComplex(
-            sound,
-            this.getSoundPath(sound),
-            1,
-            1,
-            0,
-            function(msg){
-                console.log('success:' + msg);
-                onSuccess(msg);
-            }, function(msg){
-                console.log( 'error: ' + msg );
-                onError(msg);
-            }
-        );
+    prepareSound: function(sound){
+        return new Promise(function(resolve, reject) {
+            this.getPlayer().preloadComplex(
+                sound,
+                this.getSoundPath(sound),
+                1,
+                1,
+                0,
+                function (msg) {
+                    console.log('success:' + msg);
+                    resolve(msg);
+                }, function (msg) {
+                    console.log('error: ' + msg);
+                    reject(msg);
+                }
+            );
+        }.bind(this));
     },
 
     play: function (soundFileName) {
@@ -230,7 +236,7 @@ var CordovaMusic = Object.assign({}, CordovaSound, {
             soundFileName = this.lastSound;
         }
 
-        this.prepareSound(soundFileName, function(){
+        this.prepareSound(soundFileName).then(function(){
             var player = this.getPlayer();
             player.loop(soundFileName);
         }.bind(this));
@@ -283,7 +289,7 @@ module.exports.AppMusic = AppMusic;
 
 const SFX_BUTTON = 'button.mp3';
 const SFX_BUTTON_GAME = 'button_game.mp3';
-const SFX_BUTTON_GAME_CORRECT = 'button_game_correct.wav';
+const SFX_BUTTON_GAME_CORRECT = 'button_game_correct.mp3';
 const SFX_BUTTON_GAME_WRONG = 'button_game_wrong.mp3';
 const SFX_WIN = 'win.mp3';
 var AppSFX = function(platform){
@@ -292,11 +298,20 @@ var AppSFX = function(platform){
         case CONST.PLATFORM_IOS:
         case CONST.PLATFORM_ANDROID:
             soundManager = CordovaSound;
-            soundManager.prepareSound(SFX_BUTTON);
-            soundManager.prepareSound(SFX_BUTTON_GAME);
-            soundManager.prepareSound(SFX_BUTTON_GAME_CORRECT);
-            soundManager.prepareSound(SFX_BUTTON_GAME_WRONG);
-            soundManager.prepareSound(SFX_WIN);
+            soundManager.prepareSound(SFX_BUTTON)
+                .then(function(){
+                    soundManager.prepareSound(SFX_BUTTON_GAME);
+                }.bind(this))
+                .then(function(){
+                    soundManager.prepareSound(SFX_BUTTON_GAME_CORRECT);
+                }.bind(this))
+                .then(function(){
+                    soundManager.prepareSound(SFX_BUTTON_GAME_WRONG);
+                }.bind(this))
+                .then(function(){
+                    soundManager.prepareSound(SFX_WIN);
+                }.bind(this))
+            ;
             break;
 
         case CONST.PLATFORM_SITE:

@@ -60,7 +60,7 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 		}
 	}
 
-	private PluginResult executePreload(JSONArray data) {
+	private PluginResult executePreload(JSONArray data, String preloadType) {
 		String audioID;
 		try {
 			audioID = data.getString(0);
@@ -89,8 +89,10 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				AssetFileDescriptor afd = am.openFd(fullPath);
 
 				NativeAudioAsset asset = new NativeAudioAsset(
-						afd, voices, (float)volume);
+						afd, voices, (float)volume, preloadType);
 				assetMap.put(audioID, asset);
+
+				afd.close();
 
 				return new PluginResult(Status.OK);
 			} else {
@@ -116,6 +118,9 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 				else
 					asset.play(new Callable<Void>() {
                         public Void call() throws Exception {
+							if(null == completeCallbacks){
+								return null;
+							}
                             CallbackContext callbackContext = completeCallbacks.get(audioID);
                             if (callbackContext != null) {
                                 JSONObject done = new JSONObject();
@@ -228,14 +233,14 @@ public class NativeAudio extends CordovaPlugin implements AudioManager.OnAudioFo
 			} else if (PRELOAD_SIMPLE.equals(action)) {
 				cordova.getThreadPool().execute(new Runnable() {
 		            public void run() {
-		            	callbackContext.sendPluginResult( executePreload(data) );
-		            }
+		            	callbackContext.sendPluginResult( executePreload(data, PRELOAD_SIMPLE));
+					}
 		        });				
 				
 			} else if (PRELOAD_COMPLEX.equals(action)) {
 				cordova.getThreadPool().execute(new Runnable() {
 		            public void run() {
-		            	callbackContext.sendPluginResult( executePreload(data) );
+		            	callbackContext.sendPluginResult( executePreload(data, PRELOAD_COMPLEX) );
 		            }
 		        });				
 
