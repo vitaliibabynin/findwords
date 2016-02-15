@@ -58,8 +58,9 @@
         width: 2.75rem;
       }
 
+      $animation-name: zoomIn;
       .star1.star-full {
-        $name: tada;
+        $name: $animation-name;
         $duration: 1s;
 
         -webkit-animation-name: $name;
@@ -69,7 +70,7 @@
       }
 
       .star2.star-full {
-        $name: tada;
+        $name: $animation-name;
         $duration: 1s;
         $delay: 0.25s;
 
@@ -82,7 +83,7 @@
       }
 
       .star3.star-full {
-        $name: tada;
+        $name: $animation-name;
         $duration: 1s;
         $delay: 0.5s;
 
