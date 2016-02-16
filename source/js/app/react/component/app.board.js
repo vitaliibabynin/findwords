@@ -6,8 +6,6 @@ var classNames = require('classnames');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 //var GameMixin = require('./app.mixin').GameMixin;
 
-var Notice = require('./../component/app.notice.js').Notice;
-
 
 module.exports = {};
 
@@ -111,7 +109,7 @@ var BoardClass = Object.assign({}, {}, {
         ),
         shownWords: React.PropTypes.arrayOf(React.PropTypes.number),
         isPracticeRound: React.PropTypes.bool,
-        lockScreen: React.PropTypes.func,
+        displayNotice: React.PropTypes.func,
         addToShownWords: React.PropTypes.func,
         removeWordFromShownWords: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
@@ -129,9 +127,7 @@ var BoardClass = Object.assign({}, {}, {
             prevSelectedLetters: {letters: []},
             highlightedWord: {letters: []},
             isPracticeRound: typeof this.props.isPracticeRound == "undefined" ? false : this.props.isPracticeRound,
-            lockScreen: this.props.lockScreen || function () {},
-            noticeType: "",
-            noticeWord: {letters: []},
+            displayNotice: this.props.displayNotice || function () {},
             addToShownWords: this.props.addToShownWords || function () {},
             removeWordFromShownWords: this.props.removeWordFromShownWords || function () {},
             setGameStateRoundField: this.props.setGameStateRoundField || function () {},
@@ -970,7 +966,7 @@ var BoardClass = Object.assign({}, {}, {
 
     bringUpNotice: function (type) {
         var word = this.state.selectedLetters;
-        this.displayNotice(type, word);
+        this.state.displayNotice(type, word);
 
         this.copySelectedLettersToPrevSelectedLetters();
 
@@ -995,32 +991,6 @@ var BoardClass = Object.assign({}, {}, {
             boardArr: boardArr,
             selectedLetters: {letters: [], idx: {}}
         });
-    },
-
-    displayNotice: function (type, word) {
-        this.state.lockScreen(true);
-
-        this.setState({
-            noticeType: type,
-            noticeWord: word
-        }, function () {
-            setTimeout(function () {
-                //this.hideNotice();
-            }.bind(this), 2000);
-        });
-    },
-
-    hideNotice: function () {
-        this.setState({
-            noticeType: "",
-            noticeWord: {letters: []}
-        });
-
-        this.state.lockScreen(false);
-
-        //setTimeout(function () {
-        this.emptySelectedLetters();
-        //}.bind(this), 200);
     },
 
 
@@ -1332,12 +1302,6 @@ var BoardClass = Object.assign({}, {}, {
         };
         return (
             <div className={classNames("game-board", this.state.boardExtraClass)}>
-
-                <Notice noticeType={this.state.noticeType}
-                        word={this.state.noticeWord}
-                        hideNotice={this.hideNotice}
-                />
-
                 <table ref="board"
                        className="board"
                        onTouchStart={this.onTouchStart}

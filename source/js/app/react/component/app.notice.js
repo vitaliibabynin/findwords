@@ -133,14 +133,14 @@ var NoticeClass = Object.assign({}, {}, {
         );
 
         return (
-
+            <div className="lock-screen">
                 <div className={noticeClassNames}
                      style={noticeImg}
                      onClick={this.onClick}
                 >
                     <div><span>{text}</span></div>
                 </div>
-
+            </div>
         );
     }
 

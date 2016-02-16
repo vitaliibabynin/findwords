@@ -6,6 +6,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var Board = require('./../component/app.board.js').Board;
+var Notice = require('./../component/app.notice.js').Notice;
 
 
 var PageGameLearn = Object.assign({}, {}, {
@@ -14,7 +15,8 @@ var PageGameLearn = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            screenLocked: false,
+            noticeType: "",
+            noticeWord: {letters: []},
             gameBoardMaxHeight: 0
         };
         state.boardData = this.getBoardData() || {};
@@ -49,11 +51,34 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     setGameStateRoundField: function (field, newValue) {
+        console.log([field, newValue]);
         return appManager.getGameState().setPracticeRoundField(field, newValue);
     },
 
     getGameStateRoundField: function (field, defaultValue) {
         return appManager.getGameState().getPracticeRoundField(field, defaultValue);
+    },
+
+    displayNotice: function (type, word) {
+        this.setState({
+            noticeType: type,
+            noticeWord: word
+        }, function () {
+            setTimeout(function () {
+                this.hideNotice();
+            }.bind(this), 2000);
+        });
+    },
+
+    hideNotice: function () {
+        this.setState({
+            noticeType: "",
+            noticeWord: {letters: []}
+        });
+
+        //setTimeout(function () {
+        this.refs.board.emptySelectedLetters();
+        //}.bind(this), 200);
     },
 
     getStarsReceived: function () {
@@ -110,29 +135,10 @@ var PageGameLearn = Object.assign({}, {}, {
         }.bind(this), time);
     },
 
-    lockScreen: function (boolean) {
-        boolean = typeof boolean == "undefined" ? false : boolean
-
-        this.setState({
-            screenLocked: boolean
-        })
-    },
-
-    displayLockedScreen: function () {
-        if (this.state.screenLocked) {
-            return (
-                <div className="lock-screen"></div>
-            )
-        }
-    },
-
     render: function () {
 
         return (
             <div className="page page-game">
-
-                {this.displayLockedScreen()}
-
                 <Counters isDisplayBackButton={true}
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
                 <Timer time={this.state.time}
@@ -147,11 +153,16 @@ var PageGameLearn = Object.assign({}, {}, {
                                                                     boardData={this.state.boardData}
                                                                     board={this.state.board}
                                                                     isPracticeRound={true}
-                                                                    lockScreen={this.lockScreen}
+                                                                    displayNotice={this.displayNotice}
                                                                     setGameStateRoundField={this.setGameStateRoundField}
                                                                     goToPageRoundComplete={this.goToPageRoundComplete}
                         /> : ''}
                     </div>
+
+                    <Notice noticeType={this.state.noticeType}
+                            word={this.state.noticeWord}
+                            hideNotice={this.hideNotice}
+                    />
 
                 </div>
             </div>
