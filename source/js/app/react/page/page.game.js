@@ -316,14 +316,16 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     hideNotice: function () {
-        this.setState({
-            noticeType: "",
-            noticeWord: {letters: []}
-        });
+        if(this.isMounted()){
+            this.setState({
+                noticeType: "",
+                noticeWord: {letters: []}
+            });
 
-        //setTimeout(function () {
-        this.refs.board.emptySelectedLetters();
-        //}.bind(this), 200);
+            //setTimeout(function () {
+            this.refs.board.emptySelectedLetters();
+            //}.bind(this), 200);
+        }
     },
 
 
