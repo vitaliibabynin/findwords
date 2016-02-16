@@ -22,6 +22,10 @@ var NoticeClass = Object.assign({}, {}, {
     propTypes: {
         classNames: React.PropTypes.string,
         noticeType: React.PropTypes.string,
+        noticeContainerStyle: React.PropTypes.shape({
+            height: React.PropTypes.number,
+            marginTop: React.PropTypes.number
+        }),
         word: React.PropTypes.shape({
             letters: React.PropTypes.arrayOf(React.PropTypes.shape({
                 classNames: React.PropTypes.object,
@@ -37,6 +41,7 @@ var NoticeClass = Object.assign({}, {}, {
         return {
             classNames: this.props.classNames || "",
             noticeType: this.props.noticeType || "",
+            noticeContainerStyle: this.props.noticeContainerStyle || {},
             word: this.props.word || {letters: []},
             hideNotice: this.props.hideNotice || function () {
             }
@@ -47,6 +52,7 @@ var NoticeClass = Object.assign({}, {}, {
         this.setState({
             classNames: nextProps.classNames || "",
             noticeType: nextProps.noticeType || "",
+            noticeContainerStyle: nextProps.noticeContainerStyle || {},
             word: nextProps.word || {letters: []},
             hideNotice: nextProps.hideNotice || function () {
             }
@@ -134,11 +140,17 @@ var NoticeClass = Object.assign({}, {}, {
 
         return (
             <div className="lock-screen">
-                <div className={noticeClassNames}
-                     style={noticeImg}
-                     onClick={this.onClick}
-                >
-                    <div><span>{text}</span></div>
+                <div className="noticeContainer" style={this.state.noticeContainerStyle}>
+
+                    <div className={noticeClassNames}
+                         style={noticeImg}
+                         onClick={this.onClick}>
+
+                        <div>
+                            <span>{text}</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         );

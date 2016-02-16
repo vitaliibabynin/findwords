@@ -4,6 +4,105 @@
 }
 
 .page-game{
+
+  .lock-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 500;
+
+    .noticeContainer {
+      position: relative;
+
+      .notice {
+        @-webkit-keyframes smooth-exit {
+          0% {
+            opacity: 0;
+          }
+          1% {
+            opacity: 1;
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+        @keyframes smooth-exit {
+          0% {
+            opacity: 0;
+          }
+          1% {
+            opacity: 1;
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+        //-webkit-animation: smooth-exit 2s;
+        //animation: smooth-exit 2s;
+
+        //opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        $gamePage-notice-size: 11rem;
+        width: $gamePage-notice-size;
+        min-height: $gamePage-notice-size;
+        background-color: $gamePage-notice-default-bg-color;
+        color: $gamePage-notice-default-color;
+        background-repeat: no-repeat;
+        $notice-image-width: 5.125rem;
+        background-size: $notice-image-width 5.1875rem;
+        background-position: (($gamePage-notice-size - $notice-image-width) / 2) 1rem;
+
+        &.no-such-word {
+          background-color: $gamePage-notice-noSuchWord-bg-color;
+          color: $gamePage-notice-noSuchWord-color;
+        }
+
+        &.select-differently {
+          background-color: $gamePage-notice-selectDifferently-bg-color;
+          color: $gamePage-notice-selectDifferently-color;
+        }
+
+        &.no-words-to-show {
+          background-color: $gamePage-notice-noWordsToShow-bg-color;
+          color: $gamePage-notice-noWordsToShow-color;
+        }
+
+        div {
+          display: table;
+          $margin-left-right: 1rem;
+          margin-top: 5.75rem;
+          margin-right: $margin-left-right;
+          margin-left: $margin-left-right;
+          font-size: 1rem;
+          text-align: center;
+          height: 5rem;
+          width: $gamePage-notice-size - (2 * $margin-left-right);
+          table-layout: fixed;
+
+          span {
+            display: table-cell;
+            vertical-align: middle;
+            word-wrap: break-word;
+            width: $gamePage-notice-size - (2 * $margin-left-right);
+            line-height: 1rem;
+          }
+        }
+      }
+    }
+  }
+
   .timer {
     position: relative;
     padding-top: 0.71875rem;
@@ -435,100 +534,6 @@
           }
           &.learn-bg-color-3 {
             background-color: $gamePage-board-td-learn-bg-color-3;
-          }
-        }
-      }
-    }
-
-    .lock-screen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      z-index: 500;
-
-      .notice {
-        @-webkit-keyframes smooth-exit {
-          0% {
-            opacity: 0;
-          }
-          1% {
-            opacity: 1;
-          }
-          75% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-        @keyframes smooth-exit {
-          0% {
-            opacity: 0;
-          }
-          1% {
-            opacity: 1;
-          }
-          75% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-        -webkit-animation: smooth-exit 2s;
-        animation: smooth-exit 2s;
-
-        opacity: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1000;
-        $gamePage-notice-size: 11rem;
-        width: $gamePage-notice-size;
-        min-height: $gamePage-notice-size;
-        background-color: $gamePage-notice-default-bg-color;
-        color: $gamePage-notice-default-color;
-        background-repeat: no-repeat;
-        $notice-image-width: 5.125rem;
-        background-size: $notice-image-width 5.1875rem;
-        background-position: (($gamePage-notice-size - $notice-image-width) / 2) 1rem;
-
-        &.no-such-word {
-          background-color: $gamePage-notice-noSuchWord-bg-color;
-          color: $gamePage-notice-noSuchWord-color;
-        }
-
-        &.select-differently {
-          background-color: $gamePage-notice-selectDifferently-bg-color;
-          color: $gamePage-notice-selectDifferently-color;
-        }
-
-        &.no-words-to-show {
-          background-color: $gamePage-notice-noWordsToShow-bg-color;
-          color: $gamePage-notice-noWordsToShow-color;
-        }
-
-        div {
-          display: table;
-          $margin-left-right: 1rem;
-          margin-top: 5.75rem;
-          margin-right: $margin-left-right;
-          margin-left: $margin-left-right;
-          font-size: 1rem;
-          text-align: center;
-          height: 5rem;
-          width: $gamePage-notice-size - (2 * $margin-left-right);
-          table-layout: fixed;
-
-          span {
-            display: table-cell;
-            vertical-align: middle;
-            word-wrap: break-word;
-            width: $gamePage-notice-size - (2 * $margin-left-right);
-            line-height: 1rem;
           }
         }
       }

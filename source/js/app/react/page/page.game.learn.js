@@ -16,6 +16,7 @@ var PageGameLearn = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             noticeType: "",
+            noticeContainerHeight: "",
             noticeWord: {letters: []},
             gameBoardMaxHeight: 0
         };
@@ -51,7 +52,6 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     setGameStateRoundField: function (field, newValue) {
-        console.log([field, newValue]);
         return appManager.getGameState().setPracticeRoundField(field, newValue);
     },
 
@@ -60,8 +60,17 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     displayNotice: function (type, word) {
+        var boardHeight = this.refs.board.getDOMNode().clientHeight;
+        var boardTop = this.refs.board.getDOMNode().getBoundingClientRect().top;
+
+        var noticeContainerStyle = {
+            height: boardHeight,
+            marginTop: boardTop
+        };
+
         this.setState({
             noticeType: type,
+            noticeContainerStyle: noticeContainerStyle || {},
             noticeWord: word
         }, function () {
             setTimeout(function () {
@@ -71,14 +80,14 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     hideNotice: function () {
-        this.setState({
-            noticeType: "",
-            noticeWord: {letters: []}
-        });
+        if (this.isMounted()) {
+            this.setState({
+                noticeType: "",
+                noticeWord: {letters: []}
+            });
 
-        //setTimeout(function () {
-        this.refs.board.emptySelectedLetters();
-        //}.bind(this), 200);
+            this.refs.board.emptySelectedLetters();
+        }
     },
 
     getStarsReceived: function () {
@@ -139,6 +148,13 @@ var PageGameLearn = Object.assign({}, {}, {
 
         return (
             <div className="page page-game">
+
+                <Notice noticeType={this.state.noticeType}
+                        noticeContainerStyle={this.state.noticeContainerStyle}
+                        word={this.state.noticeWord}
+                        hideNotice={this.hideNotice}
+                />
+
                 <Counters isDisplayBackButton={true}
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
                 <Timer time={this.state.time}
@@ -158,11 +174,6 @@ var PageGameLearn = Object.assign({}, {}, {
                                                                     goToPageRoundComplete={this.goToPageRoundComplete}
                         /> : ''}
                     </div>
-
-                    <Notice noticeType={this.state.noticeType}
-                            word={this.state.noticeWord}
-                            hideNotice={this.hideNotice}
-                    />
 
                 </div>
             </div>

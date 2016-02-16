@@ -26,6 +26,7 @@ var PageGameMain = Object.assign({}, {}, {
             roundIdx: parseInt(router.getParam('roundIdx')) || 0,
             shownWordsLetters: [],
             noticeType: "",
+            noticeContainerHeight: "",
             noticeWord: {letters: []},
             chipsOpenWord: appManager.getSettings().getChipsCoinsCost().openWord || 0,
             chipsOpenLetter: appManager.getSettings().getChipsCoinsCost().openLetter || 0,
@@ -67,13 +68,13 @@ var PageGameMain = Object.assign({}, {}, {
         }
 
 
-
         var $pageContent = $(this.refs.pageContent.getDOMNode());
         //console.log(this.refs.pageContent.getDOMNode().clientHeight);
         //console.log(parseInt($pageContent.css('padding-bottom')));
         var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
             - this.refs.shownWords.getDOMNode().offsetHeight
             - parseInt($pageContent.css('padding-bottom'));
+
 
         this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
 
@@ -305,8 +306,17 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     displayNotice: function (type, word) {
+        var boardHeight = this.refs.board.getDOMNode().clientHeight;
+        var boardTop = this.refs.board.getDOMNode().getBoundingClientRect().top;
+
+        var noticeContainerStyle = {
+            height: boardHeight,
+            marginTop: boardTop
+        };
+
         this.setState({
             noticeType: type,
+            noticeContainerStyle: noticeContainerStyle || {},
             noticeWord: word
         }, function () {
             setTimeout(function () {
@@ -322,9 +332,7 @@ var PageGameMain = Object.assign({}, {}, {
                 noticeWord: {letters: []}
             });
 
-            //setTimeout(function () {
             this.refs.board.emptySelectedLetters();
-            //}.bind(this), 200);
         }
     },
 
@@ -408,8 +416,16 @@ var PageGameMain = Object.assign({}, {}, {
 
         return (
             <div className="page page-game">
+
+                <Notice noticeType={this.state.noticeType}
+                        noticeContainerStyle={this.state.noticeContainerStyle}
+                        word={this.state.noticeWord}
+                        hideNotice={this.hideNotice}
+                />
+
                 <Counters isDisplayBackButton={true}
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
+
                 <Timer ref="timer" time={this.state.time}
                 setGameStateRoundField={this.setGameStateRoundField}
                 getGameStateRoundField={this.getGameStateRoundField}
@@ -438,6 +454,7 @@ var PageGameMain = Object.assign({}, {}, {
                         <span>{i18n._('chip.show-word')}</span>
                     </ChipButton>
                 </div>
+
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
                     <div className="container transform-center">
@@ -460,11 +477,6 @@ var PageGameMain = Object.assign({}, {}, {
                                     shownWordsAnimationLeave={this.state.shownWordsAnimationLeave}
                         />
                     </div>
-
-                    <Notice noticeType={this.state.noticeType}
-                        word={this.state.noticeWord}
-                        hideNotice={this.hideNotice}
-                        />
 
                 </div>
             </div>
