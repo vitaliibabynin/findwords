@@ -125,6 +125,77 @@ var AbstractFB = Object.assign({}, AbstractEventEmitter, {
     },
 
 
+    checkForNewFriends: function () {
+        if (this.isAuthorized() === false) {
+            return;
+        }
+
+        var friendsInGameState = appManager.getGameState().getFriendsInGame();
+
+        this.getAppFriends().then(function (result) {
+            if (result.constructor !== Array) {
+                console.log("getAppFriends result invalid");
+                return;
+            }
+            if (result.length == 0) {
+                if(friendsInGameState === false){
+                    //если человек только первый раз авторизовался тогда просто запоминаем его друзей
+                    //и не даем монеты, он еще не успел никому отправить инвайт
+                    appManager.getGameState().setFriendsInGame([]);
+                }
+                return;
+            }
+
+
+            var friendsFacebook = new Array(result.length);
+            for (var i = 0; i < friendsFacebook.length; i++) {
+                friendsFacebook[i] = result[i].id;
+            }
+
+            if(friendsInGameState === false){
+                //если человек только первый раз авторизовался тогда просто запоминаем его друзей
+                //и не даем монеты, он еще не успел никому отправить инвайт
+                appManager.getGameState().setFriendsInGame(friendsFacebook);
+                return;
+            }
+
+
+
+            var coinsPerFriend = appManager.getSettings().getFreeCoins().friendAdded;
+
+            if (friendsInGameState.length == 0) {
+                appManager.getGameState().setFriendsInGame(friendsFacebook);
+
+                var coinsToAdd = friendsFacebook.length * coinsPerFriend;
+                appManager.getGameState().addCoins(coinsToAdd);
+                this.forceUpdate();
+
+                appDialogs.getInfoDialog()
+                    .setTitle(i18n._('app.dialog.info.friends-joined.title'))
+                    .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', friendsFacebook.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+                    .show();
+
+                return;
+            }
+
+            var allFriends = friendsFacebook.concat(friendsInGameState);
+            var newFriends = Utils.getUniqueValues(allFriends);
+            if (newFriends.length == 0) {
+                return;
+            }
+
+            appManager.getGameState().setFriendsInGame(allFriends);
+
+            coinsToAdd = newFriends.length * coinsPerFriend;
+            appManager.getGameState().addCoins(coinsToAdd);
+
+            appDialogs.getInfoDialog()
+                .setTitle(i18n._('app.dialog.info.friends-joined.title'))
+                .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', newFriends.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+                .show();
+        }.bind(this));
+    },
+
     addLoginListener: function (callback) {
         this.on(EVENT_LOGIN, callback);
     },
@@ -156,6 +227,8 @@ var SiteFB = Object.assign({}, AbstractFB, {
             this.userId = authResponse.authResponse.userID;
             this.accessToken = authResponse.authResponse.accessToken;
             this.expireTime = authResponse.authResponse.expiresIn * 1000 + Date.now();
+
+            this.checkForNewFriends();
             this.emitLogin();
         } else if (authResponse.status === 'not_authorized') {
             // the user is logged in to Facebook,
@@ -391,6 +464,7 @@ var CordovaFB = Object.assign({}, AbstractFB, {
             this.userId = response.userID;
             this.accessToken = response.accessToken;
             this.expireTime = response.expirationDate;
+            this.checkForNewFriends();
             this.emitLogin();
         } else {
             this.emitLogout();

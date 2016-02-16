@@ -51,6 +51,9 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        window.appAnalytics.trackView('pageGame');
+        appAnalytics.trackEvent('round', 'bundle-'+this.state.roundsBundleIdx+' round-'+this.state.roundIdx, '', 1);
+
         var roundsTotal = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds.length;
         if (typeof roundsTotal == "undefined") {
             return;
@@ -171,6 +174,7 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     onChipOpenWordClick: function () {
+        appAnalytics.trackEvent('chips', 'openWord-click', 'click', 1);
         var coins = appManager.getGameState().getCoins();
         if (this.state.chipsOpenWord > coins) {
             appDialogs.getNoMoneyDialog().show();
@@ -178,6 +182,7 @@ var PageGameMain = Object.assign({}, {}, {
         }
 
         this.refs.board.openWord().then(function (result) {
+            appAnalytics.trackEvent('chips', 'openWord-charged', 'charged', 1);
             if (result !== false) {
                 var newCoins = coins - this.state.chipsOpenWord;
                 appManager.getGameState().setCoins(newCoins);
@@ -192,6 +197,7 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     onChipOpenLetterClick: function () {
+        appAnalytics.trackEvent('chips', 'openLetter-click', 'click', 1);
         var coins = appManager.getGameState().getCoins();
         if (this.state.chipsOpenLetter > coins) {
             appDialogs.getNoMoneyDialog().show();
@@ -200,6 +206,7 @@ var PageGameMain = Object.assign({}, {}, {
 
         var result = this.refs.board.openLetter();
         if (result !== false) {
+            appAnalytics.trackEvent('chips', 'openLetter-charged', 'charged', 1);
             var newCoins = coins - this.state.chipsOpenLetter;
             appManager.getGameState().setCoins(newCoins);
             this.forceUpdate();
@@ -212,6 +219,8 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     onChipShowWordClick: function () {
+        appAnalytics.trackEvent('chips', 'showWord-click', 'click', 1);
+
         var coins = appManager.getGameState().getCoins();
         if (this.state.chipsShowWord > coins) {
             appDialogs.getNoMoneyDialog().show();
@@ -220,6 +229,7 @@ var PageGameMain = Object.assign({}, {}, {
 
         var result = this.refs.board.sendWordToShowToPageGame();
         if (result !== false) {
+            appAnalytics.trackEvent('chips', 'showWord-charged', 'charged', 1);
             var newCoins = coins - this.state.chipsShowWord;
             appManager.getGameState().setCoins(newCoins);
 
@@ -353,6 +363,14 @@ var PageGameMain = Object.assign({}, {}, {
 
         this.addRewardScore(params.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(params.rewardCoins);
+
+        appAnalytics.trackEvent(
+            'roundResult',
+            'bundle-'+this.state.roundsBundleIdx+' round-'+this.state.roundIdx,
+            'remainingTime-'+this.getGameStateRoundsBundleField("secondsRemaining")+' receivedStars-'+params.starsReceived,
+            1
+        );
+
 
         return params;
     },

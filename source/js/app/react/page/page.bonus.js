@@ -39,6 +39,8 @@ var PageBonus = Object.assign({}, {}, {
     },
 
     componentWillMount: function () {
+        window.appAnalytics.trackView('pageBonus');
+
         appAd.hideBanner();
     },
 
@@ -84,6 +86,8 @@ var PageBonus = Object.assign({}, {}, {
     generateDays: function () {
         var daysPlayed = this.state.daysPlayed;
         var daysTotal = this.state.bonusDaysTotal;
+
+        appAnalytics.trackEvent('dailyBonus', 'day-'+daysPlayed, '', 1);
 
         var daysRender = new Array(daysTotal);
 

@@ -36,17 +36,25 @@
       margin-top: 1rem;
       height: 3.125rem;
       text-align: center;
+      position: relative;
 
-      div{
-        margin-right: 0.6875rem;
-        display: inline-block;
-        height: 3.0625rem;
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
+      .star-line{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
 
-      div:last-child {
-        margin-right: 0;
+        div{
+          margin-right: 0.6875rem;
+          display: inline-block;
+          height: 3.0625rem;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+
+        div:last-child {
+          margin-right: 0;
+        }
       }
 
       .star1,
@@ -60,31 +68,26 @@
 
       $animation-name: zoomIn;
       .star1.star-full {
+        opacity: 1;
+
         $name: $animation-name;
-        $duration: 1s;
+        $duration: 0.75s;
 
         -webkit-animation-name: $name;
         -webkit-animation-duration: $duration;
         animation: $name;
         animation-duration: $duration;
+
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
       }
 
       .star2.star-full {
-        $name: $animation-name;
-        $duration: 1s;
-        $delay: 0.25s;
+        opacity: 1;
 
-        -webkit-animation-name: $name;
-        -webkit-animation-duration: $duration;
-        -webkit-animation-delay: $delay;
-        animation: $name;
-        animation-duration: $duration;
-        animation-delay: $delay;
-      }
 
-      .star3.star-full {
         $name: $animation-name;
-        $duration: 1s;
+        $duration: 0.75s;
         $delay: 0.5s;
 
         -webkit-animation-name: $name;
@@ -93,6 +96,27 @@
         animation: $name;
         animation-duration: $duration;
         animation-delay: $delay;
+
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+
+      .star3.star-full {
+        opacity: 1;
+
+        $name: $animation-name;
+        $duration: 0.75s;
+        $delay: 1s;
+
+        -webkit-animation-name: $name;
+        -webkit-animation-duration: $duration;
+        -webkit-animation-delay: $delay;
+        animation: $name;
+        animation-duration: $duration;
+        animation-delay: $delay;
+
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
       }
     }
 

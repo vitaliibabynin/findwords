@@ -259,7 +259,7 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         this.setFacebookField('friendsInGame', newArray);
     },
     getFriendsInGame: function () {
-        return this.getFacebookField('friendsInGame', []);
+        return this.getFacebookField('friendsInGame', false);
     },
     //setFriendsInvited: function (newArray) {
     //    this.setFacebookField('friendsInvited', newArray);

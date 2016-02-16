@@ -196,6 +196,8 @@ var PageRankings = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        window.appAnalytics.trackView('pageRankings');
+
         if (!this.state.facebookOnline) {
             return;
         }

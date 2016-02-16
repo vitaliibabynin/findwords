@@ -32,6 +32,8 @@ var PageGameLearn = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        window.appAnalytics.trackView('pageGameLearn');
+
         var $pageContent = $(this.refs.pageContent.getDOMNode());
         var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
             - parseInt($pageContent.css('padding-bottom'));

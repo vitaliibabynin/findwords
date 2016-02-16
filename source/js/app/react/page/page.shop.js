@@ -40,6 +40,7 @@ var PageShop = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        window.appAnalytics.trackView('pageShop');
         appManager.getGameState().addChangeCoinsListener(this.update);
 
         //console.log(this.refs.container.getDOMNode());

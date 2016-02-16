@@ -21,6 +21,7 @@ var PageLearn = Object.assign({}, {}, {
     },
 
     componentWillMount: function () {
+        window.appAnalytics.trackView('pageLearn');
         appManager.getMusicManager().playGameMusic();
     },
 

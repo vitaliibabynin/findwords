@@ -34,6 +34,7 @@ var PageMain = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        window.appAnalytics.trackView('pageMain');
         appManager.getGameState().addChangeRemoveAdsListener(this.updateAdSwitch);
 
         //var gameState = appManager.getGameState().gameState;
@@ -54,9 +55,7 @@ var PageMain = Object.assign({}, {}, {
         //    }
         //}
 
-        if (this.checkForBonuses() === false) {
-            this.checkForNewFriends();
-        }
+        this.checkForBonuses()
     },
 
     componentWillUnmount: function () {
@@ -117,62 +116,7 @@ var PageMain = Object.assign({}, {}, {
     //    //appManager.getGameState().setFriendsInvited(friendsInvitedTest);
     //},
 
-    checkForNewFriends: function () {
-        if (appFB.isAuthorized() === false) {
-            return;
-        }
 
-        var friendsInGameState = appManager.getGameState().getFriendsInGame();
-
-        appFB.getAppFriends().then(function (result) {
-            if (result.constructor !== Array) {
-                console.log("getAppFriends result invalid");
-                return;
-            }
-            if (result.length == 0) {
-                return;
-            }
-
-            var friendsFacebook = new Array(result.length);
-            for (var i = 0; i < friendsFacebook.length; i++) {
-                friendsFacebook[i] = result[i].id;
-            }
-
-            var coinsPerFriend = appManager.getSettings().getFreeCoins().friendAdded;
-
-            if (friendsInGameState.length == 0) {
-                appManager.getGameState().setFriendsInGame(friendsFacebook);
-
-                var coinsToAdd = friendsFacebook.length * coinsPerFriend;
-                appManager.getGameState().addCoins(coinsToAdd);
-                this.forceUpdate();
-
-                appDialogs.getInfoDialog()
-                    .setTitle(i18n._('app.dialog.info.friends-joined.title'))
-                    .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', friendsFacebook.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
-                    .show();
-
-                return;
-            }
-
-            var allFriends = friendsFacebook.concat(friendsInGameState);
-            var newFriends = Utils.getUniqueValues(allFriends);
-            if (newFriends.length == 0) {
-                return;
-            }
-
-            appManager.getGameState().setFriendsInGame(allFriends);
-
-            coinsToAdd = newFriends.length * coinsPerFriend;
-            appManager.getGameState().addCoins(coinsToAdd);
-            this.forceUpdate();
-
-            appDialogs.getInfoDialog()
-                .setTitle(i18n._('app.dialog.info.friends-joined.title'))
-                .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', newFriends.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
-                .show();
-        }.bind(this));
-    },
 
     checkForBonuses: function () {
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();

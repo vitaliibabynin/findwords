@@ -36,6 +36,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
+        window.appAnalytics.trackView('pageGameLearnVictory');
         appDialogs.getRateDialog().showIfTime();
     },
 
@@ -127,9 +128,16 @@ var PageGameLearnVictory = Object.assign({}, {}, {
 
         return (
             <div className="stars">
-                <div className={star1Classes} style={styleStar1}></div>
-                <div className={star2Classes} style={styleStar2}></div>
-                <div className={star3Classes} style={styleStar3}></div>
+                <div className="star-line">
+                    <div className="star1 star-empty" style={{transform: 'scale(-1, 1)', backgroundImage: "url('" + this.getImagePath('victory/star_empty_right') + "')"}}></div>
+                    <div className="star2 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_mid') + "')"}}></div>
+                    <div className="star3 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_right') + "')"}}></div>
+                </div>
+                <div className="star-line">
+                    <div className={star1Classes} style={styleStar1}></div>
+                    <div className={star2Classes} style={styleStar2}></div>
+                    <div className={star3Classes} style={styleStar3}></div>
+                </div>
             </div>
         )
     },
