@@ -6,9 +6,7 @@ window.jQuery = window.$ = require('jquery');
 window.i18n = require('./i18n-strings');
 window.loadingScreen = require('./loading.screen');
 
-window.appAnalytics = require('./model/app.analytics').AnalyticsFactory(CONST.CURRENT_PLATFORM);
-window.appAnalytics.init(CONST.GA_ID[CONST.CURRENT_PLATFORM]);
-
+window.gameData = require('./game.data');
 
 
 //
@@ -43,6 +41,11 @@ $(function() {
             CONST.CURRENT_PLATFORM = CONST.PLATFORM_WINDOWS;
         }
     }
+
+    console.log(CONST);
+    console.log(CONST.CURRENT_PLATFORM);
+    window.appAnalytics = require('./model/app.analytics').AnalyticsFactory(CONST.CURRENT_PLATFORM);
+    window.appAnalytics.init(window.gameData.gaId ? window.gameData.gaId[CONST.CURRENT_PLATFORM] : '');
 
     $.ajaxSetup({ cache: false });
 

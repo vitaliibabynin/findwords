@@ -490,7 +490,6 @@ var BoardClass = Object.assign({}, {}, {
         var currentWord = this.checkIfLetterIsInCompleteWord(x, y);
 
         if (currentWord !== false) {
-
             currentWord.map(function (letter) {
                 boardArr[letter.y][letter.x].classNames.linkVisibility = LINK_VISIBLE;
             });
@@ -529,29 +528,8 @@ var BoardClass = Object.assign({}, {}, {
             return false;
         }
         var completeWordIndex = boardArr[y][x].wordIdx;
-        var completeWord = this.state.boardData[completeWordIndex];
+        var completeWord = this.state.boardData.words[completeWordIndex].letters;
 
-
-        //var completeWord = false;
-        //var completeWordIndex = false;
-        //var wordsToFind = this.state.wordsToFind.words;
-        //for (var wordIdx = 0; wordIdx < wordsToFind.length; wordIdx++) {
-        //    var word = wordsToFind[wordIdx].letters;
-        //
-        //    for (var letterIdx = 0; letterIdx < word.length; letterIdx++) {
-        //        var letter = word[letterIdx];
-        //
-        //        if (letter.x == x && letter.y == y) {
-        //            completeWord = word;
-        //            completeWordIndex = wordIdx;
-        //            break;
-        //        }
-        //    }
-        //
-        //    if (completeWordIndex !== false) {
-        //        break;
-        //    }
-        //}
 
         if (!this.state.board[completeWordIndex]) {
             return false;

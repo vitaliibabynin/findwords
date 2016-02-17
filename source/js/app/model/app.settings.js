@@ -3,7 +3,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 
 var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
-    settings: require("./../game.data"),
+    settings: window.gameData,
 
 
     setSettings: function (data) {

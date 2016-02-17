@@ -94,6 +94,7 @@
     <allow-navigation href="file:///*/*" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
+    <allow-navigation href="fbauth://*/*" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="SplashScreen" value="splash" />
     <preference name="AutoHideSplashScreen" value="false" />

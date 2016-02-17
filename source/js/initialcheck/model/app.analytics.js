@@ -96,6 +96,7 @@ var SiteAnalytics = Object.assign({}, AbstractAnalytics, {
 
 var CordovaAnalytics = Object.assign({}, AbstractAnalytics, {
     init: function(gaId){
+        console.log('CordovaAnalitycs init started width ID: ' + gaId);
         document.addEventListener("deviceready", function(){
             if(!window.hasOwnProperty('analytics')){
                 throw 'Cordova analytics not isset.';
@@ -104,7 +105,7 @@ var CordovaAnalytics = Object.assign({}, AbstractAnalytics, {
             window.analytics.startTrackerWithId(
                 gaId,
                 function(){
-
+                    console.log('CordovaAnalytics.inited.');
                 }.bind(this),
                 function(err){
                     console.log('CordovaAnalytics.init ' + err);
