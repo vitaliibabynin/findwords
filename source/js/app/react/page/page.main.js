@@ -167,11 +167,18 @@ var PageMain = Object.assign({}, {}, {
             return;
         }
 
+        var loadingDialog = appDialogs.getLoadingDialog();
+        loadingDialog.show();
+
         appDialogs.getTurnOffAdsDialog().show();
+
+        setTimeout(function () {
+            loadingDialog.hide();
+        }, 5000);
     },
 
     render: function () {
-        console.log(appManager.getGameState().gameState);
+        //console.log(appManager.getGameState().gameState);
         //console.log(this.state.checked);
         //console.log(router.getController());
 

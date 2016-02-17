@@ -49,7 +49,7 @@ var PageShop = Object.assign({}, {}, {
         //console.log(this.refs.pageContent.getDOMNode().clientHeight);
         //console.log(parseInt($pageContent.css('padding-bottom')));
         //console.log(this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom')));
-        if(this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom'))  > this.refs.container.getDOMNode().offsetHeight){
+        if (this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom')) > this.refs.container.getDOMNode().offsetHeight) {
             this.state.containerExtraClass.push('transform-center');
             this.setState({containerExtraClass: this.state.containerExtraClass});
         }
@@ -67,8 +67,15 @@ var PageShop = Object.assign({}, {}, {
         //appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);
         //console.log(buttonProps.blockId);
 
+        var loadingDialog = appDialogs.getLoadingDialog();
+        loadingDialog.show();
+
         var purchaseID = buttonProps.blockId;
         appStore.order(purchaseID);
+
+        setTimeout(function () {
+            loadingDialog.hide();
+        }, 5000);
     },
 
     onClickWatchVideo: function () {
@@ -248,19 +255,19 @@ var PageShop = Object.assign({}, {}, {
         return this.getShareButton();
     },
 
-    restorePurchase: function(){
+    restorePurchase: function () {
         var loadingDialog = appDialogs.getLoadingDialog();
         loadingDialog.show();
-        appStore.refresh().then(function(){
-            setTimeout(function(){
+        appStore.refresh().then(function () {
+            setTimeout(function () {
                 loadingDialog.hide();
             }, 3000);
-        }.bind(this), function(){
+        }.bind(this), function () {
             loadingDialog.hide();
         }.bind(this));
     },
 
-    onBackButtonClick: function(){
+    onBackButtonClick: function () {
         var controller = router.getParam('backcontroller') || 'main';
         var action = router.getParam('backaction') || 'index';
         var params = router.getParams();
@@ -286,7 +293,7 @@ var PageShop = Object.assign({}, {}, {
 
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
-                    <div ref="container" className={classNames("container", this.state.containerExtraClass)} >
+                    <div ref="container" className={classNames("container", this.state.containerExtraClass)}>
 
                         <div className="heading free-coins">{i18n._('shop.free-coins')}</div>
 
@@ -312,7 +319,8 @@ var PageShop = Object.assign({}, {}, {
 
                         {this.generateBlocks()}
 
-                        <Button className="restore" onClick={this.restorePurchase}>{i18n._('shop.button.restore')}</Button>
+                        <Button className="restore"
+                                onClick={this.restorePurchase}>{i18n._('shop.button.restore')}</Button>
 
                     </div>
 

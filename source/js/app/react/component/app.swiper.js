@@ -174,9 +174,16 @@ var SlideClass = Object.assign({}, {}, {
         e.stopPropagation();
 
         var productId = this.getProductId();
-        console.log(productId);
+        //console.log(productId);
+
+        var loadingDialog = appDialogs.getLoadingDialog();
+        loadingDialog.show();
 
         appStore.order(productId);
+
+        setTimeout(function () {
+            loadingDialog.hide();
+        }, 5000);
     },
 
     getProductId: function () {
@@ -419,8 +426,8 @@ var SwiperClass = Object.assign({}, {}, {
     onClickEffect: function (e) {
         e.preventDefault();
 
-        appManager.getGameState().setRoundsBundles(9, "isPurchased", true);
-        appManager.getGameState().addCoins(9999);
+        //appManager.getGameState().setRoundsBundles(9, "isPurchased", true);
+        //appManager.getGameState().addCoins(9999);
 
         if (!this.state.isActive) {
             appManager.getSFXManager().playButton();
