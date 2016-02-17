@@ -323,7 +323,7 @@
         },
         "cordova-plugin-facebook": {
             "FACEBOOK_APP_ID": "473524332833935",
-            "FACEBOOK_DISPLAY_NAME": "Findwords",
+            "FACEBOOK_DISPLAY_NAME": "Find Words",
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "cordova-plugin-google-analytics": {

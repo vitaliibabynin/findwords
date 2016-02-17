@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		0350AA645B314DFC9BD21A03 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B511BA67A7214AF5AEC2B459 /* EventKit.framework */; };
@@ -136,10 +135,10 @@
 
 /* Begin PBXFileReference section */
 		0018FC122CB64DF1B5756339 /* CDVAssetLibraryFilesystem.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVAssetLibraryFilesystem.h; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.h"; sourceTree = "<group>"; };
-		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Findwords/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		0207DA571B56EA530066E2B4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Find Words/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		02F1FF805ED44C1695AF41D8 /* GAITracker.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = "cordova-plugin-google-analytics/GAITracker.h"; sourceTree = "<group>"; };
 		052CFBC1FEEF460794EA6759 /* UILocalNotification+APPLocalNotification.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "UILocalNotification+APPLocalNotification.m"; path = "de.appplant.cordova.plugin.local-notification/UILocalNotification+APPLocalNotification.m"; sourceTree = "<group>"; };
-		069381DAD743466E870F1161 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Findwords/Plugins/cordova-plugin-facebook/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		069381DAD743466E870F1161 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Find Words/Plugins/cordova-plugin-facebook/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		06E2852A88A544EF90C703C6 /* CDVLocalFilesystem.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVLocalFilesystem.h; path = "cordova-plugin-file/CDVLocalFilesystem.h"; sourceTree = "<group>"; };
 		07580954210042E795B8DE4D /* Social.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		077E262F61E94575A0CC7569 /* EventKitUI.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
@@ -160,11 +159,11 @@
 		1A862B580AC54495A80C13F1 /* CordovaFacebook.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CordovaFacebook.m; path = "cordova-plugin-facebook/CordovaFacebook.m"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Findwords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Findwords.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Find Words.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Find Words.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E83771D80014BDA91DBE22C /* InAppPurchase.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = InAppPurchase.h; path = cc.fovea.cordova.purchase/InAppPurchase.h; sourceTree = "<group>"; };
 		1F948087B4FC4E1FAF22F9EF /* AdSupport.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		21DEE257CE164F4487D9E05F /* CDVLogger.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVLogger.h; path = "cordova-plugin-console/CDVLogger.h"; sourceTree = "<group>"; };
-		2344383E49964950BA0C704C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "Findwords/Plugins/cordova-plugin-facebook/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		2344383E49964950BA0C704C /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "Find Words/Plugins/cordova-plugin-facebook/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		252C6B11FBAE4BA0A4B339BE /* vg_mute_off.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = vg_mute_off.png; sourceTree = "<group>"; };
 		264392D9399B4106864DE9A0 /* UIKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2765A20E822843C7B8F75685 /* QuartzCore.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -185,9 +184,9 @@
 		30C5358FC23A4784BDAB0A3D /* MPCloseBtn@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = "MPCloseBtn@2x.png"; sourceTree = "<group>"; };
 		310FAD4391D143AFB2B9A3F4 /* libsqlite3.dylib */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3178A6519CFD451783E140F1 /* MPDAAIcon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = MPDAAIcon.png; sourceTree = "<group>"; };
-		3217A4968A2742FF8E8D05BB /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = "Findwords/Plugins/cordova-plugin-google-analytics/libGoogleAnalyticsServices.a"; sourceTree = "<group>"; };
+		3217A4968A2742FF8E8D05BB /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = "Find Words/Plugins/cordova-plugin-google-analytics/libGoogleAnalyticsServices.a"; sourceTree = "<group>"; };
 		326C2549A99E440C9534B59B /* SKProduct+LocalizedPrice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "SKProduct+LocalizedPrice.m"; path = "cc.fovea.cordova.purchase/SKProduct+LocalizedPrice.m"; sourceTree = "<group>"; };
-		32CA4F630368D1EE00C91783 /* Findwords-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Findwords-Prefix.pch"; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* Find Words-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Find Words-Prefix.pch"; sourceTree = "<group>"; };
 		3671FF8B8DBB4963BB45F3BA /* AudioToolbox.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3796A29398DD47C387812D56 /* UILocalNotification+APPLocalNotification.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "UILocalNotification+APPLocalNotification.h"; path = "de.appplant.cordova.plugin.local-notification/UILocalNotification+APPLocalNotification.h"; sourceTree = "<group>"; };
 		3CFA55D2E8A44C849FCEFE74 /* libxml2.2.dylib */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -198,14 +197,14 @@
 		498F23910E984B039621B179 /* MPCloseButtonX.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = MPCloseButtonX.png; sourceTree = "<group>"; };
 		4A10CC1E293343F6BCF44AAB /* appodeal_adbadge@2x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = "appodeal_adbadge@2x.png"; sourceTree = "<group>"; };
 		4AABACCFC4494D2EB70EAB15 /* UIApplication+APPLocalNotification.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+APPLocalNotification.m"; path = "de.appplant.cordova.plugin.local-notification/UIApplication+APPLocalNotification.m"; sourceTree = "<group>"; };
-		4CF0D2E020D741B89E3B64C5 /* Appodeal.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Appodeal.framework; path = Findwords/Plugins/com.appodeal.plugin/Appodeal.framework; sourceTree = "<group>"; };
+		4CF0D2E020D741B89E3B64C5 /* Appodeal.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Appodeal.framework; path = Find Words/Plugins/com.appodeal.plugin/Appodeal.framework; sourceTree = "<group>"; };
 		4F21BDAE1967479E94926D59 /* CoreMotion.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		549BC2409DC649448977A3CD /* NativeAudioAsset.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = NativeAudioAsset.m; path = "cordova-plugin-nativeaudio/NativeAudioAsset.m"; sourceTree = "<group>"; };
-		553B37C81C74E2570055B17D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Findwords/ru.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
-		553B37CA1C74E2570055B17D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Findwords/ru.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		553B37CD1C74E2610055B17D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Findwords/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
-		553B37CE1C74E2610055B17D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Findwords/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		5540A31E1C6DC892000F177F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "Findwords/Plugins/cordova-plugin-facebook/Bolts.framework"; sourceTree = "<group>"; };
+		553B37C81C74E2570055B17D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Find Words/ru.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		553B37CA1C74E2570055B17D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Find Words/ru.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		553B37CD1C74E2610055B17D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Find Words/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		553B37CE1C74E2610055B17D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Find Words/en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		5540A31E1C6DC892000F177F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "Find Words/Plugins/cordova-plugin-facebook/Bolts.framework"; sourceTree = "<group>"; };
 		568427A471C343C8873CEF9E /* FileUtility.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = FileUtility.h; path = cc.fovea.cordova.purchase/FileUtility.h; sourceTree = "<group>"; };
 		570D4FAD82854AB1B0BE2F2B /* CFNetwork.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		58917493BC0349848469BB6F /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; };
@@ -220,7 +219,7 @@
 		6FBC67A939B64F98AAF37326 /* CoreMedia.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		6FFE60FC3A4C446BAA82C886 /* vg_mute_on.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = vg_mute_on.png; sourceTree = "<group>"; };
 		721C8D38CA5243A69A4EFD50 /* Foundation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		725F329C87BE4362A4793C7E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "Findwords/Plugins/cordova-plugin-facebook/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		725F329C87BE4362A4793C7E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "Find Words/Plugins/cordova-plugin-facebook/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		72C7CFE6B2044227B3D37553 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
 		753EF8F8FC014E16A9ED31F1 /* NativeAudioAsset.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = NativeAudioAsset.h; path = "cordova-plugin-nativeaudio/NativeAudioAsset.h"; sourceTree = "<group>"; };
 		7AC2F43BE5784CDE9B13CA0A /* vg_cta.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = vg_cta.png; sourceTree = "<group>"; };
@@ -232,7 +231,7 @@
 		80E0675C1DDA42728E4AA1B2 /* __vungle.db */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = __vungle.db; sourceTree = "<group>"; };
 		859E685F866B4E93AC267962 /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8726DC5C480F4E7B94E861CA /* CDVFile.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVFile.m; path = "cordova-plugin-file/CDVFile.m"; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* Findwords-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Findwords-Info.plist"; path = "Findwords/Findwords-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
+		8D1107310486CEB800E47090 /* Find Words-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Find Words-Info.plist"; path = "Find Words/Find Words-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = SOURCE_ROOT; };
 		8D9C36AA6C4B4FAFB572B139 /* GAILogger.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = "cordova-plugin-google-analytics/GAILogger.h"; sourceTree = "<group>"; };
 		8E09CB0EB03F41A68D192D85 /* Twitter.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		8ECB54FDD5204FB1BB818103 /* appodeal_adbadge@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = "appodeal_adbadge@3x.png"; sourceTree = "<group>"; };
@@ -284,7 +283,7 @@
 		F45052C4F5624907A3DDD861 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProductAction.h; path = "cordova-plugin-google-analytics/GAIEcommerceProductAction.h"; sourceTree = "<group>"; };
 		F45D441EC1104A4A8E22AAEE /* CDVSplashScreen.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVSplashScreen.h; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; };
 		F55118424D394B799A3664B4 /* MPMutedBtn@3x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = "MPMutedBtn@3x.png"; sourceTree = "<group>"; };
-		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Findwords/config.xml; sourceTree = "<group>"; };
+		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Find Words/config.xml; sourceTree = "<group>"; };
 		FA1902255FCA43A9978276F1 /* MPUnmutedBtn@1x.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = "MPUnmutedBtn@1x.png"; sourceTree = "<group>"; };
 		FABDE72AA30C40359D5A13D4 /* CDVStatusBar.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVStatusBar.h; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; };
 		FAF2D6710418462D831A5619 /* appodeal_pattern.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = appodeal_pattern.png; sourceTree = "<group>"; };
@@ -346,13 +345,13 @@
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 			);
 			name = Classes;
-			path = Findwords/Classes;
+			path = Find Words/Classes;
 			sourceTree = SOURCE_ROOT;
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Findwords.app */,
+				1D6058910D05DD3D006BFB54 /* Find Words.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -377,12 +376,12 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* Findwords-Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* Find Words-Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */,
 			);
 			name = "Other Sources";
-			path = Findwords;
+			path = Find Words;
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
@@ -392,7 +391,7 @@
 				553B37C91C74E2570055B17D /* Localizable.strings */,
 				0207DA571B56EA530066E2B4 /* Images.xcassets */,
 				3047A50E1AB8057F00498E2A /* config */,
-				8D1107310486CEB800E47090 /* Findwords-Info.plist */,
+				8D1107310486CEB800E47090 /* Find Words-Info.plist */,
 				80E0675C1DDA42728E4AA1B2 /* __vungle.db */,
 				BCAD15DFB49349CAA3BD7B9B /* AdManagerAssets.bundle */,
 				C7176F512B02453B9E4EDAD4 /* appodeal_adbadge.png */,
@@ -435,7 +434,7 @@
 				0E8959827C324629AE5F0486 /* vg_privacy.png */,
 			);
 			name = Resources;
-			path = Findwords/Resources;
+			path = Find Words/Resources;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -558,7 +557,7 @@
 				753EF8F8FC014E16A9ED31F1 /* NativeAudioAsset.h */,
 			);
 			name = Plugins;
-			path = Findwords/Plugins;
+			path = Find Words/Plugins;
 			sourceTree = SOURCE_ROOT;
 		};
 		EB87FDF11871DA420020F90C /* Staging */ = {
@@ -573,9 +572,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Findwords */ = {
+		1D6058900D05DD3D006BFB54 /* Find Words */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Findwords" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Find Words" */;
 			buildPhases = (
 				304B58A110DAC018002A0835 /* Copy www directory */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
@@ -587,9 +586,9 @@
 			dependencies = (
 				301BF551109A68C00062928A /* PBXTargetDependency */,
 			);
-			name = Findwords;
-			productName = Findwords;
-			productReference = 1D6058910D05DD3D006BFB54 /* Findwords.app */;
+			name = Find Words;
+			productName = Find Words;
+			productReference = 1D6058910D05DD3D006BFB54 /* Find Words.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -605,7 +604,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Findwords" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Find Words" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -623,7 +622,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Findwords */,
+				1D6058900D05DD3D006BFB54 /* Find Words */,
 			);
 		};
 /* End PBXProject section */
@@ -793,25 +792,25 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"Findwords/Plugins/cordova-plugin-facebook",
-					"Findwords/Plugins/cordova-plugin-facebook",
-					"Findwords/Plugins/cordova-plugin-facebook",
-					Findwords/Plugins/com.appodeal.plugin,
-					"$(PROJECT_DIR)/Findwords/Plugins/cordova-plugin-facebook",
+					"Find Words/Plugins/cordova-plugin-facebook",
+					"Find Words/Plugins/cordova-plugin-facebook",
+					"Find Words/Plugins/cordova-plugin-facebook",
+					Find Words/Plugins/com.appodeal.plugin,
+					"$(PROJECT_DIR)/Find Words/Plugins/cordova-plugin-facebook",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Findwords/Findwords-Prefix.pch";
+				GCC_PREFIX_HEADER = "Find Words/Find Words-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "Findwords/Findwords-Info.plist";
+				INFOPLIST_FILE = "Find Words/Find Words-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Findwords/Plugins/cordova-plugin-google-analytics\"",
+					"\"$(SRCROOT)/Find Words/Plugins/cordova-plugin-google-analytics\"",
 				);
-				PRODUCT_NAME = Findwords;
+				PRODUCT_NAME = "Find Words";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -830,22 +829,22 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"Findwords/Plugins/cordova-plugin-facebook",
-					"Findwords/Plugins/cordova-plugin-facebook",
-					"Findwords/Plugins/cordova-plugin-facebook",
-					Findwords/Plugins/com.appodeal.plugin,
-					"$(PROJECT_DIR)/Findwords/Plugins/cordova-plugin-facebook",
+					"Find Words/Plugins/cordova-plugin-facebook",
+					"Find Words/Plugins/cordova-plugin-facebook",
+					"Find Words/Plugins/cordova-plugin-facebook",
+					Find Words/Plugins/com.appodeal.plugin,
+					"$(PROJECT_DIR)/Find Words/Plugins/cordova-plugin-facebook",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Findwords/Findwords-Prefix.pch";
+				GCC_PREFIX_HEADER = "Find Words/Find Words-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "Findwords/Findwords-Info.plist";
+				INFOPLIST_FILE = "Find Words/Find Words-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Findwords/Plugins/cordova-plugin-google-analytics\"",
+					"\"$(SRCROOT)/Find Words/Plugins/cordova-plugin-google-analytics\"",
 				);
-				PRODUCT_NAME = Findwords;
+				PRODUCT_NAME = "Find Words";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -873,6 +872,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
+				PRODUCT_NAME = "Find Words";
 			};
 			name = Debug;
 		};
@@ -898,13 +898,14 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
+				PRODUCT_NAME = "Find Words";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Findwords" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Find Words" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -913,7 +914,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Findwords" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Find Words" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

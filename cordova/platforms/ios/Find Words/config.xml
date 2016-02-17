@@ -75,7 +75,7 @@
     </feature>
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
-    <name>Findwords</name>
+    <name>Find Words</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
