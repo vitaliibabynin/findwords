@@ -31,7 +31,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     componentWillMount: function () {
         appManager.getMusicManager().stop();
         appManager.getSFXManager().playWin();
-        appAd.showInterstitial();
+        //appAd.showInterstitial();
         appAd.hideBanner();
     },
 

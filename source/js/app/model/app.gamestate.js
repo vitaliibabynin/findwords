@@ -27,8 +27,8 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         //    friendsInGame: []
         //},
         //settings: {
-        //    music: false,
-        //    sound: false
+        //    music: true,
+        //    sound: true
         //},
         //practiceRound: {
             //complete: false,
@@ -288,14 +288,14 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         this.emitChangeMusicAndSFX();
     },
     getMusic: function () {
-        return this.getSettingsField('music', false);
+        return this.getSettingsField('music', true);
     },
     setSound: function (newBoolean) {
         this.setSettingsField('sound', newBoolean);
         this.emitChangeMusicAndSFX();
     },
     getSound: function () {
-        return this.getSettingsField('sound', false);
+        return this.getSettingsField('sound', true);
     },
 
     setPracticeRoundComplete: function (newBoolean) {

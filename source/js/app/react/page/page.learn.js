@@ -23,6 +23,7 @@ var PageLearn = Object.assign({}, {}, {
     componentWillMount: function () {
         window.appAnalytics.trackView('pageLearn');
         appManager.getMusicManager().playGameMusic();
+        appAd.hideBanner();
     },
 
     //componentDidMount: function () {
@@ -33,6 +34,8 @@ var PageLearn = Object.assign({}, {}, {
         if (!this.state.goToPracticeRound) {
             appManager.getMusicManager().playMusic();
         }
+
+        appAd.showBottomBanner();
     },
 
     getImage: function () {
