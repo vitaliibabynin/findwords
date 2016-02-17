@@ -59,7 +59,7 @@ window.CONST = {
             'notice.selectDifferently.after': 'по-другому',
             'notice.noSuchWord.before': 'Слово',
             'notice.noSuchWord.after': 'мы не загадывали',
-            'notice.noWordsToShow': 'Больше нету слов, чтобы показать',
+            'notice.noWordsToShow': 'Больше нет слов, чтобы показать',
 
             //GAME PAGE VICTORY
             'victory.excellent': 'Отлично!',
@@ -73,7 +73,7 @@ window.CONST = {
             'bonus.day2': 'Уверенно идете!',
             'bonus.day3': 'Неутомимый!',
             'bonus.day4': 'Вы прошли больше половины пути!',
-            'bonus.day5': 'Нету времени отдыхать!',
+            'bonus.day5': 'Нет времени отдыхать!',
             'bonus.day6': 'На финишной прямой!',
             'bonus.day7': 'Вы сделали невозможное!',
             'bonus.day7.1': 'Так держать!',
@@ -88,7 +88,7 @@ window.CONST = {
             'bonus.day7.10': 'Покажите на что вы способны!',
             'bonus.day7.11': 'Упорство и труд все перетрут!',
             'bonus.day7.12': 'Я не верю своим глазам!',
-            'bonus.day7.13': 'Постоянство признак мастерства!',
+            'bonus.day7.13': 'Постоянство - признак мастерства!',
             'bonus.day7.14': 'Вы самый лучший!',
             'bonus.collect': 'Получить',
 
@@ -105,31 +105,31 @@ window.CONST = {
             'rankings.levels-complete': 'Пройдено уровней',
             'rankings.invite-friends.get-coins': 'Приглашай друзей и получай монеты!',
             'rankings.invite-friends': 'Пригласить друзей',
-            'rankings.login.description': 'Войдите, пожалуйста, в ваш аккаунт Facebook для того, что бы узнать рейтинг друзей и поделиться своими достижениями.',
+            'rankings.login.description': 'Войдите, пожалуйста, в ваш аккаунт Facebook для того, чтобы узнать рейтинг друзей и поделиться своими достижениями.',
             'rankings.login.button': 'Войти в Facebook',
 
             //LEARN PAGE
-            'app.page.learn.aim-of-the-game': 'Для того, что бы пройти уровень, нужно отгадать все загаданные слова на поле.',
-            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем от первой буквы слова к последней, в правильном порядке.',
+            'app.page.learn.aim-of-the-game': 'Для того, чтобы пройти уровень, нужно отгадать все загаданные слова на поле.',
+            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем от первой буквы слова к последней в правильном порядке.',
             'app.page.learn.start': 'Начать',
 
             //RATE DIALOG
             'app.dialog.rateus.title': 'Понравилась игра?',
-            'app.dialog.rateus.description': 'Оставте отзыв. Спасибо за Вашу оценку!',
+            'app.dialog.rateus.description': 'Оставьте отзыв. Спасибо за вашу оценку!',
             'app.dialog.rateus.button.rate': 'Оставить отзыв',
             'app.dialog.rateus.button.later': 'Напомнить позже',
             'app.dialog.rateus.button.never': 'Не показывать больше',
 
             //NO-COINS DIALOG
             'app.dialog.nocoins.title': 'Недостаточно монет',
-            'app.dialog.nocoins.description': 'У вас не хватает монет, вы можете купить монеты или получить их бесплатно.',
+            'app.dialog.nocoins.description': 'У вас не хватает монет. Вы можете купить монеты или получить их бесплатно.',
             'app.dialog.nocoins.button.buy': 'Купить',
             'app.dialog.nocoins.button.earn': 'Получить бесплатно',
             'app.dialog.nocoins.button.cancel': 'Отмена',
 
             //TURN-OFF-ADS DIALOG
             'app.dialog.turnoffads.title': 'Выключить рекламу',
-            'app.dialog.turnoffads.description': 'Навсегда убрать рекламу с приложения за',
+            'app.dialog.turnoffads.description': 'Навсегда убрать рекламу из приложения за',
             'app.dialog.turnoffads.button.turnoff': 'Выключить',
             'app.dialog.turnoffads.button.cancel': 'Отмена',
 
@@ -154,7 +154,7 @@ window.CONST = {
 
             //REQUIRE-PUSH DIALOG
             'app.dialog.requirepush.title': 'Уведомления',
-            'app.dialog.requirepush.description': 'Хотите знать когда придут бонусы? Подключайте уведомления.',
+            'app.dialog.requirepush.description': 'Хотите знать, когда придут бонусы? Подключайте уведомления.',
             'app.dialog.requirepush.button.ok': 'Разрешить',
             'app.dialog.requirepush.button.cancel': 'Не сейчас',
 
@@ -180,14 +180,14 @@ window.CONST = {
 
             //FACEBOOK SHARE
             'share.caption': 'Филворды',
-            'share.description': 'Увлекательная игра "Филворды: найди слово". Присоеденяйся, вместе веселее!',
+            'share.description': 'Увлекательная игра "Филворды: найди слово". Присоединяйся, вместе веселее!',
 
             //FOR STARTAD
             'startad.recommendapp': 'Рекомендуем приложение',
 
             //NOTIFICATIONS
             'notification.weekly.notify.title': 'Бонусы',
-            'notification.weekly.notify.description': 'Ты давно не заходил в игру, мы начислили бонусы, зайди проверь!',
+            'notification.weekly.notify.description': 'Ты давно не заходил в игру, мы начислили бонусы, зайди и проверь!',
 
             t: ''
         },
