@@ -216,7 +216,7 @@ var PageGameVictory = Object.assign({}, {}, {
         return (
             <div className="stars">
                 <div className="star-line">
-                    <div className="star1 star-empty" style={{WebkitTransform: 'scale(-1, 1)', transform: 'scale(-1, 1)', backgroundImage: "url('" + this.getImagePath('victory/star_empty_right') + "')"}}></div>
+                    <div className="star1 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_left') + "')"}}></div>
                     <div className="star2 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_mid') + "')"}}></div>
                     <div className="star3 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_right') + "')"}}></div>
                 </div>
