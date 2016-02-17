@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  TrueOrFalse
+
+  Created by Aleksandr Bovtruk on 05.05.15.
+
+*/
+
+CFBundleDisplayName = "Филворды: найди слово";

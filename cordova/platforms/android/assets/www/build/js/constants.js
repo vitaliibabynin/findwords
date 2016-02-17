@@ -347,8 +347,8 @@ window.CONST = {
             'app.dialog.info.friends-joined.description.coins': '#{count} coi((n|ns|ns)) added.',
 
             //FACEBOOK SHARE
-            'share.caption': 'Find Words',
-            'share.description': 'Exciting game "Find Words"! Join, more fun together!',
+            'share.caption': 'Findwords',
+            'share.description': 'Exciting game "Findwords"! Join, more fun together!',
 
             //FOR STARTAD
             'startad.recommendapp': 'We recommend this app',

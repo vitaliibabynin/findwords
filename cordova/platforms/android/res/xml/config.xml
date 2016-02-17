@@ -51,7 +51,7 @@
     <access origin="https://*.fbcdn.net" />
     <access origin="https://*.akamaihd.net" />
     <allow-intent href="market:*" />
-    <name>Find Words</name>
+    <name>Findwords</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
