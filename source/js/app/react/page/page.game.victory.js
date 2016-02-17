@@ -42,16 +42,6 @@ var PageGameVictory = Object.assign({}, {}, {
     componentDidMount: function () {
         window.appAnalytics.trackView('pageGameVictory');
 
-        if(appFB.isAuthorized()){
-            appApi.updateRating(
-                appFB.getAccessToken(),
-                CONST.GAME_TYPE,
-                appManager.getSettings().getGameId(),
-                appManager.getGameState().getScore(),
-                appManager.getGameState().getCompletedRoundsCount()
-            );
-        }
-
         if (CONST.CURRENT_PLATFORM == CONST.PLATFORM_IOS) {
             appDialogs.getRequirePushDialog().showIfTime();
         }

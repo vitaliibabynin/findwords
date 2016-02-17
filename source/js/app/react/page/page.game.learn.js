@@ -138,6 +138,16 @@ var PageGameLearn = Object.assign({}, {}, {
         var params = this.addRewards();
         this.setPracticeRoundComplete();
 
+        if(appFB.isAuthorized()){
+            appApi.updateRating(
+                appFB.getAccessToken(),
+                CONST.GAME_TYPE,
+                appManager.getSettings().getGameId(),
+                appManager.getGameState().getScore(),
+                appManager.getGameState().getCompletedRoundsCount()
+            );
+        }
+
         time = time || 0;
         setTimeout(function () {
             router.navigate("game", "learn_victory", params);

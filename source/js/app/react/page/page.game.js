@@ -398,6 +398,16 @@ var PageGameMain = Object.assign({}, {}, {
         params.roundsBundleIdx = this.state.roundsBundleIdx;
         params.roundIdx = this.state.roundIdx;
 
+        if(appFB.isAuthorized()){
+            appApi.updateRating(
+                appFB.getAccessToken(),
+                CONST.GAME_TYPE,
+                appManager.getSettings().getGameId(),
+                appManager.getGameState().getScore(),
+                appManager.getGameState().getCompletedRoundsCount()
+            );
+        }
+
         time = time || 200;
         setTimeout(function () {
             router.navigate("game", "victory", params);

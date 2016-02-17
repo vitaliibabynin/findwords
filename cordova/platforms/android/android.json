@@ -303,7 +303,7 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<string name=\"facebook_app_id\">473524332833935</string>",
+                            "xml": "<string name=\"facebook_app_id\" translatable=\"false\">473524332833935</string>",
                             "count": 1
                         }
                     ]

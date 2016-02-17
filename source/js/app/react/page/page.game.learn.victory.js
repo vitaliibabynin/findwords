@@ -18,6 +18,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
+            containerExtraClass: '',
             roundsComplete: 1,
             roundsTotal: 1,
             starsReceived: parseInt(router.getParam('starsReceived')) || 3,
@@ -38,6 +39,8 @@ var PageGameLearnVictory = Object.assign({}, {}, {
     componentDidMount: function () {
         window.appAnalytics.trackView('pageGameLearnVictory');
         appDialogs.getRateDialog().showIfTime();
+
+        this.onStartAdUpdate();
     },
 
     componentWillUnmount: function () {
@@ -142,6 +145,17 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         )
     },
 
+    onStartAdUpdate: function(){
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        if(this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom'))  > this.refs.container.getDOMNode().offsetHeight){
+            this.state.containerExtraClass = 'transform-center';
+        }else{
+            this.state.containerExtraClass = '';
+        }
+
+        this.setState({containerExtraClass: this.state.containerExtraClass});
+    },
+
     render: function () {
         var progressBar = {
             width: (this.state.roundsComplete / this.state.roundsTotal * 6.250) + "rem"
@@ -153,14 +167,15 @@ var PageGameLearnVictory = Object.assign({}, {}, {
             backgroundImage: "url('" + this.getImagePath('counter/coins') + "')"
         };
 
+
         return (
 
             <div className="page page-game-victory">
                 <Counters />
 
-                <div className="page-content">
+                <div ref="pageContent" className="page-content">
 
-                    <div className="container">
+                    <div ref="container" className={classNames("container", this.state.containerExtraClass)} >
 
                         <div className="excellent">{i18n._('victory.excellent')}</div>
 
@@ -189,7 +204,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
                         </div>
 
 
-                        <StartAd />
+                        <StartAd onUpdate={this.onStartAdUpdate} />
                     </div>
 
                 </div>
