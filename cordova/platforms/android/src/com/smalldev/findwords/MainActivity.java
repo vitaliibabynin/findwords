@@ -19,8 +19,20 @@
 
 package com.smalldev.findwords;
 
+import java.security.MessageDigest;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.webkit.WebView;
+
+
 import org.apache.cordova.*;
+
+
+
 
 public class MainActivity extends CordovaActivity
 {
@@ -28,7 +40,26 @@ public class MainActivity extends CordovaActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        if (appView == null) {
+            init();
+        }
+
+        ((WebView)this.appView.getView()).getSettings().setTextZoom(100);
+
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.smalldev.findwords",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (Exception e) {
+
+        }
     }
 }
