@@ -309,7 +309,7 @@ var PageShop = Object.assign({}, {}, {
                             <FreeCoins onClick={this.onClickInviteFriends} className="inner-block share">
                                 <div className="text">{i18n._('shop.invite-friends')}</div>
                                 <div className="add-free-coins" style={this.state.dollar}>
-                                    +{this.state.freeCoins.sendInvite}</div>
+                                    +{this.state.freeCoins.friendAdded}</div>
                             </FreeCoins>
                         </div>
 
