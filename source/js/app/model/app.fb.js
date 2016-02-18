@@ -135,6 +135,7 @@ var AbstractFB = Object.assign({}, AbstractEventEmitter, {
         this.getAppFriends().then(function (result) {
             if (result.constructor !== Array) {
                 console.log("getAppFriends result invalid");
+                appManager.getGameState().setFriendsInGame([]);
                 return;
             }
             if (result.length == 0) {
@@ -158,8 +159,6 @@ var AbstractFB = Object.assign({}, AbstractEventEmitter, {
                 appManager.getGameState().setFriendsInGame(friendsFacebook);
                 return;
             }
-
-
 
             var coinsPerFriend = appManager.getSettings().getFreeCoins().friendAdded;
 
