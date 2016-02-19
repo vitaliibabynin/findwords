@@ -185,6 +185,18 @@ var CountersClass = Object.assign({}, {}, {
         })
     },
 
+    componentDidMount: function () {
+        appManager.getGameState().addChangeCoinsListener(this.update);
+    },
+
+    componentWillUnmount: function () {
+        appManager.getGameState().removeChangeCoinsListener(this.update);
+    },
+
+    update: function () {
+        this.forceUpdate();
+    },
+
     showBackButton: function () {
         if (this.state.isDisplayBackButton) {
             return (

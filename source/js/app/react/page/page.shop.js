@@ -41,7 +41,7 @@ var PageShop = Object.assign({}, {}, {
 
     componentDidMount: function () {
         window.appAnalytics.trackView('pageShop');
-        appManager.getGameState().addChangeCoinsListener(this.update);
+        //appManager.getGameState().addChangeCoinsListener(this.update);
 
         //console.log(this.refs.container.getDOMNode());
 
@@ -55,13 +55,13 @@ var PageShop = Object.assign({}, {}, {
         }
     },
 
-    componentWillUnmount: function () {
-        appManager.getGameState().removeChangeCoinsListener(this.update);
-    },
-
-    update: function () {
-        this.forceUpdate();
-    },
+    //componentWillUnmount: function () {
+    //    appManager.getGameState().removeChangeCoinsListener(this.update);
+    //},
+    //
+    //update: function () {
+    //    this.forceUpdate();
+    //},
 
     onClickBuyCoins: function (buttonProps) {
         //appManager.getGameState().addCoins(this.state.purchases[buttonProps.blockId]);

@@ -15,6 +15,7 @@ var PageGameVictory = Object.assign({}, {}, {
 
     displayName: 'PageGameVictory',
     mixins: [GameMixin],
+    clickedContinue: false,
 
     getInitialState: function () {
         var state = {
@@ -104,6 +105,8 @@ var PageGameVictory = Object.assign({}, {}, {
         for (var i = index; i < roundsBundlesGameData.length; i++) {
             var roundsBundlesGameState = appManager.getGameState().getRoundsBundles(i);
 
+            //console.log({roundsComplete: roundsBundlesGameState.roundsComplete});
+
             if (roundsBundlesGameState.roundsComplete < roundsBundlesGameData[i].rounds.length) {
                 roundsBundleIdx = i;
                 roundIdx = roundsBundlesGameState.roundsComplete;
@@ -121,14 +124,18 @@ var PageGameVictory = Object.assign({}, {}, {
     },
 
     onClick: function () {
-        if (this.state.clickedContinue) {
+        if (this.clickedContinue) {
+            console.log("continue already clicked");
             return;
         }
-        this.setState({clickedContinue: true});
+        this.clickedContinue = true;
 
         var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();
         var roundsBundleIdx = this.state.roundsBundleIdx;
         var roundIdx = this.state.roundIdx + 1;
+
+        //console.log({pageVictoryStateRoundIdx: this.state.roundIdx});
+        //console.log({pageVictoryRoundIdx: roundIdx});
 
         if (this.state.roundsBundleIdx < roundsBundlesGameData.length - 1) {
             this.openNextSlide();

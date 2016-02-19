@@ -19,6 +19,7 @@ var PageGameMain = Object.assign({}, {}, {
 
     //mixins: [GameMixin],
     displayName: 'PageGameMain',
+    chipProcessing: false,
 
     getInitialState: function () {
         var state = {
@@ -32,7 +33,8 @@ var PageGameMain = Object.assign({}, {}, {
             chipsOpenLetter: appManager.getSettings().getChipsCoinsCost().openLetter || 0,
             chipsShowWord: appManager.getSettings().getChipsCoinsCost().showWord || 0,
             shownWordsAnimationLeave: true,
-            gameBoardMaxHeight: 0
+            gameBoardMaxHeight: 0,
+            roundComplete: false
         };
         state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];
         state.boardData = this.getBoardData(state.roundData, state.roundIdx);
@@ -52,21 +54,12 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     componentDidMount: function () {
-        window.appAnalytics.trackView('pageGame');
-        appAnalytics.trackEvent('round', 'bundle-'+this.state.roundsBundleIdx+' round-'+this.state.roundIdx, '', 1);
-
-        var roundsTotal = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds.length;
-        if (typeof roundsTotal == "undefined") {
+        if (this.checkIfRoundIsValid() === false) {
             return;
         }
 
-        //console.log({roundIdx: this.state.roundIdx});
-        //console.log({roundsTotal: roundsTotal});
-
-        if (this.state.roundIdx > roundsTotal) {
-            router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
-        }
-
+        window.appAnalytics.trackView('pageGame');
+        appAnalytics.trackEvent('round', 'bundle-' + this.state.roundsBundleIdx + ' round-' + this.state.roundIdx, '', 1);
 
         var $pageContent = $(this.refs.pageContent.getDOMNode());
         //console.log(this.refs.pageContent.getDOMNode().clientHeight);
@@ -79,6 +72,49 @@ var PageGameMain = Object.assign({}, {}, {
         this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
 
         //console.log("pageGameComponentDidMount");
+    },
+
+    checkIfRoundIsValid: function () {
+        var roundsTotal = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds.length;
+        if (typeof roundsTotal == "undefined") {
+            return false;
+        }
+
+        var params = {};
+        params.roundsBundleIdx = this.state.roundsBundleIdx;
+
+        if (this.state.roundIdx > roundsTotal) {
+            router.navigate("main", "index", {roundsBundleIdx: params.roundsBundleIdx});
+            return false;
+        }
+
+        //console.log({pageGameRoundIdx: this.state.roundIdx});
+        //console.log({pageGameRoundsTotal: roundsTotal});
+
+        var wordsTotal = this.state.boardData.words.length;
+        var board = this.state.board;
+        var wordsComplete = 0;
+
+        for (var k in board) {
+            if (!board.hasOwnProperty(k)) {
+                continue;
+            }
+
+            if (!board[k].openWord) {
+                continue;
+            }
+            wordsComplete++;
+        }
+
+        params.roundIdx = this.state.roundIdx;
+        params.starsReceived = this.getStarsReceived() || 3;
+        params.rewardScore = this.getRewardScore(params.starsReceived) || 0;
+        params.rewardCoins = this.getRewardCoins(params.starsReceived) || 0;
+
+        if (wordsComplete == wordsTotal) {
+            router.navigate("game", "victory", params);
+            return false;
+        }
     },
 
     componentWillUnmount: function () {
@@ -175,56 +211,85 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     onChipOpenWordClick: function () {
+        if (this.chipProcessing) {
+            console.log("click denied");
+            return;
+        }
+        this.chipProcessing = true;
+
         appAnalytics.trackEvent('chips', 'openWord-click', 'click', 1);
         var coins = appManager.getGameState().getCoins();
         if (this.state.chipsOpenWord > coins) {
             appDialogs.getNoMoneyDialog().show();
+            this.chipProcessing = false;
             return;
         }
 
         this.refs.board.openWord().then(function (result) {
             appAnalytics.trackEvent('chips', 'openWord-charged', 'charged', 1);
-            if (result !== false) {
-                var newCoins = coins - this.state.chipsOpenWord;
-                appManager.getGameState().setCoins(newCoins);
-                this.forceUpdate();
-
-                if (this.refs.board.checkIfRoundComplete()) {
-                    //this.goToPageRoundComplete(2000);
-                    this.goToPageRoundComplete();
-                }
-            }
-        }.bind(this));
-    },
-
-    onChipOpenLetterClick: function () {
-        appAnalytics.trackEvent('chips', 'openLetter-click', 'click', 1);
-        var coins = appManager.getGameState().getCoins();
-        if (this.state.chipsOpenLetter > coins) {
-            appDialogs.getNoMoneyDialog().show();
-            return;
-        }
-
-        var result = this.refs.board.openLetter();
-        if (result !== false) {
-            appAnalytics.trackEvent('chips', 'openLetter-charged', 'charged', 1);
-            var newCoins = coins - this.state.chipsOpenLetter;
+            var newCoins = coins - this.state.chipsOpenWord;
             appManager.getGameState().setCoins(newCoins);
-            this.forceUpdate();
+
+            //console.log("promise returned resolve");
 
             if (this.refs.board.checkIfRoundComplete()) {
                 //this.goToPageRoundComplete(2000);
                 this.goToPageRoundComplete();
+                this.chipProcessing = false;
+                return;
             }
+
+            this.chipProcessing = false;
+        }.bind(this));
+    },
+
+    onChipOpenLetterClick: function () {
+        if (this.chipProcessing) {
+            console.log("click denied");
+            return;
         }
+        this.chipProcessing = true;
+
+        appAnalytics.trackEvent('chips', 'openLetter-click', 'click', 1);
+        var coins = appManager.getGameState().getCoins();
+        if (this.state.chipsOpenLetter > coins) {
+            appDialogs.getNoMoneyDialog().show();
+
+            this.chipProcessing = false;
+            return;
+        }
+
+        this.refs.board.openLetter().then(function (result) {
+            appAnalytics.trackEvent('chips', 'openLetter-charged', 'charged', 1);
+            var newCoins = coins - this.state.chipsOpenLetter;
+            appManager.getGameState().setCoins(newCoins);
+
+            if (this.refs.board.checkIfRoundComplete()) {
+                //this.goToPageRoundComplete(2000);
+                this.goToPageRoundComplete();
+
+                this.chipProcessing = false;
+                return;
+            }
+
+            this.chipProcessing = false;
+        }.bind(this));
     },
 
     onChipShowWordClick: function () {
+        if (this.chipProcessing) {
+            console.log("click denied");
+            return;
+        }
+        this.chipProcessing = true;
+
         appAnalytics.trackEvent('chips', 'showWord-click', 'click', 1);
 
         var coins = appManager.getGameState().getCoins();
         if (this.state.chipsShowWord > coins) {
             appDialogs.getNoMoneyDialog().show();
+
+            this.chipProcessing = false;
             return;
         }
 
@@ -234,10 +299,13 @@ var PageGameMain = Object.assign({}, {}, {
             var newCoins = coins - this.state.chipsShowWord;
             appManager.getGameState().setCoins(newCoins);
 
+            this.chipProcessing = false;
             return;
         }
 
         this.displayNotice(NO_WORDS_TO_SHOW, {letters: []});
+
+        this.chipProcessing = false;
     },
 
 
@@ -326,7 +394,7 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
     hideNotice: function () {
-        if(this.isMounted()){
+        if (this.isMounted()) {
             this.setState({
                 noticeType: "",
                 noticeWord: {letters: []}
@@ -374,10 +442,12 @@ var PageGameMain = Object.assign({}, {}, {
         this.addRewardScore(params.rewardScore, this.state.roundsBundleIdx);
         this.addRewardCoins(params.rewardCoins);
 
+        //console.log("adding rewards");
+
         appAnalytics.trackEvent(
             'roundResult',
-            'bundle-'+this.state.roundsBundleIdx+' round-'+this.state.roundIdx,
-            'remainingTime-'+this.getGameStateRoundsBundleField("secondsRemaining")+' receivedStars-'+params.starsReceived,
+            'bundle-' + this.state.roundsBundleIdx + ' round-' + this.state.roundIdx,
+            'remainingTime-' + this.getGameStateRoundsBundleField("secondsRemaining") + ' receivedStars-' + params.starsReceived,
             1
         );
 
@@ -387,18 +457,28 @@ var PageGameMain = Object.assign({}, {}, {
 
     setRoundComplete: function () {
         var roundsComplete = this.getGameStateRoundsBundleField("roundsComplete");
+        //console.log("setting round complete");
         roundsComplete++;
         this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
     },
 
     goToPageRoundComplete: function (time) {
+        //if (this.state.roundComplete) {
+        //    return;
+        //}
+        //this.setState({
+        //    roundComplete: true
+        //});
+
         this.setRoundComplete();
+
+        //console.log("going to page victory");
 
         var params = this.addRewards();
         params.roundsBundleIdx = this.state.roundsBundleIdx;
         params.roundIdx = this.state.roundIdx;
 
-        if(appFB.isAuthorized()){
+        if (appFB.isAuthorized()) {
             appApi.updateRating(
                 appFB.getAccessToken(),
                 CONST.GAME_TYPE,
@@ -408,7 +488,7 @@ var PageGameMain = Object.assign({}, {}, {
             );
         }
 
-        time = time || 200;
+        time = time || 0;
         setTimeout(function () {
             router.navigate("game", "victory", params);
         }.bind(this), time);
@@ -437,29 +517,29 @@ var PageGameMain = Object.assign({}, {}, {
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
 
                 <Timer ref="timer" time={this.state.time}
-                setGameStateRoundField={this.setGameStateRoundField}
-                getGameStateRoundField={this.getGameStateRoundField}
+                       setGameStateRoundField={this.setGameStateRoundField}
+                       getGameStateRoundField={this.getGameStateRoundField}
                 />
 
                 <div ref="chips" className="chips">
                     <ChipButton className="open-word"
-                    onClick={this.onChipOpenWordClick}
-                    value={this.state.chipsOpenWord}
-                    icon="open_word">
+                                onClick={this.onChipOpenWordClick}
+                                value={this.state.chipsOpenWord}
+                                icon="open_word">
 
                         <span>{i18n._('chip.open-word')}</span>
                     </ChipButton>
                     <ChipButton className="open-letter"
-                    onClick={this.onChipOpenLetterClick}
-                    value={this.state.chipsOpenLetter}
-                    icon="open_letter">
+                                onClick={this.onChipOpenLetterClick}
+                                value={this.state.chipsOpenLetter}
+                                icon="open_letter">
 
                         <span>{i18n._('chip.open-letter')}</span>
                     </ChipButton>
                     <ChipButton className="show-word"
-                    onClick={this.onChipShowWordClick}
-                    value={this.state.chipsShowWord}
-                    icon="show_word">
+                                onClick={this.onChipShowWordClick}
+                                value={this.state.chipsShowWord}
+                                icon="show_word">
 
                         <span>{i18n._('chip.show-word')}</span>
                     </ChipButton>
@@ -468,19 +548,19 @@ var PageGameMain = Object.assign({}, {}, {
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
                     <div className="container transform-center">
-                    {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
-                            boardMaxHeight={this.state.gameBoardMaxHeight}
-                            boardData={this.state.boardData}
-                            board={this.state.board}
-                            openedLetters={this.state.openedLetters}
-                            shownWords={this.state.shownWords}
-                            displayNotice={this.displayNotice}
-                            addToShownWords={this.addToShownWords}
-                            removeWordFromShownWords={this.removeWordFromShownWords}
-                            setGameStateRoundField={this.setGameStateRoundField}
-                            goToPageRoundComplete={this.goToPageRoundComplete}
-                            checkIfBoardFitsOnScreen={this.checkIfBoardFitsOnScreen}
-                            /> : ''}
+                        {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
+                                                                    boardMaxHeight={this.state.gameBoardMaxHeight}
+                                                                    boardData={this.state.boardData}
+                                                                    board={this.state.board}
+                                                                    openedLetters={this.state.openedLetters}
+                                                                    shownWords={this.state.shownWords}
+                                                                    displayNotice={this.displayNotice}
+                                                                    addToShownWords={this.addToShownWords}
+                                                                    removeWordFromShownWords={this.removeWordFromShownWords}
+                                                                    setGameStateRoundField={this.setGameStateRoundField}
+                                                                    goToPageRoundComplete={this.goToPageRoundComplete}
+                                                                    checkIfBoardFitsOnScreen={this.checkIfBoardFitsOnScreen}
+                        /> : ''}
 
 
                         <ShownWords ref="shownWords" shownWordsLetters={this.state.shownWordsLetters}
