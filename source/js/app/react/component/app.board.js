@@ -1283,6 +1283,8 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     render: function () {
+        //console.log("board upd@ted");
+
         //console.log({board: this.state.shownWords});
         //console.log({boardProps: this.props.shownWords});
         //console.log(this.state.boardArr);

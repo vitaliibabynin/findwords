@@ -103,6 +103,8 @@ var TimerClass = Object.assign({}, {}, {
     },
 
     render: function () {
+        //console.log("timer upd@ted");
+
         var starOneThird = this.state.starOneThirdOn;
         var starTwoThirds = this.state.starTwoThirdsOn;
         var starBase = this.state.starBase;

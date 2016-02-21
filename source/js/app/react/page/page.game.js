@@ -36,7 +36,8 @@ var PageGameMain = Object.assign({}, {}, {
             gameBoardMaxHeight: 0,
             roundComplete: false
         };
-        state.roundData = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx] || [];
+        state.roundsBundlesData = appManager.getSettings().getRoundsBundles();
+        state.roundData = state.roundsBundlesData[state.roundsBundleIdx] || [];
         state.boardData = this.getBoardData(state.roundData, state.roundIdx);
 
         state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
@@ -462,6 +463,15 @@ var PageGameMain = Object.assign({}, {}, {
         this.setGameStateRoundsBundleField("roundsComplete", roundsComplete);
     },
 
+    openNextSlide: function () {
+        var numberOfRoundsRequired = this.state.roundsBundlesData[this.state.roundsBundleIdx].numberOfRoundsRequired;
+
+        if (this.state.roundIdx >= numberOfRoundsRequired - 1) {
+            var roundsBundleToOpen = this.state.roundsBundleIdx + 1;
+            appManager.getGameState().setRoundsBundles(roundsBundleToOpen, 'isUnlocked', true);
+        }
+    },
+
     goToPageRoundComplete: function (time) {
         //if (this.state.roundComplete) {
         //    return;
@@ -471,6 +481,10 @@ var PageGameMain = Object.assign({}, {}, {
         //});
 
         this.setRoundComplete();
+
+        if (this.state.roundsBundleIdx < this.state.roundsBundlesData.length - 1) {
+            this.openNextSlide();
+        }
 
         //console.log("going to page victory");
 
@@ -496,6 +510,8 @@ var PageGameMain = Object.assign({}, {}, {
 
 
     render: function () {
+        //console.log("page.game upd@ted");
+
         //console.log({pageGameScore: appManager.getGameState().getScore()});
         //console.log({pageGameCoins: appManager.getGameState().getCoins()});
         //console.log({pageGameRoundsComplete: this.getGameStateRoundsBundleField("roundsComplete")});

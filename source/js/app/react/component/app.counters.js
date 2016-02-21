@@ -206,6 +206,7 @@ var CountersClass = Object.assign({}, {}, {
     },
 
     render: function () {
+        //console.log("counters upd@ted");
 
         return (
 

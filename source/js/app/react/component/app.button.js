@@ -152,6 +152,7 @@ var ChipButtonClass = Object.assign({}, ButtonClass, {
     },
 
     render: function () {
+        //console.log("chips upd@ted");
 
         var buttonClasses = classNames(
             this.state.className,
