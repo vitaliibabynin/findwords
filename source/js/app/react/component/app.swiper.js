@@ -429,6 +429,9 @@ var SwiperClass = Object.assign({}, {}, {
         //appManager.getGameState().setRoundsBundles(9, "isPurchased", true);
         //appManager.getGameState().addCoins(9999);
 
+        //appManager.getGameState().setRemoveAds(true);
+        //appAd.setAdRemoved(true);
+
         if (!this.state.isActive) {
             appManager.getSFXManager().playButton();
 
