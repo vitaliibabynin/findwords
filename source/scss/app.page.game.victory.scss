@@ -157,6 +157,11 @@
           height: 0.8125rem;
           background-color: $gamePageVictory-container-roundsComplete-progress-bg-color;
           border-radius: 0.4rem;
+
+          &.complete {
+            -webkit-transition-duration: 1s;
+            transition-duration: 1s;
+          }
         }
       }
     }

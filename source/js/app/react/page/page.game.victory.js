@@ -29,6 +29,7 @@ var PageGameVictory = Object.assign({}, {}, {
         state.roundsComplete = this.getGameStateRoundsBundleField(state.roundsBundleIdx, 'roundsComplete') || 0;
         var rounds = appManager.getSettings().getRoundsBundles()[state.roundsBundleIdx].rounds;
         state.roundsTotal = rounds.length || 1;
+        state.roundsCompleteToShow = state.roundsComplete - 1;
 
         return state;
     },
@@ -49,6 +50,10 @@ var PageGameVictory = Object.assign({}, {}, {
 
         appDialogs.getRateDialog().showIfTime();
         this.onStartAdUpdate();
+
+        this.setState({
+            roundsCompleteToShow: this.state.roundsComplete
+        });
     },
 
     //componentDidUpdate: function (prevProps, prevState) {
@@ -241,7 +246,7 @@ var PageGameVictory = Object.assign({}, {}, {
         //console.log({victoryRoundsComplete: appManager.getGameState().getRoundsBundles(this.state.roundsBundleIdx).roundsComplete});
 
         var progressBar = {
-            width: (this.state.roundsComplete / this.state.roundsTotal * 6.250) + "rem"
+            width: (this.state.roundsCompleteToShow / this.state.roundsTotal * 6.250) + "rem"
         };
         var rewardStar = {
             backgroundImage: "url('" + this.getImagePath('counter/star') + "')"
@@ -268,9 +273,10 @@ var PageGameVictory = Object.assign({}, {}, {
 
                         <div className="rounds-complete">
                             <div className="progress-bar">
-                                <div className="panel">
-                                </div>
-                                <div className="fill" style={progressBar}>
+                                <div className="panel"></div>
+                                <div
+                                    className={classNames("fill",this.state.roundsCompleteToShow == this.state.roundsComplete ? "complete" : "")}
+                                    style={progressBar}>
                                 </div>
                             </div>
                             <div className="stats">{this.state.roundsComplete}/{this.state.roundsTotal}</div>

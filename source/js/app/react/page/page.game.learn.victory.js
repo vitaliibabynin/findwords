@@ -25,6 +25,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
             rewardScore: parseInt(router.getParam('rewardScore')) || 0,
             rewardCoins: parseInt(router.getParam('rewardCoins')) || 0
         };
+        state.roundsCompleteToShow = state.roundsComplete - 1;
 
         return state;
     },
@@ -41,6 +42,10 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         appDialogs.getRateDialog().showIfTime();
 
         this.onStartAdUpdate();
+
+        this.setState({
+            roundsCompleteToShow: this.state.roundsComplete
+        });
     },
 
     componentWillUnmount: function () {
@@ -132,9 +137,12 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         return (
             <div className="stars">
                 <div className="star-line">
-                    <div className="star1 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_left') + "')"}}></div>
-                    <div className="star2 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_mid') + "')"}}></div>
-                    <div className="star3 star-empty" style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_right') + "')"}}></div>
+                    <div className="star1 star-empty"
+                         style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_left') + "')"}}></div>
+                    <div className="star2 star-empty"
+                         style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_mid') + "')"}}></div>
+                    <div className="star3 star-empty"
+                         style={{backgroundImage: "url('" + this.getImagePath('victory/star_empty_right') + "')"}}></div>
                 </div>
                 <div className="star-line">
                     <div className={star1Classes} style={styleStar1}></div>
@@ -145,11 +153,11 @@ var PageGameLearnVictory = Object.assign({}, {}, {
         )
     },
 
-    onStartAdUpdate: function(){
+    onStartAdUpdate: function () {
         var $pageContent = $(this.refs.pageContent.getDOMNode());
-        if(this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom'))  > this.refs.container.getDOMNode().offsetHeight){
+        if (this.refs.pageContent.getDOMNode().clientHeight - parseInt($pageContent.css('padding-bottom')) > this.refs.container.getDOMNode().offsetHeight) {
             this.state.containerExtraClass = 'transform-center';
-        }else{
+        } else {
             this.state.containerExtraClass = '';
         }
 
@@ -158,7 +166,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
 
     render: function () {
         var progressBar = {
-            width: (this.state.roundsComplete / this.state.roundsTotal * 6.250) + "rem"
+            width: (this.state.roundsCompleteToShow / this.state.roundsTotal * 6.250) + "rem"
         };
         var rewardStar = {
             backgroundImage: "url('" + this.getImagePath('counter/star') + "')"
@@ -175,7 +183,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
 
                 <div ref="pageContent" className="page-content">
 
-                    <div ref="container" className={classNames("container", this.state.containerExtraClass)} >
+                    <div ref="container" className={classNames("container", this.state.containerExtraClass)}>
 
                         <div className="excellent">{i18n._('victory.excellent')}</div>
 
@@ -183,9 +191,10 @@ var PageGameLearnVictory = Object.assign({}, {}, {
 
                         <div className="rounds-complete">
                             <div className="progress-bar">
-                                <div className="panel">
-                                </div>
-                                <div className="fill" style={progressBar}>
+                                <div className="panel"></div>
+                                <div
+                                    className={classNames("fill",this.state.roundsCompleteToShow == this.state.roundsComplete ? "complete" : "")}
+                                    style={progressBar}>
                                 </div>
                             </div>
                             <div className="stats">{this.state.roundsComplete}/{this.state.roundsTotal}</div>
@@ -204,7 +213,7 @@ var PageGameLearnVictory = Object.assign({}, {}, {
                         </div>
 
 
-                        <StartAd onUpdate={this.onStartAdUpdate} />
+                        <StartAd onUpdate={this.onStartAdUpdate}/>
                     </div>
 
                 </div>
