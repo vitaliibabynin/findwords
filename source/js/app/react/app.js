@@ -4,14 +4,14 @@
 var classNames = require('classnames');
 
 var PageMain = require('./page/page.main');
-var PageGame = require('./page/page.game');
-var PageGameVictory = require('./page/page.game.victory');
+var PageGame = require('./page/page.game').PageGameMain;
+var PageGameVictory = require('./page/page.game.victory').PageGameVictory;
 var PageBonus = require('./page/page.bonus');
 var PageShop = require('./page/page.shop');
 var PageRankings = require('./page/page.rankings');
 var PageLearn = require('./page/page.learn');
-var PageGameLearn = require('./page/page.game.learn');
-var PageGameLearnVictory = require('./page/page.game.learn.victory');
+var PageGameLearn = require('./page/page.game').PageGameLearn;
+var PageGameLearnVictory = require('./page/page.game.victory').PageGameLearnVictory;
 
 React.initializeTouchEvents(true);
 var AppClass = {

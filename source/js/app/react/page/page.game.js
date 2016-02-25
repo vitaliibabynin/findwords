@@ -1,8 +1,9 @@
 "use strict";
 
 
-//var GameMixin = require('./../component/app.mixin').GameMixin;
+module.exports = {};
 
+//var GameMixin = require('./../component/app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 
@@ -15,27 +16,240 @@ var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
 
-var PageGameMain = Object.assign({}, {}, {
+var PageGameAbstract = Object.assign({}, {}, {
+
+    getInitialState: function () {
+        var state = {
+            noticeType: "",
+            noticeContainerHeight: "",
+            noticeWord: {letters: []},
+            gameBoardMaxHeight: 0
+        };
+
+        return state;
+    },
+
+
+
+    displayNotice: function (type, word) {
+        var boardHeight = this.refs.board.getDOMNode().clientHeight;
+        var boardTop = this.refs.board.getDOMNode().getBoundingClientRect().top;
+
+        var noticeContainerStyle = {
+            height: boardHeight,
+            marginTop: boardTop
+        };
+
+        this.setState({
+            noticeType: type,
+            noticeContainerStyle: noticeContainerStyle || {},
+            noticeWord: word
+        }, function () {
+            setTimeout(function () {
+                this.hideNotice();
+            }.bind(this), 2000);
+        });
+    },
+
+    hideNotice: function () {
+        if (this.isMounted()) {
+            this.setState({
+                noticeType: "",
+                noticeWord: {letters: []}
+            });
+
+            this.refs.board.emptySelectedLetters();
+        }
+    },
+
+    addRewardCoins: function (rewardCoins) {
+        var prevTotalCoins = appManager.getGameState().getCoins();
+        var newTotalCoins = prevTotalCoins + rewardCoins;
+        appManager.getGameState().setCoins(newTotalCoins);
+    },
+
+    facebookUpdate: function () {
+        if (appFB.isAuthorized()) {
+            appApi.updateRating(
+                appFB.getAccessToken(),
+                CONST.GAME_TYPE,
+                appManager.getSettings().getGameId(),
+                appManager.getGameState().getScore(),
+                appManager.getGameState().getCompletedRoundsCount()
+            );
+        }
+    },
+
+    renderNotice: function () {
+        return (
+            <Notice noticeType={this.state.noticeType}
+                    noticeContainerStyle={this.state.noticeContainerStyle}
+                    word={this.state.noticeWord}
+                    hideNotice={this.hideNotice}
+            />
+        )
+    },
+
+    renderTimer: function () {
+        return (
+            <Timer ref="timer" time={this.state.time}
+                   setGameStateRoundField={this.setGameStateRoundField}
+                   getGameStateRoundField={this.getGameStateRoundField}
+            />
+        )
+    }
+
+});
+
+var PageGameLearn = Object.assign({}, PageGameAbstract, {
+
+    displayName: 'PageGameLearn',
+
+    getInitialState: function () {
+        var state = PageGameAbstract.getInitialState.apply(this);
+
+        state.boardData = this.getBoardData() || {};
+        state.time = state.boardData.time || 0;
+        state.board = this.getGameStateRoundField("board", {}) || {};
+
+        return state;
+    },
+
+    componentWillMount: function () {
+        //appManager.getMusicManager().playGameMusic();
+        appAd.hideBanner();
+    },
+
+    componentDidMount: function () {
+        window.appAnalytics.trackView('pageGameLearn');
+
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
+            - parseInt($pageContent.css('padding-bottom'));
+
+        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
+    },
+
+    componentWillUnmount: function () {
+        appManager.getMusicManager().playMusic();
+        appAd.showBottomBanner();
+    },
+
+    getBoardData: function () {
+        return appManager.getSettings().getPracticeRound();
+    },
+
+    setGameStateRoundField: function (field, newValue) {
+        return appManager.getGameState().setPracticeRoundField(field, newValue);
+    },
+
+    getGameStateRoundField: function (field, defaultValue) {
+        return appManager.getGameState().getPracticeRoundField(field, defaultValue);
+    },
+
+
+    getStarsReceived: function () {
+        return appManager.getGameState().getPracticeRoundField('starsReceived') || 3;
+    },
+
+    getRewardScore: function (round, starsReceived) {
+        //return round.score * (starsReceived / 3) || 0;
+        return round.bonus[starsReceived].score || 0;
+    },
+
+    getRewardCoins: function (round, starsReceived) {
+        //return round.coins * (starsReceived / 3) || 0;
+        return round.bonus[starsReceived].coins || 0;
+    },
+
+    addRewardScore: function (rewardScore) {
+        var prevTotalScore = appManager.getGameState().getScore();
+        var newTotalScore = prevTotalScore + rewardScore;
+        appManager.getGameState().setScore(newTotalScore);
+    },
+
+    addRewards: function () {
+        var round = this.state.boardData;
+        var params = {};
+        params.starsReceived = this.getStarsReceived() || 3;
+        params.rewardScore = this.getRewardScore(round, params.starsReceived) || 0;
+        params.rewardCoins = this.getRewardCoins(round, params.starsReceived) || 0;
+
+        this.addRewardScore(params.rewardScore);
+        this.addRewardCoins(params.rewardCoins);
+
+        return params;
+    },
+
+    setPracticeRoundComplete: function () {
+        appManager.getGameState().setGameStateField("practiceRound", {});
+        appManager.getGameState().setPracticeRoundComplete(true);
+    },
+
+    goToPageRoundComplete: function (time) {
+        var params = this.addRewards();
+        this.setPracticeRoundComplete();
+
+        this.facebookUpdate();
+
+        time = time || 0;
+        setTimeout(function () {
+            router.navigate("game", "learn_victory", params);
+        }.bind(this), time);
+    },
+
+    render: function () {
+
+        return (
+            <div className="page page-game">
+
+                {this.renderNotice()}
+
+                <Counters isDisplayBackButton={true}/>
+
+                {this.renderTimer()}
+
+                <div ref="pageContent" className="page-content">
+
+                    <div className="container transform-center">
+                        {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
+                                                                    boardMaxHeight={this.state.gameBoardMaxHeight}
+                                                                    boardData={this.state.boardData}
+                                                                    board={this.state.board}
+                                                                    isPracticeRound={true}
+                                                                    displayNotice={this.displayNotice}
+                                                                    setGameStateRoundField={this.setGameStateRoundField}
+                                                                    goToPageRoundComplete={this.goToPageRoundComplete}
+                        /> : ''}
+                    </div>
+
+                </div>
+            </div>
+        );
+    }
+
+});
+module.exports.PageGameLearn = React.createClass(PageGameLearn);
+module.exports.PageGameLearn.Class = PageGameLearn;
+
+var PageGameMain = Object.assign({}, PageGameAbstract, {
 
     //mixins: [GameMixin],
     displayName: 'PageGameMain',
     chipProcessing: false,
 
     getInitialState: function () {
-        var state = {
-            roundsBundleIdx: parseInt(router.getParam('roundsBundleIdx')) || 0,
-            roundIdx: parseInt(router.getParam('roundIdx')) || 0,
-            shownWordsLetters: [],
-            noticeType: "",
-            noticeContainerHeight: "",
-            noticeWord: {letters: []},
-            chipsOpenWord: appManager.getSettings().getChipsCoinsCost().openWord || 0,
-            chipsOpenLetter: appManager.getSettings().getChipsCoinsCost().openLetter || 0,
-            chipsShowWord: appManager.getSettings().getChipsCoinsCost().showWord || 0,
-            shownWordsAnimationLeave: true,
-            gameBoardMaxHeight: 0,
-            roundComplete: false
-        };
+        var state = PageGameAbstract.getInitialState.apply(this);
+
+        state.roundsBundleIdx = parseInt(router.getParam('roundsBundleIdx')) || 0;
+        state.roundIdx = parseInt(router.getParam('roundIdx')) || 0;
+        state.shownWordsLetters = [];
+        state.chipsOpenWord = appManager.getSettings().getChipsCoinsCost().openWord || 0;
+        state.chipsOpenLetter = appManager.getSettings().getChipsCoinsCost().openLetter || 0;
+        state.chipsShowWord = appManager.getSettings().getChipsCoinsCost().showWord || 0;
+        state.shownWordsAnimationLeave = true;
+        state.roundComplete = false;
+
         state.roundsBundlesData = appManager.getSettings().getRoundsBundles();
         state.roundData = state.roundsBundlesData[state.roundsBundleIdx] || [];
         state.boardData = this.getBoardData(state.roundData, state.roundIdx);
@@ -374,38 +588,6 @@ var PageGameMain = Object.assign({}, {}, {
     },
 
 
-    displayNotice: function (type, word) {
-        var boardHeight = this.refs.board.getDOMNode().clientHeight;
-        var boardTop = this.refs.board.getDOMNode().getBoundingClientRect().top;
-
-        var noticeContainerStyle = {
-            height: boardHeight,
-            marginTop: boardTop
-        };
-
-        this.setState({
-            noticeType: type,
-            noticeContainerStyle: noticeContainerStyle || {},
-            noticeWord: word
-        }, function () {
-            setTimeout(function () {
-                this.hideNotice();
-            }.bind(this), 2000);
-        });
-    },
-
-    hideNotice: function () {
-        if (this.isMounted()) {
-            this.setState({
-                noticeType: "",
-                noticeWord: {letters: []}
-            });
-
-            this.refs.board.emptySelectedLetters();
-        }
-    },
-
-
     getStarsReceived: function () {
         return this.getGameStateRoundField('starsReceived', this.state.roundsBundleIdx, this.state.roundIdx) || 3;
     },
@@ -426,12 +608,6 @@ var PageGameMain = Object.assign({}, {}, {
         var prevRoundsBundleScore = appManager.getGameState().getRoundsBundles(roundsBundleIdx).bundleScore;
         var newRoundsBundleScore = prevRoundsBundleScore + rewardScore;
         appManager.getGameState().setRoundsBundles(roundsBundleIdx, 'bundleScore', newRoundsBundleScore);
-    },
-
-    addRewardCoins: function (rewardCoins) {
-        var prevTotalCoins = appManager.getGameState().getCoins();
-        var newTotalCoins = prevTotalCoins + rewardCoins;
-        appManager.getGameState().setCoins(newTotalCoins);
     },
 
     addRewards: function () {
@@ -492,15 +668,7 @@ var PageGameMain = Object.assign({}, {}, {
         params.roundsBundleIdx = this.state.roundsBundleIdx;
         params.roundIdx = this.state.roundIdx;
 
-        if (appFB.isAuthorized()) {
-            appApi.updateRating(
-                appFB.getAccessToken(),
-                CONST.GAME_TYPE,
-                appManager.getSettings().getGameId(),
-                appManager.getGameState().getScore(),
-                appManager.getGameState().getCompletedRoundsCount()
-            );
-        }
+        this.facebookUpdate();
 
         time = time || 0;
         setTimeout(function () {
@@ -523,19 +691,12 @@ var PageGameMain = Object.assign({}, {}, {
         return (
             <div className="page page-game">
 
-                <Notice noticeType={this.state.noticeType}
-                        noticeContainerStyle={this.state.noticeContainerStyle}
-                        word={this.state.noticeWord}
-                        hideNotice={this.hideNotice}
-                />
+                {this.renderNotice()}
 
                 <Counters isDisplayBackButton={true}
                           roundsBundleIdx={this.state.roundsBundleIdx}/>
 
-                <Timer ref="timer" time={this.state.time}
-                       setGameStateRoundField={this.setGameStateRoundField}
-                       getGameStateRoundField={this.getGameStateRoundField}
-                />
+                {this.renderTimer()}
 
                 <div ref="chips" className="chips">
                     <ChipButton className="open-word"
@@ -590,5 +751,5 @@ var PageGameMain = Object.assign({}, {}, {
     }
 
 });
-module.exports = React.createClass(PageGameMain);
-module.exports.Class = PageGameMain;
+module.exports.PageGameMain = React.createClass(PageGameMain);
+module.exports.PageGameMain.Class = PageGameMain;
