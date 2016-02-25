@@ -29,7 +29,13 @@ var PageGameAbstract = Object.assign({}, {}, {
         return state;
     },
 
+    centerContent: function () {
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
+            - parseInt($pageContent.css('padding-bottom'));
 
+        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
+    },
 
     displayNotice: function (type, word) {
         var boardHeight = this.refs.board.getDOMNode().clientHeight;
@@ -123,11 +129,7 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
     componentDidMount: function () {
         window.appAnalytics.trackView('pageGameLearn');
 
-        var $pageContent = $(this.refs.pageContent.getDOMNode());
-        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
-            - parseInt($pageContent.css('padding-bottom'));
-
-        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
+        this.centerContent();
     },
 
     componentWillUnmount: function () {
@@ -276,15 +278,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         window.appAnalytics.trackView('pageGame');
         appAnalytics.trackEvent('round', 'bundle-' + this.state.roundsBundleIdx + ' round-' + this.state.roundIdx, '', 1);
 
-        var $pageContent = $(this.refs.pageContent.getDOMNode());
-        //console.log(this.refs.pageContent.getDOMNode().clientHeight);
-        //console.log(parseInt($pageContent.css('padding-bottom')));
-        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
-            - this.refs.shownWords.getDOMNode().offsetHeight
-            - parseInt($pageContent.css('padding-bottom'));
-
-
-        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
+        this.centerContent();
 
         //console.log("pageGameComponentDidMount");
     },
@@ -330,6 +324,18 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
             router.navigate("game", "victory", params);
             return false;
         }
+    },
+
+    centerContent: function () {
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        //console.log(this.refs.pageContent.getDOMNode().clientHeight);
+        //console.log(parseInt($pageContent.css('padding-bottom')));
+        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
+            - this.refs.shownWords.getDOMNode().offsetHeight
+            - parseInt($pageContent.css('padding-bottom'));
+
+
+        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
     },
 
     componentWillUnmount: function () {
