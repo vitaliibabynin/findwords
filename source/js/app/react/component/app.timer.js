@@ -102,6 +102,22 @@ var TimerClass = Object.assign({}, {}, {
         clearInterval(this.interval);
     },
 
+    onPause: function () {
+        console.log("pause");
+
+        clearInterval(this.interval);
+    },
+
+    onResume: function () {
+        console.log("resume");
+
+        if (!this.state.isCountDownOn) {
+            return;
+        }
+
+        this.interval = setInterval(this.tick, 1000);
+    },
+
     render: function () {
         //console.log("timer upd@ted");
 

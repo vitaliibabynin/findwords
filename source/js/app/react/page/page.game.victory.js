@@ -27,7 +27,6 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
     componentWillMount: function () {
         appManager.getMusicManager().stop();
         appManager.getSFXManager().playWin();
-        //appAd.showInterstitial();
         appAd.hideBanner();
     },
 
@@ -266,10 +265,17 @@ var PageGameVictory = Object.assign({}, PageGameVictoryAbstract, {
     },
 
     componentWillMount: function () {
-        appManager.getMusicManager().stop();
-        appManager.getSFXManager().playWin();
+        PageGameVictoryAbstract.componentWillMount.apply(this);
+        this.showFullScreenAd();
+    },
+
+    showFullScreenAd: function () {
+        if (this.state.roundsBundleIdx == 0 && this.state.roundIdx < 5) {
+            console.log("no Ad");
+            return;
+        }
+
         appAd.showInterstitial();
-        appAd.hideBanner();
     },
 
     componentDidMount: function () {
