@@ -30,6 +30,10 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
         appAd.hideBanner();
     },
 
+    componentDidMount: function () {
+        console.log('componentDidMount not implemented.');
+    },
+
     componentWillUnmount: function () {
         appAd.showBottomBanner();
     },
@@ -122,6 +126,10 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
         }
 
         this.setState({containerExtraClass: this.state.containerExtraClass});
+    },
+
+    onClick: function () {
+        console.log('onClick not implemented.');
     },
 
     render: function () {

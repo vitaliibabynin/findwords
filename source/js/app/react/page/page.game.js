@@ -29,6 +29,56 @@ var PageGameAbstract = Object.assign({}, {}, {
         return state;
     },
 
+    componentWillMount: function () {
+        console.log('componentWillMount not implemented.');
+    },
+
+    componentDidMount: function () {
+        console.log('componentDidMount not implemented.');
+    },
+
+    componentWillUnmount: function () {
+        console.log('componentWillUnmount not implemented.');
+    },
+
+    getBoardData: function () {
+        console.log('getBoardData not implemented.');
+    },
+
+    setGameStateRoundField: function () {
+        console.log('setGameStateRoundField not implemented.');
+    },
+
+    getGameStateRoundField: function () {
+        console.log('getGameStateRoundField not implemented.');
+    },
+
+    getStarsReceived: function () {
+        console.log('getStarsReceived not implemented.');
+    },
+
+    getRewardScore: function () {
+        console.log('getRewardScore not implemented.');
+    },
+
+    getRewardCoins: function () {
+        console.log('getRewardCoins not implemented.');
+    },
+
+    addRewardScore: function () {
+        console.log('getRewardCoins not implemented.');
+    },
+
+    addRewardCoins: function (rewardCoins) {
+        var prevTotalCoins = appManager.getGameState().getCoins();
+        var newTotalCoins = prevTotalCoins + rewardCoins;
+        appManager.getGameState().setCoins(newTotalCoins);
+    },
+
+    addRewards: function () {
+        console.log('getRewardCoins not implemented.');
+    },
+
     centerContent: function () {
         var $pageContent = $(this.refs.pageContent.getDOMNode());
         var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
@@ -68,10 +118,12 @@ var PageGameAbstract = Object.assign({}, {}, {
         }
     },
 
-    addRewardCoins: function (rewardCoins) {
-        var prevTotalCoins = appManager.getGameState().getCoins();
-        var newTotalCoins = prevTotalCoins + rewardCoins;
-        appManager.getGameState().setCoins(newTotalCoins);
+    setRoundComplete: function () {
+        console.log('setRoundComplete not implemented.');
+    },
+
+    goToPageRoundComplete: function () {
+        console.log('goToPageRoundComplete not implemented.');
     },
 
     facebookUpdate: function () {
@@ -183,14 +235,14 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
         return params;
     },
 
-    setPracticeRoundComplete: function () {
+    setRoundComplete: function () {
         appManager.getGameState().setGameStateField("practiceRound", {});
         appManager.getGameState().setPracticeRoundComplete(true);
     },
 
     goToPageRoundComplete: function (time) {
         var params = this.addRewards();
-        this.setPracticeRoundComplete();
+        this.setRoundComplete();
 
         this.facebookUpdate();
 
