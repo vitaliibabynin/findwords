@@ -96,10 +96,16 @@ var TimerClass = Object.assign({}, {}, {
         }
 
         this.interval = setInterval(this.tick, 1000);
+
+        document.addEventListener("pause", this.onPause, false);
+        document.addEventListener("resume", this.onResume, false);
     },
 
     componentWillUnmount: function () {
         clearInterval(this.interval);
+
+        document.removeEventListener("pause", this.onPause, false);
+        document.removeEventListener("resume", this.onResume, false);
     },
 
     onPause: function () {
