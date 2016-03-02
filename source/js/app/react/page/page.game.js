@@ -323,7 +323,21 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
     },
 
     componentDidMount: function () {
-        if (this.checkIfRoundIsValid() === false) {
+        if (this.checkIfRoundIdxIsValid() === false) {
+            console.log("roundIdx invalid");
+            this.goToPageMain();
+            return;
+        }
+
+        if (this.checkIfRoundsBundleIsLocked() === true) {
+            console.log("roundsBundle locked");
+            this.goToPageMain();
+            return;
+        }
+
+        if (this.checkIfRoundAlreadyComplete() === true) {
+            console.log("round already complete");
+            this.goToPageVictory();
             return;
         }
 
@@ -331,27 +345,34 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         appAnalytics.trackEvent('round', 'bundle-' + this.state.roundsBundleIdx + ' round-' + this.state.roundIdx, '', 1);
 
         this.centerContent();
-
-        //console.log("pageGameComponentDidMount");
     },
 
-    checkIfRoundIsValid: function () {
-        var roundsTotal = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds.length;
-        if (typeof roundsTotal == "undefined") {
-            return false;
+    checkIfRoundsBundleIsLocked: function (roundsBundleIdx) {
+        var isLocked = false;
+
+        var roundsBundleIsUnlocked = this.getGameStateRoundsBundleField('isUnlocked', roundsBundleIdx);
+        if (roundsBundleIsUnlocked === false) {
+            console.log("isLocked");
+            isLocked = true;
         }
 
-        var params = {};
-        params.roundsBundleIdx = this.state.roundsBundleIdx;
+        var roundsBundleIsPurchased = this.getGameStateRoundsBundleField('isPurchased', roundsBundleIdx);
+        if (roundsBundleIsPurchased === true) {
+            console.log("isPurchased");
+            isLocked = false;
+        }
 
+        return isLocked;
+    },
+
+    checkIfRoundIdxIsValid: function () {
+        var roundsTotal = appManager.getSettings().getRoundsBundles()[this.state.roundsBundleIdx].rounds.length || 1;
         if (this.state.roundIdx > roundsTotal) {
-            router.navigate("main", "index", {roundsBundleIdx: params.roundsBundleIdx});
             return false;
         }
+    },
 
-        //console.log({pageGameRoundIdx: this.state.roundIdx});
-        //console.log({pageGameRoundsTotal: roundsTotal});
-
+    checkIfRoundAlreadyComplete: function () {
         var wordsTotal = this.state.boardData.words.length;
         var board = this.state.board;
         var wordsComplete = 0;
@@ -367,15 +388,23 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
             wordsComplete++;
         }
 
+        return wordsComplete == wordsTotal;
+    },
+
+    goToPageMain: function () {
+        router.navigate("main", "index", {roundsBundleIdx: this.state.roundsBundleIdx});
+    },
+    
+    goToPageVictory: function () {
+        var params = {};
+        params.roundsBundleIdx = this.state.roundsBundleIdx;
         params.roundIdx = this.state.roundIdx;
         params.starsReceived = this.getStarsReceived() || 3;
         params.rewardScore = this.getRewardScore(params.starsReceived) || 0;
         params.rewardCoins = this.getRewardCoins(params.starsReceived) || 0;
-
-        if (wordsComplete == wordsTotal) {
-            router.navigate("game", "victory", params);
-            return false;
-        }
+        params = this.chooseNextRound(params);
+        
+        router.navigate("game", "victory", params);
     },
 
     centerContent: function () {
@@ -669,25 +698,19 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
     },
 
     addRewards: function () {
-        var params = {};
-        params.starsReceived = this.getStarsReceived() || 3;
-        params.rewardScore = this.getRewardScore(params.starsReceived) || 0;
-        params.rewardCoins = this.getRewardCoins(params.starsReceived) || 0;
+        var starsReceived = this.getStarsReceived() || 3;
+        var rewardScore = this.getRewardScore(starsReceived) || 0;
+        var rewardCoins = this.getRewardCoins(starsReceived) || 0;
 
-        this.addRewardScore(params.rewardScore, this.state.roundsBundleIdx);
-        this.addRewardCoins(params.rewardCoins);
-
-        //console.log("adding rewards");
+        this.addRewardScore(rewardScore, this.state.roundsBundleIdx);
+        this.addRewardCoins(rewardCoins);
 
         appAnalytics.trackEvent(
             'roundResult',
             'bundle-' + this.state.roundsBundleIdx + ' round-' + this.state.roundIdx,
-            'remainingTime-' + this.getGameStateRoundsBundleField("secondsRemaining") + ' receivedStars-' + params.starsReceived,
+            'remainingTime-' + this.getGameStateRoundsBundleField("secondsRemaining") + ' receivedStars-' + starsReceived,
             1
         );
-
-
-        return params;
     },
 
     setRoundComplete: function () {
@@ -706,31 +729,63 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         }
     },
 
-    goToPageRoundComplete: function (time) {
-        //if (this.state.roundComplete) {
-        //    return;
-        //}
-        //this.setState({
-        //    roundComplete: true
-        //});
+    findNextUncompletedRound: function (roundsBundlesGameData, roundsBundleIdx, roundIdx, index) {
+        for (var i = index; i < roundsBundlesGameData.length; i++) {
+            if (this.checkIfRoundsBundleIsLocked(i) === true) {
+                continue;
+            }
 
+            var roundsBundleGameState = appManager.getGameState().getRoundsBundles(i);
+            if (roundsBundleGameState.roundsComplete < roundsBundlesGameData[i].rounds.length) {
+                roundsBundleIdx = i;
+                roundIdx = roundsBundleGameState.roundsComplete;
+
+                return {
+                    roundsBundleIdx: roundsBundleIdx,
+                    roundIdx: roundIdx
+                };
+            }
+        }
+        return false;
+    },
+
+    chooseNextRound: function (params) {
+        var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();
+        var roundsBundleIdx = this.state.roundsBundleIdx;
+        var roundIdx = this.state.roundIdx + 1;
+
+        var roundAfter = this.findNextUncompletedRound(roundsBundlesGameData, roundsBundleIdx, roundIdx, roundsBundleIdx);
+        //var roundAfter = false;
+        if (roundAfter !== false) {
+            params.nextRoundsBundleIdx = roundAfter.roundsBundleIdx;
+            params.nextRoundIdx = roundAfter.roundIdx;
+            return params;
+        }
+
+        var roundBefore = this.findNextUncompletedRound(roundsBundlesGameData, roundsBundleIdx, roundIdx, 0);
+        //var roundBefore = false;
+        if (roundBefore !== false) {
+            params.nextRoundsBundleIdx = roundBefore.roundsBundleIdx;
+            params.nextRoundIdx = roundBefore.roundIdx;
+            return params;
+        }
+
+        return params;
+    },
+
+    goToPageRoundComplete: function (time) {
         this.setRoundComplete();
 
         if (this.state.roundsBundleIdx < this.state.roundsBundlesData.length - 1) {
             this.openNextSlide();
         }
 
-        //console.log("going to page victory");
-
-        var params = this.addRewards();
-        params.roundsBundleIdx = this.state.roundsBundleIdx;
-        params.roundIdx = this.state.roundIdx;
-
+        this.addRewards();
         this.facebookUpdate();
 
         time = time || 0;
         setTimeout(function () {
-            router.navigate("game", "victory", params);
+            this.goToPageVictory();
         }.bind(this), time);
     },
 
