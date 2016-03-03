@@ -1,5 +1,5 @@
 {
-  "name": "Fine Words game",
+  "name": "Game",
   "version": "1.0.1",
   "main": "./source/js/app/init.app.js",
   "description": "",

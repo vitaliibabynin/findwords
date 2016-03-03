@@ -348,21 +348,10 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
     },
 
     checkIfRoundsBundleIsLocked: function (roundsBundleIdx) {
-        var isLocked = false;
-
         var roundsBundleIsUnlocked = this.getGameStateRoundsBundleField('isUnlocked', roundsBundleIdx);
-        if (roundsBundleIsUnlocked === false) {
-            console.log("isLocked");
-            isLocked = true;
-        }
-
         var roundsBundleIsPurchased = this.getGameStateRoundsBundleField('isPurchased', roundsBundleIdx);
-        if (roundsBundleIsPurchased === true) {
-            console.log("isPurchased");
-            isLocked = false;
-        }
 
-        return isLocked;
+        return !(roundsBundleIsUnlocked === true || roundsBundleIsPurchased === true);
     },
 
     checkIfRoundIdxIsValid: function () {
