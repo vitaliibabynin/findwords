@@ -197,9 +197,14 @@ var PageMain = Object.assign({}, {}, {
         var checked = this.state.adsRemoved ? "" : "checked";
         //console.log({checked: checked});
 
+        var backgroundImage = {};
+        //var backgroundImage = {
+        //  backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        //};
+
         return (
 
-            <div className="page page-main">
+            <div className="page page-main" style={backgroundImage}>
 
                 <div className="page-content">
 
