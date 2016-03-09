@@ -220,6 +220,34 @@
             }
           }
         }
+        &.slide-try-this-game {
+          text-align: center;
+          background-size: auto 4.5rem;
+          background-repeat: no-repeat;
+          background-position: center 2.5rem;
+          overflow: hidden;
+
+          .game-title {
+            margin-top: 7.5rem;
+          }
+
+          .play {
+            $height: 1.5rem;
+            margin-top: 0.3rem;
+            display: inline-block;
+            height: $height;
+            width: 60%;
+            background-color: green;
+            border-radius: 0.625rem;
+            box-shadow: inherit;
+
+            span {
+              display: inline-block;
+              vertical-align: middle;
+              line-height: $height;
+            }
+          }
+        }
       }
 
       .swiper-pagination {

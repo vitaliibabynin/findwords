@@ -456,6 +456,33 @@ var SwiperClass = Object.assign({}, {}, {
         return appManager.getSettings().getRoundsBundles();
     },
 
+    renderSlideTryThisGame: function () {
+        if (this.props.allRoundsBundlesComplete !== true) {
+            return;
+        }
+
+        var slideClasses = classNames(
+            'swiper-slide',
+            'slide-try-this-game',
+            {'hover': this.state.isActive}
+        );
+
+        var slideStyle = {
+            backgroundColor: "blue",
+            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
+
+        return (
+            <div className={slideClasses} style={slideStyle} onClick={this.onClickEffect}>
+                <div className="game-title">Game Title</div>
+
+                <div className="play">
+                    <span>{i18n._('slide.tryThisGame.play')}</span>
+                </div>
+            </div>
+        );
+    },
+
     renderSlideSoon: function () {
         if (this.state.slideSoon.isShown !== true) {
             return;
@@ -497,6 +524,8 @@ var SwiperClass = Object.assign({}, {}, {
             <div ref="swiperConatiner" className="swiper-container">
 
                 <div className="swiper-wrapper">
+                    {this.renderSlideTryThisGame()}
+
                     {slides}
 
                     {this.renderSlideSoon()}
