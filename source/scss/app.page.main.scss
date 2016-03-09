@@ -29,6 +29,21 @@
     width: 100%;
   }
 
+  .game-complete {
+    $height: 2rem;
+    height: $height;
+    background-color: blue;
+    margin-top: 0.5rem;
+    text-align: center;
+    overflow: hidden;
+
+    span {
+      display: inline-block;
+      line-height: $height;
+      vertical-align: middle;
+    }
+  }
+
   .main {
     position: relative;
     transform: translateX(-0%) translateY(-50%);

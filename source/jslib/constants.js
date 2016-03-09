@@ -41,6 +41,7 @@ window.CONST = {
             'slide.complete.message': 'Этот уровень уже был пройден',
             'slide.soon': 'СКОРО',
             'slide.tryThisGame.play': 'Играть',
+            'gameComplete': 'Игра пройдена, ждите обновление!',
 
             'button.settings': 'Настройки',
             'button.rating': 'Рейтинг',
@@ -210,6 +211,7 @@ window.CONST = {
             'slide.complete.message': 'This level has already been completed',
             'slide.soon': 'SOON',
             'slide.tryThisGame.play': 'Play',
+            'gameComplete': 'Game complete, wait for more content!',
 
             'button.settings': 'Settings',
             'button.rating': 'Rankings',

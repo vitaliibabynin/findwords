@@ -166,6 +166,18 @@ var PageMain = Object.assign({}, {}, {
         );
     },
 
+    renderGameCompleteMessage: function () {
+        if (this.state.allRoundsBundlesComplete !== true) {
+            return;
+        }
+
+        return (
+            <div className="game-complete">
+                <span>{i18n._('gameComplete')}</span>
+            </div>
+        );
+    },
+
     render: function () {
         var headImgName = "head/head_img_" + router.getLanguage();
         if (CONST.CURRENT_PLATFORM == "ios" && router.getLanguage() == "en") {
@@ -192,6 +204,8 @@ var PageMain = Object.assign({}, {}, {
                     </div>
 
                     <Counters />
+
+                    {this.renderGameCompleteMessage()}
 
                     <div className="main">
                         <Swiper initialSlide={this.state.initialSlide}
