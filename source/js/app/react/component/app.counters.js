@@ -34,7 +34,7 @@ var CounterClass = Object.assign({}, {}, {
 
     componentWillReceiveProps: function (nextProps) {
         this.setState({
-            value: nextProps.value || this.state.value,
+            value: typeof nextProps.value == "undefined" ? this.state.value : nextProps.value,
             isDisplayPlusButton: typeof nextProps.isDisplayPlusButton == "undefined" ? this.state.isDisplayPlusButton : nextProps.isDisplayPlusButton
         })
     },

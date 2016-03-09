@@ -31,6 +31,13 @@ var PageMain = Object.assign({}, {}, {
 
     componentWillMount: function () {
         appAd.hideBanner();
+
+        if (this.checkIfAllRoundsBundlesComplete() !== false) {
+            this.setState({
+                allRoundsBundlesComplete: true,
+                initialSlide: 0
+            })
+        }
     },
 
     componentDidMount: function () {
@@ -55,15 +62,7 @@ var PageMain = Object.assign({}, {}, {
         //    }
         //}
 
-        if (this.checkForBonuses() !== false) {
-            return;
-        }
-
-        if (this.checkIfAllRoundsBundlesComplete() !== false) {
-            this.setState({
-                allRoundsBundlesComplete: true
-            })
-        }
+        this.checkForBonuses()
     },
 
     componentWillUnmount: function () {
@@ -150,11 +149,24 @@ var PageMain = Object.assign({}, {}, {
         }, 5000);
     },
 
-    render: function () {
-        //console.log(appManager.getGameState().gameState);
-        //console.log(this.state.checked);
-        //console.log(router.getController());
+    renderAdSwitch: function () {
+        if (this.state.allRoundsBundlesComplete === true) {
+            return;
+        }
 
+        return (
+            <div className="footer">
+                <AdSwitch
+                    name="adSwitch"
+                    label={i18n._('switch.ad')}
+                    onChange={this.adSwitchToggle}
+                    checked={this.state.adsRemoved ? "" : "checked"}
+                />
+            </div>
+        );
+    },
+
+    render: function () {
         var headImgName = "head/head_img_" + router.getLanguage();
         if (CONST.CURRENT_PLATFORM == "ios" && router.getLanguage() == "en") {
             headImgName = "head/head_img_ios_en";
@@ -163,12 +175,6 @@ var PageMain = Object.assign({}, {}, {
         var headStyle = {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };
-
-        //console.log({GameStateRemoveAds: appManager.getGameState().getRemoveAds()});
-        //console.log({StateAdsRemoved: this.state.adsRemoved});
-
-        var checked = this.state.adsRemoved ? "" : "checked";
-        //console.log({checked: checked});
 
         var backgroundImage = {};
         //var backgroundImage = {
@@ -188,18 +194,13 @@ var PageMain = Object.assign({}, {}, {
                     <Counters />
 
                     <div className="main">
-                        <Swiper initialSlide={this.state.initialSlide}/>
+                        <Swiper initialSlide={this.state.initialSlide}
+                                allRoundsBundlesComplete={this.state.allRoundsBundlesComplete}
+                        />
                         <Navigation />
                     </div>
 
-                    <div className="footer">
-                        <AdSwitch
-                            name="adSwitch"
-                            label={i18n._('switch.ad')}
-                            onChange={this.adSwitchToggle}
-                            checked={checked}
-                        />
-                    </div>
+                    {this.renderAdSwitch()}
 
                 </div>
 

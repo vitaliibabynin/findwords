@@ -396,7 +396,10 @@ var SwiperClass = Object.assign({}, {}, {
 
     displayName: 'Swiper',
 
-    propTypes: {initialSlide: React.PropTypes.number},
+    propTypes: {
+        initialSlide: React.PropTypes.number,
+        allRoundsBundlesComplete: React.PropTypes.bool
+    },
 
     getInitialState: function () {
         return {
@@ -453,7 +456,33 @@ var SwiperClass = Object.assign({}, {}, {
         return appManager.getSettings().getRoundsBundles();
     },
 
+    renderSlideSoon: function () {
+        if (this.state.slideSoon.isShown !== true) {
+            return;
+        }
+
+        var slideClasses = classNames(
+            'swiper-slide',
+            'slide-soon',
+            {'hover': this.state.isActive}
+        );
+
+        var soonSlideStyle = {
+            backgroundColor: this.state.slideSoon.backgroundColor
+        };
+
+        return (
+            <div className={slideClasses} style={soonSlideStyle} onClick={this.onClickEffect}>
+                <div className="message">
+                    <span>{i18n._('slide.soon')}</span>
+                </div>
+            </div>
+        );
+    },
+
     render: function () {
+        //console.log(this.swiper);
+
         var slides = this.getSlidesData().map(function (slide, slideIndex, allSlides) {
             return (
                 <Slide
@@ -464,48 +493,19 @@ var SwiperClass = Object.assign({}, {}, {
             )
         });
 
-        if (this.state.slideSoon.isShown) {
-            var slideClasses = classNames(
-                'swiper-slide',
-                'slide-soon',
-                {'hover': this.state.isActive}
-            );
+        return (
+            <div ref="swiperConatiner" className="swiper-container">
 
-            var soonSlideStyle = {
-                backgroundColor: this.state.slideSoon.backgroundColor
-            };
+                <div className="swiper-wrapper">
+                    {slides}
 
-            return (
-                <div ref="swiperConatiner" className="swiper-container">
-
-                    <div className="swiper-wrapper">
-                        {slides}
-
-                        <div className={slideClasses} style={soonSlideStyle} onClick={this.onClickEffect}>
-                            <div className="message">
-                                <span>{i18n._('slide.soon')}</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="swiper-pagination"></div>
-
+                    {this.renderSlideSoon()}
                 </div>
-            )
-        } else {
-            return (
-                <div ref="swiperConatiner" className="swiper-container">
 
-                    <div className="swiper-wrapper">
-                        {slides}
-                    </div>
+                <div className="swiper-pagination"></div>
 
-                    <div className="swiper-pagination"></div>
-
-                </div>
-            )
-        }
+            </div>
+        );
     }
 
 });
