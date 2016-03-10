@@ -148,11 +148,13 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
             backgroundColor: this.state.backgoundColor
         };
 
-        //console.log(background);
+        var wallpaper = {
+            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
 
         return (
 
-            <div className="page page-game-victory">
+            <div className="page page-game-victory" style={wallpaper}>
                 <Counters />
 
                 <div ref="pageContent" className="page-content">

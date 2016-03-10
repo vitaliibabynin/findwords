@@ -32,7 +32,7 @@
   .game-complete {
     $height: 2rem;
     height: $height;
-    background-color: blue;
+    background-color: $game-complete-bg-color;
     margin-top: 0.5rem;
     text-align: center;
     overflow: hidden;
@@ -236,32 +236,53 @@
           }
         }
         &.slide-try-this-game {
-          text-align: center;
-          background-size: auto 4.5rem;
-          background-repeat: no-repeat;
-          background-position: center 2.5rem;
+          background-color: $slide-tryThisGame-bg-color;
           overflow: hidden;
+          display: table;
 
-          .game-title {
-            margin-top: 7.5rem;
-          }
+          .centered-block {
+            display: table-cell;
+            vertical-align: middle;
+            height: $slide-height;
+            width: 100%;
+            padding-left: auto;
+            padding-right: auto;
 
-          .play {
-            $height: 1.5rem;
-            margin-top: 0.3rem;
-            display: inline-block;
-            height: $height;
-            width: 60%;
-            background-color: green;
-            border-radius: 0.625rem;
-            box-shadow: inherit;
-
-            span {
+            .game-icon {
+              height: 4.5rem;
+              background-position: center;
+              background-size: contain;
+              background-repeat: no-repeat;
+            }
+            .game-title {
+              margin-top: 0.3rem;
+            }
+            .play {
+              $height: 1.5rem;
+              margin-top: 0.3rem;
               display: inline-block;
-              vertical-align: middle;
-              line-height: $height;
+              height: $height;
+              width: 6rem;
+              background-color: $slide-tryThisGame-play-bg-color;
+              border-radius: 0.625rem;
+              box-shadow: inherit;
+
+              span {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: $height;
+              }
             }
           }
+
+
+          //background-size: auto 4.5rem;
+          //background-repeat: no-repeat;
+          //background-position: center 2.5rem;
+
+
+
+
         }
       }
 

@@ -283,9 +283,13 @@ var PageShop = Object.assign({}, {}, {
             paddingBottom: appAd.getBottomBannerHeight() + 'px'
         };
 
+        var wallpaper = {
+            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
+
         return (
 
-            <div className="page page-shop">
+            <div className="page page-shop" style={wallpaper}>
                 <Counters isDisplayBackButton={true}
                           onBackButtonClick={this.onBackButtonClick}
                           isDisplayPlusButtonCoins={false}

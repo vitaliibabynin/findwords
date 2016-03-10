@@ -65,9 +65,13 @@ var PageLearn = Object.assign({}, {}, {
             paddingBottom: appAd.getBottomBannerHeight() + 'px'
         };
 
+        var wallpaper = {
+            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
+
         return (
 
-            <div className="page page-learn">
+            <div className="page page-learn" style={wallpaper}>
                 <Counters ref="counters"
                           isDisplayBackButton={false}/>
 

@@ -23,7 +23,8 @@ var PageGameAbstract = Object.assign({}, {}, {
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},
-            gameBoardMaxHeight: 0
+            gameBoardMaxHeight: 0,
+            wallpaper: "url(/build/img/wallpaper/fon.png)"
         };
 
         return state;
@@ -254,8 +255,12 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
 
     render: function () {
 
+        var wallpaper = {
+            backgroundImage: this.state.wallpaper
+        };
+
         return (
-            <div className="page page-game">
+            <div className="page page-game" style={wallpaper}>
 
                 {this.renderNotice()}
 
@@ -790,8 +795,12 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
             paddingBottom: appAd.getBottomBannerHeight() + 'px'
         };
 
+        var wallpaper = {
+            backgroundImage: this.state.wallpaper
+        };
+
         return (
-            <div className="page page-game">
+            <div className="page page-game" style={wallpaper}>
 
                 {this.renderNotice()}
 

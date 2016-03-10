@@ -2,7 +2,7 @@
 "use strict";
 
 
-var Dialog = function(params){
+var Dialog = function (params) {
     params = params || {};
 
     this._dialogId = params.dialogId || 'modalDialog';
@@ -14,30 +14,30 @@ var Dialog = function(params){
 
     this._dialog = null;
 
-    this.setTitle = function(title){
+    this.setTitle = function (title) {
         this.title = title;
         this._dialog = null;
 
         return this;
     }
 
-    this.getTitle = function(){
+    this.getTitle = function () {
         return '<div class="md-title icon"> \
-                    <h3>'+this.title+'</h3> \
+                    <h3>' + this.title + '</h3> \
                 </div>';
     }
 
-    this.getContent = function(){
+    this.getContent = function () {
         throw 'Dialog content not implemented'
     }
 
-    this.getOverlay = function(){
+    this.getOverlay = function () {
         return '<div class="md-overlay"></div>';
     }
 
-    this.getDialog = function(){
-        if(null == this._dialog){
-            this._dialog = $('<div class="md-overlay"><div class="md-modal '+this._effect+'" id="'+this._dialogId+'">'
+    this.getDialog = function () {
+        if (null == this._dialog) {
+            this._dialog = $('<div class="md-overlay"><div class="md-modal ' + this._effect + '" id="' + this._dialogId + '">'
                 + this.getTitle()
                 + this.getContent()
                 + '</div></div>');
@@ -46,55 +46,55 @@ var Dialog = function(params){
         return this._dialog;
     }
 
-    this.prepareDialog = function(dialog){
-        $('.md-close', dialog).bind( 'click', function( e ) {
+    this.prepareDialog = function (dialog) {
+        $('.md-close', dialog).bind('click', function (e) {
             this.hide();
             e.stopPropagation();
         }.bind(this));
     }
 
-    this.clear = function(){
+    this.clear = function () {
 
     },
 
-    this.isShowed = function(){
-        return this._isShowed;
-    }
+        this.isShowed = function () {
+            return this._isShowed;
+        }
 
-    this.show = function(){
-        if(this.isShowed()){
+    this.show = function () {
+        if (this.isShowed()) {
             return;
         }
 
         this._isShowed = true;
         var $body = $('body');
-        $body.append( this.getDialog() )
-             //.append( this.getOverlay() )
+        $body.append(this.getDialog())
+            //.append( this.getOverlay() )
         ;
 
         this.clear();
 
-        setTimeout(function(){
+        setTimeout(function () {
             this.getDialog().addClass('md-show');
         }.bind(this), 100);
     }
 
-    this.hide = function(){
-        if(null == this._dialog){
+    this.hide = function () {
+        if (null == this._dialog) {
             return;
         }
 
         this._dialog.removeClass('md-show');
         this._isShowed = false;
-        setTimeout(function(){
+        setTimeout(function () {
             this._dialog.detach();
             //$('.md-overlay').remove();
-        }.bind(this),300);
+        }.bind(this), 300);
     }
 
 }
 
-var InfoDialog = function(){
+var InfoDialog = function () {
 
     var dialog = new Dialog({
         dialogId: 'info-dialog',
@@ -103,23 +103,23 @@ var InfoDialog = function(){
     });
 
     dialog.contentText = '';
-    dialog.setContentText = function(text){
+    dialog.setContentText = function (text) {
         this.contentText = text;
         this._dialog = null;
 
         return this;
     }
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         return '<div class="md-content font-roboto"> \
-                        <p>'+this.contentText+'</p> \
-                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.info.button.cancel')+'</a></div> \
+                        <p>' + this.contentText + '</p> \
+                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.info.button.cancel') + '</a></div> \
                  </div> \
                 ';
     }
 
-    dialog.prepareDialog = function(dialog){
-        $('.cancel', dialog).bind( 'click', function( e ) {
+    dialog.prepareDialog = function (dialog) {
+        $('.cancel', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
@@ -130,7 +130,7 @@ var InfoDialog = function(){
     return dialog;
 }
 
-var ErrorDialog = function(){
+var ErrorDialog = function () {
 
     var dialog = new Dialog({
         dialogId: 'error-dialog',
@@ -139,23 +139,23 @@ var ErrorDialog = function(){
     });
 
     dialog.contentText = '';
-    dialog.setContentText = function(text){
+    dialog.setContentText = function (text) {
         this.contentText = text;
         this._dialog = null;
 
         return this;
     }
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         return '<div class="md-content"> \
-                        <p>'+this.contentText+'</p> \
-                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.info.button.cancel')+'</a></div> \
+                        <p>' + this.contentText + '</p> \
+                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.info.button.cancel') + '</a></div> \
                  </div> \
                 ';
     }
 
-    dialog.prepareDialog = function(dialog){
-        $('.cancel', dialog).bind( 'click', function( e ) {
+    dialog.prepareDialog = function (dialog) {
+        $('.cancel', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
@@ -165,7 +165,6 @@ var ErrorDialog = function(){
 
     return dialog;
 }
-
 
 
 var InviteFriendsDialog = function () {
@@ -175,7 +174,7 @@ var InviteFriendsDialog = function () {
         title: i18n._('app.dialog.invite-friends.title')
     });
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         //var coinsForInvite = appManager.getSettings().getFreeCoins().sendInvite;
         var coinsForAccept = appManager.getSettings().getFreeCoins().friendAdded;
 
@@ -188,15 +187,15 @@ var InviteFriendsDialog = function () {
         //        ';
 
         return '<div class="md-content"> \
-                        <p>'+i18n._('app.dialog.invite-friends.description.accept', coinsForAccept)+'</p> \
-                        <div><a href="#" class="btn invite">'+i18n._('app.dialog.invite-friends.button.invite')+'</a></div> \
-                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.invite-friends.button.cancel')+'</a></div> \
+                        <p>' + i18n._('app.dialog.invite-friends.description.accept', coinsForAccept) + '</p> \
+                        <div><a href="#" class="btn invite">' + i18n._('app.dialog.invite-friends.button.invite') + '</a></div> \
+                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.invite-friends.button.cancel') + '</a></div> \
                  </div> \
                 ';
     }
 
-    dialog.prepareDialog = function(dialog){
-        $('.invite', dialog).bind( 'click', function( e ) {
+    dialog.prepareDialog = function (dialog) {
+        $('.invite', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
@@ -239,7 +238,7 @@ var InviteFriendsDialog = function () {
             appFB.invite();
 
         }.bind(this));
-        $('.cancel', dialog).bind( 'click', function( e ) {
+        $('.cancel', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
@@ -250,7 +249,7 @@ var InviteFriendsDialog = function () {
     return dialog;
 }
 
-var TurnOffAdsDialog = function() {
+var TurnOffAdsDialog = function () {
     var dialog = new Dialog({
         dialogId: 'turnoffads-dialog',
         effect: 'slidebottom',
@@ -259,19 +258,19 @@ var TurnOffAdsDialog = function() {
 
     var productId = appManager.getSettings().getShopValue("removeAds")[CONST.CURRENT_PLATFORM];
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         var removeAdsPrice = appStore.getProductPrice(productId) || "$0";
 
         return '<div class="md-content"> \
-                        <p>'+i18n._('app.dialog.turnoffads.description')+' '+removeAdsPrice+'</p> \
-                        <div><a href="#" class="btn turnoff">'+i18n._('app.dialog.turnoffads.button.turnoff')+'</a></div> \
-                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.turnoffads.button.cancel')+'</a></div> \
+                        <p>' + i18n._('app.dialog.turnoffads.description') + ' ' + removeAdsPrice + '</p> \
+                        <div><a href="#" class="btn turnoff">' + i18n._('app.dialog.turnoffads.button.turnoff') + '</a></div> \
+                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.turnoffads.button.cancel') + '</a></div> \
                  </div> \
                 ';
     }
 
-    dialog.prepareDialog = function(dialog){
-        $('.turnoff', dialog).bind( 'click', function( e ) {
+    dialog.prepareDialog = function (dialog) {
+        $('.turnoff', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             appStore.order(productId);
@@ -279,7 +278,7 @@ var TurnOffAdsDialog = function() {
             this.hide();
             e.stopPropagation();
         }.bind(this));
-        $('.cancel', dialog).bind( 'click', function( e ) {
+        $('.cancel', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
@@ -291,8 +290,7 @@ var TurnOffAdsDialog = function() {
 }
 
 
-
-var NoCoinsDialog = function(){
+var NoCoinsDialog = function () {
 
     var dialog = new Dialog({
         dialogId: 'nocoins-dialog',
@@ -300,50 +298,50 @@ var NoCoinsDialog = function(){
         title: i18n._('app.dialog.nocoins.title')
     });
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         return '<div class="md-content"> \
-                        <p>'+i18n._('app.dialog.nocoins.description')+'</p> \
-                        <div><a href="#" class="btn buy">'+i18n._('app.dialog.nocoins.button.buy')+'</a></div> \
-                        <div><a href="#" class="btn earn">'+i18n._('app.dialog.nocoins.button.earn')+'</a></div> \
-                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.nocoins.button.cancel')+'</a></div> \
+                        <p>' + i18n._('app.dialog.nocoins.description') + '</p> \
+                        <div><a href="#" class="btn buy">' + i18n._('app.dialog.nocoins.button.buy') + '</a></div> \
+                        <div><a href="#" class="btn earn">' + i18n._('app.dialog.nocoins.button.earn') + '</a></div> \
+                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.nocoins.button.cancel') + '</a></div> \
                  </div> \
                 ';
     }
 
-    dialog.prepareDialog = function(dialog){
-        $('.buy', dialog).bind( 'click', function( e ) {
+    dialog.prepareDialog = function (dialog) {
+        $('.buy', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             //setTimeout(function(){
-                var params = router.getParams();
-                params.backaction = router.getAction();
-                params.backcontroller = router.getController();
+            var params = router.getParams();
+            params.backaction = router.getAction();
+            params.backcontroller = router.getController();
 
-                router.navigate("shop", "index", params);
-                //appDialogs.getBuyMoneyDialog().show();
+            router.navigate("shop", "index", params);
+            //appDialogs.getBuyMoneyDialog().show();
             //}, 1000);
 
             this.hide();
             e.stopPropagation();
         }.bind(this));
-        $('.earn', dialog).bind( 'click', function( e ) {
+        $('.earn', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             //setTimeout(function(){
-                var params = router.getParams();
-                params.backaction = router.getAction();
-                params.backcontroller = router.getController();
+            var params = router.getParams();
+            params.backaction = router.getAction();
+            params.backcontroller = router.getController();
 
-                router.navigate("shop", "index", params);
-                //appDialogs.getEarnMoneyDialog()
-                //    .setInvitedFriendsCount(appManager.getGameStatus().inviteFriends.length)
-                //    .show();
+            router.navigate("shop", "index", params);
+            //appDialogs.getEarnMoneyDialog()
+            //    .setInvitedFriendsCount(appManager.getGameStatus().inviteFriends.length)
+            //    .show();
             //}, 1000);
 
             this.hide();
             e.stopPropagation();
         }.bind(this));
-        $('.cancel', dialog).bind( 'click', function( e ) {
+        $('.cancel', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
@@ -355,7 +353,7 @@ var NoCoinsDialog = function(){
 }
 
 
-var RequirePushDialog = function(){
+var RequirePushDialog = function () {
 
     var dialog = new Dialog({
         dialogId: 'requirepush-dialog',
@@ -369,17 +367,17 @@ var RequirePushDialog = function(){
     dialog.settingsNamespace = 'dialogRequirePush';
     dialog.nextShowTime = 0;
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         return '<div class="md-content"> \
-                        <p>'+i18n._('app.dialog.requirepush.description')+'</p> \
-                        <div><a href="#" class="btn ok">'+i18n._('app.dialog.requirepush.button.ok')+'</a></div> \
-                        <div><a href="#" class="btn cancel">'+i18n._('app.dialog.requirepush.button.cancel')+'</a></div> \
+                        <p>' + i18n._('app.dialog.requirepush.description') + '</p> \
+                        <div><a href="#" class="btn ok">' + i18n._('app.dialog.requirepush.button.ok') + '</a></div> \
+                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.requirepush.button.cancel') + '</a></div> \
                  </div> \
                 ';
     }
 
-    dialog.prepareDialog = function(dialog){
-        $('.ok', dialog).bind( 'click', function( e ) {
+    dialog.prepareDialog = function (dialog) {
+        $('.ok', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             appNotificationLocal.registerPermissions();
@@ -387,7 +385,7 @@ var RequirePushDialog = function(){
             this.hide();
             e.stopPropagation();
         }.bind(this));
-        $('.cancel', dialog).bind( 'click', function( e ) {
+        $('.cancel', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
@@ -395,15 +393,15 @@ var RequirePushDialog = function(){
         }.bind(this));
     }
 
-    dialog.loadSettings = function(){
-        return new Promise(function(onSuccess, onError){
-            if(this.isLoadedSettings){
+    dialog.loadSettings = function () {
+        return new Promise(function (onSuccess, onError) {
+            if (this.isLoadedSettings) {
                 onSuccess();
                 return;
             }
 
-            DB.getSettings().get(this.settingsNamespace).then(function(settings){
-                if(!settings){
+            DB.getSettings().get(this.settingsNamespace).then(function (settings) {
+                if (!settings) {
                     onSuccess();
                     return;
                 }
@@ -415,15 +413,15 @@ var RequirePushDialog = function(){
         }.bind(this));
     }
 
-    dialog.saveSettings = function(){
+    dialog.saveSettings = function () {
         DB.getSettings().set(this.settingsNamespace, {
             nextShowTime: this.nextShowTime
         });
     }
 
-    dialog.showIfTime = function(){
-        this.loadSettings().then(function(){
-            if(this.nextShowTime > Date.now()){
+    dialog.showIfTime = function () {
+        this.loadSettings().then(function () {
+            if (this.nextShowTime > Date.now()) {
                 return false;
             }
 
@@ -437,7 +435,7 @@ var RequirePushDialog = function(){
 }
 
 
-var RateDialog = function(){
+var RateDialog = function () {
 
     var dialog = new Dialog({
         dialogId: 'rateus-dialog',
@@ -451,18 +449,18 @@ var RateDialog = function(){
     dialog.currentShowCount = 0;
     dialog.isNeverShow = false;
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         return '<div class="md-content"> \
-                        <p>'+i18n._('app.dialog.rateus.description')+'</p> \
-                        <div><a href="#" class="btn rate-now">'+i18n._('app.dialog.rateus.button.rate')+'</a></div> \
-                        <div><a href="#" class="btn rate-later">'+i18n._('app.dialog.rateus.button.later')+'</a></div> \
-                        <div><a href="#" class="btn rate-never">'+i18n._('app.dialog.rateus.button.never')+'</a></div> \
+                        <p>' + i18n._('app.dialog.rateus.description') + '</p> \
+                        <div><a href="#" class="btn rate-now">' + i18n._('app.dialog.rateus.button.rate') + '</a></div> \
+                        <div><a href="#" class="btn rate-later">' + i18n._('app.dialog.rateus.button.later') + '</a></div> \
+                        <div><a href="#" class="btn rate-never">' + i18n._('app.dialog.rateus.button.never') + '</a></div> \
                  </div> \
                 ';
     }
 
-    dialog.prepareDialog = function(dialog){
-        $('.rate-now', dialog).bind( 'click', function( e ) {
+    dialog.prepareDialog = function (dialog) {
+        $('.rate-now', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             Utils.openAppInMarket();
@@ -472,13 +470,13 @@ var RateDialog = function(){
             this.hide();
             e.stopPropagation();
         }.bind(this));
-        $('.rate-later', dialog).bind( 'click', function( e ) {
+        $('.rate-later', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.hide();
             e.stopPropagation();
         }.bind(this));
-        $('.rate-never', dialog).bind( 'click', function( e ) {
+        $('.rate-never', dialog).bind('click', function (e) {
             appManager.getSFXManager().playButton();
 
             this.saveNeverShow();
@@ -488,15 +486,15 @@ var RateDialog = function(){
         }.bind(this));
     }
 
-    dialog.loadSettings = function(){
-        return new Promise(function(onSuccess, onError){
-            if(this.isLoadedSettings){
+    dialog.loadSettings = function () {
+        return new Promise(function (onSuccess, onError) {
+            if (this.isLoadedSettings) {
                 onSuccess();
                 return;
             }
 
-            DB.getSettings().get(this.settingsNamespace).then(function(settings){
-                if(!settings){
+            DB.getSettings().get(this.settingsNamespace).then(function (settings) {
+                if (!settings) {
                     onSuccess();
                     return;
                 }
@@ -509,25 +507,25 @@ var RateDialog = function(){
         }.bind(this));
     }
 
-    dialog.saveSettings = function(){
+    dialog.saveSettings = function () {
         DB.getSettings().set(this.settingsNamespace, {
             currentShowCount: this.currentShowCount,
             isNeverShow: this.isNeverShow
         });
     }
 
-    dialog.saveNeverShow = function(){
+    dialog.saveNeverShow = function () {
         this.isNeverShow = true;
         this.saveSettings();
     }
 
-    dialog.showIfTime = function(){
-        this.loadSettings().then(function(){
-            if(this.isNeverShow){
+    dialog.showIfTime = function () {
+        this.loadSettings().then(function () {
+            if (this.isNeverShow) {
                 return false;
             }
 
-            if(this.currentShowCount < this.maxShowCount){
+            if (this.currentShowCount < this.maxShowCount) {
                 this.currentShowCount++;
                 this.saveSettings();
                 return false;
@@ -543,18 +541,18 @@ var RateDialog = function(){
 }
 
 
-var LoadingDialog = function(){
+var LoadingDialog = function () {
 
     var dialog = new Dialog({
         dialogId: 'loading-dialog',
         effect: 'slidebottom'
     });
 
-    dialog.getTitle = function(){
+    dialog.getTitle = function () {
         return '';
     }
 
-    dialog.getContent = function(){
+    dialog.getContent = function () {
         return '<div class="md-content"> \
                     <div id="loader-wrapper"> \
                         <div id="loader"></div> \
@@ -565,7 +563,6 @@ var LoadingDialog = function(){
 
     return dialog;
 }
-
 
 
 /**************
@@ -712,7 +709,6 @@ var LoadingDialog = function(){
 //}
 
 
-
 //var RateDialog = function(){
 //
 //    var dialog = new Dialog({
@@ -807,7 +803,6 @@ var LoadingDialog = function(){
 //
 //    return dialog;
 //}
-
 
 
 //
@@ -910,7 +905,6 @@ var LoadingDialog = function(){
 //}
 
 
-
 //var AuthErrorDialog = function(){
 //
 //    var dialog = new Dialog({
@@ -970,8 +964,6 @@ var LoadingDialog = function(){
 //}
 
 
-
-
 var Dialogs = {
     _dialogs: {},
 
@@ -983,7 +975,7 @@ var Dialogs = {
     //    return this._dialogs[dialogId];
     //},
 
-    _getDialog: function(dialogId, dialogType){
+    _getDialog: function (dialogId, dialogType) {
 //        if(!this._dialogs.hasOwnProperty(dialogId) && null == this._dialogs[dialogId]){
 //            this._dialogs[dialogId] = new dialogType();
 //        }
@@ -994,11 +986,11 @@ var Dialogs = {
     /**
      * Инфо окно с текстом
      */
-    getInfoDialog: function(){
+    getInfoDialog: function () {
         return this._getDialog("InfoDialog", InfoDialog);
     },
 
-    getErrorDialog: function(){
+    getErrorDialog: function () {
         return this._getDialog("ErrorDialog", ErrorDialog);
     },
 
@@ -1006,7 +998,7 @@ var Dialogs = {
     /**
      *  Пригласить друзей
      */
-    getInviteFriendsDialog: function(){
+    getInviteFriendsDialog: function () {
         return this._getDialog("InviteFriendsDialog", InviteFriendsDialog);
     },
 
@@ -1014,52 +1006,50 @@ var Dialogs = {
     /**
      *  Выключить рекламу
      */
-    getTurnOffAdsDialog: function(){
+    getTurnOffAdsDialog: function () {
         return this._getDialog("TurnOffAdsDialog", TurnOffAdsDialog);
     },
-
-
 
 
     /**
      * Нет монет
      */
-    getNoMoneyDialog: function(){
+    getNoMoneyDialog: function () {
         return this._getDialog("NoCoinsDialog", NoCoinsDialog);
     },
 
     /**
      * Заработать монеты
      */
-    getEarnMoneyDialog: function(){
+    getEarnMoneyDialog: function () {
         return this._getDialog("EarnCoinsDialog", EarnCoinsDialog);
     },
 
     /**
      * Купить монеты
      */
-    getBuyMoneyDialog: function(){
+    getBuyMoneyDialog: function () {
         return this._getDialog("BuyCoinsDialog", BuyCoinsDialog);
     },
 
     /**
      * Запрашиваем разрешение на уведомления
      */
-    getRequirePushDialog: function(){
+    getRequirePushDialog: function () {
         return this._getDialog("RequirePushDialog", RequirePushDialog);
     },
 
     /**
      * Оцените нас
      */
-    getRateDialog: function(){
+    getRateDialog: function () {
         return this._getDialog("rateDialog", RateDialog);
     },
 
     /**
      * Требуется авторизация
      */
-    getAuthRequestDialog: function(){
+    getAuthRequestDialog: function () {
         return this._getDialog("authRequerstDialog", AuthRequestDialog);
     },
 
@@ -1067,38 +1057,24 @@ var Dialogs = {
     /**
      * Диалог лоадинга
      */
-    getLoadingDialog: function(){
+    getLoadingDialog: function () {
         return this._getDialog("loadingDialog", LoadingDialog);
     },
-
-
-
-
-
-
 
 
     /**
      * Произошла ошибка во время авторизации
      */
-    getAuthErrorDialog: function(){
+    getAuthErrorDialog: function () {
         return this._getDialog("authErrorDialog", AuthErrorDialog);
     },
 
-    getAuthSessionExpiredDialog: function(){
+    getAuthSessionExpiredDialog: function () {
         return this._getDialog("authSessionExpiredDialog", AuthSessionExpiredDialog);
     },
 
 
-
-
-
-
-
-
-
-
-    getPushRequestDialog: function(){
+    getPushRequestDialog: function () {
         return this._getDialog("pushRequestDialog", PushRequestDialog);
     }
 

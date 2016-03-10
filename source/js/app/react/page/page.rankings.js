@@ -441,8 +441,12 @@ var PageRankings = Object.assign({}, {}, {
             paddingBottom: appAd.getBottomBannerHeight() + 'px'
         };
 
+        var wallpaper = {
+            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
+
         return (
-            <div className="page page-rankings">
+            <div className="page page-rankings" style={wallpaper}>
                 <Counters isDisplayBackButton={true}/>
 
                 <div className="page-content" style={pageContentHeight}>

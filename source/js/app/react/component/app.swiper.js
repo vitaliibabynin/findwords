@@ -467,17 +467,18 @@ var SwiperClass = Object.assign({}, {}, {
             {'hover': this.state.isActive}
         );
 
-        var slideStyle = {
-            backgroundColor: "blue",
+        var gameIcon = {
             backgroundImage: "url(/build/img/wallpaper/fon.png)"
         };
 
         return (
-            <div className={slideClasses} style={slideStyle} onClick={this.onClickEffect}>
-                <div className="game-title">Game Title</div>
-
-                <div className="play">
-                    <span>{i18n._('slide.tryThisGame.play')}</span>
+            <div className={slideClasses} onClick={this.onClickEffect}>
+                <div className="centered-block">
+                    <div className="game-icon" style={gameIcon}></div>
+                    <div className="game-title">Game Title</div>
+                    <div className="play">
+                        <span>{i18n._('slide.tryThisGame.play')}</span>
+                    </div>
                 </div>
             </div>
         );

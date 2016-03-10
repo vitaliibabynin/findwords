@@ -71,7 +71,7 @@ var PageMain = Object.assign({}, {}, {
     },
 
     checkIfAllRoundsBundlesComplete() {
-        return true;
+        //return true;
 
         var roundsBundlesGameState = appManager.getGameState().getRoundsBundles();
         var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();
@@ -188,14 +188,13 @@ var PageMain = Object.assign({}, {}, {
             backgroundImage: "url(" + this.getImagePath(headImgName) + ")"
         };
 
-        var backgroundImage = {};
-        //var backgroundImage = {
-        //  backgroundImage: "url(/build/img/wallpaper/fon.png)"
-        //};
+        var wallpaper = {
+          backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
 
         return (
 
-            <div className="page page-main" style={backgroundImage}>
+            <div className="page page-main" style={wallpaper}>
 
                 <div className="page-content">
 

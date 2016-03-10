@@ -240,9 +240,13 @@ var PageBonus = Object.assign({}, {}, {
 
     render: function () {
 
+        var wallpaper = {
+            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
+
         return (
 
-            <div className="page page-bonus">
+            <div className="page page-bonus" style={wallpaper}>
                 <Counters />
 
                 <div className="page-content">

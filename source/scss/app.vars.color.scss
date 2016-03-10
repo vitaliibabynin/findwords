@@ -22,7 +22,10 @@ $scoreCounterNumbers-color: $countersNumbers-color;
 $coinsCounterPanel-bg-color: $countersPanel-bg-color;
 $coinsCounterNumbers-color: $countersNumbers-color;
 
-//mainPage-Menu
+//gameCompleteMessage
+$game-complete-bg-color: $color-8;
+
+//mainPage-Swiper
 $slide-onClick-bg-color: $color-12;
 $slide-text-color: $color-2;
 $slide-wordsComplete-panel-bg-color: $color-11;
@@ -30,9 +33,13 @@ $slide-wordsComplete-progress-bg-color: $color-2;
 $slide-instructions-buy-color: $color-2;
 $slide-instructions-buy-bg-color: $color-3;
 $slide-soon-border-color: $color-2;
+$slide-tryThisGame-bg-color: $color-8;
+$slide-tryThisGame-play-bg-color: $color-1;
 $swiper-pagination-bullet: $color-2;
 $swiper-pagination-bullet-active: #e87e04;
 $hover-box-shadow: inset 999rem 0 $color-12;
+
+//mainPage-Navigation
 $navigation-btn-color: $color-2;
 $navigation-btn-bg-color: $color-3;
 $navigation-btn-rating-bg-color: $color-10;
