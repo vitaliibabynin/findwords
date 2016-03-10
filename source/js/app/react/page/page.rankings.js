@@ -442,8 +442,11 @@ var PageRankings = Object.assign({}, {}, {
         };
 
         var wallpaper = {
-            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+            backgroundImage: ""
         };
+        //var wallpaper = {
+        //    backgroundImage: "url('" + Utils.getImgPath('wallpaper/fon.png') + "')"
+        //};
 
         return (
             <div className="page page-rankings" style={wallpaper}>

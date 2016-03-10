@@ -24,7 +24,7 @@ var PageGameAbstract = Object.assign({}, {}, {
             noticeContainerHeight: "",
             noticeWord: {letters: []},
             gameBoardMaxHeight: 0,
-            wallpaper: "url(/build/img/wallpaper/fon.png)"
+            wallpaper: "url('" + Utils.getImgPath('wallpaper/fon.png') + "')"
         };
 
         return state;
@@ -256,8 +256,11 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
     render: function () {
 
         var wallpaper = {
-            backgroundImage: this.state.wallpaper
+            backgroundImage: ""
         };
+        //var wallpaper = {
+        //    backgroundImage: this.state.wallpaper
+        //};
 
         return (
             <div className="page page-game" style={wallpaper}>
@@ -796,8 +799,11 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         };
 
         var wallpaper = {
-            backgroundImage: this.state.wallpaper
+            backgroundImage: ""
         };
+        //var wallpaper = {
+        //    backgroundImage: this.state.wallpaper
+        //};
 
         return (
             <div className="page page-game" style={wallpaper}>
