@@ -256,11 +256,8 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
     render: function () {
 
         var wallpaper = {
-            backgroundImage: ""
+            backgroundImage: this.state.wallpaper
         };
-        //var wallpaper = {
-        //    backgroundImage: this.state.wallpaper
-        //};
 
         return (
             <div className="page page-game" style={wallpaper}>
@@ -799,11 +796,8 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         };
 
         var wallpaper = {
-            backgroundImage: ""
+            backgroundImage: this.state.wallpaper
         };
-        //var wallpaper = {
-        //    backgroundImage: this.state.wallpaper
-        //};
 
         return (
             <div className="page page-game" style={wallpaper}>

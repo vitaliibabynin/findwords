@@ -149,11 +149,8 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
         };
 
         var wallpaper = {
-            backgroundImage: ""
+            backgroundImage: "url('" + Utils.getImgPath('wallpaper/fon.png') + "')"
         };
-        //var wallpaper = {
-        //    backgroundImage: "url('" + Utils.getImgPath('wallpaper/fon.png') + "')"
-        //};
 
         return (
 
