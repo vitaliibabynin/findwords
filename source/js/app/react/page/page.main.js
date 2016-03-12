@@ -70,7 +70,7 @@ var PageMain = Object.assign({}, {}, {
         appAd.showBottomBanner();
     },
 
-    checkIfAllRoundsBundlesComplete() {
+    checkIfAllRoundsBundlesComplete: function () {
         //return true;
 
         var roundsBundlesGameState = appManager.getGameState().getRoundsBundles();
