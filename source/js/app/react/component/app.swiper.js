@@ -20,8 +20,33 @@ var LAYOUT_COMPLETE_MESSAGE = 'message';
 var PRODUCT = require('./../../model/app.store').PRODUCT;
 
 
-var SlideClass = Object.assign({}, {}, {
+var slideClassAbstract = Object.assign({}, {}, {
 
+    onClickEffect: function (e) {
+        e.preventDefault();
+
+        if (!this.state.isActive) {
+            appManager.getSFXManager().playButton();
+
+            this.setState({isActive: true}, function () {
+                setTimeout(function () {
+                    if (this.isMounted()) {
+                        this.setState({isActive: false});
+                    }
+                }.bind(this), 300);
+            });
+        }
+
+        if (this.props.onClick && typeof this.props.onClick == 'function') {
+            this.props.onClick(this.props);
+        }
+    }
+
+});
+
+var SlideClassRoundsBundle = Object.assign({}, slideClassAbstract, {
+
+    displayName: "roundsBundle",
     mixins: [GameMixin],
 
     propTypes: {
@@ -103,26 +128,6 @@ var SlideClass = Object.assign({}, {}, {
         }
 
         return appManager.getGameState().getRoundsBundles(idx) || {};
-    },
-
-    onClickEffect: function (e) {
-        e.preventDefault();
-
-        if (!this.state.isActive) {
-            appManager.getSFXManager().playButton();
-
-            this.setState({isActive: true}, function () {
-                setTimeout(function () {
-                    if (this.isMounted()) {
-                        this.setState({isActive: false});
-                    }
-                }.bind(this), 300);
-            });
-        }
-
-        if (this.props.onClick && typeof this.props.onClick == 'function') {
-            this.props.onClick(this.props);
-        }
     },
 
     onClickGame: function () {
@@ -389,10 +394,109 @@ var SlideClass = Object.assign({}, {}, {
     }
 
 });
-var Slide = React.createClass(SlideClass);
+var SlideRoundsBundle = React.createClass(SlideClassRoundsBundle);
 
+var SlideClassSoon = Object.assign({}, slideClassAbstract, {
 
-var SwiperClass = Object.assign({}, {}, {
+    displayName: "slideSoon",
+
+    propTypes: {
+        slideSoon: React.PropTypes.shape({
+            isShown: React.PropTypes.bool,
+            backgroundColor: React.PropTypes.string
+        })
+    },
+
+    getInitialState: function () {
+        var state = {};
+        state.isActive = false;
+        state.slideSoon = this.props.slideSoon || {
+                isShown: false,
+                backgroundColor: ""
+            };
+
+        return state;
+    },
+
+    render: function () {
+        if (this.state.slideSoon.isShown !== true) {
+            return;
+        }
+
+        var slideClasses = classNames(
+            'swiper-slide',
+            'slide-soon',
+            {'hover': this.state.isActive}
+        );
+
+        var soonSlideStyle = {
+            backgroundColor: this.state.slideSoon.backgroundColor
+        };
+
+        return (
+            <div className={slideClasses} style={soonSlideStyle} onClick={this.onClickEffect}>
+                <div className="message">
+                    <span>{i18n._('slide.soon')}</span>
+                </div>
+            </div>
+        );
+    }
+
+});
+var SlideSoon = React.createClass(SlideClassSoon);
+
+var SlideClassTryThisGame = Object.assign({}, slideClassAbstract, {
+
+    displayName: "slideTryThisGame",
+
+    propTypes: {
+        allRoundsBundlesComplete: React.PropTypes.bool
+    },
+
+    getInitialState: function () {
+        var state = {};
+        state.isActive = false;
+
+        return state;
+    },
+
+    render: function () {
+        if (this.props.allRoundsBundlesComplete !== true) {
+            return;
+        }
+
+        var slideClasses = classNames(
+            'swiper-slide',
+            'slide-try-this-game',
+            {'hover': this.state.isActive}
+        );
+
+        var playClasses = classNames(
+            "play",
+            {'hover': this.state.isActive}
+        );
+
+        var gameIcon = {
+            backgroundImage: "url(/build/img/wallpaper/fon.png)"
+        };
+
+        return (
+            <div className={slideClasses} onClick={this.onClickEffect}>
+                <div className="centered-block">
+                    <div className="game-icon" style={gameIcon}></div>
+                    <div className="game-title">Game Title</div>
+                    <div className={playClasses}>
+                        <span>{i18n._('slide.tryThisGame.play')}</span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+});
+var SlideTryThisGame = React.createClass(SlideClassTryThisGame);
+
+var SwiperClass = Object.assign({}, slideClassAbstract, {
 
     displayName: 'Swiper',
 
@@ -403,8 +507,6 @@ var SwiperClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         return {
-            slideTryThisGameIsActive: false,
-            slideSoonIsActive: false,
             slideSoon: appManager.getSettings().getSlideSoon() || {
                 isShown: false,
                 backgroundColor: ""
@@ -427,96 +529,8 @@ var SwiperClass = Object.assign({}, {}, {
         }
     },
 
-    onClickEffect: function (e, slide) {
-        e.preventDefault();
-
-        console.log(slide);
-
-        if (!this.state[slide]) {
-            appManager.getSFXManager().playButton();
-
-            this.setState({[slide]: true}, function () {
-                setTimeout(function () {
-                    if (this.isMounted()) {
-                        this.setState({[slide]: false});
-                    }
-                }.bind(this), 300);
-            });
-        }
-
-        if (this.props.onClick && typeof this.props.onClick == 'function') {
-            this.props.onClick(this.props);
-        }
-    },
-
-
-    onClickSlideTryThisGame: function () {
-        this.onClickEffect(e, "slideTryThisGameIsActive");
-    },
-
-    onClickSlideSoon: function (e) {
-        this.onClickEffect(e, "slideSoonIsActive");
-    },
-
     getSlidesData: function () {
         return appManager.getSettings().getRoundsBundles();
-    },
-
-    renderSlideTryThisGame: function () {
-        if (this.props.allRoundsBundlesComplete !== true) {
-            return;
-        }
-
-        var slideClasses = classNames(
-            'swiper-slide',
-            'slide-try-this-game',
-            {'hover': this.state.slideTryThisGameIsActive}
-        );
-
-        var playClasses = classNames(
-            "play",
-            {'hover': this.state.slideTryThisGameIsActive}
-        );
-
-        var gameIcon = {
-            backgroundImage: "url(/build/img/wallpaper/fon.png)"
-        };
-
-        return (
-            <div className={slideClasses} onClick={this.onClickSlideTryThisGame}>
-                <div className="centered-block">
-                    <div className="game-icon" style={gameIcon}></div>
-                    <div className="game-title">Game Title</div>
-                    <div className={playClasses}>
-                        <span>{i18n._('slide.tryThisGame.play')}</span>
-                    </div>
-                </div>
-            </div>
-        );
-    },
-
-    renderSlideSoon: function () {
-        if (this.state.slideSoon.isShown !== true) {
-            return;
-        }
-
-        var slideClasses = classNames(
-            'swiper-slide',
-            'slide-soon',
-            {'hover': this.state.isActive}
-        );
-
-        var soonSlideStyle = {
-            backgroundColor: this.state.slideSoon.backgroundColor
-        };
-
-        return (
-            <div className={slideClasses} style={soonSlideStyle} onClick={this.onClickSlideSoon}>
-                <div className="message">
-                    <span>{i18n._('slide.soon')}</span>
-                </div>
-            </div>
-        );
     },
 
     render: function () {
@@ -524,7 +538,7 @@ var SwiperClass = Object.assign({}, {}, {
 
         var slides = this.getSlidesData().map(function (slide, slideIndex, allSlides) {
             return (
-                <Slide
+                <SlideRoundsBundle
                     key={'slide_' + slideIndex}
                     slideData={slide}
                     slideIndex={slideIndex}
@@ -536,11 +550,13 @@ var SwiperClass = Object.assign({}, {}, {
             <div ref="swiperConatiner" className="swiper-container">
 
                 <div className="swiper-wrapper">
-                    {this.renderSlideTryThisGame()}
+
+                    <SlideTryThisGame allRoundsBundlesComplete={this.props.allRoundsBundlesComplete}/>
 
                     {slides}
 
-                    {this.renderSlideSoon()}
+                    <SlideSoon slideSoon={this.state.slideSoon}/>
+
                 </div>
 
                 <div className="swiper-pagination"></div>

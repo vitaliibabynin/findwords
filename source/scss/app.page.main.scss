@@ -69,7 +69,6 @@
         color: $slide-text-color;
         cursor: pointer;
 
-        &:hover,
         &.hover {
           box-shadow: $hover-box-shadow;
         }
@@ -267,6 +266,9 @@
               border-radius: 0.625rem;
               box-shadow: inherit;
 
+              &.hover {
+                box-shadow: $hover-box-shadow;
+              }
               span {
                 display: inline-block;
                 vertical-align: middle;
@@ -274,15 +276,6 @@
               }
             }
           }
-
-
-          //background-size: auto 4.5rem;
-          //background-repeat: no-repeat;
-          //background-position: center 2.5rem;
-
-
-
-
         }
       }
 
