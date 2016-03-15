@@ -815,21 +815,21 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
                                 value={this.state.chipsOpenWord}
                                 icon="open_word">
 
-                        <span>{i18n._('chip.open-word')}</span>
+                        <span>{i18n._('chip.openword')}</span>
                     </ChipButton>
                     <ChipButton className="open-letter"
                                 onClick={this.onChipOpenLetterClick}
                                 value={this.state.chipsOpenLetter}
                                 icon="open_letter">
 
-                        <span>{i18n._('chip.open-letter')}</span>
+                        <span>{i18n._('chip.openletter')}</span>
                     </ChipButton>
                     <ChipButton className="show-word"
                                 onClick={this.onChipShowWordClick}
                                 value={this.state.chipsShowWord}
                                 icon="show_word">
 
-                        <span>{i18n._('chip.show-word')}</span>
+                        <span>{i18n._('chip.showword')}</span>
                     </ChipButton>
                 </div>
 

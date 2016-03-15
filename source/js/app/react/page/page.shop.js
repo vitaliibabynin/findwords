@@ -299,11 +299,11 @@ var PageShop = Object.assign({}, {}, {
 
                     <div ref="container" className={classNames("container", this.state.containerExtraClass)}>
 
-                        <div className="heading free-coins">{i18n._('shop.free-coins')}</div>
+                        <div className="heading free-coins">{i18n._('shop.freecoins')}</div>
 
                         <div className="outer-block">
                             <FreeCoins onClick={this.onClickWatchVideo} className="inner-block watch-video">
-                                <div className="text">{i18n._('shop.watch-video')}</div>
+                                <div className="text">{i18n._('shop.watchvideo')}</div>
                                 <div className="add-free-coins" style={this.state.dollar}>
                                     +{this.state.freeCoins.watchVideo}</div>
                             </FreeCoins>
@@ -311,7 +311,7 @@ var PageShop = Object.assign({}, {}, {
 
                         <div className="outer-block">
                             <FreeCoins onClick={this.onClickInviteFriends} className="inner-block share">
-                                <div className="text">{i18n._('shop.invite-friends')}</div>
+                                <div className="text">{i18n._('shop.invitefriends')}</div>
                                 <div className="add-free-coins" style={this.state.dollar}>
                                     +{this.state.freeCoins.friendAdded}</div>
                             </FreeCoins>
@@ -319,7 +319,7 @@ var PageShop = Object.assign({}, {}, {
 
                         {this.showShareButton()}
 
-                        <div className="heading buy-coins">{i18n._('shop.buy-coins')}</div>
+                        <div className="heading buy-coins">{i18n._('shop.buycoins')}</div>
 
                         {this.generateBlocks()}
 

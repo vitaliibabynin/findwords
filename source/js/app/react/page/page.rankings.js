@@ -127,7 +127,7 @@ var PlayerStatsClass = Object.assign({}, {}, {
                     </div>
 
                     <div className="levels-complete">
-                        {i18n._('rankings.levels-complete')}: {this.props.player.levelscompleted}/{this.props.roundsTotal}
+                        {i18n._('rankings.levelscomplete')}: {this.props.player.levelscompleted}/{this.props.roundsTotal}
                     </div>
 
                 </div>
@@ -401,12 +401,12 @@ var PageRankings = Object.assign({}, {}, {
                     {this.playersRankings()}
                 </div>
 
-                <div className="invite-friends-text">{i18n._('rankings.invite-friends.get-coins')}</div>
+                <div className="invite-friends-text">{i18n._('rankings.invitefriends.getcoins')}</div>
 
                 <SimpleButton className="invite-friends-fb-button"
                               onClick={this.onClickInviteFriends}
                               displayName="InviteFriendsButton" >
-                    <div style={facebookImg}>{i18n._('rankings.invite-friends')}</div>
+                    <div style={facebookImg}>{i18n._('rankings.invitefriends')}</div>
                 </SimpleButton>
 
             </div>

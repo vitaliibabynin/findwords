@@ -40,8 +40,8 @@ window.CONST = {
             'slide.complete': 'Пройден',
             'slide.complete.message': 'Этот уровень уже был пройден',
             'slide.soon': 'СКОРО',
-            'slide.tryThisGame.play': 'Играть',
-            'gameComplete': 'Игра пройдена, ждите обновление!',
+            'slide.trythisgame.play': 'Играть',
+            'gamecomplete': 'Игра пройдена, ждите обновление!',
 
             'button.settings': 'Настройки',
             'button.rating': 'Рейтинг',
@@ -53,19 +53,19 @@ window.CONST = {
             'button.sound': 'Звук',
 
             //GAME PAGE
-            'chip.open-word': 'Открыть слово',
-            'chip.open-letter': 'Открыть букву',
-            'chip.show-word': 'Показать слово',
+            'chip.openword': 'Открыть слово',
+            'chip.openletter': 'Открыть букву',
+            'chip.showword': 'Показать слово',
 
-            'notice.selectDifferently.before': 'Попробуйте собрать слово',
-            'notice.selectDifferently.after': 'по-другому',
-            'notice.noSuchWord.before': 'Слово',
-            'notice.noSuchWord.after': 'мы не загадывали',
-            'notice.noWordsToShow': 'Больше нет слов, чтобы показать',
+            'notice.selectdifferently.before': 'Попробуйте собрать слово',
+            'notice.selectdifferently.after': 'по-другому',
+            'notice.nosuchword.before': 'Слово',
+            'notice.nosuchword.after': 'мы не загадывали',
+            'notice.nowordstoshow': 'Больше нет слов, чтобы показать',
 
             //GAME PAGE VICTORY
             'victory.excellent': 'Отлично!',
-            'victory.yourReward': 'Ваша награда:',
+            'victory.yourreward': 'Ваша награда:',
             'victory.continue': 'Продолжить',
 
             //BONUS PAGE
@@ -95,24 +95,24 @@ window.CONST = {
             'bonus.collect': 'Получить',
 
             //SHOP PAGE
-            'shop.free-coins': 'Монеты бесплатно',
-            'shop.watch-video': 'Посмотреть видео',
-            'shop.invite-friends': 'Пригласить друзей',
+            'shop.freecoins': 'Монеты бесплатно',
+            'shop.watchvideo': 'Посмотреть видео',
+            'shop.invitefriends': 'Пригласить друзей',
             'shop.share': 'Рассказать про игру',
-            'shop.buy-coins': 'Покупка монет',
+            'shop.buycoins': 'Покупка монет',
             'shop.button.restore': 'Восстановить покупки',
 
             //RANKINGS PAGE
             'rankings.heading': 'Рейтинг друзей',
-            'rankings.levels-complete': 'Пройдено уровней',
-            'rankings.invite-friends.get-coins': 'Приглашай друзей и получай монеты!',
-            'rankings.invite-friends': 'Пригласить друзей',
+            'rankings.levelscomplete': 'Пройдено уровней',
+            'rankings.invitefriends.getcoins': 'Приглашай друзей и получай монеты!',
+            'rankings.invitefriends': 'Пригласить друзей',
             'rankings.login.description': 'Войдите, пожалуйста, в ваш аккаунт Facebook для того, чтобы узнать рейтинг друзей и поделиться своими достижениями.',
             'rankings.login.button': 'Войти в Facebook',
 
             //LEARN PAGE
-            'app.page.learn.aim-of-the-game': 'Для того, чтобы пройти уровень, нужно отгадать все загаданные слова на поле.',
-            'app.page.learn.how-to-play': 'Для отгадывания слов нужно провести пальцем от первой буквы слова к последней в правильном порядке.',
+            'app.page.learn.aimofthegame': 'Для того, чтобы пройти уровень, нужно отгадать все загаданные слова на поле.',
+            'app.page.learn.howtoplay': 'Для отгадывания слов нужно провести пальцем от первой буквы слова к последней в правильном порядке.',
             'app.page.learn.start': 'Начать',
 
             //RATE DIALOG
@@ -165,20 +165,20 @@ window.CONST = {
             'app.dialog.info.rewardedvideo.notfound.description': 'На данный момент нет видео для просмотра. Пожалуйста, попробуйте немного позже.',
 
             //FACEBOOK INVITE DIALOG
-            'app.dialog.invite-friends.title': 'Пригласить друзей в Facebook',
-            //'app.dialog.invite-friends.description.invite': 'За каждого приглашенного друга вы получите #{count} моне((та|ты|т)).',
-            'app.dialog.invite-friends.description.accept': 'Вы получите #{count} моне((та|ты|т)) за каждого друга, который примет ваше приглашение и присоединится к игре ',
-            'app.dialog.invite-friends.button.invite': 'Пригласить друзей',
-            'app.dialog.invite-friends.button.cancel': 'Отмена',
+            'app.dialog.invitefriends.title': 'Пригласить друзей в Facebook',
+            //'app.dialog.invitefriends.description.invite': 'За каждого приглашенного друга вы получите #{count} моне((та|ты|т)).',
+            'app.dialog.invitefriends.description.accept': 'Вы получите #{count} моне((та|ты|т)) за каждого друга, который примет ваше приглашение и присоединится к игре ',
+            'app.dialog.invitefriends.button.invite': 'Пригласить друзей',
+            'app.dialog.invitefriends.button.cancel': 'Отмена',
 
             //FACEBOOK INVITE WINDOW
             'app.invite.title': 'Выберите друзей',
             //'app.invite.message': 'Привет, я играю в интересную игру "Филворды: найди слово"! Присоединяйся, будем играть вместе!',
 
             //FACEBOOK FRIENDS JOINED DIALOG
-            'app.dialog.info.friends-joined.title': 'Монеты добавлены',
-            'app.dialog.info.friends-joined.description.friends': '#{count} дру((г|га|зей)) приня((л|ли|ли)) ваше приглашение.',
-            'app.dialog.info.friends-joined.description.coins': '#{count} моне((та|ты|т)) добавлено.',
+            'app.dialog.info.friendsjoined.title': 'Монеты добавлены',
+            'app.dialog.info.friendsjoined.description.friends': '#{count} дру((г|га|зей)) приня((л|ли|ли)) ваше приглашение.',
+            'app.dialog.info.friendsjoined.description.coins': '#{count} моне((та|ты|т)) добавлено.',
 
             //FACEBOOK SHARE
             'share.caption': 'Филворды',
@@ -210,8 +210,8 @@ window.CONST = {
             'slide.complete': 'Complete',
             'slide.complete.message': 'This level has already been completed',
             'slide.soon': 'SOON',
-            'slide.tryThisGame.play': 'Play',
-            'gameComplete': 'Game complete, wait for more content!',
+            'slide.trythisgame.play': 'Play',
+            'gamecomplete': 'Game complete, wait for more content!',
 
             'button.settings': 'Settings',
             'button.rating': 'Rankings',
@@ -223,19 +223,19 @@ window.CONST = {
             'button.sound': 'Sound',
 
             //GAME PAGE
-            'chip.open-word': 'Open word',
-            'chip.open-letter': 'Open letter',
-            'chip.show-word': 'Show word',
+            'chip.openword': 'Open word',
+            'chip.openletter': 'Open letter',
+            'chip.showword': 'Show word',
 
-            'notice.selectDifferently.before': 'Try compiling the word',
-            'notice.selectDifferently.after': 'another way',
-            'notice.noSuchWord.before': 'The word',
-            'notice.noSuchWord.after': 'is not in the riddle',
-            'notice.noWordsToShow': 'No more words to show',
+            'notice.selectdifferently.before': 'Try compiling the word',
+            'notice.selectdifferently.after': 'another way',
+            'notice.nosuchword.before': 'The word',
+            'notice.nosuchword.after': 'is not in the riddle',
+            'notice.nowordstoshow': 'No more words to show',
 
             //GAME PAGE VICTORY
             'victory.excellent': 'Excellent!',
-            'victory.yourReward': 'Your reward:',
+            'victory.yourreward': 'Your reward:',
             'victory.continue': 'Continue',
 
             //BONUS PAGE
@@ -265,24 +265,24 @@ window.CONST = {
             'bonus.collect': 'Collect',
 
             //SHOP PAGE
-            'shop.free-coins': 'Free Coins',
-            'shop.watch-video': 'Watch a video',
-            'shop.invite-friends': 'Invite friends',
+            'shop.freecoins': 'Free Coins',
+            'shop.watchvideo': 'Watch a video',
+            'shop.invitefriends': 'Invite friends',
             'shop.share': 'Share with friends',
-            'shop.buy-coins': 'Buy coins',
+            'shop.buycoins': 'Buy coins',
             'shop.button.restore': 'Restore purchases',
 
             //RANKINGS PAGE
             'rankings.heading': 'Friends rankings',
-            'rankings.levels-complete': 'Levels complete',
-            'rankings.invite-friends.get-coins': 'Invite friends and get coins!',
-            'rankings.invite-friends': 'Invite friends',
+            'rankings.levelscomplete': 'Levels complete',
+            'rankings.invitefriends.getcoins': 'Invite friends and get coins!',
+            'rankings.invitefriends': 'Invite friends',
             'rankings.login.description': 'Please login to Facebook, to see your friends\' rankings and share your achievements.',
             'rankings.login.button': 'Login to Facebook',
 
             //LEARN PAGE
-            'app.page.learn.aim-of-the-game': 'In order to complete a level, you need to find all the hidden words on the board.',
-            'app.page.learn.how-to-play': 'To guess a word you need to swipe your finger from the first letter to the last, in the correct order.',
+            'app.page.learn.aimofthegame': 'In order to complete a level, you need to find all the hidden words on the board.',
+            'app.page.learn.howtoplay': 'To guess a word you need to swipe your finger from the first letter to the last, in the correct order.',
             'app.page.learn.start': 'Start',
 
             //RATE DIALOG
@@ -335,20 +335,20 @@ window.CONST = {
             'app.dialog.info.rewardedvideo.notfound.description': 'There aren\'t any videos to watch at the moment. Please try again later.',
 
             //FACEBOOK INVITE DIALOG
-            'app.dialog.invite-friends.title': 'Invite friends on Facebook',
-            //'app.dialog.invite-friends.description.invite': 'You will receive #{count} coi((n|ns|ns)) per friend invited.',
-            'app.dialog.invite-friends.description.accept': 'You will receive #{count} coi((n|ns|ns)) for every friend that accepts your invitation and joins the game.',
-            'app.dialog.invite-friends.button.invite': 'Invite friends',
-            'app.dialog.invite-friends.button.cancel': 'Cancel',
+            'app.dialog.invitefriends.title': 'Invite friends on Facebook',
+            //'app.dialog.invitefriends.description.invite': 'You will receive #{count} coi((n|ns|ns)) per friend invited.',
+            'app.dialog.invitefriends.description.accept': 'You will receive #{count} coi((n|ns|ns)) for every friend that accepts your invitation and joins the game.',
+            'app.dialog.invitefriends.button.invite': 'Invite friends',
+            'app.dialog.invitefriends.button.cancel': 'Cancel',
 
             //FACEBOOK INVITE WINDOW
             'app.invite.title': 'Select friends',
             //'app.invite.message': 'Hello, I am playing an interesting game called "findwords"! Join, and let\'s play together!',
 
             //FACEBOOK FRIENDS JOINED DIALOG
-            'app.dialog.info.friends-joined.title': 'Coins added',
-            'app.dialog.info.friends-joined.description.friends': '#{count} frien((d|ds|ds)) accepted your invite.',
-            'app.dialog.info.friends-joined.description.coins': '#{count} coi((n|ns|ns)) added.',
+            'app.dialog.info.friendsjoined.title': 'Coins added',
+            'app.dialog.info.friendsjoined.description.friends': '#{count} frien((d|ds|ds)) accepted your invite.',
+            'app.dialog.info.friendsjoined.description.coins': '#{count} coi((n|ns|ns)) added.',
 
             //FACEBOOK SHARE
             'share.caption': 'Find Words',

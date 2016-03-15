@@ -170,8 +170,8 @@ var AbstractFB = Object.assign({}, AbstractEventEmitter, {
                 this.forceUpdate();
 
                 appDialogs.getInfoDialog()
-                    .setTitle(i18n._('app.dialog.info.friends-joined.title'))
-                    .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', friendsFacebook.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+                    .setTitle(i18n._('app.dialog.info.friendsjoined.title'))
+                    .setContentText(i18n._('app.dialog.info.friendsjoined.description.friends', friendsFacebook.length) + " " + i18n._('app.dialog.info.friendsjoined.description.coins', coinsToAdd))
                     .show();
 
                 return;
@@ -189,8 +189,8 @@ var AbstractFB = Object.assign({}, AbstractEventEmitter, {
             appManager.getGameState().addCoins(coinsToAdd);
 
             appDialogs.getInfoDialog()
-                .setTitle(i18n._('app.dialog.info.friends-joined.title'))
-                .setContentText(i18n._('app.dialog.info.friends-joined.description.friends', newFriends.length) + " " + i18n._('app.dialog.info.friends-joined.description.coins', coinsToAdd))
+                .setTitle(i18n._('app.dialog.info.friendsjoined.title'))
+                .setContentText(i18n._('app.dialog.info.friendsjoined.description.friends', newFriends.length) + " " + i18n._('app.dialog.info.friendsjoined.description.coins', coinsToAdd))
                 .show();
         }.bind(this));
     },

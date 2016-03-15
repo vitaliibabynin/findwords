@@ -173,7 +173,7 @@ var PageMain = Object.assign({}, {}, {
 
         return (
             <div className="game-complete">
-                <span>{i18n._('gameComplete')}</span>
+                <span>{i18n._('gamecomplete')}</span>
             </div>
         );
     },

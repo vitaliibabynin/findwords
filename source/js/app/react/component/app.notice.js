@@ -81,20 +81,20 @@ var NoticeClass = Object.assign({}, {}, {
 
         switch (this.state.noticeType) {
             case NO_WORDS_TO_SHOW:
-                return i18n._('notice.noWordsToShow');
+                return i18n._('notice.nowordstoshow');
             case NO_SUCH_WORD:
                 if (capitalizedWord === false) {
                     return false;
                 }
-                textBefore = i18n._('notice.noSuchWord.before');
-                textAfter = i18n._('notice.noSuchWord.after');
+                textBefore = i18n._('notice.nosuchword.before');
+                textAfter = i18n._('notice.nosuchword.after');
                 return textBefore + ' "' + capitalizedWord + '" ' + textAfter;
             case SELECT_DIFFERENTLY:
                 if (capitalizedWord === false) {
                     return false;
                 }
-                textBefore = i18n._('notice.selectDifferently.before');
-                textAfter = i18n._('notice.selectDifferently.after');
+                textBefore = i18n._('notice.selectdifferently.before');
+                textAfter = i18n._('notice.selectdifferently.after');
                 return textBefore + ' "' + capitalizedWord + '" ' + textAfter;
             default:
                 return false;

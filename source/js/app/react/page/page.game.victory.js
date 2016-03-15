@@ -177,7 +177,7 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
                             <div className="stats">{this.state.roundsComplete}/{this.state.roundsTotal}</div>
                         </div>
 
-                        <div className="your-reward">{i18n._('victory.yourReward')}</div>
+                        <div className="your-reward">{i18n._('victory.yourreward')}</div>
 
                         <div className="rewards">
                             <div className="score" style={rewardStar}>{this.state.rewardScore}</div>

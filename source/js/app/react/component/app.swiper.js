@@ -486,7 +486,7 @@ var SlideClassTryThisGame = Object.assign({}, slideClassAbstract, {
                     <div className="game-icon" style={gameIcon}></div>
                     <div className="game-title">Game Title</div>
                     <div className={playClasses}>
-                        <span>{i18n._('slide.tryThisGame.play')}</span>
+                        <span>{i18n._('slide.trythisgame.play')}</span>
                     </div>
                 </div>
             </div>

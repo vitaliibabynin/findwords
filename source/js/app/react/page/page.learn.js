@@ -79,13 +79,13 @@ var PageLearn = Object.assign({}, {}, {
 
                     <div className="container">
                         <div className="aim-of-the-game">
-                            <span>{i18n._('app.page.learn.aim-of-the-game')}</span>
+                            <span>{i18n._('app.page.learn.aimofthegame')}</span>
                         </div>
 
                         <div className="image-of-board" style={imageStyle}></div>
 
                         <div className="how-to-play">
-                            <span>{i18n._('app.page.learn.how-to-play')}</span>
+                            <span>{i18n._('app.page.learn.howtoplay')}</span>
                         </div>
 
                         <SimpleButton className="btn start"

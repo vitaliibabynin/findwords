@@ -169,9 +169,9 @@ var ErrorDialog = function () {
 
 var InviteFriendsDialog = function () {
     var dialog = new Dialog({
-        dialogId: 'invite-friends-dialog',
+        dialogId: 'invitefriends-dialog',
         effect: 'slidebottom',
-        title: i18n._('app.dialog.invite-friends.title')
+        title: i18n._('app.dialog.invitefriends.title')
     });
 
     dialog.getContent = function () {
@@ -179,17 +179,17 @@ var InviteFriendsDialog = function () {
         var coinsForAccept = appManager.getSettings().getFreeCoins().friendAdded;
 
         //return '<div class="md-content"> \
-        //                <p>'+i18n._('app.dialog.invite-friends.description.invite', coinsForInvite)+' \
-        //                '+i18n._('app.dialog.invite-friends.description.accept', coinsForAccept)+'</p> \
-        //                <div><a href="#" class="btn invite">'+i18n._('app.dialog.invite-friends.button.invite')+'</a></div> \
-        //                <div><a href="#" class="btn cancel">'+i18n._('app.dialog.invite-friends.button.cancel')+'</a></div> \
+        //                <p>'+i18n._('app.dialog.invitefriends.description.invite', coinsForInvite)+' \
+        //                '+i18n._('app.dialog.invitefriends.description.accept', coinsForAccept)+'</p> \
+        //                <div><a href="#" class="btn invite">'+i18n._('app.dialog.invitefriends.button.invite')+'</a></div> \
+        //                <div><a href="#" class="btn cancel">'+i18n._('app.dialog.invitefriends.button.cancel')+'</a></div> \
         //         </div> \
         //        ';
 
         return '<div class="md-content"> \
-                        <p>' + i18n._('app.dialog.invite-friends.description.accept', coinsForAccept) + '</p> \
-                        <div><a href="#" class="btn invite">' + i18n._('app.dialog.invite-friends.button.invite') + '</a></div> \
-                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.invite-friends.button.cancel') + '</a></div> \
+                        <p>' + i18n._('app.dialog.invitefriends.description.accept', coinsForAccept) + '</p> \
+                        <div><a href="#" class="btn invite">' + i18n._('app.dialog.invitefriends.button.invite') + '</a></div> \
+                        <div><a href="#" class="btn cancel">' + i18n._('app.dialog.invitefriends.button.cancel') + '</a></div> \
                  </div> \
                 ';
     }
