@@ -71,7 +71,7 @@ var PageMain = Object.assign({}, {}, {
     },
 
     checkIfAllRoundsBundlesComplete: function () {
-        //return true;
+        return true;
 
         var roundsBundlesGameState = appManager.getGameState().getRoundsBundles();
         var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();

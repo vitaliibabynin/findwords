@@ -403,7 +403,8 @@ var SwiperClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         return {
-            isActive: false,
+            slideTryThisGameIsActive: false,
+            slideSoonIsActive: false,
             slideSoon: appManager.getSettings().getSlideSoon() || {
                 isShown: false,
                 backgroundColor: ""
@@ -426,22 +427,18 @@ var SwiperClass = Object.assign({}, {}, {
         }
     },
 
-    onClickEffect: function (e) {
+    onClickEffect: function (e, slide) {
         e.preventDefault();
 
-        //appManager.getGameState().setRoundsBundles(9, "isPurchased", true);
-        //appManager.getGameState().addCoins(9999);
+        console.log(slide);
 
-        //appManager.getGameState().setRemoveAds(true);
-        //appAd.setAdRemoved(true);
-
-        if (!this.state.isActive) {
+        if (!this.state[slide]) {
             appManager.getSFXManager().playButton();
 
-            this.setState({isActive: true}, function () {
+            this.setState({[slide]: true}, function () {
                 setTimeout(function () {
                     if (this.isMounted()) {
-                        this.setState({isActive: false});
+                        this.setState({[slide]: false});
                     }
                 }.bind(this), 300);
             });
@@ -450,6 +447,15 @@ var SwiperClass = Object.assign({}, {}, {
         if (this.props.onClick && typeof this.props.onClick == 'function') {
             this.props.onClick(this.props);
         }
+    },
+
+
+    onClickSlideTryThisGame: function () {
+        this.onClickEffect(e, "slideTryThisGameIsActive");
+    },
+
+    onClickSlideSoon: function (e) {
+        this.onClickEffect(e, "slideSoonIsActive");
     },
 
     getSlidesData: function () {
@@ -464,7 +470,12 @@ var SwiperClass = Object.assign({}, {}, {
         var slideClasses = classNames(
             'swiper-slide',
             'slide-try-this-game',
-            {'hover': this.state.isActive}
+            {'hover': this.state.slideTryThisGameIsActive}
+        );
+
+        var playClasses = classNames(
+            "play",
+            {'hover': this.state.slideTryThisGameIsActive}
         );
 
         var gameIcon = {
@@ -472,11 +483,11 @@ var SwiperClass = Object.assign({}, {}, {
         };
 
         return (
-            <div className={slideClasses} onClick={this.onClickEffect}>
+            <div className={slideClasses} onClick={this.onClickSlideTryThisGame}>
                 <div className="centered-block">
                     <div className="game-icon" style={gameIcon}></div>
                     <div className="game-title">Game Title</div>
-                    <div className="play">
+                    <div className={playClasses}>
                         <span>{i18n._('slide.tryThisGame.play')}</span>
                     </div>
                 </div>
@@ -500,7 +511,7 @@ var SwiperClass = Object.assign({}, {}, {
         };
 
         return (
-            <div className={slideClasses} style={soonSlideStyle} onClick={this.onClickEffect}>
+            <div className={slideClasses} style={soonSlideStyle} onClick={this.onClickSlideSoon}>
                 <div className="message">
                     <span>{i18n._('slide.soon')}</span>
                 </div>

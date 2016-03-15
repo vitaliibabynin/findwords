@@ -99,6 +99,23 @@
           &.slide-soon {
             line-height: $slide-height;
           }
+          &.slide-try-this-game {
+
+            .centered-block {
+              height: $slide-height;
+
+              .game-icon {
+                height: 5.5rem;
+              }
+              .game-title {
+                margin-top: 0.75rem;
+              }
+              .play {
+                margin-top: 0.75rem;
+                width: 6.5rem;
+              }
+            }
+          }
         }
       }
 
