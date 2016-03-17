@@ -7,6 +7,7 @@ var Object = {assign: require('react/lib/Object.assign')};
 //var classNames = require('classnames');
 var moment = require('moment');
 
+var IconButton = require('./../component/app.button').IconButton;
 var Counters = require('./../component/app.counters').Counters;
 var Swiper = require('./../component/app.swiper').Swiper;
 var Navigation = require('./../component/app.menu').Navigation;
@@ -23,7 +24,8 @@ var PageMain = Object.assign({}, {}, {
         var state = {
             initialSlide: parseInt(router.getParam('roundsBundleIdx')) || 0,
             adsRemoved: appManager.getGameState().getRemoveAds() ? true : false,
-            allRoundsBundlesComplete: false
+            allRoundsBundlesComplete: false,
+            socialUrls: appManager.getSettings().getSocialUrls() || {}
         };
 
         return state;
@@ -70,26 +72,6 @@ var PageMain = Object.assign({}, {}, {
         appAd.showBottomBanner();
     },
 
-    checkIfAllRoundsBundlesComplete: function () {
-        return true;
-
-        var roundsBundlesGameState = appManager.getGameState().getRoundsBundles();
-        var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();
-        var roundsBundlesComplete = 0;
-
-        for (var k in roundsBundlesGameState) {
-            if (!roundsBundlesGameState.hasOwnProperty(k)) {
-                continue;
-            }
-
-            if (roundsBundlesGameState[k].roundsComplete >= roundsBundlesGameData[k].rounds.length) {
-                ++roundsBundlesComplete;
-            }
-        }
-
-        return roundsBundlesComplete >= roundsBundlesGameData.length;
-    },
-
     checkForBonuses: function () {
         var lastAccessNumber = appManager.getGameState().getLastAccessDate();
         var todayString = moment().format("YYYYMMDD") || "";
@@ -127,6 +109,40 @@ var PageMain = Object.assign({}, {}, {
         //go to bonus page
         router.navigate("bonus", "index", {initialSlide: this.state.initialSlide});
     },
+
+
+    checkIfAllRoundsBundlesComplete: function () {
+        return true;
+
+        var roundsBundlesGameState = appManager.getGameState().getRoundsBundles();
+        var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();
+        var roundsBundlesComplete = 0;
+
+        for (var k in roundsBundlesGameState) {
+            if (!roundsBundlesGameState.hasOwnProperty(k)) {
+                continue;
+            }
+
+            if (roundsBundlesGameState[k].roundsComplete >= roundsBundlesGameData[k].rounds.length) {
+                ++roundsBundlesComplete;
+            }
+        }
+
+        return roundsBundlesComplete >= roundsBundlesGameData.length;
+    },
+
+    renderGameCompleteMessage: function () {
+        if (this.state.allRoundsBundlesComplete !== true) {
+            return;
+        }
+
+        return (
+            <div className="game-complete">
+                <span>{i18n._('gamecomplete')}</span>
+            </div>
+        );
+    },
+
 
     updateAdSwitch: function () {
         this.setState({
@@ -166,17 +182,20 @@ var PageMain = Object.assign({}, {}, {
         );
     },
 
-    renderGameCompleteMessage: function () {
-        if (this.state.allRoundsBundlesComplete !== true) {
-            return;
-        }
 
-        return (
-            <div className="game-complete">
-                <span>{i18n._('gamecomplete')}</span>
-            </div>
-        );
+    onClickFacebook: function () {
+        console.log(this.state.socialUrls.facebook);
+        return this.state.socialUrls.facebook;
     },
+
+    onClickTwitter: function () {
+        return this.state.socialUrls.twitter;
+    },
+
+    onClickVk: function () {
+        return this.state.socialUrls.vk;
+    },
+
 
     render: function () {
         var headImgName = "head/head_img_" + router.getLanguage();
@@ -198,8 +217,16 @@ var PageMain = Object.assign({}, {}, {
 
                 <div className="page-content">
 
-                    <div className="head"
-                         style={headStyle}>
+                    <div className="head" style={headStyle}>
+                        <IconButton className="facebook" icon="icon_fb" onClick={this.onClickFacebook}>
+                            <a href={this.state.socialUrls.facebook} />
+                        </IconButton>
+                        <IconButton className="twitter" icon="icon_tw" onClick={this.onClickTwitter}>
+                            <a href={this.state.socialUrls.twitter} />
+                        </IconButton>
+                        <IconButton className="vk" icon="icon_vk" onClick={this.onClickVk}>
+                            <a href={this.state.socialUrls.vk} />
+                        </IconButton>
                     </div>
 
                     <Counters />

@@ -21,6 +21,29 @@
 
     position: absolute;
     top: 0;
+
+    .btn.icon {
+      height: 1.5rem;
+      width: 1.5rem;
+      display: block;
+      margin-top: 0.34375rem;
+      margin-left: auto;
+      margin-right: 0;
+      padding-top: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &.facebook {
+        background-color: $head-btnIcon-faccebook;
+      }
+      &.twitter {
+        background-color: $head-btnIcon-twitter;
+      }
+      &.vk {
+        background-color: $head-btnIcon-vk;
+      }
+    }
   }
 
   .counters {

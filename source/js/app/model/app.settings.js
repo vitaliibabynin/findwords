@@ -51,18 +51,18 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getShareAppLink: function () {
         var shareLink = this.getSettingsValue('shareAppLink', false);
-        if(!shareLink){
+        if (!shareLink) {
             shareLink = Utils.getPlatformUrl(CONST.CURRENT_PLATFORM);
         }
 
         return shareLink;
     },
 
-    getInviteAppUrl: function(){
+    getInviteAppUrl: function () {
         return this.getSettingsValue('inviteAppLink', false);
     },
 
-    getAppInviteImgUrl: function(){
+    getAppInviteImgUrl: function () {
         var inviteUrl = this.getSettingsValue('inviteImgUrl', false)
         return inviteUrl ? inviteUrl[router.getLanguage()] : ''
     },
@@ -135,16 +135,20 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return safePracticeRound;
     },
 
-    getRoundsTotal: function(){
+    getRoundsTotal: function () {
         var totalRounds = 0;
         var roundsBundles = this.getRoundsBundles();
-        if(!roundsBundles){
+        if (!roundsBundles) {
             return totalRounds;
         }
 
-        for(var k in roundsBundles){
-            if(!roundsBundles.hasOwnProperty(k)){ continue; }
-            if(!roundsBundles[k].rounds){ continue; }
+        for (var k in roundsBundles) {
+            if (!roundsBundles.hasOwnProperty(k)) {
+                continue;
+            }
+            if (!roundsBundles[k].rounds) {
+                continue;
+            }
             totalRounds += roundsBundles[k].rounds.length;
         }
 
@@ -231,6 +235,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         safeInitialCoins = parseInt(safeInitialCoins);
 
         return safeInitialCoins;
+    },
+
+    getSocialUrls: function () {
+        return this.getSettingsValue('social', {});
     }
 
 });
