@@ -1,6 +1,20 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/cc.fovea.cordova.purchase/www/store-android.js",
+        "id": "cc.fovea.cordova.purchase.InAppBillingPlugin",
+        "clobbers": [
+            "store"
+        ]
+    },
+    {
+        "file": "plugins/com.appodeal.plugin/www/appodeal.js",
+        "id": "com.appodeal.plugin.AppodealPlugin",
+        "clobbers": [
+            "Appodeal"
+        ]
+    },
+    {
         "file": "plugins/com.portnou.cordova.plugin.preferences/www/preferences.js",
         "id": "com.portnou.cordova.plugin.preferences.Preferences",
         "clobbers": [
@@ -19,37 +33,6 @@ module.exports = [
         "id": "cordova-plugin-facebook.CordovaFacebook",
         "clobbers": [
             "CordovaFacebook"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
-        "id": "cordova-plugin-google-analytics.UniversalAnalytics",
-        "clobbers": [
-            "analytics"
-        ]
-    },
-    {
-        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
-        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
-        "clobbers": [
-            "cordova.plugins.notification.local",
-            "plugin.notification.local"
-        ]
-    },
-    {
-        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
-        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
-        "clobbers": [
-            "cordova.plugins.notification.local.core",
-            "plugin.notification.local.core"
-        ]
-    },
-    {
-        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
-        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
-        "merges": [
-            "cordova.plugins.notification.local.core",
-            "plugin.notification.local.core"
         ]
     },
     {
@@ -199,11 +182,25 @@ module.exports = [
         "runs": true
     },
     {
+        "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
+        "id": "cordova-plugin-google-analytics.UniversalAnalytics",
+        "clobbers": [
+            "analytics"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
         "id": "cordova-plugin-inappbrowser.inappbrowser",
         "clobbers": [
             "cordova.InAppBrowser.open",
             "window.open"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+        "id": "cordova-plugin-nativeaudio.nativeaudio",
+        "clobbers": [
+            "window.plugins.NativeAudio"
         ]
     },
     {
@@ -226,29 +223,48 @@ module.exports = [
         "runs": true
     },
     {
-        "file": "plugins/cc.fovea.cordova.purchase/www/store-android.js",
-        "id": "cc.fovea.cordova.purchase.InAppBillingPlugin",
+        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
+        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
         "clobbers": [
-            "store"
+            "cordova.plugins.notification.local",
+            "plugin.notification.local"
         ]
     },
     {
-        "file": "plugins/com.appodeal.plugin/www/appodeal.js",
-        "id": "com.appodeal.plugin.AppodealPlugin",
+        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
+        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
         "clobbers": [
-            "Appodeal"
+            "cordova.plugins.notification.local.core",
+            "plugin.notification.local.core"
         ]
     },
     {
-        "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
-        "id": "cordova-plugin-nativeaudio.nativeaudio",
-        "clobbers": [
-            "window.plugins.NativeAudio"
+        "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
+        "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
+        "merges": [
+            "cordova.plugins.notification.local.core",
+            "plugin.notification.local.core"
         ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
-{}
+{
+    "cc.fovea.cordova.purchase": "4.0.0",
+    "com.appodeal.plugin": "1.4",
+    "com.portnou.cordova.plugin.preferences": "1.0.0",
+    "cordova-plugin-console": "1.0.2",
+    "cordova-plugin-device": "1.1.0",
+    "cordova-plugin-facebook": "0.2.2",
+    "cordova-plugin-file": "4.1.0",
+    "cordova-plugin-google-analytics": "0.8.1",
+    "cordova-plugin-inappbrowser": "1.2.1",
+    "cordova-plugin-nativeaudio": "3.0.6",
+    "cordova-plugin-splashscreen": "3.1.0",
+    "cordova-plugin-statusbar": "2.1.0",
+    "cordova-plugin-whitelist": "1.2.1",
+    "de.appplant.cordova.common.registerusernotificationsettings": "1.0.1",
+    "de.appplant.cordova.plugin.local-notification": "0.8.2"
+};
 // BOTTOM OF METADATA
 });

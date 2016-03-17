@@ -9,14 +9,6 @@
                 "parents": {
                     "/manifest": [
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 2
-                        },
-                        {
                             "xml": "<uses-permission android:name=\"com.android.vending.BILLING\" />",
                             "count": 1
                         },
@@ -31,57 +23,17 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
+                            "count": 1
                         }
                     ],
                     "/manifest/application": [
-                        {
-                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:enabled=\"true\" android:name=\"com.google.android.gms.analytics.AnalyticsReceiver\"><intent-filter><action android:name=\"com.google.android.gms.analytics.ANALYTICS_DISPATCH\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"com.google.android.gms.analytics.AnalyticsService\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:exported=\"true\" android:name=\"com.google.android.gms.analytics.CampaignTrackingReceiver\"><intent-filter><action android:name=\"com.android.vending.INSTALL_REFERRER\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<service android:name=\"com.google.android.gms.analytics.CampaignTrackingService\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.TriggerReceiver\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.ClearReceiver\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ClickActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.notification.TriggerReceiver\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.notification.ClearReceiver\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.RestoreReceiver\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.notification.ClickActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
-                            "count": 1
-                        },
                         {
                             "xml": "<meta-data android:name=\"com.appodeal.framework\" android:value=\"cordova\" />",
                             "count": 1
@@ -96,6 +48,10 @@
                         },
                         {
                             "xml": "<activity android:configChanges=\"orientation|screenSize\" android:name=\"com.appodeal.ads.LoaderActivity\" android:theme=\"@android:style/Theme.Translucent.NoTitleBar\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
                             "count": 1
                         },
                         {
@@ -165,6 +121,50 @@
                         {
                             "xml": "<activity android:configChanges=\"keyboardHidden|orientation|screenSize\" android:name=\"com.vungle.publisher.FullScreenAdActivity\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:enabled=\"true\" android:name=\"com.google.android.gms.analytics.AnalyticsReceiver\"><intent-filter><action android:name=\"com.google.android.gms.analytics.ANALYTICS_DISPATCH\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"com.google.android.gms.analytics.AnalyticsService\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"true\" android:name=\"com.google.android.gms.analytics.CampaignTrackingReceiver\"><intent-filter><action android:name=\"com.android.vending.INSTALL_REFERRER\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:name=\"com.google.android.gms.analytics.CampaignTrackingService\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.TriggerReceiver\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.ClearReceiver\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.localnotification.ClickActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.notification.TriggerReceiver\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.notification.ClearReceiver\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<receiver android:exported=\"false\" android:name=\"de.appplant.cordova.plugin.localnotification.RestoreReceiver\"><intent-filter><action android:name=\"android.intent.action.BOOT_COMPLETED\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:exported=\"false\" android:launchMode=\"singleInstance\" android:name=\"de.appplant.cordova.plugin.notification.ClickActivity\" android:theme=\"@android:style/Theme.NoDisplay\" />",
+                            "count": 1
                         }
                     ],
                     "application": [
@@ -183,16 +183,16 @@
                     ],
                     "/*": [
                         {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 2
+                        },
+                        {
                             "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
                             "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
                             "count": 1
-                        },
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 2
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
@@ -209,6 +209,14 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"InAppBillingPlugin\"><param name=\"android-package\" value=\"com.smartmobilesoftware.inappbilling.InAppBillingPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"AppodealPlugin\"><param name=\"android-package\" value=\"com.appodeal.plugin.AppodealPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Preferences\"><param name=\"android-package\" value=\"com.portnou.cordova.plugin.preferences.Preferences\" /></feature>",
                             "count": 1
                         },
@@ -217,19 +225,19 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"UniversalAnalytics\"><param name=\"android-package\" value=\"com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NativeAudio\"><param name=\"android-package\" value=\"com.rjfun.cordova.plugin.nativeaudio.NativeAudio\" /></feature>",
                             "count": 1
                         },
                         {
@@ -245,15 +253,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"InAppBillingPlugin\"><param name=\"android-package\" value=\"com.smartmobilesoftware.inappbilling.InAppBillingPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"AppodealPlugin\"><param name=\"android-package\" value=\"com.appodeal.plugin.AppodealPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"NativeAudio\"><param name=\"android-package\" value=\"com.rjfun.cordova.plugin.nativeaudio.NativeAudio\" /></feature>",
+                            "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -312,6 +312,13 @@
         }
     },
     "installed_plugins": {
+        "cc.fovea.cordova.purchase": {
+            "BILLING_KEY": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAobtfA2MKfXQqNPjOm3MtN/QvJMCV6vd04OfGWUMTfnGmArNn47j4R189FYRyymOzxGLceywu09w+XZuJnLh3+fitw1a3Gw/vgid7pwoVkRjjQT9py99Wcq/9OEPTcZFHuGgayd1pgOtuPwdfUJB0M/wOaAxgLEp7FcTiJ0g7RnIetOPVD2yJhTmqtX9Hyvo3/mH95o7wdfCcr+E6L9+6F4oBkFZpvjkyxRg73MQk1CA9LtxYiSxKYwKZdsjj7+fB9ILo6yUPe8YL2pnb1D+e3YSP/g+aPadTSsIY7twmXFsdMSbhlv01hbeROUJ44qHHXLs7CJbaF3zvS9NCb7tw/QIDAQAB",
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "com.appodeal.plugin": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
         "com.portnou.cordova.plugin.preferences": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
@@ -326,19 +333,16 @@
             "FACEBOOK_DISPLAY_NAME": "Findwords",
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
-        "cordova-plugin-google-analytics": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "de.appplant.cordova.common.registerusernotificationsettings": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "de.appplant.cordova.plugin.local-notification": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
         "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.smalldev.findwords"
+        },
+        "cordova-plugin-nativeaudio": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
         "cordova-plugin-splashscreen": {
@@ -350,19 +354,29 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
-        "cc.fovea.cordova.purchase": {
-            "BILLING_KEY": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAobtfA2MKfXQqNPjOm3MtN/QvJMCV6vd04OfGWUMTfnGmArNn47j4R189FYRyymOzxGLceywu09w+XZuJnLh3+fitw1a3Gw/vgid7pwoVkRjjQT9py99Wcq/9OEPTcZFHuGgayd1pgOtuPwdfUJB0M/wOaAxgLEp7FcTiJ0g7RnIetOPVD2yJhTmqtX9Hyvo3/mH95o7wdfCcr+E6L9+6F4oBkFZpvjkyxRg73MQk1CA9LtxYiSxKYwKZdsjj7+fB9ILo6yUPe8YL2pnb1D+e3YSP/g+aPadTSsIY7twmXFsdMSbhlv01hbeROUJ44qHHXLs7CJbaF3zvS9NCb7tw/QIDAQAB",
+        "de.appplant.cordova.common.registerusernotificationsettings": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         },
-        "com.appodeal.plugin": {
-            "PACKAGE_NAME": "com.smalldev.findwords"
-        },
-        "cordova-plugin-nativeaudio": {
+        "de.appplant.cordova.plugin.local-notification": {
             "PACKAGE_NAME": "com.smalldev.findwords"
         }
     },
     "dependent_plugins": {},
     "modules": [
+        {
+            "file": "plugins/cc.fovea.cordova.purchase/www/store-android.js",
+            "id": "cc.fovea.cordova.purchase.InAppBillingPlugin",
+            "clobbers": [
+                "store"
+            ]
+        },
+        {
+            "file": "plugins/com.appodeal.plugin/www/appodeal.js",
+            "id": "com.appodeal.plugin.AppodealPlugin",
+            "clobbers": [
+                "Appodeal"
+            ]
+        },
         {
             "file": "plugins/com.portnou.cordova.plugin.preferences/www/preferences.js",
             "id": "com.portnou.cordova.plugin.preferences.Preferences",
@@ -382,37 +396,6 @@
             "id": "cordova-plugin-facebook.CordovaFacebook",
             "clobbers": [
                 "CordovaFacebook"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
-            "id": "cordova-plugin-google-analytics.UniversalAnalytics",
-            "clobbers": [
-                "analytics"
-            ]
-        },
-        {
-            "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
-            "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
-            "clobbers": [
-                "cordova.plugins.notification.local",
-                "plugin.notification.local"
-            ]
-        },
-        {
-            "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
-            "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
-            "clobbers": [
-                "cordova.plugins.notification.local.core",
-                "plugin.notification.local.core"
-            ]
-        },
-        {
-            "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
-            "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
-            "merges": [
-                "cordova.plugins.notification.local.core",
-                "plugin.notification.local.core"
             ]
         },
         {
@@ -562,11 +545,25 @@
             "runs": true
         },
         {
+            "file": "plugins/cordova-plugin-google-analytics/www/analytics.js",
+            "id": "cordova-plugin-google-analytics.UniversalAnalytics",
+            "clobbers": [
+                "analytics"
+            ]
+        },
+        {
             "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
             "id": "cordova-plugin-inappbrowser.inappbrowser",
             "clobbers": [
                 "cordova.InAppBrowser.open",
                 "window.open"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+            "id": "cordova-plugin-nativeaudio.nativeaudio",
+            "clobbers": [
+                "window.plugins.NativeAudio"
             ]
         },
         {
@@ -589,25 +586,45 @@
             "runs": true
         },
         {
-            "file": "plugins/cc.fovea.cordova.purchase/www/store-android.js",
-            "id": "cc.fovea.cordova.purchase.InAppBillingPlugin",
+            "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js",
+            "id": "de.appplant.cordova.plugin.local-notification.LocalNotification",
             "clobbers": [
-                "store"
+                "cordova.plugins.notification.local",
+                "plugin.notification.local"
             ]
         },
         {
-            "file": "plugins/com.appodeal.plugin/www/appodeal.js",
-            "id": "com.appodeal.plugin.AppodealPlugin",
+            "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js",
+            "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Core",
             "clobbers": [
-                "Appodeal"
+                "cordova.plugins.notification.local.core",
+                "plugin.notification.local.core"
             ]
         },
         {
-            "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
-            "id": "cordova-plugin-nativeaudio.nativeaudio",
-            "clobbers": [
-                "window.plugins.NativeAudio"
+            "file": "plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js",
+            "id": "de.appplant.cordova.plugin.local-notification.LocalNotification.Util",
+            "merges": [
+                "cordova.plugins.notification.local.core",
+                "plugin.notification.local.core"
             ]
         }
-    ]
+    ],
+    "plugin_metadata": {
+        "cc.fovea.cordova.purchase": "4.0.0",
+        "com.appodeal.plugin": "1.4",
+        "com.portnou.cordova.plugin.preferences": "1.0.0",
+        "cordova-plugin-console": "1.0.2",
+        "cordova-plugin-device": "1.1.0",
+        "cordova-plugin-facebook": "0.2.2",
+        "cordova-plugin-file": "4.1.0",
+        "cordova-plugin-google-analytics": "0.8.1",
+        "cordova-plugin-inappbrowser": "1.2.1",
+        "cordova-plugin-nativeaudio": "3.0.6",
+        "cordova-plugin-splashscreen": "3.1.0",
+        "cordova-plugin-statusbar": "2.1.0",
+        "cordova-plugin-whitelist": "1.2.1",
+        "de.appplant.cordova.common.registerusernotificationsettings": "1.0.1",
+        "de.appplant.cordova.plugin.local-notification": "0.8.2"
+    }
 }

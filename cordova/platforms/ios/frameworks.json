@@ -1,9 +1,5 @@
 {
-    "StoreKit.framework": 3,
-    "SystemConfiguration.framework": 2,
-    "CoreData.framework": 1,
-    "libz.dylib": 2,
-    "libsqlite3.dylib": 2,
+    "StoreKit.framework": 2,
     "AdSupport.framework": 1,
     "AudioToolbox.framework": 2,
     "AVFoundation.framework": 2,
@@ -21,10 +17,14 @@
     "QuartzCore.framework": 1,
     "Security.framework": 1,
     "Social.framework": 1,
+    "SystemConfiguration.framework": 2,
     "Twitter.framework": 1,
     "UIKit.framework": 1,
     "WebKit.framework": 1,
     "libc++.dylib": 1,
+    "libsqlite3.dylib": 2,
     "libxml2.2.dylib": 1,
+    "libz.dylib": 2,
+    "CoreData.framework": 1,
     "Foundation.framework": 1
 }

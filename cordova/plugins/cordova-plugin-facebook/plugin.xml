@@ -72,7 +72,7 @@
         </config-file>
 
         <config-file target="res/values/strings.xml" parent="/*">
-            <string name="facebook_app_id">$FACEBOOK_APP_ID</string>
+            <string name="facebook_app_id" translatable="false">$FACEBOOK_APP_ID</string>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="application">
