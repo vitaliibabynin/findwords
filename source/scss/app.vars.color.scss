@@ -12,9 +12,9 @@ $mainPage-bg-color: $color-5;
 
 //mainPage-Header
 $header-bg-color: $color-8;
-$head-btnIcon-faccebook: #3b5998;
-$head-btnIcon-twitter: #6383a8;
-$head-btnIcon-vk: #00aced;
+$head-btnIcon-faccebook: $social-fb-bg-color;
+$head-btnIcon-twitter: $social-twitter-bg-color;
+$head-btnIcon-vk: $social-vk-bg-color;
 
 //mainPage-Counters
 $counters-bg-color: $color-1;

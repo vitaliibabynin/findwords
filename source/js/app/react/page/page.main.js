@@ -112,7 +112,7 @@ var PageMain = Object.assign({}, {}, {
 
 
     checkIfAllRoundsBundlesComplete: function () {
-        return true;
+        //return true;
 
         var roundsBundlesGameState = appManager.getGameState().getRoundsBundles();
         var roundsBundlesGameData = appManager.getSettings().getRoundsBundles();
@@ -184,20 +184,21 @@ var PageMain = Object.assign({}, {}, {
 
 
     onClickFacebook: function () {
-        console.log(this.state.socialUrls.facebook);
-        return this.state.socialUrls.facebook;
+        Utils.openUrl(this.state.socialUrls.fb[router.getLanguage()]);
     },
 
     onClickTwitter: function () {
-        return this.state.socialUrls.twitter;
+        Utils.openUrl(this.state.socialUrls.twitter[router.getLanguage()]);
     },
 
     onClickVk: function () {
-        return this.state.socialUrls.vk;
+        Utils.openUrl(this.state.socialUrls.vk[router.getLanguage()]);
     },
 
 
     render: function () {
+        console.log(appManager.getGameState().gameState);
+
         var headImgName = "head/head_img_" + router.getLanguage();
         if (CONST.CURRENT_PLATFORM == "ios" && router.getLanguage() == "en") {
             headImgName = "head/head_img_ios_en";
@@ -218,15 +219,9 @@ var PageMain = Object.assign({}, {}, {
                 <div className="page-content">
 
                     <div className="head" style={headStyle}>
-                        <IconButton className="facebook" icon="icon_fb" onClick={this.onClickFacebook}>
-                            <a href={this.state.socialUrls.facebook} />
-                        </IconButton>
-                        <IconButton className="twitter" icon="icon_tw" onClick={this.onClickTwitter}>
-                            <a href={this.state.socialUrls.twitter} />
-                        </IconButton>
-                        <IconButton className="vk" icon="icon_vk" onClick={this.onClickVk}>
-                            <a href={this.state.socialUrls.vk} />
-                        </IconButton>
+                        <IconButton className="facebook" icon="icon_fb" onClick={this.onClickFacebook}/>
+                        <IconButton className="twitter" icon="icon_tw" onClick={this.onClickTwitter}/>
+                        <IconButton className="vk" icon="icon_vk" onClick={this.onClickVk}/>
                     </div>
 
                     <Counters />

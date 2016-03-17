@@ -117,10 +117,12 @@ var SlideClassRoundsBundle = Object.assign({}, slideClassAbstract, {
             appManager.getGameState().setRoundsBundles(idx, "bundleScore", 0);
             appManager.getGameState().setRoundsBundles(idx, "roundsComplete", 0);
 
-            var index = idx - 1 >= 0 ? idx - 1 : 0;
-            var numberOfRoundsRequired = parseInt(appManager.getSettings().getRoundsBundles()[index].numberOfRoundsRequired);
+            var prevIdx = idx - 1 >= 0 ? idx - 1 : 0;
+            var numberOfRoundsRequired = parseInt(appManager.getSettings().getRoundsBundles()[prevIdx].numberOfRoundsRequired);
 
             if (idx == 0 || numberOfRoundsRequired == 0) {
+                appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
+            } else if (this.checkIfPreviousRoundsBundleComplete(prevIdx)) {
                 appManager.getGameState().setRoundsBundles(idx, "isUnlocked", true);
             } else {
                 appManager.getGameState().setRoundsBundles(idx, "isUnlocked", false);
@@ -128,6 +130,13 @@ var SlideClassRoundsBundle = Object.assign({}, slideClassAbstract, {
         }
 
         return appManager.getGameState().getRoundsBundles(idx) || {};
+    },
+
+    checkIfPreviousRoundsBundleComplete: function (prevIdx) {
+        var prevRoundsTotal = appManager.getSettings().getRoundsBundles()[prevIdx].rounds.length;
+        var prevRoundsComplete = appManager.getGameState().getRoundsBundles(prevIdx).roundsComplete;
+
+        return prevRoundsComplete >= prevRoundsTotal;
     },
 
     onClickGame: function () {
@@ -319,6 +328,7 @@ var SlideClassRoundsBundle = Object.assign({}, slideClassAbstract, {
 
     renderInstructions: function () {
         var index = this.state.slideIndex - 1;
+
         var roundsCompletePrevSlide = appManager.getGameState().getRoundsBundles(index).roundsComplete;
         var roundsNeededToUnlock = appManager.getSettings().getRoundsBundles()[index].numberOfRoundsRequired;
         var roundsLeftTillUnlock = roundsNeededToUnlock - roundsCompletePrevSlide;
@@ -420,7 +430,9 @@ var SlideClassSoon = Object.assign({}, slideClassAbstract, {
 
     render: function () {
         if (this.state.slideSoon.isShown !== true) {
-            return;
+            return (
+                <div></div>
+            );
         }
 
         var slideClasses = classNames(
@@ -462,7 +474,9 @@ var SlideClassTryThisGame = Object.assign({}, slideClassAbstract, {
 
     render: function () {
         if (this.props.allRoundsBundlesComplete !== true) {
-            return;
+            return (
+                <div></div>
+            );
         }
 
         var slideClasses = classNames(
@@ -546,12 +560,13 @@ var SwiperClass = Object.assign({}, slideClassAbstract, {
             )
         });
 
+        //Потом вставить перед {slides}
+        //<SlideTryThisGame allRoundsBundlesComplete={this.props.allRoundsBundlesComplete}/>
+
         return (
             <div ref="swiperConatiner" className="swiper-container">
 
                 <div className="swiper-wrapper">
-
-                    <SlideTryThisGame allRoundsBundlesComplete={this.props.allRoundsBundlesComplete}/>
 
                     {slides}
 
