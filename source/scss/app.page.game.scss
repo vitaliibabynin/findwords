@@ -3,7 +3,7 @@
   background-color: $gamePageVictory-bg-color;
 }
 
-.page-game{
+.page-game {
 
   .lock-screen {
     position: absolute;
@@ -166,7 +166,7 @@
   .chips {
     height: 3.125rem;
     //margin: 0.25rem 1.5625rem;
-//    margin: 0 0 0.25rem 0;
+    //    margin: 0 0 0.25rem 0;
     margin: 0;
     color: $gamePage-chip-color;
     width: 100%;
@@ -231,14 +231,14 @@
     height: calc(100vh - 2.375rem - 4.750rem) !important;
     overflow: hidden !important;
 
-    .container{
-        &.transform-center{
-            position: relative;
-            transform: translateX(-0%) translateY(-50%);
-            top: 50%;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
+    .container {
+      &.transform-center {
+        position: relative;
+        transform: translateX(-0%) translateY(-50%);
+        top: 50%;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
     }
 
     .game-board {
@@ -260,7 +260,6 @@
         margin-left: auto;
         margin-right: auto;
 
-
         td {
           cursor: pointer;
           position: relative;
@@ -281,7 +280,6 @@
           background-color: $gamePage-board-td-bg-color-default;
           //border-bottom: 1px solid $gamePage-board-color-border;
           //border-right: 1px solid $gamePage-board-color-border;
-
 
           &.open-letter-before-link-top:before,
           &.open-letter-before-link-right:before,
@@ -449,37 +447,36 @@
           //  animation: fontbulger 0.2s;
           //}
 
-
-          &:last-of-type{
+          &:last-of-type {
             border-right: none;
           }
         }
 
-        tr:last-of-type{
-          td{
+        tr:last-of-type {
+          td {
             border-bottom: none;
           }
         }
 
-/*
-        tr {
-          td:last-child {
-            //background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem),
-            //linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
-          }
-        }
+        /*
+                tr {
+                  td:last-child {
+                    //background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem),
+                    //linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
+                  }
+                }
 
-        tr:last-child {
+                tr:last-child {
 
-          td {
-            background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
-            linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
-          }
-          td:last-child {
-            background-image: none;
-          }
-        }
-*/
+                  td {
+                    background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
+                    linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
+                  }
+                  td:last-child {
+                    background-image: none;
+                  }
+                }
+        */
         td {
           &.bg-color-1 {
             background-color: $gamePage-board-td-bg-color-1;
@@ -540,17 +537,45 @@
     }
 
     .shown-words {
-      margin-left: 1.625rem;
-      margin-right: 1.625rem;
+      position: relative;
+      //margin-left: 1.625rem;
+      //margin-right: 1.625rem;
       //padding-top: 0.25rem;
       //padding-bottom: 0.25rem;
+      padding-left: 1.625rem;
+      padding-right: 1.625rem;
       //height: 3rem;
       height: 2.5rem;
+      //margin-top: 0.5rem;
+      //height: 2rem;
       color: $gamePage-shownWords-word-color;
       //line-height: 2.5rem;
       text-align: center;
 
+      .background-line {
+        position: absolute;
+        top: 0.25rem;
+        left: 0;
+        height: 2.5rem;
+        width: 100%;
+        background-color: $gamePage-shownWords-backgroundLine-bg-color;
+        opacity: 0.5;
+        z-index: 10;
+
+        &.hidden {
+          $transitionDuration: 0.01s;
+          $transitionDelay: 0.99s;
+          -webkit-transition-duration: $transitionDuration;
+          -webkit-transition-delay: $transitionDelay;
+          transition-duration: $transitionDuration;
+          transition-delay: $transitionDelay;
+          opacity: 0.01;
+        }
+      }
+
       div {
+        position: relative;
+        z-index: 100;
         display: inline-block;
         margin-right: 0.5rem;
         //text-transform: capitalize;
@@ -584,8 +609,8 @@
   }
 }
 
-html.ios.ipad{
-  .page-game{
+html.ios.ipad {
+  .page-game {
     .page-content {
       .game-board {
         margin-left: 2.5625rem;
@@ -595,7 +620,6 @@ html.ios.ipad{
   }
 
 }
-
 
 /*
 html.csscalc {

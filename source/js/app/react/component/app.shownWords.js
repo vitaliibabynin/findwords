@@ -3,6 +3,7 @@
 
 var Object = {assign: require('react/lib/Object.assign')};
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var classNames = require('classnames');
 
 
 var ShownWordsClass = Object.assign({}, {}, {
@@ -81,6 +82,17 @@ var ShownWordsClass = Object.assign({}, {}, {
         return this.state.shownWordsLetters.length <= 2 ? 0 : 0.25;
     },
 
+    displayBackgroundLine: function () {
+        var classes = classNames(
+            "background-line",
+            this.state.shownWordsLetters.length == 0 ? "hidden" : ""
+        );
+
+        return (
+            <div className={classes}></div>
+        )
+    },
+
     render: function () {
         var whichFontSize = this.chooseFontSize();
         var whichPadding = this.choosePaddingTop();
@@ -90,11 +102,11 @@ var ShownWordsClass = Object.assign({}, {}, {
             paddingTop: whichPadding + "rem"
         };
 
-        var words = this.state.words.map(function(word, i) {
+        var words = this.state.words.map(function (word, i) {
             word = Utils.capitalizeWord(word);
 
             return (
-                <div key={word} >
+                <div key={word}>
                     {word}
                 </div>
             );
@@ -103,6 +115,7 @@ var ShownWordsClass = Object.assign({}, {}, {
         return (
             <div className="shown-words"
                  style={style}>
+                {this.displayBackgroundLine()}
                 <ReactCSSTransitionGroup
                     transitionName="fade"
                     transitionEnter={true}
