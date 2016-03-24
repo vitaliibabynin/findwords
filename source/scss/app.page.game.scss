@@ -536,31 +536,89 @@
       }
     }
 
+    //.shown-words {
+    //  position: relative;
+    //  //margin-left: 1.625rem;
+    //  //margin-right: 1.625rem;
+    //  //padding-top: 0.25rem;
+    //  //padding-bottom: 0.25rem;
+    //  padding-left: 1.625rem;
+    //  padding-right: 1.625rem;
+    //  //height: 3rem;
+    //  height: 2.5rem;
+    //  //margin-top: 0.5rem;
+    //  //height: 2rem;
+    //  color: $gamePage-shownWords-word-color;
+    //  //line-height: 2.5rem;
+    //  text-align: center;
+    //
+    //  .background-line {
+    //    position: absolute;
+    //    top: 0.25rem;
+    //    left: 0;
+    //    height: 2.5rem;
+    //    width: 100%;
+    //    background-color: $gamePage-shownWords-backgroundLine-bg-color;
+    //    opacity: 0.5;
+    //    z-index: 10;
+    //
+    //    &.hidden {
+    //      $transitionDuration: 0.01s;
+    //      $transitionDelay: 0.99s;
+    //      -webkit-transition-duration: $transitionDuration;
+    //      -webkit-transition-delay: $transitionDelay;
+    //      transition-duration: $transitionDuration;
+    //      transition-delay: $transitionDelay;
+    //      opacity: 0.01;
+    //    }
+    //  }
+    //
+    //  div {
+    //    position: relative;
+    //    z-index: 100;
+    //    display: inline-block;
+    //    margin-right: 0.5rem;
+    //    //text-transform: capitalize;
+    //
+    //    &.fade-enter {
+    //      opacity: 0.01;
+    //    }
+    //
+    //    &.fade-enter.fade-enter-active {
+    //      -webkit-transition-duration: 1s;
+    //      -webkit-transition-delay: 0s;
+    //      transition-duration: 1s;
+    //      transition-delay: 0s;
+    //      opacity: 1;
+    //    }
+    //
+    //    &.fade-leave {
+    //      opacity: 1;
+    //    }
+    //
+    //    &.fade-leave.fade-leave-active {
+    //      opacity: 0.01;
+    //      -webkit-transition-duration: 1s;
+    //      -webkit-transition-delay: 0s;
+    //      transition-duration: 1s;
+    //      transition-delay: 0s;
+    //    }
+    //  }
+    //}
+
     .shown-words {
       position: relative;
-      //margin-left: 1.625rem;
-      //margin-right: 1.625rem;
-      //padding-top: 0.25rem;
-      //padding-bottom: 0.25rem;
-      padding-left: 1.625rem;
-      padding-right: 1.625rem;
-      //height: 3rem;
       height: 2.5rem;
-      //margin-top: 0.5rem;
-      //height: 2rem;
       color: $gamePage-shownWords-word-color;
-      //line-height: 2.5rem;
       text-align: center;
+      padding-top: 0.25rem;
 
       .background-line {
-        position: absolute;
-        top: 0.25rem;
-        left: 0;
-        height: 2.5rem;
+        display: table;
+        height: 2.25rem;
         width: 100%;
         background-color: $gamePage-shownWords-backgroundLine-bg-color;
         opacity: 0.5;
-        z-index: 10;
 
         &.hidden {
           $transitionDuration: 0.01s;
@@ -571,37 +629,43 @@
           transition-delay: $transitionDelay;
           opacity: 0.01;
         }
-      }
 
-      div {
-        position: relative;
-        z-index: 100;
-        display: inline-block;
-        margin-right: 0.5rem;
-        //text-transform: capitalize;
+        .words {
+          display: table-cell;
+          vertical-align: middle;
+          padding-left: 1.625rem;
+          padding-right: 1.625rem;
+          height: 2.25rem;
 
-        &.fade-enter {
-          opacity: 0.01;
-        }
+          div {
+            display: inline-block;
+            margin-right: 0.5rem;
+            //text-transform: capitalize;
 
-        &.fade-enter.fade-enter-active {
-          -webkit-transition-duration: 1s;
-          -webkit-transition-delay: 0s;
-          transition-duration: 1s;
-          transition-delay: 0s;
-          opacity: 1;
-        }
+            &.fade-enter {
+              opacity: 0.01;
+            }
 
-        &.fade-leave {
-          opacity: 1;
-        }
+            &.fade-enter.fade-enter-active {
+              -webkit-transition-duration: 1s;
+              -webkit-transition-delay: 0s;
+              transition-duration: 1s;
+              transition-delay: 0s;
+              opacity: 1;
+            }
 
-        &.fade-leave.fade-leave-active {
-          opacity: 0.01;
-          -webkit-transition-duration: 1s;
-          -webkit-transition-delay: 0s;
-          transition-duration: 1s;
-          transition-delay: 0s;
+            &.fade-leave {
+              opacity: 1;
+            }
+
+            &.fade-leave.fade-leave-active {
+              opacity: 0.01;
+              -webkit-transition-duration: 1s;
+              -webkit-transition-delay: 0s;
+              transition-duration: 1s;
+              transition-delay: 0s;
+            }
+          }
         }
       }
     }

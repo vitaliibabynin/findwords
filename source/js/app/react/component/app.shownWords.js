@@ -60,47 +60,52 @@ var ShownWordsClass = Object.assign({}, {}, {
         return words;
     },
 
+    //chooseFontSize: function () {
+    //    var shownWordsLength = this.state.shownWordsLetters.length;
+    //
+    //    if (shownWordsLength <= 2) {
+    //        return 2;
+    //    }
+    //
+    //    if (shownWordsLength <= 8) {
+    //        return 1;
+    //    }
+    //
+    //    if (shownWordsLength <= 16) {
+    //        return 0.75;
+    //    }
+    //
+    //    return 87 / 128;
+    //},
+
     chooseFontSize: function () {
         var shownWordsLength = this.state.shownWordsLetters.length;
 
-        if (shownWordsLength <= 2) {
+        if (shownWordsLength <= 1) {
             return 2;
         }
 
-        if (shownWordsLength <= 8) {
+        if (shownWordsLength <= 2) {
+            return 1.25;
+        }
+
+        //if (shownWordsLength <= 3) {
+        //    return 1.25;
+        //}
+
+        if (shownWordsLength <= 6) {
             return 1;
         }
 
-        if (shownWordsLength <= 16) {
+        if (shownWordsLength <= 9) {
             return 0.75;
         }
 
         return 87 / 128;
     },
 
-    choosePaddingTop: function () {
-        return this.state.shownWordsLetters.length <= 2 ? 0 : 0.25;
-    },
-
-    displayBackgroundLine: function () {
-        var classes = classNames(
-            "background-line",
-            this.state.shownWordsLetters.length == 0 ? "hidden" : ""
-        );
-
-        return (
-            <div className={classes}></div>
-        )
-    },
-
     render: function () {
         var whichFontSize = this.chooseFontSize();
-        var whichPadding = this.choosePaddingTop();
-
-        var style = {
-            fontSize: whichFontSize + "rem",
-            paddingTop: whichPadding + "rem"
-        };
 
         var words = this.state.words.map(function (word, i) {
             word = Utils.capitalizeWord(word);
@@ -112,20 +117,33 @@ var ShownWordsClass = Object.assign({}, {}, {
             );
         });
 
+        var style = {
+            lineHeight: (whichFontSize * 1.125) + "rem",
+            fontSize: whichFontSize + "rem"
+        };
+
+        var classes = classNames(
+            "background-line",
+            this.state.shownWordsLetters.length == 0 ? "hidden" : ""
+        );
+
         return (
-            <div className="shown-words"
-                 style={style}>
-                {this.displayBackgroundLine()}
-                <ReactCSSTransitionGroup
-                    transitionName="fade"
-                    transitionEnter={true}
-                    transitionLeave={this.state.shownWordsAnimationLeave}
-                    transitionEnterTimeout={this.state.time}
-                    transitionLeaveTimeout={this.state.time}>
-                    {words}
-                </ReactCSSTransitionGroup>
+            <div className="shown-words">
+                 <div className={classes}>
+                     <div className="words" style={style}>
+                         <ReactCSSTransitionGroup
+                             transitionName="fade"
+                             transitionEnter={true}
+                             transitionLeave={this.state.shownWordsAnimationLeave}
+                             transitionEnterTimeout={this.state.time}
+                             transitionLeaveTimeout={this.state.time}>
+                             {words}
+                         </ReactCSSTransitionGroup>
+                     </div>
+                 </div>
             </div>
         );
+
     }
 
 });
