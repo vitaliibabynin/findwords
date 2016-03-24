@@ -403,10 +403,12 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
 
     centerContent: function () {
         var $pageContent = $(this.refs.pageContent.getDOMNode());
+        var $shownWords = $(this.refs.shownWords.getDOMNode());
         //console.log(this.refs.pageContent.getDOMNode().clientHeight);
         //console.log(parseInt($pageContent.css('padding-bottom')));
         var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
             - this.refs.shownWords.getDOMNode().offsetHeight
+            - parseInt($shownWords.css('margin-top'))
             - parseInt($pageContent.css('padding-bottom'));
 
 

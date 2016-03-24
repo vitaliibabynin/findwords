@@ -27,7 +27,7 @@ var ShownWordsClass = Object.assign({}, {}, {
         var state = {
             shownWordsLetters: this.props.shownWordsLetters || [],
             time: 1000,
-            shownWordsAnimationLeave: typeof this.props.shownWordsAnimationLeave == "undefined" ? true : this.props.shownWordsAnimationLeave
+            shownWordsAnimationLeave: typeof this.props.shownWordsAnimationLeave == "undefined" ? true : this.props.shownWordsAnimationLeave,
         };
         state.words = this.convertWords(state.shownWordsLetters);
 
@@ -60,24 +60,6 @@ var ShownWordsClass = Object.assign({}, {}, {
         return words;
     },
 
-    //chooseFontSize: function () {
-    //    var shownWordsLength = this.state.shownWordsLetters.length;
-    //
-    //    if (shownWordsLength <= 2) {
-    //        return 2;
-    //    }
-    //
-    //    if (shownWordsLength <= 8) {
-    //        return 1;
-    //    }
-    //
-    //    if (shownWordsLength <= 16) {
-    //        return 0.75;
-    //    }
-    //
-    //    return 87 / 128;
-    //},
-
     chooseFontSize: function () {
         var shownWordsLength = this.state.shownWordsLetters.length;
 
@@ -88,10 +70,6 @@ var ShownWordsClass = Object.assign({}, {}, {
         if (shownWordsLength <= 2) {
             return 1.25;
         }
-
-        //if (shownWordsLength <= 3) {
-        //    return 1.25;
-        //}
 
         if (shownWordsLength <= 6) {
             return 1;
@@ -123,24 +101,26 @@ var ShownWordsClass = Object.assign({}, {}, {
         };
 
         var classes = classNames(
-            "background-line",
+            "shown-words",
             this.state.shownWordsLetters.length == 0 ? "hidden" : ""
         );
 
+        var margin = {
+            marginTop: "0.25rem"
+        };
+
         return (
-            <div className="shown-words">
-                 <div className={classes}>
-                     <div className="words" style={style}>
-                         <ReactCSSTransitionGroup
-                             transitionName="fade"
-                             transitionEnter={true}
-                             transitionLeave={this.state.shownWordsAnimationLeave}
-                             transitionEnterTimeout={this.state.time}
-                             transitionLeaveTimeout={this.state.time}>
-                             {words}
-                         </ReactCSSTransitionGroup>
-                     </div>
-                 </div>
+            <div className={classes} style={margin}>
+                <div className="words" style={style}>
+                    <ReactCSSTransitionGroup
+                        transitionName="fade"
+                        transitionEnter={true}
+                        transitionLeave={this.state.shownWordsAnimationLeave}
+                        transitionEnterTimeout={this.state.time}
+                        transitionLeaveTimeout={this.state.time}>
+                        {words}
+                    </ReactCSSTransitionGroup>
+                </div>
             </div>
         );
 

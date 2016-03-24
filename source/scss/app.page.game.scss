@@ -607,64 +607,58 @@
     //}
 
     .shown-words {
-      position: relative;
-      height: 2.5rem;
-      color: $gamePage-shownWords-word-color;
+      display: table;
+      height: 2.25rem;
+      width: 100%;
       text-align: center;
-      padding-top: 0.25rem;
+      background-color: $gamePage-shownWords-backgroundLine-bg-color;
+      opacity: 0.5;
 
-      .background-line {
-        display: table;
+      &.hidden {
+        $transitionDuration: 0.01s;
+        $transitionDelay: 0.99s;
+        -webkit-transition-duration: $transitionDuration;
+        -webkit-transition-delay: $transitionDelay;
+        transition-duration: $transitionDuration;
+        transition-delay: $transitionDelay;
+        opacity: 0.01;
+      }
+
+      .words {
+        display: table-cell;
+        vertical-align: middle;
+        padding-left: 1.625rem;
+        padding-right: 1.625rem;
         height: 2.25rem;
-        width: 100%;
-        background-color: $gamePage-shownWords-backgroundLine-bg-color;
-        opacity: 0.5;
+        color: $gamePage-shownWords-word-color;
 
-        &.hidden {
-          $transitionDuration: 0.01s;
-          $transitionDelay: 0.99s;
-          -webkit-transition-duration: $transitionDuration;
-          -webkit-transition-delay: $transitionDelay;
-          transition-duration: $transitionDuration;
-          transition-delay: $transitionDelay;
-          opacity: 0.01;
-        }
+        div {
+          display: inline-block;
+          margin-right: 0.5rem;
+          //text-transform: capitalize;
 
-        .words {
-          display: table-cell;
-          vertical-align: middle;
-          padding-left: 1.625rem;
-          padding-right: 1.625rem;
-          height: 2.25rem;
+          &.fade-enter {
+            opacity: 0.01;
+          }
 
-          div {
-            display: inline-block;
-            margin-right: 0.5rem;
-            //text-transform: capitalize;
+          &.fade-enter.fade-enter-active {
+            -webkit-transition-duration: 1s;
+            -webkit-transition-delay: 0s;
+            transition-duration: 1s;
+            transition-delay: 0s;
+            opacity: 1;
+          }
 
-            &.fade-enter {
-              opacity: 0.01;
-            }
+          &.fade-leave {
+            opacity: 1;
+          }
 
-            &.fade-enter.fade-enter-active {
-              -webkit-transition-duration: 1s;
-              -webkit-transition-delay: 0s;
-              transition-duration: 1s;
-              transition-delay: 0s;
-              opacity: 1;
-            }
-
-            &.fade-leave {
-              opacity: 1;
-            }
-
-            &.fade-leave.fade-leave-active {
-              opacity: 0.01;
-              -webkit-transition-duration: 1s;
-              -webkit-transition-delay: 0s;
-              transition-duration: 1s;
-              transition-delay: 0s;
-            }
+          &.fade-leave.fade-leave-active {
+            opacity: 0.01;
+            -webkit-transition-duration: 1s;
+            -webkit-transition-delay: 0s;
+            transition-duration: 1s;
+            transition-delay: 0s;
           }
         }
       }
