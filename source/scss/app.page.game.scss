@@ -542,7 +542,7 @@
       width: 100%;
       text-align: center;
       background-color: $gamePage-shownWords-backgroundLine-bg-color;
-      opacity: 0.5;
+      opacity: 1;
 
       &.hidden {
         $transitionDuration: 0.01s;
