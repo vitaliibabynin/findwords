@@ -983,6 +983,7 @@ var Dialogs = {
         return new dialogType();
     },
 
+
     /**
      * Инфо окно с текстом
      */
@@ -1018,19 +1019,6 @@ var Dialogs = {
         return this._getDialog("NoCoinsDialog", NoCoinsDialog);
     },
 
-    /**
-     * Заработать монеты
-     */
-    getEarnMoneyDialog: function () {
-        return this._getDialog("EarnCoinsDialog", EarnCoinsDialog);
-    },
-
-    /**
-     * Купить монеты
-     */
-    getBuyMoneyDialog: function () {
-        return this._getDialog("BuyCoinsDialog", BuyCoinsDialog);
-    },
 
     /**
      * Запрашиваем разрешение на уведомления
@@ -1039,18 +1027,12 @@ var Dialogs = {
         return this._getDialog("RequirePushDialog", RequirePushDialog);
     },
 
+
     /**
      * Оцените нас
      */
     getRateDialog: function () {
         return this._getDialog("rateDialog", RateDialog);
-    },
-
-    /**
-     * Требуется авторизация
-     */
-    getAuthRequestDialog: function () {
-        return this._getDialog("authRequerstDialog", AuthRequestDialog);
     },
 
 
@@ -1062,21 +1044,51 @@ var Dialogs = {
     },
 
 
+
+
+
+    /**************
+     *
+     *  NOT USED DIALOGS
+     *
+     */
+
+    /**
+     * Заработать монеты
+     */
+    //getEarnMoneyDialog: function () {
+    //    return this._getDialog("EarnCoinsDialog", EarnCoinsDialog);
+    //},
+
+    /**
+     * Купить монеты
+     */
+    //getBuyMoneyDialog: function () {
+    //    return this._getDialog("BuyCoinsDialog", BuyCoinsDialog);
+    //},
+
+    /**
+     * Требуется авторизация
+     */
+    //getAuthRequestDialog: function () {
+    //    return this._getDialog("authRequerstDialog", AuthRequestDialog);
+    //},
+
     /**
      * Произошла ошибка во время авторизации
      */
-    getAuthErrorDialog: function () {
-        return this._getDialog("authErrorDialog", AuthErrorDialog);
-    },
+    //getAuthErrorDialog: function () {
+    //    return this._getDialog("authErrorDialog", AuthErrorDialog);
+    //},
 
-    getAuthSessionExpiredDialog: function () {
-        return this._getDialog("authSessionExpiredDialog", AuthSessionExpiredDialog);
-    },
+    //getAuthSessionExpiredDialog: function () {
+    //    return this._getDialog("authSessionExpiredDialog", AuthSessionExpiredDialog);
+    //},
 
+    //getPushRequestDialog: function () {
+    //    return this._getDialog("pushRequestDialog", PushRequestDialog);
+    //}
 
-    getPushRequestDialog: function () {
-        return this._getDialog("pushRequestDialog", PushRequestDialog);
-    }
 
 }
 
