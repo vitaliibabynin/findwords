@@ -10,7 +10,9 @@ var Object = {assign: require('react/lib/Object.assign')};
 var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
-var Board = require('./../component/app.board.js').Board;
+var GameControl = require('./../component/app.board.js').GameControl;
+var BoardA1 = require('./../component/app.board.js').BoardA1;
+var Board = require('./../component/app.board.old.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
@@ -23,7 +25,7 @@ var PageGameAbstract = Object.assign({}, {}, {
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},
-            gameBoardMaxHeight: 0,
+            boardMaxHeight: 0,
             wallpaper: "url('" + Utils.getImgPath('wallpaper/fon.png') + "')"
         };
 
@@ -82,10 +84,10 @@ var PageGameAbstract = Object.assign({}, {}, {
 
     centerContent: function () {
         var $pageContent = $(this.refs.pageContent.getDOMNode());
-        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
+        var boardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
             - parseInt($pageContent.css('padding-bottom'));
 
-        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
+        this.setState({boardMaxHeight: boardMaxHeight});
     },
 
     displayNotice: function (type, word) {
@@ -253,6 +255,7 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
         }.bind(this), time);
     },
 
+
     render: function () {
 
         var wallpaper = {
@@ -271,12 +274,11 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
                 <div ref="pageContent" className="page-content">
 
                     <div className="container transform-center">
-                        {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
-                                                                    boardMaxHeight={this.state.gameBoardMaxHeight}
+                        {this.state.boardMaxHeight > 0 ? <BoardA1
+                                                                    boardMaxHeight={this.state.boardMaxHeight}
                                                                     boardData={this.state.boardData}
                                                                     board={this.state.board}
                                                                     isPracticeRound={true}
-                                                                    displayNotice={this.displayNotice}
                                                                     setGameStateRoundField={this.setGameStateRoundField}
                                                                     goToPageRoundComplete={this.goToPageRoundComplete}
                         /> : ''}
@@ -406,36 +408,18 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         var $shownWords = $(this.refs.shownWords.getDOMNode());
         //console.log(this.refs.pageContent.getDOMNode().clientHeight);
         //console.log(parseInt($pageContent.css('padding-bottom')));
-        var gameBoardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
+        var boardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
             - this.refs.shownWords.getDOMNode().offsetHeight
             - parseInt($shownWords.css('margin-top'))
             - parseInt($pageContent.css('padding-bottom'));
 
 
-        this.setState({gameBoardMaxHeight: gameBoardMaxHeight});
+        this.setState({boardMaxHeight: boardMaxHeight});
     },
 
     componentWillUnmount: function () {
         appManager.getMusicManager().playMusic();
     },
-
-    //checkIfBoardFitsOnScreen: function (boardHeight) {
-    //    //console.log(boardHeight);
-    //
-    //    if (typeof boardHeight == "undefined") {
-    //        return false;
-    //    }
-    //
-    //    var $pageContent = $(this.refs.pageContent.getDOMNode());
-    //    //console.log(this.refs.pageContent.getDOMNode().clientHeight);
-    //    //console.log(parseInt($pageContent.css('padding-bottom')));
-    //    var contentHeight = this.refs.pageContent.getDOMNode().clientHeight
-    //                            - this.refs.timer.getDOMNode().clientHeight
-    //                            - this.refs.chips.getDOMNode().clientHeight
-    //                            - parseInt($pageContent.css('padding-bottom'));
-    //
-    //    return contentHeight > boardHeight;
-    //},
 
     getBoardData: function (roundData, roundIdx) {
         return roundData.rounds[roundIdx] || {
@@ -838,8 +822,9 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
                     <div className="container transform-center">
-                        {this.state.gameBoardMaxHeight > 0 ? <Board ref="board"
-                                                                    boardMaxHeight={this.state.gameBoardMaxHeight}
+                        {this.state.boardMaxHeight > 0 ? <Board
+                                                                    ref="board"
+                                                                    boardMaxHeight={this.state.boardMaxHeight}
                                                                     boardData={this.state.boardData}
                                                                     board={this.state.board}
                                                                     openedLetters={this.state.openedLetters}
@@ -849,7 +834,6 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
                                                                     removeWordFromShownWords={this.removeWordFromShownWords}
                                                                     setGameStateRoundField={this.setGameStateRoundField}
                                                                     goToPageRoundComplete={this.goToPageRoundComplete}
-                                                                    checkIfBoardFitsOnScreen={this.checkIfBoardFitsOnScreen}
                         /> : ''}
 
 
