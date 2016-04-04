@@ -66,6 +66,10 @@ var GameControlClass = Object.assign({}, {}, {
 module.exports.GameControl = React.createClass(GameControlClass);
 module.exports.GameControl.Class = GameControlClass;
 
+
+var COLOR_SELECTED = "selected";
+
+
 //var BoardAbstractClass = Object.assign({}, {}, {});
 //var BoardAbstract = React.createClass(BoardAbstractClass);
 
@@ -225,11 +229,36 @@ var BoardA1Class = Object.assign({}, {}, {
         var newState = {};
 
         this.addFirstLetterToSelectedLetters(x, y, newState);
+
         this.setState(newState);
     },
 
     onTouchMove: function (e) {
+        this.preventDefaultOnEvent(e);
 
+        var cellCoordinates = this.calcWhichCellIsTouched(e);
+        if (!cellCoordinates) {
+            return;
+        }
+        var x = cellCoordinates.x;
+        var y = cellCoordinates.y;
+
+        if (!this.checkIfValidLetter(x, y)) {
+            return;
+        }
+
+        appManager.getSFXManager().playButtonGame();
+
+        var newState = {};
+
+        var indexOrFalse = this.getIndexIfLetterIsSelected(x, y);
+        if (indexOrFalse !== false) {
+            this.removeSelectedLettersAfter(x, y, indexOrFalse, newState)
+        } else {
+            this.addLetterToSelectedLetters(x, y, newState);
+        }
+
+        this.setState(newState);
     },
 
     onTouchEnd: function (e) {
@@ -237,11 +266,25 @@ var BoardA1Class = Object.assign({}, {}, {
 
         appManager.getSFXManager().playButtonGameWrong();
 
-        this.emptySelectedLetters();
+        var newState = {};
+
+        this.emptySelectedLetters(newState);
+
+        this.setState(newState);
     },
 
     onTouchCancel: function (e) {
+        console.log("cancel");
 
+        this.preventDefaultOnEvent(e);
+
+        appManager.getSFXManager().playButtonGameWrong();
+
+        var newState = {};
+
+        this.emptySelectedLetters(newState);
+
+        this.setState(newState);
     },
 
 
@@ -287,7 +330,7 @@ var BoardA1Class = Object.assign({}, {}, {
         selectedLetters.idx[y + '_' + x] = selectedLetters.letters.length - 1;
 
         boardArr[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
-        boardArr[y][x].classNames.color = "selected";
+        boardArr[y][x].classNames.color = COLOR_SELECTED;
 
         newState.boardArr = boardArr;
         newState.selectedLetters = selectedLetters;
@@ -328,7 +371,7 @@ var BoardA1Class = Object.assign({}, {}, {
         return wordsComplete;
     },
 
-    emptySelectedLetters: function () {
+    emptySelectedLetters: function (newState) {
         var boardArr = this.state.boardArr;
         var selectedLetters = this.state.selectedLetters.letters;
 
@@ -337,10 +380,117 @@ var BoardA1Class = Object.assign({}, {}, {
             delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color;
         }
 
-        this.setState({
-            boardArr: boardArr,
-            selectedLetters: {letters: [], idx: {}}
-        });
+        newState.boardArr = boardArr;
+        newState.selectedLetters = {letters: [], idx: {}};
+    },
+
+    checkIfValidLetter: function (x, y) {
+        var selectedLetters = this.state.selectedLetters.letters;
+
+        if (selectedLetters.length == 0) {
+            return false;
+        }
+
+        var prevX = selectedLetters[selectedLetters.length - 1].x;
+        var prevY = selectedLetters[selectedLetters.length - 1].y;
+
+        if (y == prevY && x == prevX) {
+            return false;
+        }
+
+        //return this.checkWhichRules1(x, y, prevX, prevY);
+        return this.checkWhichRules2(x, y, prevX, prevY);
+    },
+
+    checkWhichRules1: function (x, y, prevX, prevY) {
+        if (y == prevY + 1 && x == prevX) {
+            return true;
+        }
+        if (y == prevY - 1 && x == prevX) {
+            return true;
+        }
+        if (x == prevX + 1 && y == prevY) {
+            return true;
+        }
+        if (x == prevX - 1 && y == prevY) {
+            return true;
+        }
+
+        return false;
+    },
+
+    checkWhichRules2: function (x, y, prevX, prevY) {
+        return (Math.abs(x - prevX) <= 1 && Math.abs(y - prevY) <= 1);
+    },
+
+    addLetterToSelectedLetters: function (x, y, newState) {
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
+
+        var previousLetter = selectedLetters.letters[selectedLetters.letters.length - 1];
+
+        //find out which link needs to be attached
+        //restrict which letters can be clicked
+        var prevX = previousLetter.x;
+        var prevY = previousLetter.y;
+        var prevColor = previousLetter.classNames.backgroundColor;
+
+
+        selectedLetters.letters.push(boardArr[y][x]);
+        selectedLetters.idx[y + '_' + x] = selectedLetters.letters.length - 1;
+
+        boardArr[y][x].classNames.backgroundColor = prevColor;
+        boardArr[y][x].classNames.color = COLOR_SELECTED;
+
+        //if (y == prevY + 1 && x == prevX) {
+        //    boardArr[y][x].classNames.backgroundColor = prevColor;
+        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
+        //}
+        //
+        //if (y == prevY - 1 && x == prevX) {
+        //    boardArr[y][x].classNames.backgroundColor = prevColor;
+        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
+        //}
+        //
+        //if (x == prevX + 1 && y == prevY) {
+        //    boardArr[y][x].classNames.backgroundColor = prevColor;
+        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
+        //}
+        //
+        //if (x == prevX - 1 && y == prevY) {
+        //    boardArr[y][x].classNames.backgroundColor = prevColor;
+        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
+        //}
+
+        newState.boardArr = boardArr;
+        newState.selectedLetters = selectedLetters;
+    },
+
+    getIndexIfLetterIsSelected: function (x, y) {
+        var selectedIdx = this.state.selectedLetters.idx;
+
+        var key = y + '_' + x;
+        if (!selectedIdx.hasOwnProperty(key)) {
+            return false;
+        }
+
+        return selectedIdx[key];
+    },
+
+    removeSelectedLettersAfter: function (x, y, index, newState) {
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters.letters : this.state.selectedLetters.letters;
+        var selectedIdx = newState && newState.selectedLetters ? newState.selectedLetters.idx : this.state.selectedLetters.idx;
+
+        for (var i = index + 1; i < selectedLetters.length; i++) {
+            delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.backgroundColor;
+            delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color;
+            delete selectedIdx[selectedLetters[i].y + '_' + selectedLetters[i].x];
+        }
+
+        selectedLetters.splice(index + 1, selectedLetters.length - (index - 1));
+
+        newState.selectedLetters = {letters: selectedLetters, idx: selectedIdx};
     },
 
 
