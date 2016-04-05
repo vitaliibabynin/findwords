@@ -1,12 +1,16 @@
 "use strict";
 
 
+
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 
+
 module.exports = {};
+
+
 
 var GameControlClass = Object.assign({}, {}, {
     displayName: 'GameControl',
@@ -67,17 +71,13 @@ module.exports.GameControl = React.createClass(GameControlClass);
 module.exports.GameControl.Class = GameControlClass;
 
 
+
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
 
 
-//var BoardAbstractClass = Object.assign({}, {}, {});
-//var BoardAbstract = React.createClass(BoardAbstractClass);
 
-
-var BoardA1Class = Object.assign({}, {}, {
-
-    displayName: 'BoardA1',
+var BoardAbstractClass = Object.assign({}, {}, {
 
     propTypes: {
         boardMaxHeight: React.PropTypes.number,
@@ -105,8 +105,11 @@ var BoardA1Class = Object.assign({}, {}, {
     },
 
 
+
     getInitialState: function () {
         var state = {
+            boardType: "abstract",
+
             //for centering
             boardExtraClass: [],
 
@@ -228,7 +231,6 @@ var BoardA1Class = Object.assign({}, {}, {
             this.addLettersInFoundWord(currentWord, backgroundColor, boardArr);
         }
     },
-
 
     addLettersInFoundWord: function (currentWord, backgroundColor, boardArr) {
         boardArr[currentWord.letters[0].y][currentWord.letters[0].x].classNames = {
@@ -427,75 +429,6 @@ var BoardA1Class = Object.assign({}, {}, {
         return {x: x, y: y};
     },
 
-    addFirstLetterToSelectedLetters: function (x, y, newState) {
-        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
-        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
-
-        selectedLetters.letters.push(boardArr[y][x]);
-        selectedLetters.idx[y + '_' + x] = selectedLetters.letters.length - 1;
-
-        boardArr[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
-        boardArr[y][x].classNames.color = COLOR_SELECTED;
-
-        newState.boardArr = boardArr;
-        newState.selectedLetters = selectedLetters;
-    },
-
-    selectWordBackgroundColor: function () {
-        var backgroundColor = '';
-        var backgroundColors = this.state.backgroundColors || [];
-        var wordsComplete = this.howManyCompleteWordsInBoard();
-
-        if (this.state.isPracticeRound) {
-            //  +1 because word hasn't been added to completedWords yet
-            for (var i = 0; i < wordsComplete + 1; i++) {
-                backgroundColor = backgroundColors[i % backgroundColors.length];
-            }
-        } else {
-            var colorIdx = appManager.getGameState().getBoardColorIdx();
-            backgroundColor = backgroundColors[colorIdx];
-        }
-
-        return backgroundColor;
-    },
-
-    howManyCompleteWordsInBoard: function () {
-        var board = this.state.board;
-
-        var wordsComplete = 0;
-        for (var word in board) {
-            if (!board.hasOwnProperty(word)) {
-                continue;
-            }
-
-            if (board[word].openWord == true) {
-                wordsComplete++;
-            }
-        }
-
-        return wordsComplete;
-    },
-
-    emptySelectedLetters: function (newState) {
-        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
-        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
-
-        for (var i = 0; i < selectedLetters.letters.length; i++) {
-            delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.backgroundColor;
-            delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.color;
-        }
-
-        if (newState) {
-            newState.boardArr = boardArr;
-            newState.selectedLetters = {letters: [], idx: {}};
-        } else {
-            this.setState({
-                boardArr: boardArr,
-                selectedLetters: {letters: [], idx: {}}
-            });
-        }
-    },
-
 
 
     checkIfValidLetter: function (x, y) {
@@ -512,32 +445,32 @@ var BoardA1Class = Object.assign({}, {}, {
             return false;
         }
 
-        //return this.checkWhichRules1(x, y, prevX, prevY);
-        return this.checkWhichRules2(x, y, prevX, prevY);
+        if (this.getIndexIfLetterIsSelected(x, y) !== false) {
+            return true;
+        }
+
+        return this.checkWhichRules(x, y, prevX, prevY);
     },
 
-    checkWhichRules1: function (x, y, prevX, prevY) {
-        if (y == prevY + 1 && x == prevX) {
-            return true;
-        }
-        if (y == prevY - 1 && x == prevX) {
-            return true;
-        }
-        if (x == prevX + 1 && y == prevY) {
-            return true;
-        }
-        if (x == prevX - 1 && y == prevY) {
-            return true;
-        }
-
-        return false;
-    },
-
-    checkWhichRules2: function (x, y, prevX, prevY) {
-        return (Math.abs(x - prevX) <= 1 && Math.abs(y - prevY) <= 1);
+    checkWhichRules: function (x, y, prevX, prevY) {
+        throw 'BoardAbstract.checkWhichRules not implemented.';
     },
 
 
+
+    addFirstLetterToSelectedLetters: function (x, y, newState) {
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
+
+        selectedLetters.letters.push(boardArr[y][x]);
+        selectedLetters.idx[y + '_' + x] = selectedLetters.letters.length - 1;
+
+        boardArr[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
+        boardArr[y][x].classNames.color = COLOR_SELECTED;
+
+        newState.boardArr = boardArr;
+        newState.selectedLetters = selectedLetters;
+    },
 
     addLetterToSelectedLetters: function (x, y, newState) {
         var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
@@ -582,6 +515,26 @@ var BoardA1Class = Object.assign({}, {}, {
         newState.selectedLetters = selectedLetters;
     },
 
+    emptySelectedLetters: function (newState) {
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
+
+        for (var i = 0; i < selectedLetters.letters.length; i++) {
+            delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.backgroundColor;
+            delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.color;
+        }
+
+        if (newState) {
+            newState.boardArr = boardArr;
+            newState.selectedLetters = {letters: [], idx: {}};
+        } else {
+            this.setState({
+                boardArr: boardArr,
+                selectedLetters: {letters: [], idx: {}}
+            });
+        }
+    },
+
     getIndexIfLetterIsSelected: function (x, y) {
         var selectedIdx = this.state.selectedLetters.idx;
 
@@ -607,6 +560,25 @@ var BoardA1Class = Object.assign({}, {}, {
         selectedLetters.splice(index + 1, selectedLetters.length - (index - 1));
 
         newState.selectedLetters = {letters: selectedLetters, idx: selectedIdx};
+    },
+
+
+
+    howManyCompleteWordsInBoard: function () {
+        var board = this.state.board;
+
+        var wordsComplete = 0;
+        for (var word in board) {
+            if (!board.hasOwnProperty(word)) {
+                continue;
+            }
+
+            if (board[word].openWord == true) {
+                wordsComplete++;
+            }
+        }
+
+        return wordsComplete;
     },
 
     checkForCompletedWord: function () {
@@ -659,23 +631,6 @@ var BoardA1Class = Object.assign({}, {}, {
         newState.board = board;
     },
 
-    nextColorIdx: function () {
-        var backgroundColors = this.state.backgroundColors || [];
-        var colorIdx = appManager.getGameState().getBoardColorIdx();
-
-        colorIdx++;
-        if (colorIdx >= backgroundColors.length) {
-            colorIdx = colorIdx - backgroundColors.length;
-        }
-
-        appManager.getGameState().setBoardColorIdx(colorIdx);
-    },
-
-    setBoardGameState: function (board) {
-        this.state.setGameStateRoundField('board', board);
-    },
-
-
     checkIfLetterIsInCompleteWord: function (x, y) {
         var boardArr = this.state.boardArr;
         if (!boardArr || !boardArr[y] || !boardArr[y][x]) {
@@ -697,29 +652,47 @@ var BoardA1Class = Object.assign({}, {}, {
 
 
 
+    selectWordBackgroundColor: function () {
+        var backgroundColor = '';
+        var backgroundColors = this.state.backgroundColors || [];
+        var wordsComplete = this.howManyCompleteWordsInBoard();
+
+        if (this.state.isPracticeRound) {
+            //  +1 because word hasn't been added to completedWords yet
+            for (var i = 0; i < wordsComplete + 1; i++) {
+                backgroundColor = backgroundColors[i % backgroundColors.length];
+            }
+        } else {
+            var colorIdx = appManager.getGameState().getBoardColorIdx();
+            backgroundColor = backgroundColors[colorIdx];
+        }
+
+        return backgroundColor;
+    },
+
+    nextColorIdx: function () {
+        var backgroundColors = this.state.backgroundColors || [];
+        var colorIdx = appManager.getGameState().getBoardColorIdx();
+
+        colorIdx++;
+        if (colorIdx >= backgroundColors.length) {
+            colorIdx = colorIdx - backgroundColors.length;
+        }
+
+        appManager.getGameState().setBoardColorIdx(colorIdx);
+    },
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    setBoardGameState: function (board) {
+        this.state.setGameStateRoundField('board', board);
+    },
 
 
 
     render: function () {
 
-        console.log({stateBoard: this.state.board});
+        //console.log({stateBoard: this.state.board});
         //console.log({wordsToFind: this.state.wordsToFind});
         //console.log({boardArr: this.state.boardArr});
         //console.log({selectedLetters: this.state.selectedLetters});
@@ -730,7 +703,7 @@ var BoardA1Class = Object.assign({}, {}, {
         };
 
         return (
-            <div className={classNames("game-board", this.state.boardExtraClass)}>
+            <div className={classNames("game-board", this.state.boardExtraClass, this.state.boardType)}>
                 <table ref="board"
                        className="board"
                        onTouchStart={this.onTouchStart}
@@ -773,9 +746,73 @@ var BoardA1Class = Object.assign({}, {}, {
     }
 
 });
+var BoardAbstract = React.createClass(BoardAbstractClass);
+
+
+
+var BoardA1Class = Object.assign({}, BoardAbstractClass, {
+
+    displayName: 'BoardA1',
+
+    getInitialState: function () {
+        var state = BoardAbstractClass.getInitialState.apply(this);
+        state.boardType = "board-a1";
+
+        return state;
+    },
+
+    checkWhichRules: function (x, y, prevX, prevY) {
+        if (y == prevY + 1 && x == prevX) {
+            return true;
+        }
+        if (y == prevY - 1 && x == prevX) {
+            return true;
+        }
+        if (x == prevX + 1 && y == prevY) {
+            return true;
+        }
+        if (x == prevX - 1 && y == prevY) {
+            return true;
+        }
+
+        return false;
+    },
+
+    render: function () {
+        return BoardAbstractClass.render.apply(this);
+    }
+
+});
 var BoardA1 = React.createClass(BoardA1Class);
 module.exports.BoardA1 = BoardA1;
 module.exports.BoardA1.Class = BoardA1Class;
+
+
+
+var BoardA2Class = Object.assign({}, BoardAbstractClass, {
+
+    displayName: 'BoardA2',
+
+    getInitialState: function () {
+        var state = BoardAbstractClass.getInitialState.apply(this);
+        state.boardType = "board-a2";
+
+        return state;
+    },
+
+    checkWhichRules: function (x, y, prevX, prevY) {
+        return (Math.abs(x - prevX) <= 1 && Math.abs(y - prevY) <= 1);
+    },
+
+    render: function () {
+        return BoardAbstractClass.render.apply(this);
+    }
+
+});
+var BoardA2 = React.createClass(BoardA2Class);
+module.exports.BoardA2 = BoardA2;
+module.exports.BoardA2.Class = BoardA2Class;
+
 
 
 var LetterClass = Object.assign({}, {}, {
