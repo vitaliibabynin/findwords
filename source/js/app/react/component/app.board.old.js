@@ -522,8 +522,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     checkIfLetterIsInCompleteWord: function (x, y) {
-
-
         var boardArr = this.state.boardArr;
         if (!boardArr || !boardArr[y] || !boardArr[y][x]) {
             return false;
@@ -1280,7 +1278,7 @@ var BoardClass = Object.assign({}, {}, {
         //console.log({board: this.state.shownWords});
         //console.log({boardProps: this.props.shownWords});
         //console.log(this.state.boardArr);
-        console.log(this.state.selectedLetters);
+        //console.log(this.state.selectedLetters);
         //console.log(this.state.wordsToFind);
         //console.log(this.state.board);
         //console.log(this.state.openedLetters);
