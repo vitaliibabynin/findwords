@@ -12,6 +12,7 @@ var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
 var GameControl = require('./../component/app.board.js').GameControl;
 var BoardA1 = require('./../component/app.board.js').BoardA1;
+var BoardA2 = require('./../component/app.board.js').BoardA2;
 var Board = require('./../component/app.board.old.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownWords.js').ShownWords;
@@ -90,6 +91,7 @@ var PageGameAbstract = Object.assign({}, {}, {
         this.setState({boardMaxHeight: boardMaxHeight});
     },
 
+
     displayNotice: function (type, word) {
         var boardHeight = this.refs.board.getDOMNode().clientHeight;
         var boardTop = this.refs.board.getDOMNode().getBoundingClientRect().top;
@@ -121,6 +123,7 @@ var PageGameAbstract = Object.assign({}, {}, {
         }
     },
 
+
     setRoundComplete: function () {
         console.log('setRoundComplete not implemented.');
     },
@@ -128,6 +131,7 @@ var PageGameAbstract = Object.assign({}, {}, {
     goToPageRoundComplete: function () {
         console.log('goToPageRoundComplete not implemented.');
     },
+
 
     facebookUpdate: function () {
         if (appFB.isAuthorized()) {
@@ -140,6 +144,7 @@ var PageGameAbstract = Object.assign({}, {}, {
             );
         }
     },
+
 
     renderNotice: function () {
         return (
@@ -274,11 +279,13 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
                 <div ref="pageContent" className="page-content">
 
                     <div className="container transform-center">
-                        {this.state.boardMaxHeight > 0 ? <BoardA1
+                        {this.state.boardMaxHeight > 0 ? <BoardA2
+                                                                    ref="board"
                                                                     boardMaxHeight={this.state.boardMaxHeight}
                                                                     boardData={this.state.boardData}
                                                                     board={this.state.board}
                                                                     isPracticeRound={true}
+                                                                    displayNotice={this.displayNotice}
                                                                     setGameStateRoundField={this.setGameStateRoundField}
                                                                     goToPageRoundComplete={this.goToPageRoundComplete}
                         /> : ''}

@@ -1,15 +1,12 @@
 "use strict";
 
 
-
 var Object = {assign: require('react/lib/Object.assign')};
 var classNames = require('classnames');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 
-
 module.exports = {};
-
 
 
 var GameControlClass = Object.assign({}, {}, {
@@ -71,10 +68,10 @@ module.exports.GameControl = React.createClass(GameControlClass);
 module.exports.GameControl.Class = GameControlClass;
 
 
-
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
-
+var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
+var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
 
 
 var BoardAbstractClass = Object.assign({}, {}, {
@@ -100,10 +97,10 @@ var BoardAbstractClass = Object.assign({}, {}, {
         }),
         board: React.PropTypes.object,
         isPracticeRound: React.PropTypes.bool,
+        displayNotice: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
         goToPageRoundComplete: React.PropTypes.func
     },
-
 
 
     getInitialState: function () {
@@ -121,11 +118,16 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
             selectedLetters: {letters: [], idx: {}},
 
+            prevSelectedLetters: {letters: [], idx: {}},
+
             //highlights completed word when clicked
             highlightedWord: {letters: []},
 
             //used to choose word background colors
             isPracticeRound: typeof this.props.isPracticeRound == "undefined" ? false : this.props.isPracticeRound,
+
+            displayNotice: this.props.displayNotice || function () {
+            },
 
             setGameStateRoundField: this.props.setGameStateRoundField || function () {
             },
@@ -172,14 +174,10 @@ var BoardAbstractClass = Object.assign({}, {}, {
     extractWordsToFind: function (boardData) {
         var wordsToFind = {words: []};
 
-        //console.log(boardData.words);
-
         for (var i = 0; i < boardData.words.length; i++) {
             wordsToFind.words[i] = {letters: boardData.words[i].letters};
-            //wordsToFind.idx[boardData.words[i].y + '' + boardData.words[i].x] = i;
         }
 
-        //console.log(wordsToFind);
         return wordsToFind;
     },
 
@@ -290,7 +288,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
 
-
     componentDidMount: function () {
         this.setState({
             cellSize: Math.min(
@@ -299,7 +296,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
             ) || 0
         });
     },
-
 
 
     onTouchStart: function (e) {
@@ -317,7 +313,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
         var newState = {};
 
         if (this.checkIfLetterIsInCompleteWord(x, y)) {
-            console.log("letter in complete word");
+            console.log("animate word");
         } else {
             this.addFirstLetterToSelectedLetters(x, y, newState);
         }
@@ -365,15 +361,28 @@ var BoardAbstractClass = Object.assign({}, {}, {
         var completedWordIdxOrFalse = this.checkForCompletedWord();
         if (completedWordIdxOrFalse !== false) {
             appManager.getSFXManager().playButtonGameCorrect();
-
             this.addCompletedWordToBoard(completedWordIdxOrFalse, newState);
-
             this.setState(newState);
             return;
         }
 
         appManager.getSFXManager().playButtonGameWrong();
 
+        if (this.checkLettersInWordsToFind()) {
+            this.bringUpNotice(SELECT_DIFFERENTLY);
+            this.copySelectedLettersToPrevSelectedLetters(newState);
+            //emptySelectedLetters called through ref
+            return;
+        }
+
+        if (this.selectedLettersEqualsPrevSelectedLetters()) {
+            this.bringUpNotice(NO_SUCH_WORD);
+            this.copySelectedLettersToPrevSelectedLetters(newState);
+            //emptySelectedLetters called through ref
+            return;
+        }
+
+        this.copySelectedLettersToPrevSelectedLetters(newState);
         this.emptySelectedLetters(newState);
 
         this.setState(newState);
@@ -392,7 +401,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         this.setState(newState);
     },
-
 
 
     preventDefaultOnEvent: function (e) {
@@ -430,7 +438,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
 
-
     checkIfValidLetter: function (x, y) {
         var selectedLetters = this.state.selectedLetters.letters;
 
@@ -455,7 +462,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
     checkWhichRules: function (x, y, prevX, prevY) {
         throw 'BoardAbstract.checkWhichRules not implemented.';
     },
-
 
 
     addFirstLetterToSelectedLetters: function (x, y, newState) {
@@ -563,6 +569,61 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
 
+    copySelectedLettersToPrevSelectedLetters: function (newState) {
+        newState.prevSelectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
+    },
+
+    selectedLettersEqualsPrevSelectedLetters: function () {
+        var selectedLetters = this.state.selectedLetters.letters;
+        var previousSelection = this.state.prevSelectedLetters.letters;
+
+        if (selectedLetters.length < 2) {
+            return false;
+        }
+
+        if (selectedLetters.length != previousSelection.length) {
+            return false;
+        }
+
+        for (var i = 0; i < selectedLetters.length; i++) {
+            if (selectedLetters[i] != previousSelection[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    },
+
+    checkLettersInWordsToFind: function () {
+        var words = this.state.wordsToFind.words;
+        var selectedLetters = this.state.selectedLetters.letters;
+
+        for (var wordIdx = 0; wordIdx < words.length; wordIdx++) {
+            var word = words[wordIdx].letters;
+            if (word.length != selectedLetters.length) {
+                continue;
+            }
+
+            var lettersMatch = true;
+            for (var letterIdx = 0; letterIdx < word.length; letterIdx++) {
+                if (selectedLetters[letterIdx].letter != word[letterIdx].letter) {
+                    lettersMatch = false;
+                    break;
+                }
+            }
+
+            if (lettersMatch) {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    bringUpNotice: function (type) {
+        var word = this.state.selectedLetters;
+        this.state.displayNotice(type, word);
+    },
+
 
     howManyCompleteWordsInBoard: function () {
         var board = this.state.board;
@@ -651,7 +712,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
 
-
     selectWordBackgroundColor: function () {
         var backgroundColor = '';
         var backgroundColors = this.state.backgroundColors || [];
@@ -683,15 +743,14 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
 
-
     setBoardGameState: function (board) {
         this.state.setGameStateRoundField('board', board);
     },
 
 
-
     render: function () {
 
+        //console.log({prevSelectedLetters: this.state.prevSelectedLetters});
         //console.log({stateBoard: this.state.board});
         //console.log({wordsToFind: this.state.wordsToFind});
         //console.log({boardArr: this.state.boardArr});
@@ -749,7 +808,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
 var BoardAbstract = React.createClass(BoardAbstractClass);
 
 
-
 var BoardA1Class = Object.assign({}, BoardAbstractClass, {
 
     displayName: 'BoardA1',
@@ -788,7 +846,6 @@ module.exports.BoardA1 = BoardA1;
 module.exports.BoardA1.Class = BoardA1Class;
 
 
-
 var BoardA2Class = Object.assign({}, BoardAbstractClass, {
 
     displayName: 'BoardA2',
@@ -805,14 +862,77 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
     },
 
     render: function () {
-        return BoardAbstractClass.render.apply(this);
+
+        //console.log({prevSelectedLetters: this.state.prevSelectedLetters});
+        //console.log({stateBoard: this.state.board});
+        //console.log({wordsToFind: this.state.wordsToFind});
+        //console.log({boardArr: this.state.boardArr});
+        //console.log({selectedLetters: this.state.selectedLetters});
+
+        var boardArr = this.state.boardArr;
+        var boardStyle = {
+            fontSize: (this.state.cellSize / 2) + "px"
+        };
+
+        var cellContainerWidth = {
+            width: this.state.cellSize * 0.75,
+            height: this.state.cellSize * 0.5
+        };
+
+        return (
+            <div className={classNames("game-board", this.state.boardExtraClass, this.state.boardType)}>
+                <table ref="board"
+                       className="board"
+                       onTouchStart={this.onTouchStart}
+                       onTouchMove={this.onTouchMove}
+                       onTouchEnd={this.onTouchEnd}
+                       onTouchCancel={this.onTouchCancel}
+                       style={boardStyle}>
+
+                    {boardArr.map(function (row, rowId) {
+                        return (
+                            <tr key={rowId}>
+
+                                {row.map(function (cell, cellId) {
+
+                                    var properties = [];
+                                    for (var property in cell.classNames) {
+                                        if (!cell.classNames.hasOwnProperty(property)) {
+                                            continue;
+                                        }
+                                        properties.push(cell.classNames[property]);
+                                    }
+                                    var letterClassNames = classNames(
+                                        properties,
+                                        rowId % 2 == 0 ? "left" : "right"
+                                    );
+
+                                    return (
+                                        <td key={rowId + '/' + cellId}
+                                             style={cellContainerWidth}
+                                        >
+                                            <Letter2 key={rowId + '_' + cellId}
+                                                    classNames={letterClassNames}
+                                                    cellSize={this.state.cellSize}>
+                                                {cell.letter}
+                                            </Letter2>
+                                        </td>
+                                    );
+                                }.bind(this))}
+
+                            </tr>
+                        );
+                    }.bind(this))}
+
+                </table>
+            </div>
+        );
     }
 
 });
 var BoardA2 = React.createClass(BoardA2Class);
 module.exports.BoardA2 = BoardA2;
 module.exports.BoardA2.Class = BoardA2Class;
-
 
 
 var LetterClass = Object.assign({}, {}, {
@@ -855,3 +975,44 @@ var LetterClass = Object.assign({}, {}, {
 
 });
 var Letter = React.createClass(LetterClass);
+
+var Letter2Class = Object.assign({}, {}, {
+    mixins: [PureRenderMixin],
+    displayName: 'Letter',
+
+    propTypes: {
+        classNames: React.PropTypes.string,
+        cellSize: React.PropTypes.number
+    },
+
+    getInitialState: function () {
+        return {
+            classNames: this.props.classNames || "",
+            cellSize: this.props.cellSize || 0
+        };
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({
+            classNames: nextProps.classNames || "",
+            cellSize: nextProps.cellSize || 0
+        });
+    },
+
+    render: function () {
+        var cellStyle = {
+            height: (this.state.cellSize * 0.5) + "px",
+            width: (this.state.cellSize * 0.5) + "px",
+            lineHeight: (this.state.cellSize * 0.5) + "px"
+        };
+
+        return (
+            <div className={classNames(this.state.classNames, "letter")}
+                style={cellStyle}>
+                <span>{this.props.children}</span>
+            </div>
+        );
+    }
+
+});
+var Letter2 = React.createClass(Letter2Class);

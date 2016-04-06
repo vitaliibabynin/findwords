@@ -217,6 +217,19 @@ module.exports = {
         return this.removeMatchingValues(array, matchingValues);
     },
 
+    convertObjectToArray: function (object) {
+        var array = [];
+        for (var k in object) {
+            if (!object.hasOwnProperty(k)) {
+                continue;
+            }
+
+            array.push(object[k]);
+        }
+
+        return array;
+    },
+
     difference: function (a, b) {
         return Math.abs(a - b)
     },
