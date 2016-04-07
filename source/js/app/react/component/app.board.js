@@ -861,6 +861,19 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
         return (Math.abs(x - prevX) <= 1 && Math.abs(y - prevY) <= 1);
     },
 
+    chooseRowMargin: function (rowId, smallerCellSize) {
+
+
+        var rowStyles = {};
+
+        if (rowId % 2 != 0) {
+            rowStyles.transform = "translateX(" + smallerCellSize / 4 + "px)";
+        } else {
+            rowStyles.transform = "translateX(" + (-smallerCellSize / 4) + "px)";
+        }
+        return rowStyles;
+    },
+
     render: function () {
 
         //console.log({prevSelectedLetters: this.state.prevSelectedLetters});
@@ -869,14 +882,19 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
         //console.log({boardArr: this.state.boardArr});
         //console.log({selectedLetters: this.state.selectedLetters});
 
+        var smallerCellSize = (this.state.cellSize * (this.state.boardData.board.cols - 1)) / this.state.boardData.board.cols;
+        console.log(smallerCellSize);
+
         var boardArr = this.state.boardArr;
         var boardStyle = {
-            fontSize: (this.state.cellSize / 2) + "px"
+            fontSize: (smallerCellSize / 2) + "px",
+            width: this.state.cellSize * (this.state.boardData.board.cols - 1) + "px"
         };
 
-        var cellContainerWidth = {
-            width: this.state.cellSize * 0.75,
-            height: this.state.cellSize * 0.5
+        var cellStyle = {
+            height: smallerCellSize + "px",
+            lineHeight: smallerCellSize + "px",
+            width: smallerCellSize + "px"
         };
 
         return (
@@ -891,7 +909,8 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
 
                     {boardArr.map(function (row, rowId) {
                         return (
-                            <tr key={rowId}>
+                            <tr key={rowId}
+                                style={this.chooseRowMargin(rowId, smallerCellSize)}>
 
                                 {row.map(function (cell, cellId) {
 
@@ -902,20 +921,17 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
                                         }
                                         properties.push(cell.classNames[property]);
                                     }
-                                    var letterClassNames = classNames(
-                                        properties,
-                                        rowId % 2 == 0 ? "left" : "right"
-                                    );
+                                    var letterClassNames = classNames(properties);
 
                                     return (
                                         <td key={rowId + '/' + cellId}
-                                             style={cellContainerWidth}
+                                            style={cellStyle}
                                         >
-                                            <Letter2 key={rowId + '_' + cellId}
-                                                    classNames={letterClassNames}
-                                                    cellSize={this.state.cellSize}>
+                                            <LetterA2 key={rowId + '_' + cellId}
+                                                     classNames={letterClassNames}
+                                                     cellSize={smallerCellSize}>
                                                 {cell.letter}
-                                            </Letter2>
+                                            </LetterA2>
                                         </td>
                                     );
                                 }.bind(this))}
@@ -976,9 +992,9 @@ var LetterClass = Object.assign({}, {}, {
 });
 var Letter = React.createClass(LetterClass);
 
-var Letter2Class = Object.assign({}, {}, {
+var LetterA2Class = Object.assign({}, {}, {
     mixins: [PureRenderMixin],
-    displayName: 'Letter',
+    displayName: 'LetterA2',
 
     propTypes: {
         classNames: React.PropTypes.string,
@@ -1000,19 +1016,41 @@ var Letter2Class = Object.assign({}, {}, {
     },
 
     render: function () {
+        var scale = 0.75;
+
         var cellStyle = {
-            height: (this.state.cellSize * 0.5) + "px",
-            width: (this.state.cellSize * 0.5) + "px",
-            lineHeight: (this.state.cellSize * 0.5) + "px"
+            //height: this.state.cellSize + "px",
+            //lineHeight: this.state.cellSize + "px",
+            width: this.state.cellSize + "px",
+
+            height: (scale * this.state.cellSize) + "px",
+            lineHeight: (scale * this.state.cellSize) + "px"
+            //width: (scale * this.state.cellSize) + "px"
+        };
+
+        var topTriangleStyle = {
+            top: (-this.state.cellSize / 4) + "px",
+            borderLeftWidth: (this.state.cellSize / 2) + "px",
+            borderRightWidth: (this.state.cellSize / 2) + "px",
+            borderBottomWidth: (this.state.cellSize / 4) + "px"
+        };
+
+        var bottomTriangleStyle = {
+            bottom: (-this.state.cellSize / 4 + 1) + "px",
+            borderLeftWidth: (this.state.cellSize / 2) + "px",
+            borderRightWidth: (this.state.cellSize / 2) + "px",
+            borderTopWidth: (this.state.cellSize / 4) + "px"
         };
 
         return (
             <div className={classNames(this.state.classNames, "letter")}
-                style={cellStyle}>
+                 style={cellStyle}>
+                <div className="top-triangle" style={topTriangleStyle}></div>
                 <span>{this.props.children}</span>
+                <div className="bottom-triangle" style={bottomTriangleStyle}></div>
             </div>
         );
     }
 
 });
-var Letter2 = React.createClass(Letter2Class);
+var LetterA2 = React.createClass(LetterA2Class);
