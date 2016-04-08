@@ -867,9 +867,11 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
         var rowStyles = {};
 
         if (rowId % 2 != 0) {
-            rowStyles.transform = "translateX(" + smallerCellSize / 4 + "px)";
+            rowStyles.WebkitTransform = "translate(" + smallerCellSize / 4 + "px, 0)";
+            rowStyles.transform = "translate(" + smallerCellSize / 4 + "px, 0)";
         } else {
-            rowStyles.transform = "translateX(" + (-smallerCellSize / 4) + "px)";
+            rowStyles.WebkitTransform = "translate(" + (-smallerCellSize / 4) + "px, 0)";
+            rowStyles.transform = "translate(" + (-smallerCellSize / 4) + "px, 0)";
         }
         return rowStyles;
     },
