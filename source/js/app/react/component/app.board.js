@@ -1029,7 +1029,7 @@ var LetterA2Class = Object.assign({}, {}, {
         };
 
         var topTriangleStyle = {
-            top: (-this.state.cellSize / 4) + "px",
+            top: (-this.state.cellSize / 4 + 1) + "px",
             borderLeftWidth: (this.state.cellSize / 2) + "px",
             borderRightWidth: (this.state.cellSize / 2) + "px",
             borderBottomWidth: (this.state.cellSize / 4) + "px"
