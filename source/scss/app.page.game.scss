@@ -549,13 +549,147 @@
           background-color: rgba(225, 225, 225, 0);
           margin-left: auto;
           margin-right: auto;
-          //border-collapse: collapse;
+          border-collapse: collapse;
 
           tr {
+            padding: 0;
 
             td{
+              padding: 0;
+              text-align: center;
 
-              .letter {
+              .letter6 {
+                $size: 75px;
+
+                position: relative;
+                width: $size;
+                height: $size * 0.5774;
+                line-height: $size * 0.5774;
+                vertical-align: middle;
+                background-color: #64C7CC;
+                margin: $size * 0.2887 0;
+                border-left: solid 5px #333333;
+                border-right: solid 5px #333333;
+
+                .top-triangle,
+                .bottom-triangle {
+                  content: "";
+                  position: absolute;
+                  z-index: 1;
+                  width: $size * 0.7071;
+                  height: $size * 0.7071;
+                  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+                  -ms-transform: scaleY(0.5774) rotate(-45deg);
+                  transform: scaleY(0.5774) rotate(-45deg);
+                  background-color: inherit;
+                  left: $size * 0.096447;
+                }
+
+                .top-triangle {
+                  top: $size * -0.353553;
+                  border-top: solid 7.0711px #333333;
+                  border-right: solid 7.0711px #333333;
+                }
+
+                .bottom-triangle {
+                  bottom: $size * -0.353553;
+                  border-bottom: solid 7.0711px #333333;
+                  border-left: solid 7.0711px #333333;
+                }
+
+                span {
+                  position: relative;
+                  z-index: 10;
+                }
+              }
+
+
+              
+              .letter5 {
+                position: relative;
+                width: 0.75px;
+                height: 43.30px;
+                background-color: #64C7CC;
+                margin: 21.65px 0;
+                border-left: solid 5px #333333;
+                border-right: solid 5px #333333;
+
+                .top-triangle,
+                .bottom-triangle {
+                  content: "";
+                  position: absolute;
+                  z-index: 1;
+                  width: 53.03px;
+                  height: 53.03px;
+                  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+                  -ms-transform: scaleY(0.5774) rotate(-45deg);
+                  transform: scaleY(0.5774) rotate(-45deg);
+                  background-color: inherit;
+                  left: 5.9835px;
+                }
+
+                .top-triangle{
+                  top: -26.5165px;
+                  border-top: solid 7.0711px #333333;
+                  border-right: solid 7.0711px #333333;
+                }
+
+                .bottom-triangle {
+                  bottom: -26.5165px;
+                  border-bottom: solid 7.0711px #333333;
+                  border-left: solid 7.0711px #333333;
+                }
+
+                span {
+                  position: relative;
+                  z-index: 10;
+                }
+              }
+
+
+
+              .letter2 {
+                position: relative;
+                width: 75px;
+                height: 43.30px;
+                background-color: #64C7CC;
+                margin: 21.65px 0;
+                border-left: solid 5px #333333;
+                border-right: solid 5px #333333;
+
+                span {
+                  position: relative;
+                  z-index: 100;
+                }
+              }
+
+              .letter:before,
+              .letter:after {
+                content: "";
+                position: absolute;
+                z-index: 1;
+                width: 53.03px;
+                height: 53.03px;
+                -webkit-transform: scaleY(0.5774) rotate(-45deg);
+                -ms-transform: scaleY(0.5774) rotate(-45deg);
+                transform: scaleY(0.5774) rotate(-45deg);
+                background-color: inherit;
+                left: 5.9835px;
+              }
+
+              .letter:before {
+                top: -26.5165px;
+                border-top: solid 7.0711px #333333;
+                border-right: solid 7.0711px #333333;
+              }
+
+              .letter:after {
+                bottom: -26.5165px;
+                border-bottom: solid 7.0711px #333333;
+                border-left: solid 7.0711px #333333;
+              }
+
+              .letter3 {
                 position: relative;
                 //width: 100px;
                 //height: 57.74px;
@@ -563,6 +697,11 @@
                 //margin: 28.87px 0;
                 border-left: solid 1px $gamePage-board-td-bg-color-default;
                 border-right: solid 1px $gamePage-board-td-bg-color-default;
+
+                span {
+                  position: relative;
+                  z-index: 100;
+                }
 
                 .top-triangle,
                 .bottom-triangle {
@@ -596,11 +735,12 @@
                   border-left-color: $gamePage-board-td-bg-color-default;
                 }
               }
+
             }
           }
 
 
-          .letter2 {
+          .letterOld {
             $scale: 3.585 * 0.75;
             background-color: $gamePage-board-td-bg-color-default;
 

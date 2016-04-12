@@ -862,8 +862,6 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
     },
 
     chooseRowMargin: function (rowId, smallerCellSize) {
-
-
         var rowStyles = {};
 
         if (rowId % 2 != 0) {
@@ -895,7 +893,7 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
 
         var cellStyle = {
             height: smallerCellSize + "px",
-            lineHeight: smallerCellSize + "px",
+            //lineHeight: smallerCellSize + "px",
             width: smallerCellSize + "px"
         };
 
@@ -930,8 +928,8 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
                                             style={cellStyle}
                                         >
                                             <LetterA2 key={rowId + '_' + cellId}
-                                                     classNames={letterClassNames}
-                                                     cellSize={smallerCellSize}>
+                                                      classNames={letterClassNames}
+                                                      cellSize={smallerCellSize}>
                                                 {cell.letter}
                                             </LetterA2>
                                         </td>
@@ -1031,27 +1029,41 @@ var LetterA2Class = Object.assign({}, {}, {
         var topTriangleStyle = {
             width: (0.7071 * hexagramSize) + "px",
             height: (0.7071 * hexagramSize) + "px",
-            left: (0.96447 * hexagramSize) + "px",
-            top: (-0.353553 * hexagramSize) + "px",
-            borderTopWidth: (0.70711 * hexagramSize) + "px",
-            borderRightWidth: (0.70711 * hexagramSize) + "px"
+            left: (0.096447 * hexagramSize) + "px",
+            top: (-0.353553 * hexagramSize) + "px"
+            //borderTopWidth: (0.70711 * hexagramSize) + "px",
+            //borderRightWidth: (0.70711 * hexagramSize) + "px"
         };
 
         var bottomTriangleStyle = {
             width: (0.7071 * hexagramSize) + "px",
             height: (0.7071 * hexagramSize) + "px",
-            left: (0.96447 * hexagramSize) + "px",
-            bottom: (-0.353553 * hexagramSize) + "px",
-            borderBottomWidth: (0.70711 * hexagramSize) + "px",
-            borderLeftWidth: (0.70711 * hexagramSize) + "px"
+            left: (0.096447 * hexagramSize) + "px",
+            bottom: (-0.353553 * hexagramSize) + "px"
+            //borderBottomWidth: (0.70711 * hexagramSize) + "px",
+            //borderLeftWidth: (0.70711 * hexagramSize) + "px"
         };
 
+        //return (
+        //    <div className={classNames(this.state.classNames, "letter")}
+        //         style={cellStyle}>
+        //        <div className="top-triangle" style={topTriangleStyle}></div>
+        //        <span>{this.props.children}</span>
+        //        <div className="bottom-triangle" style={bottomTriangleStyle}></div>
+        //    </div>
+        //);
+
+        //return (
+        //    <div className={classNames(this.state.classNames, "letter")}>
+        //        <span>{this.props.children}</span>
+        //    </div>
+        //);
+
         return (
-            <div className={classNames(this.state.classNames, "letter")}
-                 style={cellStyle}>
-                <div className="top-triangle" style={topTriangleStyle}></div>
+            <div className={classNames(this.state.classNames, "letter6")}>
+                <div className="top-triangle"></div>
                 <span>{this.props.children}</span>
-                <div className="bottom-triangle" style={bottomTriangleStyle}></div>
+                <div className="bottom-triangle"></div>
             </div>
         );
     }
