@@ -1018,30 +1018,32 @@ var LetterA2Class = Object.assign({}, {}, {
     },
 
     render: function () {
-        var scale = 0.75;
+        var hexagramSize = this.state.cellSize / 2;
 
         var cellStyle = {
-            //height: this.state.cellSize + "px",
-            //lineHeight: this.state.cellSize + "px",
-            width: this.state.cellSize + "px",
-
-            height: (scale * this.state.cellSize) + "px",
-            lineHeight: (scale * this.state.cellSize) + "px"
-            //width: (scale * this.state.cellSize) + "px"
+            width: hexagramSize + "px",
+            height: (0.5774 * hexagramSize) + "px",
+            lineHeight: (0.5774 * hexagramSize) + "px",
+            marginTop: (0.2887 * hexagramSize) + "px",
+            marginBottom: (0.2887 * hexagramSize) + "px"
         };
 
         var topTriangleStyle = {
-            top: (-this.state.cellSize / 4 + 1) + "px",
-            borderLeftWidth: (this.state.cellSize / 2) + "px",
-            borderRightWidth: (this.state.cellSize / 2) + "px",
-            borderBottomWidth: (this.state.cellSize / 4) + "px"
+            width: (0.7071 * hexagramSize) + "px",
+            height: (0.7071 * hexagramSize) + "px",
+            left: (0.96447 * hexagramSize) + "px",
+            top: (-0.353553 * hexagramSize) + "px",
+            borderTopWidth: (0.70711 * hexagramSize) + "px",
+            borderRightWidth: (0.70711 * hexagramSize) + "px"
         };
 
         var bottomTriangleStyle = {
-            bottom: (-this.state.cellSize / 4 + 1) + "px",
-            borderLeftWidth: (this.state.cellSize / 2) + "px",
-            borderRightWidth: (this.state.cellSize / 2) + "px",
-            borderTopWidth: (this.state.cellSize / 4) + "px"
+            width: (0.7071 * hexagramSize) + "px",
+            height: (0.7071 * hexagramSize) + "px",
+            left: (0.96447 * hexagramSize) + "px",
+            bottom: (-0.353553 * hexagramSize) + "px",
+            borderBottomWidth: (0.70711 * hexagramSize) + "px",
+            borderLeftWidth: (0.70711 * hexagramSize) + "px"
         };
 
         return (

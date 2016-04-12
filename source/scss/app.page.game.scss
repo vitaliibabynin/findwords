@@ -551,7 +551,56 @@
           margin-right: auto;
           //border-collapse: collapse;
 
-          .letter {
+          tr {
+
+            td{
+
+              .letter {
+                position: relative;
+                //width: 100px;
+                //height: 57.74px;
+                background-color: $gamePage-board-td-bg-color-default;
+                //margin: 28.87px 0;
+                border-left: solid 1px $gamePage-board-td-bg-color-default;
+                border-right: solid 1px $gamePage-board-td-bg-color-default;
+
+                .top-triangle,
+                .bottom-triangle {
+                  content: "";
+                  position: absolute;
+                  z-index: 1;
+                  //width: 70.71px;
+                  //height: 70.71px;
+                  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+                  -ms-transform: scaleY(0.5774) rotate(-45deg);
+                  transform: scaleY(0.5774) rotate(-45deg);
+                  background-color: inherit;
+                  //left: 9.6447px;
+                }
+                .top-triangle {
+                  //top: -35.3553px;
+                  //border-top: solid 7.0711px #333333;
+                  border-top-style: solid;
+                  border-top-color: $gamePage-board-td-bg-color-default;
+                  //border-right: solid 7.0711px #333333;
+                  border-right-style: solid;
+                  border-right-color: $gamePage-board-td-bg-color-default;
+                }
+                .bottom-triangle {
+                  //bottom: -35.3553px;
+                  //border-bottom: solid 7.0711px #333333;
+                  border-bottom-style: solid;
+                  border-bottom-color: $gamePage-board-td-bg-color-default;
+                  //border-left: solid 7.0711px #333333;
+                  border-left-style: solid;
+                  border-left-color: $gamePage-board-td-bg-color-default;
+                }
+              }
+            }
+          }
+
+
+          .letter2 {
             $scale: 3.585 * 0.75;
             background-color: $gamePage-board-td-bg-color-default;
 
