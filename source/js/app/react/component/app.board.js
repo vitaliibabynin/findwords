@@ -864,12 +864,14 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
     chooseRowMargin: function (rowId, smallerCellSize) {
         var rowStyles = {};
 
+        var top = smallerCellSize * 0.18 * rowId * -1;
+
         if (rowId % 2 != 0) {
-            rowStyles.WebkitTransform = "translate(" + smallerCellSize / 4 + "px, 0)";
-            rowStyles.transform = "translate(" + smallerCellSize / 4 + "px, 0)";
+            rowStyles.WebkitTransform = "translate(" + smallerCellSize * 0.23 + "px, "+top+"px)";
+            rowStyles.transform = "translate(" + smallerCellSize * 0.23 + "px, "+top+"px)";
         } else {
-            rowStyles.WebkitTransform = "translate(" + (-smallerCellSize / 4) + "px, 0)";
-            rowStyles.transform = "translate(" + (-smallerCellSize / 4) + "px, 0)";
+            rowStyles.WebkitTransform = "translate(" + (-smallerCellSize * 0.25) + "px, "+top+"px)";
+            rowStyles.transform = "translate(" + (-smallerCellSize * 0.25) + "px, "+top+"px)";
         }
         return rowStyles;
     },
@@ -883,7 +885,7 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
         //console.log({selectedLetters: this.state.selectedLetters});
 
         var smallerCellSize = (this.state.cellSize * (this.state.boardData.board.cols - 1)) / this.state.boardData.board.cols;
-        console.log(smallerCellSize);
+        console.log('smallerCellSize', smallerCellSize);
 
         var boardArr = this.state.boardArr;
         var boardStyle = {
@@ -891,11 +893,7 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
             width: this.state.cellSize * (this.state.boardData.board.cols - 1) + "px"
         };
 
-        var cellStyle = {
-            height: smallerCellSize + "px",
-            //lineHeight: smallerCellSize + "px",
-            width: smallerCellSize + "px"
-        };
+
 
         return (
             <div className={classNames("game-board", this.state.boardExtraClass, this.state.boardType)}>
@@ -922,6 +920,14 @@ var BoardA2Class = Object.assign({}, BoardAbstractClass, {
                                         properties.push(cell.classNames[property]);
                                     }
                                     var letterClassNames = classNames(properties);
+
+                                    var cellStyle = {
+                                        height: smallerCellSize + "px",
+                                        //lineHeight: smallerCellSize + "px",
+                                        width: smallerCellSize + "px"
+                                    };
+                                    cellStyle.WebkitTransform = "translate(" + cellId * -5 + "px, 0)";
+                                    cellStyle.transform = "translate(" + cellId * -5 + "px, 0)";
 
                                     return (
                                         <td key={rowId + '/' + cellId}
@@ -1019,27 +1025,27 @@ var LetterA2Class = Object.assign({}, {}, {
         var hexagramSize = this.state.cellSize / 2;
 
         var cellStyle = {
-            width: hexagramSize + "px",
-            height: (0.5774 * hexagramSize) + "px",
-            lineHeight: (0.5774 * hexagramSize) + "px",
-            marginTop: (0.2887 * hexagramSize) + "px",
-            marginBottom: (0.2887 * hexagramSize) + "px"
+            width: this.state.cellSize + "px",
+            height: (0.5774 * this.state.cellSize) + "px",
+            lineHeight: (0.5774 * this.state.cellSize) + "px"
+            //marginTop: (0.2887 * hexagramSize) + "px",
+            //marginBottom: (0.2887 * hexagramSize) + "px"
         };
 
         var topTriangleStyle = {
-            width: (0.7071 * hexagramSize) + "px",
-            height: (0.7071 * hexagramSize) + "px",
-            left: (0.096447 * hexagramSize) + "px",
-            top: (-0.353553 * hexagramSize) + "px"
+            width: (0.7071 * this.state.cellSize) + "px",
+            height: (0.7071 * this.state.cellSize) + "px",
+            left: (0.090447 * this.state.cellSize) + "px",
+            top: (-0.353553 * this.state.cellSize) + "px"
             //borderTopWidth: (0.70711 * hexagramSize) + "px",
             //borderRightWidth: (0.70711 * hexagramSize) + "px"
         };
 
         var bottomTriangleStyle = {
-            width: (0.7071 * hexagramSize) + "px",
-            height: (0.7071 * hexagramSize) + "px",
-            left: (0.096447 * hexagramSize) + "px",
-            bottom: (-0.353553 * hexagramSize) + "px"
+            width: (0.7071 * this.state.cellSize) + "px",
+            height: (0.7071 * this.state.cellSize) + "px",
+            left: (0.090447 * this.state.cellSize) + "px",
+            bottom: (-0.353553 * this.state.cellSize) + "px"
             //borderBottomWidth: (0.70711 * hexagramSize) + "px",
             //borderLeftWidth: (0.70711 * hexagramSize) + "px"
         };
@@ -1060,13 +1066,52 @@ var LetterA2Class = Object.assign({}, {}, {
         //);
 
         return (
-            <div className={classNames(this.state.classNames, "letter6")}>
-                <div className="top-triangle"></div>
+            <div className={classNames(this.state.classNames, "letter6")} style={cellStyle}>
+                <div className="top-triangle" style={topTriangleStyle}></div>
                 <span>{this.props.children}</span>
-                <div className="bottom-triangle"></div>
+                <div className="bottom-triangle" style={bottomTriangleStyle}></div>
             </div>
         );
     }
 
 });
 var LetterA2 = React.createClass(LetterA2Class);
+
+
+//var points = [];
+//
+//var sideWidth = this.state.cellSize / 2;
+//points.push(sideWidth + ',' + 0);
+//points.push(this.state.cellSize + ',' + sideWidth/2);
+//points.push(this.state.cellSize + ',' + (sideWidth+sideWidth/2));
+//points.push(sideWidth + ',' + this.state.cellSize);
+//points.push(0 + ',' + (sideWidth+sideWidth/2));
+//points.push(0 + ',' + sideWidth/2);
+//
+//
+//
+////points.push(sideWidth*0.55 + ',' + 0);
+////points.push((sideWidth+sideWidth*0.55) + ',' + 0);
+////points.push(this.state.cellSize + ',' + sideWidth);
+////points.push((sideWidth+sideWidth*0.55) + ',' + this.state.cellSize);
+////points.push(sideWidth*0.55 + ',' + this.state.cellSize);
+////points.push(0 + ',' + sideWidth);
+//
+////points.push("70.444,218.89");
+////points.push("15.444,118.89");
+////points.push("70.444,18.89");
+////points.push("180.444,18.89");
+////points.push("235.444,118.89");
+////points.push("180.444,218.89");
+//
+////70.444,218.89 15.444,118.89 70.444,18.89 180.444,18.89 235.444,118.89 180.444,218.89
+//return (
+//    <div className={classNames(this.state.classNames, "letter6_1")} style={{width: 62.0625+'px', height: 62.0625+'px'}}>
+//        <svg style={{width: 62.0625+'px', height: 62.0625+'px'}}>
+//            <polygon points={points.join(" ")}
+//                     fill="rgb(234,234,234)" stroke-width="1" stroke="rgb(0,0,0)"/>
+//        </svg>
+//
+//
+//    </div>
+//);
