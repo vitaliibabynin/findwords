@@ -560,6 +560,10 @@
 
               .letter6 {
                 $size: 75px;
+                $borderSize: 2px;
+
+                $borderExtra: $borderSize * 1.4142;
+                $marginExtra: $size * 0.2887;
 
                 position: relative;
                 width: $size;
@@ -567,9 +571,9 @@
                 line-height: $size * 0.5774;
                 vertical-align: middle;
                 background-color: #64C7CC;
-                //margin: $size * 0.2887 0;
-                border-left: solid 5px #333333;
-                border-right: solid 5px #333333;
+                //margin: $marginExtra 0;
+                border-left: solid $borderSize #333333;
+                border-right: solid $borderSize #333333;
 
                 .top-triangle,
                 .bottom-triangle {
@@ -582,19 +586,19 @@
                   -ms-transform: scaleY(0.5774) rotate(-45deg);
                   transform: scaleY(0.5774) rotate(-45deg);
                   background-color: inherit;
-                  left: $size * 0.096447;
+                  left: ($size * 0.1464) - $borderSize;
                 }
 
                 .top-triangle {
                   top: $size * -0.353553;
-                  border-top: solid 7.0711px #333333;
-                  border-right: solid 7.0711px #333333;
+                  border-top: solid $borderExtra #333333;
+                  border-right: solid $borderExtra #333333;
                 }
 
                 .bottom-triangle {
                   bottom: $size * -0.353553;
-                  border-bottom: solid 7.0711px #333333;
-                  border-left: solid 7.0711px #333333;
+                  border-bottom: solid $borderExtra #333333;
+                  border-left: solid $borderExtra #333333;
                 }
 
                 span {
