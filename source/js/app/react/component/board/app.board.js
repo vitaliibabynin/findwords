@@ -70,8 +70,8 @@ module.exports.GameControl.Class = GameControlClass;
 
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
-var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
-var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
+var SELECT_DIFFERENTLY = require('./../app.notice.js').SELECT_DIFFERENTLY;
+var NO_SUCH_WORD = require('./../app.notice.js').NO_SUCH_WORD;
 
 
 var BoardAbstractClass = Object.assign({}, {}, {

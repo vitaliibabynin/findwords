@@ -10,10 +10,10 @@ var Object = {assign: require('react/lib/Object.assign')};
 var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
-var GameControl = require('./../component/app.board.js').GameControl;
-var BoardA1 = require('./../component/app.board.js').BoardA1;
-var BoardA2 = require('./../component/app.board.js').BoardA2;
-var Board = require('./../component/app.board.old.js').Board;
+//var GameControl = require('./../component/board/app.board.js').GameControl;
+//var BoardA1 = require('./../component/board/app.board.a1.js').BoardA1;
+var BoardA2 = require('./../component/board/app.board.a2.js').BoardA2;
+var Board = require('./../component/board/app.board.old.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownWords.js').ShownWords;
 
