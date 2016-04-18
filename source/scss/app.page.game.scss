@@ -567,7 +567,12 @@
 
                 background-color: #d4d3d6;
                 display: inline-block;
+                text-align: center;
 
+                span {
+                  position: relative;
+                  z-index: 5;
+                }
               }
               .letter:first-of-type{
                 margin-left: 0px;
