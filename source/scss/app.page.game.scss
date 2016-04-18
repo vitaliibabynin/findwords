@@ -554,18 +554,17 @@
           .row {
             padding: 0;
 
-
               .letter {
                 width: 100px;
                 height: 57.74px;
                 margin: 28.87px 0;
                 margin-left: -2px;
 
-                border-left: solid 2px #c23e60;
-                border-right: solid 2px #c23e60;
+                border-left: solid 2px $gamePage-board-color-border;
+                border-right: solid 2px $gamePage-board-color-border;
                 position: relative;
 
-                background-color: #d4d3d6;
+                background-color: $gamePage-board-td-bg-color-default;
                 display: inline-block;
                 text-align: center;
 
@@ -595,14 +594,14 @@
 
               .top-triangle {
                 top: -35.3553px;
-                border-top: solid 2.8284px #c23e60;
-                border-right: solid 2.8284px #c23e60;
+                border-top: solid 2.8284px $gamePage-board-color-border;
+                border-right: solid 2.8284px $gamePage-board-color-border;
               }
 
               .bottom-triangle {
                 bottom: -35.3553px;
-                border-bottom: solid 2.8284px #c23e60;
-                border-left: solid 2.8284px #c23e60;
+                border-bottom: solid 2.8284px $gamePage-board-color-border;
+                border-left: solid 2.8284px $gamePage-board-color-border;
               }
 
 

@@ -50,16 +50,24 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
         var smallerCellSize = (this.state.cellSize * (this.state.boardData.board.cols - 0.5)) / this.state.boardData.board.cols;
         console.log('smallerCellSize', smallerCellSize);
 
-        var boardArr = this.state.boardArr;
-        var boardStyle = {
-            fontSize: (smallerCellSize / 2) + "px",
-            width: this.state.cellSize * (this.state.boardData.board.cols /*- 1*/) + "px"
+        var gameBoardStyle = {
+            paddingTop: 1 + "px",
+            paddingBottom: 1 + "px"
         };
 
 
+        var boardArr = this.state.boardArr;
+        var boardStyle = {
+            fontSize: (smallerCellSize / 2) + "px",
+            width: this.state.cellSize * (this.state.boardData.board.cols /*- 1*/) + "px",
+            marginTop: ((0.7071 * (0.5774 * smallerCellSize)) - 1) + "px",
+            marginBottom: (0.7071 * (0.5774 * smallerCellSize)) + "px"
+        };
 
         return (
-            <div className={classNames("game-board", this.state.boardExtraClass, this.state.boardType)}>
+            <div className={classNames("game-board", this.state.boardExtraClass, this.state.boardType)}
+                 style={gameBoardStyle}
+            >
                 <div ref="board"
                        className="board"
                        onTouchStart={this.onTouchStart}
@@ -73,7 +81,7 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
                         var rowStyle = {
                             marginTop: (smallerCellSize * 0.2555) +'px',
                             zIndex: rowId+1
-                        }
+                        };
                         if(rowId % 2 != 0){
                             rowStyle.marginLeft = (smallerCellSize * 0.485) +'px';
                         }
