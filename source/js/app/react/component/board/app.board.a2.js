@@ -130,7 +130,7 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
         var boardX = screenX - clientRect.left;
         var boardY = screenY - clientRect.top;
 
-        console.log({boardX: boardX, boardY: boardY});
+        //console.log({boardX: boardX, boardY: boardY});
 
         var coordinatesTable = this.state.coordinatesTable;
 
@@ -164,6 +164,7 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
         console.log({x: x, y: y});
 
         if (x !== false && y !== false) {
+            this.lastXY = {x: x, y: y};
             return {x: x, y: y};
         }
 
