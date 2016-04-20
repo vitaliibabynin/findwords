@@ -13,6 +13,8 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
 
     displayName: 'BoardA2',
 
+    lastXY: {x: 0, y: 0},
+
     getInitialState: function () {
         var state = BoardAbstract.Class.getInitialState.apply(this);
         state.boardType = "board-a2";
@@ -20,23 +22,152 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
         return state;
     },
 
+    componentDidMount: function () {
+        var cellSize = this.calculateCellSize();
+        var smallerCellSize = this.calculateSmallerCellSize(cellSize);
+        var coordinatesTable = this.createCoordinatesTable(smallerCellSize);
+
+        this.setState({
+            cellSize: cellSize,
+            smallerCellSize: smallerCellSize,
+            coordinatesTable: coordinatesTable
+        });
+    },
+
+    calculateSmallerCellSize: function (cellSize) {
+        return (cellSize * (this.state.boardData.board.cols - 0.5)) / this.state.boardData.board.cols;
+    },
+
+    createCoordinatesTable: function (smallerCellSize) {
+        var table = {
+            y: {
+                //0: {
+                //    begin: 0,
+                //    end: 10,
+                //    x: {
+                //        0: {begin: 0, end: 10},
+                //        1: {begin: 11, end: 20}
+                //    }
+                //},
+                //1: {
+                //    begin: 11,
+                //    end: 20,
+                //    x: {
+                //        0: {begin: 0, end: 10},
+                //        1: {begin: 11, end: 20}
+                //    }
+                //}
+            }
+        };
+
+        var rows = this.state.boardData.board.rows;
+        var cols = this.state.boardData.board.cols;
+
+        var cellWidthX = smallerCellSize;
+        var cellHeightY = (0.5774 * smallerCellSize);
+
+        var marginTop = smallerCellSize * 0.2555;
+        var marginLeft = smallerCellSize * 0.485;
+
+        //first row
+        var lastEndY = cellHeightY;
+        table.y[0] = {begin: 0, end: lastEndY, x: {}};
+        var lastEndX = 0;
+        for (var l = 0; l < cols; l++) {
+            var endX = lastEndX + cellWidthX;
+            table.y[0].x[l] = {
+                begin: lastEndX,
+                end: endX
+            };
+            lastEndX = endX;
+        }
+
+        for (var i = 1; i < rows; i++) {
+            //y
+            var endY = lastEndY + marginTop + cellHeightY;
+            table.y[i] = {
+                begin: lastEndY + marginTop,
+                end: endY,
+                x: {}
+            };
+            lastEndY = endY;
+
+            //x
+            var firstBeginX = 0;
+            if (i % 2 != 0) {
+                firstBeginX = marginLeft;
+            }
+            lastEndX = firstBeginX + cellWidthX;
+            table.y[i].x[0] = {
+                begin: firstBeginX,
+                end: lastEndX
+            };
+            for (var j = 1; j < cols; j++) {
+                endX = lastEndX + cellWidthX;
+                table.y[i].x[j] = {
+                    begin: lastEndX,
+                    end: endX
+                };
+                lastEndX = endX;
+            }
+        }
+
+        console.log(table);
+
+        return table;
+    },
+
     checkWhichRules: function (x, y, prevX, prevY) {
         return (Math.abs(x - prevX) <= 1 && Math.abs(y - prevY) <= 1);
     },
 
-    chooseRowMargin: function (rowId, smallerCellSize) {
-        var rowStyles = {};
+    calcWhichCellIsTouched: function (e) {
+        var screenX = e.touches[0].clientX;
+        var screenY = e.touches[0].clientY;
 
-        var top = smallerCellSize * 0.18 * rowId * -1;
+        var clientRect = e.currentTarget.getBoundingClientRect();
 
-        if (rowId % 2 != 0) {
-            rowStyles.WebkitTransform = "translate(" + smallerCellSize * 0.23 + "px, "+top+"px)";
-            rowStyles.transform = "translate(" + smallerCellSize * 0.23 + "px, "+top+"px)";
-        } else {
-            rowStyles.WebkitTransform = "translate(" + (-smallerCellSize * 0.25) + "px, "+top+"px)";
-            rowStyles.transform = "translate(" + (-smallerCellSize * 0.25) + "px, "+top+"px)";
+        var boardX = screenX - clientRect.left;
+        var boardY = screenY - clientRect.top;
+
+        console.log({boardX: boardX, boardY: boardY});
+
+        var coordinatesTable = this.state.coordinatesTable;
+
+        var lastY = this.lastXY.y;
+        var lastX = this.lastXY.x;
+        if (boardY < coordinatesTable.y[lastY].end && boardY > coordinatesTable.y[lastY].begin) {
+            if (boardX < coordinatesTable.y[lastY].x[lastX].end && boardX > coordinatesTable.y[lastY].x[lastX].begin) {
+                return {x: lastX, y: lastY};
+            }
         }
-        return rowStyles;
+
+        var y = false;
+        var x = false;
+        for (var k in coordinatesTable.y) {
+            if (!coordinatesTable.y.hasOwnProperty(k)) {
+                continue;
+            }
+            if (boardY < coordinatesTable.y[k].end && boardY > coordinatesTable.y[k].begin) {
+                y = k;
+                for (var l in coordinatesTable.y[k].x) {
+                    if (!coordinatesTable.y[k].x.hasOwnProperty(l)) {
+                        continue;
+                    }
+                    if (boardX < coordinatesTable.y[k].x[l].end && boardX > coordinatesTable.y[k].x[l].begin) {
+                        x = l;
+                    }
+                }
+            }
+        }
+
+        console.log({x: x, y: y});
+
+        if (x !== false && y !== false) {
+            return {x: x, y: y};
+        }
+
+        return false;
     },
 
     render: function () {
@@ -47,21 +178,24 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
         //console.log({boardArr: this.state.boardArr});
         //console.log({selectedLetters: this.state.selectedLetters});
 
-        var smallerCellSize = (this.state.cellSize * (this.state.boardData.board.cols - 0.5)) / this.state.boardData.board.cols;
-        console.log('smallerCellSize', smallerCellSize);
+        //var smallerCellSize = (this.state.cellSize * (this.state.boardData.board.cols - 0.5)) / this.state.boardData.board.cols;
+        //console.log('smallerCellSize', smallerCellSize);
+
+        //console.log(this.state.smallerCellSize);
+
+        var boardArr = this.state.boardArr;
+        var smallerCellSize = this.state.smallerCellSize;
 
         var gameBoardStyle = {
             paddingTop: 1 + "px",
             paddingBottom: 1 + "px"
         };
 
-
-        var boardArr = this.state.boardArr;
         var boardStyle = {
             fontSize: (smallerCellSize / 2) + "px",
             width: this.state.cellSize * (this.state.boardData.board.cols /*- 1*/) + "px",
-            marginTop: ((0.7071 * (0.5774 * smallerCellSize)) - 1) + "px",
-            marginBottom: (0.7071 * (0.5774 * smallerCellSize)) + "px"
+            marginTop: (smallerCellSize * 0.2555) + "px",
+            marginBottom: (smallerCellSize * 0.2555) + "px"
         };
 
         return (
@@ -69,25 +203,24 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
                  style={gameBoardStyle}
             >
                 <div ref="board"
-                       className="board"
-                       onTouchStart={this.onTouchStart}
-                       onTouchMove={this.onTouchMove}
-                       onTouchEnd={this.onTouchEnd}
-                       onTouchCancel={this.onTouchCancel}
-                       style={boardStyle}>
+                     className="board"
+                     onTouchStart={this.onTouchStart}
+                     onTouchMove={this.onTouchMove}
+                     onTouchEnd={this.onTouchEnd}
+                     onTouchCancel={this.onTouchCancel}
+                     style={boardStyle}>
 
                     {boardArr.map(function (row, rowId) {
-                        //style={this.chooseRowMargin(rowId, smallerCellSize)}
                         var rowStyle = {
-                            marginTop: (smallerCellSize * 0.2555) +'px',
-                            zIndex: rowId+1
+                            marginTop: (smallerCellSize * 0.2555) + 'px',
+                            zIndex: rowId + 1
                         };
-                        if(rowId % 2 != 0){
-                            rowStyle.marginLeft = (smallerCellSize * 0.485) +'px';
+                        if (rowId % 2 != 0) {
+                            rowStyle.marginLeft = (smallerCellSize * 0.485) + 'px';
                         }
 
                         return (
-                            <div className="row" key={rowId} style={rowStyle} >
+                            <div className="row" key={rowId} style={rowStyle}>
 
                                 {row.map(function (cell, cellId) {
 
@@ -139,29 +272,23 @@ var LetterA2Class = Object.assign({}, Letter.Class, {
             width: this.props.cellSize + "px",
             height: (0.5774 * this.props.cellSize) + "px",
             lineHeight: (0.5774 * this.props.cellSize) + "px",
-            marginTop: 0.2887+'px',
-            marginBottom: 0.2887+'px',
-            zIndex: (this.props.rowId+1) * this.props.cellId
+            marginTop: 0.2887 + 'px',
+            marginBottom: 0.2887 + 'px',
+            zIndex: (this.props.rowId + 1) * this.props.cellId
         };
 
         var topTriangleStyle = {
             width: (0.7071 * this.props.cellSize) + "px",
             height: (0.7071 * this.props.cellSize) + "px",
-            left: ((0.136447 * this.props.cellSize)-1) + "px",
-
+            left: ((0.136447 * this.props.cellSize) - 1) + "px",
             top: (-0.353553 * this.props.cellSize) + "px"
-            //borderTopWidth: (0.70711 * hexagramSize) + "px",
-            //borderRightWidth: (0.70711 * hexagramSize) + "px"
         };
 
         var bottomTriangleStyle = {
             width: (0.7071 * this.props.cellSize) + "px",
             height: (0.7071 * this.props.cellSize) + "px",
-            left: ((0.136447 * this.props.cellSize)-1) + "px",
-
+            left: ((0.136447 * this.props.cellSize) - 1) + "px",
             bottom: (-0.353553 * this.props.cellSize) + "px"
-            //borderBottomWidth: (0.70711 * hexagramSize) + "px",
-            //borderLeftWidth: (0.70711 * hexagramSize) + "px"
         };
 
         return (

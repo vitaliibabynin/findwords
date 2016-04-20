@@ -102,7 +102,6 @@ module.exports.Letter = React.createClass(LetterClass);
 module.exports.Letter.Class = LetterClass;
 
 
-
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
 var SELECT_DIFFERENTLY = require('./../app.notice.js').SELECT_DIFFERENTLY;
@@ -325,11 +324,15 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
     componentDidMount: function () {
         this.setState({
-            cellSize: Math.min(
+            cellSize: this.calculateCellSize()
+        });
+    },
+
+    calculateCellSize: function () {
+        return Math.min(
                 ($('.game-board').width() - this.state.boardData.board.cols) / this.state.boardData.board.cols,
                 (this.props.boardMaxHeight - this.state.boardData.board.rows - 5) / this.state.boardData.board.rows
-            ) || 0
-        });
+            ) || 0;
     },
 
 
@@ -823,8 +826,8 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
                                     return (
                                         <module.exports.Letter key={rowId + '_' + cellId}
-                                                classNames={letterClassNames}
-                                                cellSize={this.state.cellSize}>
+                                                               classNames={letterClassNames}
+                                                               cellSize={this.state.cellSize}>
                                             {cell.letter}
                                         </module.exports.Letter>
                                     );
