@@ -118,7 +118,23 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
     },
 
     checkWhichRules: function (x, y, prevX, prevY) {
-        return (Math.abs(x - prevX) <= 1 && Math.abs(y - prevY) <= 1);
+        var result = false;
+
+        if (Math.abs(x - prevX) <= 1 && Math.abs(y - prevY) <= 1) {
+            result =  true;
+        }
+
+        if (y % 2 != 0) {
+            if (Math.abs(y - prevY) == 1 && x - prevX == 1) {
+                result = false;
+            }
+        } else {
+            if (Math.abs(y - prevY) == 1 && x - prevX == -1) {
+                result = false;
+            }
+        }
+
+        return result;
     },
 
     calcWhichCellIsTouched: function (e) {
@@ -161,7 +177,7 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
             }
         }
 
-        console.log({x: x, y: y});
+        //console.log({x: x, y: y});
 
         if (x !== false && y !== false) {
             this.lastXY = {x: x, y: y};
