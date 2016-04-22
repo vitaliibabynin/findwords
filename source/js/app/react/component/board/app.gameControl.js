@@ -2,10 +2,7 @@
 
 
 var Object = {assign: require('react/lib/Object.assign')};
-var classNames = require('classnames');
-
-var BoardA1 = require('./app.board.a1').BoardA1;
-var BoardA2 = require('./app.board.a2').BoardA2;
+//var classNames = require('classnames');
 
 
 module.exports = {};
@@ -15,6 +12,7 @@ var GameControlClass = Object.assign({}, {}, {
     displayName: 'GameControl',
 
     propTypes: {
+        boardType: React.PropTypes.func,
         boardMaxHeight: React.PropTypes.number,
         boardData: React.PropTypes.shape({
             board: React.PropTypes.shape({
@@ -41,6 +39,8 @@ var GameControlClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
+            boardType: this.props.boardType || function () {
+            },
             boardMaxHeight: this.props.boardMaxHeight || 0,
             boardData: this.props.boardData || {},
             board: this.props.board || {},
@@ -61,8 +61,10 @@ var GameControlClass = Object.assign({}, {}, {
 
     render: function () {
 
+        var BoardType = this.state.boardType;
+
         return (
-            <BoardA2
+            <BoardType
                 ref="board"
                 boardMaxHeight={this.state.boardMaxHeight}
                 boardData={this.state.boardData}

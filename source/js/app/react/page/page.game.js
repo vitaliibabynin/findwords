@@ -13,7 +13,6 @@ var ChipButton = require('./../component/app.button').ChipButton;
 var GameControl = require('./../component/board/app.gamecontrol.js').GameControl;
 var BoardA1 = require('./../component/board/app.board.a1.js').BoardA1;
 var BoardA2 = require('./../component/board/app.board.a2.js').BoardA2;
-//var Board = require('./../component/board/app.board.old.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownwords.js').ShownWords;
 
@@ -23,6 +22,7 @@ var PageGameAbstract = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
+            boardType: "boardA2",
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},
@@ -142,6 +142,18 @@ var PageGameAbstract = Object.assign({}, {}, {
                 appManager.getGameState().getScore(),
                 appManager.getGameState().getCompletedRoundsCount()
             );
+        }
+    },
+
+
+    selectBoardType: function () {
+        switch (this.state.boardType) {
+            case "boardA1":
+                return BoardA1;
+            case "boardA2":
+                return BoardA2;
+            default:
+                return BoardA1
         }
     },
 
@@ -267,6 +279,8 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
             backgroundImage: this.state.wallpaper
         };
 
+        var BoardType = this.selectBoardType();
+
         return (
             <div className="page page-game" style={wallpaper}>
 
@@ -279,7 +293,7 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
                 <div ref="pageContent" className="page-content">
 
                     <div className="container transform-center">
-                        {this.state.boardMaxHeight > 0 ? <BoardA2
+                        {this.state.boardMaxHeight > 0 ? <BoardType
                                                                     ref="board"
                                                                     boardMaxHeight={this.state.boardMaxHeight}
                                                                     boardData={this.state.boardData}
@@ -792,6 +806,8 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
             backgroundImage: this.state.wallpaper
         };
 
+        var BoardType = this.selectBoardType();
+
         return (
             <div className="page page-game" style={wallpaper}>
 
@@ -831,6 +847,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
                     <div className="container transform-center">
                         {this.state.boardMaxHeight > 0 ? <GameControl
                                                                     ref="board"
+                                                                    boardType={BoardType}
                                                                     boardMaxHeight={this.state.boardMaxHeight}
                                                                     boardData={this.state.boardData}
                                                                     board={this.state.board}

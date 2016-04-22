@@ -35,7 +35,7 @@ var BoardA1Class = Object.assign({}, BoardAbstract.Class, {
     },
 
     render: function () {
-        return BoardAbstractClass.render.apply(this);
+        return BoardAbstract.Class.render.apply(this);
     }
 
 });
