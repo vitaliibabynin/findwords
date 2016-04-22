@@ -399,8 +399,13 @@ var BoardAbstractClass = Object.assign({}, {}, {
         var completedWordIdxOrFalse = this.checkForCompletedWord();
         if (completedWordIdxOrFalse !== false) {
             appManager.getSFXManager().playButtonGameCorrect();
+
             this.addCompletedWordToBoard(completedWordIdxOrFalse, newState);
             this.setState(newState);
+
+            if (this.checkIfRoundComplete()) {
+                this.state.goToPageRoundComplete();
+            }
             return;
         }
 
@@ -783,6 +788,15 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
     setBoardGameState: function (board) {
         this.state.setGameStateRoundField('board', board);
+    },
+
+    checkIfRoundComplete: function () {
+        var board = this.state.board;
+        var wordsToFind = this.state.wordsToFind.words;
+
+        var boardLength = Utils.countObjectProperties(board);
+
+        return boardLength == wordsToFind.length;
     },
 
 

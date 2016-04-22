@@ -112,7 +112,7 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
             }
         }
 
-        console.log(table);
+        //console.log(table);
 
         return table;
     },
