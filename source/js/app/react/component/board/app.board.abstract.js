@@ -9,65 +9,6 @@ var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 module.exports = {};
 
 
-var GameControlClass = Object.assign({}, {}, {
-    displayName: 'GameControl',
-
-    propTypes: {
-        boardMaxHeight: React.PropTypes.number,
-        boardData: React.PropTypes.shape({
-            board: React.PropTypes.shape({
-                rows: React.PropTypes.number,
-                cols: React.PropTypes.number
-            }),
-            words: React.PropTypes.arrayOf(
-                React.PropTypes.shape({
-                    letters: React.PropTypes.arrayOf(
-                        React.PropTypes.shape({
-                            x: React.PropTypes.number,
-                            y: React.PropTypes.number,
-                            letter: React.PropTypes.string
-                        })
-                    )
-                })
-            )
-        }),
-        board: React.PropTypes.object,
-        setGameStateRoundField: React.PropTypes.func,
-        goToPageRoundComplete: React.PropTypes.func
-    },
-
-    getInitialState: function () {
-        var state = {
-            boardMaxHeight: this.props.boardMaxHeight || 0,
-            boardData: this.props.boardData || {},
-            board: this.props.board || {},
-            setGameStateRoundField: this.props.setGameStateRoundField || function () {
-            },
-            goToPageRoundComplete: this.props.goToPageRoundComplete || function () {
-            }
-        };
-
-        return state;
-    },
-
-    render: function () {
-
-        return (
-            <BoardType1
-                boardMaxHeight={this.state.boardMaxHeight}
-                boardData={this.state.boardData}
-                board={this.state.board}
-                goToPageRoundComplete={this.goToPageRoundComplete}
-            />
-        );
-
-    }
-
-});
-module.exports.GameControl = React.createClass(GameControlClass);
-module.exports.GameControl.Class = GameControlClass;
-
-
 var LetterClass = Object.assign({}, {}, {
     mixins: [PureRenderMixin],
     displayName: 'Letter',

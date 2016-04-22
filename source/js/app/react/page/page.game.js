@@ -10,12 +10,12 @@ var Object = {assign: require('react/lib/Object.assign')};
 var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
-//var GameControl = require('./../component/board/app.board.js').GameControl;
-//var BoardA1 = require('./../component/board/app.board.a1.js').BoardA1;
+var GameControl = require('./../component/board/app.gamecontrol.js').GameControl;
+var BoardA1 = require('./../component/board/app.board.a1.js').BoardA1;
 var BoardA2 = require('./../component/board/app.board.a2.js').BoardA2;
-var Board = require('./../component/board/app.board.old.js').Board;
+//var Board = require('./../component/board/app.board.old.js').Board;
 var Notice = require('./../component/app.notice.js').Notice;
-var ShownWords = require('./../component/app.shownWords.js').ShownWords;
+var ShownWords = require('./../component/app.shownwords.js').ShownWords;
 
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
 
@@ -829,7 +829,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
                 <div ref="pageContent" className="page-content" style={pageContentHeight}>
 
                     <div className="container transform-center">
-                        {this.state.boardMaxHeight > 0 ? <Board
+                        {this.state.boardMaxHeight > 0 ? <GameControl
                                                                     ref="board"
                                                                     boardMaxHeight={this.state.boardMaxHeight}
                                                                     boardData={this.state.boardData}
