@@ -741,6 +741,40 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
 
+    getWordsToFind: function () {
+        return this.state.wordsToFind;
+    },
+
+    getBoard: function () {
+        return this.state.board;
+    },
+
+    openWord: function (index) {
+        var backgroundColor = this.selectWordBackgroundColor();
+        this.nextColorIdx();
+
+        var board = this.state.board;
+        board[index] = {
+            color: backgroundColor,
+            openWord: true
+        };
+        this.state.setGameStateRoundField('board', board);
+
+        appManager.getSFXManager().playButtonGameCorrect();
+
+        var currentWord = this.state.wordsToFind.words[index];
+        var boardArr = this.state.boardArr;
+        this.addLettersInFoundWord(currentWord, backgroundColor, boardArr);
+
+        if (this.isMounted()) {
+            this.setState({
+                boardArr: boardArr,
+                board: board
+            });
+        }
+    },
+
+
     render: function () {
 
         //console.log({prevSelectedLetters: this.state.prevSelectedLetters});

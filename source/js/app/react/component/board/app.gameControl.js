@@ -56,8 +56,39 @@ var GameControlClass = Object.assign({}, {}, {
     },
 
     emptySelectedLetters: function () {
-        this.refs.board.emptySelectedLetters();
+        return this.refs.board.emptySelectedLetters();
     },
+
+    getUnopenedWordIndex: function (wordsToFind) {
+        var board = this.refs.board.getBoard();
+
+        var index = false;
+
+        for (var i = 0; i < wordsToFind.words.length; i++) {
+            if (!board[i] || board[i].openWord === false) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
+    },
+
+    openWord: function () {
+        var wordsToFind = this.refs.board.getWordsToFind();
+        var index = this.getUnopenedWordIndex(wordsToFind);
+
+        if (index === false) {
+            return false;
+        }
+
+        this.refs.board.openWord(index);
+    },
+
+    checkIfRoundComplete: function () {
+        return this.refs.board.checkIfRoundComplete();
+    },
+
 
     render: function () {
 
