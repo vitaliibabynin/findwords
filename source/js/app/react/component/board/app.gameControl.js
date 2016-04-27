@@ -34,7 +34,10 @@ var GameControlClass = Object.assign({}, {}, {
         board: React.PropTypes.object,
         displayNotice: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
-        goToPageRoundComplete: React.PropTypes.func
+        goToPageRoundComplete: React.PropTypes.func,
+        shownWords: React.PropTypes.arrayOf(React.PropTypes.number),
+        addToShownWords: React.PropTypes.func,
+        removeWordFromShownWords: React.PropTypes.func
     },
 
     getInitialState: function () {
@@ -49,6 +52,11 @@ var GameControlClass = Object.assign({}, {}, {
             setGameStateRoundField: this.props.setGameStateRoundField || function () {
             },
             goToPageRoundComplete: this.props.goToPageRoundComplete || function () {
+            },
+            shownWords: this.props.shownWords || [],
+            addToShownWords: this.props.addToShownWords || function () {
+            },
+            removeWordFromShownWords: this.props.removeWordFromShownWords || function () {
             }
         };
 
@@ -83,6 +91,72 @@ var GameControlClass = Object.assign({}, {}, {
         }
 
         this.refs.board.openWord(index);
+
+        this.removeFromShownWordsIfShown(index);
+    },
+
+    sendWordToShowToPageGame: function () {
+        var wordArr = this.getUnopenedUnshownWordAndIndex();
+
+        if (!wordArr) {
+            return false;
+        }
+
+        this.state.addToShownWords(wordArr[0], wordArr[1]);
+    },
+
+    getUnopenedUnshownWordAndIndex: function () {
+        var words = this.refs.board.getWordsToFind().words;
+        var board = this.refs.board.getBoard();
+
+        if (board.length == words.length) {
+            return false;
+        }
+
+        for (var wordIdx = 0; wordIdx < words.length; wordIdx++) {
+            var word = words[wordIdx].letters;
+
+            var wordIsOpen = this.checkIfWordIsOpen(wordIdx);
+            var wordIsShown = this.checkIfWordIsShown(wordIdx);
+
+            if (!wordIsOpen && !wordIsShown) {
+                return [word, wordIdx];
+            }
+        }
+
+        return false;
+    },
+
+    checkIfWordIsOpen: function (wordIdx) {
+        var board = this.state.board;
+
+        if (!board.hasOwnProperty(wordIdx)) {
+            return false;
+        }
+
+        return board[wordIdx].openWord;
+    },
+
+    checkIfWordIsShown: function (wordIdx) {
+        var shownWords = this.state.shownWords;
+
+        if (shownWords.length == 0) {
+            return false;
+        }
+
+        for (var shownWordIdx = 0; shownWordIdx < shownWords.length; shownWordIdx++) {
+            if (shownWords[shownWordIdx] === wordIdx) {
+                return true;
+            }
+        }
+
+        return false;
+    },
+
+    removeFromShownWordsIfShown: function (index) {
+        if (this.checkIfWordIsShown(index)) {
+            this.state.removeWordFromShownWords(index);
+        }
     },
 
     checkIfRoundComplete: function () {
@@ -103,6 +177,7 @@ var GameControlClass = Object.assign({}, {}, {
                 displayNotice={this.state.displayNotice}
                 setGameStateRoundField={this.state.setGameStateRoundField}
                 goToPageRoundComplete={this.state.goToPageRoundComplete}
+                removeFromShownWordsIfShown={this.removeFromShownWordsIfShown}
             />
         );
 

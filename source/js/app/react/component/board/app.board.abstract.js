@@ -74,7 +74,8 @@ var BoardAbstractClass = Object.assign({}, {}, {
         isPracticeRound: React.PropTypes.bool,
         displayNotice: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
-        goToPageRoundComplete: React.PropTypes.func
+        goToPageRoundComplete: React.PropTypes.func,
+        removeFromShownWordsIfShown: React.PropTypes.func
     },
 
 
@@ -108,6 +109,10 @@ var BoardAbstractClass = Object.assign({}, {}, {
             },
 
             goToPageRoundComplete: this.props.goToPageRoundComplete || function () {
+            },
+
+            //removes shown words
+            removeFromShownWordsIfShown: this.props.removeFromShownWordsIfShown || function () {
             }
         };
 
@@ -343,6 +348,8 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
             this.addCompletedWordToBoard(completedWordIdxOrFalse, newState);
             this.setState(newState);
+
+            this.state.removeFromShownWordsIfShown(completedWordIdxOrFalse);
 
             if (this.checkIfRoundComplete()) {
                 this.state.goToPageRoundComplete();

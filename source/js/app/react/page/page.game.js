@@ -515,9 +515,6 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
             return false;
         }
 
-        console.log(field, roundsBundleIdx, roundIdx);
-        console.log(appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field]);
-
         return appManager.getGameState().getRound(roundsBundleIdx, roundIdx)[field];
     },
 
@@ -552,24 +549,6 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         }
 
         this.chipProcessing = false;
-
-
-        //this.refs.board.openWord().then(function (result) {
-        //    appAnalytics.trackEvent('chips', 'openWord-charged', 'charged', 1);
-        //    var newCoins = coins - this.state.chipsOpenWord;
-        //    appManager.getGameState().setCoins(newCoins);
-        //
-        //    //console.log("promise returned resolve");
-        //
-        //    if (this.refs.board.checkIfRoundComplete()) {
-        //        //this.goToPageRoundComplete(2000);
-        //        this.goToPageRoundComplete();
-        //        this.chipProcessing = false;
-        //        return;
-        //    }
-        //
-        //    this.chipProcessing = false;
-        //}.bind(this));
     },
 
     onChipOpenLetterClick: function () {
