@@ -45,6 +45,18 @@ module.exports.Letter.Class = LetterClass;
 
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
+
+var LINK_VISIBLE = "visible";
+
+var BEFORE_LINK_TOP = "before-link-top";
+var BEFORE_LINK_RIGHT = "before-link-right";
+var BEFORE_LINK_BOTTOM = "before-link-bottom";
+var BEFORE_LINK_LEFT = "before-link-left";
+var AFTER_LINK_TOP = "after-link-top";
+var AFTER_LINK_RIGHT = "after-link-right";
+var AFTER_LINK_BOTTOM = "after-link-bottom";
+var AFTER_LINK_LEFT = "after-link-left";
+
 var SELECT_DIFFERENTLY = require('./../app.notice.js').SELECT_DIFFERENTLY;
 var NO_SUCH_WORD = require('./../app.notice.js').NO_SUCH_WORD;
 
@@ -464,6 +476,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         boardArr[y][x].classNames.backgroundColor = this.selectWordBackgroundColor();
         boardArr[y][x].classNames.color = COLOR_SELECTED;
+        boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
 
         newState.boardArr = boardArr;
         newState.selectedLetters = selectedLetters;
@@ -488,25 +501,29 @@ var BoardAbstractClass = Object.assign({}, {}, {
         boardArr[y][x].classNames.backgroundColor = prevColor;
         boardArr[y][x].classNames.color = COLOR_SELECTED;
 
-        //if (y == prevY + 1 && x == prevX) {
-        //    boardArr[y][x].classNames.backgroundColor = prevColor;
-        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
-        //}
-        //
-        //if (y == prevY - 1 && x == prevX) {
-        //    boardArr[y][x].classNames.backgroundColor = prevColor;
-        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
-        //}
-        //
-        //if (x == prevX + 1 && y == prevY) {
-        //    boardArr[y][x].classNames.backgroundColor = prevColor;
-        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
-        //}
-        //
-        //if (x == prevX - 1 && y == prevY) {
-        //    boardArr[y][x].classNames.backgroundColor = prevColor;
-        //    boardArr[y][x].classNames.color = COLOR_SELECTED;
-        //}
+        if (y == prevY + 1 && x == prevX) {
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+        }
+
+        if (y == prevY - 1 && x == prevX) {
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+        }
+
+        if (x == prevX + 1 && y == prevY) {
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_LEFT;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+        }
+
+        if (x == prevX - 1 && y == prevY) {
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_RIGHT;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
+        }
 
         newState.boardArr = boardArr;
         newState.selectedLetters = selectedLetters;
@@ -517,6 +534,9 @@ var BoardAbstractClass = Object.assign({}, {}, {
         var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters : this.state.selectedLetters;
 
         for (var i = 0; i < selectedLetters.letters.length; i++) {
+            delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.linkBefore;
+            delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.linkAfter;
+            delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.linkVisibility;
             delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.backgroundColor;
             delete boardArr[selectedLetters.letters[i].y][selectedLetters.letters[i].x].classNames.color;
         }
@@ -549,6 +569,9 @@ var BoardAbstractClass = Object.assign({}, {}, {
         var selectedIdx = newState && newState.selectedLetters ? newState.selectedLetters.idx : this.state.selectedLetters.idx;
 
         for (var i = index + 1; i < selectedLetters.length; i++) {
+            delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkBefore;
+            delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkAfter;
+            delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkVisibility;
             delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.backgroundColor;
             delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color;
             delete selectedIdx[selectedLetters[i].y + '_' + selectedLetters[i].x];

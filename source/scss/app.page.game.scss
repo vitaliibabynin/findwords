@@ -249,13 +249,8 @@
       &.board-a1 {
 
         .board {
-          //border-collapse: collapse;
-          //border: 0.0625rem solid $gamePage-board-color-border;
-          border: none; //1px solid $gamePage-board-color-border;
-          //background-color: $gamePage-board-td-bg-color-default;
+          border: none;
           color: $gamePage-board-color;
-          //table-layout: fixed;
-
           border-spacing: 1px;
           padding: 0;
           background-color: $gamePage-board-color-border;
@@ -268,20 +263,10 @@
             text-align: center;
             vertical-align: middle;
             text-transform: uppercase;
-            //overflow: hidden;
             white-space: nowrap;
-            //border: none;
             line-height: 100%;
             padding: 0;
-            //background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border .0625rem),
-            //linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
-            //background-size: 100% 100%, 200% 100%;
-            //background-position: 0 0, 0 0;
-            //background-repeat: no-repeat;
-
             background-color: $gamePage-board-td-bg-color-default;
-            //border-bottom: 1px solid $gamePage-board-color-border;
-            //border-right: 1px solid $gamePage-board-color-border;
 
             &.open-letter-before-link-top:before,
             &.open-letter-before-link-right:before,
@@ -411,13 +396,6 @@
               left: -1px;
             }
 
-            &.open-letter {
-              color: $gamePage-board-td-color-open-letter;
-            }
-            &.selected {
-              color: $gamePage-board-td-color-selected;
-            }
-
             //@-webkit-keyframes fontbulger {
             //  0% {
             //    -webkit-transform: scale(1.5, 1.5);
@@ -441,426 +419,11 @@
             //  }
             //}
 
-            &.completed {
-              color: $gamePage-board-td-color-complete;
-            }
             //&.animation span {
             //  -webkit-animation: fontbulger 0.2s;
             //  animation: fontbulger 0.2s;
             //}
 
-            &:last-of-type {
-              border-right: none;
-            }
-          }
-
-          tr:last-of-type {
-            td {
-              border-bottom: none;
-            }
-          }
-
-          /*
-                  tr {
-                    td:last-child {
-                      //background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, transparent 0.0625rem),
-                      //linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, $gamePage-board-color-border 0.0625rem);
-                    }
-                  }
-
-                  tr:last-child {
-
-                    td {
-                      background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent 98.8%, $gamePage-board-color-border 0.0625rem),
-                      linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent 98.829%, transparent 0.0625rem);
-                    }
-                    td:last-child {
-                      background-image: none;
-                    }
-                  }
-          */
-          td {
-            &.bg-color-1 {
-              background-color: $gamePage-board-td-bg-color-1;
-            }
-            &.bg-color-2 {
-              background-color: $gamePage-board-td-bg-color-2;
-            }
-            &.bg-color-3 {
-              background-color: $gamePage-board-td-bg-color-3;
-            }
-            &.bg-color-4 {
-              background-color: $gamePage-board-td-bg-color-4;
-            }
-            &.bg-color-5 {
-              background-color: $gamePage-board-td-bg-color-5;
-            }
-            &.bg-color-6 {
-              background-color: $gamePage-board-td-bg-color-6;
-            }
-            &.bg-color-7 {
-              background-color: $gamePage-board-td-bg-color-7;
-            }
-            &.bg-color-8 {
-              background-color: $gamePage-board-td-bg-color-8;
-            }
-            &.bg-color-9 {
-              background-color: $gamePage-board-td-bg-color-9;
-            }
-            &.bg-color-10 {
-              background-color: $gamePage-board-td-bg-color-10;
-            }
-            &.bg-color-11 {
-              background-color: $gamePage-board-td-bg-color-11;
-            }
-            &.bg-color-12 {
-              background-color: $gamePage-board-td-bg-color-12;
-            }
-            &.bg-color-13 {
-              background-color: $gamePage-board-td-bg-color-13;
-            }
-            &.bg-color-14 {
-              background-color: $gamePage-board-td-bg-color-14;
-            }
-            &.bg-color-15 {
-              background-color: $gamePage-board-td-bg-color-15;
-            }
-            &.learn-bg-color-1 {
-              background-color: $gamePage-board-td-learn-bg-color-1;
-            }
-            &.learn-bg-color-2 {
-              background-color: $gamePage-board-td-learn-bg-color-2;
-            }
-            &.learn-bg-color-3 {
-              background-color: $gamePage-board-td-learn-bg-color-3;
-            }
-          }
-        }
-      }
-
-      &.board-a2 {
-        .board {
-          //border: none;
-          color: $gamePage-board-color;
-
-          //border-spacing: 1px;
-          padding: 0;
-          //background-color: $gamePage-board-color-border;
-          background-color: rgba(225, 225, 225, 0);
-          margin-left: auto;
-          margin-right: auto;
-          border-collapse: collapse;
-
-          .row {
-            padding: 0;
-
-              .letter {
-                width: 100px;
-                height: 57.74px;
-                margin: 28.87px 0;
-                margin-left: -2px;
-
-                border-left: solid 2px $gamePage-board-color-border;
-                border-right: solid 2px $gamePage-board-color-border;
-                position: relative;
-
-                background-color: $gamePage-board-td-bg-color-default;
-                display: inline-block;
-                text-align: center;
-
-                span {
-                  position: relative;
-                  z-index: 5;
-                }
-              }
-              .letter:first-of-type{
-                margin-left: 0px;
-              }
-
-              .top-triangle,
-              .bottom-triangle {
-                width: 70.71px;
-                height: 70.71px;
-                left: 13.6447px;
-
-                content: "";
-                position: absolute;
-                z-index: 1;
-                -webkit-transform: scaleY(0.5774) rotate(-45deg);
-                -ms-transform: scaleY(0.5774) rotate(-45deg);
-                transform: scaleY(0.5774) rotate(-45deg);
-                background-color: inherit;
-              }
-
-              .top-triangle {
-                top: -35.3553px;
-                border-top: solid 2.8284px $gamePage-board-color-border;
-                border-right: solid 2.8284px $gamePage-board-color-border;
-              }
-
-              .bottom-triangle {
-                bottom: -35.3553px;
-                border-bottom: solid 2.8284px $gamePage-board-color-border;
-                border-left: solid 2.8284px $gamePage-board-color-border;
-              }
-
-
-              .letter6 {
-                $size: 75px;
-
-                position: relative;
-                width: $size;
-                height: $size * 0.5774;
-                line-height: $size * 0.5774;
-                vertical-align: middle;
-                background-color: #64C7CC;
-                //margin: $size * 0.2887 0;
-                border-left: solid 5px #333333;
-                border-right: solid 5px #333333;
-
-                .top-triangle,
-                .bottom-triangle {
-                  content: "";
-                  position: absolute;
-                  z-index: 1;
-                  width: $size * 0.7071;
-                  height: $size * 0.7071;
-                  -webkit-transform: scaleY(0.5774) rotate(-45deg);
-                  -ms-transform: scaleY(0.5774) rotate(-45deg);
-                  transform: scaleY(0.5774) rotate(-45deg);
-                  background-color: inherit;
-                  left: $size * 0.096447;
-                }
-
-                .top-triangle {
-                  top: $size * -0.353553;
-                  border-top: solid 7.0711px #333333;
-                  border-right: solid 7.0711px #333333;
-                }
-
-                .bottom-triangle {
-                  bottom: $size * -0.353553;
-                  border-bottom: solid 7.0711px #333333;
-                  border-left: solid 7.0711px #333333;
-                }
-
-                span {
-                  position: relative;
-                  z-index: 10;
-                }
-              }
-
-              .letter5 {
-                position: relative;
-                width: 0.75px;
-                height: 43.30px;
-                background-color: #64C7CC;
-                margin: 21.65px 0;
-                border-left: solid 5px #333333;
-                border-right: solid 5px #333333;
-
-                .top-triangle,
-                .bottom-triangle {
-                  content: "";
-                  position: absolute;
-                  z-index: 1;
-                  width: 53.03px;
-                  height: 53.03px;
-                  -webkit-transform: scaleY(0.5774) rotate(-45deg);
-                  -ms-transform: scaleY(0.5774) rotate(-45deg);
-                  transform: scaleY(0.5774) rotate(-45deg);
-                  background-color: inherit;
-                  left: 5.9835px;
-                }
-
-                .top-triangle{
-                  top: -26.5165px;
-                  border-top: solid 7.0711px #333333;
-                  border-right: solid 7.0711px #333333;
-                }
-
-                .bottom-triangle {
-                  bottom: -26.5165px;
-                  border-bottom: solid 7.0711px #333333;
-                  border-left: solid 7.0711px #333333;
-                }
-
-                span {
-                  position: relative;
-                  z-index: 10;
-                }
-              }
-
-              .letter2 {
-                position: relative;
-                width: 75px;
-                height: 43.30px;
-                background-color: #64C7CC;
-                margin: 21.65px 0;
-                border-left: solid 5px #333333;
-                border-right: solid 5px #333333;
-
-                span {
-                  position: relative;
-                  z-index: 100;
-                }
-              }
-
-              .letter8:before,
-              .letter8:after {
-                content: "";
-                position: absolute;
-                z-index: 1;
-                width: 53.03px;
-                height: 53.03px;
-                -webkit-transform: scaleY(0.5774) rotate(-45deg);
-                -ms-transform: scaleY(0.5774) rotate(-45deg);
-                transform: scaleY(0.5774) rotate(-45deg);
-                background-color: inherit;
-                left: 5.9835px;
-              }
-
-              .letter8:before {
-                top: -26.5165px;
-                border-top: solid 7.0711px #333333;
-                border-right: solid 7.0711px #333333;
-              }
-
-              .letter8:after {
-                bottom: -26.5165px;
-                border-bottom: solid 7.0711px #333333;
-                border-left: solid 7.0711px #333333;
-              }
-
-              .letter8 {
-                position: relative;
-                //width: 100px;
-                //height: 57.74px;
-                background-color: $gamePage-board-td-bg-color-default;
-                //margin: 28.87px 0;
-                border-left: solid 1px $gamePage-board-td-bg-color-default;
-                border-right: solid 1px $gamePage-board-td-bg-color-default;
-
-                span {
-                  position: relative;
-                  z-index: 100;
-                }
-
-                .top-triangle,
-                .bottom-triangle {
-                  content: "";
-                  position: absolute;
-                  z-index: 1;
-                  //width: 70.71px;
-                  //height: 70.71px;
-                  -webkit-transform: scaleY(0.5774) rotate(-45deg);
-                  -ms-transform: scaleY(0.5774) rotate(-45deg);
-                  transform: scaleY(0.5774) rotate(-45deg);
-                  background-color: inherit;
-                  //left: 9.6447px;
-                }
-                .top-triangle {
-                  //top: -35.3553px;
-                  //border-top: solid 7.0711px #333333;
-                  border-top-style: solid;
-                  border-top-color: $gamePage-board-td-bg-color-default;
-                  //border-right: solid 7.0711px #333333;
-                  border-right-style: solid;
-                  border-right-color: $gamePage-board-td-bg-color-default;
-                }
-                .bottom-triangle {
-                  //bottom: -35.3553px;
-                  //border-bottom: solid 7.0711px #333333;
-                  border-bottom-style: solid;
-                  border-bottom-color: $gamePage-board-td-bg-color-default;
-                  //border-left: solid 7.0711px #333333;
-                  border-left-style: solid;
-                  border-left-color: $gamePage-board-td-bg-color-default;
-                }
-              }
-
-          }
-
-
-          .letterOld {
-            $scale: 3.585 * 0.75;
-            background-color: $gamePage-board-td-bg-color-default;
-
-            cursor: pointer;
-            position: relative;
-            text-align: center;
-            vertical-align: middle;
-            text-transform: uppercase;
-            white-space: nowrap;
-            //line-height: 100%;
-            padding: 0;
-            //border-left: 1px solid $gamePage-board-color-border;
-            //border-right: 1px solid $gamePage-board-color-border;
-
-            //width: 100px * $scale;
-            //height: 55px * $scale;
-            //margin: (10px * $scale) auto;
-            //background: #fc5e5e;
-
-            .top-triangle {
-              content: '';
-              width: 0;
-              height: 0;
-              position: absolute;
-              //top: -25px * $scale;
-              left: 0;
-              //border-left: (50px * $scale) solid transparent;
-              border-left-style: solid;
-              border-left-color: transparent;
-              border-right-style: solid;
-              border-right-color: transparent;
-              //border-right: (50px * $scale) solid transparent;
-              //border-bottom: (25px * $scale) solid #fc5e5e;
-              border-bottom-style: solid;
-              border-bottom-color: $gamePage-board-td-bg-color-default;
-
-            }
-
-            .bottom-triangle {
-              content: '';
-              width: 0;
-              height: 0;
-              position: absolute;
-              //bottom: -25px * $scale;
-              left: 0;
-              border-left-style: solid;
-              border-left-color: transparent;
-              border-right-style: solid;
-              border-right-color: transparent;
-              //border-left: (50px * $scale) solid transparent;
-              //border-right: (50px * $scale) solid transparent;
-              //border-top: (25px * $scale) solid #fc5e5e;
-              border-top-style: solid;
-              border-top-color: $gamePage-board-td-bg-color-default;
-            }
-
-            //background-color: $gamePage-board-td-bg-color-default;
-
-            &.selected {
-              color: $gamePage-board-td-color-selected;
-            }
-
-            &.completed {
-              color: $gamePage-board-td-color-complete;
-            }
-
-            &:last-of-type {
-              //border-right: none;
-            }
-          }
-
-          tr:last-of-type {
-            td {
-              //border-bottom: none;
-            }
-          }
-
-          .letter {
             &.open-letter {
               color: $gamePage-board-td-color-open-letter;
             }
@@ -949,6 +512,154 @@
           }
         }
       }
+
+      &.board-a2 {
+        .board {
+          color: $gamePage-board-color;
+          padding: 0;
+          background-color: rgba(225, 225, 225, 0);
+          margin-left: auto;
+          margin-right: auto;
+          border-collapse: collapse;
+
+          .row {
+            padding: 0;
+
+            .letter {
+              margin: 28.87px 0;
+              margin-left: -2px;
+
+              border-left: solid 2px $gamePage-board-color-border;
+              border-right: solid 2px $gamePage-board-color-border;
+              position: relative;
+
+              background-color: $gamePage-board-td-bg-color-default;
+              display: inline-block;
+              text-align: center;
+
+              span {
+                position: relative;
+                z-index: 5;
+              }
+            }
+            .letter:first-of-type {
+              margin-left: 0px;
+            }
+
+            .top-triangle,
+            .bottom-triangle {
+              left: 13.6447px;
+
+              content: "";
+              position: absolute;
+              z-index: 1;
+              -webkit-transform: scaleY(0.5774) rotate(-45deg);
+              -ms-transform: scaleY(0.5774) rotate(-45deg);
+              transform: scaleY(0.5774) rotate(-45deg);
+              background-color: inherit;
+            }
+
+            .top-triangle {
+              border-top: solid 2.8284px $gamePage-board-color-border;
+              border-right: solid 2.8284px $gamePage-board-color-border;
+            }
+
+            .bottom-triangle {
+              border-bottom: solid 2.8284px $gamePage-board-color-border;
+              border-left: solid 2.8284px $gamePage-board-color-border;
+            }
+
+            .letter {
+              &.open-letter {
+                color: $gamePage-board-td-color-open-letter;
+              }
+              &.selected {
+                color: $gamePage-board-td-color-selected;
+              }
+              &.completed {
+                color: $gamePage-board-td-color-complete;
+              }
+
+              &.bg-color-1 {
+                background-color: $gamePage-board-td-bg-color-1;
+              }
+              &.bg-color-2 {
+                background-color: $gamePage-board-td-bg-color-2;
+              }
+              &.bg-color-3 {
+                background-color: $gamePage-board-td-bg-color-3;
+              }
+              &.bg-color-4 {
+                background-color: $gamePage-board-td-bg-color-4;
+              }
+              &.bg-color-5 {
+                background-color: $gamePage-board-td-bg-color-5;
+              }
+              &.bg-color-6 {
+                background-color: $gamePage-board-td-bg-color-6;
+              }
+              &.bg-color-7 {
+                background-color: $gamePage-board-td-bg-color-7;
+              }
+              &.bg-color-8 {
+                background-color: $gamePage-board-td-bg-color-8;
+              }
+              &.bg-color-9 {
+                background-color: $gamePage-board-td-bg-color-9;
+              }
+              &.bg-color-10 {
+                background-color: $gamePage-board-td-bg-color-10;
+              }
+              &.bg-color-11 {
+                background-color: $gamePage-board-td-bg-color-11;
+              }
+              &.bg-color-12 {
+                background-color: $gamePage-board-td-bg-color-12;
+              }
+              &.bg-color-13 {
+                background-color: $gamePage-board-td-bg-color-13;
+              }
+              &.bg-color-14 {
+                background-color: $gamePage-board-td-bg-color-14;
+              }
+              &.bg-color-15 {
+                background-color: $gamePage-board-td-bg-color-15;
+              }
+              &.learn-bg-color-1 {
+                background-color: $gamePage-board-td-learn-bg-color-1;
+
+                .top-triangle {
+                  border-bottom-color: $gamePage-board-td-learn-bg-color-1;
+                }
+                .bottom-triangle {
+                  border-top-color: $gamePage-board-td-learn-bg-color-1;
+                }
+              }
+              &.learn-bg-color-2 {
+                background-color: $gamePage-board-td-learn-bg-color-2;
+
+                .top-triangle {
+                  border-bottom-color: $gamePage-board-td-learn-bg-color-2;
+                }
+                .bottom-triangle {
+                  border-top-color: $gamePage-board-td-learn-bg-color-2;
+                }
+              }
+              &.learn-bg-color-3 {
+                background-color: $gamePage-board-td-learn-bg-color-3;
+
+                .top-triangle {
+                  border-bottom-color: $gamePage-board-td-learn-bg-color-3;
+                }
+                .bottom-triangle {
+                  border-top-color: $gamePage-board-td-learn-bg-color-3;
+                }
+              }
+            }
+          }
+        }
+      }
+
     }
 
     .shown-words {
@@ -1023,42 +734,3 @@ html.ios.ipad {
   }
 
 }
-
-/*
-html.csscalc {
-  .page-game > .page-content {
-
-    .timer {
-      .timer-stars {
-        background-position: 0 0.3125rem, calc(33.33% + .5rem) 0.28125rem, calc(66.66% + .5rem) 0.1875rem;
-      }
-    }
-
-    .board {
-      td {
-        background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border .0625rem),
-        linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem);
-      }
-
-      tr {
-        td:last-child {
-          background-image: linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
-          linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
-        }
-      }
-
-      tr:last-child {
-        td {
-          background-image: linear-gradient(90deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), $gamePage-board-color-border 0.0625rem),
-          linear-gradient(180deg, $gamePage-board-td-bg-color-default-transparent calc(100% - .0625rem), transparent 0.0625rem);
-        }
-
-        td:last-child {
-          background-image: none;
-        }
-      }
-    }
-
-  }
-}
-*/
