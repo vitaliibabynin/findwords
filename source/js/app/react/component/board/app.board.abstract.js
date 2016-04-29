@@ -47,6 +47,7 @@ var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
 
 var LINK_VISIBLE = "visible";
+var LINK_FADE = "fade";
 
 var BEFORE_LINK_TOP = "before-link-top";
 var BEFORE_LINK_RIGHT = "before-link-right";
@@ -222,12 +223,13 @@ var BoardAbstractClass = Object.assign({}, {}, {
         }
     },
 
-    addLettersInFoundWord: function (currentWord, backgroundColor, boardArr) {
+    addLettersInFoundWord: function (currentWord, backgroundColor, boardArr, linkVisibility) {
+        var linkVisibility = linkVisibility == "undefined" ? LINK_FADE : linkVisibility;
+
         boardArr[currentWord.letters[0].y][currentWord.letters[0].x].classNames = {
             backgroundColor: backgroundColor,
-            color: COLOR_COMPLETED
-            //,
-            //linkVisibility: LINK_FADE
+            color: COLOR_COMPLETED,
+            linkVisibility: linkVisibility
         };
 
         for (var i = 1; i < currentWord.letters.length; i++) {
@@ -237,44 +239,30 @@ var BoardAbstractClass = Object.assign({}, {}, {
             var prevX = prevLetter.x;
             var prevY = prevLetter.y;
 
+            boardArr[y][x].classNames = {
+                backgroundColor: backgroundColor,
+                color: COLOR_COMPLETED,
+                linkVisibility: linkVisibility
+            };
+
             if (y == prevY + 1 && x == prevX) {
-                boardArr[y][x].classNames = {
-                    //linkBefore: BEFORE_LINK_TOP,
-                    //linkVisibility: LINK_FADE,
-                    backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
-                };
-                //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
+                boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP;
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
             }
 
             if (y == prevY - 1 && x == prevX) {
-                boardArr[y][x].classNames = {
-                    //linkBefore: BEFORE_LINK_BOTTOM,
-                    //linkVisibility: LINK_FADE,
-                    backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
-                };
-                //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
+                boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM;
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
             }
 
             if (x == prevX + 1 && y == prevY) {
-                boardArr[y][x].classNames = {
-                    //linkBefore: BEFORE_LINK_LEFT,
-                    //linkVisibility: LINK_FADE,
-                    backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
-                };
-                //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+                boardArr[y][x].classNames.linkBefore = BEFORE_LINK_LEFT;
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
             }
 
             if (x == prevX - 1 && y == prevY) {
-                boardArr[y][x].classNames = {
-                    //linkBefore: BEFORE_LINK_RIGHT,
-                    //linkVisibility: LINK_FADE,
-                    backgroundColor: backgroundColor,
-                    color: COLOR_COMPLETED
-                };
-                //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+                boardArr[y][x].classNames.linkBefore = BEFORE_LINK_RIGHT;
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
             }
         }
     },
@@ -308,8 +296,9 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         var newState = {};
 
-        if (this.checkIfLetterIsInCompleteWord(x, y)) {
-            console.log("animate word");
+        var currentWordOrFalse = this.checkIfLetterIsInCompleteWord(x, y);
+        if (currentWordOrFalse) {
+            this.highlightCompletedWord(x, y, currentWordOrFalse, newState)
         } else {
             this.addFirstLetterToSelectedLetters(x, y, newState);
         }
@@ -354,6 +343,8 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         var newState = {};
 
+        this.fadeHighlightedWord(newState);
+
         var completedWordIdxOrFalse = this.checkForCompletedWord();
         if (completedWordIdxOrFalse !== false) {
             appManager.getSFXManager().playButtonGameCorrect();
@@ -393,13 +384,13 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
     onTouchCancel: function (e) {
         console.log("cancel");
-
         this.preventDefaultOnEvent(e);
 
         appManager.getSFXManager().playButtonGameWrong();
 
         var newState = {};
 
+        this.fadeHighlightedWord(newState);
         this.emptySelectedLetters(newState);
 
         this.setState(newState);
@@ -576,6 +567,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
             delete boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color;
             delete selectedIdx[selectedLetters[i].y + '_' + selectedLetters[i].x];
         }
+        delete boardArr[selectedLetters[index].y][selectedLetters[index].x].classNames.linkAfter;
 
         selectedLetters.splice(index + 1, selectedLetters.length - (index - 1));
 
@@ -690,6 +682,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         for (var i = 0; i < selectedLetters.length; i++) {
             boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color = COLOR_COMPLETED;
+            boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkVisibility = LINK_FADE;
         }
 
         var backgroundColor = boardArr[selectedLetters[0].y][selectedLetters[0].x].classNames.backgroundColor;
@@ -723,6 +716,34 @@ var BoardAbstractClass = Object.assign({}, {}, {
         }
 
         return false;
+    },
+
+    highlightCompletedWord: function (x, y, currentWord, newState) {
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+
+        for (var i = 0; i < currentWord.length; i++) {
+            boardArr[currentWord[i].y][currentWord[i].x].classNames.linkVisibility = LINK_VISIBLE;
+        }
+
+        newState.boardArr = boardArr;
+        newState.highlightedWord = {letters: currentWord};
+    },
+
+    fadeHighlightedWord: function (newState) {
+        var highlightedWord = this.state.highlightedWord.letters;
+
+        if (highlightedWord == []) {
+            return;
+        }
+
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+
+        for (var i = 0; i < highlightedWord.length; i++) {
+            boardArr[highlightedWord[i].y][highlightedWord[i].x].classNames.linkVisibility = LINK_FADE;
+        }
+
+        newState.boardArr = boardArr;
+        newState.highlightedWord = {letters: []};
     },
 
 
@@ -794,14 +815,23 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         var currentWord = this.state.wordsToFind.words[index];
         var boardArr = this.state.boardArr;
-        this.addLettersInFoundWord(currentWord, backgroundColor, boardArr);
+        this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_VISIBLE);
 
-        if (this.isMounted()) {
-            this.setState({
-                boardArr: boardArr,
-                board: board
-            });
-        }
+        this.setState({
+            boardArr: boardArr,
+            board: board
+        }, function () {
+            for (var i = 0; i < currentWord.letters.length; i++) {
+                boardArr[currentWord.letters[i].y][currentWord.letters[i].x].classNames.linkVisibility = LINK_FADE;
+            }
+            setTimeout(function () {
+                if (this.isMounted()) {
+                    this.setState({
+                        boardArr: boardArr
+                    })
+                }
+            }.bind(this), 200);
+        });
     },
 
 

@@ -279,28 +279,28 @@
               background-color: $gamePage-board-td-bg-color-link-open-letter;
             }
 
-            //@-webkit-keyframes fade {
-            //  0% {
-            //    opacity: 1;
-            //  }
-            //  25% {
-            //    opacity: 1;
-            //  }
-            //  100% {
-            //    opacity: 0;
-            //  }
-            //}
-            //@keyframes fade {
-            //  0% {
-            //    opacity: 1;
-            //  }
-            //  25% {
-            //    opacity: 1;
-            //  }
-            //  100% {
-            //    opacity: 0;
-            //  }
-            //}
+            @-webkit-keyframes fade {
+              0% {
+                opacity: 1;
+              }
+              25% {
+                opacity: 1;
+              }
+              100% {
+                opacity: 0;
+              }
+            }
+            @keyframes fade {
+              0% {
+                opacity: 1;
+              }
+              25% {
+                opacity: 1;
+              }
+              100% {
+                opacity: 0;
+              }
+            }
 
             &.before-link-top.fade:before,
             &.before-link-right.fade:before,
