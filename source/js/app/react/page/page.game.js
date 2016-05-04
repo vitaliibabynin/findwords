@@ -11,8 +11,8 @@ var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
 var ChipButton = require('./../component/app.button').ChipButton;
 var GameControl = require('./../component/board/app.gamecontrol.js').GameControl;
-var BoardA1 = require('./../component/board/app.board.a1.js').BoardA1;
-var BoardA2 = require('./../component/board/app.board.a2.js').BoardA2;
+var BoardSquare = require('./../component/board/app.board.square.js').BoardSquare;
+var BoardHexagon = require('./../component/board/app.board.hexagon.js').BoardHexagon;
 var Notice = require('./../component/app.notice.js').Notice;
 var ShownWords = require('./../component/app.shownwords.js').ShownWords;
 
@@ -22,7 +22,7 @@ var PageGameAbstract = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            boardType: "boardA2",
+            boardType: "boardSquare",
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},
@@ -148,12 +148,12 @@ var PageGameAbstract = Object.assign({}, {}, {
 
     selectBoardType: function () {
         switch (this.state.boardType) {
-            case "boardA1":
-                return BoardA1;
-            case "boardA2":
-                return BoardA2;
+            case "boardSquare":
+                return BoardSquare;
+            case "boardHexagon":
+                return BoardHexagon;
             default:
-                return BoardA1
+                return BoardSquare
         }
     },
 

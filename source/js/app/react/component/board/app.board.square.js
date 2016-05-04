@@ -6,9 +6,9 @@ var BoardAbstract = require('./app.board.abstract').BoardAbstract;
 
 module.exports = {};
 
-var BoardA1Class = Object.assign({}, BoardAbstract.Class, {
+var BoardSquareClass = Object.assign({}, BoardAbstract.Class, {
 
-    displayName: 'BoardA1',
+    displayName: 'BoardSquare',
 
     getInitialState: function () {
         var state = BoardAbstract.Class.getInitialState.apply(this);
@@ -39,5 +39,5 @@ var BoardA1Class = Object.assign({}, BoardAbstract.Class, {
     }
 
 });
-module.exports.BoardA1 = React.createClass(BoardA1Class);
-module.exports.BoardA1.Class = BoardA1Class;
+module.exports.BoardSquare = React.createClass(BoardSquareClass);
+module.exports.BoardSquare.Class = BoardSquareClass;

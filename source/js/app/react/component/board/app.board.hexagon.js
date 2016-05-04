@@ -9,9 +9,9 @@ var Letter = require('./app.board.abstract').Letter;
 
 module.exports = {};
 
-var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
+var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
-    displayName: 'BoardA2',
+    displayName: 'BoardHexagon',
 
     lastXY: {x: 0, y: 0},
 
@@ -270,8 +270,8 @@ var BoardA2Class = Object.assign({}, BoardAbstract.Class, {
     }
 
 });
-module.exports.BoardA2 = React.createClass(BoardA2Class);
-module.exports.BoardA2.Class = BoardA2Class;
+module.exports.BoardHexagon = React.createClass(BoardHexagonClass);
+module.exports.BoardHexagon.Class = BoardHexagonClass;
 
 
 var LetterA2Class = Object.assign({}, Letter.Class, {
