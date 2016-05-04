@@ -17,15 +17,16 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     replace = require('gulp-replace'),
     exec = require('child_process').exec
+    , shell = require('shelljs')
     ;
 
 
 
 var path = {
     cordova: {
-        root: 'cordova/',
-        www: 'cordova/www/',
-        wwwbuild: 'cordova/www/build/'
+        root: 'cordova/app/',
+        www: 'cordova/app/www/',
+        wwwbuild: 'cordova/app/www/build/'
     },
     build: { //Тут мы укажем куда складывать готовые после сборки файлы
         root: 'build/',
@@ -358,9 +359,20 @@ gulp.task('cordova:prepare:www', function (cb) {
 });
 
 gulp.task('cordova:prepare:app', function (cb) {
-    exec('cd ./cordova && cordova prepare', function (err, stdout, stderr) {
+    console.log('cd ./'+path.cordova.root+' && cordova prepare');
+    exec('cd ./'+path.cordova.root+' && cordova prepare', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
+
+        shell.cp(
+            './cordova/app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+            './cordova/app/platforms/android/assets/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+        );
+        shell.cp(
+            './cordova/app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+            './cordova/app/platforms/ios/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+        );
+
         cb(err);
     });
 });

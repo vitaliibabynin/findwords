@@ -2,5 +2,9 @@
 .svn
 .wakatime-project
 npm-debug.log
-/node_modules
 .DS_Store
+.gradle
+/node_modules
+/build
+/cordova/app
+/cordova/app-handmade

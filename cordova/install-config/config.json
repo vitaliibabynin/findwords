@@ -1,0 +1,16 @@
+{
+    "package": "com.smalldev.testAlk",
+    "version": "123.0.1",
+    "name": {
+        "system": "FindwordsTest",
+        "en": "EN name",
+        "ru": "RU name"
+    },
+    "facebook": {
+    	"displayName": "FindwordsFB",
+    	"appId": "473524332833935FB"
+    },
+    "android": {
+    	"billingKey": "dfvsdfvfv"
+    }
+}

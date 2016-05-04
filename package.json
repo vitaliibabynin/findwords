@@ -32,7 +32,8 @@
     "reactify": "1.1.0",
     "styletto": "0.4.6",
     "vinyl-buffer": "1.0.0",
-    "vinyl-source-stream": "1.1.0"
+    "vinyl-source-stream": "1.1.0",
+    "shelljs": "0.6.0"
   },
   "scripts": {
     "start": "gulp",
@@ -40,7 +41,10 @@
 
     "build": "NODE_ENV=production npm run clean && NODE_ENV=production gulp build",
     "preparecordova": "NODE_ENV=production gulp cordova:all",
-    "bpcordova": "npm run build && npm run preparecordova",
+    "bpcordova": "npm run cordovainstall && npm run build && npm run preparecordova",
+
+    "cordovainstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:install",
+    "cordovareinstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:reinstall",
 
     "winbuild": "SET NODE_ENV=production && npm run clean && gulp build",
     "winpreparecordova": "SET NODE_ENV=production && gulp cordova:all",

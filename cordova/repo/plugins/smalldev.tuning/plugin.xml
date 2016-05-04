@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="smalldev.tuning"
+        version="1.0.1">
+
+    <name>SmallDev.Tuning</name>
+
+    <description>Добавляет в приложения правки для SmallDev</description>
+
+    <license>Apache 2.0</license>
+
+    <author>Alek</author>
+
+    <!-- cordova -->
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <!-- android -->
+    <platform name="android">
+        <resource-file src="src/android/res/values-ru" target="res/values-ru" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <resource-file src="src/ios/en.lproj" />
+        <resource-file src="src/ios/ru.lproj" />
+    </platform>
+
+</plugin>

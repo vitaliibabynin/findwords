@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name" translatable="false">Findwords</string>
-    <string name="launcher_name" translatable="false">@string/app_name_2</string>
-    <string name="activity_name" translatable="false">@string/launcher_name</string>
-    <string name="facebook_app_id" translatable="false">473524332833935</string>
-</resources>
