@@ -132,9 +132,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
         //data adapted for render
         state.boardArr = this.boardConverter(state.boardData);
 
-        state.backgroundColors = this.getBackgroundColors(state.isPracticeRound) || [];
-
-        this.addFoundWordsToBoardArr(state.board, state.boardData, state.boardArr);
+        state.backgroundColors = this.getBackgroundColors(state.isPracticeRound) || [
 
         return state;
     },
@@ -192,7 +190,9 @@ var BoardAbstractClass = Object.assign({}, {}, {
         return backgroundColors;
     },
 
-    addFoundWordsToBoardArr: function (board, boardData, boardArr) {
+    addFoundWordsToBoardArr: function (newState) {
+        var board = this.state.board;
+
         for (var k in board) {
             if (!board.hasOwnProperty(k)) {
                 continue;
@@ -204,9 +204,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
             var backgroundColor = board[k].color;
 
-            var currentWord = boardData.words[k];
-
-            this.addLettersInFoundWord(currentWord, backgroundColor, boardArr);
+            this.openWord(k, newState, backgroundColor);
         }
     },
 
@@ -256,9 +254,13 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
 
     componentDidMount: function () {
-        this.setState({
-            cellSize: this.calculateCellSize()
-        });
+        var newState = {};
+
+        this.addFoundWordsToBoardArr(newState);
+        newState.cellSize = this.calculateCellSize();
+
+        console.log(newState);
+        this.setState(newState);
     },
 
     calculateCellSize: function () {
@@ -659,9 +661,11 @@ var BoardAbstractClass = Object.assign({}, {}, {
         return wordIdx;
     },
 
-    openWord: function (index, newState) {
-        var backgroundColor = this.selectWordBackgroundColor();
-        this.nextColorIdx();
+    openWord: function (index, newState, backgroundColor) {
+        if (typeof backgroundColor == "undefined") {
+            backgroundColor = this.selectWordBackgroundColor();
+            this.nextColorIdx();
+        }
 
         var board = this.state.board;
         board[index] = {
@@ -672,16 +676,21 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         appManager.getSFXManager().playButtonGameCorrect();
 
-        var currentWord = this.state.boardData.words[index];
         var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+        var currentWord = this.state.boardData.words[index];
 
-        if (newState) {
-            this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_FADE);
+        if (this.state.selectedLetters.letters.length != 0) {
+            for (var i = 0; i < currentWord.letters.length; i++) {
+                boardArr[currentWord.letters[i].y][currentWord.letters[i].x].classNames.color = COLOR_COMPLETED;
+                boardArr[currentWord.letters[i].y][currentWord.letters[i].x].classNames.linkVisibility = LINK_FADE;
+            }
+
             newState.boardArr = boardArr;
             newState.selectedLetters = {letters: [], idx: {}};
             newState.board = board;
         } else {
             this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_VISIBLE);
+
             this.setState({
                 boardArr: boardArr,
                 board: board
