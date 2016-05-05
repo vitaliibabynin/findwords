@@ -67,29 +67,21 @@ gulp.task('cordova:app:prepare', function (cb) {
         console.log(stdout);
         console.log(stderr);
 
+        gulp
+            .src('./'+path.cordova.repo+'keystore/*')
+            .pipe(gulp.dest(path.cordova.app + 'platforms/android/'))
+            .on('finish', function() {
+                shell.cp(
+                    './app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+                    './app/platforms/android/assets/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+                );
+                shell.cp(
+                    './app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+                    './app/platforms/ios/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+                );
 
-        shell.cp(
-            './app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
-            './app/platforms/android/assets/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
-        );
-        shell.cp(
-            './app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
-            './app/platforms/ios/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
-        );
-
-        /*
-        var filePath = './app/platforms/android/assets/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js';
-        console.log(filePath);
-        //нужно использовать реплейс.. сед походу только на одну строку меняет
-        shell.sed('-i', /cordova\.define[\w\s"()-\.]*{[\s]*cordova/g, '_ttt_', filePath);
-        shell.sed('-i', /}\);[\s]*}\);/g, '}\);', filePath);
-
-        filePath = './app/platforms/ios/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js';
-        shell.sed('-i', /cordova\.define[\w\s"()-\.]*{[\s]*cordova\.define[\w\s"()-\.]*{/g, 'cordova.define("cordova-plugin-facebook.CordovaFacebook", function(require, exports, module) {', filePath);
-        shell.sed('-i', /}\);[\s]*}\);/g, '}\);', filePath);
-        */
-
-        cb(err);
+                cb(err);
+            });
     });
 });
 
