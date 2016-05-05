@@ -334,9 +334,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         var completedWordIdxOrFalse = this.checkForCompletedWord();
         if (completedWordIdxOrFalse !== false) {
-            appManager.getSFXManager().playButtonGameCorrect();
-
-            this.addCompletedWordToBoard(completedWordIdxOrFalse, newState);
+            this.openWord(completedWordIdxOrFalse, newState);
             this.setState(newState);
 
             this.state.removeFromShownWordsIfShown(completedWordIdxOrFalse);
@@ -661,29 +659,45 @@ var BoardAbstractClass = Object.assign({}, {}, {
         return wordIdx;
     },
 
-    addCompletedWordToBoard: function (index, newState) {
+    openWord: function (index, newState) {
+        var backgroundColor = this.selectWordBackgroundColor();
         this.nextColorIdx();
 
-        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
-        var selectedLetters = newState && newState.selectedLetters ? newState.selectedLetters.letters : this.state.selectedLetters.letters;
-
-        for (var i = 0; i < selectedLetters.length; i++) {
-            boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.color = COLOR_COMPLETED;
-            boardArr[selectedLetters[i].y][selectedLetters[i].x].classNames.linkVisibility = LINK_FADE;
-        }
-
-        var backgroundColor = boardArr[selectedLetters[0].y][selectedLetters[0].x].classNames.backgroundColor;
         var board = this.state.board;
         board[index] = {
             color: backgroundColor,
             openWord: true
         };
-
         this.setBoardGameState(board);
 
-        newState.boardArr = boardArr;
-        newState.selectedLetters = {letters: [], idx: {}};
-        newState.board = board;
+        appManager.getSFXManager().playButtonGameCorrect();
+
+        var currentWord = this.state.boardData.words[index];
+        var boardArr = newState && newState.boardArr ? newState.boardArr : this.state.boardArr;
+
+        if (newState) {
+            this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_FADE);
+            newState.boardArr = boardArr;
+            newState.selectedLetters = {letters: [], idx: {}};
+            newState.board = board;
+        } else {
+            this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_VISIBLE);
+            this.setState({
+                boardArr: boardArr,
+                board: board
+            }, function () {
+                for (var i = 0; i < currentWord.letters.length; i++) {
+                    boardArr[currentWord.letters[i].y][currentWord.letters[i].x].classNames.linkVisibility = LINK_FADE;
+                }
+                setTimeout(function () {
+                    if (this.isMounted()) {
+                        this.setState({
+                            boardArr: boardArr
+                        })
+                    }
+                }.bind(this), 200);
+            });
+        }
     },
 
     checkIfLetterIsInCompleteWord: function (x, y) {
@@ -777,40 +791,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
     getBoard: function () {
         return this.state.board;
-    },
-
-    openWord: function (index) {
-        var backgroundColor = this.selectWordBackgroundColor();
-        this.nextColorIdx();
-
-        var board = this.state.board;
-        board[index] = {
-            color: backgroundColor,
-            openWord: true
-        };
-        this.state.setGameStateRoundField('board', board);
-
-        appManager.getSFXManager().playButtonGameCorrect();
-
-        var currentWord = this.state.boardData.words[index];
-        var boardArr = this.state.boardArr;
-        this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_VISIBLE);
-
-        this.setState({
-            boardArr: boardArr,
-            board: board
-        }, function () {
-            for (var i = 0; i < currentWord.letters.length; i++) {
-                boardArr[currentWord.letters[i].y][currentWord.letters[i].x].classNames.linkVisibility = LINK_FADE;
-            }
-            setTimeout(function () {
-                if (this.isMounted()) {
-                    this.setState({
-                        boardArr: boardArr
-                    })
-                }
-            }.bind(this), 200);
-        });
     },
 
 
