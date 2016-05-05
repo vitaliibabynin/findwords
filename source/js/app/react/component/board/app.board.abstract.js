@@ -132,7 +132,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
         //data adapted for render
         state.boardArr = this.boardConverter(state.boardData);
 
-        state.backgroundColors = this.getBackgroundColors(state.isPracticeRound) || [
+        state.backgroundColors = this.getBackgroundColors(state.isPracticeRound) || [];
 
         return state;
     },
