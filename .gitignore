@@ -2,6 +2,7 @@
 .svn
 .wakatime-project
 npm-debug.log
+nohup.out
 .DS_Store
 .gradle
 /node_modules
