@@ -67,12 +67,12 @@ var GameControlClass = Object.assign({}, {}, {
         return this.refs.board.emptySelectedLetters();
     },
 
-    getUnopenedWordIndex: function (wordsToFind) {
+    getUnopenedWordIndex: function () {
         var board = this.refs.board.getBoard();
 
         var index = false;
 
-        for (var i = 0; i < wordsToFind.words.length; i++) {
+        for (var i = 0; i < this.state.boardData.words.length; i++) {
             if (!board[i] || board[i].openWord === false) {
                 index = i;
                 break;
@@ -83,8 +83,7 @@ var GameControlClass = Object.assign({}, {}, {
     },
 
     openWord: function () {
-        var wordsToFind = this.refs.board.getWordsToFind();
-        var index = this.getUnopenedWordIndex(wordsToFind);
+        var index = this.getUnopenedWordIndex();
 
         if (index === false) {
             return false;
@@ -106,7 +105,7 @@ var GameControlClass = Object.assign({}, {}, {
     },
 
     getUnopenedUnshownWordAndIndex: function () {
-        var words = this.refs.board.getWordsToFind().words;
+        var words = this.state.boardData.words;
         var board = this.refs.board.getBoard();
 
         if (board.length == words.length) {

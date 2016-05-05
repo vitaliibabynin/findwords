@@ -132,12 +132,9 @@ var BoardAbstractClass = Object.assign({}, {}, {
         //data adapted for render
         state.boardArr = this.boardConverter(state.boardData);
 
-        //array of words
-        state.wordsToFind = this.extractWordsToFind(state.boardData);
-
         state.backgroundColors = this.getBackgroundColors(state.isPracticeRound) || [];
 
-        this.addFoundWordsToBoardArr(state.board, state.wordsToFind, state.boardArr);
+        this.addFoundWordsToBoardArr(state.board, state.boardData, state.boardArr);
 
         return state;
     },
@@ -162,16 +159,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
         });
 
         return arr;
-    },
-
-    extractWordsToFind: function (boardData) {
-        var wordsToFind = {words: []};
-
-        for (var i = 0; i < boardData.words.length; i++) {
-            wordsToFind.words[i] = {letters: boardData.words[i].letters};
-        }
-
-        return wordsToFind;
     },
 
     getBackgroundColors: function (isPracticeRound) {
@@ -205,7 +192,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
         return backgroundColors;
     },
 
-    addFoundWordsToBoardArr: function (board, wordsToFind, boardArr) {
+    addFoundWordsToBoardArr: function (board, boardData, boardArr) {
         for (var k in board) {
             if (!board.hasOwnProperty(k)) {
                 continue;
@@ -217,7 +204,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
             var backgroundColor = board[k].color;
 
-            var currentWord = wordsToFind.words[k];
+            var currentWord = boardData.words[k];
 
             this.addLettersInFoundWord(currentWord, backgroundColor, boardArr);
         }
@@ -601,7 +588,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
     checkLettersInWordsToFind: function () {
-        var words = this.state.wordsToFind.words;
+        var words = this.state.boardData.words;
         var selectedLetters = this.state.selectedLetters.letters;
 
         for (var wordIdx = 0; wordIdx < words.length; wordIdx++) {
@@ -649,7 +636,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
     checkForCompletedWord: function () {
-        var words = this.state.wordsToFind.words;
+        var words = this.state.boardData.words;
 
         var selectedLetters = this.state.selectedLetters.letters;
         if (selectedLetters.length == 0) {
@@ -783,18 +770,10 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
     checkIfRoundComplete: function () {
-        var board = this.state.board;
-        var wordsToFind = this.state.wordsToFind.words;
-
-        var boardLength = Utils.countObjectProperties(board);
-
-        return boardLength == wordsToFind.length;
+        var boardLength = Utils.countObjectProperties(this.state.board);
+        return boardLength == this.state.boardData.words.length;
     },
 
-
-    getWordsToFind: function () {
-        return this.state.wordsToFind;
-    },
 
     getBoard: function () {
         return this.state.board;
@@ -813,7 +792,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         appManager.getSFXManager().playButtonGameCorrect();
 
-        var currentWord = this.state.wordsToFind.words[index];
+        var currentWord = this.state.boardData.words[index];
         var boardArr = this.state.boardArr;
         this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_VISIBLE);
 
