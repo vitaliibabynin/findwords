@@ -543,6 +543,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
             if (this.refs.board.checkIfRoundComplete()) {
                 //this.goToPageRoundComplete(2000);
                 this.goToPageRoundComplete();
+
                 this.chipProcessing = false;
                 return;
             }
@@ -551,7 +552,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         this.chipProcessing = false;
     },
 
-    onChipOpenLetterClick: function () {
+    onChipOpenLetterClick2: function () {
         if (this.chipProcessing) {
             console.log("click denied");
             return;
@@ -582,6 +583,39 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
 
             this.chipProcessing = false;
         }.bind(this));
+    },
+
+    onChipOpenLetterClick: function () {
+        if (this.chipProcessing) {
+            console.log("click denied");
+            return;
+        }
+        this.chipProcessing = true;
+
+        appAnalytics.trackEvent('chips', 'openLetter-click', 'click', 1);
+        var coins = appManager.getGameState().getCoins();
+        if (this.state.chipsOpenLetter > coins) {
+            appDialogs.getNoMoneyDialog().show();
+
+            this.chipProcessing = false;
+            return;
+        }
+
+        if (this.refs.board.openLetter() !== false) {
+            appAnalytics.trackEvent('chips', 'openLetter-charged', 'charged', 1);
+            var newCoins = coins - this.state.chipsOpenLetter;
+            appManager.getGameState().setCoins(newCoins);
+
+            if (this.refs.board.checkIfRoundComplete()) {
+                //this.goToPageRoundComplete(2000);
+                this.goToPageRoundComplete();
+
+                this.chipProcessing = false;
+                return;
+            }
+        }
+
+        this.chipProcessing = false;
     },
 
     onChipShowWordClick: function () {

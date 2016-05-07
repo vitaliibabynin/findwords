@@ -208,13 +208,11 @@ var BoardAbstractClass = Object.assign({}, {}, {
         }
     },
 
-    addLettersInFoundWord: function (currentWord, backgroundColor, boardArr, linkVisibility) {
-        var linkVisibility = linkVisibility == "undefined" ? LINK_FADE : linkVisibility;
-
+    addLettersInFoundWord: function (currentWord, backgroundColor, boardArr) {
         boardArr[currentWord.letters[0].y][currentWord.letters[0].x].classNames = {
             backgroundColor: backgroundColor,
             color: COLOR_COMPLETED,
-            linkVisibility: linkVisibility
+            linkVisibility: LINK_VISIBLE
         };
 
         for (var i = 1; i < currentWord.letters.length; i++) {
@@ -227,7 +225,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
             boardArr[y][x].classNames = {
                 backgroundColor: backgroundColor,
                 color: COLOR_COMPLETED,
-                linkVisibility: linkVisibility
+                linkVisibility: LINK_VISIBLE
             };
 
             if (y == prevY + 1 && x == prevX) {
@@ -689,7 +687,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
             newState.selectedLetters = {letters: [], idx: {}};
             newState.board = board;
         } else {
-            this.addLettersInFoundWord(currentWord, backgroundColor, boardArr, LINK_VISIBLE);
+            this.addLettersInFoundWord(currentWord, backgroundColor, boardArr);
 
             this.setState({
                 boardArr: boardArr,

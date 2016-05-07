@@ -197,7 +197,7 @@ var PageMain = Object.assign({}, {}, {
 
 
     render: function () {
-        console.log(appManager.getGameState().gameState);
+        //console.log(appManager.getGameState().gameState);
 
         var headImgName = "head/head_img_" + router.getLanguage();
         if (CONST.CURRENT_PLATFORM == "ios" && router.getLanguage() == "en") {

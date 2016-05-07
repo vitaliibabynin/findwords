@@ -94,6 +94,14 @@ var GameControlClass = Object.assign({}, {}, {
         this.removeFromShownWordsIfShown(index);
     },
 
+    openLetter: function () {
+        var index = this.getUnopenedWordIndex();
+
+        if (index === false) {
+            return false;
+        }
+    },
+
     sendWordToShowToPageGame: function () {
         var wordArr = this.getUnopenedUnshownWordAndIndex();
 
