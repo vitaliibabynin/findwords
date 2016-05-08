@@ -58,6 +58,8 @@ var AFTER_LINK_RIGHT = "after-link-right";
 var AFTER_LINK_BOTTOM = "after-link-bottom";
 var AFTER_LINK_LEFT = "after-link-left";
 
+var OPEN_LETTER_COLOR = require('./app.gamecontrol.js').OPEN_LETTER_COLOR;
+
 var SELECT_DIFFERENTLY = require('./../app.notice.js').SELECT_DIFFERENTLY;
 var NO_SUCH_WORD = require('./../app.notice.js').NO_SUCH_WORD;
 
@@ -833,7 +835,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
     },
 
 
-    filterClassNames: function (cellClassNames) {
+    removeOpenedLetterLinksIfLetterSelected: function (cellClassNames) {
         var filteredCellClassNames = JSON.parse(JSON.stringify(cellClassNames));
 
         if (filteredCellClassNames.openLetter == OPEN_LETTER_COLOR && filteredCellClassNames.color == COLOR_SELECTED) {
@@ -873,12 +875,12 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
                                 {row.map(function (cell, cellId) {
 
+                                    var filteredCellClassNames = this.removeOpenedLetterLinksIfLetterSelected(cell.classNames);
                                     var properties = [];
-                                    for (var property in cell.classNames) {
-                                        if (!cell.classNames.hasOwnProperty(property)) {
-                                            continue;
+                                    for (var property in filteredCellClassNames) {
+                                        if (filteredCellClassNames.hasOwnProperty(property)) {
+                                            properties.push(filteredCellClassNames[property]);
                                         }
-                                        properties.push(cell.classNames[property]);
                                     }
                                     var letterClassNames = classNames(properties);
 
@@ -889,6 +891,7 @@ var BoardAbstractClass = Object.assign({}, {}, {
                                             {cell.letter}
                                         </module.exports.Letter>
                                     );
+
                                 }.bind(this))}
 
                             </tr>

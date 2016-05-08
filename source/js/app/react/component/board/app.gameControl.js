@@ -9,6 +9,8 @@ module.exports = {};
 
 
 var OPEN_LETTER_COLOR = "open-letter";
+module.exports.OPEN_LETTER_COLOR = OPEN_LETTER_COLOR;
+
 var OPEN_LETTER_BEFORE_LINK_TOP = "open-letter-before-link-top";
 var OPEN_LETTER_BEFORE_LINK_RIGHT = "open-letter-before-link-right";
 var OPEN_LETTER_BEFORE_LINK_BOTTOM = "open-letter-before-link-bottom";
