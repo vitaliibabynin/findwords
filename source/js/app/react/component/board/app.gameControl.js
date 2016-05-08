@@ -8,6 +8,17 @@ var Object = {assign: require('react/lib/Object.assign')};
 module.exports = {};
 
 
+var OPEN_LETTER_COLOR = "open-letter";
+var OPEN_LETTER_BEFORE_LINK_TOP = "open-letter-before-link-top";
+var OPEN_LETTER_BEFORE_LINK_RIGHT = "open-letter-before-link-right";
+var OPEN_LETTER_BEFORE_LINK_BOTTOM = "open-letter-before-link-bottom";
+var OPEN_LETTER_BEFORE_LINK_LEFT = "open-letter-before-link-left";
+var OPEN_LETTER_AFTER_LINK_TOP = "open-letter-after-link-top";
+var OPEN_LETTER_AFTER_LINK_RIGHT = "open-letter-after-link-right";
+var OPEN_LETTER_AFTER_LINK_BOTTOM = "open-letter-after-link-bottom";
+var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
+
+
 var GameControlClass = Object.assign({}, {}, {
     displayName: 'GameControl',
 
@@ -32,6 +43,14 @@ var GameControlClass = Object.assign({}, {}, {
             )
         }),
         board: React.PropTypes.object,
+        openedLetters: React.PropTypes.shape({
+            letters: React.PropTypes.arrayOf(
+                React.PropTypes.shape({
+                    x: React.PropTypes.number,
+                    y: React.PropTypes.number
+                })),
+            wordIdx: React.PropTypes.number
+        }),
         displayNotice: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
         goToPageRoundComplete: React.PropTypes.func,
@@ -47,6 +66,7 @@ var GameControlClass = Object.assign({}, {}, {
             boardMaxHeight: this.props.boardMaxHeight || 0,
             boardData: this.props.boardData || {},
             board: this.props.board || {},
+            openedLetters: this.props.openedLetters || [],
             displayNotice: this.props.displayNotice || function () {
             },
             setGameStateRoundField: this.props.setGameStateRoundField || function () {
@@ -63,9 +83,116 @@ var GameControlClass = Object.assign({}, {}, {
         return state;
     },
 
-    emptySelectedLetters: function () {
-        return this.refs.board.emptySelectedLetters();
+    componentDidMount: function () {
+        this.addOpenedLettersToBoardArr();
     },
+
+
+    addOpenedLettersToBoardArr: function () {
+        var openedLetters = this.getAndCheckOpenedLetters();
+        var boardArr = this.refs.board.getBoardArr();
+        var wordIdx = openedLetters.wordIdx;
+        if (wordIdx === false) {
+            return;
+        }
+
+        var unopenedWord = this.state.boardData.words[wordIdx].letters;
+        boardArr[unopenedWord[0].y][unopenedWord[0].x].classNames.openLetter = OPEN_LETTER_COLOR;
+        for (var i = 1; i < openedLetters.letters.length; i++) {
+            var currentLetter = unopenedWord[i];
+            var prevLetter = unopenedWord[i - 1];
+            this.addOpenedLetterToBoardArr(boardArr, openedLetters, currentLetter, prevLetter);
+        }
+    },
+
+    addOpenedLetterToBoardArr: function (boardArr, openedLetters, currentLetter, prevLetter) {
+        var x = currentLetter.x;
+        var y = currentLetter.y;
+        var prevX = prevLetter.x;
+        var prevY = prevLetter.y;
+
+        boardArr[y][x].classNames = {
+            openLetter: OPEN_LETTER_COLOR
+        };
+        if (y == prevY + 1 && x == prevX) {
+            boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_TOP;
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM;
+        }
+        if (y == prevY - 1 && x == prevX) {
+            boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_BOTTOM;
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_TOP;
+        }
+        if (x == prevX + 1 && y == prevY) {
+            boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_LEFT;
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_RIGHT;
+        }
+        if (x == prevX - 1 && y == prevY) {
+            boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_RIGHT;
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_LEFT;
+        }
+    },
+
+    getAndCheckOpenedLetters: function () {
+        var openedLetters = this.refs.board.getOpenedLetters();
+        console.log(openedLetters);
+
+        if (!openedLetters.hasOwnProperty("letters")) {
+            openedLetters.letters = [];
+        }
+        if (!openedLetters.hasOwnProperty("wordIdx")) {
+            openedLetters.wordIdx = false;
+        }
+
+        return openedLetters;
+    },
+
+    setOpenedLettersStateAndGameState: function (openedLetters) {
+        this.state.setGameStateRoundField('openedLetters', openedLetters);
+        this.setState({openedLetters: openedLetters})
+    },
+
+    openLetter: function () {
+        var openedLetters = this.getAndCheckOpenedLetters();
+        var wordIdx = false;
+        if (openedLetters.letters.length == 0) {
+            wordIdx = this.getUnopenedWordIndex();
+        } else {
+            wordIdx = openedLetters.wordIdx;
+        }
+        if (wordIdx === false) {
+            return false;
+        }
+
+        var boardArr = this.refs.board.getBoardArr();
+        var unopenedWord = this.state.boardData.words[wordIdx].letters;
+
+        if (openedLetters.letters.length == 0) {
+            appManager.getSFXManager().playButtonGame();
+
+            boardArr[unopenedWord[0].y][unopenedWord[0].x].classNames.openLetter = OPEN_LETTER_COLOR;
+            openedLetters = {letters: [{x: unopenedWord[0].x, y: unopenedWord[0].y}], wordIdx: wordIdx};
+
+            this.setOpenedLettersStateAndGameState(openedLetters);
+            this.refs.board.setBoardArr(boardArr);
+            return;
+        }
+
+        if (openedLetters.letters.length == unopenedWord.length - 1) {
+            this.openWord(wordIdx);
+            return;
+        }
+
+        appManager.getSFXManager().playButtonGame();
+
+        var currentLetter = unopenedWord[openedLetters.letters.length];
+        var prevLetter = unopenedWord[openedLetters.letters.length - 1];
+        openedLetters.letters.push({x: currentLetter.x, y: currentLetter.y});
+        this.addOpenedLetterToBoardArr(boardArr, openedLetters, currentLetter, prevLetter);
+
+        this.setOpenedLettersStateAndGameState(openedLetters);
+        this.refs.board.setBoardArr(boardArr);
+    },
+
 
     getUnopenedWordIndex: function () {
         var board = this.refs.board.getBoard();
@@ -82,25 +209,19 @@ var GameControlClass = Object.assign({}, {}, {
         return index;
     },
 
-    openWord: function () {
-        var index = this.getUnopenedWordIndex();
+    openWord: function (index) {
+        index = (typeof index == "undefined") ? this.getUnopenedWordIndex() : index;
 
         if (index === false) {
             return false;
         }
 
         this.refs.board.openWord(index);
+        this.setOpenedLettersStateAndGameState({});
 
         this.removeFromShownWordsIfShown(index);
     },
 
-    openLetter: function () {
-        var index = this.getUnopenedWordIndex();
-
-        if (index === false) {
-            return false;
-        }
-    },
 
     sendWordToShowToPageGame: function () {
         var wordArr = this.getUnopenedUnshownWordAndIndex();
@@ -166,6 +287,11 @@ var GameControlClass = Object.assign({}, {}, {
         }
     },
 
+
+    emptySelectedLetters: function () {
+        return this.refs.board.emptySelectedLetters();
+    },
+
     checkIfRoundComplete: function () {
         return this.refs.board.checkIfRoundComplete();
     },
@@ -181,6 +307,7 @@ var GameControlClass = Object.assign({}, {}, {
                 boardMaxHeight={this.state.boardMaxHeight}
                 boardData={this.state.boardData}
                 board={this.state.board}
+                openedLetters={this.state.openedLetters}
                 displayNotice={this.state.displayNotice}
                 setGameStateRoundField={this.state.setGameStateRoundField}
                 goToPageRoundComplete={this.state.goToPageRoundComplete}

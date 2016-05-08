@@ -84,6 +84,14 @@ var BoardAbstractClass = Object.assign({}, {}, {
             )
         }),
         board: React.PropTypes.object,
+        openedLetters: React.PropTypes.shape({
+            letters: React.PropTypes.arrayOf(
+                React.PropTypes.shape({
+                    x: React.PropTypes.number,
+                    y: React.PropTypes.number
+                })),
+            wordIdx: React.PropTypes.number
+        }),
         isPracticeRound: React.PropTypes.bool,
         displayNotice: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
@@ -104,6 +112,8 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
             //gameState
             board: this.props.board || {},
+
+            openedLetters: this.props.openedLetters || [],
 
             selectedLetters: {letters: [], idx: {}},
 
@@ -266,6 +276,12 @@ var BoardAbstractClass = Object.assign({}, {}, {
                 ($('.game-board').width() - this.state.boardData.board.cols) / this.state.boardData.board.cols,
                 (this.props.boardMaxHeight - this.state.boardData.board.rows - 5) / this.state.boardData.board.rows
             ) || 0;
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({
+            openedLetters: typeof nextProps.openedLetters == "undefined" ? this.state.openedLetters : nextProps.openedLetters
+        })
     },
 
 
@@ -683,9 +699,12 @@ var BoardAbstractClass = Object.assign({}, {}, {
                 boardArr[currentWord.letters[i].y][currentWord.letters[i].x].classNames.linkVisibility = LINK_FADE;
             }
 
+            this.setOpenedLettersGameState({});
+
             newState.boardArr = boardArr;
             newState.selectedLetters = {letters: [], idx: {}};
             newState.board = board;
+            newState.openedLetters = {};
         } else {
             this.addLettersInFoundWord(currentWord, backgroundColor, boardArr);
 
@@ -790,6 +809,10 @@ var BoardAbstractClass = Object.assign({}, {}, {
         this.state.setGameStateRoundField('board', board);
     },
 
+    setOpenedLettersGameState: function (openedLetters) {
+        this.state.setGameStateRoundField('openedLetters', openedLetters);
+    },
+
     checkIfRoundComplete: function () {
         var boardLength = Utils.countObjectProperties(this.state.board);
         return boardLength == this.state.boardData.words.length;
@@ -799,7 +822,27 @@ var BoardAbstractClass = Object.assign({}, {}, {
     getBoard: function () {
         return this.state.board;
     },
+    getBoardArr: function () {
+        return this.state.boardArr;
+    },
+    setBoardArr: function (boardArr) {
+        this.setState({boardArr: boardArr})
+    },
+    getOpenedLetters: function () {
+        return this.state.openedLetters;
+    },
 
+
+    filterClassNames: function (cellClassNames) {
+        var filteredCellClassNames = JSON.parse(JSON.stringify(cellClassNames));
+
+        if (filteredCellClassNames.openLetter == OPEN_LETTER_COLOR && filteredCellClassNames.color == COLOR_SELECTED) {
+            delete filteredCellClassNames.openLetterLinkAfter;
+            delete filteredCellClassNames.openLetterLinkBefore;
+        }
+
+        return filteredCellClassNames;
+    },
 
     render: function () {
 

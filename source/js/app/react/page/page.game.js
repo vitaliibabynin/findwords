@@ -339,7 +339,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
         state.time = state.boardData.time || 0;
 
-        state.openedLetters = this.getGameStateRoundField("openedLetters", state.roundsBundleIdx, state.roundIdx) || [];
+        state.openedLetters = this.getGameStateRoundField("openedLetters", state.roundsBundleIdx, state.roundIdx) || {};
         state.shownWords = this.getGameStateRoundField("shownWords", state.roundsBundleIdx, state.roundIdx) || [];
         state.shownWordsLetters = this.shownWordsConverter(state.shownWords, state.boardData) || [];
 
