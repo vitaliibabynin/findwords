@@ -824,27 +824,19 @@ var BoardAbstractClass = Object.assign({}, {}, {
     getBoard: function () {
         return this.state.board;
     },
+
     getBoardArr: function () {
         return this.state.boardArr;
     },
+
     setBoardArr: function (boardArr) {
         this.setState({boardArr: boardArr})
     },
+
     getOpenedLetters: function () {
         return this.state.openedLetters;
     },
 
-
-    removeOpenedLetterLinksIfLetterSelected: function (cellClassNames) {
-        var filteredCellClassNames = JSON.parse(JSON.stringify(cellClassNames));
-
-        if (filteredCellClassNames.openLetter == OPEN_LETTER_COLOR && filteredCellClassNames.color == COLOR_SELECTED) {
-            delete filteredCellClassNames.openLetterLinkAfter;
-            delete filteredCellClassNames.openLetterLinkBefore;
-        }
-
-        return filteredCellClassNames;
-    },
 
     render: function () {
 
@@ -875,12 +867,12 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
                                 {row.map(function (cell, cellId) {
 
-                                    var filteredCellClassNames = this.removeOpenedLetterLinksIfLetterSelected(cell.classNames);
                                     var properties = [];
-                                    for (var property in filteredCellClassNames) {
-                                        if (filteredCellClassNames.hasOwnProperty(property)) {
-                                            properties.push(filteredCellClassNames[property]);
+                                    for (var property in cell.classNames) {
+                                        if (!cell.classNames.hasOwnProperty(property)) {
+                                            continue;
                                         }
+                                        properties.push(cell.classNames[property]);
                                     }
                                     var letterClassNames = classNames(properties);
 

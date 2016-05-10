@@ -310,9 +310,6 @@
             &.after-link-right.fade:after,
             &.after-link-bottom.fade:after,
             &.after-link-left.fade:after {
-              //opacity: 0;
-              //-webkit-animation: fade 2s;
-              //animation: fade 2s;
               -webkit-transition-duration: 1.5s;
               -webkit-transition-delay: 0.5s;
               transition-duration: 1.5s;
@@ -328,8 +325,6 @@
             &.after-link-right.visible:after,
             &.after-link-bottom.visible:after,
             &.after-link-left.visible:after {
-              //-webkit-animation: none;
-              //animation: none;
               -webkit-transition-duration: 0s;
               -webkit-transition-delay: 0s;
               transition-duration: 0s;
@@ -396,33 +391,24 @@
               left: -1px;
             }
 
-            //@-webkit-keyframes fontbulger {
-            //  0% {
-            //    -webkit-transform: scale(1.5, 1.5);
-            //  }
-            //  99% {
-            //    -webkit-transform: scale(1.5, 1.5);
-            //  }
-            //  100% {
-            //    -webkit-transform: initial;
-            //  }
-            //}
-            //@keyframes fontbulger {
-            //  0% {
-            //    transform: scale(1.5, 1.5);
-            //  }
-            //  99% {
-            //    transform: scale(1.5, 1.5);
-            //  }
-            //  100% {
-            //    transform: initial;
-            //  }
-            //}
-
-            //&.animation span {
-            //  -webkit-animation: fontbulger 0.2s;
-            //  animation: fontbulger 0.2s;
-            //}
+            &.selected.open-letter-before-link-top:before,
+            &.selected.open-letter-before-link-right:before,
+            &.selected.open-letter-before-link-bottom:before,
+            &.selected.open-letter-before-link-left:before,
+            &.selected.open-letter-after-link-top:after,
+            &.selected.open-letter-after-link-right:after,
+            &.selected.open-letter-after-link-bottom:after,
+            &.selected.open-letter-after-link-left:after,
+            &.selected.before-link-top:before,
+            &.selected.before-link-right:before,
+            &.selected.before-link-bottom:before,
+            &.selected.before-link-left:before,
+            &.selected.after-link-top:after,
+            &.selected.after-link-right:after,
+            &.selected.after-link-bottom:after,
+            &.selected.after-link-left:after {
+              display: none;
+            }
 
             &.open-letter {
               color: $gamePage-board-td-color-open-letter;
