@@ -231,6 +231,11 @@ int nativeShowStyleForType(int adTypes) {
 
 - (void) isLoaded:(CDVInvokedUrlCommand*)command
 {
+    id adType = [[command arguments] objectAtIndex:0];
+    int isAdReady = [Appodeal isReadyForShowWithStyle:nativeShowStyleForType([adType integerValue])] ? 1 : 0;
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:isAdReady];
+    
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void) isPrecache:(CDVInvokedUrlCommand*)command

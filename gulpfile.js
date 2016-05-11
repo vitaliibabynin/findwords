@@ -310,6 +310,21 @@ gulp.task('music:build', function(){
 });
 
 
+gulp.task('app:settings:prepare', function(cb){
+    shell.cp(
+        './cordova/install-config/source/game.data.js',
+        './source/js/initialcheck/game.data.js'
+    );
+    shell.cp(
+        './cordova/install-config/source/app.colors.scss',
+        './source/scss/app.colors.scss'
+    );
+
+    console.log('AppSettings prepared.');
+
+    cb();
+});
+
 gulp.task('fonts:build', function(){
     return gulp
         .src(path.watch.fonts)
@@ -364,14 +379,14 @@ gulp.task('cordova:prepare:app', function (cb) {
         console.log(stdout);
         console.log(stderr);
 
-        shell.cp(
-            './cordova/app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
-            './cordova/app/platforms/android/assets/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
-        );
-        shell.cp(
-            './cordova/app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
-            './cordova/app/platforms/ios/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
-        );
+        //shell.cp(
+        //    './cordova/app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+        //    './cordova/app/platforms/android/assets/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+        //);
+        //shell.cp(
+        //    './cordova/app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+        //    './cordova/app/platforms/ios/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+        //);
 
         cb(err);
     });
@@ -387,6 +402,7 @@ gulp.task('cordova:all', function (cb) {
 
 gulp.task('build', function(cb) {
     runSequence(
+        'app:settings:prepare',
         'fonts:build',
         'img:build',
         'music:build',

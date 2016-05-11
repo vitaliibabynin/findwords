@@ -73,6 +73,14 @@ gulp.task('cordova:app:prepare', function (cb) {
             .on('finish', function() {
                 shell.cp(
                     './app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+                    './app/platforms/android/platform_www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+                );
+                shell.cp(
+                    './app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
+                    './app/platforms/ios/platform_www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
+                );
+                shell.cp(
+                    './app/plugins/cordova-plugin-facebook/www/CordovaFacebook.js',
                     './app/platforms/android/assets/www/plugins/cordova-plugin-facebook/www/CordovaFacebook.js'
                 );
                 shell.cp(

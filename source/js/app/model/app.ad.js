@@ -30,7 +30,12 @@ var Ad = function(currentPlatform, isCordovaApp){
                     Appodeal.disableLocationPermissionCheck();
                     Appodeal.initialize(this.settings.appodeal.appid, Appodeal.INTERSTITIAL | Appodeal.VIDEO | Appodeal.BANNER | Appodeal.REWARDED_VIDEO);
                     Appodeal.enableInterstitialCallbacks(true);
-                    Appodeal.enableVideoCallbacks(true);
+                    if(CONST.PLATFORM_ANDROID == currentPlatform){
+                        Appodeal.enableSkippableVideoCallbacks(true);
+                        Appodeal.enableNonSkippableVideoCallbacks(true);
+                    }else if(CONST.PLATFORM_IOS == currentPlatform){
+                        Appodeal.enableVideoCallbacks(true);
+                    }
                     Appodeal.enableRewardedVideoCallbacks(true);
 
                     this.bottomBannerHeight = 50;
@@ -146,18 +151,22 @@ var Ad = function(currentPlatform, isCordovaApp){
         return new Promise(function(resolve, reject){
 
             if(this.appodelInited){
-
-                document.addEventListener('onRewardedVideoFinished', function(data){
-                    console.log('Reward:' + data.amount + ' ' + data.name);  //data.amount  - amount of reward, data.name - reward name
-                    resolve();
-                });
-                Appodeal.isLoaded(Appodeal.REWARDED_VIDEO, function(result){
-                    if(result){
-                        Appodeal.show(Appodeal.REWARDED_VIDEO);
-                        return;
+                Appodeal.isLoaded(Appodeal.REWARDED_VIDEO, function (result) {
+                    if(!result){
+                        return reject();
                     }
 
-                    reject();
+                    document.addEventListener('onRewardedVideoDidFinish', function (data) {
+                        console.log('Reward Video:' + data.amount + ' ' + data.name);  //data.amount  - amount of reward, data.name - reward name
+                        resolve();
+                    }.bind(this));
+                    document.addEventListener('onRewardedVideoFinished', function (data) {
+                        console.log('Reward Video:' + data.amount + ' ' + data.name);  //data.amount  - amount of reward, data.name - reward name
+                        resolve();
+                    }.bind(this));
+
+
+                    Appodeal.show(Appodeal.REWARDED_VIDEO);
                 }.bind(this));
 
                 return;

@@ -47,6 +47,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                 return this.getGameState().init();
             }.bind(this))
             .then(function(){
+                    console.log('init 1');
                     return Promise.all([
                         window.appFB.init(this.getSettings().getFacebookId(), this.language)
                         , window.appStore.init() //из-за этого пока не грузится на iOS девайсах, нужно завести в панельке аппстора приложение
@@ -56,6 +57,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                 }.bind(this))
             .then(function(){
                     return new Promise(function(resolve, reject){
+                        console.log('init 2');
                         this.getMusicManager().playMusic();
                         window.appNotificationLocal.hasPermissions().then(function(granted){
                             if(!granted){
@@ -73,6 +75,7 @@ var AppManager = Object.assign({}, AbstractEventEmitter, {
                     }.bind(this));
                 }.bind(this))
             .then(function(){
+                    console.log('init 3');
                     router.addChangeLanguageListener(this.onLanguageChanged.bind(this));
                     document.addEventListener("backbutton", this.onHardwareBackBtnClick.bind(this), false);
 

@@ -42,6 +42,7 @@
     "build": "NODE_ENV=production npm run clean && NODE_ENV=production gulp build",
     "preparecordova": "NODE_ENV=production gulp cordova:all",
     "bpcordova": "npm run cordovainstall && npm run build && npm run preparecordova",
+    "bprelease": "npm run bpcordova && cd ./cordova/app && cordova build --release",
 
     "cordovainstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:install",
     "cordovareinstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:reinstall",
