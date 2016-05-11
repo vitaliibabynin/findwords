@@ -45,6 +45,7 @@ module.exports.Letter.Class = LetterClass;
 
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
+var OPEN_LETTER_COLOR = require('./app.gamecontrol.js').OPEN_LETTER_COLOR;
 
 var LINK_VISIBLE = "visible";
 module.exports.LINK_VISIBLE = LINK_VISIBLE;
@@ -848,6 +849,16 @@ var BoardAbstractClass = Object.assign({}, {}, {
         return this.state.openedLetters;
     },
 
+    removeOpenLetterLinksInSelectedLetters: function (cellClassNames) {
+        var filteredCellClassNames = JSON.parse(JSON.stringify(cellClassNames));
+
+        if (filteredCellClassNames.openLetter == OPEN_LETTER_COLOR && filteredCellClassNames.color == COLOR_SELECTED) {
+            delete filteredCellClassNames.openLetterLinkAfter;
+            delete filteredCellClassNames.openLetterLinkBefore;
+        }
+
+        return filteredCellClassNames;
+    },
 
     render: function () {
 
@@ -878,14 +889,16 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
                                 {row.map(function (cell, cellId) {
 
+                                    var filteredCellClassNames = this.removeOpenLetterLinksInSelectedLetters(cell.classNames);
                                     var properties = [];
-                                    for (var property in cell.classNames) {
-                                        if (!cell.classNames.hasOwnProperty(property)) {
-                                            continue;
+                                    for (var property in filteredCellClassNames) {
+                                        if (filteredCellClassNames.hasOwnProperty(property)) {
+                                            properties.push(filteredCellClassNames[property]);
                                         }
-                                        properties.push(cell.classNames[property]);
                                     }
-                                    var letterClassNames = classNames(properties);
+                                    var letterClassNames = classNames(
+                                        properties
+                                    );
 
                                     return (
                                         <module.exports.Letter key={rowId + '_' + cellId}

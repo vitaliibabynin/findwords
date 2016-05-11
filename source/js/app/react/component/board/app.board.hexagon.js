@@ -162,7 +162,6 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
         }
 
         if (y % 2 != 0) {
-            console.log("y % 2 != 0");
             if (y == prevY + 1) {
                 if (x == prevX) {
                     boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
@@ -311,14 +310,16 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
                                 {row.map(function (cell, cellId) {
 
+                                    var filteredCellClassNames = this.removeOpenLetterLinksInSelectedLetters(cell.classNames);
                                     var properties = [];
-                                    for (var property in cell.classNames) {
-                                        if (!cell.classNames.hasOwnProperty(property)) {
-                                            continue;
+                                    for (var property in filteredCellClassNames) {
+                                        if (filteredCellClassNames.hasOwnProperty(property)) {
+                                            properties.push(filteredCellClassNames[property]);
                                         }
-                                        properties.push(cell.classNames[property]);
                                     }
-                                    var letterClassNames = classNames(properties);
+                                    var letterClassNames = classNames(
+                                        properties
+                                    );
 
                                     return (
                                         <LetterA2 key={rowId + '_' + cellId}

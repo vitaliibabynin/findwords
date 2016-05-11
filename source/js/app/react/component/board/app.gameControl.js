@@ -51,7 +51,10 @@ var GameControlClass = Object.assign({}, {}, {
                     x: React.PropTypes.number,
                     y: React.PropTypes.number
                 })),
-            wordIdx: React.PropTypes.number
+            wordIdx: React.PropTypes.oneOfType([
+                React.PropTypes.bool,
+                React.PropTypes.number
+            ])
         }),
         displayNotice: React.PropTypes.func,
         setGameStateRoundField: React.PropTypes.func,
