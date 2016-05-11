@@ -47,16 +47,29 @@ var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
 
 var LINK_VISIBLE = "visible";
+module.exports.LINK_VISIBLE = LINK_VISIBLE;
+
 var LINK_FADE = "fade";
 
 var BEFORE_LINK_TOP = "before-link-top";
+
 var BEFORE_LINK_RIGHT = "before-link-right";
+module.exports.BEFORE_LINK_RIGHT = BEFORE_LINK_RIGHT;
+
 var BEFORE_LINK_BOTTOM = "before-link-bottom";
+
 var BEFORE_LINK_LEFT = "before-link-left";
+module.exports.BEFORE_LINK_LEFT = BEFORE_LINK_LEFT;
+
 var AFTER_LINK_TOP = "after-link-top";
+
 var AFTER_LINK_RIGHT = "after-link-right";
+module.exports.AFTER_LINK_RIGHT = AFTER_LINK_RIGHT;
+
 var AFTER_LINK_BOTTOM = "after-link-bottom";
+
 var AFTER_LINK_LEFT = "after-link-left";
+module.exports.AFTER_LINK_LEFT = AFTER_LINK_LEFT;
 
 var SELECT_DIFFERENTLY = require('./../app.notice.js').SELECT_DIFFERENTLY;
 var NO_SUCH_WORD = require('./../app.notice.js').NO_SUCH_WORD;
@@ -491,33 +504,34 @@ var BoardAbstractClass = Object.assign({}, {}, {
 
         boardArr[y][x].classNames.backgroundColor = prevColor;
         boardArr[y][x].classNames.color = COLOR_SELECTED;
+        boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
 
+        this.addLinksToSelectedLetter(boardArr, x, y, prevX, prevY);
+
+        newState.boardArr = boardArr;
+        newState.selectedLetters = selectedLetters;
+    },
+
+    addLinksToSelectedLetter: function (boardArr, x, y, prevX, prevY) {
         if (y == prevY + 1 && x == prevX) {
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP;
             boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM;
-            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
         }
 
         if (y == prevY - 1 && x == prevX) {
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM;
             boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP;
-            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
         }
 
         if (x == prevX + 1 && y == prevY) {
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_LEFT;
             boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
-            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
         }
 
         if (x == prevX - 1 && y == prevY) {
             boardArr[y][x].classNames.linkBefore = BEFORE_LINK_RIGHT;
             boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
-            boardArr[y][x].classNames.linkVisibility = LINK_VISIBLE;
         }
-
-        newState.boardArr = boardArr;
-        newState.selectedLetters = selectedLetters;
     },
 
     emptySelectedLetters: function (newState) {

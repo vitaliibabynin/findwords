@@ -9,6 +9,20 @@ var Letter = require('./app.board.abstract').Letter;
 
 module.exports = {};
 
+//var LINK_VISIBLE = require('./app.board.abstract.js').LINK_VISIBLE;
+var BEFORE_LINK_LEFT = require('./app.board.abstract.js').BEFORE_LINK_LEFT;
+var BEFORE_LINK_RIGHT = require('./app.board.abstract.js').BEFORE_LINK_RIGHT;
+var AFTER_LINK_LEFT = require('./app.board.abstract.js').AFTER_LINK_LEFT;
+var AFTER_LINK_RIGHT = require('./app.board.abstract.js').AFTER_LINK_RIGHT;
+var BEFORE_LINK_TOP_LEFT = "before-link-top-left";
+var BEFORE_LINK_TOP_RIGHT = "before-link-top-right";
+var AFTER_LINK_TOP_LEFT = "after-link-top-left";
+var AFTER_LINK_TOP_RIGHT = "after-link-top-right";
+var BEFORE_LINK_BOTTOM_LEFT = "before-link-bottom-left";
+var BEFORE_LINK_BOTTOM_RIGHT = "before-link-bottom-right";
+var AFTER_LINK_BOTTOM_LEFT = "after-link-bottom-left";
+var AFTER_LINK_BOTTOM_RIGHT = "after-link-bottom-right";
+
 var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
     displayName: 'BoardHexagon',
@@ -135,6 +149,62 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
         }
 
         return result;
+    },
+
+    addLinksToSelectedLetter: function (boardArr, x, y, prevX, prevY) {
+        if (x == prevX + 1 && y == prevY) {
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_LEFT;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+        }
+        if (x == prevX - 1 && y == prevY) {
+            boardArr[y][x].classNames.linkBefore = BEFORE_LINK_RIGHT;
+            boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+        }
+
+        if (y % 2 != 0) {
+            console.log("y % 2 != 0");
+            if (y == prevY + 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                }
+                if (x == prevX - 1) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                }
+            }
+            if (y == prevY - 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
+                }
+                if (x == prevX - 1) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
+                }
+            }
+        } else {
+            if (y == prevY + 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                }
+                if (x == prevX + 1) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                }
+            }
+            if (y == prevY - 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
+                }
+                if (x == prevX + 1) {
+                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
+                }
+            }
+        }
     },
 
     calcWhichCellIsTouched: function (e) {
