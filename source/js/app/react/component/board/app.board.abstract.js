@@ -58,8 +58,6 @@ var AFTER_LINK_RIGHT = "after-link-right";
 var AFTER_LINK_BOTTOM = "after-link-bottom";
 var AFTER_LINK_LEFT = "after-link-left";
 
-var OPEN_LETTER_COLOR = require('./app.gamecontrol.js').OPEN_LETTER_COLOR;
-
 var SELECT_DIFFERENTLY = require('./../app.notice.js').SELECT_DIFFERENTLY;
 var NO_SUCH_WORD = require('./../app.notice.js').NO_SUCH_WORD;
 
@@ -269,7 +267,6 @@ var BoardAbstractClass = Object.assign({}, {}, {
         this.addFoundWordsToBoardArr(newState);
         newState.cellSize = this.calculateCellSize();
 
-        console.log(newState);
         this.setState(newState);
     },
 

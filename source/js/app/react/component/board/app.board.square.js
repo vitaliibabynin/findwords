@@ -12,7 +12,7 @@ var BoardSquareClass = Object.assign({}, BoardAbstract.Class, {
 
     getInitialState: function () {
         var state = BoardAbstract.Class.getInitialState.apply(this);
-        state.boardType = "board-a1";
+        state.boardType = "board-square";
 
         return state;
     },

@@ -17,7 +17,7 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
     getInitialState: function () {
         var state = BoardAbstract.Class.getInitialState.apply(this);
-        state.boardType = "board-a2";
+        state.boardType = "board-hexagon";
 
         return state;
     },

@@ -22,7 +22,8 @@ var PageGameAbstract = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            boardType: "boardSquare",
+            //boardType: "boardSquare",
+            boardType: "boardHexagon",
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},
