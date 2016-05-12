@@ -18,12 +18,18 @@ var ShownWords = require('./../component/app.shownwords.js').ShownWords;
 
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
 
+var BOARD_TYPE_SQUARE = "board-square";
+module.exports.BOARD_TYPE_SQUARE = BOARD_TYPE_SQUARE;
+
+var BOARD_TYPE_HEXAGON = "board-hexagon";
+module.exports.BOARD_TYPE_HEXAGON = BOARD_TYPE_HEXAGON;
+
 var PageGameAbstract = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            //boardType: "boardSquare",
-            boardType: "boardHexagon",
+            //boardType: BOARD_TYPE_SQUARE,
+            boardType: BOARD_TYPE_HEXAGON,
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},
@@ -149,9 +155,9 @@ var PageGameAbstract = Object.assign({}, {}, {
 
     selectBoardType: function () {
         switch (this.state.boardType) {
-            case "boardSquare":
+            case BOARD_TYPE_SQUARE:
                 return BoardSquare;
-            case "boardHexagon":
+            case BOARD_TYPE_HEXAGON:
                 return BoardHexagon;
             default:
                 return BoardSquare
@@ -887,7 +893,8 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
                     <div className="container transform-center">
                         {this.state.boardMaxHeight > 0 ? <GameControl
                             ref="board"
-                            boardType={BoardType}
+                            boardTypeComponent={BoardType}
+                            boardTypeString={this.state.boardType}
                             boardMaxHeight={this.state.boardMaxHeight}
                             boardData={this.state.boardData}
                             board={this.state.board}

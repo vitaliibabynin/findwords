@@ -8,6 +8,8 @@ var Object = {assign: require('react/lib/Object.assign')};
 module.exports = {};
 
 
+var PAGE_GAME = require('./../../page/page.game');
+
 var OPEN_LETTER_COLOR = "open-letter";
 module.exports.OPEN_LETTER_COLOR = OPEN_LETTER_COLOR;
 
@@ -19,13 +21,22 @@ var OPEN_LETTER_AFTER_LINK_TOP = "open-letter-after-link-top";
 var OPEN_LETTER_AFTER_LINK_RIGHT = "open-letter-after-link-right";
 var OPEN_LETTER_AFTER_LINK_BOTTOM = "open-letter-after-link-bottom";
 var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
+var OPEN_LETTER_BEFORE_LINK_TOP_LEFT = "open-letter-before-link-top-left";
+var OPEN_LETTER_BEFORE_LINK_TOP_RIGHT = "open-letter-before-link-top-right";
+var OPEN_LETTER_AFTER_LINK_TOP_LEFT = "open-letter-after-link-top-left";
+var OPEN_LETTER_AFTER_LINK_TOP_RIGHT = "open-letter-after-link-top-right";
+var OPEN_LETTER_BEFORE_LINK_BOTTOM_LEFT = "open-letter-before-link-bottom-left";
+var OPEN_LETTER_BEFORE_LINK_BOTTOM_RIGHT = "open-letter-before-link-bottom-right";
+var OPEN_LETTER_AFTER_LINK_BOTTOM_LEFT = "open-letter-after-link-bottom-left";
+var OPEN_LETTER_AFTER_LINK_BOTTOM_RIGHT = "open-letter-after-link-bottom-right";
 
 
 var GameControlClass = Object.assign({}, {}, {
     displayName: 'GameControl',
 
     propTypes: {
-        boardType: React.PropTypes.func,
+        boardTypeComponent: React.PropTypes.func,
+        boardTypeString: React.PropTypes.string,
         boardMaxHeight: React.PropTypes.number,
         boardData: React.PropTypes.shape({
             board: React.PropTypes.shape({
@@ -66,8 +77,9 @@ var GameControlClass = Object.assign({}, {}, {
 
     getInitialState: function () {
         var state = {
-            boardType: this.props.boardType || function () {
+            boardTypeComponent: this.props.boardTypeComponent || function () {
             },
+            boardTypeString: this.props.boardTypeString || "",
             boardMaxHeight: this.props.boardMaxHeight || 0,
             boardData: this.props.boardData || {},
             board: this.props.board || {},
@@ -119,6 +131,12 @@ var GameControlClass = Object.assign({}, {}, {
         boardArr[y][x].classNames = {
             openLetter: OPEN_LETTER_COLOR
         };
+
+        if (this.state.boardTypeString == PAGE_GAME.BOARD_TYPE_HEXAGON) {
+            this.addOpenedLetterToBoardArrHexagon(boardArr, openedLetters, x, y, prevX, prevY);
+            return;
+        }
+
         if (y == prevY + 1 && x == prevX) {
             boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_TOP;
             boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM;
@@ -134,6 +152,61 @@ var GameControlClass = Object.assign({}, {}, {
         if (x == prevX - 1 && y == prevY) {
             boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_RIGHT;
             boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_LEFT;
+        }
+    },
+
+    addOpenedLetterToBoardArrHexagon: function (boardArr, openedLetters, x, y, prevX, prevY) {
+        if (x == prevX + 1 && y == prevY) {
+            boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_LEFT;
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_RIGHT;
+        }
+        if (x == prevX - 1 && y == prevY) {
+            boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_RIGHT;
+            boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_LEFT;
+        }
+
+        if (y % 2 != 0) {
+            if (y == prevY + 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_TOP_LEFT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM_RIGHT;
+                }
+                if (x == prevX - 1) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_TOP_RIGHT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM_LEFT;
+                }
+            }
+            if (y == prevY - 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_BOTTOM_LEFT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_TOP_RIGHT;
+                }
+                if (x == prevX - 1) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_BOTTOM_RIGHT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_TOP_LEFT;
+                }
+            }
+        } else {
+            if (y == prevY + 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_TOP_RIGHT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM_LEFT;
+                }
+                if (x == prevX + 1) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_TOP_LEFT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_BOTTOM_RIGHT;
+                }
+            }
+            if (y == prevY - 1) {
+                if (x == prevX) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_BOTTOM_RIGHT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_TOP_LEFT;
+                }
+                if (x == prevX + 1) {
+                    boardArr[y][x].classNames.openLetterLinkBefore = OPEN_LETTER_BEFORE_LINK_BOTTOM_LEFT;
+                    boardArr[prevY][prevX].classNames.openLetterLinkAfter = OPEN_LETTER_AFTER_LINK_TOP_RIGHT;
+                }
+            }
         }
     },
 
@@ -303,7 +376,7 @@ var GameControlClass = Object.assign({}, {}, {
 
     render: function () {
 
-        var BoardType = this.state.boardType;
+        var BoardType = this.state.boardTypeComponent;
 
         return (
             <BoardType
