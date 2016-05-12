@@ -9,7 +9,9 @@ var Letter = require('./app.board.abstract').Letter;
 
 module.exports = {};
 
-//var LINK_VISIBLE = require('./app.board.abstract.js').LINK_VISIBLE;
+var COLOR_COMPLETED = require('./app.board.abstract.js').COLOR_COMPLETED;
+var LINK_VISIBLE = require('./app.board.abstract.js').LINK_VISIBLE;
+
 var BEFORE_LINK_LEFT = require('./app.board.abstract.js').BEFORE_LINK_LEFT;
 var BEFORE_LINK_RIGHT = require('./app.board.abstract.js').BEFORE_LINK_RIGHT;
 var AFTER_LINK_LEFT = require('./app.board.abstract.js').AFTER_LINK_LEFT;
@@ -37,15 +39,14 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
     },
 
     componentDidMount: function () {
-        var cellSize = this.calculateCellSize();
-        var smallerCellSize = this.calculateSmallerCellSize(cellSize);
-        var coordinatesTable = this.createCoordinatesTable(smallerCellSize);
+        var newState = {};
 
-        this.setState({
-            cellSize: cellSize,
-            smallerCellSize: smallerCellSize,
-            coordinatesTable: coordinatesTable
-        });
+        this.addFoundWordsToBoardArr(newState);
+        newState.cellSize = this.calculateCellSize();
+        newState.smallerCellSize = this.calculateSmallerCellSize(newState.cellSize);
+        newState.coordinatesTable = this.createCoordinatesTable(newState.smallerCellSize);
+
+        this.setState(newState);
     },
 
     calculateSmallerCellSize: function (cellSize) {
@@ -201,6 +202,81 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
                 if (x == prevX + 1) {
                     boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
                     boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
+                }
+            }
+        }
+    },
+
+    addLettersInFoundWord: function (currentWord, backgroundColor, boardArr) {
+        boardArr[currentWord.letters[0].y][currentWord.letters[0].x].classNames = {
+            backgroundColor: backgroundColor,
+            color: COLOR_COMPLETED,
+            linkVisibility: LINK_VISIBLE
+        };
+
+        for (var i = 1; i < currentWord.letters.length; i++) {
+            var x = currentWord.letters[i].x;
+            var y = currentWord.letters[i].y;
+            var prevLetter = currentWord.letters[i - 1];
+            var prevX = prevLetter.x;
+            var prevY = prevLetter.y;
+
+            boardArr[y][x].classNames = {
+                backgroundColor: backgroundColor,
+                color: COLOR_COMPLETED,
+                linkVisibility: LINK_VISIBLE
+            };
+
+            if (x == prevX + 1 && y == prevY) {
+                boardArr[y][x].classNames.linkBefore = BEFORE_LINK_LEFT;
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_RIGHT;
+            }
+            if (x == prevX - 1 && y == prevY) {
+                boardArr[y][x].classNames.linkBefore = BEFORE_LINK_RIGHT;
+                boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_LEFT;
+            }
+
+            if (y % 2 != 0) {
+                if (y == prevY + 1) {
+                    if (x == prevX) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                    }
+                    if (x == prevX - 1) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                    }
+                }
+                if (y == prevY - 1) {
+                    if (x == prevX) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
+                    }
+                    if (x == prevX - 1) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
+                    }
+                }
+            } else {
+                if (y == prevY + 1) {
+                    if (x == prevX) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                    }
+                    if (x == prevX + 1) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                    }
+                }
+                if (y == prevY - 1) {
+                    if (x == prevX) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
+                    }
+                    if (x == prevX + 1) {
+                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
+                    }
                 }
             }
         }

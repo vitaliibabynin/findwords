@@ -45,6 +45,8 @@ module.exports.Letter.Class = LetterClass;
 
 var COLOR_SELECTED = "selected";
 var COLOR_COMPLETED = "completed";
+module.exports.COLOR_COMPLETED = COLOR_COMPLETED;
+
 var OPEN_LETTER_COLOR = require('./app.gamecontrol.js').OPEN_LETTER_COLOR;
 
 var LINK_VISIBLE = "visible";
