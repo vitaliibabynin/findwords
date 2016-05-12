@@ -104,7 +104,10 @@ var BoardAbstractClass = Object.assign({}, {}, {
                     x: React.PropTypes.number,
                     y: React.PropTypes.number
                 })),
-            wordIdx: React.PropTypes.number
+            wordIdx: React.PropTypes.oneOfType([
+                React.PropTypes.bool,
+                React.PropTypes.number
+            ])
         }),
         isPracticeRound: React.PropTypes.bool,
         displayNotice: React.PropTypes.func,

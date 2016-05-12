@@ -139,7 +139,6 @@ var GameControlClass = Object.assign({}, {}, {
 
     getAndCheckOpenedLetters: function () {
         var openedLetters = this.refs.board.getOpenedLetters();
-        console.log(openedLetters);
 
         if (!openedLetters.hasOwnProperty("letters")) {
             openedLetters.letters = [];
