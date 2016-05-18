@@ -438,7 +438,7 @@ var LetterA2Class = Object.assign({}, Letter.Class, {
             lineHeight: (0.5774 * this.props.cellSize) + "px",
             marginTop: 0.2887 + 'px',
             marginBottom: 0.2887 + 'px',
-            zIndex: (this.props.rowId + 1) * this.props.cellId
+            zIndex: parseInt((this.props.rowId + 1).toString() +''+ this.props.cellId.toString())
         };
 
         var topTriangleStyle = {
