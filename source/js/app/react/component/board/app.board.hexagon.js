@@ -20,10 +20,10 @@ var BEFORE_LINK_TOP_LEFT = "before-link-top-left";
 var BEFORE_LINK_TOP_RIGHT = "before-link-top-right";
 var AFTER_LINK_TOP_LEFT = "after-link-top-left";
 var AFTER_LINK_TOP_RIGHT = "after-link-top-right";
-var BEFORE_LINK_BOTTOM_LEFT = "before-link-bottom-left";
-var BEFORE_LINK_BOTTOM_RIGHT = "before-link-bottom-right";
-var AFTER_LINK_BOTTOM_LEFT = "after-link-bottom-left";
-var AFTER_LINK_BOTTOM_RIGHT = "after-link-bottom-right";
+//var BEFORE_LINK_BOTTOM_LEFT = "before-link-bottom-left";
+//var BEFORE_LINK_BOTTOM_RIGHT = "before-link-bottom-right";
+//var AFTER_LINK_BOTTOM_LEFT = "after-link-bottom-left";
+//var AFTER_LINK_BOTTOM_RIGHT = "after-link-bottom-right";
 
 var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
@@ -166,20 +166,20 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
             if (y == prevY + 1) {
                 if (x == prevX) {
                     boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
-                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                    //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
                 }
                 if (x == prevX - 1) {
                     boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
-                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                    //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
                 }
             }
             if (y == prevY - 1) {
                 if (x == prevX) {
-                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                    //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
                     boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
                 }
                 if (x == prevX - 1) {
-                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                    //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
                     boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
                 }
             }
@@ -187,20 +187,20 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
             if (y == prevY + 1) {
                 if (x == prevX) {
                     boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
-                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                    //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
                 }
                 if (x == prevX + 1) {
                     boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
-                    boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                    //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
                 }
             }
             if (y == prevY - 1) {
                 if (x == prevX) {
-                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                    //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
                     boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
                 }
                 if (x == prevX + 1) {
-                    boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                    //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
                     boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
                 }
             }
@@ -240,20 +240,20 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
                 if (y == prevY + 1) {
                     if (x == prevX) {
                         boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
-                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                        //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
                     }
                     if (x == prevX - 1) {
                         boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
-                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                        //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
                     }
                 }
                 if (y == prevY - 1) {
                     if (x == prevX) {
-                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                        //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
                         boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
                     }
                     if (x == prevX - 1) {
-                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                        //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
                         boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
                     }
                 }
@@ -261,20 +261,20 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
                 if (y == prevY + 1) {
                     if (x == prevX) {
                         boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_RIGHT;
-                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
+                        //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_LEFT;
                     }
                     if (x == prevX + 1) {
                         boardArr[y][x].classNames.linkBefore = BEFORE_LINK_TOP_LEFT;
-                        boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
+                        //boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_BOTTOM_RIGHT;
                     }
                 }
                 if (y == prevY - 1) {
                     if (x == prevX) {
-                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
+                        //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_RIGHT;
                         boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_LEFT;
                     }
                     if (x == prevX + 1) {
-                        boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
+                        //boardArr[y][x].classNames.linkBefore = BEFORE_LINK_BOTTOM_LEFT;
                         boardArr[prevY][prevX].classNames.linkAfter = AFTER_LINK_TOP_RIGHT;
                     }
                 }

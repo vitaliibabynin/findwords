@@ -18,10 +18,10 @@ var ShownWords = require('./../component/app.shownwords.js').ShownWords;
 
 var NO_WORDS_TO_SHOW = require('./../component/app.notice.js').NO_WORDS_TO_SHOW;
 
-var BOARD_TYPE_SQUARE = "board-square";
+var BOARD_TYPE_SQUARE = "square";
 module.exports.BOARD_TYPE_SQUARE = BOARD_TYPE_SQUARE;
 
-var BOARD_TYPE_HEXAGON = "board-hexagon";
+var BOARD_TYPE_HEXAGON = "hexagon";
 module.exports.BOARD_TYPE_HEXAGON = BOARD_TYPE_HEXAGON;
 
 var PageGameAbstract = Object.assign({}, {}, {
