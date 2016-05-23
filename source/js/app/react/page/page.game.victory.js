@@ -19,7 +19,7 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
             starsReceived: parseInt(router.getParam('starsReceived')) || 3,
             rewardScore: parseInt(router.getParam('rewardScore')) || 0,
             rewardCoins: parseInt(router.getParam('rewardCoins')) || 0,
-            displayStars: false
+            displayStars: appManager.getGameState().getTimer() || false
         };
 
         return state;

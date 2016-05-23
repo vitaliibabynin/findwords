@@ -11,7 +11,10 @@ var SETTINGS_GAMESTATE = 'game_state';
 var GameState = Object.assign({}, AbstractEventEmitter, {
 
     gameState: {
-        coins: appManager.getSettings().getInitialCoins()
+        coins: appManager.getSettings().getInitialCoins(),
+        settings: {
+            timer: appManager.getSettings().getTimerEnabled()
+        }
         //score: 0,
         //boardColorIdx: 0,
         //adPreferences: {
@@ -282,6 +285,12 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         }
 
         return this.gameState.settings[field];
+    },
+    setTimer: function (newBoolean) {
+        this.setSettingsField('timer', newBoolean);
+    },
+    getTimer: function () {
+        return this.getSettingsField('timer', true);
     },
     setMusic: function (newBoolean) {
         this.setSettingsField('music', newBoolean);

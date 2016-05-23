@@ -30,7 +30,7 @@ var PageGameAbstract = Object.assign({}, {}, {
         var state = {
             //boardType: BOARD_TYPE_SQUARE,
             boardType: BOARD_TYPE_HEXAGON,
-            displayTimer: false,
+            displayTimer: appManager.getGameState().getTimer() || false,
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},

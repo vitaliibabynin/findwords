@@ -19,10 +19,11 @@ var BUTTON_MENU_FACEBOOK = "facebook";
 var BUTTON_MENU_SHOP = "shop";
 var BUTTON_SETTINGS = "settings";
 var BUTTON_SETTINGS_LANGUAGES = "settings_languages";
-var BUTTON_SETTINGS_MUSIC = "settings_music";
-var BUTTON_SETTINGS_SOUND = "settings_sound";
 var BUTTON_SETTINGS_LANG_RU = "settings_lang_ru";
 var BUTTON_SETTINGS_LANG_EN = "settings_lang_en";
+var BUTTON_SETTINGS_TIMER = "settings_timer";
+var BUTTON_SETTINGS_MUSIC = "settings_music";
+var BUTTON_SETTINGS_SOUND = "settings_sound";
 
 
 var NavigationClass = Object.assign({}, {}, {
@@ -42,7 +43,8 @@ var NavigationClass = Object.assign({}, {}, {
             facebookOnline: appFB.isAuthorized(),
             profilePic: "",
             profileFirstName: "",
-            profileLastName: ""
+            profileLastName: "",
+            showTimerButton: appManager.getSettings().getTimerUserChangeAllow()
         };
 
         return state;
@@ -111,18 +113,6 @@ var NavigationClass = Object.assign({}, {}, {
             icon: router.getLanguage(),
             onClick: this.onClick
         };
-        buttons[BUTTON_SETTINGS_MUSIC] = {
-            id: BUTTON_SETTINGS_MUSIC,
-            title: i18n._('button.music'),
-            icon: "music",
-            onClick: this.onClick
-        };
-        buttons[BUTTON_SETTINGS_SOUND] = {
-            id: BUTTON_SETTINGS_SOUND,
-            title: i18n._('button.sound'),
-            icon: "sound",
-            onClick: this.onClick
-        };
         buttons[BUTTON_SETTINGS_LANG_RU] = {
             id: BUTTON_SETTINGS_LANG_RU,
             title: i18n._('language.ru'),
@@ -133,6 +123,24 @@ var NavigationClass = Object.assign({}, {}, {
             id: BUTTON_SETTINGS_LANG_EN,
             title: i18n._('language.en'),
             icon: CONST.LANGUAGE_EN,
+            onClick: this.onClick
+        };
+        buttons[BUTTON_SETTINGS_TIMER] = {
+            id: BUTTON_SETTINGS_TIMER,
+            title: i18n._('button.timer'),
+            icon: "timer",
+            onClick: this.onClick
+        };
+        buttons[BUTTON_SETTINGS_MUSIC] = {
+            id: BUTTON_SETTINGS_MUSIC,
+            title: i18n._('button.music'),
+            icon: "music",
+            onClick: this.onClick
+        };
+        buttons[BUTTON_SETTINGS_SOUND] = {
+            id: BUTTON_SETTINGS_SOUND,
+            title: i18n._('button.sound'),
+            icon: "sound",
             onClick: this.onClick
         };
 
@@ -158,6 +166,13 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_LAYOUT_SETTINGS:
                 buttonItems.push({id: BUTTON_SETTINGS, isPressed: true});
                 buttonItems.push({id: BUTTON_SETTINGS_LANGUAGES, isPressed: false});
+                if (this.state.showTimerButton === true) {
+                    buttonItems.push({
+                        id: BUTTON_SETTINGS_TIMER,
+                        isPressed: false,
+                        icon: appManager.getGameState().getTimer() ? "time_on" : "time_off"
+                    });
+                }
                 buttonItems.push({
                     id: BUTTON_SETTINGS_MUSIC,
                     isPressed: false,
@@ -224,14 +239,6 @@ var NavigationClass = Object.assign({}, {}, {
             case BUTTON_SETTINGS_LANGUAGES:
                 this.setState({buttonLayout: this.state.buttonLayout == BUTTON_LAYOUT_SETTINGS_LANG ? BUTTON_LAYOUT_SETTINGS : BUTTON_LAYOUT_SETTINGS_LANG});
                 break;
-            case BUTTON_SETTINGS_MUSIC:
-                appManager.getGameState().setMusic(!appManager.getGameState().getMusic());
-                this.forceUpdate();
-                break;
-            case BUTTON_SETTINGS_SOUND:
-                appManager.getGameState().setSound(!appManager.getGameState().getSound());
-                this.forceUpdate();
-                break;
             case BUTTON_SETTINGS_LANG_RU:
                 //ничего не делаем если язык уже выставлен точно такой же на кнопку которого мы клацаем
                 if (router.getLanguage() == CONST.LANGUAGE_RU) {
@@ -245,6 +252,18 @@ var NavigationClass = Object.assign({}, {}, {
                     return;
                 }
                 appManager.changeLangAndReload(CONST.LANGUAGE_EN);
+                break;
+            case BUTTON_SETTINGS_TIMER:
+                appManager.getGameState().setTimer(!appManager.getGameState().getTimer());
+                this.forceUpdate();
+                break;
+            case BUTTON_SETTINGS_MUSIC:
+                appManager.getGameState().setMusic(!appManager.getGameState().getMusic());
+                this.forceUpdate();
+                break;
+            case BUTTON_SETTINGS_SOUND:
+                appManager.getGameState().setSound(!appManager.getGameState().getSound());
+                this.forceUpdate();
                 break;
         }
     },

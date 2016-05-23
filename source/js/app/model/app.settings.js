@@ -243,6 +243,18 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getTimer: function () {
         return this.getSettingsValue('timer', {});
+    },
+    getTimerValue: function (key, defaultValue) {
+        if (!this.getTimer() || !this.getTimer().hasOwnProperty(key)) {
+            return defaultValue;
+        }
+        return this.getTimer()[key];
+    },
+    getTimerEnabled: function () {
+        return this.getTimerValue('enabled', false);
+    },
+    getTimerUserChangeAllow: function () {
+        return this.getTimerValue('userChangeAllow', false);
     }
 
 });
