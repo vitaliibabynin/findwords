@@ -239,6 +239,10 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getSocialUrls: function () {
         return this.getSettingsValue('social', {});
+    },
+
+    getTimer: function () {
+        return this.getSettingsValue('timer', {});
     }
 
 });
