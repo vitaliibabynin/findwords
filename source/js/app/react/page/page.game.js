@@ -5,7 +5,7 @@ module.exports = {};
 
 //var GameMixin = require('./../component/app.mixin').GameMixin;
 var Object = {assign: require('react/lib/Object.assign')};
-//var classNames = require('classnames');
+var classNames = require('classnames');
 
 var Counters = require('./../component/app.counters').Counters;
 var Timer = require('./../component/app.timer').Timer;
@@ -30,6 +30,7 @@ var PageGameAbstract = Object.assign({}, {}, {
         var state = {
             //boardType: BOARD_TYPE_SQUARE,
             boardType: BOARD_TYPE_HEXAGON,
+            displayTimer: false,
             noticeType: "",
             noticeContainerHeight: "",
             noticeWord: {letters: []},
@@ -91,11 +92,7 @@ var PageGameAbstract = Object.assign({}, {}, {
     },
 
     centerContent: function () {
-        var $pageContent = $(this.refs.pageContent.getDOMNode());
-        var boardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
-            - parseInt($pageContent.css('padding-bottom'));
-
-        this.setState({boardMaxHeight: boardMaxHeight});
+        console.log('centerContent not implemented.');
     },
 
 
@@ -176,12 +173,20 @@ var PageGameAbstract = Object.assign({}, {}, {
     },
 
     renderTimer: function () {
+        if (this.state.displayTimer === false) {
+            return;
+        }
+
         return (
             <Timer ref="timer" time={this.state.time}
                    setGameStateRoundField={this.setGameStateRoundField}
                    getGameStateRoundField={this.getGameStateRoundField}
             />
         )
+    },
+
+    render: function () {
+        console.log('render not implemented.');
     }
 
 });
@@ -228,9 +233,17 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
         return appManager.getGameState().getPracticeRoundField(field, defaultValue);
     },
 
+    centerContent: function () {
+        var $pageContent = $(this.refs.pageContent.getDOMNode());
+        var boardMaxHeight = this.refs.pageContent.getDOMNode().clientHeight
+            - parseInt($pageContent.css('padding-bottom'));
+
+        this.setState({boardMaxHeight: boardMaxHeight});
+    },
+
 
     getStarsReceived: function () {
-        return appManager.getGameState().getPracticeRoundField('starsReceived') || 3;
+        return appManager.getGameState().getPracticeRoundField('starsReceived') || 2;
     },
 
     getRewardScore: function (round, starsReceived) {
@@ -297,7 +310,9 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
 
                 {this.renderTimer()}
 
-                <div ref="pageContent" className="page-content">
+                <div ref="pageContent"
+                     className={classNames("page-content", this.state.displayTimer === true ? "display-timer" : "no-timer")}
+                >
 
                     <div className="container transform-center">
                         {this.state.boardMaxHeight > 0 ? <BoardType
@@ -723,7 +738,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
 
 
     getStarsReceived: function () {
-        return this.getGameStateRoundField('starsReceived', this.state.roundsBundleIdx, this.state.roundIdx) || 3;
+        return this.getGameStateRoundField('starsReceived', this.state.roundsBundleIdx, this.state.roundIdx) || 2;
     },
 
     getRewardScore: function (starsReceived) {
@@ -888,7 +903,10 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
                     </ChipButton>
                 </div>
 
-                <div ref="pageContent" className="page-content" style={pageContentHeight}>
+                <div ref="pageContent"
+                     className={classNames("page-content", this.state.displayTimer === true ? "display-timer" : "no-timer")}
+                     style={pageContentHeight}
+                >
 
                     <div className="container transform-center">
                         {this.state.boardMaxHeight > 0 ? <GameControl

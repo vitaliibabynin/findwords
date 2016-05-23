@@ -18,7 +18,8 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
             containerExtraClass: '',
             starsReceived: parseInt(router.getParam('starsReceived')) || 3,
             rewardScore: parseInt(router.getParam('rewardScore')) || 0,
-            rewardCoins: parseInt(router.getParam('rewardCoins')) || 0
+            rewardCoins: parseInt(router.getParam('rewardCoins')) || 0,
+            displayStars: false
         };
 
         return state;
@@ -88,6 +89,10 @@ var PageGameVictoryAbstract = Object.assign({}, {}, {
     },
 
     getStars: function () {
+        if (this.state.displayStars === false) {
+            return;
+        }
+
         var starArrangement = this.selectStarArrangement();
         var styleStar1 = {backgroundImage: starArrangement[0]};
         var styleStar2 = {backgroundImage: starArrangement[1]};

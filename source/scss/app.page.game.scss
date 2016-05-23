@@ -226,9 +226,14 @@
   }
 
   .page-content {
-    /*margin-top: 0rem;*/
-    height: 76% !important;
-    height: calc(100vh - 2.375rem - 4.750rem) !important;
+    &.no-timer {
+      height: 84% !important;
+      height: calc(100vh - 4.750rem) !important;
+    }
+    &.display-timer {
+      height: 76% !important;
+      height: calc(100vh - 2.375rem - 4.750rem) !important;
+    }
     overflow: hidden !important;
 
     .container {
