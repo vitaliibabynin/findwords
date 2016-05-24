@@ -8,6 +8,7 @@ var EVENT_REMOVE_ADS = "eventChageRemoveAds";
 
 var SETTINGS_GAMESTATE = 'game_state';
 
+
 var GameState = Object.assign({}, AbstractEventEmitter, {
 
     gameState: {
@@ -131,6 +132,8 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
                 if (gameState) {
                     this.gameState = gameState;
                 }
+
+                this.setMaxListeners(20);
 
                 return resolve();
             }.bind(this));
@@ -464,6 +467,7 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
 
 
     addChangeRoundsBundlesListener: function(callback){
+        console.log("hello");
         this.on(EVENT_CHANGE_ROUNDS_BUNDLES, callback);
     },
     removeChangeRoundsBundlesListener: function(callback){

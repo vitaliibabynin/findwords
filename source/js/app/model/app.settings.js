@@ -5,7 +5,6 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     settings: window.gameData,
 
-
     setSettings: function (data) {
         this.settings = data;
 
@@ -245,10 +244,11 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
         return this.getSettingsValue('timer', {});
     },
     getTimerValue: function (key, defaultValue) {
-        if (!this.getTimer() || !this.getTimer().hasOwnProperty(key)) {
+        var timer = this.getTimer();
+        if (!timer || !timer.hasOwnProperty(key)) {
             return defaultValue;
         }
-        return this.getTimer()[key];
+        return timer[key];
     },
     getTimerEnabled: function () {
         return this.getTimerValue('enabled', false);

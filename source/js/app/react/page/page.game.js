@@ -173,7 +173,16 @@ var PageGameAbstract = Object.assign({}, {}, {
     },
 
     renderTimer: function () {
-        if (this.state.displayTimer === false) {
+        console.log(this.state.displayTimer);
+        if (this.state.displayTimer !== true) {
+            var starsReceived = this.getGameStateRoundField("starsReceived");
+            if (typeof starsReceived == "undefined") {
+                this.setGameStateRoundField('starsReceived', 2);
+                return;
+            }
+            if (starsReceived == 3) {
+                this.setGameStateRoundField('starsReceived', 2);
+            }
             return;
         }
 
@@ -738,6 +747,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
 
 
     getStarsReceived: function () {
+        console.log(this.getGameStateRoundField('starsReceived', this.state.roundsBundleIdx, this.state.roundIdx));
         return this.getGameStateRoundField('starsReceived', this.state.roundsBundleIdx, this.state.roundIdx) || 2;
     },
 
