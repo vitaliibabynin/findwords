@@ -49,6 +49,7 @@ window.CONST = {
             'button.facebook.exit': 'Выйти',
             'button.shop': 'Магазин',
             'button.languages': 'Языки',
+            'button.timer': 'Таймер',
             'button.music': 'Музыка',
             'button.sound': 'Звук',
 
@@ -219,6 +220,7 @@ window.CONST = {
             'button.facebook.exit': 'Exit',
             'button.shop': 'Shop',
             'button.languages': 'Language',
+            'button.timer': 'Timer',
             'button.music': 'Music',
             'button.sound': 'Sound',
 
