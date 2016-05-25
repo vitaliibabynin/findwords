@@ -5,7 +5,6 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     settings: window.gameData,
 
-
     setSettings: function (data) {
         this.settings = data;
 
@@ -239,6 +238,23 @@ var AppSettings = Object.assign({}, AbstractEventEmitter, {
 
     getSocialUrls: function () {
         return this.getSettingsValue('social', {});
+    },
+
+    getTimer: function () {
+        return this.getSettingsValue('timer', {});
+    },
+    getTimerValue: function (key, defaultValue) {
+        var timer = this.getTimer();
+        if (!timer || !timer.hasOwnProperty(key)) {
+            return defaultValue;
+        }
+        return timer[key];
+    },
+    getTimerEnabled: function () {
+        return this.getTimerValue('enabled', false);
+    },
+    getTimerUserChangeAllow: function () {
+        return this.getTimerValue('userChangeAllow', false);
     }
 
 });

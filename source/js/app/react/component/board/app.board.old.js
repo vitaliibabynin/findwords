@@ -75,8 +75,8 @@ var OPEN_LETTER_AFTER_LINK_TOP = "open-letter-after-link-top";
 var OPEN_LETTER_AFTER_LINK_RIGHT = "open-letter-after-link-right";
 var OPEN_LETTER_AFTER_LINK_BOTTOM = "open-letter-after-link-bottom";
 var OPEN_LETTER_AFTER_LINK_LEFT = "open-letter-after-link-left";
-var SELECT_DIFFERENTLY = require('./../component/app.notice.js').SELECT_DIFFERENTLY;
-var NO_SUCH_WORD = require('./../component/app.notice.js').NO_SUCH_WORD;
+var SELECT_DIFFERENTLY = require('./../app.notice.js').SELECT_DIFFERENTLY;
+var NO_SUCH_WORD = require('./../app.notice.js').NO_SUCH_WORD;
 
 var BoardClass = Object.assign({}, {}, {
 
@@ -164,14 +164,6 @@ var BoardClass = Object.assign({}, {}, {
         //this.centerBoard();
     },
 
-    //centerBoard: function () {
-    //    var boardHeight = this.refs.board.getDOMNode().offsetHeight;
-    //    if (!this.state.boardExtraClass.indexOf('transform-center') && this.state.checkIfBoardFitsOnScreen(boardHeight)) {
-    //        this.state.boardExtraClass.push('transform-center');
-    //        this.setState({boardExtraClass: this.state.boardExtraClass});
-    //    }
-    //    ;
-    //},
 
     boardConverter: function (boardData) {
         var arr = new Array(boardData.board.rows);
@@ -530,8 +522,6 @@ var BoardClass = Object.assign({}, {}, {
     },
 
     checkIfLetterIsInCompleteWord: function (x, y) {
-
-
         var boardArr = this.state.boardArr;
         if (!boardArr || !boardArr[y] || !boardArr[y][x]) {
             return false;

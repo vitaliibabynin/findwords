@@ -34,7 +34,14 @@ var TimerClass = Object.assign({}, {}, {
             getGameStateRoundField: this.props.getGameStateRoundField || function () {
             }
         };
-        state.starsReceived = state.getGameStateRoundField("starsReceived") || 3;
+        var gameStateStarsReceived = state.getGameStateRoundField("starsReceived");
+        console.log(gameStateStarsReceived);
+        if (typeof gameStateStarsReceived == "undefined") {
+            state.setGameStateRoundField('starsReceived', 3);
+            state.starsReceived = 3;
+        } else {
+            state.starsReceived = gameStateStarsReceived;
+        }
 
         var initialTime = state.getGameStateRoundField("secondsRemaining") || 0;
 

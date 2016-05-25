@@ -8,10 +8,14 @@ var EVENT_REMOVE_ADS = "eventChageRemoveAds";
 
 var SETTINGS_GAMESTATE = 'game_state';
 
+
 var GameState = Object.assign({}, AbstractEventEmitter, {
 
     gameState: {
-        coins: appManager.getSettings().getInitialCoins()
+        coins: appManager.getSettings().getInitialCoins(),
+        settings: {
+            timer: appManager.getSettings().getTimerEnabled()
+        }
         //score: 0,
         //boardColorIdx: 0,
         //adPreferences: {
@@ -128,6 +132,8 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
                 if (gameState) {
                     this.gameState = gameState;
                 }
+
+                this.setMaxListeners(20);
 
                 return resolve();
             }.bind(this));
@@ -282,6 +288,12 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
         }
 
         return this.gameState.settings[field];
+    },
+    setTimer: function (newBoolean) {
+        this.setSettingsField('timer', newBoolean);
+    },
+    getTimer: function () {
+        return this.getSettingsField('timer', true);
     },
     setMusic: function (newBoolean) {
         this.setSettingsField('music', newBoolean);
@@ -455,6 +467,7 @@ var GameState = Object.assign({}, AbstractEventEmitter, {
 
 
     addChangeRoundsBundlesListener: function(callback){
+        console.log("hello");
         this.on(EVENT_CHANGE_ROUNDS_BUNDLES, callback);
     },
     removeChangeRoundsBundlesListener: function(callback){
