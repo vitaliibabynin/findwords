@@ -374,11 +374,13 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
                     {boardArr.map(function (row, rowId) {
                         var rowStyle = {
-                            marginTop: (smallerCellSize * 0.2555) + 'px',
+                            //marginTop: (smallerCellSize * 0.2555) + 'px',
+                            marginTop: (Math.sqrt(Math.pow(0.7071 * smallerCellSize, 2) - (Math.pow(smallerCellSize, 2) / 4)) / 2) + 'px',
                             zIndex: rowId + 1
                         };
                         if (rowId % 2 != 0) {
-                            rowStyle.marginLeft = (smallerCellSize * 0.485) + 'px';
+                            //rowStyle.marginLeft = (smallerCellSize * 0.485) + 'px';
+                            rowStyle.marginLeft = ((smallerCellSize - 2) / 2) + 'px';
                         }
 
                         return (
