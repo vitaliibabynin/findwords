@@ -46,10 +46,13 @@
 
     "cordovainstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:install",
     "cordovareinstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:reinstall",
+    "wincordovainstall": "SET NODE_ENV=production && cd cordova && gulp --gulpfile ./gulpfile.js cordova:app:install",
+    "wincordovareinstall": "SET NODE_ENV=production && cd cordova && gulp --gulpfile ./gulpfile.js cordova:app:reinstall",
 
     "winbuild": "SET NODE_ENV=production && npm run clean && gulp build",
     "winpreparecordova": "SET NODE_ENV=production && gulp cordova:all",
-    "winbpcordova": "npm run winbuild && npm run winpreparecordova",
+    "winbpcordova": "npm run wincordovainstall && npm run winbuild && npm run winpreparecordova",
+    "winbprelease": "npm run winbpcordova && cd ./cordova/app && cordova build --release",
 
     "test": "echo \"Error: no test specified\" && exit 1"
   },

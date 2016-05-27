@@ -29,7 +29,7 @@ var PageGameAbstract = Object.assign({}, {}, {
     getInitialState: function () {
         var state = {
             //boardType: BOARD_TYPE_SQUARE,
-            boardType: BOARD_TYPE_HEXAGON,
+            //boardType: BOARD_TYPE_HEXAGON,
             displayTimer: appManager.getGameState().getTimer() || false,
             noticeType: "",
             noticeContainerHeight: "",
@@ -208,6 +208,7 @@ var PageGameLearn = Object.assign({}, PageGameAbstract, {
         var state = PageGameAbstract.getInitialState.apply(this);
 
         state.boardData = this.getBoardData() || {};
+        state.boardType = state.boardData.boardType || BOARD_TYPE_SQUARE;
         state.time = state.boardData.time || 0;
         state.board = this.getGameStateRoundField("board", {}) || {};
 
@@ -366,6 +367,7 @@ var PageGameMain = Object.assign({}, PageGameAbstract, {
         state.roundsBundlesData = appManager.getSettings().getRoundsBundles();
         state.roundData = state.roundsBundlesData[state.roundsBundleIdx] || [];
         state.boardData = this.getBoardData(state.roundData, state.roundIdx);
+        state.boardType = state.boardData.boardType || BOARD_TYPE_SQUARE;
 
         state.board = this.getGameStateRoundField("board", state.roundsBundleIdx, state.roundIdx) || {};
         state.time = state.boardData.time || 0;
