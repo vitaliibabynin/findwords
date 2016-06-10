@@ -1,5 +1,5 @@
 {
-    "package": "com.smalldev.fillwords.threebyfour",
+    "package": "com.smalldev.fillwords3x4",
     "version": "0.0.1",
     "name": {
         "system": "Fillwords3x4",
@@ -7,10 +7,10 @@
         "ru": "Филворды 3x4"
     },
     "facebook": {
-    	"displayName": "",
-    	"appId": ""
+    	"displayName": "Fillwords 3x4",
+    	"appId": "294619027542525"
     },
     "android": { 
-    	"billingKey": ""
+    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl/c2kaQ9ySn/M93QaJePyPJ11a0V0t8gJkAaGNygJtofisJMLxU9CezLABNgyWT8YSvZvTMKwHmaZ8sSGnf5U0Jv4VqtAVlR8rQ7gW5Bt8JXgzOgukGbug1E5XElsht94f2vGH062UiQmvSuJUUFYDVWeaIm68nXiiLNJkk7bXE6qmOjuGpXLMNF3ESbu+6l4g+qYUAWdWqvGPAQ2/Zu+YjzBAWKE1y3e+s5Wn4btWwifWjc4Hsd/HFAxXEg1OMU+k8lo7sbXfkNMdvMzB8XDE2cn+VyEKCGFWhXreOdXUx7MfwmzsoidbU1vMZLyW83cU8dhD0bYHfdmfI6D1dtPwIDAQAB"
     }
 }
