@@ -1,16 +1,16 @@
 {
-    "package": "com.smalldev.fillwords3x4",
-    "version": "0.0.4",
+    "package": "com.smalldev.findwordsthetopics",
+    "version": "1.0.14",
     "name": {
-        "system": "Fillwords3x4",
-        "en": "Fillwords 3x4",
-        "ru": "Филворды 3x4"
+        "system": "FindwordsTopics",
+        "en": "Findwords the topics",
+        "ru": "Филворды: Темы"
     },
     "facebook": {
-    	"displayName": "Fillwords 3x4",
-    	"appId": "294619027542525"
+        "displayName": "Find Words",
+        "appId": "232075287136977"
     },
-    "android": { 
-    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxx3/B+NawSZSHsY+WXojxxbyx/1g1Gs0BK0zE9je9x58EuP2uwI7i97uNxZ+JBRmMvsvYlKRO8+2aUN++FPgP3GPHsVzUFn7sZrnP4O/7LFK3B0p903w3MKA+P2zefSDB+poSey6LNOb/0Ucx5VhYxAhTW4wp7xdyO0kV2+A7vASG3rcbgJSsSgxYkki8bSTs3ajnQqeh8blMfIHmGqGhezp8iCB00OwolRzbHEhqt3tFhrmcX9octisVYcZvWEhUhOWeqCKnEh+6lTS0oTEUTm8Bytd66hU9sFv0ZT3hym9iVtMyChkmQJFNjOebCDkk1TDGqsdeM7QCVPaE4K/SwIDAQAB"
+    "android": {
+        "billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkVSyZX3i33JvWFr6rBk86flZ9769qUHoFeiJirXuMLasgmf3zdKS9z6Ar5/8Y41B15vkZ0ISzHY4AyHdKta3fMvbV8O2jo3g1jmjI8imMdVKPb8ZUtw3w++p10ugra1oaHE3UcSB2U1LQkzpnsEesCzNIfkOYh1h1d89xaoEXRUuatTp2yVB4CEfwUze9YUWZiMeGFVh3GI1D8/XEwtXiosQHIsM1BQwooqoOWIGAvdYSmM75CfXDxI8YOGBDJqAWyiAm2PT3XjCQ+N6FqXUX2NXdMTNBV5hyUmm1DxR50Xp3CCghmhmHsKywqmA2nYHyJj2zabLhafYiqDb35+XsQIDAQAB"
     }
 }
