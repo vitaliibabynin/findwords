@@ -298,7 +298,7 @@ public class AppodealPlugin extends CordovaPlugin {
     private SkippableVideoCallbacks skippableVideoListener = new SkippableVideoCallbacks() {
 
         @Override
-        public void onSkippableVideoClosed() {
+        public void onSkippableVideoClosed(boolean b) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
@@ -352,7 +352,7 @@ public class AppodealPlugin extends CordovaPlugin {
     private NonSkippableVideoCallbacks nonSkippableVideoListener = new NonSkippableVideoCallbacks() {
 
         @Override
-        public void onNonSkippableVideoClosed() {
+        public void onNonSkippableVideoClosed(boolean b) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
@@ -406,7 +406,7 @@ public class AppodealPlugin extends CordovaPlugin {
     private RewardedVideoCallbacks rewardedVideoListener = new RewardedVideoCallbacks() {
 
         @Override
-        public void onRewardedVideoClosed() {
+        public void onRewardedVideoClosed(boolean b) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
@@ -482,7 +482,7 @@ public class AppodealPlugin extends CordovaPlugin {
         }
 
         @Override
-        public void onBannerLoaded() {
+        public void onBannerLoaded(int i, boolean b) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {

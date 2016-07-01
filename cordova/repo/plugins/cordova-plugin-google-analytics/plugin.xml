@@ -43,8 +43,7 @@
   </platform>
 
   <platform name="android">
-    <framework src="com.google.android.gms:play-services-analytics:8.3.0" />
-    <framework src="com.google.android.gms:play-services-ads:8.3.0" />
+    <framework src="com.google.android.gms:play-services-analytics:8.4.0" />
     <framework src="com.android.support:support-v4:+" />
 
     <config-file target="res/xml/config.xml" parent="/*">
