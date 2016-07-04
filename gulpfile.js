@@ -320,6 +320,28 @@ gulp.task('app:settings:prepare', function(cb){
         './source/scss/app.colors.scss'
     );
 
+    shell.cp(
+        '-R',
+        './cordova/install-config/source/img/',
+        './source/img/'
+    );
+
+    //var destPath = path.cordova.app + 'platforms/android/';
+    //gulp
+    //    .src('./'+path.cordova.installConfig+'android/**/*')
+    //    .pipe(gulp.dest(destPath))
+    //    .on('finish', function() {
+    //        console.log('Android res copied to '+destPath);
+    //
+    //        var stringsXml = destPath + 'res/values/strings.xml';
+    //        shell.sed('-i', /name="app_name"([\s\w"'=]*)>[\s\w0-9]*</g, 'name="app_name"$1>'+installConfig.name.en+'<', stringsXml);
+    //
+    //        stringsXml = destPath + 'res/values-ru/strings.xml';
+    //        shell.sed('-i', /name="app_name"([\s\w"'=]*)>[\s\w0-9]*</g, 'name="app_name"$1>'+installConfig.name.ru+'<', stringsXml);
+    //
+    //        cb();
+    //    });
+
     console.log('AppSettings prepared.');
 
     cb();
