@@ -1,16 +1,16 @@
 {
-    "package": "com.smalldev.findwords.hexagon",
-    "version": "1.0.1",
+    "package": "com.smalldev.findwords",
+    "version": "1.0.15",
     "name": {
-        "system": "FindwordsHexagram",
-        "en": "Fillwords Hexagram",
-        "ru": "Филворды Хексаграмы"
+        "system": "Findwords",
+        "en": "Find Words",
+        "ru": "Филворды: найди слово"
     },
-    "facebook": { 
-    	"displayName": "Филворды Хексаграмы",
-    	"appId": "295135404161154"
+    "facebook": {
+    	"displayName": "Find Words",
+    	"appId": "473524332833935"
     },
     "android": {
-    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtqDQXVEFStHlw5ZciZW0BNlHFG/ycKQydrwAgeWL1b+8OsbcT2lWuQdEXHuUuyHFrdGHOPVo/9AlYgelewZXh8An4MFvDZHFy0deBVb+Y/k3W0wPgA8wV+HCUqkARD7O8LNPidQUmF1QlGQmUQmkpn04u1shhdh1zcAymMEI236PgV4Nc8kkwguWo3HqW57MMgcvS8bul8Oozong2EchenMIQXbEj1Z7l6LpcJtxuq40Ek3tHDG4wxIUjzPESAg6l/zQyZFpnOtmUtGsv7D5SlHZrgAx7jD4EiKXeDcTF20NbDEjTEVwLEdVXfZuE6l2yXl9kPjZxTXmr6JMivvt0QIDAQAB"
+    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAobtfA2MKfXQqNPjOm3MtN/QvJMCV6vd04OfGWUMTfnGmArNn47j4R189FYRyymOzxGLceywu09w+XZuJnLh3+fitw1a3Gw/vgid7pwoVkRjjQT9py99Wcq/9OEPTcZFHuGgayd1pgOtuPwdfUJB0M/wOaAxgLEp7FcTiJ0g7RnIetOPVD2yJhTmqtX9Hyvo3/mH95o7wdfCcr+E6L9+6F4oBkFZpvjkyxRg73MQk1CA9LtxYiSxKYwKZdsjj7+fB9ILo6yUPe8YL2pnb1D+e3YSP/g+aPadTSsIY7twmXFsdMSbhlv01hbeROUJ44qHHXLs7CJbaF3zvS9NCb7tw/QIDAQAB"
     }
 }
