@@ -1,16 +1,16 @@
 {
-    "package": "com.smalldev.findwords",
-    "version": "1.0.15",
+    "package": "com.smalldev.fillwords3x4",
+    "version": "1.0.5",
     "name": {
-        "system": "Findwords",
-        "en": "Find Words",
-        "ru": "Филворды: найди слово"
+        "system": "Fillwords3x4",
+        "en": "Fillwords 3x4",
+        "ru": "Филворды 3x4"
     },
     "facebook": {
-    	"displayName": "Find Words",
-    	"appId": "473524332833935"
+    	"displayName": "Fillwords 3x4",
+    	"appId": "294619027542525"
     },
-    "android": {
-    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAobtfA2MKfXQqNPjOm3MtN/QvJMCV6vd04OfGWUMTfnGmArNn47j4R189FYRyymOzxGLceywu09w+XZuJnLh3+fitw1a3Gw/vgid7pwoVkRjjQT9py99Wcq/9OEPTcZFHuGgayd1pgOtuPwdfUJB0M/wOaAxgLEp7FcTiJ0g7RnIetOPVD2yJhTmqtX9Hyvo3/mH95o7wdfCcr+E6L9+6F4oBkFZpvjkyxRg73MQk1CA9LtxYiSxKYwKZdsjj7+fB9ILo6yUPe8YL2pnb1D+e3YSP/g+aPadTSsIY7twmXFsdMSbhlv01hbeROUJ44qHHXLs7CJbaF3zvS9NCb7tw/QIDAQAB"
+    "android": { 
+    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxx3/B+NawSZSHsY+WXojxxbyx/1g1Gs0BK0zE9je9x58EuP2uwI7i97uNxZ+JBRmMvsvYlKRO8+2aUN++FPgP3GPHsVzUFn7sZrnP4O/7LFK3B0p903w3MKA+P2zefSDB+poSey6LNOb/0Ucx5VhYxAhTW4wp7xdyO0kV2+A7vASG3rcbgJSsSgxYkki8bSTs3ajnQqeh8blMfIHmGqGhezp8iCB00OwolRzbHEhqt3tFhrmcX9octisVYcZvWEhUhOWeqCKnEh+6lTS0oTEUTm8Bytd66hU9sFv0ZT3hym9iVtMyChkmQJFNjOebCDkk1TDGqsdeM7QCVPaE4K/SwIDAQAB"
     }
 }
