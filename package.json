@@ -43,13 +43,13 @@
     "preparecordova": "NODE_ENV=production gulp cordova:all",
     "bpcordova": "npm run cordovainstall && npm run build && npm run preparecordova",
     "bprelease": "npm run bpcordova && cd ./cordova/app && cordova build --release",
-    "fullpackage": "npm run bprelease && npm run cordovareinstall",
+    "fullpackage": "npm run cordovareinstall && npm run bprelease",
 
     "cordovainstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:install",
     "cordovareinstall": "NODE_ENV=production gulp --gulpfile ./cordova/gulpfile.js cordova:app:reinstall",
     "wincordovainstall": "SET NODE_ENV=production && cd cordova && gulp --gulpfile ./gulpfile.js cordova:app:install",
     "wincordovareinstall": "SET NODE_ENV=production && cd cordova && gulp --gulpfile ./gulpfile.js cordova:app:reinstall",
-    "winfullpackage": "npm run winbprelease && npm run wincordovareinstall",
+    "winfullpackage": "npm run wincordovareinstall && npm run winbprelease ",
 
 
     "winbuild": "SET NODE_ENV=production && npm run clean && gulp build",
