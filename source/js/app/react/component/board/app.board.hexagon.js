@@ -50,6 +50,9 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
             if(window.devicePixelRatio == 1){
                 scaleRatio = 0.59505;
             }
+            if(window.devicePixelRatio == 2 && !deviceJS.tablet()){
+                scaleRatio = 0.55505;
+            }
         }
         //вычисляем высоту равнобедреного треугольника и делает отступ сверх в рядах
         newState.cellTriangleHeight = Math.sqrt(Math.pow(scaleRatio * newState.smallerCellSize, 2) - (Math.pow(newState.smallerCellSize, 2) / 4)) / 2;
