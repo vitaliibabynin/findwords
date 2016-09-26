@@ -1,0 +1,16 @@
+{
+    "package": "com.smalldev.fillwordsmix",
+    "version": "0.0.1",
+    "name": {
+        "system": "FindwordsHexagram",
+        "en": "Word Search: mix find",
+        "ru": "Найди слова: микс филворды"
+    },
+    "facebook": { 
+    	"displayName": "Найди слово: Филворды­микс",
+    	"appId": "302070980159235"
+    },
+    "android": {
+    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhJuN58RwOrYAkikccfsK+/Hbt8qdgjh2Ewg97B+qjbY7fK1v07ZPPKSHFaEfmPeIpprXNJn/qdooi2YdlvsNYn1aFGsB5jafACdRQUCKwWwe0HKeIVczVN/dInq7fwiWFDnzf3jK5Z9YHYsgzy+jw5Fe+e8yxRLDetcEDvxjXNFHuv/OXlvw6cx4d5mmRIP6gIIyeoyBDY43/zZNVn8FEKPaO/B+XrQ5z11q3Cd9qbhmoUUbl+3ToDsd9zNK8F9I1eOsdz3CgHeigEXHuSQ1xdti/9IZWx/G3mn2JoNim8xd+wmaBMZJ3KqLTbjQlbj2SvJQqOl4yr5n2ASQhXrs3QIDAQAB"
+    }
+}
