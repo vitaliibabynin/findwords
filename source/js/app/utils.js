@@ -257,4 +257,16 @@ module.exports = {
         return clone;
     }
 
+
+    //getScreenSize: function(){
+    //    var screenSizeD = screen.width / window.devicePixelRatio;
+    //    if(screenSizeD < 600){
+    //        screenSizeD = '< 7';
+    //    }else if(screenSizeD < 700){
+    //        screenSizeD = '7';
+    //    }else{
+    //        screenSizeD = '>7 maybe 9-10 and more';
+    //    }
+    //}
+
 }

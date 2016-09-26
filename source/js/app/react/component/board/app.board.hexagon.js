@@ -44,7 +44,19 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
         this.addFoundWordsToBoardArr(newState);
         newState.cellSize = this.calculateCellSize();
         newState.smallerCellSize = this.calculateSmallerCellSize(newState.cellSize);
-        newState.coordinatesTable = this.createCoordinatesTable(newState.smallerCellSize);
+
+        var scaleRatio = 0.7071;
+        if(CONST.CURRENT_PLATFORM == CONST.PLATFORM_ANDROID){
+            if(window.devicePixelRatio == 1){
+                scaleRatio = 0.59505;
+            }
+            if(window.devicePixelRatio == 2 && !deviceJS.tablet()){
+                scaleRatio = 0.55505;
+            }
+        }
+        //вычисляем высоту равнобедреного треугольника и делает отступ сверх в рядах
+        newState.cellTriangleHeight = Math.sqrt(Math.pow(scaleRatio * newState.smallerCellSize, 2) - (Math.pow(newState.smallerCellSize, 2) / 4)) / 2;
+        newState.coordinatesTable = this.createCoordinatesTable(newState.smallerCellSize, newState.cellTriangleHeight);
 
         this.setState(newState);
     },
@@ -53,7 +65,7 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
         return (cellSize * (this.state.boardData.board.cols - 0.5)) / this.state.boardData.board.cols;
     },
 
-    createCoordinatesTable: function (smallerCellSize) {
+    createCoordinatesTable: function (smallerCellSize, cellTriangleHeight) {
         var table = {
             y: {
                 //0: {
@@ -84,8 +96,10 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
         var marginTop = smallerCellSize * 0.2555;
         var marginLeft = smallerCellSize * 0.485;
 
+        var halfTriangleHeight = cellTriangleHeight / 2.2;
+
         //first row
-        var lastEndY = cellHeightY;
+        var lastEndY = cellHeightY + halfTriangleHeight;
         table.y[0] = {begin: 0, end: lastEndY, x: {}};
         var lastEndX = 0;
         for (var l = 0; l < cols; l++) {
@@ -99,9 +113,9 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
         for (var i = 1; i < rows; i++) {
             //y
-            var endY = lastEndY + marginTop + cellHeightY;
+            var endY = lastEndY + marginTop + cellHeightY + halfTriangleHeight;
             table.y[i] = {
-                begin: lastEndY + marginTop,
+                begin: lastEndY + marginTop - halfTriangleHeight,
                 end: endY,
                 x: {}
             };
@@ -286,14 +300,24 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
         var screenX = e.touches[0].clientX;
         var screenY = e.touches[0].clientY;
 
-        var clientRect = e.currentTarget.getBoundingClientRect();
 
+        var clientRect = e.currentTarget.getBoundingClientRect();
         var boardX = screenX - clientRect.left;
         var boardY = screenY - clientRect.top;
 
+        var coordinatesTable = this.state.coordinatesTable;
+
+        //Not ended experiment
+        //var cellHeight = clientRect.height / this.state.boardData.board.rows;
+        //var cellWidth = this.state.smallerCellSize;
+        //
+        //boardX = boardX - coordinatesTable.y[1].x[0].begin;
+        //console.log('x:'+boardX, 'y:'+boardY, 'cw:'+cellWidth, 'ch:'+cellHeight);
+        //console.log(cellHeight, 'y:'+(Math.floor(boardY / cellHeight)), 'x:'+(Math.min(Math.floor(boardX / cellWidth)), this.state.boardData.board.cols-1) );
+        //return;
         //console.log({boardX: boardX, boardY: boardY});
 
-        var coordinatesTable = this.state.coordinatesTable;
+
 
         var lastY = this.lastXY.y;
         var lastX = this.lastXY.x;
@@ -347,6 +371,7 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
 
         var boardArr = this.state.boardArr;
         var smallerCellSize = this.state.smallerCellSize;
+        var cellTriangleHeight = this.state.cellTriangleHeight;
 
         var gameBoardStyle = {
             paddingTop: 1 + "px",
@@ -359,6 +384,17 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
             marginTop: (smallerCellSize * 0.2555) + "px",
             marginBottom: (smallerCellSize * 0.2555) + "px"
         };
+
+        var scaleRatio = 0.7071;
+        if(CONST.CURRENT_PLATFORM == CONST.PLATFORM_ANDROID){
+            if(window.devicePixelRatio == 1){
+                scaleRatio = 0.59505;
+            }
+        }
+
+        //вычисляем высоту равнобедреного треугольника и делает отступ сверх в рядах
+        var rowMarginTop = Math.sqrt(Math.pow(scaleRatio * smallerCellSize, 2) - (Math.pow(smallerCellSize, 2) / 4)) / 2;
+
 
         return (
             <div className={classNames("game-board", this.state.boardExtraClass, this.state.boardType)}
@@ -375,7 +411,7 @@ var BoardHexagonClass = Object.assign({}, BoardAbstract.Class, {
                     {boardArr.map(function (row, rowId) {
                         var rowStyle = {
                             //marginTop: (smallerCellSize * 0.2555) + 'px',
-                            marginTop: (Math.sqrt(Math.pow(0.7071 * smallerCellSize, 2) - (Math.pow(smallerCellSize, 2) / 4)) / 2) + 'px',
+                            marginTop: cellTriangleHeight + 'px',
                             zIndex: rowId + 1
                         };
                         if (rowId % 2 != 0) {
