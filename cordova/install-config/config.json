@@ -1,16 +1,16 @@
 {
-    "package": "com.smalldev.fillwords3x4",
-    "version": "1.0.6",
+    "package": "com.smalldev.findwords.hexagon",
+    "version": "1.0.4",
     "name": {
-        "system": "Fillwords3x4",
-        "en": "Fillwords 3x4",
-        "ru": "Филворды 3x4"
+        "system": "FindwordsHexagram",
+        "en": "Fillwords Hexagram",
+        "ru": "Филворды Хексаграмы"
     },
-    "facebook": {
-    	"displayName": "Fillwords 3x4",
-    	"appId": "294619027542525"
+    "facebook": { 
+    	"displayName": "Филворды Хексаграмы",
+    	"appId": "295135404161154"
     },
-    "android": { 
-    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxx3/B+NawSZSHsY+WXojxxbyx/1g1Gs0BK0zE9je9x58EuP2uwI7i97uNxZ+JBRmMvsvYlKRO8+2aUN++FPgP3GPHsVzUFn7sZrnP4O/7LFK3B0p903w3MKA+P2zefSDB+poSey6LNOb/0Ucx5VhYxAhTW4wp7xdyO0kV2+A7vASG3rcbgJSsSgxYkki8bSTs3ajnQqeh8blMfIHmGqGhezp8iCB00OwolRzbHEhqt3tFhrmcX9octisVYcZvWEhUhOWeqCKnEh+6lTS0oTEUTm8Bytd66hU9sFv0ZT3hym9iVtMyChkmQJFNjOebCDkk1TDGqsdeM7QCVPaE4K/SwIDAQAB"
+    "android": {
+    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtqDQXVEFStHlw5ZciZW0BNlHFG/ycKQydrwAgeWL1b+8OsbcT2lWuQdEXHuUuyHFrdGHOPVo/9AlYgelewZXh8An4MFvDZHFy0deBVb+Y/k3W0wPgA8wV+HCUqkARD7O8LNPidQUmF1QlGQmUQmkpn04u1shhdh1zcAymMEI236PgV4Nc8kkwguWo3HqW57MMgcvS8bul8Oozong2EchenMIQXbEj1Z7l6LpcJtxuq40Ek3tHDG4wxIUjzPESAg6l/zQyZFpnOtmUtGsv7D5SlHZrgAx7jD4EiKXeDcTF20NbDEjTEVwLEdVXfZuE6l2yXl9kPjZxTXmr6JMivvt0QIDAQAB"
     }
 }
