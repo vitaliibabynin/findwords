@@ -1,16 +1,16 @@
 {
-    "package": "com.smalldev.fillwordsmix",
-    "version": "0.0.4",
+    "package": "com.smalldev.searchwords",
+    "version": "0.0.1",
     "name": {
-        "system": "FindwordsMix",
-        "en": "Word Search: mix find",
-        "ru": "Найди слова: микс филворды"
+        "system": "FindwordsSearchWords",
+        "en": "Findwords: Search Words",
+        "ru": "Филворды: Поиск слов"
     },
     "facebook": { 
-    	"displayName": "Найди слово: Филворды­микс",
-    	"appId": "302070980159235"
+    	"displayName": "Филворды: Поиск слов",
+    	"appId": "343427706012360"
     },
     "android": {
-    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhJuN58RwOrYAkikccfsK+/Hbt8qdgjh2Ewg97B+qjbY7fK1v07ZPPKSHFaEfmPeIpprXNJn/qdooi2YdlvsNYn1aFGsB5jafACdRQUCKwWwe0HKeIVczVN/dInq7fwiWFDnzf3jK5Z9YHYsgzy+jw5Fe+e8yxRLDetcEDvxjXNFHuv/OXlvw6cx4d5mmRIP6gIIyeoyBDY43/zZNVn8FEKPaO/B+XrQ5z11q3Cd9qbhmoUUbl+3ToDsd9zNK8F9I1eOsdz3CgHeigEXHuSQ1xdti/9IZWx/G3mn2JoNim8xd+wmaBMZJ3KqLTbjQlbj2SvJQqOl4yr5n2ASQhXrs3QIDAQAB"
+      "billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk9x1D4Z68c4AEFHhzMgSR8QmX72Da5o6+qnHcywBAaFW+2Adr9OCb7yxPNCmW0577Qopnr0j3awYo3AzUT3UmYYzu33r5JSHvLmA+YZVZk7t3qG5oqBubTQeP8S6oKKvTzkV7nRMRtyZoE++RNA/jKeRkkEjsX2xKQfommd5epvY/Efuwrc+9guHpWBXvy4MH4pyrsKS9vfs9zIatuIYe/ryUsSy52IKLufVbpncoMMFyxhQu9Ej3txTbemS7is0Ye28mViAOEgd5XVUHI6+v7Fdm4ekELwIsIAgNZHMIP+/GY565GF98vKiMXnejdX2EoTORSvYoS/p1KlR0Udu4wIDAQAB"
     }
 }
