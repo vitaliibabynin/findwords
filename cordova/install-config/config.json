@@ -1,13 +1,13 @@
 {
     "package": "com.smalldev.searchwords",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "name": {
-        "system": "FindwordsSearchWords",
-        "en": "Findwords: Search Words",
-        "ru": "Филворды: Поиск слов"
+        "system": "SearchWordsFindwords",
+        "en": "Search Words: Findwords",
+        "ru": "Поиск слов: Филворды"
     },
     "facebook": { 
-    	"displayName": "Филворды: Поиск слов",
+    	"displayName": "Поиск слов: Филворды",
     	"appId": "343427706012360"
     },
     "android": {
