@@ -1,16 +1,16 @@
 {
-    "package": "com.smalldev.findwords",
+    "package": "com.smalldev.findwordsthetopics",
     "version": "1.0.17",
     "name": {
-        "system": "Findwords",
-        "en": "Find Words",
-        "ru": "Филворды: найди слово"
+        "system": "Findwordsthetopics",
+        "en": "Findwords the topics",
+        "ru": "Филворды: Темы"
     },
     "facebook": {
-    	"displayName": "Find Words",
-    	"appId": "473524332833935"
+        "displayName": "Find Words",
+        "appId": "232075287136977"
     },
     "android": {
-    	"billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAobtfA2MKfXQqNPjOm3MtN/QvJMCV6vd04OfGWUMTfnGmArNn47j4R189FYRyymOzxGLceywu09w+XZuJnLh3+fitw1a3Gw/vgid7pwoVkRjjQT9py99Wcq/9OEPTcZFHuGgayd1pgOtuPwdfUJB0M/wOaAxgLEp7FcTiJ0g7RnIetOPVD2yJhTmqtX9Hyvo3/mH95o7wdfCcr+E6L9+6F4oBkFZpvjkyxRg73MQk1CA9LtxYiSxKYwKZdsjj7+fB9ILo6yUPe8YL2pnb1D+e3YSP/g+aPadTSsIY7twmXFsdMSbhlv01hbeROUJ44qHHXLs7CJbaF3zvS9NCb7tw/QIDAQAB"
+        "billingKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkVSyZX3i33JvWFr6rBk86flZ9769qUHoFeiJirXuMLasgmf3zdKS9z6Ar5/8Y41B15vkZ0ISzHY4AyHdKta3fMvbV8O2jo3g1jmjI8imMdVKPb8ZUtw3w++p10ugra1oaHE3UcSB2U1LQkzpnsEesCzNIfkOYh1h1d89xaoEXRUuatTp2yVB4CEfwUze9YUWZiMeGFVh3GI1D8/XEwtXiosQHIsM1BQwooqoOWIGAvdYSmM75CfXDxI8YOGBDJqAWyiAm2PT3XjCQ+N6FqXUX2NXdMTNBV5hyUmm1DxR50Xp3CCghmhmHsKywqmA2nYHyJj2zabLhafYiqDb35+XsQIDAQAB"
     }
 }
